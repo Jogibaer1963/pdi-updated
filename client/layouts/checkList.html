@@ -1,22 +1,23 @@
-<template name="checkList">
 
+<template name="checkList">
 {{#if currentUser}}
-    <div class="">
-        <br>
-      <a class="checklistReturn-btn" href="/inspectionStart">PDI Overview</a>
-    </div>
-    <div id="">
-        <img src="claas_logo.png" />
-    </div>
-    <br><br>
 {{> inputNewCheckPoint}}
+    {{> checkPointTable}}
 {{else}}
     {{> login}}
 {{/if}}
 </template>
 
 <template name="inputNewCheckPoint">
-  <div>
+  <div class="whiteBox">
+      <div class="">
+          <br>
+          <a class="checklistReturn-btn" href="/inspectionStart">PDI Overview</a>
+      </div>
+      <div id="">
+          <img src="claas_logo.png" />
+      </div>
+      <br><br>
       <div class="checkpointHeader">
           <div class="title"> PDI Checkpoints</div>
       </div>
@@ -42,162 +43,63 @@
               <input type="text" id="errorDescription" name="errorDescription" class="input descriptionBox"
                      placeholder="Description" value="{{errorDescription}}" required>
             </div>
-            <br><br>
-            <div class="">
+                <div class="inputMargin title">
+                   <label for="machineRange">Machine Range, divide by white space like "C7800200 C7900300 "</label>
                 <br>
-                <ul class="">
-                    <label for="C77"><input type="checkbox" value="C77" id="C77" name="range">C77</label>
-                    <label for="C78"><input type="checkbox" value="C78" id="C78" name="range">C78</label>
-                    <label for="C79"><input type="checkbox" value="C79" id="C79" name="range">C79</label>
-
+                   <label for="machineRangeStart" class=""><input type="text" class="input" id="machineRangeStart" name="machineRangeStart" placeholder="Range Start"></label>
+                   <label for="machineRangeEnd" class=""> <input type="text" class="input" id="machineRangeEnd" name="machineRangeEnd" placeholder="Range End"></label>
+                </div>
+            <br><br><br>
+            <div>
+                <div>
+                    <label for="machineRange" class="checkpointCheckbox checkBoxHeader">Machine type only if range is not applicable</label>
+                </div>
+                <ul class="checkpointCheckbox">
+                    <label for="C77" class="checkBoxMargin"><input type="checkbox" value="C77" id="C77" name="range">C77</label>
+                    <label for="C78" class="checkBoxMargin"><input type="checkbox" value="C78" id="C78" name="range">C78</label>
+                    <label for="C79" class="checkBoxMargin"><input type="checkbox" value="C79" id="C79" name="range">C79</label>
+                    <label for="C87" class="checkBoxMargin"><input type="checkbox" value="C87" id="C87" name="range">C87</label>
+                    <label for="C88" class="checkBoxMargin"><input type="checkbox" value="C88" id="C88" name="range">C88</label>
+                    <label for="C89" class="checkBoxMargin"><input type="checkbox" value="C89" id="C89" name="range">C89</label>
                 </ul>
             </div>
-            <div class="machineRange">
-                <div>
-                    <h3>Machine Range, divide by white space</h3>
-                    <input type="text" id="machineRangeStart" name="machineRangeStart" placeholder="Range Start">
-                </div>
-                <div class="machineRangeEnd">
-                    <input type="text" id="machineRangeEnd" name="machineRangeEnd" placeholder="Range End">
-                </div>
+            <div class="inputMargin">
+                <button class="" type="submit">Submit</button>
+                <button class="">Activate / Edit</button>
+                <button class=" colorCheckButtonDeactivate deActiveCheck">Deactivate</button>
             </div>
-            <button class="newCheck" type="submit">Submit</button>
         </form>
-        <button class="newCheck">Activate / Edit</button>
-        <button class="newCheck colorCheckButtonDeactivate deActiveCheck">Deactivate</button>
-    </div>
+  </div>
+</template>
 
-    <br><br>
-    <h2 class="posCheckListText posActiveText">Active Checklist</h2>
-        <div class="rTable">
-            <div class="rTableRow rTableHeadCheck">
-                <div class="rTableHead posWidth"><strong>Pos</strong></div>
-                <div class="rTableHead posFailure"><strong>Active Failures</strong></div>
-                <div class="rTableHead posType"><strong>Type</strong></div>
-                <div class="rTableHead posRange"><strong>Range Start</strong></div>
-                <div class="rTableHead posRange"><strong>Range End</strong></div>
+<template name="checkPointTable">
+     <div class="tablePosition">
+        <div>
+            <button class="title inputMargin tableHeadFixed">Active Checklist</button>
+        </div>
+           <br><br>
+      <div class="divTable blueTable">
+         <div class="divTableHeading ">
+            <div class="divTableRow table">
+                <div class="divTableHead"><strong>Pos</strong></div>
+                <div class="divTableHead"><strong>Active Failures</strong></div>
+                <div class="divTableHead"><strong>Type</strong></div>
+                <div class="divTableHead"><strong>Range Start</strong></div>
+                <div class="divTableHead"><strong>Range End</strong></div>
             </div>
-            <div class="checkTable posCheckTable">
+         </div>
+
+            <div class="divTableBody scroll">
                 {{#each checkList}}
-                   <div class="rTableRow showCheckList {{selectedClass}}">
-                      <div class="rTableCell posWidth">{{errorPos}}</div>
-                      <div class="rTableCell posFailure">{{errorDescription}}</div>
-                      <div class="rTableCell posType">{{machineType}}</div>
-                      <div class="rTableCell posRange">{{machineRangeStart}}</div>
-                      <div class="rTableCell posRange">{{machineRangeEnd}}</div>
+                   <div class="divTableRow {{selectedClass}}">
+                      <div class="divTableCell">{{errorPos}}</div>
+                      <div class="divTableCell">{{errorDescription}}</div>
+                      <div class="divTableCell">{{machineType}}</div>
+                      <div class="divTableCell">{{machineRangeStart}}</div>
+                      <div class="divTableCell">{{machineRangeEnd}}</div>
                    </div>
                 {{/each}}
             </div>
         </div>
-        <h2 class="posTextInactive posCheckListText">Inactive Checkpoints</h2>
-        <div class="rTable">
-            <div class="rTableRow rTableHeadInactive">
-                <div class="rTableHead posWidth"><strong>Pos</strong></div>
-                <div class="rTableHead posFailure"><strong>Active Failures</strong></div>
-                <div class="rTableHead posType"><strong>Type</strong></div>
-                <div class="rTableHead posRange"><strong>Range Start</strong></div>
-                <div class="rTableHead posRange"><strong>Range End</strong></div>
-            </div>
-            <div class="checkTable posCheckInactiveTable">
-                {{#each inActiveCheckPoints}}
-                    <div class="rTableRow showCheckList {{selectedClass}}">
-                       <div class="rTableCell posWidth">{{errorPos}}</div>
-                       <div class="rTableCell posFailure">{{errorDescription}}</div>
-                       <div class="rTableCell posType">{{machineType}}</div>
-                       <div class="rTableCell posRange">{{machineRangeStart}}</div>
-                       <div class="rTableCell posRange">{{machineRangeEnd}}</div>
-                    </div>
-               {{/each}}
-            </div>
-        </div>
+     </div>
 </template>
-
-
-
-
-
-
-<!--
-
-
-
-
-<template name="input_new_checklistItems">
-  <form class="inputNewCheckListItems">
-    <div>
-        <button class="deActiveCheck" type="submit">Deactivate Check Point</button>
-        <button class="reActiveCheck" type="submit">Re-activate / Edit </button>
-        <br>
-    </div>
-{{#with editCheckpoint}}
-        <div class="userBox">
-            <label for="selectMe" class="input"></label>
-            <select name="newPosition" id="selectMe" class="inputComment">
-                <option selected="selected">{{errorPos}}</option>
-                <option>Top</option>
-                <option>Bottom</option>
-                <option>Front</option>
-                <option>Back</option>
-                <option>Left</option>
-                <option>Right</option>
-                <option>Over All</option>
-                <option>Cab Inside/Outside</option>
-            </select>
-        </div>
-        <label for="errorDescription"></label>
-        <input type="text" id="errorDescription" name="errorDescription"  placeholder="Description" value="{{errorDescription}}" required>
-        <label for="machineType"></label>
-        <input type="text" id="machineType" name="machineType"  placeholder="Machine Range" value="{{machineType}}" required>
-{{/with}}
-    </form>
-    <br><br><br>
-    <div class="checkListBox">
-        <div class="rTable" style="background-color: #6fd981">
-            <div class="rTableRow rTableHeadCheck">
-                <div class="rTableHead posWidth"><strong>Pos</strong></div>
-                <div class="rTableHead posFailure"><strong>Active Failures</strong></div>
-                <div class="rTableHead posType"><strong>Type</strong></div>
-                <div class="rTableHead posRange"><strong>Range Start</strong></div>
-                <div class="rTableHead posRange"><strong>Range End</strong></div>
-            </div>
-            <br><br>
-            {{#each checkList}}
-                <div class="rTableRow showCheckList {{selectedClass}}">
-                    <div class="rTableCell posWidth">{{errorPos}}</div>
-                    <div class="rTableCell posFailure">{{errorDescription}}</div>
-                    <div class="rTableCell posType">{{machineType}}</div>
-                    <div class="rTableCell posRange">{{machineRangeStart}}</div>
-                    <div class="rTableCell posRange">{{machineRangeEnd}}</div>
-                </div>
-            {{/each}}
-        </div>
-    </div>
-</template>
-
-
-<template name="deactivatedCheckPoints">
-    <div class="checkListBox posBox inActiveList ">
-        <div class="rTable" style="background-color: #e80525">
-            <div class="rTableRow inActiveCheck rTableHeadInactive">
-                <div class="rTableHead posWidth"><strong>Pos</strong></div>
-                <div class="rTableHead posFailure"><strong>Active Failures</strong></div>
-                <div class="rTableHead posType"><strong>Type</strong></div>
-                <div class="rTableHead posRange"><strong>Range Start</strong></div>
-                <div class="rTableHead posRange"><strong>Range End</strong></div>
-            </div>
-            {{#each inActiveCheckPoints}}
-                <div class="rTableRow showCheckList {{selectedClass}}">
-                    <div class="rTableCell posWidth">{{errorPos}}</div>
-                    <div class="rTableCell posFailure">{{errorDescription}}</div>
-                    <div class="rTableCell posType">{{machineType}}</div>
-                    <div class="rTableCell posRange">{{machineRangeStart}}</div>
-                    <div class="rTableCell posRange">{{machineRangeEnd}}</div>
-                </div>
-            {{/each}}
-        </div>
-    </div>
-</template>
-
-
-  -->
-

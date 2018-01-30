@@ -1,3 +1,14 @@
+// White Box
+
+.whiteBox {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  height: 370px;
+  background-color: white;
+  z-index: 1;
+}
+
 
 // Buttons
 
@@ -29,6 +40,22 @@ a:hover {
   vertical-align: center;
 }
 
+.tablePosition {
+  position: absolute;
+  top: 330px;
+  width: 100%;
+}
+
+.tableHeadFixed {
+  position: fixed;
+  z-index: 1;
+}
+
+.scroll {
+  max-height: 60px;
+  overflow: auto;
+}
+
 // Input Fields
 
 .input {
@@ -42,5 +69,18 @@ a:hover {
 }
 
 .descriptionBox {
-  width: 300px;
+  width: 350px;
 }
+
+.checkBoxHeader {
+  padding-left: 40px;
+}
+
+.checkpointCheckbox {
+  margin-left: 525px;
+}
+
+.checkBoxMargin {
+  margin: 5px;
+}
+
