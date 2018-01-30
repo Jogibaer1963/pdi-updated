@@ -1,0 +1,86 @@
+<template name="machineInspect_2">
+    {{> machineUser}}
+    <br><br>
+    {{> pdiCheckList}}
+    <br>
+    {{> addPdiItems}}
+    <br>
+    <div>
+        {{#dropdown name="failureList" classes="dropDownList"}}
+            {{> chooseFailureList}}
+        {{/dropdown}}
+    </div>
+    <br>
+     {{> washBayMessage}}
+</template>
+
+<template name="pdiCheckList">
+    <div class="checkPointBox">
+        <div class="rTable">
+            <div class="rTableRow ">
+                <div class="rTableHead"><strong>Failure Position</strong></div>
+                <div class="rTableHead"><strong>Failure Description</strong></div>
+                <div class="rTableHead" style="width: 80px"><strong>Range</strong></div>
+            </div>
+        {{#each checkMe}}
+            {{#each checkList}}
+                <div class="rTableRow showCheckList {{selectedClass}}">
+                    <div class="rTableCell">{{errorPos}}</div>
+                    <div class="rTableCell">{{errorDescription}}</div>
+                    <div class="rTableCell" style="font-size: 15px">{{machineType}}</div>
+                </div>
+            {{/each}}
+            {{/each}}
+        </div>
+    </div>
+    <div>
+        <button class="checkListFinding bad" type="submit" >Add to List</button>
+        <button class="checkListFinding good" type="submit" >No findings</button>
+    </div>
+    <div class="pdiAddCheck">
+        <form class="addCheckPointsToList">
+            <input type="text" id="pdiDescription" name="failureDescription" placeholder="Description">
+            <button class="machineNewIssue" type="submit">Add Failure</button>
+            <button class="checkListButton  machineNewAtt" type="button">Attention for Repair</button>
+            <br><br>
+            <button class="checkListButton orderPart" type="button">Order Replacement</button>
+            <button class="checkListButton bigFinger" type="button">Big Finger Button</button>
+        </form>
+    </div>
+</template>
+
+<template name="chooseFailureList">
+    <div class="dropDown">
+        <div class="rTable">
+            {{#each failureList}}
+                <div class="rTableRow showFailureList {{selectedClass}}">
+                    <div class="rTableCell">{{error_describ}}</div>
+                </div>
+            {{/each}}
+        </div>
+    </div>
+</template>
+
+<template name="addPdiItems">
+    <div class="rTable repairOrderList">
+        {{# with foundNewFailure}}
+            {{#each repOrder}}
+                <div class="rTableRow showFinalCheck {{selectedClass}}">
+                    <div class="rTableCell pdiRepair">{{errorDescription}}</div>
+                </div>
+            {{/each}}
+        {{/with}}
+        <button class="erasePoint" type="submit" >Delete Repair Point</button>
+        <button class="loginSubmit posPdiFinished" type="submit" >PDI Finished</button>
+    </div>
+</template>
+
+<template name="washBayMessage">
+    <div class="messageFieldWashBay">
+    <form class="messageToWashBay">
+        <input type="text" id="pdiDescription" name="message" placeholder="Message to WashBay" required>
+        <br><br>
+        <button class="washBayMessage" type="submit">Submit Message to Wash Bay</button>
+    </form>
+    </div>
+</template>

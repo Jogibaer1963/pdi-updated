@@ -1,0 +1,35 @@
+<template name="machineLocation">
+    {{#if currentUser}}
+        {{> MainLayout_3}}
+        <br>
+    <form class="locationId">
+        <button type="submit" class="machineUpdateLocation">Update Location</button>
+        <label for="locationId" class="mLocationId" ></label>
+        <input type="text" class="machineUpdateLocationInput" id="locationId" name="locationId" required>
+    </form>
+    <div class="rTableMachine clearfix tablePos">
+        <div class="rTableRow">
+            <div class="rTableHeadOverView"><strong>Machine</strong></div>
+            <div class="rTableHeadOverView"><strong>Shippdate</strong></div>
+            <div class="rTableHeadOverView"><strong>PDI</strong></div>
+            <div class="rTableHeadOverView"><strong>Rep</strong></div>
+            <div class="rTableHeadOverView"><strong>Wash</strong></div>
+            <div class="rTableHeadOverView"><strong>Load</strong></div>
+            <div class="rTableHeadOverView"><strong>Location</strong></div>
+        </div>
+        {{#each overView}}
+            <div class="rTableRow locationUpdate {{selectedClass}}">
+                <div class="rTableCellOverView">{{machineId}}</div>
+                <div class="rTableCellOverView" style="width: 50px">{{date}}</div>
+                <div class="rTableCellOverView {{getStatusColor pdiStatus}}" style="background-color:{{getStatusColor pdiStatus}}; color:{{getStatusColor pdiStatus}}" >{{pdiStatus}}</div>
+                <div class="rTableCellOverView {{getStatusColor repairStatus}}" style="background-color:{{getStatusColor repairStatus}}; color:{{getStatusColor repairStatus}}" >{{repairStatus}}</div>
+                <div class="rTableCellOverView {{getStatusColor washStatus}}" style="background-color:{{getStatusColor washStatus}}; color:{{getStatusColor washStatus}}" >{{washStatus}}</div>
+                <div class="rTableCellOverView {{getStatusColor shipStatus}}" style="background-color:{{getStatusColor shipStatus}}; color:{{getStatusColor shipStatus}}" >{{shipStatus}}</div>
+                <div class="rTableCell" style="background-color: #6fd981">{{locationId}}</div>
+            </div>
+        {{/each}}
+    </div>
+    {{else}}
+        {{> login}}
+    {{/if}}
+</template>

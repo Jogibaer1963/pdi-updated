@@ -1,0 +1,51 @@
+<template name="adminViewUser">
+    {{#if currentUser}}
+       {{> AdminLayout}}
+        <br><br>
+        <h2>Users Total: {{usersTotal}}</h2>
+        <br>
+        <div class="rTableMachine clearfix tablePos rTableStyle">
+            <div class="rTableRow">
+                <div class="rTableHeadOverView"><strong>id</strong></div>
+                <div class="rTableHeadOverView"><strong>user</strong></div>
+                <div class="rTableHeadOverView"><strong>Role</strong></div>
+                <div class="rTableHeadOverView"><strong>Date Created</strong></div>
+                <div class="rTableHeadOverView"><strong>Created by</strong></div>
+                <div class="rTableHeadOverView"><strong>Last Login</strong></div>
+                <div class="rTableHeadOverView"><strong>Client IP</strong></div>
+                <div class="rTableHeadOverView"><strong>Logged in</strong></div>
+                <div class="rTableHeadOverView"><strong>Log out</strong></div>
+                <div class="rTableHeadOverView"><strong>Erase User</strong></div>
+            </div>
+             {{#each userResult}}
+                <div class="rTableRow {{selectedClass}}">
+                    <div class="rTableCellOverView">{{_id}}</div>
+                    <div class="rTableCellOverView">{{username}}</div>
+                    <div class="rTableCellOverView">{{role}}</div>
+                    <div class="rTableCellOverView">{{createdAt}}</div>
+                    <div class="rTableCellOverView">{{createdBy.username}}</div>
+                    <div class="rTableCellOverView">{{lastLogin}}</div>
+                    <div class="rTableCellOverView">{{clientIp}}</div>
+                    <div class="rTableCellOverView {{getStatusLogin loginStatus}}"
+                         style="background-color:{{getStatusLogin loginStatus}}; color:{{getStatusLogin
+                                 loginStatus}}" >{{services.resume.loginTokens}}</div>
+                    <div class="rTableCellOverView ">
+                        <label>
+                            <input class="rTableStyle" type="checkbox" name="logOut" id="logOut"  value="{{_id}}">
+                        </label>
+                    </div>
+                    <div class="rTableCellOverView">
+                        <label>
+                            <input class="rTableStyle" type="checkbox" name="deleteMe" value="{{_id}}">
+                        </label>
+                    </div>
+                </div>
+             {{/each}}
+        </div>
+        <form class="adminUserLog">
+            <button type="button" class="backButton btnPos">Send</button>
+</form>
+{{else}}
+{{> login}}
+{{/if}}
+</template>

@@ -1,0 +1,54 @@
+<template name="pdi_printOut">
+    <div>
+        <div>
+            {{#each listContent}}
+                <div>
+                    <h3>Machine Id : {{machineId}}</h3>
+                </div>
+                {{#each repairOrder}}
+                    <div class="pdiUser">
+                        <h3>PDI performed by : {{user}}</h3>
+                    </div>
+                    <div>
+                        <h3>Main OMM :&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {{ommMain}}</h3>
+                    </div>
+                    <div>
+                        <h3>Supplement OMM : &nbsp;&nbsp;{{ommSupp}}</h3>
+                    </div>
+                    <div>
+                        <h3>Unload Instructions : {{ommFitting}}</h3>
+                    </div>
+                    <div class="sumRightSide">
+                        <h3>Cebis Mobil OMM : {{ommCebis}}</h3>
+                    </div>
+                    <div class="sumRightSide">
+                        <h3>Tera Track OMM : {{ommTerra}}</h3>
+                    </div>
+                    <div class="sumRightSide">
+                        <h3>Profi Cam OMM : {{ommProfiCam}}</h3>
+                    </div>
+                    <div class="repairList">
+                        <h3>Repair List:</h3>
+                    </div>
+                    <br>
+                        <div class="rTable repairList">
+                            <div class="rTableRow ">
+                                <div class="rTableHead" style="width: 80px"><strong>Error ID</strong></div>
+                                <div class="rTableHead" style="width: 700px"><strong>Error Description</strong></div>
+                                <div class="rTableHead" style="width: 150px"><strong>Repair Comments</strong></div>
+                                <div class="rTableHead" style="width: 150px"><strong>Issue Resolved</strong></div>
+                            </div>
+                          {{#each repOrder}}
+                            <div>
+                                <div class="rTableCell" style="width: 80px; align-items: center">{{errorNr}}</div>
+                                <div class="rTableCell" style="width: 700px">{{errorDescription}}</div>
+                                <div class="rTableCell" style="width: 150px">{{repairComment}}</div>
+                                <div class="rTableCell" style="width: 150px">{{issueResolved}}</div>
+                            </div>
+                          {{/each}}
+                        </div>
+                {{/each}}
+            {{/each}}
+        </div>
+    </div>
+</template>

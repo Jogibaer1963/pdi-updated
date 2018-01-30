@@ -1,0 +1,26 @@
+<template name="adminNewUser">
+    {{> AdminLayout}}
+    <br><br><br>
+    <form class="adminRegisterNewUser">
+        <input class="omInput" name="registerUser" placeholder="User Name">
+        <input class="omInput" name="registerPassword" placeholder="Password">
+        <select name="userRole" class="omInput omInputButton"  id="selectMe">
+            <option>Admin</option>
+            <option>Logistics</option>
+            <option>Quality PDI</option>
+            <option>Repair Team</option>
+            <option>Wash Bay</option>
+            <option>Loading</option>
+        </select>
+        <input type="submit" value="Register" class="adminRegister">
+        <p>Roles are</p>
+        <p>Admin = Admin or SuperUser</p>
+        <p>Logistics = mostly CTD like Mary, Amanda....</p>
+        <p>PDI = Quality Guys, the best ever...</p>
+        <p>Repair Team = JoAnn's Group for Repair Machines</p>
+        <p>Wash Bay = Thomas Nelson's group like Shawn or a temp washing the Machine</p>
+        <p>Loading = Thomas Nelson's Group like Shawn, moving the Machine to the Trailer</p>
+    </form>
+
+    <h1>{{result}}</h1>
+</template>

@@ -1,0 +1,34 @@
+<template name="wordSearch">
+    {{#if currentUser}}
+        <div class="">
+            {{> MainLayout_3}}
+        </div>
+    <h2>Use Keywords</h2>
+    <div>
+        <form class="searchKey">
+            <div class="userBox">
+                <label for="searchWord" class="input"></label>
+                <input type="text" class="inputComment" name="searchWord" id="searchWord" placeholder="Keyword"/>
+            </div>
+               <div class="userBox">
+                  <button class="searchWord" type="submit">Submit</button>
+               </div>
+        </form>
+    </div>
+        <br><br><br>
+    <div class="rTable keywordList">
+        <div class="rTableRow">
+            <div class="rTableHead"><strong>Machine</strong></div>
+            <div class="rTableHead"><strong>Error Description</strong></div>
+        </div>
+        {{#each keyWordFind}}
+            <div class="rTableRow {{selectedClass}}">
+                <div class="rTableCell">{{Machine_Nr}}</div>
+                <div class="rTableCell">{{Error_Description}}</div>
+            </div>
+        {{/each}}
+    </div>
+    {{else}}
+        {{> login}}
+    {{/if}}
+</template>

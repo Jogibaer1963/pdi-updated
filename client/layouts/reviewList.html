@@ -1,0 +1,25 @@
+<template name="reviewList">
+    {{#if currentUser}}
+    {{> MainLayout}}
+    <div class=""><h2>Review PDI Machine</h2></div>
+    <div class="checkListBox2">
+        <div class="rTable">
+            <div class="rTableRow">
+                <div class="rTableHead"><strong>Id</strong></div>
+                <div class="rTableHead"><strong>Failure Description</strong></div>
+            </div>
+            {{#with reviewMachine}}
+                {{#each repairOrder}}
+                <div class="rTableRow {{selectedClass}}">
+                    <div class="rTableCell">{{machineId}}</div>
+                    <div class="rTableCell">{{machineType}}</div>
+                    <div class="rTableCell">{{repairOrder}}</div>
+                </div>
+                    {{/each}}
+            {{/with}}
+        </div>
+    </div>
+{{else}}
+{{> login}}
+{{/if}}
+</template>

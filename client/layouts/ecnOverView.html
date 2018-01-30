@@ -1,0 +1,101 @@
+<template name="ecnOverView">
+        <div >
+            <a class="btn " href="/overViewLoggedIn">Back to Over View</a>
+        </div>
+    <div class="ecnOverView">
+        <h2>Overview of all stored ECN's</h2>
+        {{>allEcnOverView}}
+
+    </div>
+        <h1>Add Edit and Search MCO</h1>
+        <form class="searchMachine">
+            <div class="userBox">
+                <label for="addMco" class="input" >Enter MCO Id</label>
+                <br>
+                <input type="text" class="inputComment" id="searchId" value="8100" name="searchId" required disabled />
+            </div>
+            <div class="userBox">
+                <button class="searchSubmit" type="submit" disabled>Submit</button>
+            </div>
+            <div class="ecnNew">
+              {{> ecnNew}}
+            </div>
+        </form>
+</template>
+
+
+<template name="allEcnOverView">
+    <div class="rTableMachine">
+        <div class="rTableRow">
+            <div class="rTableHeadOverView" ><strong>MCO Number</strong></div>
+            <div class="rTableHeadOverView" ><strong>Effective Date</strong></div>
+            <div class="rTableHeadOverView" ><strong>Machine Recording</strong></div>
+            <div class="rTableHeadOverView" style="width: 100px"><strong>Status Machine Recording</strong></div>
+            <div class="rTableHeadOverView" ><strong>Status MCO implemented</strong></div>
+            <div class="rTableHeadOverView" ><strong>Internal MCO Notes</strong></div>
+        </div>
+        {{#each mcoOverView}}
+            <div class="rTableRow locationUpdate {{selectedClass}}">
+                <div class="rTableCellOverView" >{{mcoId}}</div>
+                <div class="rTableCellOverView" >{{effectiveDate}}</div>
+                <div class="rTableCellOverView" >{{machineRecording}}</div>
+                <div class="rTableCellOverView" >{{statusMachine}}</div>
+                <div class="rTableCellOverView" >{{statusMco}}</div>
+                <div class="rTableCellOverView" >{{mcoNotes}}</div>
+            </div>
+        {{/each}}
+    </div>
+</template>
+
+<template name="ecnNew">
+    <div>
+        <h2>Add New MCO</h2>
+            <form class="addNewEcn">
+                <label for="newEcn">
+                <input type="text"
+                       class="inputComment"
+                       id="newEcn"
+                       value="8100"
+                       name="newEcn"
+
+                       pattern="[0-9]{8}"
+                       required/>
+                </label>
+                <h2>Effective at</h2>
+                <label for="ecnEffectivity">
+                <input type="date"
+                       class="dateField"
+                       id="ecnEffectivity"
+                       name="ecnEffectivity"
+                       pattern="(?:20)[0-9]{2}-(?:(?:0[1-9]|1[0-2])-(?:0[1-9]|1[0-9]|2[0-9])|(?:(?!02)(?:0[1-9]|1[0-2])-(?:30))|(?:(?:0[13578]|1[02])-31))"
+                       required />
+                </label>
+                <p></p>
+                <div>
+                    <label for="machineRecording">
+                        <input type="checkbox"
+                               id="machineRecording"
+                               name="machineRecording"
+                               class="newKit1">Machine Recording</label>
+                </div>
+                <p></p>
+                <div>
+                    <label for="statusList">
+
+                    </label>
+                </div>
+                <p></p>
+                <label for="mcoNotes">
+                    <input type="text"
+                           class="inputComment"
+                           id="mcoNotes"
+                           name="mcoNotes"
+                           placeholder="MCO Notes" />
+                </label>
+                <div class="userBox">
+                    <button class="searchSubmit"
+                            type="submit">Submit</button>
+                </div>
+            </form>
+    </div>
+</template>

@@ -1,0 +1,169 @@
+<template name="mainLayout">
+<body>
+{{#if currentUser}}
+  {{#if isInRole 'admin'}}
+      {{> MainLayout}}
+      {{> overViewList}}
+      {{> headerList}}
+    {{/if}}
+  {{#if isInRole 'shipping'}}
+      {{> shippingLayout}}
+      {{> overViewList}}
+      {{> headerList}}
+  {{/if}}
+  {{#if isInRole 'pdi'}}
+      {{> pdiLayout}}
+      {{> overViewList}}
+      {{> headerList}}
+  {{/if}}
+  {{#if isInRole 'repair'}}
+      {{> repairLayout}}
+      {{> overViewList}}
+      {{> headerList}}
+  {{/if}}
+  {{#if isInRole 'outBound'}}
+      {{> washLayout}}
+      {{> overViewList}}
+      {{> headerList}}
+  {{/if}}
+ {{else}}
+    {{> login}}
+{{/if}}
+</body>
+</template>
+
+<template name="AdminLayout">
+    <div class="">
+        <nav>
+            <a class="btn btnRed" href="/adminNewUser">New User</a>
+            <a class="btn btnRed" href="/adminViewUser">View User</a>
+            <a class="btn btnRed" href="/newFiskalYear">Change Fiscal Year</a>
+            <a class="btn btnRed" href="/manipulateDatabase">Manipulate Database</a>
+            <a class="btn " href="/overViewLoggedIn">Over View</a>
+            <a class="logout btn" href="/logout" >Logout</a>
+        </nav>
+    </div>
+</template>
+
+
+<template name="MainLayout">
+  <div class="">
+    <nav>
+        <a class="btn " href="/shippingMachines">Shipping</a>
+        <a class="btn" href="/inspectionStart">Inspection</a>
+        <a class="btn" href="/repairView">Repair</a>
+        <a class="btn" href="/washList">Wash Bay</a>
+        <a class="btn" href="/readyShipList">Final Status</a>
+        <a class="btn " href="/ecnOverView">ECN Tracking</a>
+        <br><br>
+        <a class="btn" href="/statistics">Statistics</a>
+        <a class="btn btnRed" href="/admin">Admin</a>
+        <a class="btn" href="/machineSearch">Search by Machine</a>
+        <a class="btn" href="/wordSearch">Search by Key Word</a>
+        <a class="btn" href="/machineLocation">Locations</a>
+        <a class="logout btn" href="/logout" >Logout</a>
+    </nav>
+  </div>
+</template>
+
+<template name="shippingLayout">
+    <div class="">
+        <nav>
+            <a class="btn " href="/shippingMachines">Shipping</a>
+            <a class="btn" href="/machineSearch">Search by Machine</a>
+            <a class="btn" href="/wordSearch">Search by Key Word</a>
+            <a class="btn" href="/machineLocation">Locations</a>
+            <a class="btn" href="/statistics">Statistics</a>
+            <a class="logout btn" href="/logout" >Logout</a>
+        </nav>
+    </div>
+</template>
+
+<template name="pdiLayout">
+    <div class="">
+        <nav>
+            <a class="btn " href="/overViewLoggedIn">Over View</a>
+            <a class="btn" href="/inspectionStart">Inspection</a>
+            <a class="btn" href="/machineSearch">Search by Machine</a>
+            <a class="btn" href="/wordSearch">Search by Key Word</a>
+            <a class="btn" href="/machineLocation">Locations</a>
+            <a class="btn " href="/ecnOverview">ECN Tracking</a>
+            <a class="btn" href="/statistics">Statistics</a>
+            <a class="logout btn" href="/logout" >Logout</a>
+        </nav>
+    </div>
+</template>
+
+<template name="repairLayout">
+    <div class="">
+        <nav>
+            <a class="btn " href="/overViewLoggedIn">Over View</a>
+            <a class="btn" href="/repairView">Repair</a>
+            <a class="btn" href="/machineSearch">Search by Machine</a>
+            <a class="btn" href="/wordSearch">Search by Key Word</a>
+            <a class="btn" href="/wordSearch">Search by Key Word</a>
+            <a class="btn" href="/machineLocation">Locations</a>
+            <a class="btn" href="/charts">Charts</a>
+            <a class="logout btn" href="/logout" >Logout</a>
+        </nav>
+    </div>
+</template>
+
+<template name="washLayout">
+    <div class="">
+        <nav>
+            <a class="btn " href="/overViewLoggedIn">Over View</a>
+            <a class="btn " href="/shippingMachines">Shipping</a>
+            <a class="btn" href="/washList">Wash Bay</a>
+            <a class="btn" href="/readyShipList">Final Status</a>
+            <a class="btn" href="/machineSearch">Search by Machine</a>
+            <a class="btn" href="/wordSearch">Search by Key Word</a>
+            <a class="btn" href="/machineLocation">Locations</a>
+            <a class="logout btn" href="/logout" >Logout</a>
+        </nav>
+    </div>
+</template>
+
+<template name="outBound">
+    <div class="">
+        <nav>
+            <a class="btn " href="/overViewLoggedIn">Over View</a>
+            <a class="btn " href="/shippingMachines">Shipping</a>
+            <a class="btn" href="/readyShipList">Ready to Ship</a>
+            <a class="btn" href="/machineSearch">Search by Machine</a>
+            <a class="btn" href="/wordSearch">Search by Key Word</a>
+            <a class="btn" href="/machineLocation">Locations</a>
+            <a class="btn" href="/statistics">Statistics</a>
+            <a class="logout btn" href="/logout" >Logout</a>
+        </nav>
+    </div>
+</template>
+
+<template name="MainLayout_3">
+    <div class="">
+        <nav>
+            <a class="btn " href="/overViewLoggedIn">Over View</a>
+            <a class="btn" href="/machineLocation">Locations</a>
+            <a class="btn" href="/statistics">Statistics</a>
+            <a class="logout btn" href="/logout" >Logout</a>
+        </nav>
+    </div>
+</template>
+
+<template name="MainLayout_mary">
+    <div class="">
+        <nav>
+            <a class="btn " href="/shippingMachines">Back to Shipping</a>
+            <a class="btn " href="/overViewLoggedIn">Over View</a>
+            <a class="btn" href="/machineLocation">Locations</a>
+            <a class="btn" href="/statistics">Statistics</a>
+            <a class="logout btn" href="/logout" >Logout</a>
+        </nav>
+    </div>
+</template>
+
+
+<template name="unAuthorized">
+    <h1>Password / Username wrong or not Authorized</h1>
+</template>
+

@@ -1,0 +1,60 @@
+<template name="pdi_Omm">
+    <a class="loginSubmit" style="text-decoration: none; background-color: #0ddc1b " href="/inspectionStart">PDI Overview</a>
+    <br><br><br><br>
+    <h1>Omm's Main / Supplement / Unloading Fitting / CeMoS / Terra Track / Profi Cam 3</h1>
+    <button type="submit" class="loginSubmit mainOm">Main Om</button>
+    <button type="submit" class="loginSubmit suppOm">Supplement</button>
+    <button type="submit" class="loginSubmit unloadOm">Unload</button>
+    <button type="submit" class="loginSubmit cemosOm">CeMoS</button>
+    <button type="submit" class="loginSubmit terraOm">Terra Track</button>
+    <button type="submit" class="loginSubmit profiOm">Profi Cam</button>
+    <br><br><br><br><br>
+    {{> Template.dynamic template=content}}
+    {{> mainOmmInput}}
+
+</template>
+
+
+<template name="omMain">
+    <div class="">
+        <div class="rTable">
+            <div class="rTableRow">
+                <div class="rTableHead"><strong>Part Nr</strong></div>
+                <div class="rTableHead"><strong>Range / Variant </strong></div>
+            </div>
+            {{#each mainOm}}
+                <div class="rTableRow {{selectedClass}}">
+                    <div class="rTableCell">{{ommMain}}</div>
+                    <div class="rTableCell">{{ommMainRange}}</div>
+                </div>
+            {{/each}}
+        </div>
+    </div>
+</template>
+
+<template name="suppOm">
+    <div class="">
+        <div class="rTable">
+            <div class="rTableRow">
+                <div class="rTableHead"><strong>Part Nr</strong></div>
+                <div class="rTableHead"><strong>Range / Variant </strong></div>
+            </div>
+            {{#each suppOm}}
+                <div class="rTableRow {{selectedClass}}">
+                    <div class="rTableCell">{{ommSupp}}</div>
+                    <div class="rTableCell">{{ommSuppRange}}</div>
+                </div>
+            {{/each}}
+        </div>
+    </div>
+</template>
+
+<template name="mainOmmInput">
+    <form class="mainOm">
+      <input type="text" class="mainPartInput" id="mainOmmPartNr" name="mainOmmPartNr" placeholder="Part Nr">
+      <input type="text" class="mainRangeInput" id="mainOmmRange" name="mainOmmRange"  placeholder="Main Omm Range" required>
+    <button class="newCheck" type="submit">Add New Main Om</button>
+    </form>
+</template>
+
+

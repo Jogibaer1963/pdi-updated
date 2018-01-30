@@ -1,0 +1,194 @@
+<template name="headerShipList">
+    {{#if currentUser}}
+        {{> MainLayout_3}}
+        <div class="userBox">
+            <button class="headerShip" type="submit">Machines</button>
+        </div>
+        {{> inputHead}}
+        {{> headShippingList}}
+        {{> headerTrailer}}
+        {{> trailerAtWork}}
+    {{else}}
+        {{> login}}
+    {{/if}}
+</template>
+
+<template name="inputHead">
+    <div class="">
+        <form class="orangeredHeadShippingBox inputNewHead">
+            <div class="userBox">
+                <label for="MachineId" class="input" >Head-Id</label>
+                <br>
+                <input type="text" class="inputComment" id="headId" name="newHead" placeholder="Head Id" value="{{headId}}" required>
+            </div>
+
+            <div class="userBox">
+                <label for="shippingDate" class="input">Shipping-Date</label>
+                <br>
+                <input type="Date" class="inputComment" id="shippingDate" name="newDate" required>
+            </div>
+            <div class="userBox">
+                <label for="newDestination" class="input">Destination</label>
+                <br>
+                <input type="text" class="inputComment" id="newDestination" name="newDestination" placeholder="Destination">
+            </div>
+            <br><br><br><br>
+            <div class="userBox">
+                <label for="newTransporter" class="input">Transporter</label>
+                <br>
+                <input type="text" class="inputComment" id="newTransporter" name="newTransporter" placeholder="Transporter">
+            </div>
+            <div class="userBox">
+                <div class="inputKit">Ship with Kit</div>
+                <br>
+                <ul class="checkbox">
+                    <li>
+                        <div>
+                            <label for="newKit1">
+                                <input type="checkbox" value=" B07_0040" id="newKit1" name="newKit" class="newKit1" {{newKit1}}>B07 0040</label>
+                        </div>
+                    </li>
+                    <li>
+                    <div>
+                        <label for="newKit2">
+                            <input type="checkbox" value=" B07_0045" id="newKit2" name="newKit" class="newKit2"  {{newKit2}}>B07 0045</label>
+                    </div>
+                </li>
+                    <li>
+                        <div class="kitGroup007">
+                            <label for="newKit3">
+                                <input type="checkbox" value=" 007_0300" id="newKit3" name="newKit" class="newKit3"  {{newKit3}}>007 0300</label>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="kitGroup007">
+                            <label for="newKit4">
+                                <input type="checkbox" value=" 007_0302" id="newKit2" name="newKit" class="newKit2"  {{newKit4}}>007 0302</label>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="kitGroup003">
+                            <label for="newKit5">
+                                <input type="checkbox" value=" 003_0301" id="newKit2" name="newKit" class="newKit2"  {{newKit5}}>003 0301</label>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="kitGroup003">
+                            <label for="newKit6">
+                                <input type="checkbox" value=" 003_0300" id="newKit2" name="newKit" class="newKit2"  {{newKit6}}>003 0300</label>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="kitGroup003">
+                            <label for="newKit7">
+                                <input type="checkbox" value=" 003_0302" id="newKit2" name="newKit" class="newKit2"  {{newKit7}}>003 0302</label>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <br><br><br><br><br><br>
+            <div class="userBox">
+                <label for="newComment" class="inputComment">Comments</label>
+                <br>
+                <input type="text" class="comment inputComment" id="newComment" name="newComment" placeholder="Comments">
+            </div>
+            <br>
+            <div class="userBox">
+                <button class="loginSubmit" type="submit">Submit</button>
+            </div>
+        </form>
+    </div>
+</template>
+
+<template name="headShippingList">
+    <div class="">
+        <div class="buttonPositionId3">
+            <button class="buttonPositionHead" type="submit">Delete marked Machine</button>
+        </div>
+        <div class="buttonEdit">
+            <button class="buttonPosition2Head" type="submit">Edit marked Machine</button>
+        </div>
+        <div class="rTable">
+            <div class="rTableRow ">
+                <div class="rTableHead"><strong>Machine</strong></div>
+                <div class="rTableHead" ><strong>ShipDate</strong></div>
+                <div class="rTableHead"><strong>Destination</strong></div>
+                <div class="rTableHead"><strong>Transporter</strong></div>
+                <div class="rTableHead" style="width: 164px; text-align: center;"><strong>Ship with Kit</strong></div>
+                <div class="rTableHead"><strong>Shipping Comments</strong></div>
+                <div class="rTableHead"><strong>Ship Status</strong></div>
+            </div>
+            {{#each shippList}}
+                <div class="rTableRow newShippingHead {{selectedClass}}">
+                    <div class="rTableCell">{{newHeadId}}</div>
+                    <div class="rTableCell">{{date}}</div>
+                    <div class="rTableCell">{{destination}}</div>
+                    <div class="rTableCell">{{transporter}}</div>
+                    <div class="rTableCell" style="width: 90px">{{kit}}</div>
+                    <div class="rTableCellComment">{{shippingComment}}</div>
+                    <div class="rTableCell {{getStatusColor shipStatus}}" style="background-color:{{getStatusColor shipStatus}}; color:{{getStatusColor shipStatus}}">{{shipStatus}}</div>
+                </div>
+            {{/each}}
+        </div>
+    </div>
+</template>
+
+<template name="headerTrailer">
+    <div class="headerTrailerLot">
+    <h2>Trailer on Lot</h2>
+    </div>
+    <div class="headerTrailerMove">
+        <h2>Trailer on the Move</h2>
+    </div>
+ <div class="headTrailerList">
+    <form class="newTrailerInput">
+    <div class="">
+        <label for="newTransporter" class=""></label>
+        <input type="text" class="inputTransporterId" id="newTransporter" name="newTransporter" placeholder="Transporter">
+    </div>
+    <div class="">
+        <label for="trailerId" class=""></label>
+        <input type="text" class="inputTrailerId" id="trailerId" name="trailerId" placeholder="Trailer Id">
+    </div>
+    <div class="trailerButton">
+        <button class="trailerSubmit" type="submit">Enter Trailer Id</button>
+    </div>
+    </form>
+    <div class="rTable trailerLot">
+        <div class="rTableRow">
+            <div class="rTableHead"><strong>Transporter</strong></div>
+            <div class="rTableHead" ><strong>Trailer ID</strong></div>
+        </div>
+        {{#each availiableTrailer}}
+            <div class="rTableRow trailerTable {{selectedClass}}">
+                <div class="rTableTrailer">{{headTransporter}}</div>
+                <div class="rTableTrailer">{{newTrailer}}</div>
+            </div>
+        {{/each}}
+    </div>
+ </div>
+</template>
+
+<template name="trailerAtWork">
+    <div class="">
+        <button class="trailerDelete" type="submit">Delete Trailer</button>
+    </div>
+    <div class="">
+        <button class="trailerMove" type="submit">Move me</button>
+    </div>
+ <div class="trailerAtWork trailerLot">
+    <div class="rTable">
+        <div class="rTableRow ">
+            <div class="rTableHead"><strong>Transporter</strong></div>
+            <div class="rTableHead" ><strong>Trailer ID</strong></div>
+        </div>
+        {{#each trailerGone}}
+            <div class="rTableRow moveTrailer {{selectedClass}}">
+                <div class="rTableTrailer">{{headTransporter}}</div>
+                <div class="rTableTrailer">{{newTrailer}}</div>
+            </div>
+        {{/each}}
+    </div>
+ </div>
+</template>
+

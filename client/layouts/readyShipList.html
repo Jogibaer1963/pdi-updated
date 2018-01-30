@@ -1,0 +1,73 @@
+<template name="readyShipList">
+<body>
+{{#if currentUser}}
+    {{> MainLayout_3}}
+    <h2>List of Availiable Machines for Shipping</h2>
+    {{> overViewReadyList}}
+    <br><br><br><br>
+<!--    {{> shippingInProcess}}  -->
+{{else}}
+    {{> login}}
+{{/if}}
+
+ </body>
+</template>
+
+
+<template name="overViewReadyList">
+    <form class="shipMe">
+        <div>
+            <button type="submit" class="shipMeButton">Ship me</button>
+        </div>
+    </form>
+    <form class="locationId">
+        <div>
+            <button type="submit" class="machineLocation">Update Location</button>
+            <label for="locationId" class="mLocationId" ></label>
+            <input type="text" class="machineLocationInput" id="locationId" name="locationId" required>
+        </div>
+    </form>
+    <div class="machineReadyBox">
+    <div class="rTable">
+        <div class="rTableRow">
+            <div class="rTableHead"><strong>Machine</strong></div>
+            <div class="rTableHead"><strong><span>Shipdate</span></strong></div>
+            <div class="rTableHead"><strong>Destination</strong></div>
+            <div class="rTableHead"><strong>Transporter</strong></div>
+            <div class="rTableHead"><strong>Location</strong></div>
+            <div class="rTableHead" style="width: 200px"><strong>Shipping Comments</strong></div>
+        </div>
+        {{#each overView}}
+            <div class="rTableRow readyList {{selectedClass}}">
+                <div class="rTableCell">{{machineId}}{{newHeadId}}</div>
+                <div class="rTableCell">{{date}}</div>
+                <div class="rTableCell">{{destination}}</div>
+                <div class="rTableCell">{{transporter}}</div>
+                <div class="rTableCell" style="background-color: #6fd981">{{locationId}}</div>
+                <div class="rTableCellComment">{{shippingComment}}</div>
+            </div>
+        {{/each}}
+    </div>
+    </div>
+</template>
+
+<template name="shippingInProcess">
+    <button type="submit" class="machineOnTrailer">Machine gone</button>
+    <br>
+    <div class="machineShipBox">
+      <ul class="horizontal-slide">
+        {{#each shippingOverView}}
+            <div class="span2 machineReadyShip {{selectedClass}}">
+                <h2>----------------------------</h2>
+              <li><h4>{{machineId}}{{newHeadId}}</h4></li>
+              <li>{{date}}</li>
+              <li>{{destination}}</li>
+              <li>{{transporter}}</li>
+              <li>{{kit}}</li>
+              <li>{{tireTrack}}</li>
+              <li>{{shippingComment}}</li>
+            </div>
+        {{/each}}
+      </ul>
+    </div>
+</template>

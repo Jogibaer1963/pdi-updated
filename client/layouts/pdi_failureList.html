@@ -1,0 +1,40 @@
+<template name="failureList">
+    <head>
+        <title>Failures</title>
+    </head>
+    <a class="btn" href="/">Back to Main Overview</a>
+    <a class="btn" href="/inspectionStart">Back to Inspections Over View</a>
+    <a class="btn" href="/checkList">Switch to Check List</a>
+    <h1>Add or Remove Failure ID's</h1>
+    {{> input_new_failure}}
+    {{> show_failure_List}}
+</template>
+
+<template name="input_new_failure">
+    <form class="inputNewFailure">
+        <label for="errorDescription"></label>
+        <input class="inputField" type="text" id="errorDescription" name="error_describe" placeholder="Failure Description" required>
+        <button class="btn btn-lg btn-success " type="submit" >Submit New Failure</button>
+    </form>
+</template>
+
+<template name="show_failure_List">
+    <div class="">
+        <br><br>
+        <div class="col-xs-1"><button class="btn btn-danger btn-lg buttonPositionId4" type="submit">Delete Failure ID</button></div>
+        <br><p></p><br>
+        <div class="checkListBox">
+            <div class="rTable">
+                <div class="rTableRow ">
+                    <div class="rTableHead"><strong>Failure Description</strong></div>
+                </div>
+                {{#each failureList}}
+                    <div class="rTableRow showFailureList {{selectedClass}}">
+                        <div class="rTableCell">{{error_describ}}</div>
+                    </div>
+                {{/each}}
+            </div>
+        </div>
+    </div>
+</template>
+

@@ -1,0 +1,46 @@
+
+// Buttons
+
+.checklistReturn-btn {
+  position: fixed;
+  right: 250px;
+  color: black;
+}
+
+// Anker tags
+
+a:hover {
+  background-color: lightgrey;
+  text-align: right;
+  text-decoration: none;
+}
+
+// Headers and Title
+
+.checkpointHeader .title {
+  height:40px;
+  line-height:30px;
+  background:gray;
+  font-size:18px;
+  font-family: verdana, serif;
+  display:block;
+  color:white;
+  padding:10px;
+  vertical-align: center;
+}
+
+// Input Fields
+
+.input {
+  border: black 1px;
+  background-color: #e6e6e6;
+}
+
+.inputMargin {
+  float: left;
+  margin-left: 25px;
+}
+
+.descriptionBox {
+  width: 300px;
+}

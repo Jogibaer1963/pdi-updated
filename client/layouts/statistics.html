@@ -1,0 +1,34 @@
+<template name="statistics">
+    <body>
+    {{#if currentUser}}
+        {{>fuelChart}}
+        {{>analyzeRepair}}
+    {{else}}
+        {{> login}}
+    {{/if}}
+    </body>
+</template>
+
+<template name="fuelChart">
+    {{> highchartsHelper chartId="test" chartWidth="100%" charHeight="100%" chartObject=topGenresChart}}
+</template>
+
+
+
+<template name="analyzeRepair">
+    <form class="datePicker">
+        <label for="dateStart"></label>
+        <input type="date" id="dateStart" name="dateStart">
+        <label for="dateEnd"></label>
+        <input type="date" id="dateEnd" name="dateEnd">
+        <button type="submit">Submit</button>
+    </form>
+    {{#each machineRepair}}
+        <div class="rTableRow">
+            <div class="rTableCell">{{pdiDate}}</div>
+        </div>
+    {{/each}}
+
+
+</template>
+

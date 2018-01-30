@@ -1,0 +1,135 @@
+<template name="machineInspect">
+    {{#if currentUser}}
+        <a class="loginSubmit" style="text-decoration: none; background-color: #dddb05" href="/inspectionStart">PDI Overview / Cancel PDI</a>
+        <br><br><br><br>
+        {{> machineUser}}
+        {{> ommBook}}
+    {{else}}
+        {{> login}}
+    {{/if}}
+</template>
+
+<template name="machineUser">
+    {{#with machineNow}}
+        <h2>Machine to Inspect: {{machine}}</h2>
+        <h2>Performed by: {{userLoggedIn}}</h2>
+    {{/with}}
+</template>
+
+<template name="ommBook">
+    <form class="omBooklets">
+        <label for="fuelMe" class="fuel">Fuel consumption with PDI start</label>
+        <input type="text" class="omInput" id="fuelMe" name="fuelMe" placeholder="Gallon" required>
+    <br><br><br>
+        {{#dropdownTrigger  name="ommMain"}}
+            <button class="loginSubmit omInputButton">OM Main</button>
+        {{/dropdownTrigger}}
+        <input type="text" class="omInput" id="locationId" name="omMain" value="{{selectedMainOm}}" required>
+        {{#dropdown name="ommMain" align="left" top="-55" left="-270"}}
+            <div class="rTable tablePosDropDown">
+                {{#each ommMainBooklets}}
+                    <div class="rTableRow omMain omTable">
+                        <div class="rTableCell" style="font-size: 30px;height: 60px;width: 80px;white-space: nowrap;">{{ommMain}}</div>
+                        <div class="rTableCell" style="font-size: 30px;height: 60px;width: 80px;white-space: nowrap;">{{ommMainRange}}</div>
+                    </div>
+                {{/each}}
+            </div>
+        {{/dropdown}}
+        <br>
+        <div class="">
+            {{#dropdownTrigger  name="ommSuppBook"}}
+                <button class="loginSubmit omInputButton">OM Supp</button>
+            {{/dropdownTrigger}}
+            <label for="locationId" class="mLocationId" ></label>
+            <input type="text" class="omInput " id="locationId" name="omSupp" value="{{selectedSuppOm}}" required>
+            {{#dropdown name="ommSuppBook" align="left" top="-50" left="-270"}}
+                <div class="rTable tablePosDropDown">
+                    {{#each ommSupplement}}
+                        <div class="rTableRow omSupp omTable">
+                            <div class="rTableCell" style="font-size: 30px;height: 60px;width: 80px;white-space: nowrap;">{{ommSupp}}</div>
+                            <div class="rTableCell" style="font-size: 30px;height: 60px;width: 80px;white-space: nowrap;">{{ommRange}}</div>
+                        </div>
+                    {{/each}}
+                </div>
+            {{/dropdown}}
+        </div>
+        <br>
+        <div class="">
+            {{#dropdownTrigger  name="ommUnloadBooks"}}
+                <button class="loginSubmit omInputButton">Om Fitting</button>
+            {{/dropdownTrigger}}
+            <label for="locationId" class="mLocationId" ></label>
+            <input type="text" class="omInput " id="locationId" name="omUnload" value="{{selectedUnloadOm}}" required>
+            {{#dropdown name="ommUnloadBooks" align="left" top="-50" left="-270"}}
+                <div class="rTable tablePosDropDown">
+                    {{#each ommUnload}}
+                        <div class="rTableRow omUnload omTable">
+                            <div class="rTableCell" style="font-size: 30px;height: 60px;width: 80px;white-space: nowrap;">{{omUnload}}</div>
+                            <div class="rTableCell" style="font-size: 30px;height: 60px;width: 80px;white-space: nowrap;">{{ommRange}}</div>
+                        </div>
+                    {{/each}}
+                </div>
+            {{/dropdown}}
+        </div>
+        <br>
+        <div class="">
+            {{#dropdownTrigger  name="ommCebisMobilBook"}}
+                <button class="loginSubmit omInputButton">OM CeMos</button>
+            {{/dropdownTrigger}}
+            <label for="locationId" class="mLocationId" ></label>
+            <input type="text" class="omInput " id="locationId" name="omCebis" value="{{selectedCemosOm}}">
+            {{#dropdown name="ommCebisMobilBook" align="right" top="-50" left="-420"}}
+                <div class="rTable tablePosDropDown">
+                    {{#each ommCebisMo}}
+                        <div class="rTableRow omCemos omTable">
+                            <div class="rTableCell" style="font-size: 30px;height: 60px;width: 80px;white-space: nowrap;">{{ommCebisMobil}}</div>
+                            <div class="rTableCell" style="font-size: 30px;height: 60px;width: 80px;white-space: nowrap;">{{ommRange}}</div>
+                        </div>
+                    {{/each}}
+                </div>
+            {{/dropdown}}
+        </div>
+        <br>
+        <div class="">
+            {{#dropdownTrigger  name="ommTeraTrackBook"}}
+                <button class="loginSubmit omInputButton">OM Tera Track</button>
+            {{/dropdownTrigger}}
+            <label for="locationId" class="mLocationId" ></label>
+            <input type="text" class="omInput " id="locationId" name="omTerra" value="{{selectedTeraOm}}">
+            {{#dropdown name="ommTeraTrackBook" align="right" top="-50" left="-420"}}
+                <div class="rTable tablePosDropDown">
+                    {{#each ommTera}}
+                        <div class="rTableRow omTera omTable">
+                            <div class="rTableCell" style="font-size: 30px;height: 60px;width: 80px;white-space: nowrap;">{{ommTeraTrack}}</div>
+                            <div class="rTableCell" style="font-size: 30px;height: 60px;width: 80px;white-space: nowrap;">{{ommRange}}</div>
+                        </div>
+                    {{/each}}
+                </div>
+            {{/dropdown}}
+        </div>
+        <br>
+        <div class="">
+            {{#dropdownTrigger  name="ommProfiCamBook"}}
+                <button class="loginSubmit omInputButton">OM Profi Cam</button>
+            {{/dropdownTrigger}}
+            <label for="locationId" class="mLocationId" ></label>
+            <input type="text" class="omInput " id="locationId" name="omProfiCam" value="{{selectedProfiCam}}">
+            {{#dropdown name="ommProfiCamBook" align="left" top="-60" left="-270"}}
+                <div class="rTable tablePosDropDown">
+                    {{#each ommProfi}}
+                        <div class="rTableRow ommProfiCam omTable {{selectedClass}}">
+                            <div class="rTableCell" style="font-size: 30px;height: 60px;width: 80px;white-space: nowrap;">{{ommProfiCam}}</div>
+                            <div class="rTableCell" style="font-size: 30px;height: 60px;width: 80px;white-space: nowrap;">{{ommRange}}</div>
+                        </div>
+                    {{/each}}
+                </div>
+            {{/dropdown}}
+        </div>
+        <br><br><br><br><br><br>
+        <div class=" posPdiOmm">
+            <button class="loginSubmitOMM" type="submit" >Submit OMM's</button>
+        </div>
+    </form>
+</template>
+
+

@@ -1,0 +1,9 @@
+<template name="admin">
+    {{#if currentUser}}
+        {{> AdminLayout}}
+    {{else}}
+        {{> login}}
+    {{/if}}
+</template>
+
+

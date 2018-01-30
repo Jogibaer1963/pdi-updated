@@ -1,0 +1,106 @@
+<template name="editMachine">
+    {{#if currentUser}}
+        {{> shippingLayout}}
+        <h1>Edit Machine</h1>
+        {{#with showEditMachine}}
+            <div class="">
+                <form class="orangeredShippingBox inputEditMachine">
+                    <div class="userBox">
+                        <label for="MachineId" class="input" >Machine-Id</label>
+                        <br>
+                        <input type="text" class="inputComment" id="MachineId" name="newMachine" placeholder="Machine Id" value="{{machineId}}">
+                    </div>
+                    <div class="userBox">
+                        <label for="shippingDate" class="input">Shipping-Date</label>
+                        <br>
+                        <input type="Date" class="inputComment" id="shippingDate" name="newDate" value="{{date}}" required>
+                    </div>
+                    <div class="userBox">
+                        <label for="newDestination" class="input">Destination</label>
+                        <br>
+                        <input type="text" class="inputComment" id="newDestination" name="newDestination" placeholder="Destination" value="{{destination}}">
+                    </div>
+                    <br><br><br><br>
+                    <div class="userBox">
+                        <label for="newTransporter" class="input">Transporter</label>
+                        <br>
+                        <input type="text" class="inputComment" id="newTransporter" name="newTransporter" placeholder="Transporter" value="{{transporter}}">
+                    </div>
+                    <div class="userBox">
+                        <label for="selectMe" class="input">Tires / MTS </label>
+                        <br>
+                        <select name="newTireTrack" id="selectMe" class="inputComment">
+                            <option>{{tireTrack}}</option>
+                            <option>Single Tire</option>
+                            <option>520 GY / 2208 017.0</option>
+                            <option>620 GY / 2208 016.0</option>
+                            <option>620 MI / 2208 019.0</option>
+                            <option>620 GY / 2208 878.0</option>
+                            <option>MTS</option>
+                        </select>
+                    </div>
+                    <div class="userBox checkBoxChecked">
+                        <div class="inputKit">Ship with Kit</div>
+                        <br>
+                        <ul class="checkbox">
+                          <li>
+                            <div>
+                              <label for="newKit1">
+                              <input type="checkbox" value="C03_0019" id="newKit1" name="newKit" class="newKit1" {{newKit1}}>C03 0019</label>
+                            </div>
+                          </li>
+                          <li>
+                            <div>
+                              <label for="newKit2">
+                              <input type="checkbox" value="C03_0065" id="newKit2" name="newKit" class="newKit2"  {{newKit2}}>C03 0065</label>
+                            </div>
+                          </li>
+                          <li>
+                                <div>
+                                    <label for="newKit3">
+                                    <input type="checkbox" value="C03_0165" id="newKit3" name="newKit" class="newKit3"  {{newKit3}}>C03 0165</label>
+                                </div>
+                            </li>
+                            <li>
+                                <div>
+                                    <label for="newKit7">
+                                        <input type="checkbox" value="C03_0180" id="newKit7" name="newKit" class="newKit7" {{newKit7}}>C03 0180</label>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="newKit4Pos">
+                                    <label for="newKit4">
+                                    <input type="checkbox" value="B05_0120" id="newKit4" name="newKit" class="newKit4"  {{newKit4}}>B05 0120</label>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="newKit5Pos">
+                                    <label for="newKit5">
+                                    <input type="checkbox" value="B05_0130" id="newKit5" name="newKit" class="newKit5"  {{newKit5}}>B05 0130</label>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="newKit6Pos">
+                                    <label for="newKit6">
+                                        <input type="checkbox" value="D06_0030" id="newKit6" name="newKit" class="newKit6"  {{newKit6}}>D06 0030</label>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    <br><br><br><br><br><br><br>
+                    <div class="userBox">
+                        <label for="newComment" class="inputComment">Comments</label>
+                        <br>
+                        <input type="text" class="comment inputComment" id="newComment" name="newComment" placeholder="Comments" value="{{shippingComment}}">
+                    </div>
+                    <br><br><br><br>
+                    <div class="userBox">
+                        <button class="loginSubmit buttonEditPos" type="submit">Submit</button>
+                    </div>
+                </form>
+            </div>
+            {{/with}}
+    {{else}}
+        {{> login}}
+    {{/if}}
+</template>

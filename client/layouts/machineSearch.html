@@ -1,0 +1,108 @@
+<template name="machineSearch">
+    {{#if currentUser}}
+    <div class="">
+        {{> MainLayout_3}}
+    </div>
+    <h1>Search and Edit a Machine</h1>
+    <form class="searchMachine">
+        <div class="userBox">
+            <label for="machineId" class="input" >Machine-Id</label>
+            <br>
+            <input type="text" class="inputComment" id="searchId" name="searchId" placeholder="Machine Id" required />
+        </div>
+        <div class="userBox">
+            <button class="searchSubmit" type="submit">Submit</button>
+        </div>
+    </form>
+    <br><br><br><br><br><br>
+    <h1>Shipping Content</h1>
+    <div class="rTable">
+        <div class="rTableRow">
+            <div class="rTableHead"><strong>Machine</strong></div>
+            <div class="rTableHead" ><strong>ShipDate</strong></div>
+            <div class="rTableHead"><strong>Destination</strong></div>
+            <div class="rTableHead"><strong>Transporter</strong></div>
+            <div class="rTableHead"><strong>Ship with Kit</strong></div>
+            <div class="rTableHead"><strong>Tire / Track</strong></div>
+            <div class="rTableHead" style="width: 200px"><strong>Shipping Comments</strong></div>
+            <div class="rTableHead"><strong>Machine Hours</strong></div>
+        </div>
+        {{#each machineSearchShow}}
+            <div class="rTableRow {{selectedClass}}">
+                <div class="rTableCell">{{machineId}}</div>
+                <div class="rTableCell">{{date}}</div>
+                <div class="rTableCell">{{destination}}</div>
+                <div class="rTableCell">{{transporter}}</div>
+                <div class="rTableCell">{{kit}}</div>
+                <div class="rTableCell">{{tireTrack}}</div>
+                <div class="rTableCellComment">{{shippingComment}}</div>
+                <div class="rTableCell">{{machineHour}}</div>
+            </div>
+        {{/each}}
+    </div>
+    <br>
+    <h1>Process Status</h1>
+    <div class="rTable">
+        <div class="rTableRow">
+            <div class="rTableHead"><strong>Date of creation</strong></div>
+            <div class="rTableHead" ><strong>Location</strong></div>
+            <div class="rTableHead"><strong>PDI Duration</strong></div>
+            <div class="rTableHead"><strong>PDI Status</strong></div>
+            <div class="rTableHead"><strong>Repair Status</strong></div>
+            <div class="rTableHead"><strong>Wash Duration</strong></div>
+            <div class="rTableHead"><strong>Wash Status</strong></div>
+            <div class="rTableHead"><strong>Ship Status</strong></div>
+        </div>
+        {{#each machineSearchShow}}
+            <div class="rTableRow {{selectedClass}}">
+                <div class="rTableCell">{{dateOfCreation}}</div>
+                <div class="rTableCell">{{locationId}}</div>
+                <div class="rTableCell">{{pdiDuration}}</div>
+                <div class="rTableCell {{getStatusColor pdiStatus}}" style="background-color:{{getStatusColor pdiStatus}}; color:{{getStatusColor pdiStatus}}">{{pdiStatus}}</div>
+                <div class="rTableCell {{getStatusColor repairStatus}}" style="background-color:{{getStatusColor repairStatus}}; color:{{getStatusColor repairStatus}}">{{repairStatus}}</div>
+                <div class="rTableCell">{{washDuration}}</div>
+                <div class="rTableCell {{getStatusColor washStatus}}" style="background-color:{{getStatusColor washStatus}}; color:{{getStatusColor washStatus}}">{{washStatus}}</div>
+                <div class="rTableCell {{getStatusColor shipStatus}}" style="background-color:{{getStatusColor shipStatus}}; color:{{getStatusColor shipStatus}}">{{shipStatus}}</div>
+            </div>
+        {{/each}}
+    </div>
+    <h1>PDI Content</h1>
+    <div class="printList">
+        {{#each machineSearchShow}}
+            {{#each repairOrder}}
+                <div class="pdiUser">
+                    <div>
+                        <h3>PDI performed by: {{user}}</h3>
+                    </div>
+                    <h3>Main OMM :&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ommMain}}</h3>
+                </div>
+                <div>
+                    <h3>Supplement OMM : &nbsp;&nbsp;{{ommSupp}}</h3>
+                </div>
+                <div>
+                    <h3>Unload Instructions : {{ommFitting}}</h3>
+                </div>
+                <div class="sumRightSide">
+                    <h3>Cebis Mobil OMM : {{ommCebis}}</h3>
+                </div>
+                <div class="sumRightSide">
+                    <h3>Tera Track OMM : {{ommTerra}}</h3>
+                </div>
+                <div class="sumRightSide">
+                    <h3>Profi Cam OMM : {{ommProfiCam}}</h3>
+                </div>
+                <ul>
+                    {{#each repOrder}}
+                        <div>
+                            {{errorNr}}  {{errorDescription}}
+                        </div>
+                    {{/each}}
+                </ul>
+            {{/each}}
+        {{/each}}
+    </div>
+    {{else}}
+    {{> login}}
+    {{/if}}
+</template>
+

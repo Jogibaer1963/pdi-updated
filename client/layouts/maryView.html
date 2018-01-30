@@ -1,0 +1,123 @@
+<template name="maryView">
+{{#if currentUser}}
+    {{> MainLayout_mary}}
+      {{>searchMaryView}}
+    {{> overViewListMaryView}}
+{{else}}
+    {{> login}}
+{{/if}}
+</template>
+
+<template name="searchMaryView">
+    <form class="machine">
+        <button class="inputSearchMary">Search</button>
+        <label for="machine"></label>
+        <input class="inputSearchMachine" id="machine" name="machine" placeholder="Machine">
+    </form>
+        <div class="searchMaryView">
+            <div class="rTableRow">
+                <div class="rTableHeadOverView"><strong>Machine</strong></div>
+                <div class="rTableHeadOverView"><strong>Shippdate</strong></div>
+                <div class="rTableHeadOverView"><strong>PDI</strong></div>
+                <div class="rTableHeadOverView"><strong>Rep</strong></div>
+                <div class="rTableHeadOverView"><strong>Wash</strong></div>
+                <div class="rTableHeadOverView"><strong>Load</strong></div>
+                <div class="rTableHeadOverView"><strong>Truck ordered</strong></div>
+                <div class="rTableHeadOverView"><strong>Kit List printed</strong></div>
+                <div class="rTableHeadOverView"><strong>Transporter</strong></div>
+                <div class="rTableHeadOverView"><strong>City</strong></div>
+                <div class="rTableHeadOverView"><strong>Location</strong></div>
+                <div class="rTableHeadOverView"><strong>Tires</strong></div>
+                <div class="rTableHead" style="width: 150px"><strong>Shipping Comments</strong></div>
+            </div>
+           {{#each maryViewMachine}}
+               <div class="rTableRow truckStatus {{selectedClass2}}">
+               <div class="rTableCellOverView">{{machineId}}</div>
+               <div class="rTableCellOverView" style="width: 50px">{{date}}</div>
+               <div class="rTableCellOverView {{getStatusColor pdiStatus}}" style="background-color:{{getStatusColor pdiStatus}}; color:{{getStatusColor pdiStatus}}" >{{pdiStatus}}</div>
+               <div class="rTableCellOverView {{getStatusColor repairStatus}}" style="background-color:{{getStatusColor repairStatus}}; color:{{getStatusColor repairStatus}}" >{{repairStatus}}</div>
+               <div class="rTableCellOverView {{getStatusColor washStatus}}" style="background-color:{{getStatusColor washStatus}}; color:{{getStatusColor washStatus}}" >{{washStatus}}</div>
+               <div class="rTableCellOverView {{getStatusColor shipStatus}}" style="background-color:{{getStatusColor shipStatus}}; color:{{getStatusColor shipStatus}}" >{{shipStatus}}</div>
+               <div class="rTableCellOverView {{getStatus truckStatus}}" style="background-color:{{getStatus truckStatus}}; color:{{getStatus truckStatus}}" >{{truckStatus}}</div>
+               <div class="rTableCellOverView {{getStatus KitStatus}}" style="background-color:{{getStatus KitStatus}}; color:{{getStatus KitStatus}}" >{{KitStatus}}</div>
+               <div class="rTableCell" style="background-color: #6fd981">{{transporter}}</div>
+               <div class="rTableCell" style="background-color: #6fd981">{{destination}}</div>
+               <div class="rTableCell" style="background-color: #6fd981">{{locationId}}</div>
+               <div class="rTableCell" style="background-color: #6fd981">{{tireTrack}}</div>
+               <div class="rTableCellComment">{{shippingComment}}</div>
+               </div>
+           {{/each}}
+        </div>
+</template>
+
+
+<template name="overViewListMaryView">
+    <br><br><br>
+    <form>
+        <button type="submit" class="addTruck">Truck Ordered</button>
+        <button type="submit" class="addList">List Printed</button>
+        <br><br>
+        <button type="submit" class="removeTruck">Remove Truck</button>
+        <button type="submit" class="removeList">Remove List</button>
+     </form>
+    <br><br><br><br><br>
+    <div class="rTableMaryView clearfix">
+        <div class="rTableRow">
+            <div class="rTableHeadOverView"><strong>Machine</strong></div>
+            <div class="rTableHeadOverView"><strong>Shippdate</strong></div>
+            <div class="rTableHeadOverView"><strong>PDI</strong></div>
+            <div class="rTableHeadOverView"><strong>Rep</strong></div>
+            <div class="rTableHeadOverView"><strong>Wash</strong></div>
+            <div class="rTableHeadOverView"><strong>Load</strong></div>
+            <div class="rTableHeadOverView"><strong>Truck ordered</strong></div>
+            <div class="rTableHeadOverView"><strong>Kit List printed</strong></div>
+            <div class="rTableHeadOverView"><strong>Transporter</strong></div>
+            <div class="rTableHeadOverView"><strong>City</strong></div>
+            <div class="rTableHeadOverView"><strong>Location</strong></div>
+            <div class="rTableHeadOverView"><strong>Tires</strong></div>
+            <div class="rTableHead" style="width: 200px"><strong>Shipping Comments</strong></div>
+        </div>
+        {{#each overView}}
+            <div class="rTableRow truckStatus {{selectedClass2}}">
+                <div class="rTableCellOverView">{{machineId}}</div>
+                <div class="rTableCellOverView" style="width: 50px">{{date}}</div>
+                <div class="rTableCellOverView {{getStatusColor pdiStatus}}" style="background-color:{{getStatusColor pdiStatus}}; color:{{getStatusColor pdiStatus}}" >{{pdiStatus}}</div>
+                <div class="rTableCellOverView {{getStatusColor repairStatus}}" style="background-color:{{getStatusColor repairStatus}}; color:{{getStatusColor repairStatus}}" >{{repairStatus}}</div>
+                <div class="rTableCellOverView {{getStatusColor washStatus}}" style="background-color:{{getStatusColor washStatus}}; color:{{getStatusColor washStatus}}" >{{washStatus}}</div>
+                <div class="rTableCellOverView {{getStatusColor shipStatus}}" style="background-color:{{getStatusColor shipStatus}}; color:{{getStatusColor shipStatus}}" >{{shipStatus}}</div>
+                <div class="rTableCellOverView {{getStatus truckStatus}}" style="background-color:{{getStatus truckStatus}}; color:{{getStatus truckStatus}}" >{{truckStatus}}</div>
+                <div class="rTableCellOverView {{getStatus KitStatus}}" style="background-color:{{getStatus KitStatus}}; color:{{getStatus KitStatus}}" >{{KitStatus}}</div>
+                <div class="rTableCell" style="background-color: #6fd981">{{transporter}}</div>
+                <div class="rTableCell" style="background-color: #6fd981">{{destination}}</div>
+                <div class="rTableCell" style="background-color: #6fd981">{{locationId}}</div>
+                <div class="rTableCell" style="background-color: #6fd981">{{tireTrack}}</div>
+                <div class="rTableCellComment">{{shippingComment}}</div>
+            </div>
+        {{/each}}
+    </div>
+</template>
+
+<template name="headerListMaryView">
+    <div class="headerList ">
+        <div class="rTableHeaders">
+            <div class="rTableRow">
+                <div class="rTableHeadOverView"><strong>Header</strong></div>
+                <div class="rTableHeadOverView"><strong>Shippdate</strong></div>
+                <div class="rTableHeadOverView"><strong>PDI</strong></div>
+                <div class="rTableHeadOverView"><strong>Rep</strong></div>
+                <div class="rTableHeadOverView"><strong>Load</strong></div>
+                <div class="rTableHeadOverView"><strong>Location</strong></div>
+            </div>
+            {{#each overView}}
+                <div class="rTableRow">
+                    <div class="rTableCellOverView">{{newHeadId}}</div>
+                    <div class="rTableCellOverView" style="width: 50px">{{date}}</div>
+                    <div class="rTableCellOverView {{getStatusColor pdiStatus}}" style="background-color:{{getStatusColor pdiStatus}}; color:{{getStatusColor pdiStatus}}" >{{pdiStatus}}</div>
+                    <div class="rTableCellOverView {{getStatusColor repairStatus}}" style="background-color:{{getStatusColor repairStatus}}; color:{{getStatusColor repairStatus}}" >{{repairStatus}}</div>
+                    <div class="rTableCellOverView {{getStatusColor shipStatus}}" style="background-color:{{getStatusColor shipStatus}}; color:{{getStatusColor shipStatus}}" >{{shipStatus}}</div>
+                    <div class="rTableCell" style="background-color: #6fd981">{{locationId}}</div>
+                </div>
+            {{/each}}
+        </div>
+    </div>
+</template>
