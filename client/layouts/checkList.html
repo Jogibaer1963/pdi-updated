@@ -2,7 +2,7 @@
 <template name="checkList">
 {{#if currentUser}}
 {{> inputNewCheckPoint}}
-    {{> checkPointTable}}
+
 {{else}}
     {{> login}}
 {{/if}}
@@ -70,36 +70,30 @@
             </div>
         </form>
   </div>
-</template>
 
-<template name="checkPointTable">
-     <div class="tablePosition">
-        <div>
-            <button class="title inputMargin tableHeadFixed">Active Checklist</button>
-        </div>
-           <br><br>
-      <div class="divTable blueTable">
-         <div class="divTableHeading ">
-            <div class="divTableRow table">
-                <div class="divTableHead"><strong>Pos</strong></div>
-                <div class="divTableHead"><strong>Active Failures</strong></div>
-                <div class="divTableHead"><strong>Type</strong></div>
-                <div class="divTableHead"><strong>Range Start</strong></div>
-                <div class="divTableHead"><strong>Range End</strong></div>
-            </div>
-         </div>
 
-            <div class="divTableBody scroll">
-                {{#each checkList}}
-                   <div class="divTableRow {{selectedClass}}">
-                      <div class="divTableCell">{{errorPos}}</div>
-                      <div class="divTableCell">{{errorDescription}}</div>
-                      <div class="divTableCell">{{machineType}}</div>
-                      <div class="divTableCell">{{machineRangeStart}}</div>
-                      <div class="divTableCell">{{machineRangeEnd}}</div>
-                   </div>
-                {{/each}}
-            </div>
-        </div>
-     </div>
+
+    <table class="blueTable">
+        <thead>
+        <tr class="">
+            <th class="position">Position</th>
+            <th class="failure">Active Failure</th>
+            <th class="type">Type</th>
+            <th class="rangeStart">Range start</th>
+            <th class="rangeEnd">Range end</th>
+        </tr>
+        </thead>
+        <tbody>
+    {{#each checkList}}
+        <tr class="">
+            <td class="position">{{errorPos}}</td>
+            <td class="failure">{{errorDescription}}</td>
+            <td class="type">{{machineType}}</td>
+            <td class="rangeStart">{{machineRangeStart}}</td>
+            <td class="rangeEnd">{{machineRangeEnd}}</td>
+        </tr>
+    {{/each}}
+        </tbody>
+    </table>
+
 </template>

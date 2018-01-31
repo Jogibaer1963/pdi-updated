@@ -46,6 +46,15 @@ if (Meteor.isClient) {
 
     Template.inputNewCheckPoint.helpers({
 
+        checkList: function () {
+            event.preventDefault();
+            Session.set('selectedCheckPoint', '');
+            let loadedCheckPoints = checkPoints.find({status: 1}, {sort: {errorPos: 1}});
+            let countedCheckPoints = loadedCheckPoints.count();
+
+            console.log(countedCheckPoints);
+            return loadedCheckPoints;
+        },
 
 
         inActiveCheckPoints: function () {
