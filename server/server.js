@@ -328,9 +328,12 @@ if(Meteor.isServer){
                           machineRangeEnd: machineRangeEnd});
         },
 
-        'editCheckPoint': function(checkId, status, errorPos, errorDescription, machineType) {
+        'editCheckPoint': function(checkId, status, errorPos, errorDescription, range, machineRangeStart, machineRangeEnd) {
+            console.log(checkId, status, errorPos);
             checkPoints.update({_id: checkId}, {$set: {status: status, errorPos: errorPos,
-                errorDescription: errorDescription, machineType: machineType}});
+                    errorDescription: errorDescription, machineType: range, machineRangeStart: machineRangeStart,
+                    machineRangeEnd: machineRangeEnd}});
+
         },
 
         'deactivateCheckPoint': function(deactivateCheck, status) {

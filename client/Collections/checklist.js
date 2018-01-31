@@ -1,6 +1,7 @@
 if (Meteor.isClient) {
 
     Session.set("toggleActiveInactive", 0);
+    Session.set("statusEdit", 0);
 
     Template.inputNewCheckPoint.events({
 
@@ -17,8 +18,18 @@ if (Meteor.isClient) {
                 range.push($(this).val());
             });
             const status = 1;
+            let statusEdit = Session.get("statusEdit");
+            if (statusEdit === 0 ) {
             Meteor.call('inputNewCheckPoint', status, errorPos, errorDescription,
                 range, resultStart, resultEnd);
+            } else if (statusEdit === 1 ) {
+                let checkPointToActivateEdit = Session.get("selectedCheckPoint");
+                Meteor.call('editCheckPoint',checkPointToActivateEdit, status, errorPos,
+                    errorDescription, range, resultStart, resultEnd);
+                Session.set("statusEdit", 0);
+                Session.set("errorEdit", '');
+
+            }
             event.target.newPosition.value = "";
             event.target.errorDescription.value = "";
             event.target.C77.checked = false;
@@ -32,15 +43,7 @@ if (Meteor.isClient) {
         'click .showCheckList': function () {
             event.preventDefault();
             const checkPoint = this._id;
-            console.log(checkPoint);
             Session.set('selectedCheckPoint', checkPoint);
-        },
-
-        // Edit selected checkpoint
-        'click .editCheck': () => {
-            event.preventDefault();
-            let checkPointToActivateEdit = Session.get("selectedCheckPoint");
-            console.log("edit Checkpoint", checkPointToActivateEdit);
 
         },
 
@@ -56,7 +59,6 @@ if (Meteor.isClient) {
         'click .deActiveCheck': function () {
             event.preventDefault();
             const deactivateCheck = Session.get('selectedCheckPoint');
-            console.log('deactivate', deactivateCheck);
             const status = 0;
             Meteor.call('deactivateCheckPoint', deactivateCheck, status);
         },
@@ -94,6 +96,7 @@ if (Meteor.isClient) {
             }
         },
 
+        // switch table header from active to inactive and return
         activeHeader: ()=> {
             let header = Session.get("activeHeader");
                  if (header === 1) {
@@ -103,15 +106,21 @@ if (Meteor.isClient) {
                      }
             },
 
+        // edit description of a checkpoint
+        errorEdit: () => {
+            let checkPointToActivateEdit = Session.get('selectedCheckPoint');
+            return checkPoints.findOne({_id:checkPointToActivateEdit}).errorDescription;
+        },
+
+
         'selectedClass': function () {
             const checkPoint = this._id;
             const selectedCheckPoint = Session.get('selectedCheckPoint');
             if (selectedCheckPoint === checkPoint) {
+                Session.set("statusEdit", 1);
               return "selected"
             }
         }
-
-
     });
 
 }

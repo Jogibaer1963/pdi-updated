@@ -41,7 +41,7 @@
               <label for="errorDescription">Error Description *</label>
                 <br>
               <input type="text" id="errorDescription" name="errorDescription" class="input descriptionBox"
-                     placeholder="Description" value="{{errorDescription}}" required>
+                     placeholder="Description" value="{{errorEdit}}" required>
             </div>
                 <div class="inputMargin title">
                    <label for="machineRange">Machine Range, divide by white space like "C7800200 C7900300 "</label>
@@ -64,8 +64,7 @@
                 </ul>
             </div>
             <div class="inputMargin">
-                <button class="" type="submit">Submit new check point</button>
-                <button class="editCheck">Edit check point</button>
+                <button class="insertNew" type="submit" >Submit check point</button>
                 <button class="activateCheck">Re-activate check point</button>
                 <button class=" colorCheckButtonDeactivate deActiveCheck">Deactivate check point</button>
                 <button class="switchCheckPointTable">Switch active / inactive list </button>
