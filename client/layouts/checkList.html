@@ -22,7 +22,7 @@
           <div class="title"> PDI Checkpoints</div>
       </div>
       <br>
-        <form class="">
+        <form class="inputNewCheck">
             <div class="inputMargin">
                 <label for="newPosition" class="">Position *</label>
                 <br>
@@ -64,20 +64,19 @@
                 </ul>
             </div>
             <div class="inputMargin">
-                <button class="" type="submit">Submit</button>
-                <button class="">Activate / Edit</button>
-                <button class=" colorCheckButtonDeactivate deActiveCheck">Deactivate</button>
+                <button class="" type="submit">Submit new check point</button>
+                <button class="editCheck">Edit check point</button>
+                <button class="activateCheck">Re-activate check point</button>
+                <button class=" colorCheckButtonDeactivate deActiveCheck">Deactivate check point</button>
+                <button class="switchCheckPointTable">Switch active / inactive list </button>
             </div>
         </form>
   </div>
-
-
-
-    <table class="blueTable">
+    <table class="blueTable"  cellpadding="10">
         <thead>
         <tr class="">
             <th class="position">Position</th>
-            <th class="failure">Active Failure</th>
+            <th class="failure">{{activeHeader}}</th>
             <th class="type">Type</th>
             <th class="rangeStart">Range start</th>
             <th class="rangeEnd">Range end</th>
@@ -85,9 +84,9 @@
         </thead>
         <tbody>
     {{#each checkList}}
-        <tr class="">
+        <tr class="showCheckList {{selectedClass}}">
             <td class="position">{{errorPos}}</td>
-            <td class="failure">{{errorDescription}}</td>
+            <td class="failureRow">{{errorDescription}}</td>
             <td class="type">{{machineType}}</td>
             <td class="rangeStart">{{machineRangeStart}}</td>
             <td class="rangeEnd">{{machineRangeEnd}}</td>

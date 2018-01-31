@@ -1,5 +1,7 @@
 if (Meteor.isClient) {
 
+    Session.set("toggleActiveInactive", 0);
+
     Template.inputNewCheckPoint.events({
 
         'submit .inputNewCheck': function (event) {
@@ -26,6 +28,7 @@ if (Meteor.isClient) {
             event.target.machineRangeEnd.value = "";
         },
 
+        // get the _id of the selected checkpoint
         'click .showCheckList': function () {
             event.preventDefault();
             const checkPoint = this._id;
@@ -33,13 +36,45 @@ if (Meteor.isClient) {
             Session.set('selectedCheckPoint', checkPoint);
         },
 
+        // Edit selected checkpoint
+        'click .editCheck': () => {
+            event.preventDefault();
+            let checkPointToActivateEdit = Session.get("selectedCheckPoint");
+            console.log("edit Checkpoint", checkPointToActivateEdit);
+
+        },
+
+        // activate selected checkpoint
+        'click .activateCheck': () => {
+            event.preventDefault();
+            let checkPointToActivateEdit = Session.get("selectedCheckPoint");
+            let status = 1;
+            Meteor.call("reActiveCheck", checkPointToActivateEdit, status);
+        },
+
+        // deactivate the selected checkpoint
         'click .deActiveCheck': function () {
             event.preventDefault();
             const deactivateCheck = Session.get('selectedCheckPoint');
             console.log('deactivate', deactivateCheck);
             const status = 0;
             Meteor.call('deactivateCheckPoint', deactivateCheck, status);
+        },
+
+
+
+        // switch active and inactive checklists
+        // initial value = 0 => Active Checklist
+        'click .switchCheckPointTable': () => {
+            event.preventDefault();
+            let toggle = Session.get("toggleActiveInactive");
+            if(toggle === 0) {
+                Session.set("toggleActiveInactive", 1);
+            } else {
+                Session.set("toggleActiveInactive", 0);
+            }
         }
+
 
     });
 
@@ -49,42 +84,32 @@ if (Meteor.isClient) {
         checkList: function () {
             event.preventDefault();
             Session.set('selectedCheckPoint', '');
-            let loadedCheckPoints = checkPoints.find({status: 1}, {sort: {errorPos: 1}});
-            let countedCheckPoints = loadedCheckPoints.count();
-
-            console.log(countedCheckPoints);
-            return loadedCheckPoints;
+            let toggle = Session.get("toggleActiveInactive");
+            if(toggle === 0) {
+                Session.set("activeHeader", 1);
+                return checkPoints.find({status: 1}, {sort: {errorPos: 1}});
+            } else {
+                Session.set("activeHeader", 0);
+                return checkPoints.find({status: 0}, {sort: {errorPos: 1}});
+            }
         },
 
-
-        inActiveCheckPoints: function () {
-            event.preventDefault();
-            return checkPoints.find({status: 0}, {sort: {errorPos: 1}});
-        },
+        activeHeader: ()=> {
+            let header = Session.get("activeHeader");
+                 if (header === 1) {
+                     return ("Active Failure")
+                 } else {
+                    return ("Inactive Failure");
+                     }
+            },
 
         'selectedClass': function () {
             const checkPoint = this._id;
             const selectedCheckPoint = Session.get('selectedCheckPoint');
             if (selectedCheckPoint === checkPoint) {
-                return "selected"
+              return "selected"
             }
         }
-
-
-    });
-
-    Template.checkPointTable.helpers({
-
-        checkList: function () {
-            event.preventDefault();
-            Session.set('selectedCheckPoint', '');
-            let loadedCheckPoints = checkPoints.find({status: 1}, {sort: {errorPos: 1}});
-            let countedCheckPoints = loadedCheckPoints.count();
-
-            console.log(countedCheckPoints);
-            return loadedCheckPoints;
-        },
-
 
 
     });
