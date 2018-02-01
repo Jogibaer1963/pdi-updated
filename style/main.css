@@ -1,11 +1,3 @@
-.whiteBox {
-  position: fixed;
-  top: 0;
-  width: 100%;
-  height: 370px;
-  background-color: white;
-  z-index: 1; }
-
 .checklistReturn-btn {
   position: fixed;
   right: 250px;
@@ -26,11 +18,6 @@ a:hover {
   color: white;
   padding: 10px;
   vertical-align: center; }
-
-.tablePosition {
-  position: absolute;
-  top: 330px;
-  width: 100%; }
 
 .tableHeadFixed {
   position: fixed;
@@ -61,10 +48,10 @@ a:hover {
 .checkBoxMargin {
   margin: 5px; }
 
-table {
+.tableChecklist {
   position: absolute;
   top: 400px;
-  margin-left: 10px; }
+  margin-left: 25px; }
 
 thead {
   background-color: lightgrey; }
@@ -147,7 +134,49 @@ table.blueTable tfoot .links a {
   padding: 2px 8px;
   border-radius: 5px; }
 
+table {
+  width: 892px; }
+
+.mainLayout {
+  position: fixed;
+  right: 250px;
+  color: black; }
+
+.overviewHeader {
+  font-size: 25px; }
+
+.tablePdiOverview {
+  position: absolute;
+  top: 300px; }
+
+.pdiMachineField {
+  width: 100px; }
+
+.pdiShipDate {
+  width: 100px; }
+
+.pdiComments {
+  width: 500px; }
+
+.pdiPDIField {
+  width: 50px; }
+
+.pdiWashField {
+  width: 50px; }
+
+.pdiLocation {
+  width: 100px; }
+
 .selected {
   background-color: #978f93; }
+
+.individualNavigation {
+  font-size: 16px; }
+
+.navigation {
+  margin-left: 25px; }
+
+.marginMain {
+  margin-left: 25px; }
 
 /*# sourceMappingURL=main.css.map */

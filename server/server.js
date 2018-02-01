@@ -119,7 +119,6 @@ if(Meteor.isServer){
             }
         },
 
-
         'fuelConsumption': function () {
             let elementMachine = [];
             let elementFuelStart = [];
@@ -162,12 +161,12 @@ if(Meteor.isServer){
                 usersProfil.remove({username: userName});
             }
         },
-
+    /*
         'adminUserLoggedIn': function (err, usersReturn) {
           usersReturn = Meteor.usersProfil.find().fetch();
          return usersReturn;
         },
-
+    */
         'newUser' : function (userConst, passwordConst, role,  createdAt, loggedUser) {
             Accounts.createUser({username: userConst, password: passwordConst});
             setTimeout(function () {
@@ -329,11 +328,9 @@ if(Meteor.isServer){
         },
 
         'editCheckPoint': function(checkId, status, errorPos, errorDescription, range, machineRangeStart, machineRangeEnd) {
-            console.log(checkId, status, errorPos);
             checkPoints.update({_id: checkId}, {$set: {status: status, errorPos: errorPos,
                     errorDescription: errorDescription, machineType: range, machineRangeStart: machineRangeStart,
                     machineRangeEnd: machineRangeEnd}});
-
         },
 
         'deactivateCheckPoint': function(deactivateCheck, status) {
@@ -349,19 +346,21 @@ if(Meteor.isServer){
                 errorDescription: errorDescription, machineType: machineType}});
         },
 
-        'generatePdiList': function(selectedPdiMachineId, dateStart, selectedPdiMachineNr, range) {
+        'generatePdiList': function(selectedPdiMachineId, selectedPdiMachineNr, dateStart, user, range) {
             siArrayList = [];
-            pdiCheckList.insert({_id: selectedPdiMachineId});
+            // remove double key... just in case...
             InspectedMachines.remove({_id: selectedPdiMachineId});
+            // set machine status into pdi active (2)
             MachineReady.update({_id: selectedPdiMachineId}, {$set: {pdiStatus: 2, startPdiDate: dateStart}});
-            InspectedMachines.insert({_id: selectedPdiMachineId, machineId: selectedPdiMachineNr});
-
-            checkPoints.find({status: 1, machineType: {$in: range}}, {sort: {errorPos: 1}}).forEach(function(copy){
-                pdiCheckList.update({_id: selectedPdiMachineId}, {$addToSet: {checkList: (copy)}});
-            });
-
-            pdiCheckList.update({_id: selectedPdiMachineId}, {$pull: {checkList: {status: 0}}});
-
+            // prepare database for incoming pdi checkpoints
+            InspectedMachines.insert({_id: selectedPdiMachineId, machineId: selectedPdiMachineNr,
+                dateStart: dateStart, user: user});
+            // generate Checklist (checkpoint must have active status 1 and only machine in range
+            checkPoints.find({status: 1, machineType: {$in: range}},
+                {fields: {errorDescription: 1, _id: -1}}, {sort: {errorPos: 1}}).forEach(function (copy) {
+                     InspectedMachines.update({_id: selectedPdiMachineId}, {$addToSet: {checkList: (copy)}});
+                       });
+            // SI added to repair list
             const list = siList.find({machineNr: selectedPdiMachineNr}, {limit:1}).fetch();
             if(list === '') {
             } else {
@@ -397,7 +396,6 @@ if(Meteor.isServer){
 
         'cancelPdi': function(pdiMachineId) {
             InspectedMachines.remove({_id: pdiMachineId});
-            pdiCheckList.remove({_id: pdiMachineId});
             MachineReady.update({_id: pdiMachineId}, {$set: {pdiStatus: 0}});
             siListDone.remove({_id: pdiMachineId});
         },
@@ -410,6 +408,7 @@ if(Meteor.isServer){
             pdiCheckList.update({_id: selectedPdiMachineId},
                 {$pull: {checkList: {_id: selectedCheckPoint}}});
         },
+
 
         'bigFinger': function (selectedPdiMachineId, selectedCheckPoint) {
             let bigFingerBase = checkPoints.findOne({_id: selectedCheckPoint});

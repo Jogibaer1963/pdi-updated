@@ -1,0 +1,53 @@
+
+// table positions
+
+$pdiOverviewMachine: 100px;
+$pdiShipDate: 100px;
+$pdiComments: 500px;
+$pdiPDIField: 50px;
+$pdiWashField: 50px;
+$pdiLocation: 100px;
+
+table {
+  width: 892px;
+}
+
+.mainLayout {
+  position: fixed;
+  right: 250px;
+  color: black;
+}
+
+.overviewHeader {
+  font-size: 25px;
+}
+
+.tablePdiOverview {
+  position: absolute;
+  top: 300px;
+}
+
+
+.pdiMachineField {
+  width: $pdiOverviewMachine;
+}
+
+.pdiShipDate {
+  width: $pdiShipDate;
+}
+
+.pdiComments {
+  width: $pdiComments;
+}
+
+.pdiPDIField {
+  width: $pdiPDIField;
+}
+
+.pdiWashField {
+  width: $pdiWashField;
+}
+
+.pdiLocation {
+  width: $pdiLocation;
+}

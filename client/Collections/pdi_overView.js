@@ -2,7 +2,22 @@
 if(Meteor.isClient) {
 
 
-    Template.openPdi.helpers({
+    Template.inspection.helpers({
+
+         shippList: function () {
+           Session.set('selectedPdiMachine', '');
+         // Order of shipping date
+           return MachineReady.find({$or:[{pdiStatus: 0},{pdiStatus: 2}]}, {sort: {date: 1}},
+                {machineId: 1, date: 1, shippingComment: 1, pdiStatus: 1, washStatus: 1});
+         },
+        
+        'selectedClass': function(){
+            const openInspect = this._id;
+            const selectedPdiMachine = Session.get('selectedPdiMachine');
+            if (selectedPdiMachine === openInspect) {
+                return "selected";
+                  }
+        },
 
         countPdi: function() {
             return MachineReady.find({$or:[{pdiStatus: 0},{pdiStatus: 2}]}, {sort: {date: 1}}) .count();
@@ -16,55 +31,41 @@ if(Meteor.isClient) {
                     return acc + val
                 }, 0);
                 return number = (sum / average.consumption.length).toFixed(2);
-                }
+            }
         }
-
-    });
-
-
-    Template.inspection.helpers({
-         shippList: function () {
-           Session.set('selectedPdiMachine', '');
-         // Order of shipping date
-              return MachineReady.find({$or:[{pdiStatus: 0},{pdiStatus: 2}]}, {sort: {date: 1}});
-            },
-        
-        'selectedClass': function(){
-            const openInspect = this._id;
-            const selectedPdiMachine = Session.get('selectedPdiMachine');
-            if (selectedPdiMachine === openInspect) {
-                return "selected_2"
-                  }
-             }
         });
 
     Template.inspection.events({
+
         'click .openInspections': function() {
-            const openInspect = this._id;
-            localStorage.setItem('selectedPdi', openInspect);
-            Session.set('selectedPdiMachine', localStorage.getItem('selectedPdi'));
+           const openInspect = this._id;
+        // localStorage.setItem('selectedPdi', openInspect);
+            Session.set('selectedPdiMachine', openInspect);
+
             const machineId = MachineReady.findOne({_id: openInspect}).machineId;
-            localStorage.setItem('pdiMachine', machineId);
-            Session.set('pdiMachineNumber', localStorage.getItem('pdiMachine'));
-            const user = Meteor.user().username;
-            Session.setPersistent('currentLoggedInUser', user);
-            },
+
+         // localStorage.setItem('pdiMachine', machineId);
+            Session.set('pdiMachineNumber', machineId);
+       //   Session.setPersistent('currentLoggedInUser', user);
+        },
 
         'click .machinePdi': function() {
             event.preventDefault();
+            const user = Meteor.user().username;
             const selectedPdiMachineId = Session.get('selectedPdiMachine');
             const selectedPdiMachineNr = Session.get('pdiMachineNumber');
             const firstRange =  JSON.stringify(selectedPdiMachineNr).slice(1,4);
             const range = [];
             range.push(firstRange);
-            console.log(range);
             const dateStart = Date.now();
-          Meteor.call('generatePdiList', selectedPdiMachineId, dateStart, selectedPdiMachineNr,
-                range);
-            FlowRouter.go('machineInspect');
+            Meteor.call('generatePdiList', selectedPdiMachineId, selectedPdiMachineNr, dateStart,
+               user, range);
+         //   FlowRouter.go('machineInspect');
         },
 
-        'click .stopPdiProcess': function() {
+        // Button Cancel PDI as long pdi is not finished
+
+        'click .cancelPdiProcess': function() {
             event.preventDefault();
             const pdiMachineId = Session.get('selectedPdiMachine');
             Meteor.call('cancelPdi', pdiMachineId);
@@ -85,43 +86,10 @@ if(Meteor.isClient) {
         'click .resumePdi': function() {
             event.preventDefault();
             FlowRouter.go('machineInspect_2');
-        },
-        
-        'submit .locationId': function(event) {
-            event.preventDefault();
-            const selectedPdiMachine = Session.get('selectedPdiMachine');
-            if(typeof selectedPdiMachine === 'undefined') {
-                alert('Mark the Machine first before update the Location');
-            }
-            const locationId = event.target.locationId.value;
-            Meteor.call('locationUpdate', selectedPdiMachine, locationId);
-            event.target.locationId.value="";
-            Session.set('selectedPdiMachine', '');
-        },
-        
-        'submit .reservedId': function(event) {
-            event.preventDefault();
-            const selectedPdiMachine = Session.get('selectedPdiMachine');
-            if(typeof selectedPdiMachine === 'undefined') {
-                alert('Mark the Machine first before you reserve');
-            }
-            const reservedId = event.target.reservedId.value;
-            Meteor.call('reserveUpdate', selectedPdiMachine, reservedId);
-            event.target.reservedId.value="";
-            Session.set('selectedPdiMachine', '');
-            
         }
 
     });
 
-
-    Template.inspectionHeads.helpers({
-        shippList: function () {
-            Session.set('selectedPdiMachine', '');
-            // Order of shipping date
-            return MachineReady.find({$or: [{pdiStatus: 0}, {pdiStatus: 2}]}, {sort: {date: 1}});
-        }
-    });
 
     Handlebars.registerHelper('inActive', function() {
         const inActiveStatus = Session.get('inActiveState');

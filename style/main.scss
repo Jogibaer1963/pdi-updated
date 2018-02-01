@@ -1,6 +1,22 @@
 @import 'checklist';
 @import "tables";
+@import "pdi-overview";
+
+
+
 
 .selected {
   background-color: #978f93;
+}
+
+.individualNavigation {
+  font-size: 16px;
+}
+
+.navigation {
+  margin-left: 25px;
+}
+
+.marginMain {
+  margin-left: 25px;
 }

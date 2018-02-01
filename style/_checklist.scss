@@ -1,13 +1,4 @@
-// White Box
 
-.whiteBox {
-  position: fixed;
-  top: 0;
-  width: 100%;
-  height: 370px;
-  background-color: white;
-  z-index: 1;
-}
 
 
 // Buttons
@@ -38,12 +29,6 @@ a:hover {
   color:white;
   padding:10px;
   vertical-align: center;
-}
-
-.tablePosition {
-  position: absolute;
-  top: 330px;
-  width: 100%;
 }
 
 .tableHeadFixed {
@@ -85,3 +70,10 @@ a:hover {
   margin: 5px;
 }
 
+// table position
+
+.tableChecklist {
+  position: absolute;
+  top: 400px;
+  margin-left: 25px;
+}

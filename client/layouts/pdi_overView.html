@@ -1,114 +1,73 @@
 <template name="inspectionStart">
     {{#if currentUser}}
-        <div class="pdiOverviewLayout">
-       {{> whiteBox_2}}
-        {{> MainLayout_3}}
-        <br>
-        {{> inspection_x}}
-        <br>
-        {{> openPdi}}
-        </div>
-        <br>
         {{> inspection}}
     {{else}}
         {{> login}}
     {{/if}}
 </template>
 
-<template name="whiteBox_2">
-    <div class="whiteBox_2">
-    </div>
-</template>
-
-<template name="inspection_x">
-    <nav>
-        <a class="btn2" href="/checkList">Checklist items</a>
-        <a class="btn2" href="/pdiRepairList">Review Repair List</a>
-        <a class="btn2" href="/pdi_Omm">OMM's</a>
-        <a class="btn2" href="/si">SI's or special Item's</a>
-    </nav>
-</template>
-
-
-<template name="openPdi">
-    <div class="countPdi">
-        <h2>Open Pdi's : {{countPdi}}</h2>
-    </div>
-    <div class="countConsumption">
-        <h2>Average Fuel Consumption per Pdi : {{countConsumption}} Gallon</h2>
-    </div>
-</template>
 
 
 <template name="inspection">
- <br><br><br><br><br><br>
- <div class="buttonPdiView">
-    <form>
-        <button type="submit" class="pdiMeButton machinePdi {{inActive}}">PDI Start</button>
-        <button type="submit" class="pdiMeButton machineSkipPdi">Skip PDI</button>
-        <button type="submit" class="resumePdi">Resume PDI</button>
-        <button type="submit" class="stopPdiProcess">Cancel  PDI</button>
-    </form>
-        <br><br><br><br><br>
-    <form class="locationId">
-        <button type="submit" class="machineLocation">Update Location</button>
-        <label for="locationId" class="mLocationId" ></label>
-        <input type="text" class="machineLocationInput" id="locationId" name="locationId" required>
-    </form>
-    <form class="reservedId">
-        <button type="submit" class="reserveId">Reserved for</button>
-        <label for="reservedId" class="mLocationId" ></label>
-        <input type="text" class="reservedForInput" id="reservedId" name="reservedId" required>
-    </form>
- </div>
-    <br><br><br><br><br><br><br><br><br><br>
-
-    <div class="rTable">
-         <div class="rTableRow ">
-            <div class="rTableHead"><strong>Machine</strong></div>
-            <div class="rTableHead"><strong>Ship Date</strong></div>
-            <div class="rTableHead" style="width: 280px"><strong>Comments</strong></div>
-             <div class="rTableHead"><strong>PDI</strong></div>
-             <div class="rTableHead"><strong>Wash</strong></div>
-            <div class="rTableHead"><strong>Location</strong></div>
-             <div class="rTableHead"><strong>Reserved for</strong></div>
-          </div>
-           {{#each shippList}}
-            <div class="rTableRow openInspections {{selectedClass}}">
-               <div class="rTableCell">{{machineId}}{{newHeadId}}</div>
-               <div class="rTableCell">{{date}}</div>
-               <div class="rTableCell">{{shippingComment}}</div>
-               <div class="rTableCell {{getStatusColor pdiStatus}}" style="background-color:{{getStatusColor pdiStatus}}; color:{{getStatusColor pdiStatus}}">{{pdiStatus}}</div>
-               <div class="rTableCell  {{getStatusColor washStatus}}" style="background-color:{{getStatusColor washStatus}}; color:{{getStatusColor washStatus}}" >{{washStatus}}</div>
-                <div class="rTableCell" style="background-color: #6fd981">{{locationId}}</div>
-                <div class="rTableCell" style="background-color: #6fd981">{{reservedFor}}</div>
-           </div>
-        {{/each}}
-   </div>
-</template>
-
-<template name="inspectionHeads">
-    <div class="rTable">
-        <div class="rTableRow ">
-            <div class="rTableHead"><strong>Head</strong></div>
-            <div class="rTableHead"><strong>Ship Date</strong></div>
-            <div class="rTableHead" style="width: 280px"><strong>Comments</strong></div>
-            <div class="rTableHead"><strong>PDI</strong></div>
-            <div class="rTableHead"><strong>Wash</strong></div>
-            <div class="rTableHead"><strong>Location</strong></div>
-        </div>
-        {{#each shippList}}
-            <div class="rTableRow openInspections {{selectedClass}}">
-                <div class="rTableCell">{{newHeadId}}</div>
-                <div class="rTableCell">{{date}}</div>
-                <div class="rTableCell">{{shippingComment}}</div>
-                <div class="rTableCell {{getStatusColor pdiStatus}}" style="background-color:{{getStatusColor pdiStatus}}; color:{{getStatusColor pdiStatus}}">{{pdiStatus}}</div>
-                <div class="rTableCell  {{getStatusColor washStatus}}" style="background-color:{{getStatusColor washStatus}}; color:{{getStatusColor washStatus}}" >{{washStatus}}</div>
-                <div class="rTableCell" style="background-color: #6fd981">{{locationId}}</div>
-            </div>
-        {{/each}}
+    <div class="marginMain">
+    <nav class="mainLayout">
+        <a href="/overViewLoggedIn">Over View |</a>
+        <a href="/machineLocation">Locations |</a>
+        <a href="/statistics">Statistics |</a>
+        <a href="/logout" >Logout</a>
+    </nav>
+    <br>
+    <div id="">
+        <img src="claas_logo.png" />
     </div>
+    <br>
+    <nav class="individualNavigation">
+        <a class="navigation" href="/checkList">Checklist</a>
+        <a class="navigation" href="/pdiRepairList">Review Repair List</a>
+        <a class="navigation" href="/si">SI's or special Item's</a>
+    </nav>
+ <br>
+    <div class="overviewHeader">
+        Open Pdi's : {{countPdi}}
+    </div>
+    <div class="overviewHeader">
+       Average Fuel Consumption per Pdi : {{countConsumption}} Gallon
+    </div>
+    <br>
+    <form>
+        <button class="machinePdi {{inActive}}">PDI Start</button>
+        <button class="cancelPdiProcess">Cancel PDI</button>
+        <button class="machineSkipPdi">Skip PDI</button>
+        <button class="resumePdi">Resume PDI</button>
+    </form>
+        <br><br>
+    <table class="blueTable tablePdiOverview" cellpadding="10">
+         <thead>
+           <tr>
+            <th class="pdiMachineField"><strong>Machine</strong></th>
+            <th class="pdiShipDate"><strong>Ship Date</strong></th>
+            <th class="pdiComments"><strong>Comments</strong></th>
+             <th class="pdiPDIField"><strong>PDI</strong></th>
+             <th class="pdiWashField"><strong>Wash</strong></th>
+            <th class="pdiLocation"><strong>Location</strong></th>
+           </tr>
+         </thead>
+        <tbody>
+           {{#each shippList}}
+            <tr class="openInspections {{selectedClass}}">
+               <td class="pdiMachineField">{{machineId}}</td>
+               <td class="pdiShipDate">{{date}}</td>
+               <td class="pdiComments">{{shippingComment}}</td>
+               <td class="pdiPDIField {{getStatusColor pdiStatus}}" style="background-color:{{getStatusColor pdiStatus}}; color:{{getStatusColor pdiStatus}}">{{pdiStatus}}</td>
+               <td class="pdiWashField {{getStatusColor washStatus}}" style="background-color:{{getStatusColor washStatus}}; color:{{getStatusColor washStatus}}" >{{washStatus}}</td>
+               <td class="pdiLocation" style="background-color: #6fd981">{{locationId}}</td>
+            </tr>
+           {{/each}}
+        </tbody>
+    </table>
+  </div>
 </template>
+
 
 
 
