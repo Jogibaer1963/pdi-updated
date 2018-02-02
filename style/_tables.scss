@@ -22,31 +22,6 @@ table {
     width: 1195px; /* can be dynamic */
 }
 
-.position {
-    width: $positionTable;
-
-}
-
-.failure {
-    width: $failureTable;
-    }
-
-.failureRow {
-  width: $failureTableRow;
-}
-
-  .type {
-    width: $typeTable
-  }
-
-  .rangeStart {
-    width: $rangeStartEndTable;
-  }
-
-  .rangeEnd {
-    width: $rangeStartEndTable
-  }
-
   table.blueTable {
     border: 1px solid #a49892;
     background-color: #EEEEEE;
@@ -59,6 +34,7 @@ table {
   }
   table.blueTable tbody td {
     font-size: 13px;
+    word-wrap: break-word;
   }
   table.blueTable tr:nth-child(even) {
     background-color: #b5e1e4;

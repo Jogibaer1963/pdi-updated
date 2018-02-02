@@ -1,3 +1,10 @@
+// variables
+
+$positionTable: 142px;
+$failureTable: 500px;
+$failureTableRow: 500px;
+$typeTable: 100px;
+$rangeStartEndTable: 220px;
 
 
 
@@ -76,4 +83,36 @@ a:hover {
   position: absolute;
   top: 400px;
   margin-left: 25px;
+}
+
+
+.position {
+  max-width: $positionTable;
+  min-width: $positionTable;
+
+}
+
+.failure {
+  max-width: $failureTable;
+  min-width: $failureTable;
+}
+
+.failureRow {
+  max-width: $failureTableRow;
+  min-width: $failureTableRow;
+}
+
+.type {
+  max-width: $typeTable;
+  min-width: $typeTable;
+}
+
+.rangeStart {
+  max-width: $rangeStartEndTable;
+  min-width: $rangeStartEndTable;
+}
+
+.rangeEnd {
+  max-width: $rangeStartEndTable;
+  min-width: $rangeStartEndTable;
 }

@@ -53,6 +53,30 @@ a:hover {
   top: 400px;
   margin-left: 25px; }
 
+.position {
+  max-width: 142px;
+  min-width: 142px; }
+
+.failure {
+  max-width: 500px;
+  min-width: 500px; }
+
+.failureRow {
+  max-width: 500px;
+  min-width: 500px; }
+
+.type {
+  max-width: 100px;
+  min-width: 100px; }
+
+.rangeStart {
+  max-width: 220px;
+  min-width: 220px; }
+
+.rangeEnd {
+  max-width: 220px;
+  min-width: 220px; }
+
 thead {
   background-color: lightgrey; }
 
@@ -67,24 +91,6 @@ table {
   width: 1195px;
   /* can be dynamic */ }
 
-.position {
-  width: 142px; }
-
-.failure {
-  width: 500px; }
-
-.failureRow {
-  width: 520px; }
-
-.type {
-  width: 113px; }
-
-.rangeStart {
-  width: 220px; }
-
-.rangeEnd {
-  width: 220px; }
-
 table.blueTable {
   border: 1px solid #a49892;
   background-color: #EEEEEE;
@@ -96,7 +102,8 @@ table.blueTable td, table.blueTable th {
   padding: 3px 5px; }
 
 table.blueTable tbody td {
-  font-size: 13px; }
+  font-size: 13px;
+  word-wrap: break-word; }
 
 table.blueTable tr:nth-child(even) {
   background-color: #b5e1e4; }
@@ -135,7 +142,7 @@ table.blueTable tfoot .links a {
   border-radius: 5px; }
 
 table {
-  width: 892px; }
+  width: 870px; }
 
 .mainLayout {
   position: fixed;
@@ -150,22 +157,28 @@ table {
   top: 300px; }
 
 .pdiMachineField {
-  width: 100px; }
+  max-width: 80px;
+  min-width: 80px; }
 
 .pdiShipDate {
-  width: 100px; }
+  max-width: 80px;
+  min-width: 80px; }
 
 .pdiComments {
-  width: 500px; }
+  max-width: 520px;
+  min-width: 520px; }
 
 .pdiPDIField {
-  width: 50px; }
+  max-width: 50px;
+  min-width: 50px; }
 
 .pdiWashField {
-  width: 50px; }
+  max-width: 50px;
+  min-width: 50px; }
 
 .pdiLocation {
-  width: 100px; }
+  max-width: 100px;
+  min-width: 100px; }
 
 .selected {
   background-color: #978f93; }

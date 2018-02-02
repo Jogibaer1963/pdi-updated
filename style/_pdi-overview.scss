@@ -1,15 +1,15 @@
 
 // table positions
 
-$pdiOverviewMachine: 100px;
-$pdiShipDate: 100px;
-$pdiComments: 500px;
+$pdiOverviewMachine: 80px;
+$pdiShipDate: 80px;
+$pdiComments: 520px;
 $pdiPDIField: 50px;
 $pdiWashField: 50px;
 $pdiLocation: 100px;
 
 table {
-  width: 892px;
+  width: 870px;
 }
 
 .mainLayout {
@@ -29,25 +29,31 @@ table {
 
 
 .pdiMachineField {
-  width: $pdiOverviewMachine;
+  max-width: $pdiOverviewMachine;
+  min-width: $pdiOverviewMachine;
 }
 
 .pdiShipDate {
-  width: $pdiShipDate;
+  max-width: $pdiShipDate;
+  min-width: $pdiShipDate;
 }
 
 .pdiComments {
-  width: $pdiComments;
+  max-width: $pdiComments;
+  min-width: $pdiComments;
 }
 
 .pdiPDIField {
-  width: $pdiPDIField;
+  max-width: $pdiPDIField;
+  min-width: $pdiPDIField;
 }
 
 .pdiWashField {
-  width: $pdiWashField;
+  max-width: $pdiWashField;
+  min-width: $pdiWashField;
 }
 
 .pdiLocation {
-  width: $pdiLocation;
+  max-width: $pdiLocation;
+  min-width: $pdiLocation;
 }
