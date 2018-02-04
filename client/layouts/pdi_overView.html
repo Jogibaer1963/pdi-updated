@@ -35,19 +35,19 @@
     </div>
     <br>
     <form>
-        <button class="machinePdi {{inActive}}">PDI Start</button>
+        <button class="machinePdi">Perform PDI</button>
         <button class="cancelPdiProcess">Cancel PDI</button>
         <button class="machineSkipPdi">Skip PDI</button>
         <button class="resumePdi">Resume PDI</button>
     </form>
         <br><br>
-    <table class="blueTable tablePdiOverview" cellpadding="10">
+    <table class="pdiTable blueTable tablePdiOverview" cellpadding="10">
          <thead>
            <tr>
             <th class="pdiMachineField"><strong>Machine</strong></th>
             <th class="pdiShipDate"><strong>Ship Date</strong></th>
             <th class="pdiComments"><strong>Comments</strong></th>
-             <th class="pdiPDIField"><strong>PDI</strong></th>
+             <th class="pdiPDIField" style="background-color:{{getStatusColor pdiStatus}}; color:{{getStatusColor pdiStatus}}">{{pdiStatus}}><strong>PDI</strong></th>
              <th class="pdiWashField"><strong>Wash</strong></th>
             <th class="pdiLocation"><strong>Location</strong></th>
            </tr>

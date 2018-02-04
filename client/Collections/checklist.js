@@ -13,6 +13,7 @@ if (Meteor.isClient) {
             const machineRangeEnd = event.target.machineRangeEnd.value;
             const resultStart = machineRangeStart.split(" ");
             const resultEnd = machineRangeEnd.split(" ");
+            const checkStatus = 0;
             const range = [];
             $('input[name=range]:checked').each(function () {
                 range.push($(this).val());
@@ -21,11 +22,11 @@ if (Meteor.isClient) {
             let statusEdit = Session.get("statusEdit");
             if (statusEdit === 0 ) {
             Meteor.call('inputNewCheckPoint', status, errorPos, errorDescription,
-                range, resultStart, resultEnd);
+                range, resultStart, resultEnd, checkStatus);
             } else if (statusEdit === 1 ) {
                 let checkPointToActivateEdit = Session.get("selectedCheckPoint");
                 Meteor.call('editCheckPoint',checkPointToActivateEdit, status, errorPos,
-                    errorDescription, range, resultStart, resultEnd);
+                    errorDescription, range, resultStart, resultEnd, checkStatus);
                 Session.set("statusEdit", 0);
                 Session.set("errorEdit", '');
 

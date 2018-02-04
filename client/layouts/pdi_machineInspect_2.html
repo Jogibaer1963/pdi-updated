@@ -22,14 +22,12 @@
                 <div class="rTableHead"><strong>Failure Description</strong></div>
                 <div class="rTableHead" style="width: 80px"><strong>Range</strong></div>
             </div>
-        {{#each checkMe}}
             {{#each checkList}}
                 <div class="rTableRow showCheckList {{selectedClass}}">
                     <div class="rTableCell">{{errorPos}}</div>
                     <div class="rTableCell">{{errorDescription}}</div>
                     <div class="rTableCell" style="font-size: 15px">{{machineType}}</div>
                 </div>
-            {{/each}}
             {{/each}}
         </div>
     </div>

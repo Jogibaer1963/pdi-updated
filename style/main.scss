@@ -1,12 +1,15 @@
 @import 'checklist';
 @import "tables";
 @import "pdi-overview";
+@import "glowingBox";
+@import "pdiCheckList";
 
 
 
 
 .selected {
   background-color: #978f93;
+  z-index: revert;
 }
 
 .individualNavigation {

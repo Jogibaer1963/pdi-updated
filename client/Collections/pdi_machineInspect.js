@@ -1,7 +1,10 @@
+
+
 if(Meteor.isClient) {
 
 
-    Template.machineUser.helpers({
+    Template.ommBook.helpers({
+
 
         'machineNow': function () {
             event.preventDefault();
@@ -9,10 +12,10 @@ if(Meteor.isClient) {
             Session.set('pdiMachineNumber', localStorage.getItem('pdiMachine'));
             const pdiMachine = Session.get('pdiMachineNumber');
             return {userLoggedIn: userLoggedIn, machine: pdiMachine};
-        }
-    });
+        },
 
-    Template.ommBook.helpers({
+
+
 
 
         ommMainBooklets: function () {
@@ -79,11 +82,22 @@ if(Meteor.isClient) {
             const selectedProfiOmId = Session.get('selectedProfiId');
             if(selectedProfiOmId === omId) {
                 return "selected";
-            } 
+            }
+        },
+
+
+        checkList: function() {
+            event.preventDefault();
+            const machineId = Session.get('pdiMachineNumber');
+            console.log('Machine', machineId);
+            result = MachineReady.findOne({machineId: machineId}).checkList;
+            console.log('result', result);
+            return result;
         }
 
     });
-    //****************************************************************//
+
+
     Template.ommBook.events({
         'click .omMain': function() {
             event.preventDefault();
@@ -165,4 +179,6 @@ if(Meteor.isClient) {
             FlowRouter.go('machineInspect_2');
         }
     });
+
 }
+

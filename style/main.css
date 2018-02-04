@@ -87,9 +87,8 @@ table tbody {
   overflow: auto;
   height: 500px; }
 
-table {
-  width: 1195px;
-  /* can be dynamic */ }
+table.blueTable {
+  width: 1195px; }
 
 table.blueTable {
   border: 1px solid #a49892;
@@ -141,7 +140,7 @@ table.blueTable tfoot .links a {
   padding: 2px 8px;
   border-radius: 5px; }
 
-table {
+table.pdiTable {
   width: 870px; }
 
 .mainLayout {
@@ -180,8 +179,94 @@ table {
   max-width: 100px;
   min-width: 100px; }
 
+.inProcess {
+  animation: glowing 1500ms infinite;
+  color: transparent; }
+
+@keyframes glowing {
+  0% {
+    background-color: #AA3939;
+    box-shadow: 0 0 3px  #AA5939; }
+  50% {
+    background-color: #FFB232;
+    box-shadow: 0 0 10px #FFB232; }
+  100% {
+    background-color: #FFE800;
+    box-shadow: 0 0 3px #FFE800; } }
+@keyframes Siglowing {
+  0% {
+    background-color: #481317;
+    box-shadow: 0 0 3px  #AA5939; }
+  50% {
+    background-color: #cb2aff;
+    box-shadow: 0 0 10px #ffd855; }
+  100% {
+    background-color: #1cbdee;
+    box-shadow: 0 0 3px #ec67ff; } }
+.ommInput {
+  margin-left: 15px; }
+
+table {
+  width: 411px;
+  margin-left: 10px; }
+
+tbody.pdiCheckList {
+  height: 500px;
+  overflow: auto; }
+
+.pdiCheckList {
+  border: 1px solid #a49892;
+  background-color: #EEEEEE; }
+
+td {
+  border: 2px solid #AA3939;
+  position: relative; }
+
+.buttonOK {
+  color: green;
+  font-weight: bold;
+  float: left;
+  width: 130px;
+  position: absolute;
+  bottom: 0; }
+
+.buttonNOK {
+  color: red;
+  font-weight: bold;
+  float: left;
+  width: 130px;
+  position: absolute;
+  margin-left: 130px;
+  bottom: 0; }
+
+.buttonNA {
+  color: lightgrey;
+  font-weight: bold;
+  float: left;
+  width: 130px;
+  position: absolute;
+  margin-left: 260px;
+  bottom: 0; }
+
+.pdiCell {
+  font-size: 16px;
+  height: 200px; }
+
+.positionCheckPos {
+  position: absolute;
+  margin: 10px;
+  top: 0;
+  font-weight: bold;
+  font-size: 16px; }
+
+.positionCheckText {
+  margin: 10px;
+  font-weight: bold;
+  font-size: 16px; }
+
 .selected {
-  background-color: #978f93; }
+  background-color: #978f93;
+  z-index: revert; }
 
 .individualNavigation {
   font-size: 16px; }

@@ -1,0 +1,72 @@
+
+.ommInput {
+  margin-left: 15px;
+}
+
+table {
+  width: 411px;
+ margin-left: 10px;
+}
+
+tbody.pdiCheckList {
+  height: 500px;
+  overflow: auto;
+}
+
+.pdiCheckList {
+  border: 1px solid #a49892;
+  background-color: #EEEEEE;
+}
+
+td {
+  border: 2px solid #AA3939;
+  position: relative;
+}
+
+.buttonOK {
+  color: green;
+  font-weight: bold;
+  float: left;
+  width: 130px;
+  position: absolute;
+  bottom: 0;
+}
+
+.buttonNOK {
+  color: red;
+  font-weight: bold;
+  float:left;
+  width: 130px;
+  position: absolute;
+  margin-left: 130px;
+  bottom: 0;
+}
+
+.buttonNA {
+  color: lightgrey;
+  font-weight: bold;
+  float: left;
+  width: 130px;
+  position: absolute;
+  margin-left: 260px;
+  bottom: 0;
+}
+
+.pdiCell {
+  font-size: 16px;
+  height: 200px;
+}
+
+.positionCheckPos {
+  position: absolute;
+  margin: 10px;
+  top: 0;
+  font-weight: bold;
+  font-size: 16px;
+}
+
+.positionCheckText {
+  margin: 10px;
+  font-weight: bold;
+  font-size: 16px;
+}

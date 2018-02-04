@@ -7,9 +7,10 @@ $pdiComments: 520px;
 $pdiPDIField: 50px;
 $pdiWashField: 50px;
 $pdiLocation: 100px;
+$pdiTable: 870px;
 
-table {
-  width: 870px;
+table.pdiTable {
+  width: $pdiTable;
 }
 
 .mainLayout {

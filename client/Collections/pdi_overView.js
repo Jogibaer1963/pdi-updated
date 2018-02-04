@@ -57,10 +57,10 @@ if(Meteor.isClient) {
             const firstRange =  JSON.stringify(selectedPdiMachineNr).slice(1,4);
             const range = [];
             range.push(firstRange);
-            const dateStart = Date.now();
+            const dateStart = new Date().toLocaleDateString();
             Meteor.call('generatePdiList', selectedPdiMachineId, selectedPdiMachineNr, dateStart,
-               user, range);
-         //   FlowRouter.go('machineInspect');
+              user, range);
+            FlowRouter.go('machineInspect');
         },
 
         // Button Cancel PDI as long pdi is not finished

@@ -1,26 +1,27 @@
 <template name="machineInspect">
+
     {{#if currentUser}}
-        <a class="loginSubmit" style="text-decoration: none; background-color: #dddb05" href="/inspectionStart">PDI Overview / Cancel PDI</a>
-        <br><br><br><br>
-        {{> machineUser}}
+        <div id="">
+            <img src="claas_logo.png" />
+        </div>
         {{> ommBook}}
     {{else}}
         {{> login}}
     {{/if}}
 </template>
 
-<template name="machineUser">
+
+<template name="ommBook">
+    <div class="ommInput">
     {{#with machineNow}}
         <h2>Machine to Inspect: {{machine}}</h2>
         <h2>Performed by: {{userLoggedIn}}</h2>
     {{/with}}
-</template>
-
-<template name="ommBook">
     <form class="omBooklets">
-        <label for="fuelMe" class="fuel">Fuel consumption with PDI start</label>
+        <label for="fuelMe" class="fuel">Fuel consumption before PDI</label>
+        <br>
         <input type="text" class="omInput" id="fuelMe" name="fuelMe" placeholder="Gallon" required>
-    <br><br><br>
+    <br><br>
         {{#dropdownTrigger  name="ommMain"}}
             <button class="loginSubmit omInputButton">OM Main</button>
         {{/dropdownTrigger}}
@@ -125,11 +126,30 @@
                 </div>
             {{/dropdown}}
         </div>
-        <br><br><br><br><br><br>
-        <div class=" posPdiOmm">
-            <button class="loginSubmitOMM" type="submit" >Submit OMM's</button>
-        </div>
     </form>
+    </div>
+        <br><br>
+        <table class="pdiCheckList">
+            <tbody>
+                {{#each checkList}}
+                    <tr class=" {{selectedClass}}">
+                        <td class="pdiCell">
+                            <div class="positionCheckPos">
+                            {{{errorPos}}}
+                            </div>
+                            <div class="positionCheckText">
+                            {{{errorDescription}}}
+                            </div>
+                            <button class="buttonOK">OK</button>
+
+                            <button class="buttonNOK">NOK</button>
+
+                            <button class="buttonNA">N/A</button>
+                        </td>
+                    </tr>
+                {{/each}}
+            </tbody>
+        </table>
 </template>
 
 
