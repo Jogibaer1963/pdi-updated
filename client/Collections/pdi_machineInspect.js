@@ -8,10 +8,14 @@ if(Meteor.isClient) {
 
         'machineNow': function () {
             event.preventDefault();
-            const userLoggedIn = Session.get('currentLoggedInUser');
-            Session.set('pdiMachineNumber', localStorage.getItem('pdiMachine'));
-            const pdiMachine = Session.get('pdiMachineNumber');
-            return {userLoggedIn: userLoggedIn, machine: pdiMachine};
+            const user = Meteor.user().username;
+            Session.set('selectedPdiMachineId', localStorage.getItem('pdiMachineId'));
+            Session.set('selectedPdiMachineNr', localStorage.getItem('pdiMachineNr'));
+            const selectedPdiMachineId = Session.get('selectedPdiMachineId');
+            const selectedPdiMachineNr = Session.get('selectedPdiMachineNr');
+            console.log(selectedPdiMachineId, selectedPdiMachineNr);
+
+            return {machine: selectedPdiMachineNr, userLoggedIn: user};
         },
 
 
@@ -84,10 +88,9 @@ if(Meteor.isClient) {
 
         checkList: function() {
             event.preventDefault();
-            const machineId = Session.get('pdiMachineNumber');
-            console.log('Machine', machineId);
+            Session.set('selectedPdiMachineNr', localStorage.getItem('pdiMachineNr'));
+            const machineId = Session.get('selectedPdiMachineNr');
             result = MachineReady.findOne({machineId: machineId}).checkList;
-            console.log('result', result);
             return result;
         },
 
@@ -99,6 +102,12 @@ if(Meteor.isClient) {
           //      return "selected";
           //  }
         },
+
+        'selectedGreenButton': () => {
+            event.preventDefault();
+
+            return 'selectedBackgroundGreen';
+        }
 
 
 
@@ -189,35 +198,35 @@ if(Meteor.isClient) {
 
         'click .buttonOK': (event) => {
             event.preventDefault();
-            Session.set('selectedMachine', localStorage.getItem('selectedPdi'));
-            const pdiMachineId = Session.get('selectedMachine');
+            Session.set('selectedPdiMachineId', localStorage.getItem('pdiMachineId'));
+            const selectedPdiMachineId = Session.get('selectedPdiMachineId');
             let idFailure = event.currentTarget.id;
-            if(pdiMachineId) {
-                Meteor.call('okButton', pdiMachineId, idFailure);
+            if(selectedPdiMachineId) {
+                Meteor.call('okButton', selectedPdiMachineId, idFailure);
             } else {
                 console.log("Lost Machine Number")
             }
         },
 
-        'click .buttonNOK': (event, template) => {
+        'click .buttonNOK': (event) => {
             event.preventDefault();
-            Session.set('selectedMachine', localStorage.getItem('selectedPdi'));
-            const pdiMachineId = Session.get('selectedMachine');
+            Session.set('selectedPdiMachineId', localStorage.getItem('pdiMachineId'));
+            const selectedPdiMachineId = Session.get('selectedPdiMachineId');
             let idFailure = event.currentTarget.id;
-            if(pdiMachineId) {
-                Meteor.call('okButton', pdiMachineId, idFailure);
+            if(selectedPdiMachineId) {
+                Meteor.call('nokButton', selectedPdiMachineId, idFailure);
             } else {
                 console.log("Lost Machine Number")
             }
         },
 
-        'click .buttonNA': (event, template) => {
+        'click .buttonNA': (event) => {
             event.preventDefault();
-            Session.set('selectedMachine', localStorage.getItem('selectedPdi'));
-            const pdiMachineId = Session.get('selectedMachine');
+            Session.set('selectedPdiMachineId', localStorage.getItem('pdiMachineId'));
+            const selectedPdiMachineId = Session.get('selectedPdiMachineId');
             let idFailure = event.currentTarget.id;
-            if(pdiMachineId) {
-                Meteor.call('okButton', pdiMachineId, idFailure);
+            if(selectedPdiMachineId) {
+                Meteor.call('naButton', selectedPdiMachineId, idFailure);
             } else {
                 console.log("Lost Machine Number")
             }

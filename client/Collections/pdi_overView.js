@@ -54,6 +54,8 @@ if(Meteor.isClient) {
             const user = Meteor.user().username;
             const selectedPdiMachineId = Session.get('selectedPdiMachine');
             const selectedPdiMachineNr = Session.get('pdiMachineNumber');
+            localStorage.setItem('pdiMachineNr', selectedPdiMachineNr);
+            localStorage.setItem('pdiMachineId', selectedPdiMachineId);
             const firstRange =  JSON.stringify(selectedPdiMachineNr).slice(1,4);
             const range = [];
             range.push(firstRange);
