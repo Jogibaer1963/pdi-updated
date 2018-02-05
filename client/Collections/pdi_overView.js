@@ -4,7 +4,7 @@ if(Meteor.isClient) {
 
     Template.inspection.helpers({
 
-         shippList: function () {
+         shipList: function () {
            Session.set('selectedPdiMachine', '');
          // Order of shipping date
            return MachineReady.find({$or:[{pdiStatus: 0},{pdiStatus: 2}]}, {sort: {date: 1}},

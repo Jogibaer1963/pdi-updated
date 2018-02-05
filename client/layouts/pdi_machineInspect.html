@@ -132,19 +132,19 @@
         <table class="pdiCheckList">
             <tbody>
                 {{#each checkList}}
-                    <tr class=" {{selectedClass}}">
-                        <td class="pdiCell">
-                            <div class="positionCheckPos">
-                            {{{errorPos}}}
+                    <tr class=" ">
+                        <td class="pdiCell {{selectedFailure}}">
+                            <div class="positionCheckPos" >
+                            {{{errorPos}}} {{_id}}
                             </div>
                             <div class="positionCheckText">
                             {{{errorDescription}}}
                             </div>
-                            <button class="buttonOK">OK</button>
+                            <button class="buttonOK" id={{_id}}>OK</button>
 
-                            <button class="buttonNOK">NOK</button>
+                            <button class="buttonNOK" id={{_id}}>NOK</button>
 
-                            <button class="buttonNA">N/A</button>
+                            <button class="buttonNA" id={{_id}}>N/A</button>
                         </td>
                     </tr>
                 {{/each}}

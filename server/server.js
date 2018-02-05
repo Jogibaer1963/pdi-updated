@@ -431,6 +431,20 @@ if(Meteor.isServer){
 
         },
 
+        // pdi Checklist buttons
+
+        'okButton': (machineId, idFailure) => {
+            MachineReady.update({_id: machineId, "checkList._id": idFailure}, {$set: {"checkList.$.checkStatus": 1}})
+        },
+
+        'nokButton': (machineId, idFailure) => {
+            MachineReady.update({_id: machineId, "checkList._id": idFailure}, {$set: {"checkList.$.checkStatus": 2}})
+        },
+
+        'naButton': (machineId, idFailure) => {
+            MachineReady.update({_id: machineId, "checkList._id": idFailure}, {$set: {"checkList.$.checkStatus": 3}})
+        },
+
 
         'findMe': function (machineNr, selectedPdiMachine) {
             InspectedMachines.update({machineId: machineNr}, {$pull: {repOrder: {_id:selectedPdiMachine}}});
