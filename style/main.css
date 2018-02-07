@@ -141,7 +141,7 @@ table.blueTable tfoot .links a {
   border-radius: 5px; }
 
 table.pdiTable {
-  width: 870px; }
+  width: 570px; }
 
 .mainLayout {
   position: fixed;
@@ -164,8 +164,8 @@ table.pdiTable {
   min-width: 80px; }
 
 .pdiComments {
-  max-width: 520px;
-  min-width: 520px; }
+  max-width: 320px;
+  min-width: 320px; }
 
 .pdiPDIField {
   max-width: 50px;
@@ -176,8 +176,12 @@ table.pdiTable {
   min-width: 50px; }
 
 .pdiLocation {
-  max-width: 100px;
-  min-width: 100px; }
+  max-width: 70px;
+  min-width: 70px; }
+
+.pdiConfig {
+  max-width: 60px;
+  min-width: 60px; }
 
 .inProcess {
   animation: glowing 1500ms infinite;

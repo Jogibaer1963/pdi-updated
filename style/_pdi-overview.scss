@@ -3,11 +3,12 @@
 
 $pdiOverviewMachine: 80px;
 $pdiShipDate: 80px;
-$pdiComments: 520px;
+$pdiComments: 320px;
 $pdiPDIField: 50px;
 $pdiWashField: 50px;
-$pdiLocation: 100px;
-$pdiTable: 870px;
+$pdiLocation: 70px;
+$config: 60px;
+$pdiTable: 570px;
 
 table.pdiTable {
   width: $pdiTable;
@@ -57,4 +58,9 @@ table.pdiTable {
 .pdiLocation {
   max-width: $pdiLocation;
   min-width: $pdiLocation;
+}
+
+.pdiConfig {
+  max-width: $config;
+  min-width: $config;
 }

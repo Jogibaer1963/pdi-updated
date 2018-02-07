@@ -1,3 +1,5 @@
+import readTxtFile from 'qm-fs-readtxtfile';
+
 
 if(Meteor.isClient) {
 
@@ -7,8 +9,11 @@ if(Meteor.isClient) {
          shipList: function () {
            Session.set('selectedPdiMachine', '');
          // Order of shipping date
-           return MachineReady.find({$or:[{pdiStatus: 0},{pdiStatus: 2}]}, {sort: {date: 1}},
-                {machineId: 1, date: 1, shippingComment: 1, pdiStatus: 1, washStatus: 1});
+          let k = MachineReady.find({$or:[{pdiStatus: 0},{pdiStatus: 2}]}, {sort: {date: 1}},
+                {machineId: 1, date: 1, shippingComment: 1, pdiStatus: 1,
+                    washStatus: 1, configStatus: 1});
+          console.log(k.fetch());
+          return k;
          },
         
         'selectedClass': function(){
@@ -37,37 +42,37 @@ if(Meteor.isClient) {
 
     Template.inspection.events({
 
-        'click .openInspections': function() {
-           const openInspect = this._id;
-        // localStorage.setItem('selectedPdi', openInspect);
+        'click .openInspections': function () {
+            const openInspect = this._id;
+            // localStorage.setItem('selectedPdi', openInspect);
             Session.set('selectedPdiMachine', openInspect);
 
             const machineId = MachineReady.findOne({_id: openInspect}).machineId;
 
-         // localStorage.setItem('pdiMachine', machineId);
+            // localStorage.setItem('pdiMachine', machineId);
             Session.set('pdiMachineNumber', machineId);
-       //   Session.setPersistent('currentLoggedInUser', user);
+            //   Session.setPersistent('currentLoggedInUser', user);
         },
 
-        'click .machinePdi': function() {
+        'click .machinePdi': function () {
             event.preventDefault();
             const user = Meteor.user().username;
             const selectedPdiMachineId = Session.get('selectedPdiMachine');
             const selectedPdiMachineNr = Session.get('pdiMachineNumber');
             localStorage.setItem('pdiMachineNr', selectedPdiMachineNr);
             localStorage.setItem('pdiMachineId', selectedPdiMachineId);
-            const firstRange =  JSON.stringify(selectedPdiMachineNr).slice(1,4);
+            const firstRange = JSON.stringify(selectedPdiMachineNr).slice(1, 4);
             const range = [];
             range.push(firstRange);
             const dateStart = new Date().toLocaleDateString();
             Meteor.call('generatePdiList', selectedPdiMachineId, selectedPdiMachineNr, dateStart,
-              user, range);
+                user, range);
             FlowRouter.go('machineInspect');
         },
 
         // Button Cancel PDI as long pdi is not finished
 
-        'click .cancelPdiProcess': function() {
+        'click .cancelPdiProcess': function () {
             event.preventDefault();
             const pdiMachineId = Session.get('selectedPdiMachine');
             Meteor.call('cancelPdi', pdiMachineId);
@@ -78,20 +83,25 @@ if(Meteor.isClient) {
             Session.set('selectedSuppOm', '');
             Session.set('selectedMainOm', '');
         },
-        
-        'click .machineSkipPdi': function() {
+
+        'click .machineSkipPdi': function () {
             event.preventDefault();
             const pdiMachineId = Session.get('selectedPdiMachine');
             Meteor.call('skipPdi', pdiMachineId);
         },
 
-        'click .resumePdi': function() {
+        'click .resumePdi': function () {
             event.preventDefault();
             FlowRouter.go('machineInspect_2');
-        }
+        },
 
+        'click .loadConfig': () => {
+            event.preventDefault();
+            const readTextFile = require('read-text-file');
+            const textFile = readTextFile.read("c:/Downloads/C7700180_00.txt");
+                console.log(textFile);
+        },
     });
-
 
     Handlebars.registerHelper('inActive', function() {
         const inActiveStatus = Session.get('inActiveState');

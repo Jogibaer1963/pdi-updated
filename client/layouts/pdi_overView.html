@@ -39,6 +39,7 @@
         <button class="cancelPdiProcess">Cancel PDI</button>
         <button class="machineSkipPdi">Skip PDI</button>
         <button class="resumePdi">Resume PDI</button>
+        <button class="loadConfig">Load Config</button>
     </form>
         <br><br>
     <table class="pdiTable blueTable tablePdiOverview" cellpadding="10">
@@ -50,6 +51,7 @@
              <th class="pdiPDIField" style="background-color:{{getStatusColor pdiStatus}}; color:{{getStatusColor pdiStatus}}">{{pdiStatus}}><strong>PDI</strong></th>
              <th class="pdiWashField"><strong>Wash</strong></th>
             <th class="pdiLocation"><strong>Location</strong></th>
+               <th class="pdiConfig"><strong>Config loaded</strong></th>
            </tr>
          </thead>
         <tbody>
@@ -61,6 +63,7 @@
                <td class="pdiPDIField {{getStatusColor pdiStatus}}" style="background-color:{{getStatusColor pdiStatus}}; color:{{getStatusColor pdiStatus}}">{{pdiStatus}}</td>
                <td class="pdiWashField {{getStatusColor washStatus}}" style="background-color:{{getStatusColor washStatus}}; color:{{getStatusColor washStatus}}" >{{washStatus}}</td>
                <td class="pdiLocation" style="background-color: #6fd981">{{locationId}}</td>
+               <td class="pdiConfig {{getConfigColor configStatus}}" style="background-color:{{getConfigColor configStatus}}; color:{{getConfigColor configStatus}}">{{configStatus}}</td>
             </tr>
            {{/each}}
         </tbody>
