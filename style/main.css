@@ -178,14 +178,22 @@ table.pdiTable {
   min-width: 80px; }
 
 .pdiShipDate {
-  max-width: 80px;
-  min-width: 80px; }
+  max-width: 90px;
+  min-width: 90px; }
 
 .pdiComments {
   max-width: 320px;
   min-width: 320px; }
 
+.pdiKitField {
+  max-width: 180px;
+  min-width: 180px; }
+
 .pdiPDIField {
+  max-width: 50px;
+  min-width: 50px; }
+
+.pdiRepField {
   max-width: 50px;
   min-width: 50px; }
 
@@ -200,6 +208,21 @@ table.pdiTable {
 .pdiConfig {
   max-width: 60px;
   min-width: 60px; }
+
+table.headerTable {
+  width: 300px; }
+
+.headerId {
+  max-width: 80px;
+  min-width: 80px; }
+
+.headerShipDate {
+  max-width: 90px;
+  min-width: 90px; }
+
+.headerPos {
+  position: absolute;
+  left: 400px; }
 
 .inProcess {
   animation: glowing 1500ms infinite;
@@ -285,6 +308,9 @@ td {
   margin: 10px;
   font-weight: bold;
   font-size: 16px; }
+
+#logo {
+  margin: 10px; }
 
 .selected {
   background-color: #978f93;

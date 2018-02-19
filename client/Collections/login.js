@@ -8,6 +8,7 @@
               const passwordVar = event.target.loginPassword.value;
               const dateLogin = new Date();
               Session.set('loginId', userVar);
+
             Meteor.loginWithPassword(userVar, passwordVar, function(){
                if(Meteor.userId()){
                    Meteor.call('successfullLogin', userVar, dateLogin);
@@ -19,8 +20,6 @@
             });
         }
     });
-
-
 
 
     Template.MainLayout.events({

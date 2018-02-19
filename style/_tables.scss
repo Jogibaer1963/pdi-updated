@@ -1,4 +1,3 @@
-@import "variables";
 
 
 thead {
@@ -72,3 +71,107 @@ table.blueTable {
     padding: 2px 8px;
     border-radius: 5px;
   }
+
+
+
+$shipDate: 90px;
+
+$pdiOverviewMachine: 80px;
+$pdiComments: 320px;
+$pdiKitField: 180px;
+$pdiPDIField: 50px;
+$pdiRepField: 50px;
+$pdiWashField: 50px;
+$pdiLocation: 70px;
+$config: 60px;
+$pdiTable: 570px;
+
+$headerTable: 300px;
+$headerId: 80px;
+
+
+
+table.pdiTable {
+  width: $pdiTable;
+}
+
+
+.mainLayout {
+  position: fixed;
+  right: 250px;
+  color: black;
+}
+
+.overviewHeader {
+  font-size: 25px;
+}
+
+.tablePdiOverview {
+  position: absolute;
+  top: 300px;
+}
+
+
+.pdiMachineField {
+  max-width: $pdiOverviewMachine;
+  min-width: $pdiOverviewMachine;
+}
+
+.pdiShipDate {
+  max-width: $shipDate;
+  min-width: $shipDate;
+}
+
+.pdiComments {
+  max-width: $pdiComments;
+  min-width: $pdiComments;
+}
+
+.pdiKitField {
+  max-width: $pdiKitField;
+  min-width: $pdiKitField;
+}
+
+.pdiPDIField {
+  max-width: $pdiPDIField;
+  min-width: $pdiPDIField;
+}
+
+.pdiRepField {
+  max-width: $pdiRepField;
+  min-width: $pdiRepField;
+}
+
+.pdiWashField {
+  max-width: $pdiWashField;
+  min-width: $pdiWashField;
+}
+
+.pdiLocation {
+  max-width: $pdiLocation;
+  min-width: $pdiLocation;
+}
+
+.pdiConfig {
+  max-width: $config;
+  min-width: $config;
+}
+
+table.headerTable {
+  width: $headerTable;
+}
+
+.headerId {
+  max-width: $headerId;
+  min-width: $headerId;
+}
+
+.headerShipDate {
+  max-width: $shipDate;
+  min-width: $shipDate;
+}
+
+.headerPos {
+  position: absolute;
+  left: 400px;
+}

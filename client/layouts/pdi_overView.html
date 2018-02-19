@@ -9,15 +9,15 @@
 
 
 <template name="inspection">
-    <div class="marginMain">
-    <nav class="mainLayout">
+  <div>
+      <nav class="mainLayout">
         <a href="/overViewLoggedIn">Over View |</a>
         <a href="/machineLocation">Locations |</a>
         <a href="/statistics">Statistics |</a>
         <a href="/logout" >Logout</a>
-    </nav>
+      </nav>
     <br>
-    <div id="">
+    <div id="logo">
         <img src="claas_logo.png" />
     </div>
     <br>
@@ -26,7 +26,7 @@
         <a class="navigation" href="/pdiRepairList">Review Repair List</a>
         <a class="navigation" href="/si">SI's or special Item's</a>
     </nav>
- <br>
+      <br>
     <div class="overviewHeader">
         Open Pdi's : {{countPdi}}
     </div>
@@ -44,15 +44,15 @@
         <br><br>
     <table class="pdiTable blueTable tablePdiOverview" cellpadding="10">
          <thead>
-           <tr>
-            <th class="pdiMachineField"><strong>Machine</strong></th>
-            <th class="pdiShipDate"><strong>Ship Date</strong></th>
-            <th class="pdiComments"><strong>Comments</strong></th>
-             <th class="pdiPDIField" style="background-color:{{getStatusColor pdiStatus}}; color:{{getStatusColor pdiStatus}}">{{pdiStatus}}><strong>PDI</strong></th>
-             <th class="pdiWashField"><strong>Wash</strong></th>
-            <th class="pdiLocation"><strong>Location</strong></th>
-               <th class="pdiConfig"><strong>Config loaded</strong></th>
-           </tr>
+            <tr>
+              <th class="pdiMachineField"><strong>Machine</strong></th>
+              <th class="pdiShipDate"><strong>Ship Date</strong></th>
+              <th class="pdiComments"><strong>Comments</strong></th>
+              <th class="pdiPDIField" style="background-color:{{getStatusColor pdiStatus}}; color:{{getStatusColor pdiStatus}}">{{pdiStatus}}><strong>PDI</strong></th>
+              <th class="pdiWashField"><strong>Wash</strong></th>
+              <th class="pdiLocation"><strong>Location</strong></th>
+              <th class="pdiConfig"><strong>Config loaded</strong></th>
+            </tr>
          </thead>
         <tbody>
            {{#each shipList}}

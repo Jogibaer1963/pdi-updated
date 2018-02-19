@@ -1,12 +1,14 @@
-@import '_login.scss';
+@import 'login';
 @import 'checklist';
 @import "tables";
-@import "pdi-overview";
 @import "glowingBox";
 @import "pdiCheckList";
 
 
 
+#logo {
+  margin: 10px;
+}
 
 .selected {
   background-color: #978f93;
@@ -28,3 +30,4 @@
 .marginMain {
   margin-left: 25px;
 }
+
