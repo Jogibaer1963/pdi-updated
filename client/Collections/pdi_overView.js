@@ -1,4 +1,4 @@
-import readTxtFile from 'qm-fs-readtxtfile';
+
 
 
 if(Meteor.isClient) {
@@ -10,8 +10,8 @@ if(Meteor.isClient) {
            Session.set('selectedPdiMachine', '');
          // Order of shipping date
           let k = MachineReady.find({$or:[{pdiStatus: 0},{pdiStatus: 2}]}, {sort: {date: 1}},
-                {machineId: 1, date: 1, shippingComment: 1, pdiStatus: 1,
-                    washStatus: 1, configStatus: 1});
+              {fields: {machineId: 1, date: 1, shippingComment: 1, pdiStatus: 1,
+                    washStatus: 1, configStatus: 1}});
           console.log(k.fetch());
           return k;
          },

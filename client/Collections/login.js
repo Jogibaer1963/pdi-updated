@@ -17,12 +17,7 @@
                   Meteor.call('unsuccessLogin', userVar, passwordVar, dateLogin);
                    }
             });
-        },
-
-        'click .loginSubmit': function() {
-            Bert.alert('Loading', 'success', 'growl-top-left');
         }
-
     });
 
 

@@ -1,0 +1,29 @@
+
+// login
+
+$userTop: 150px;
+$loginTop: 220px;
+$loginLeft: 25px;
+$loginButton: 290px;
+
+#logo {
+  margin: 25px;
+}
+
+.userName {
+  position: absolute;
+  top: $userTop;
+  left: $loginLeft;
+}
+
+.loginPasswd {
+  position: absolute;
+  top: $loginTop;
+  left: $loginLeft;
+}
+
+.loginButton {
+  position: absolute;
+  top: $loginButton;
+  left: $loginLeft;
+}

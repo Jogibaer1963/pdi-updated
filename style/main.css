@@ -1,3 +1,21 @@
+#logo {
+  margin: 25px; }
+
+.userName {
+  position: absolute;
+  top: 150px;
+  left: 25px; }
+
+.loginPasswd {
+  position: absolute;
+  top: 220px;
+  left: 25px; }
+
+.loginButton {
+  position: absolute;
+  top: 290px;
+  left: 25px; }
+
 .checklistReturn-btn {
   position: fixed;
   right: 250px;
