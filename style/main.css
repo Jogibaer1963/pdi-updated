@@ -161,10 +161,10 @@ table.blueTable tfoot .links a {
 table.pdiTable {
   width: 570px; }
 
-.mainLayout {
-  position: fixed;
-  right: 250px;
-  color: black; }
+table.overViewTable {
+  position: absolute;
+  top: 300px;
+  width: 415px; }
 
 .overviewHeader {
   font-size: 25px; }
@@ -210,7 +210,7 @@ table.pdiTable {
   min-width: 60px; }
 
 table.headerTable {
-  width: 300px; }
+  width: 230px; }
 
 .headerId {
   max-width: 80px;
@@ -220,9 +220,19 @@ table.headerTable {
   max-width: 90px;
   min-width: 90px; }
 
+.headerStatus {
+  max-width: 80px;
+  min-width: 80px; }
+
 .headerPos {
   position: absolute;
-  left: 400px; }
+  left: 450px;
+  top: 300px; }
+
+.openStatus {
+  position: relative;
+  top: 100px;
+  margin-left: 25px; }
 
 .inProcess {
   animation: glowing 1500ms infinite;
@@ -310,6 +320,10 @@ td {
   font-size: 16px; }
 
 #logo {
+  position: absolute;
+  top: 25px; }
+
+#logo {
   margin: 10px; }
 
 .selected {
@@ -327,5 +341,10 @@ td {
 
 .marginMain {
   margin-left: 25px; }
+
+.mainLayout {
+  position: fixed;
+  left: 450px;
+  color: black; }
 
 /*# sourceMappingURL=main.css.map */

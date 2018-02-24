@@ -85,9 +85,11 @@ $pdiWashField: 50px;
 $pdiLocation: 70px;
 $config: 60px;
 $pdiTable: 570px;
+$overViewTable: 415px;
 
-$headerTable: 300px;
+$headerTable: 230px;
 $headerId: 80px;
+$headerStatus: 80px;
 
 
 
@@ -95,11 +97,10 @@ table.pdiTable {
   width: $pdiTable;
 }
 
-
-.mainLayout {
-  position: fixed;
-  right: 250px;
-  color: black;
+table.overViewTable {
+  position: absolute;
+  top: 300px;
+  width: $overViewTable;
 }
 
 .overviewHeader {
@@ -171,7 +172,13 @@ table.headerTable {
   min-width: $shipDate;
 }
 
+.headerStatus {
+  max-width: $headerStatus;
+  min-width: $headerStatus;
+}
+
 .headerPos {
   position: absolute;
-  left: 400px;
+  left: 450px;
+  top: 300px;
 }

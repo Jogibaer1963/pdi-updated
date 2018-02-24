@@ -3,28 +3,24 @@
 {{#if currentUser}}
   {{#if isInRole 'admin'}}
       {{> MainLayout}}
-      {{> overViewList}}
-      {{> headerList}}
+      {{> overViewLoggedIn}}
     {{/if}}
   {{#if isInRole 'shipping'}}
       {{> shippingLayout}}
-      {{> overViewList}}
-      {{> headerList}}
+      {{> overViewLoggedIn}}
   {{/if}}
   {{#if isInRole 'pdi'}}
       {{> pdiLayout}}
-      {{> overViewList}}
-      {{> headerList}}
+      {{> overViewLoggedIn}}
   {{/if}}
   {{#if isInRole 'repair'}}
       {{> repairLayout}}
-      {{> overViewList}}
-      {{> headerList}}
+      {{> overViewLoggedIn}}
   {{/if}}
   {{#if isInRole 'outBound'}}
       {{> washLayout}}
-      {{> overViewList}}
-      {{> headerList}}
+      {{> overViewLoggedIn}}
+
   {{/if}}
  {{else}}
     {{> login}}
@@ -47,21 +43,21 @@
 
 
 <template name="MainLayout">
-  <div class="">
+  <div class="mainLayout">
     <nav>
-        <a class="btn " href="/shippingMachines">Shipping</a>
-        <a class="btn" href="/inspectionStart">Inspection</a>
-        <a class="btn" href="/repairView">Repair</a>
-        <a class="btn" href="/washList">Wash Bay</a>
-        <a class="btn" href="/readyShipList">Final Status</a>
-        <a class="btn " href="/ecnOverView">ECN Tracking</a>
-        <br><br>
-        <a class="btn" href="/statistics">Statistics</a>
-        <a class="btn btnRed" href="/admin">Admin</a>
-        <a class="btn" href="/machineSearch">Search by Machine</a>
-        <a class="btn" href="/wordSearch">Search by Key Word</a>
-        <a class="btn" href="/machineLocation">Locations</a>
-        <a class="logout btn" href="/logout" >Logout</a>
+        <a href="/shippingMachines">Shipping |</a>
+        <a href="/inspectionStart">Inspection |</a>
+        <a href="/repairView">Repair |</a>
+        <a href="/washList">Wash Bay |</a>
+        <a href="/readyShipList">Final Status |</a>
+        <a href="/ecnOverView">ECN Tracking |</a>
+        <br>
+        <a href="/statistics">Statistics |</a>
+        <a class="btnRed" href="/admin">Admin |</a>
+        <a href="/machineSearch">Search by Machine |</a>
+        <a href="/wordSearch">Search by Key Word |</a>
+        <a href="/machineLocation">Locations |</a>
+        <a class="logout" href="/logout" >Logout</a>
     </nav>
   </div>
 </template>

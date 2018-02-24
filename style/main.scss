@@ -1,8 +1,10 @@
 @import 'login';
 @import 'checklist';
 @import "tables";
+@import "overViewLoggedIn";
 @import "glowingBox";
 @import "pdiCheckList";
+@import "pdi_overView";
 
 
 
@@ -31,3 +33,8 @@
   margin-left: 25px;
 }
 
+.mainLayout {
+  position: fixed;
+  left: 450px;
+  color: black;
+}
