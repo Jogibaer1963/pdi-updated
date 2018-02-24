@@ -43,11 +43,6 @@ if (Meteor.isClient) {
             event.target.newComment.value="";
         },
 
-        'click .maryView': function() {
-            event.preventDefault();
-            FlowRouter.go('maryView');
-        },
-
         'submit .searchMachines': function() {
             event.preventDefault();
             const selectedMachine = event.target.inputSearch.value;
@@ -65,11 +60,7 @@ if (Meteor.isClient) {
         editMachine: function() {
             const selectedMachine = Session.get('selectedMachine');
            return MachineReady.findOne({_id: selectedMachine});
-        }
-
-    });
-
-    Template.shippingList.helpers({
+        },
 
         shippList: function () {
             // Order of shipping date
@@ -80,33 +71,10 @@ if (Meteor.isClient) {
             const shippingMachine = this._id;
             const selectedMachine = Session.get('selectedMachine');
             if (shippingMachine === selectedMachine) {
-               return "selected"
-           }
-       }
-
-    });
-
-
-    Template.shippingList.events({
-        'click .newShippingMachine': function() {
-            event.preventDefault();
-            const shippingMachine = this._id;
-            Session.set('selectedMachine', shippingMachine );
-        },
-
-        'click .buttonPositionId3': function() {
-            event.preventDefault();
-            const selectedMachine = Session.get('selectedMachine');
-            Meteor.call('removeFromShipList', selectedMachine)
-        },
-
-        'click .buttonEdit': function() {
-            const selectedMachine = Session.get('selectedMachine');
-            Session.set('editSelectedMachine', selectedMachine);
-            if(typeof selectedMachine === 'string' ) {
-            FlowRouter.go('editMachine');
+                return "selected"
             }
         }
+
     });
 
 }

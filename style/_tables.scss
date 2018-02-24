@@ -72,16 +72,22 @@ table.blueTable {
     border-radius: 5px;
   }
 
+  th {
+    height: 50px;
+  }
 
 
 $shipDate: 90px;
 
 $pdiOverviewMachine: 80px;
+$pdiDestination: 100px;
+
 $pdiComments: 320px;
 $pdiKitField: 180px;
 $pdiPDIField: 50px;
 $pdiRepField: 50px;
 $pdiWashField: 50px;
+$pdiShipField: 50px;
 $pdiLocation: 70px;
 $config: 60px;
 $pdiTable: 570px;
@@ -92,6 +98,10 @@ $headerId: 80px;
 $headerStatus: 80px;
 
 
+.shippingMachines {
+  height: 100px;
+}
+
 
 table.pdiTable {
   width: $pdiTable;
@@ -101,6 +111,12 @@ table.overViewTable {
   position: absolute;
   top: 300px;
   width: $overViewTable;
+}
+
+table.shippingTable {
+  position: absolute;
+  top: 400px;
+  width: 600px;
 }
 
 .overviewHeader {
@@ -123,12 +139,22 @@ table.overViewTable {
   min-width: $shipDate;
 }
 
+.pdiDestination {
+  max-width: $pdiDestination;
+  min-width: $pdiDestination;
+}
+
 .pdiComments {
   max-width: $pdiComments;
   min-width: $pdiComments;
 }
 
 .pdiKitField {
+  max-width: $pdiKitField;
+  min-width: $pdiKitField;
+}
+
+.pdiTireField {
   max-width: $pdiKitField;
   min-width: $pdiKitField;
 }
@@ -146,6 +172,11 @@ table.overViewTable {
 .pdiWashField {
   max-width: $pdiWashField;
   min-width: $pdiWashField;
+}
+
+.pdiShipField {
+  max-width: $pdiShipField;
+  min-width: $pdiShipField;
 }
 
 .pdiLocation {

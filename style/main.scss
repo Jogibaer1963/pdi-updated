@@ -2,6 +2,7 @@
 @import 'checklist';
 @import "tables";
 @import "overViewLoggedIn";
+@import "newShippingMachine";
 @import "glowingBox";
 @import "pdiCheckList";
 @import "pdi_overView";
@@ -36,5 +37,6 @@
 .mainLayout {
   position: fixed;
   left: 450px;
+  margin-top: 10px;
   color: black;
 }

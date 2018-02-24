@@ -1,49 +1,39 @@
 <template name="shippingMachines">
     {{#if currentUser}}
-        {{> shippingList}}
-        {{> whiteBox}}
-        <div class="userBox ">
-            <button class="headerShip" type="submit">Headers</button>
-        </div>
-        <div class="mainFix">
             {{> MainLayout_3}}
-        </div>
         {{> inputMachine}}
     {{else}}
         {{> login}}
     {{/if}}
 </template>
 
-<template name="whiteBox">
-    <div class="whiteBox">
-    </div>
-</template>
-
 <template name="inputMachine">
-    <div class="orangeredShippingBox">
+    <div id="logo">
+        <img src="claas_logo.png" />
+    </div>
+    <div class="newMachineShipping">
       <form class="inputNewMachine">
-        <div class="userBox userBox2">
+         <div class="shippingInputs">
            <label for="MachineId" class="input" >Machine-Id</label>
            <br>
            <input type="text" class="inputComment" id="MachineId" name="newMachine" placeholder="Machine Id" value="{{machineId}}" required>
          </div>
-         <div class="userBox userBox2">
+         <div class="shippingInputs">
            <label for="shippingDate" class="input">Shipping-Date</label>
            <br>
            <input type="Date" class="inputComment" id="shippingDate" name="newDate" required>
          </div>
-         <div class="userBox">
+         <div class="shippingInputs">
            <label for="newDestination" class="input">Destination</label>
            <br>
            <input type="text" class="inputComment" id="newDestination" name="newDestination" placeholder="Destination">
          </div>
-              <br><br><br><br><br>
-         <div class="userBox userBox2">
+         <div class="shippingInputs">
             <label for="newTransporter" class="input">Transporter</label>
             <br>
             <input type="text" class="inputComment" id="newTransporter" name="newTransporter" placeholder="Transporter">
          </div>
-          <div class="userBox">
+          <div class="shippingInputs">
               <label for="selectMe" class="input">Tires / MTS </label>
               <br>
               <select name="newTireTrack" id="selectMe" class="inputComment">
@@ -55,114 +45,111 @@
                   <option>MTS</option>
               </select>
           </div>
-       <div class="userBox">
-           <div class="inputKit">Ship with Kit</div>
-           <br>
-         <ul class="checkbox">
-           <li>
-               <div>
-                   <label for="newKit1">
-                  <input type="checkbox" value="C03_0019" id="newKit1" name="newKit" class="newKit1">C03 0019</label>
-               </div>
-           </li>
-           <li>
-               <div>
-                   <label for="newKit2">
-                   <input type="checkbox" value="C03_0065" id="newKit2" name="newKit" class="newKit2">C03 0065</label>
-               </div>
-           </li>
-           <li>
-               <div>
-                   <label for="newKit3">
-                   <input type="checkbox" value="C03_0165" id="newKit3" name="newKit" class="newKit3">C03 0165</label>
-               </div>
-           </li>
-             <li>
+           <br><br><br>
+          <div class="firstKit">
+             <ul class="checkbox">
+                <li>
+                  <div>
+                    <label for="noKit">
+                    <input type="checkbox" value="No Kit" id="noKit" name="noKit" class="noKit">No Kit</label>
+                  </div>
+                </li>
+                <li>
+                  <div>
+                    <label for="newKit1">
+                    <input type="checkbox" value="C03_0019" id="newKit1" name="newKit" class="newKit1">C03 0019</label>
+                  </div>
+                </li>
+                <li>
+                  <div>
+                     <label for="newKit2">
+                     <input type="checkbox" value="C03_0065" id="newKit2" name="newKit" class="newKit2">C03 0065</label>
+                  </div>
+               </li>
+               <li>
                  <div>
+                    <label for="newKit3">
+                    <input type="checkbox" value="C03_0165" id="newKit3" name="newKit" class="newKit3">C03 0165</label>
+                  </div>
+                </li>
+             </ul>
+          </div>
+          <div class="secondKit">
+             <ul class="checkbox">
+               <li>
+                  <div>
                      <label for="newKit7">
-                         <input type="checkbox" value="C03_0180" id="newKit7" name="newKit" class="newKit7">C03 0180</label>
-                 </div>
-             </li>
-             <li>
-                 <div class="newKit4Pos">
+                     <input type="checkbox" value="C03_0180" id="newKit7" name="newKit" class="newKit7">C03 0180</label>
+                  </div>
+               </li>
+               <li>
+                  <div class="newKit4Pos">
                      <label for="newKit4">
-                         <input type="checkbox" value="B05_0120" id="newKit4" name="newKit" class="newKit4">B05 0120</label>
+                     <input type="checkbox" value="B05_0120" id="newKit4" name="newKit" class="newKit4">B05 0120</label>
                  </div>
-             </li>
-             <li>
+               </li>
+               <li>
                  <div class="newKit5Pos">
                      <label for="newKit5">
-                         <input type="checkbox" value="B05_0130" id="newKit5" name="newKit" class="newKit5">B05 0130</label>
+                     <input type="checkbox" value="B05_0130" id="newKit5" name="newKit" class="newKit5">B05 0130</label>
                  </div>
-             </li>
-             <li>
-                 <div class="newKit6Pos">
+               </li>
+               <li>
+                  <div class="newKit6Pos">
                      <label for="newKit6">
-                         <input type="checkbox" value="D06_0030" id="newKit6" name="newKit" class="newKit6">D06 0030</label>
+                     <input type="checkbox" value="D06_0030" id="newKit6" name="newKit" class="newKit6">D06 0030</label>
                  </div>
-             </li>
-         </ul>
-       </div>
-          <br><br><br><br><br><br>
+               </li>
+             </ul>
+          </div>
        <div>
           <label for="newComment"></label>
            <br>
-          <input type="text" class="comment" id="newComment" name="newComment" placeholder="Comments">
+          <input type="text" class="comment" id="newComment" name="newComment" placeholder="Shipping Comment">
        </div>
           <br>
-       <div class="userBox">
-        <button class="shippingSubmit" type="submit">Submit</button>
+       <div class="newMachineSubmit">
+           <button class="" type="submit">Submit shipping machine</button>
        </div>
-            <div class="userBox">
-                <button class="maryView" type="submit">Mary's View</button>
-            </div>
       </form>
+        <br><br>
       <div>
-         <form class="searchMachines">
-           <button class="searchMachineSubmit" type="submit">Search Me</button>
+         <form class="find_Machine">
+           <button class="searchMachineSubmit" type="submit">Find Machine</button>
            <input class="inputComment inputSearch" type="text" name="inputSearch" placeholder=" Machine Search" />
          </form>
        </div>
     </div>
-</template>
-
-<template name="shippingList">
-    <div class="">
-        <div class="buttonPositionId3">
-            <button class="buttonPosition" type="submit">Delete marked Machine</button>
-            </div>
-        <div class="buttonEdit">
-            <button class="buttonPosition2" type="submit">Edit marked Machine</button>
-        </div>
-        <div class="rTable tableShip">
-            <div class="rTableRow">
-               <div class="rTableHead"><strong>Machine</strong></div>
-               <div class="rTableHead" ><strong>ShipDate</strong></div>
-               <div class="rTableHead"><strong>Destination</strong></div>
-               <div class="rTableHead"><strong>Transporter</strong></div>
-               <div class="rTableHead"><strong>Ship with Kit</strong></div>
-               <div class="rTableHead"><strong>Tire / Track</strong></div>
-               <div class="rTableHead" style="width: 200px"><strong>Shipping Comments</strong></div>
-               <div class="rTableHead"><strong>Ship Status</strong></div>
-            </div>
-            {{#each shippList}}
-                <div class="rTableRow newShippingMachine {{selectedClass}}">
-                    <div class="rTableCell">{{machineId}}</div>
-                    <div class="rTableCell">{{date}}</div>
-                    <div class="rTableCell">{{destination}}</div>
-                    <div class="rTableCell">{{transporter}}</div>
-                    <div class="rTableCell">{{kit}}</div>
-                    <div class="rTableCell">{{tireTrack}}</div>
-                    <div class="rTableCellComment">{{shippingComment}}</div>
-                    <div class="rTableCell {{getStatusColor shipStatus}}" style="background-color:{{getStatusColor shipStatus}}; color:{{getStatusColor shipStatus}}">{{shipStatus}}</div>
-                </div>
-            {{/each}}
-            </div>
-        </div>
+        <table class="shippingTable blueTable" cellpadding="1">
+          <thead class="">
+            <tr class="">
+               <th class="pdiMachineField"><strong>Machine</strong></th>
+               <th class="pdiShipDate"><strong>ShipDate</strong></th>
+               <th class="pdiDestination"><strong>Destination</strong></th>
+               <th class="pdiTransporter"><strong>Transporter</strong></th>
+               <th class="pdiKitField"><strong>Ship with Kit</strong></th>
+               <th class="pdiTireField"><strong>Tire / Track</strong></th>
+               <th class="pdiComments"><strong>Shipping Comments</strong></th>
+               <th class="pdiShipField"><strong>Ship Status</strong></th>
+            </tr>
+          </thead>
+            <tbody>
+              {{#each shippList}}
+                <tr>
+                    <td class="pdiMachineField">{{machineId}}</td>
+                    <td class="pdiShipDate">{{date}}</td>
+                    <td class="pdiDestination">{{destination}}</td>
+                    <td class="pdiTransporter">{{transporter}}</td>
+                    <td class="pdiKitField">{{kit}}</td>
+                    <td class="pdiTireField">{{tireTrack}}</td>
+                    <td class="pdiComments">{{shippingComment}}</td>
+                    <td class="pdiShipField {{getStatusColor shipStatus}}" style="background-color:{{getStatusColor shipStatus}}; color:{{getStatusColor shipStatus}}">{{shipStatus}}</td>
+                </tr>
+              {{/each}}
+            </tbody>
+        </table>
 
 </template>
-
-
 
 
 

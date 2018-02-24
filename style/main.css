@@ -158,6 +158,12 @@ table.blueTable tfoot .links a {
   padding: 2px 8px;
   border-radius: 5px; }
 
+th {
+  height: 50px; }
+
+.shippingMachines {
+  height: 100px; }
+
 table.pdiTable {
   width: 570px; }
 
@@ -165,6 +171,11 @@ table.overViewTable {
   position: absolute;
   top: 300px;
   width: 415px; }
+
+table.shippingTable {
+  position: absolute;
+  top: 400px;
+  width: 600px; }
 
 .overviewHeader {
   font-size: 25px; }
@@ -181,11 +192,19 @@ table.overViewTable {
   max-width: 90px;
   min-width: 90px; }
 
+.pdiDestination {
+  max-width: 100px;
+  min-width: 100px; }
+
 .pdiComments {
   max-width: 320px;
   min-width: 320px; }
 
 .pdiKitField {
+  max-width: 180px;
+  min-width: 180px; }
+
+.pdiTireField {
   max-width: 180px;
   min-width: 180px; }
 
@@ -198,6 +217,10 @@ table.overViewTable {
   min-width: 50px; }
 
 .pdiWashField {
+  max-width: 50px;
+  min-width: 50px; }
+
+.pdiShipField {
   max-width: 50px;
   min-width: 50px; }
 
@@ -233,6 +256,32 @@ table.headerTable {
   position: relative;
   top: 100px;
   margin-left: 25px; }
+
+.newMachineShipping {
+  position: absolute;
+  top: 100px;
+  margin-left: 25px; }
+
+.shippingInputs {
+  margin-left: 20px;
+  float: left; }
+
+.firstKit {
+  float: left; }
+
+.secondKit {
+  float: left; }
+
+.comment {
+  margin-left: 200px;
+  width: 500px; }
+
+.newMachineSubmit {
+  margin-top: 50px; }
+
+.shippingMachinesTable {
+  position: relative;
+  top: 30px; }
 
 .inProcess {
   animation: glowing 1500ms infinite;
@@ -345,6 +394,7 @@ td {
 .mainLayout {
   position: fixed;
   left: 450px;
+  margin-top: 10px;
   color: black; }
 
 /*# sourceMappingURL=main.css.map */
