@@ -57,6 +57,7 @@ if (Meteor.isClient) {
         'click .editMachine': () => {
             event.preventDefault();
             const editMachine = Session.get('selectedMachine');
+            console.log(editMachine);
 
         },
 
