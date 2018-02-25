@@ -295,6 +295,10 @@ table.headerTable {
 .searchField {
   margin-left: 15px; }
 
+.delete_Machine {
+  float: left;
+  margin-right: 25px; }
+
 .inProcess {
   animation: glowing 1500ms infinite;
   color: transparent; }
