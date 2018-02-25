@@ -583,7 +583,7 @@ if(Meteor.isServer){
         'machineIsGone': function(selectedCheckPoint) {
             MachineReady.update({_id:selectedCheckPoint}, {$set: {shipStatus: 1}});
         },
-
+        // shipping Machines
         'removeFromShipList': function(selectedMachine) {
             MachineReady.remove(selectedMachine);
         },

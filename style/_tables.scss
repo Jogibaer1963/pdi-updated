@@ -81,6 +81,7 @@ $shipDate: 90px;
 
 $pdiOverviewMachine: 80px;
 $pdiDestination: 100px;
+$pdiTransporter: 100px;
 
 $pdiComments: 320px;
 $pdiKitField: 180px;
@@ -92,6 +93,7 @@ $pdiLocation: 70px;
 $config: 60px;
 $pdiTable: 570px;
 $overViewTable: 415px;
+
 
 $headerTable: 230px;
 $headerId: 80px;
@@ -142,6 +144,11 @@ table.shippingTable {
 .pdiDestination {
   max-width: $pdiDestination;
   min-width: $pdiDestination;
+}
+
+.pdiTransporter {
+  max-width: $pdiTransporter;
+  min-width: $pdiTransporter;
 }
 
 .pdiComments {

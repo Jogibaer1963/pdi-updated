@@ -196,6 +196,10 @@ table.shippingTable {
   max-width: 100px;
   min-width: 100px; }
 
+.pdiTransporter {
+  max-width: 100px;
+  min-width: 100px; }
+
 .pdiComments {
   max-width: 320px;
   min-width: 320px; }
@@ -286,7 +290,10 @@ table.headerTable {
 
 .shippingMachinesTable {
   position: relative;
-  top: 30px; }
+  top: 40px; }
+
+.searchField {
+  margin-left: 15px; }
 
 .inProcess {
   animation: glowing 1500ms infinite;

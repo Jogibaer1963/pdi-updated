@@ -112,15 +112,24 @@
            <button class="" type="submit">Submit shipping machine</button>
        </div>
       </form>
-        <br><br>
+        <br>
       <div>
          <form class="find_Machine">
-           <button class="searchMachineSubmit" type="submit">Find Machine</button>
-           <input class="inputComment inputSearch" type="text" name="inputSearch" placeholder=" Machine Search" />
+           <button class="searchMachine" type="submit">Find Machine</button>
+           <input class="searchField" type="text" name="inputSearch" placeholder=" Machine Search" />
          </form>
        </div>
+        <br>
+        <div>
+            <form class="delete_Machine">
+                <button class="deleteMachine" type="submit">Delete marked machine</button>
+            </form>
+            <form class="edit_Machine">
+                <button class="editMachine" type="submit">Edit marked machine</button>
+            </form>
+        </div>
     </div>
-        <table class="shippingTable blueTable" cellpadding="1">
+        <table class="shippingTable blueTable" cellpadding="10">
           <thead class="">
             <tr class="">
                <th class="pdiMachineField"><strong>Machine</strong></th>
@@ -135,7 +144,7 @@
           </thead>
             <tbody>
               {{#each shippList}}
-                <tr>
+                <tr class="shippingMachine {{selected}}">
                     <td class="pdiMachineField">{{machineId}}</td>
                     <td class="pdiShipDate">{{date}}</td>
                     <td class="pdiDestination">{{destination}}</td>
@@ -148,7 +157,6 @@
               {{/each}}
             </tbody>
         </table>
-
 </template>
 
 
