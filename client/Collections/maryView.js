@@ -11,7 +11,7 @@
            const selectedTruck = this._id;
            const selectedMachineId = Session.get('selectedMachineId');
             if (selectedMachineId === selectedTruck) {
-                return "selected_2"
+                return "selected"
             }
         }
     });

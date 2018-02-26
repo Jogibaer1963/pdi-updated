@@ -8,8 +8,7 @@
               const passwordVar = event.target.loginPassword.value;
               const dateLogin = new Date();
               Session.set('loginId', userVar);
-
-            Meteor.loginWithPassword(userVar, passwordVar, function(){
+              Meteor.loginWithPassword(userVar, passwordVar, function(){
                if(Meteor.userId()){
                    Meteor.call('successfullLogin', userVar, dateLogin);
                    FlowRouter.go('/');
@@ -23,6 +22,7 @@
 
 
     Template.MainLayout.events({
+
         'click .logout': function (event) {
             event.preventDefault();
             const logoutId = Session.get('loginId');

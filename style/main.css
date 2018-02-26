@@ -200,6 +200,14 @@ table.shippingTable {
   max-width: 100px;
   min-width: 100px; }
 
+.pdiTruckOnOrder {
+  max-width: 50px;
+  min-width: 50px; }
+
+.pdiKitList {
+  max-width: 50px;
+  min-width: 50px; }
+
 .pdiComments {
   max-width: 320px;
   min-width: 320px; }
@@ -282,11 +290,12 @@ table.headerTable {
   float: left; }
 
 .comment {
-  margin-left: 200px;
+  position: absolute;
+  left: 440px;
   width: 500px; }
 
 .newMachineSubmit {
-  margin-top: 50px; }
+  margin-top: 30px; }
 
 .shippingMachinesTable {
   position: relative;
@@ -298,6 +307,31 @@ table.headerTable {
 .delete_Machine {
   float: left;
   margin-right: 25px; }
+
+.editMachine {
+  background: repeating-linear-gradient(45deg, #e6e6e6, #bc171b 10px, #e6e6e6 10px, #bc171b 20px); }
+
+.searchMachine {
+  background: repeating-linear-gradient(45deg, #e6e6e6, #bc171b 10px, #e6e6e6 10px, #bc171b 20px); }
+
+.buttonField {
+  margin-left: 25px;
+  position: absolute;
+  top: 300px; }
+
+.machineSearch {
+  margin-left: 25px;
+  position: absolute;
+  top: 150px; }
+
+.inputSearchMary {
+  background: repeating-linear-gradient(45deg, #e6e6e6, #bc171b 10px, #e6e6e6 10px, #bc171b 20px); }
+
+.addList {
+  margin-left: 25px; }
+
+.removeList {
+  margin-left: 25px; }
 
 .inProcess {
   animation: glowing 1500ms infinite;

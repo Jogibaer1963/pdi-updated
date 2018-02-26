@@ -1,9 +1,5 @@
 <template name="headerShipList">
     {{#if currentUser}}
-        {{> MainLayout_3}}
-        <div class="userBox">
-            <button class="headerShip" type="submit">Machines</button>
-        </div>
         {{> inputHead}}
         {{> headShippingList}}
         {{> headerTrailer}}
@@ -101,36 +97,39 @@
 </template>
 
 <template name="headShippingList">
-    <div class="">
         <div class="buttonPositionId3">
             <button class="buttonPositionHead" type="submit">Delete marked Machine</button>
         </div>
         <div class="buttonEdit">
             <button class="buttonPosition2Head" type="submit">Edit marked Machine</button>
         </div>
-        <div class="rTable">
-            <div class="rTableRow ">
-                <div class="rTableHead"><strong>Machine</strong></div>
-                <div class="rTableHead" ><strong>ShipDate</strong></div>
-                <div class="rTableHead"><strong>Destination</strong></div>
-                <div class="rTableHead"><strong>Transporter</strong></div>
-                <div class="rTableHead" style="width: 164px; text-align: center;"><strong>Ship with Kit</strong></div>
-                <div class="rTableHead"><strong>Shipping Comments</strong></div>
-                <div class="rTableHead"><strong>Ship Status</strong></div>
-            </div>
+        <table class="shippingTable blueTable" cellpadding="10">
+            <thead class="">
+            <tr class="">
+                <th class="pdiMachineField"><strong>Machine</strong></th>
+                <th class="pdiShipDate" ><strong>ShipDate</strong></th>
+                <th class="pdiDestination"><strong>Destination</strong></th>
+                <th class="pdiTransporter"><strong>Transporter</strong></th>
+                <th class="pdiKitField" style="width: 164px; text-align: center;"><strong>Ship with Kit</strong></th>
+                <th class="pdiComments"><strong>Shipping Comments</strong></th>
+                <th class="pdiShipField"><strong>Ship Status</strong></th>
+            </tr>
+            </thead>
+            <tbody>
             {{#each shippList}}
-                <div class="rTableRow newShippingHead {{selectedClass}}">
-                    <div class="rTableCell">{{newHeadId}}</div>
-                    <div class="rTableCell">{{date}}</div>
-                    <div class="rTableCell">{{destination}}</div>
-                    <div class="rTableCell">{{transporter}}</div>
-                    <div class="rTableCell" style="width: 90px">{{kit}}</div>
-                    <div class="rTableCellComment">{{shippingComment}}</div>
-                    <div class="rTableCell {{getStatusColor shipStatus}}" style="background-color:{{getStatusColor shipStatus}}; color:{{getStatusColor shipStatus}}">{{shipStatus}}</div>
-                </div>
+                <tr class="rTableRow newShippingHead {{selectedClass}}">
+                    <td class="pdiMachineField">{{newHeadId}}</td>
+                    <td class="pdiShipDate">{{date}}</td>
+                    <td class="pdiDestination">{{destination}}</td>
+                    <td class="pdiTransporter">{{transporter}}</td>
+                    <td class="pdiKitField" style="width: 90px">{{kit}}</td>
+                    <td class="pdiComments">{{shippingComment}}</td>
+                    <td class="pdiShipField {{getStatusColor shipStatus}}" style="background-color:{{getStatusColor shipStatus}}; color:{{getStatusColor shipStatus}}">{{shipStatus}}</td>
+                </tr>
             {{/each}}
-        </div>
-    </div>
+
+    </tbody>
+    </table>
 </template>
 
 <template name="headerTrailer">

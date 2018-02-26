@@ -19,12 +19,13 @@
 }
 
 .comment {
-  margin-left: 200px;
+  position: absolute;
+  left: 440px;
   width: 500px;
 }
 
 .newMachineSubmit {
-  margin-top: 50px ;
+  margin-top: 30px ;
 }
 
 .shippingMachinesTable {
@@ -39,4 +40,24 @@
 .delete_Machine {
   float: left;
   margin-right: 25px;
+}
+
+.editMachine {
+  background: repeating-linear-gradient(
+                  45deg,
+                  #e6e6e6,
+                  #bc171b 10px,
+                  #e6e6e6 10px,
+                  #bc171b 20px
+  );
+}
+
+.searchMachine {
+  background: repeating-linear-gradient(
+                  45deg,
+                  #e6e6e6,
+                  #bc171b 10px,
+                  #e6e6e6 10px,
+                  #bc171b 20px
+  );
 }
