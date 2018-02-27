@@ -349,6 +349,9 @@ table.headerTable {
   top: 390px;
   left: 100px; }
 
+.editHead {
+  background: repeating-linear-gradient(45deg, #e6e6e6, #bc171b 10px, #e6e6e6 10px, #bc171b 20px); }
+
 .buttonField {
   margin-left: 25px;
   position: absolute;

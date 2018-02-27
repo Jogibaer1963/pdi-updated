@@ -33,7 +33,13 @@ if (Meteor.isClient) {
             event.target.newTransporter.value="";
             document.getElementById('newKit1').checked= false;
             document.getElementById('newKit2').checked= false;
-
+            document.getElementById('newKit3').checked= false;
+            document.getElementById('newKit4').checked= false;
+            document.getElementById('newKit5').checked= false;
+            document.getElementById('newKit6').checked= false;
+            document.getElementById('newKit7').checked= false;
+            document.getElementById('newKit8').checked= false;
+            document.getElementById('newKit9').checked= false;
             event.target.newComment.value="";
         },
 
@@ -44,7 +50,7 @@ if (Meteor.isClient) {
 
         },
 
-        'click .buttonPositionId3': function() {
+        'click .deleteHeader': function() {
             event.preventDefault();
             const selectedHead = Session.get('selectedHead');
             Meteor.call('removeFromShipList', selectedHead)
