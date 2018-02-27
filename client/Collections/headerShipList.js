@@ -11,19 +11,19 @@ if (Meteor.isClient) {
     Template.inputHead.events({
         "submit .inputNewHead": function(event) {
             event.preventDefault();
-            var createUnixTime = Date.now();
-            var startDate = moment.tz(createUnixTime, "America/Chicago").format().slice(0, 19);
-            var createDate = startDate.slice(0,10);
-            var createTime = startDate.slice(-8);
-            var newHeadInput = event.target.newHead.value;
-            var newShippingDate = event.target.newDate.value;
-            var newShippingDestination = event.target.newDestination.value;
-            var newShippingTransporter = event.target.newTransporter.value;
-            var newShippingKit= [];
+            const createUnixTime = Date.now();
+            const startDate = moment.tz(createUnixTime, "America/Chicago").format().slice(0, 19);
+            const createDate = startDate.slice(0,10);
+            const createTime = startDate.slice(-8);
+            const newHeadInput = event.target.newHead.value;
+            const newShippingDate = event.target.newDate.value;
+            const newShippingDestination = event.target.newDestination.value;
+            const newShippingTransporter = event.target.newTransporter.value;
+            const newShippingKit= [];
             $('input[name=newKit]:checked').each(function() {
                 newShippingKit.push($(this).val());
             });
-            var newShippingComment = event.target.newComment.value;
+            const newShippingComment = event.target.newComment.value;
             Meteor.call('addHeadToShipList', newHeadInput, newShippingDate,
                 createUnixTime, createDate, createTime, newShippingDestination,
                 newShippingTransporter, newShippingKit, newShippingComment );
@@ -40,7 +40,7 @@ if (Meteor.isClient) {
 
     Template.inputMachine.helpers({
         editMachine: function() {
-            var selectedHead = Session.get('selectedHead');
+            const selectedHead = Session.get('selectedHead');
             return MachineReady.findOne({_id: selectedHead});
 
         }
@@ -54,9 +54,9 @@ if (Meteor.isClient) {
         },
 
         'selectedClass': function() {
-            var shippingHead = this._id;
-            var selectedHead = Session.get('selectedHead');
-            if (shippingHead == selectedHead) {
+            const shippingHead = this._id;
+            const selectedHead = Session.get('selectedHead');
+            if (shippingHead === selectedHead) {
                 return "selected"
             }
         }
@@ -67,21 +67,21 @@ if (Meteor.isClient) {
     Template.headShippingList.events({
         'click .newShippingHead': function() {
             event.preventDefault();
-            var shippingHead = this._id;
+            const shippingHead = this._id;
             Session.set('selectedHead', shippingHead );
 
         },
 
         'click .buttonPositionId3': function() {
             event.preventDefault();
-            var selectedHead = Session.get('selectedHead');
+            const selectedHead = Session.get('selectedHead');
             Meteor.call('removeFromShipList', selectedHead)
         },
 
         'click .buttonEdit': function() {
-            var selectedHead = Session.get('selectedHead');
+            const selectedHead = Session.get('selectedHead');
             Session.set('editSelectedHead', selectedHead);
-            if(typeof selectedHead == 'string' ) {
+            if(typeof selectedHead === 'string' ) {
                 FlowRouter.go('editHead');
             }
         }
@@ -96,9 +96,22 @@ if (Meteor.isClient) {
             },
 
         'selectedClass': function() {
-            var shippingHead = this._id;
-            var selectedHead = Session.get('selectedHead');
-            if (shippingHead == selectedHead) {
+            const shippingHead = this._id;
+            const selectedHead = Session.get('selectedHead');
+            if (shippingHead === selectedHead) {
+                return "selected"
+            }
+        },
+
+        trailerGone: function() {
+            event.preventDefault();
+            return headerTrailer.find({status: '0'});
+        },
+
+        'selectedClass2': function() {
+            const shippingHead = this._id;
+            const selectedHead = Session.get('selectedHead');
+            if (shippingHead === selectedHead) {
                 return "selected"
             }
         }
@@ -109,8 +122,8 @@ if (Meteor.isClient) {
 
        'submit .newTrailerInput': function() {
            event.preventDefault();
-           var headTransporter = event.target.newTransporter.value;
-           var trailerId = event.target.trailerId.value;
+           const headTransporter = event.target.newTransporter.value;
+           const trailerId = event.target.trailerId.value;
            Meteor.call('insertHeadTrailer', headTransporter, trailerId);
            event.target.newTransporter.value = '';
            event.target.trailerId.value = '';
@@ -118,35 +131,14 @@ if (Meteor.isClient) {
 
         'click .trailerTable': function() {
             event.preventDefault();
-            var shippingHead = this._id;
+            const shippingHead = this._id;
             Session.set('selectedHead', shippingHead );
 
-        }
-
-    });
-
-    Template.trailerAtWork.helpers({
-
-        trailerGone: function() {
-            event.preventDefault();
-            return headerTrailer.find({status: '0'});
         },
-
-        'selectedClass': function() {
-            var shippingHead = this._id;
-            var selectedHead = Session.get('selectedHead');
-            if (shippingHead == selectedHead) {
-                return "selected"
-            }
-        }
-
-    });
-
-    Template.trailerAtWork.events({
 
         'click .moveTrailer': function() {
             event.preventDefault();
-            var shippingHead = this._id;
+            const shippingHead = this._id;
             Session.set('selectedHead', shippingHead );
 
         },
@@ -154,9 +146,9 @@ if (Meteor.isClient) {
 
         'click .trailerMove': function() {
             event.preventDefault();
-            var trailerId = Session.get('selectedHead');
-            var status = headerTrailer.findOne({_id: trailerId}).status;
-            if(status == '1') {
+            const trailerId = Session.get('selectedHead');
+            const status = headerTrailer.findOne({_id: trailerId}).status;
+            if(status === '1') {
                 newStatus = '0'
             } else {
                 newStatus = '1'
@@ -167,10 +159,12 @@ if (Meteor.isClient) {
 
         'click .trailerDelete': function() {
             event.preventDefault();
-            var trailerId = Session.get('selectedHead');
+            const trailerId = Session.get('selectedHead');
             Meteor.call('deleteTrailer', trailerId);
         }
 
     });
+
+
 
 }

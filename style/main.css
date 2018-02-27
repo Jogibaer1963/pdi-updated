@@ -314,6 +314,12 @@ table.headerTable {
 .searchMachine {
   background: repeating-linear-gradient(45deg, #e6e6e6, #bc171b 10px, #e6e6e6 10px, #bc171b 20px); }
 
+.firstKit {
+  margin-top: 25px; }
+
+.secondKit {
+  margin-top: 25px; }
+
 .buttonField {
   margin-left: 25px;
   position: absolute;
