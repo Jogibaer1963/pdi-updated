@@ -1,8 +1,8 @@
 <template name="headerShipList">
     {{#if currentUser}}
         {{> inputHead}}
+
     <!--
-        {{> headShippingList}}
         {{> headerTrailer}}
         -->
     {{else}}
@@ -54,13 +54,13 @@
                     <li>
                         <div class="kitGroup007">
                             <label for="newKit3">
-                                <input type="checkbox" value=" 007_0300" id="newKit3" name="newKit" class="newKit3"  {{newKit3}}>007 0300</label>
+                                <input type="checkbox" value=" 007_0300" id="newKit3" name="newKit" class="newKit3"  {{newKit3}}>007 0300 / 0358 347.0 Laser Pilot LH</label>
                         </div>
                     </li>
                     <li>
                         <div class="kitGroup007">
                             <label for="newKit4">
-                                <input type="checkbox" value=" 007_0302" id="newKit2" name="newKit" class="newKit2"  {{newKit4}}>007 0302</label>
+                                <input type="checkbox" value=" 007_0302" id="newKit2" name="newKit" class="newKit2"  {{newKit4}}>007 0302 / 0358 354.0 Laser Pilot RH</label>
                         </div>
                     </li>
                 </ul>
@@ -85,30 +85,38 @@
                                 <input type="checkbox" value=" 003_0302" id="newKit2" name="newKit" class="newKit2"  {{newKit7}}>003 0302</label>
                         </div>
                     </li>
+                    <li>
+                        <div class="kitGroup003">
+                            <label for="newKit8">
+                                <input type="checkbox" value=" 003_0220" id="newKit2" name="newKit" class="newKit2"  {{newKit8}}>003 0220 / 0523 803.0 Canola Kit 35ft RH 10.5m</label>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="kitGroup003">
+                            <label for="newKit9">
+                                <input type="checkbox" value=" 003_0312" id="newKit2" name="newKit" class="newKit2"  {{newKit9}}>003 0220 / 0398 735.0 Canola Kit 40ft LH 12.3m</label>
+                        </div>
+                    </li>
                 </ul>
             </div>
-            <br><br><br><br><br><br>
-            <div class="comment">
+            <div class="headerComment">
                 <label for="newComment" class="inputComment">Comments</label>
                 <br>
-                <input type="text" class="inputComment" id="newComment" name="newComment" placeholder="Comments">
+                <input type="text" class="headerInputComment" id="newComment" name="newComment" placeholder="Comments">
             </div>
             <br>
-            <div class="newMachineSubmit">
-                <button class="loginSubmit" type="submit">Submit</button>
+            <div class="headerSubmit">
+                <button class="btn btn-default btn-success" type="submit">Submit</button>
             </div>
         </form>
     </div>
-</template>
-
-<template name="headShippingList">
-        <div class="buttonPositionId3">
-            <button class="buttonPositionHead" type="submit">Delete marked Machine</button>
+        <div class="buttonDelete">
+            <button class="btn btn-default btn-danger" type="submit">Delete marked Machine</button>
         </div>
         <div class="buttonEdit">
-            <button class="buttonPosition2Head" type="submit">Edit marked Machine</button>
+            <button class="btn btn-default btn-info" type="submit">Edit marked Machine</button>
         </div>
-        <table class="shippingTable blueTable" cellpadding="10">
+        <table class="shippingTable blueTable headerTable" cellpadding="10">
             <thead class="">
             <tr class="">
                 <th class="pdiMachineField"><strong>Machine</strong></th>
@@ -121,20 +129,19 @@
             </tr>
             </thead>
             <tbody>
-            {{#each shippList}}
-                <tr class="rTableRow newShippingHead {{selectedClass}}">
-                    <td class="pdiMachineField">{{newHeadId}}</td>
-                    <td class="pdiShipDate">{{date}}</td>
-                    <td class="pdiDestination">{{destination}}</td>
-                    <td class="pdiTransporter">{{transporter}}</td>
-                    <td class="pdiKitField" style="width: 90px">{{kit}}</td>
-                    <td class="pdiComments">{{shippingComment}}</td>
-                    <td class="pdiShipField {{getStatusColor shipStatus}}" style="background-color:{{getStatusColor shipStatus}}; color:{{getStatusColor shipStatus}}">{{shipStatus}}</td>
-                </tr>
-            {{/each}}
-
-    </tbody>
-    </table>
+               {{#each shippList}}
+                  <tr class="rTableRow newShippingHead {{selectedClass}}">
+                     <td class="pdiMachineField">{{newHeadId}}</td>
+                     <td class="pdiShipDate">{{date}}</td>
+                     <td class="pdiDestination">{{destination}}</td>
+                     <td class="pdiTransporter">{{transporter}}</td>
+                     <td class="pdiKitField" style="width: 90px">{{kit}}</td>
+                     <td class="pdiComments">{{shippingComment}}</td>
+                     <td class="pdiShipField {{getStatusColor shipStatus}}" style="background-color:{{getStatusColor shipStatus}}; color:{{getStatusColor shipStatus}}">{{shipStatus}}</td>
+                  </tr>
+               {{/each}}
+           </tbody>
+        </table>
 </template>
 
 <template name="headerTrailer">

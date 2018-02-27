@@ -233,8 +233,8 @@ table.shippingTable {
   min-width: 50px; }
 
 .pdiShipField {
-  max-width: 50px;
-  min-width: 50px; }
+  max-width: 60px;
+  min-width: 60px; }
 
 .pdiLocation {
   max-width: 70px;
@@ -319,6 +319,35 @@ table.headerTable {
 
 .secondKit {
   margin-top: 25px; }
+
+.headerComment {
+  position: absolute;
+  top: 210px;
+  left: 10px; }
+
+.headerInputComment {
+  position: absolute;
+  width: 500px; }
+
+.headerSubmit {
+  position: absolute;
+  top: 235px;
+  left: 610px;
+  width: 80px; }
+
+.headerTable {
+  margin-top: 50px;
+  margin-left: 30px; }
+
+.buttonDelete {
+  position: absolute;
+  top: 390px;
+  left: 270px; }
+
+.buttonEdit {
+  position: absolute;
+  top: 390px;
+  left: 100px; }
 
 .buttonField {
   margin-left: 25px;

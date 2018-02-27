@@ -35,36 +35,8 @@ if (Meteor.isClient) {
             document.getElementById('newKit2').checked= false;
 
             event.target.newComment.value="";
-        }
-    });
-
-    Template.inputMachine.helpers({
-        editMachine: function() {
-            const selectedHead = Session.get('selectedHead');
-            return MachineReady.findOne({_id: selectedHead});
-
-        }
-
-    });
-
-    Template.headShippingList.helpers({
-        shippList: function () {
-            // Order of shipping date
-            return MachineReady.find({newHeadId: {$gt: '00'}}, {sort: {date: -1}});
         },
 
-        'selectedClass': function() {
-            const shippingHead = this._id;
-            const selectedHead = Session.get('selectedHead');
-            if (shippingHead === selectedHead) {
-                return "selected"
-            }
-        }
-
-    });
-
-
-    Template.headShippingList.events({
         'click .newShippingHead': function() {
             event.preventDefault();
             const shippingHead = this._id;
@@ -85,8 +57,31 @@ if (Meteor.isClient) {
                 FlowRouter.go('editHead');
             }
         }
+    });
+
+    Template.inputHead.helpers({
+        editMachine: function() {
+            const selectedHead = Session.get('selectedHead');
+            return MachineReady.findOne({_id: selectedHead});
+
+        },
+
+        shippList: function () {
+            // Order of shipping date
+            return MachineReady.find({newHeadId: {$gt: '00'}}, {sort: {date: -1}});
+        },
+
+        'selectedClass': function() {
+            const shippingHead = this._id;
+            const selectedHead = Session.get('selectedHead');
+            if (shippingHead === selectedHead) {
+                return "selected"
+            }
+        }
 
     });
+
+
 
     Template.headerTrailer.helpers({
 
