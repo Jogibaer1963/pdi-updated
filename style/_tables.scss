@@ -232,3 +232,26 @@ table.headerTable {
   left: 450px;
   top: 300px;
 }
+
+table.trailerTable {
+  position: absolute;
+  width: 175px;
+  top: 420px;
+}
+
+.trailerTableOnTheMove {
+  position: relative;
+  left: 250px;
+}
+
+.trailerHome {
+  position: absolute;
+  top: 350px;
+  left: 50px;
+}
+
+.trailerOnDuty {
+  position: absolute;
+  top: 350px;
+  left: 300px;
+}

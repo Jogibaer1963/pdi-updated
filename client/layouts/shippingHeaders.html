@@ -145,13 +145,8 @@
 </template>
 
 <template name="headerTrailer">
-    <div class="headerTrailerLot">
-    <h2>Trailer on Lot</h2>
-    </div>
-    <div class="headerTrailerMove">
-        <h2>Trailer on the Move</h2>
-    </div>
- <div class="headTrailerList">
+    <div class="trailerSection">
+ <div class="">
     <form class="newTrailerInput">
     <div class="">
         <label for="newTransporter" class=""></label>
@@ -165,7 +160,10 @@
         <button class="trailerSubmit" type="submit">Enter Trailer Id</button>
     </div>
     </form>
-     <table class="shippingTable blueTable" cellpadding="10">
+     <div class="trailerHome">
+         <h2>On Lot</h2>
+     </div>
+     <table class="trailerTable blueTable" cellpadding="10">
          <thead class="">
            <tr class="">
               <th class=""><strong>Transporter</strong></th>
@@ -187,7 +185,10 @@
     <div class="">
         <button class="trailerMove" type="submit">Move me</button>
     </div>
-     <table class="shippingTable blueTable" cellpadding="10">
+     <div class="trailerOnDuty">
+         <h2>In Duty</h2>
+     </div>
+     <table class="trailerTable trailerTableOnTheMove blueTable" cellpadding="10">
          <thead class="">
          <tr class="">
             <th class="rTableHead"><strong>Transporter</strong></th>
@@ -196,13 +197,14 @@
          </thead>
          <tbody>
         {{#each trailerGone}}
-            <div class="rTableRow moveTrailer {{selectedClass2}}">
-                <div class="rTableTrailer">{{headTransporter}}</div>
-                <div class="rTableTrailer">{{newTrailer}}</div>
-            </div>
+            <tr class="rTableRow moveTrailer {{selectedClass2}}">
+                <td class="rTableTrailer">{{headTransporter}}</td>
+                <td class="rTableTrailer">{{newTrailer}}</td>
+            </tr>
         {{/each}}
          </tbody>
     </table>
  </div>
+    </div>
 </template>
 

@@ -264,6 +264,25 @@ table.headerTable {
   left: 450px;
   top: 300px; }
 
+table.trailerTable {
+  position: absolute;
+  width: 175px;
+  top: 420px; }
+
+.trailerTableOnTheMove {
+  position: relative;
+  left: 250px; }
+
+.trailerHome {
+  position: absolute;
+  top: 350px;
+  left: 50px; }
+
+.trailerOnDuty {
+  position: absolute;
+  top: 350px;
+  left: 300px; }
+
 .overView {
   position: relative;
   top: 80px;
@@ -351,6 +370,11 @@ table.headerTable {
 
 .editHead {
   background: repeating-linear-gradient(45deg, #e6e6e6, #bc171b 10px, #e6e6e6 10px, #bc171b 20px); }
+
+.trailerSection {
+  position: relative;
+  top: 2.2em;
+  left: 70em; }
 
 .buttonField {
   margin-left: 25px;
