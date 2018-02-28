@@ -41,13 +41,13 @@
                     <li>
                         <div class="kitGroup003">
                             <label for="newKit8">
-                                <input type="checkbox" value=" 003 0220 / 0523 803.0 Canola Kit 35ft RH 10.5m" id="newKit8" name="newKit" class="newKit2"  {{newKit8}}>003 0220 / 0523 803.0 Canola Kit 35ft RH 10.5m</label>
+                                <input type="checkbox" value=" 003 0220 / 0523 803.0 Canola Kit 35ft RH" id="newKit8" name="newKit" class="newKit2"  {{newKit8}}>003 0220 / 0523 803.0 Canola Kit 35ft RH 10.5m</label>
                         </div>
                     </li>
                     <li>
                         <div class="kitGroup003">
                             <label for="newKit9">
-                                <input type="checkbox" value=" 003 0312 / 0398 735.0 Canola Kit 40ft LH 12.3m" id="newKit9" name="newKit" class="newKit2"  {{newKit9}}>003 0220 / 0398 735.0 Canola Kit 40ft LH 12.3m</label>
+                                <input type="checkbox" value=" 003 0312 / 0398 735.0 Canola Kit 40ft LH" id="newKit9" name="newKit" class="newKit2"  {{newKit9}}>003 0220 / 0398 735.0 Canola Kit 40ft LH 12.3m</label>
                         </div>
                     </li>
                     <li>
@@ -123,7 +123,7 @@
                 <th class="pdiShipDate" ><strong>ShipDate</strong></th>
                 <th class="pdiDestination"><strong>Destination</strong></th>
                 <th class="pdiTransporter"><strong>Transporter</strong></th>
-                <th class="pdiKitField" style="width: 164px; text-align: center;"><strong>Ship with Kit</strong></th>
+                <th class="headerKit" style="width: 164px; text-align: center;"><strong>Ship with Kit</strong></th>
                 <th class="pdiComments"><strong>Shipping Comments</strong></th>
                 <th class="pdiShipField"><strong>Ship Status</strong></th>
             </tr>
@@ -135,7 +135,7 @@
                      <td class="pdiShipDate">{{date}}</td>
                      <td class="pdiDestination">{{destination}}</td>
                      <td class="pdiTransporter">{{transporter}}</td>
-                     <td class="pdiKitField">{{kit}}</td>
+                     <td class="headerKit">{{kit}}</td>
                      <td class="pdiComments">{{shippingComment}}</td>
                      <td class="pdiShipField {{getStatusColor shipStatus}}" style="background-color:{{getStatusColor shipStatus}}; color:{{getStatusColor shipStatus}}">{{shipStatus}}</td>
                   </tr>
@@ -145,8 +145,7 @@
 </template>
 
 <template name="headerTrailer">
-    <div class="trailerSection">
- <div class="">
+ <div class="trailerSection">
     <form class="newTrailerInput">
     <div class="">
         <label for="newTransporter" class=""></label>
@@ -160,51 +159,50 @@
         <button class="trailerSubmit" type="submit">Enter Trailer Id</button>
     </div>
     </form>
+     <div class="">
+         <button class="trailerDelete" type="submit">Delete Trailer</button>
+     </div>
+     <div class="moveButton">
+         <button class="trailerMove" type="submit">Move Trailer</button>
+     </div>
      <div class="trailerHome">
          <h2>On Lot</h2>
      </div>
      <table class="trailerTable blueTable" cellpadding="10">
          <thead class="">
            <tr class="">
-              <th class=""><strong>Transporter</strong></th>
-              <th class="" ><strong>Trailer ID</strong></th>
+              <th class="pdiTransporter"><strong>Transporter</strong></th>
+              <th class="pdiTrailer" ><strong>Trailer ID</strong></th>
            </tr>
          </thead>
          <tbody>
           {{#each availiableTrailer}}
             <tr class="rTableRow trailerTable {{selectedClass}}">
-                <td class="rTableTrailer">{{headTransporter}}</td>
-                <td class="rTableTrailer">{{newTrailer}}</td>
+                <td class="pdiTransporter">{{headTransporter}}</td>
+                <td class="pdiTrailer">{{newTrailer}}</td>
             </tr>
         {{/each}}
          </tbody>
      </table>
-    <div class="">
-        <button class="trailerDelete" type="submit">Delete Trailer</button>
-    </div>
-    <div class="">
-        <button class="trailerMove" type="submit">Move me</button>
-    </div>
      <div class="trailerOnDuty">
          <h2>In Duty</h2>
      </div>
      <table class="trailerTable trailerTableOnTheMove blueTable" cellpadding="10">
          <thead class="">
          <tr class="">
-            <th class="rTableHead"><strong>Transporter</strong></th>
-            <th class="rTableHead" ><strong>Trailer ID</strong></th>
+            <th class="pdiTransporter"><strong>Transporter</strong></th>
+            <th class="pdiTrailer" ><strong>Trailer ID</strong></th>
         </tr>
          </thead>
          <tbody>
         {{#each trailerGone}}
             <tr class="rTableRow moveTrailer {{selectedClass2}}">
-                <td class="rTableTrailer">{{headTransporter}}</td>
-                <td class="rTableTrailer">{{newTrailer}}</td>
+                <td class="pdiTransporter">{{headTransporter}}</td>
+                <td class="pdiTrailer">{{newTrailer}}</td>
             </tr>
         {{/each}}
          </tbody>
     </table>
  </div>
-    </div>
 </template>
 

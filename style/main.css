@@ -244,6 +244,14 @@ table.shippingTable {
   max-width: 60px;
   min-width: 60px; }
 
+.pdiTrailer {
+  max-width: 80px;
+  min-width: 80px; }
+
+.headerKit {
+  max-width: 300px;
+  min-width: 300px; }
+
 table.headerTable {
   width: 230px; }
 
@@ -266,22 +274,12 @@ table.headerTable {
 
 table.trailerTable {
   position: absolute;
-  width: 175px;
+  width: 180px;
   top: 420px; }
 
 .trailerTableOnTheMove {
   position: relative;
   left: 250px; }
-
-.trailerHome {
-  position: absolute;
-  top: 350px;
-  left: 50px; }
-
-.trailerOnDuty {
-  position: absolute;
-  top: 350px;
-  left: 300px; }
 
 .overView {
   position: relative;
@@ -375,6 +373,21 @@ table.trailerTable {
   position: relative;
   top: 2.2em;
   left: 70em; }
+
+.trailerHome {
+  position: absolute;
+  top: 350px;
+  left: 50px; }
+
+.trailerOnDuty {
+  position: absolute;
+  top: 350px;
+  left: 300px; }
+
+.moveButton {
+  position: absolute;
+  top: 340px;
+  left: 185px; }
 
 .buttonField {
   margin-left: 25px;

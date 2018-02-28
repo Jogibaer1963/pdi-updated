@@ -87,6 +87,7 @@ $pdiKitList: 50px;
 
 $pdiComments: 320px;
 $pdiKitField: 180px;
+$headerKit: 300px;
 $pdiPDIField: 50px;
 $pdiRepField: 50px;
 $pdiWashField: 50px;
@@ -100,6 +101,8 @@ $overViewTable: 415px;
 $headerTable: 230px;
 $headerId: 80px;
 $headerStatus: 80px;
+
+$pdiTrailer: 80px;
 
 
 .shippingMachines {
@@ -208,6 +211,16 @@ table.shippingTable {
   min-width: $config;
 }
 
+.pdiTrailer {
+  max-width: $pdiTrailer;
+  min-width: $pdiTrailer;
+}
+
+.headerKit {
+  max-width: $headerKit;
+  min-width: $headerKit;
+}
+
 table.headerTable {
   width: $headerTable;
 }
@@ -235,7 +248,7 @@ table.headerTable {
 
 table.trailerTable {
   position: absolute;
-  width: 175px;
+  width: 180px;
   top: 420px;
 }
 
@@ -244,14 +257,3 @@ table.trailerTable {
   left: 250px;
 }
 
-.trailerHome {
-  position: absolute;
-  top: 350px;
-  left: 50px;
-}
-
-.trailerOnDuty {
-  position: absolute;
-  top: 350px;
-  left: 300px;
-}
