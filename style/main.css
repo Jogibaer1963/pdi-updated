@@ -1,6 +1,9 @@
 #logo {
   margin: 25px; }
 
+.loginImage {
+  margin-top: 100px; }
+
 .userName {
   position: absolute;
   top: 150px;
@@ -209,8 +212,8 @@ table.shippingTable {
   min-width: 50px; }
 
 .pdiComments {
-  max-width: 320px;
-  min-width: 320px; }
+  max-width: 310px;
+  min-width: 310px; }
 
 .pdiKitField {
   max-width: 180px;
@@ -249,8 +252,8 @@ table.shippingTable {
   min-width: 80px; }
 
 .headerKit {
-  max-width: 300px;
-  min-width: 300px; }
+  max-width: 320px;
+  min-width: 320px; }
 
 table.headerTable {
   width: 230px; }
@@ -290,6 +293,11 @@ table.trailerTable {
   position: relative;
   top: 80px;
   margin-left: 25px; }
+
+.headerTablePosition {
+  position: absolute;
+  left: 450px;
+  top: 250px; }
 
 .newMachineShipping {
   position: absolute;
@@ -388,6 +396,9 @@ table.trailerTable {
   position: absolute;
   top: 340px;
   left: 185px; }
+
+.headerKit {
+  white-space: pre-wrap; }
 
 .buttonField {
   margin-left: 25px;
