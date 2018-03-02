@@ -7,7 +7,7 @@ if (Meteor.isClient) {
 
        machineOverView: function() {
           return MachineReady.find({machineId: {$gt: 'C00000'}, $or: [{shipStatus: 0},
-               {shipStatus: 2}]}, {sort: {date: 1}});
+               {shipStatus: 2}]}, {sort: {date: 1}, limit: 20});
 
         },
 

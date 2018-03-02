@@ -51,6 +51,18 @@
                         </div>
                     </li>
                     <li>
+                        <div class="kitGroup003">
+                            <label for="newKit9">
+                                <input type="checkbox" value=" 540_003_0220 | PartNr. 0398 534.0 Knife Kit LH" id="newKit10" name="newKit" class="newKit2"  {{newKit10}}>540_003_0220 | PartNr. 0398 534.0 Knife Kit LH</label>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="kitGroup003">
+                            <label for="newKit3">
+                                <input type="checkbox" value=" 540_003_230 | PartNr. 0398 535.0 Knife Kit RH " id="newKit11" name="newKit" class="newKit2"  {{newKit11}}>540_003_0230 | PartNr. 0398 535.0 Knife Kit RH</label>
+                        </div>
+                    </li>
+                    <li>
                         <div class="kitGroup007">
                             <label for="newKit3">
                                 <input type="checkbox" value=" SW_007_0300 | PartNr. 0358 347.0 Laser Pilot LH " id="newKit3" name="newKit" class="newKit3"  {{newKit3}}>007 0300 | 0358 347.0 Laser Pilot LH</label>
@@ -147,21 +159,21 @@
 <template name="headerTrailer">
  <div class="trailerSection">
     <form class="newTrailerInput">
-    <div class="">
-        <label for="newTransporter" class=""></label>
-        <input type="text" class="inputTransporterId" id="newTransporter" name="newTransporter" placeholder="Transporter">
-    </div>
-    <div class="">
-        <label for="trailerId" class=""></label>
-        <input type="text" class="inputTrailerId" id="trailerId" name="trailerId" placeholder="Trailer Id">
-    </div>
-    <div class="trailerButton">
-        <button class="trailerSubmit" type="submit">Enter Trailer Id</button>
-    </div>
+       <div class="">
+         <label for="newTransporter" class=""></label>
+         <input type="text" class="inputTransporterId newTrailer" id="newTransporter" name="newTransporter" placeholder="Transporter">
+       </div>
+       <div class="">
+         <label for="trailerId" class=""></label>
+         <input type="text" class="inputTrailerId newTrailer" id="trailerId" name="trailerId" placeholder="Trailer Id">
+       </div>
+       <div class="trailerButton">
+         <button class="trailerSubmit newTrailer" type="submit">Add new Trailer</button>
+       </div>
     </form>
-     <div class="">
+       <div class="deleteTrailer">
          <button class="trailerDelete" type="submit">Delete Trailer</button>
-     </div>
+       </div>
      <div class="moveButton">
          <button class="trailerMove" type="submit">Move Trailer</button>
      </div>
@@ -177,7 +189,7 @@
          </thead>
          <tbody>
           {{#each availiableTrailer}}
-            <tr class="rTableRow trailerTable {{selectedClass}}">
+            <tr class="trailerOnLotTable {{selectedClass}}">
                 <td class="pdiTransporter">{{headTransporter}}</td>
                 <td class="pdiTrailer">{{newTrailer}}</td>
             </tr>
@@ -196,7 +208,7 @@
          </thead>
          <tbody>
         {{#each trailerGone}}
-            <tr class="rTableRow moveTrailer {{selectedClass2}}">
+            <tr class="moveTrailer {{selectedClass2}}">
                 <td class="pdiTransporter">{{headTransporter}}</td>
                 <td class="pdiTrailer">{{newTrailer}}</td>
             </tr>

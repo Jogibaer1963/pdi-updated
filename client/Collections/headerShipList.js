@@ -97,9 +97,9 @@ if (Meteor.isClient) {
             },
 
         'selectedClass': function() {
-            const shippingHead = this._id;
-            const selectedHead = Session.get('selectedHead');
-            if (shippingHead === selectedHead) {
+            const trailer = this._id;
+            const selectedTrailer = Session.get('selectedTrailer');
+            if (selectedTrailer === trailer) {
                 return "selected"
             }
         },
@@ -110,9 +110,9 @@ if (Meteor.isClient) {
         },
 
         'selectedClass2': function() {
-            const shippingHead = this._id;
-            const selectedHead = Session.get('selectedHead');
-            if (shippingHead === selectedHead) {
+            const shippingTrailer = this._id;
+            const selectedTrailer = Session.get('selectedTrailer');
+            if (shippingTrailer === selectedTrailer) {
                 return "selected"
             }
         }
@@ -130,24 +130,23 @@ if (Meteor.isClient) {
            event.target.trailerId.value = '';
            },
 
-        'click .trailerTable': function() {
+        'click .trailerOnLotTable': function() {
             event.preventDefault();
-            const shippingHead = this._id;
-            Session.set('selectedHead', shippingHead );
+            const selectedTrailer = this._id;
+            Session.set('selectedTrailer', selectedTrailer );
 
         },
 
         'click .moveTrailer': function() {
             event.preventDefault();
-            const shippingHead = this._id;
-            Session.set('selectedHead', shippingHead );
+            const shippingTrailer = this._id;
+            Session.set('selectedTrailer', shippingTrailer);
 
         },
 
-
         'click .trailerMove': function() {
             event.preventDefault();
-            const trailerId = Session.get('selectedHead');
+            const trailerId = Session.get('selectedTrailer');
             const status = headerTrailer.findOne({_id: trailerId}).status;
             if(status === '1') {
                 newStatus = '0'
@@ -155,12 +154,12 @@ if (Meteor.isClient) {
                 newStatus = '1'
             }
             Meteor.call('updateHeadTrailer', trailerId, newStatus);
-            Session.set('selectedHead', '');
+            Session.set('selectedTrailer', '');
         },
 
         'click .trailerDelete': function() {
             event.preventDefault();
-            const trailerId = Session.get('selectedHead');
+            const trailerId = Session.get('selectedTrailer');
             Meteor.call('deleteTrailer', trailerId);
         }
 

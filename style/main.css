@@ -377,10 +377,22 @@ table.trailerTable {
 .editHead {
   background: repeating-linear-gradient(45deg, #e6e6e6, #bc171b 10px, #e6e6e6 10px, #bc171b 20px); }
 
+.newTrailerInput {
+  position: absolute;
+  top: 220px; }
+
+.deleteTrailer {
+  position: absolute;
+  top: 300px;
+  left: 185px; }
+
+.newTrailer {
+  margin-top: 10px; }
+
 .trailerSection {
   position: relative;
   top: 2.2em;
-  left: 70em; }
+  left: 80em; }
 
 .trailerHome {
   position: absolute;
