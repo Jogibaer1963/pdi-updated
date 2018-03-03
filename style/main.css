@@ -524,6 +524,10 @@ td {
   position: absolute;
   top: 25px; }
 
+.washBayLinks {
+  position: relative;
+  left: 40em; }
+
 table.washTable {
   width: 393px; }
 

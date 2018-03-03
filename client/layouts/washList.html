@@ -1,5 +1,8 @@
 <template name="washList">
     {{#if currentUser}}
+         <div class="washBayLinks">
+         {{> washLayout}}
+         </div>
          {{> overViewWashList}}
       {{else}}
           {{> login}}
@@ -68,7 +71,7 @@
           <tr>
             <th class="pdiMachineField"><strong>Machine</strong></th>
             <th class="pdiComments"><strong>{{activeHeader}}</strong></th>
-            <th class="pdiUser"><strong>Cleared from</strong></th>
+            <th class="pdiUser"><strong>Cleared by</strong></th>
               <th class="pdiShipDate"><strong>Cleared at</strong></th>
           </tr>
         </thead>
