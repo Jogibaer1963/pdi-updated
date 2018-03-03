@@ -1,0 +1,16 @@
+{
+  "public": {
+    "persistent_session": {
+      "default_method": "persistent"
+    }
+  },
+
+  "galaxy.meteor.com": {
+    "env": {
+      "MONGO_URL": "mongodb://jogibaer:s8umftog@candidate.36.mongolayer.com:10976,candidate.37.mongolayer.com:10986/sandbox?replicaSet=set-563d1d6efb36a6be4e0002c8",
+      "MONGO_OPLOG_URL": "mongodb://jogibaer:s8umftog@candidate.36.mongolayer.com:10976,candidate.37.mongolayer.com:10986/local?authSource=sandbox&replicaSet=set-563d1d6efb36a6be4e0002c8"
+    },
+    "appId": "4y2fyJq4jZCpWEbLr",
+    "appSecret": "cda7c337-4610-4a63-8bc5-512d8471c95b"
+  }
+}
