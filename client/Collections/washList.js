@@ -1,6 +1,7 @@
 if (Meteor.isClient) {
 
     Template.overViewWashList.helpers({
+
         overView: function() {
             return MachineReady.find({$and:[{machineId: {$gt: 'C000000'}},
                 {$or: [{washStatus: 0},{washStatus: 2}]},
@@ -36,10 +37,57 @@ if (Meteor.isClient) {
                         return 'inActiveButton';
                        } else {}
             } else { return 'inActiveButton'}
+        },
+
+
+        washMessage: function () {
+            event.preventDefault();
+            Session.set('selectedCheckPoint', '');
+            let toggle = Session.get("toggleActiveInactive");
+            if(toggle === 0) {
+                Session.set("activeHeader", 1);
+                return washBayText.find({active: 1});
+            } else {
+                Session.set("activeHeader", 0);
+                 return washBayText.find({active: 0});
+            }
+        },
+
+        // switch table header from active to inactive and return
+        activeHeader: ()=> {
+            let header = Session.get("activeHeader");
+            if (header === 1) {
+                return ("Active messages")
+            } else {
+                return  "Cleared messages";
+            }
+        },
+
+
+        'selectedClass2': function() {
+            const message = this._id;
+            const selectedMessage = Session.get('selectedMessage');
+            if (selectedMessage === message) {
+                return "selected_2"
+            }
         }
+
     });
 
     Template.overViewWashList.events({
+
+        // switch active and inactive checklists
+        // initial value = 0 => Active Checklist
+        'click .switchWashHistory': () => {
+            event.preventDefault();
+            let toggle = Session.get("toggleActiveInactive");
+            if(toggle === 0) {
+                Session.set("toggleActiveInactive", 1);
+            } else {
+                Session.set("toggleActiveInactive", 0);
+            }
+        },
+
         'click .readyWash': function () {
             const checkPoint = this._id;
             Session.set('selectedMachineId', checkPoint);
@@ -94,39 +142,19 @@ if (Meteor.isClient) {
             Meteor.call('messageToWashBay_2', messageId, machineId);
             event.target.messageId.value="";
             event.target.machineId.value="";
-        }
-    });
-
-
-    Template.messageTemplate.helpers({
-        washMessage: function() {
-            return washBayText.find({active: 1});
-
         },
 
-        'selectedClass': function() {
-            const message = this._id;
-            const selectedMessage = Session.get('selectedMessage');
-            if (selectedMessage === message) {
-                return "selected_2"
-            }
-        }
-        
-    });
-        
-    Template.messageTemplate.events({
         'click .textMessage': function () {
             const message = this._id;
             Session.set('selectedMessage', message);
         },
-        
+
         'click .messageButton': function() {
             event.preventDefault();
             userWashBay = Meteor.userId();
             const removeId = Session.get('selectedMessage');
             Meteor.call('removeText', removeId, userWashBay);
         }
-        
     });
 
     

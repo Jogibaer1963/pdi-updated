@@ -20,6 +20,7 @@ table.blueTable {
     width: 1195px;
 }
 
+
   table.blueTable {
     border: 1px solid #a49892;
     background-color: #EEEEEE;
@@ -103,6 +104,7 @@ $headerStatus: 80px;
 
 $pdiTrailer: 80px;
 
+$pdiUser: 200px;
 
 .shippingMachines {
   height: 100px;
@@ -218,6 +220,11 @@ table.shippingTable {
 .headerKit {
   max-width: $headerKit;
   min-width: $headerKit;
+}
+
+.pdiUser {
+  max-width: $pdiUser;
+  min-width: $pdiUser;
 }
 
 table.headerTable {

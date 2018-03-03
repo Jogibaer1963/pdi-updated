@@ -1,80 +1,86 @@
 <template name="washList">
     {{#if currentUser}}
-         {{> MainLayout_3}}
          {{> overViewWashList}}
-         {{> messageTemplate}}
       {{else}}
           {{> login}}
         {{/if}}
 </template>
 
 <template name="overViewWashList">
-    <form class="washBayMessanger">
-        <button type="submit" class="washButton messangerWashBay">Message to Wash Bay</button>
-        <label for="machineId" class="mLocationId" ></label>
-        <input type="text" class="messengerMachineBox" id="machineId" name="machineId" placeholder="Machine Nr"
+    <div id="logo">
+        <img src="claas_logo.png" />
+    </div>
+    <div class="washMessage">
+       <form class="washBayMessanger">
+          <button type="submit" class="messangerWashBay">Message to Wash Bay</button>
+          <label for="machineId" class="mLocationId" ></label>
+          <input type="text" class="messengerMachineBox" id="machineId" name="machineId" placeholder="Machine Nr"
                required>
-        <label for="messageId" class="mLocationId" ></label>
-        <input type="text" class="messengerTextBox" id="messageId" name="messageId" placeholder="Text" required>
-    </form>
-
-
-    <h2>Wash List of Availiable Machines</h2>
+          <label for="messageId" class="mLocationId" ></label>
+          <input type="text" class="textBox" id="messageId" name="messageId" placeholder="Text" required>
+       </form>
+    </div>
+    <div class="washListButtons">
+    <h2>Wash List</h2>
         <form>
+              <button type="submit" class="machineLocationWashBay">Update Location</button>
+              <label for="locationId" class="mLocationId" ></label>
+              <input type="text" class="machineLocationInputWashBay" id="locationId" name="locationId" required>
+            <br><br>
               <button type="submit" class="washButton machineInWashBay {{inActive}}">Wash Start</button>
               <button type="submit" class="washButton stopWashProcess {{forbiddenButton}}">Wash Stop</button>
               <button type="submit" class="washButton machineOutWashBay {{forbiddenButton}}">Wash Done</button>
         </form>
-
-    <form class="locationId">
-            <button type="submit" class="machineLocationWashBay">Update Location</button>
-            <label for="locationId" class="mLocationId" ></label>
-            <input type="text" class="machineLocationInputWashBay" id="locationId" name="locationId" required>
-    </form>
-    <br><br><br><br><br><br><br><br>
-    <div class="rTable">
-        <div class="rTableRow">
-            <div class="rTableHead"><strong>Machine</strong></div>
-            <div class="rTableHead"><strong><span>Ship Date</span></strong></div>
-            <div class="rTableHead"><strong>PDI</strong></div>
-            <div class="rTableHead"><strong>Rep</strong></div>
-            <div class="rTableHead"><strong>Wash</strong></div>
-            <div class="rTableHead"><strong>Location</strong></div>
-         </div>
-        {{#each overView}}
-            <div class="rTableRow readyWash {{selectedClass}}">
-                <div class="rTableCell">{{machineId}}</div>
-                <div class="rTableCell" style="width: 120px">{{date}}</div>
-                <div class="rTableCell  {{getStatusColor pdiStatus}}" style="background-color:{{getStatusColor
-                        pdiStatus}}; color:{{getStatusColor pdiStatus}}" >{{pdiStatus}}</div>
-                <div class="rTableCell" style="background-color:{{getStatusColor repairStatus}};
-                        color:{{getStatusColor repairStatus}}" >{{repairStatus}}</div>
-                <div class="rTableCell  {{getStatusColor washStatus}}" style="background-color:{{getStatusColor washStatus}};
-                        color:{{getStatusColor washStatus}}" >{{washStatus}}</div>
-                <div class="rTableCell" style="background-color: #6fd981">{{locationId}}</div>
-            </div>
-        {{/each}}
     </div>
-</template>
-
-<template name="messageTemplate">
+    <table class="blueTable washTable">
+       <thead >
+          <tr>
+            <th class="pdiMachineField"><strong>Machine</strong></th>
+            <th class="pdiShipDate"><strong>Ship Date</strong></th>
+            <th class="pdiPDIField"><strong>PDI</strong></th>
+            <th class="pdiRepField"><strong>Rep</strong></th>
+            <th class="pdiWashField"><strong>Wash</strong></th>
+            <th class="pdiLocation"><strong>Location</strong></th>
+          </tr>
+       </thead>
+       <tbody>
+          {{#each overView}}
+             <tr class="readyWash {{selectedClass}}">
+                <td class="pdiMachineField">{{machineId}}</td>
+                <td class="pdiShipDate">{{date}}</td>
+                <td class="pdiPDIField  {{getStatusColor pdiStatus}}" style="background-color:{{getStatusColor
+                        pdiStatus}}; color:{{getStatusColor pdiStatus}}" >{{pdiStatus}}</td>
+                <td class="pdiRepField " style="background-color:{{getStatusColor repairStatus}};
+                        color:{{getStatusColor repairStatus}}" >{{repairStatus}}</td>
+                <td class="pdiWashField  {{getStatusColor washStatus}}" style="background-color:{{getStatusColor washStatus}};
+                        color:{{getStatusColor washStatus}}" >{{washStatus}}</td>
+                <td class="pdiLocation" style="background-color: #6fd981">{{locationId}}</td>
+             </tr>
+           {{/each}}
+        </tbody>
+    </table>
     <div>
-        <button type="submit" class="washButton messageButton">Message received</button>
+        <button type="submit" class="messageClearButton messageButton">Clear Message</button>
+        <button type="submit" class="messageClearButton washBayToggleButton switchWashHistory">Toggle Active / History</button>
     </div>
-     <div class="messanger">
-          <h3>Message to the Wash Bay</h3>
-       <div class="rTable" >
-        <div class="rTableRow">
-            <div class="rTableHead"><strong>Machine</strong></div>
-            <div class="rTableHead"><strong>Message</strong></div>
-        </div>
-        {{#each washMessage}}
-            <div class="rTableRow  textMessage {{selectedClass}}">
-                <div class="rTableCell">{{machineNr}}</div>
-                <div class="rTableCell">{{washBayMessage}}</div>
-            </div>
-        {{/each}}
-       </div>
-
-     </div>
+    <table class="blueTable messageTable">
+       <thead >
+          <tr>
+            <th class="pdiMachineField"><strong>Machine</strong></th>
+            <th class="pdiComments"><strong>{{activeHeader}}</strong></th>
+            <th class="pdiUser"><strong>Cleared from</strong></th>
+              <th class="pdiShipDate"><strong>Cleared at</strong></th>
+          </tr>
+        </thead>
+        <tbody>
+          {{#each washMessage}}
+            <tr class="textMessage {{selectedClass}}">
+                <td class="pdiMachineField">{{machineNr}}</td>
+                <td class="pdiComments">{{washBayMessage}}</td>
+                <td class="pdiUser"><strong>{{user}}</strong></td>
+                <td class="pdiShipDate"><strong>{{inactiveDate}}</strong></td>
+            </tr>
+          {{/each}}
+        </tbody>
+     </table>
 </template>
