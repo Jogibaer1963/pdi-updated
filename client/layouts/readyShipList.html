@@ -2,10 +2,9 @@
 <body>
 {{#if currentUser}}
     {{> MainLayout_3}}
-    <h2>List of Availiable Machines for Shipping</h2>
+    <h2>List of Availiable Machines</h2>
     {{> overViewReadyList}}
-    <br><br><br><br>
-<!--    {{> shippingInProcess}}  -->
+
 {{else}}
     {{> login}}
 {{/if}}
@@ -27,7 +26,7 @@
             <input type="text" class="machineLocationInput" id="locationId" name="locationId" required>
         </div>
     </form>
-   <table class="blueTable">
+   <table class="blueTable ">
        <thead>
        <tr>
             <th class="rTableHead"><strong>Machine</strong></th>
@@ -50,27 +49,5 @@
             </tr>
         {{/each}}
        </tbody>
-
    </table>
-</template>
-
-<template name="shippingInProcess">
-    <button type="submit" class="machineOnTrailer">Machine gone</button>
-    <br>
-    <div class="machineShipBox">
-      <ul class="horizontal-slide">
-        {{#each shippingOverView}}
-            <div class="span2 machineReadyShip {{selectedClass}}">
-                <h2>----------------------------</h2>
-              <li><h4>{{machineId}}{{newHeadId}}</h4></li>
-              <li>{{date}}</li>
-              <li>{{destination}}</li>
-              <li>{{transporter}}</li>
-              <li>{{kit}}</li>
-              <li>{{tireTrack}}</li>
-              <li>{{shippingComment}}</li>
-            </div>
-        {{/each}}
-      </ul>
-    </div>
 </template>
