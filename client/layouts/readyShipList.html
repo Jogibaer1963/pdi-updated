@@ -27,28 +27,31 @@
             <input type="text" class="machineLocationInput" id="locationId" name="locationId" required>
         </div>
     </form>
-    <div class="machineReadyBox">
-    <div class="rTable">
-        <div class="rTableRow">
-            <div class="rTableHead"><strong>Machine</strong></div>
-            <div class="rTableHead"><strong><span>Shipdate</span></strong></div>
-            <div class="rTableHead"><strong>Destination</strong></div>
-            <div class="rTableHead"><strong>Transporter</strong></div>
-            <div class="rTableHead"><strong>Location</strong></div>
-            <div class="rTableHead" style="width: 200px"><strong>Shipping Comments</strong></div>
-        </div>
+   <table class="blueTable">
+       <thead>
+       <tr>
+            <th class="rTableHead"><strong>Machine</strong></th>
+            <th class="rTableHead"><strong><span>Shipdate</span></strong></th>
+            <th class="rTableHead"><strong>Destination</strong></th>
+            <th class="rTableHead"><strong>Transporter</strong></th>
+            <th class="rTableHead"><strong>Location</strong></th>
+            <th class="rTableHead" style="width: 200px"><strong>Shipping Comments</strong></th>
+       </tr>
+       </thead>
+       <tbody>
         {{#each overView}}
-            <div class="rTableRow readyList {{selectedClass}}">
-                <div class="rTableCell">{{machineId}}{{newHeadId}}</div>
-                <div class="rTableCell">{{date}}</div>
-                <div class="rTableCell">{{destination}}</div>
-                <div class="rTableCell">{{transporter}}</div>
-                <div class="rTableCell" style="background-color: #6fd981">{{locationId}}</div>
-                <div class="rTableCellComment">{{shippingComment}}</div>
-            </div>
+            <tr class="rTableRow readyList {{selectedClass}}">
+                <td class="rTableCell">{{machineId}}{{newHeadId}}</td>
+                <td class="rTableCell">{{date}}</td>
+                <td class="rTableCell">{{destination}}</td>
+                <td class="rTableCell">{{transporter}}</td>
+                <td class="rTableCell" style="background-color: #6fd981">{{locationId}}</td>
+                <td class="rTableCellComment">{{shippingComment}}</td>
+            </tr>
         {{/each}}
-    </div>
-    </div>
+       </tbody>
+
+   </table>
 </template>
 
 <template name="shippingInProcess">

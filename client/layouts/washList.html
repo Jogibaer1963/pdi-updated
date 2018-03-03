@@ -26,13 +26,15 @@
     <div class="washListButtons">
     <h2>Wash List</h2>
         <form>
-              <button type="submit" class="machineLocationWashBay">Update Location</button>
-              <label for="locationId" class="mLocationId" ></label>
-              <input type="text" class="machineLocationInputWashBay" id="locationId" name="locationId" required>
-            <br><br>
-              <button type="submit" class="washButton machineInWashBay {{inActive}}">Wash Start</button>
-              <button type="submit" class="washButton stopWashProcess {{forbiddenButton}}">Wash Stop</button>
-              <button type="submit" class="washButton machineOutWashBay {{forbiddenButton}}">Wash Done</button>
+             <label for="locationId" class="mLocationId" ></label>
+             <input type="text" id="locationId" name="locationId" required>
+             <button type="submit" class="locationId">Update Location</button>
+        </form>
+            <br>
+        <form>
+              <button type="submit" class="washButton machineInWashBay">Wash Start</button>
+              <button type="submit" class="washButton stopWashProcess">Wash cancled</button>
+              <button type="submit" class="washButton machineOutWashBay">Wash Done</button>
         </form>
     </div>
     <table class="blueTable washTable">

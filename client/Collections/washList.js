@@ -15,30 +15,9 @@ if (Meteor.isClient) {
             const checkPoint = this._id;
             const selectedMachineId = Session.get('selectedMachineId');
             if (selectedMachineId === checkPoint) {
-                return "selected_2"
+                return "selected"
             }
         },
-
-       'inActive': function() {
-          const status = MachineReady.find({'washStatus': 2}).count();
-            if (status > 0) {
-              return 'inActiveButton';
-               } else {
-            }
-        },
-
-        'forbiddenButton': function() {
-            const washId = MachineReady.findOne({washStatus: 2}, {fields: {_id:1}});
-            if(typeof washId !== 'undefined') {
-                const washMeId = JSON.stringify(washId);
-                const res = washMeId.slice(8, 25);
-                const selectedMachine = Session.get('selectedMachineId');
-                    if(selectedMachine !== res ) {
-                        return 'inActiveButton';
-                       } else {}
-            } else { return 'inActiveButton'}
-        },
-
 
         washMessage: function () {
             event.preventDefault();
@@ -49,7 +28,7 @@ if (Meteor.isClient) {
                 return washBayText.find({active: 1});
             } else {
                 Session.set("activeHeader", 0);
-                 return washBayText.find({active: 0});
+                 return washBayText.find({active: 0}, {sort: {inactiveDate: -1}});
             }
         },
 
