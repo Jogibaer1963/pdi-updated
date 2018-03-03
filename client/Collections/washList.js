@@ -64,11 +64,11 @@ if (Meteor.isClient) {
         },
 
 
-        'selectedClass2': function() {
+        'selectedMessage': function() {
             const message = this._id;
             const selectedMessage = Session.get('selectedMessage');
             if (selectedMessage === message) {
-                return "selected_2"
+                return "selected"
             }
         }
 
@@ -153,7 +153,8 @@ if (Meteor.isClient) {
             event.preventDefault();
             userWashBay = Meteor.userId();
             const removeId = Session.get('selectedMessage');
-            Meteor.call('removeText', removeId, userWashBay);
+            const date = moment().format('YYYY-MM-DD, h:mm:ss a');
+            Meteor.call('removeText', removeId, userWashBay, date);
         }
     });
 

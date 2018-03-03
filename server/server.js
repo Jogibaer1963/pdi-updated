@@ -275,8 +275,12 @@ if(Meteor.isServer){
         return exportcsv.exportToCSV(collection, heading, delimiter);
         },
 
-        'removeText': function(removeId, userWashBay) {
-            washBayText.update({_id: removeId}, {$set: {active: 0, user: userWashBay}});
+        // called by washList.js set washBay message to inactive, add user, add date
+        'removeText': function(removeId, userWashBay, date) {
+            if (userWashBay) {
+                const userName = Meteor.users.findOne({_id: userWashBay}).username;
+                washBayText.update({_id: removeId}, {$set: {active: 0, user: userName, inactiveDate: date}});
+            }
         },
 
         'messageToWashBay': function(machineNr, washMessage, machine_id) {
