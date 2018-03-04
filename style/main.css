@@ -234,9 +234,6 @@ table.shippingTable {
   top: 400px;
   width: 600px; }
 
-.overviewHeader {
-  font-size: 25px; }
-
 .tablePdiOverview {
   position: absolute;
   top: 300px; }
@@ -600,6 +597,17 @@ td {
 #logo {
   position: absolute;
   top: 25px; }
+
+.overviewHeader {
+  position: absolute;
+  top: 150px;
+  font-size: 25px;
+  margin-left: 25px; }
+
+.pdiButton {
+  position: absolute;
+  top: 240px;
+  margin-left: 25px; }
 
 .washBayLinks {
   position: relative;

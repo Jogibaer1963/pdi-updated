@@ -11,10 +11,13 @@
 <template name="inspection">
   <div>
       <nav class="mainLayout">
-        <a href="/overViewUser">Over View |</a>
-        <a href="/machineLocation">Locations |</a>
-        <a href="/statistics">Statistics |</a>
-        <a href="/logout" >Logout</a>
+        <a class="btn" href="/overViewUser">Over View</a>
+          <a>|</a>
+        <a class="btn" href="/machineLocation">Locations</a>
+          <a>|</a>
+        <a class="btn" href="/statistics" disabled>Statistics</a>
+          <a>|</a>
+        <a class="btn" href="/logout" >Logout</a>
       </nav>
     <br>
     <div id="logo">
@@ -22,18 +25,18 @@
     </div>
     <br>
     <nav class="mainLayout">
-        <a href="/checkList">Checklist |</a>
-        <a href="/pdiRepairList">Review Repair List |</a>
-        <a href="/si">SI's or special Item's </a>
+        <a class="btn" href="/checkList">Checklist</a>
+        <a>|</a>
+        <a class="btn" href="/pdiRepairList">Review Repair List</a>
+        <a>|</a>
+        <a class="btn" href="/si">SI's or special Item's </a>
     </nav>
-      <br><br><br>
     <div class="overviewHeader">
         Open Pdi's : {{countPdi}}
-    </div>
-    <div class="overviewHeader">
+        <br>
        Average Fuel Consumption per Pdi : {{countConsumption}} Gallon
     </div>
-    <br>
+    <div class="pdiButton">
     <form>
         <button class="machinePdi">Perform PDI</button>
         <button class="cancelPdiProcess">Cancel PDI</button>
@@ -41,7 +44,7 @@
         <button class="resumePdi">Resume PDI</button>
         <button class="loadConfig">Load Config</button>
     </form>
-        <br><br>
+    </div>
     <table class="pdiTable blueTable tablePdiOverview" cellpadding="10">
          <thead>
             <tr>

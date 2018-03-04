@@ -47,11 +47,17 @@
       <div class="templateNav">
         <nav>
            <a class="btn" href="/shippingMachines">Shipping Combines</a>
+            <a>|</a>
            <a class="btn" href="/inspectionStart">Inspection</a>
+            <a>|</a>
            <a class="btn" href="/repairView">Repair</a>
+            <a>|</a>
            <a class="btn" href="/washList">Wash Bay</a>
+            <a>|</a>
            <a class="btn" href="/readyShipList">Final Status</a>
+            <a>|</a>
            <a class="btn" href="/ecnOverView">ECN Tracking</a>
+            <a>|</a>
            <a class="btn btn-danger" href="/admin">Admin</a>
          </nav>
        </div>
@@ -120,11 +126,15 @@
 <template name="MainLayout_3">
     <div class="mainLayout">
         <nav>
-            <a href="/headerShipList">Switch to Headers |</a>
-            <a href="/maryView">Truck Status |</a>
-            <a href="/overViewUser">Over View |</a>
-            <a href="/statistics">Statistics |</a>
-            <a class="logout" href="/logout" >Logout |</a>
+            <a class="btn" href="/headerShipList">Switch to Headers</a>
+            <a>|</a>
+            <a class="btn" href="/maryView">Truck Status</a>
+            <a>|</a>
+            <a class="btn" href="/overViewUser">Over View</a>
+            <a>|</a>
+            <a class="btn" href="/statistics" disabled>Statistics</a>
+            <a>|</a>
+            <a class="btn logout" href="/logout" >Logout</a>
         </nav>
     </div>
 </template>
