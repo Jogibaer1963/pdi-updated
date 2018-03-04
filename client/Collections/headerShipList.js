@@ -40,6 +40,8 @@ if (Meteor.isClient) {
             document.getElementById('newKit7').checked= false;
             document.getElementById('newKit8').checked= false;
             document.getElementById('newKit9').checked= false;
+            document.getElementById('newKit10').checked= false;
+            document.getElementById('newKit11').checked= false;
             event.target.newComment.value="";
         },
 

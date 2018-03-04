@@ -1,9 +1,8 @@
 if (Meteor.isClient) {
 
-    Meteor.subscribe("overView");
     Meteor.subscribe("MachineReady");
 
-    Template.overViewLoggedIn.helpers({
+    Template.overView.helpers({
 
        machineOverView: function() {
           return MachineReady.find({machineId: {$gt: 'C00000'}, $or: [{shipStatus: 0},

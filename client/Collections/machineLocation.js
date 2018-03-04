@@ -1,13 +1,11 @@
-/**
- * Created by Jogibaer on 12.06.2016.
- */
+
 if (Meteor.isClient) {
 
-    Template.machineLocation.helpers({
+    Template.pdiLocation.helpers({
+
         overView: function() {
             const machineLoc = MachineReady.find( {machineId: {$gt: 'C00000'}, $or: [{shipStatus: 0},
                 {shipStatus: 2}]}, {sort: {date: 1}}).fetch();
-            console.log(machineLoc);
             return machineLoc;
             },
 
@@ -20,7 +18,7 @@ if (Meteor.isClient) {
         }
     });
 
-    Template.machineLocation.events({
+    Template.pdiLocation.events({
 
         'click .locationUpdate': function() {
             event.preventDefault();

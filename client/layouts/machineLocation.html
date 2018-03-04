@@ -1,35 +1,62 @@
 <template name="machineLocation">
     {{#if currentUser}}
-        {{> MainLayout_3}}
-        <br>
+        {{> locationNav}}
+        {{> pdiLocation}}
+    {{else}}
+        {{> login}}
+    {{/if}}
+</template>
+
+<template name="locationNav">
+    <div class="topNav">
+        <nav>
+            <a class="btn" href="/overViewUser">OverView</a>
+            <a>|</a>
+            <a class="btn" href="/machineSearch" disabled>Search by Machine</a>
+            <a>|</a>
+            <a class="btn" href="/wordSearch" disabled>Search by Key Word</a>
+            <a>|</a>
+            <a class="btn" href="/statistics" disabled>Statistics</a>
+            <a>|</a>
+            <a class="btn logout" href="/logout" >Logout</a>
+        </nav>
+    </div>
+</template>
+
+<template name="pdiLocation">
+    <div id="logo">
+        <img src="claas_logo.png" />
+    </div>
+
     <form class="locationId">
         <button type="submit" class="machineUpdateLocation">Update Location</button>
         <label for="locationId" class="mLocationId" ></label>
         <input type="text" class="machineUpdateLocationInput" id="locationId" name="locationId" required>
     </form>
-    <div class="rTableMachine clearfix tablePos">
-        <div class="rTableRow">
-            <div class="rTableHeadOverView"><strong>Machine</strong></div>
-            <div class="rTableHeadOverView"><strong>Shippdate</strong></div>
-            <div class="rTableHeadOverView"><strong>PDI</strong></div>
-            <div class="rTableHeadOverView"><strong>Rep</strong></div>
-            <div class="rTableHeadOverView"><strong>Wash</strong></div>
-            <div class="rTableHeadOverView"><strong>Load</strong></div>
-            <div class="rTableHeadOverView"><strong>Location</strong></div>
-        </div>
+        <table class="blueTable locationTable">
+          <thead>
+            <tr>
+              <th class="pdiOverviewMachine"><strong>Machine</strong></th>
+              <th class="pdiShipDate"><strong>Shippdate</strong></th>
+              <th class="pdiPDIField"><strong>PDI</strong></th>
+              <th class="pdiRepField"><strong>Rep</strong></th>
+              <th class="pdiWashField"><strong>Wash</strong></th>
+              <th class="pdiShipField"><strong>Ship</strong></th>
+              <th class="pdiLocation"><strong>Location</strong></th>
+            </tr>
+          </thead>
+            <tbody>
         {{#each overView}}
-            <div class="rTableRow locationUpdate {{selectedClass}}">
-                <div class="rTableCellOverView">{{machineId}}</div>
-                <div class="rTableCellOverView" style="width: 50px">{{date}}</div>
-                <div class="rTableCellOverView {{getStatusColor pdiStatus}}" style="background-color:{{getStatusColor pdiStatus}}; color:{{getStatusColor pdiStatus}}" >{{pdiStatus}}</div>
-                <div class="rTableCellOverView {{getStatusColor repairStatus}}" style="background-color:{{getStatusColor repairStatus}}; color:{{getStatusColor repairStatus}}" >{{repairStatus}}</div>
-                <div class="rTableCellOverView {{getStatusColor washStatus}}" style="background-color:{{getStatusColor washStatus}}; color:{{getStatusColor washStatus}}" >{{washStatus}}</div>
-                <div class="rTableCellOverView {{getStatusColor shipStatus}}" style="background-color:{{getStatusColor shipStatus}}; color:{{getStatusColor shipStatus}}" >{{shipStatus}}</div>
-                <div class="rTableCell" style="background-color: #6fd981">{{locationId}}</div>
-            </div>
+            <tr class="locationUpdate {{selectedClass}}">
+                <td class="pdiOverviewMachine">{{machineId}}</td>
+                <td class="pdiShipDate">{{date}}</td>
+                <td class="pdiPDIField {{getStatusColor pdiStatus}}" style="background-color:{{getStatusColor pdiStatus}}; color:{{getStatusColor pdiStatus}}" >{{pdiStatus}}</td>
+                <td class="pdiRepField {{getStatusColor repairStatus}}" style="background-color:{{getStatusColor repairStatus}}; color:{{getStatusColor repairStatus}}" >{{repairStatus}}</td>
+                <td class="pdiWashField {{getStatusColor washStatus}}" style="background-color:{{getStatusColor washStatus}}; color:{{getStatusColor washStatus}}" >{{washStatus}}</td>
+                <td class="pdiShipField {{getStatusColor shipStatus}}" style="background-color:{{getStatusColor shipStatus}}; color:{{getStatusColor shipStatus}}" >{{shipStatus}}</td>
+                <td class="pdiLocation" style="background-color: #6fd981">{{locationId}}</td>
+            </tr>
         {{/each}}
-    </div>
-    {{else}}
-        {{> login}}
-    {{/if}}
+            </tbody>
+        </table>
 </template>

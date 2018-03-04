@@ -1,7 +1,9 @@
+@import "admin";
 @import 'login';
 @import 'checklist';
 @import "tables";
-@import "overViewLoggedIn";
+@import "overView";
+@import "machineLocation";
 @import "shippingMachine";
 @import "shippingHeaders";
 @import "maryView";
@@ -11,6 +13,22 @@
 @import "washList";
 
 
+
+.insideNavBar {
+  margin-top: 25px;
+}
+
+.topNav {
+  position: relative;
+  margin-top: 25px;
+  left: 40em;
+}
+
+.templateNav {
+  position: absolute;
+  left: 40em;
+  top: 6em;
+}
 
 #logo {
   margin: 10px;

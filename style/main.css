@@ -1,3 +1,17 @@
+.submitAdmin {
+  position: absolute;
+  left: 57em; }
+
+.totalUsers {
+  margin-left: 25px;
+  position: absolute;
+  top: 100px; }
+
+.newUser {
+  position: absolute;
+  top: 120px;
+  margin-left: 10px; }
+
 #logo {
   margin: 25px; }
 
@@ -164,16 +178,56 @@ table.blueTable tfoot .links a {
 th {
   height: 50px; }
 
+table.tableAdminPos {
+  width: 853px; }
+
+.adminUserId {
+  max-width: 150px;
+  min-width: 150px; }
+
+.adminUser {
+  max-width: 80px;
+  min-width: 80px; }
+
+.userRole {
+  max-width: 80px;
+  min-width: 80px; }
+
+.userCreated {
+  max-width: 110px;
+  min-width: 110px; }
+
+.userCreatedBy {
+  max-width: 80px;
+  min-width: 80px; }
+
+.userLastLogin {
+  max-width: 110px;
+  min-width: 110px; }
+
+.userIP {
+  max-width: 80px;
+  min-width: 80px; }
+
+.userStatus {
+  max-width: 60px;
+  min-width: 60px; }
+
+.userLogOut {
+  max-width: 50px;
+  min-width: 50px;
+  text-align: center; }
+
+.userErase {
+  max-width: 50px;
+  min-width: 50px;
+  text-align: center; }
+
 .shippingMachines {
   height: 100px; }
 
 table.pdiTable {
   width: 570px; }
-
-table.overViewTable {
-  position: absolute;
-  top: 300px;
-  width: 415px; }
 
 table.shippingTable {
   position: absolute;
@@ -301,7 +355,30 @@ table.trailerTable {
 .headerTablePosition {
   position: absolute;
   left: 450px;
-  top: 250px; }
+  top: 300px; }
+
+table.overViewTable {
+  position: absolute;
+  top: 350px;
+  width: 415px; }
+
+.locationTable {
+  position: absolute;
+  top: 200px;
+  margin-left: 25px; }
+
+.locationId {
+  position: absolute;
+  top: 150px;
+  margin-left: 25px; }
+
+table.locationTable {
+  width: 464px; }
+
+.shippingNav {
+  position: absolute;
+  top: 70px;
+  left: 40em; }
 
 .newMachineShipping {
   position: absolute;
@@ -566,6 +643,19 @@ table.historyMessageTable {
 
 .washBayToggleButton {
   margin-left: 300px; }
+
+.insideNavBar {
+  margin-top: 25px; }
+
+.topNav {
+  position: relative;
+  margin-top: 25px;
+  left: 40em; }
+
+.templateNav {
+  position: absolute;
+  left: 40em;
+  top: 6em; }
 
 #logo {
   margin: 10px; }

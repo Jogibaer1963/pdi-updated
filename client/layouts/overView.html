@@ -1,5 +1,15 @@
-<template name="overViewLoggedIn">
-        {{> MainLayout}}
+<template name="overViewUser">
+    {{#if currentUser}}
+           {{> mainLayout}}
+    {{else}}
+        {{> login}}
+    {{/if}}
+</template>
+
+
+
+
+<template name="overView">
     <div id="logo">
         <img src="claas_logo.png" />
     </div>

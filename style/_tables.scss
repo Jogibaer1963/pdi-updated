@@ -95,7 +95,7 @@ $pdiShipField: 60px;
 $pdiLocation: 70px;
 $config: 60px;
 $pdiTable: 570px;
-$overViewTable: 415px;
+
 
 
 $headerTable: 230px;
@@ -106,20 +106,87 @@ $pdiTrailer: 80px;
 
 $pdiUser: 200px;
 
+//admin table
+
+table.tableAdminPos {
+  width: 853px;
+}
+
+$userId: 150px;
+$user: 80px;
+$userRole: 80px;
+$dateCreated: 110px;
+$createdBy: 50px;
+$lastLogin: 110px;
+$clientIp: 80px;
+$loggedIn: 60px;
+$logOut: 50px;
+$eraseUser: 50px;
+
+.adminUserId {
+  max-width: $userId;
+  min-width: $userId;
+}
+
+.adminUser {
+  max-width: $user;
+  min-width: $user;
+}
+
+.userRole {
+  max-width: $userRole;
+  min-width: $userRole;
+}
+
+.userCreated {
+  max-width: $dateCreated;
+  min-width: $dateCreated;
+}
+
+.userCreatedBy {
+  max-width: $user;
+  min-width: $user;
+}
+
+.userLastLogin {
+  max-width: $lastLogin;
+  min-width: $lastLogin;
+}
+
+.userIP {
+  max-width: $clientIp;
+  min-width: $clientIp;
+}
+
+.userStatus {
+   max-width: $loggedIn;
+   min-width: $loggedIn;
+ }
+
+.userLogOut {
+  max-width: $logOut;
+  min-width: $logOut;
+  text-align: center;
+
+}
+
+.userErase {
+  max-width: $eraseUser;
+  min-width: $eraseUser;
+  text-align: center;
+}
+
 .shippingMachines {
   height: 100px;
 }
 
+// end Admin Table
 
 table.pdiTable {
   width: $pdiTable;
 }
 
-table.overViewTable {
-  position: absolute;
-  top: 300px;
-  width: $overViewTable;
-}
+
 
 table.shippingTable {
   position: absolute;

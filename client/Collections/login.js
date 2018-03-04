@@ -6,7 +6,7 @@
             event.preventDefault();
               const userVar = event.target.loginUser.value;
               const passwordVar = event.target.loginPassword.value;
-              const dateLogin = new Date();
+              const dateLogin = moment().format('MMMM Do YYYY, h:mm:ss a');
               Session.set('loginId', userVar);
               Meteor.loginWithPassword(userVar, passwordVar, function(){
                if(Meteor.userId()){
@@ -21,8 +21,7 @@
     });
 
 
-    Template.MainLayout.events({
-
+    Template.topNav.events({
         'click .logout': function (event) {
             event.preventDefault();
             const logoutId = Session.get('loginId');
@@ -30,6 +29,7 @@
             Meteor.call('successfullLogout', logoutId, logoutDate);
             Session.key = {};
             Meteor.logout();
+            FlowRouter.go('/login');
         }
     });
 
@@ -42,6 +42,7 @@
             Meteor.call('successfullLogout', logoutId, logoutDate);
             Session.key = {};
             Meteor.logout();
+            FlowRouter.go('/login');
         }
     });
 
@@ -53,6 +54,7 @@
             Meteor.call('successfullLogout', logoutId, logoutDate);
             Session.key = {};
             Meteor.logout();
+            FlowRouter.go('/login');
         }
     });
 
@@ -64,6 +66,7 @@
             Meteor.call('successfullLogout', logoutId, logoutDate);
             Session.key = {};
             Meteor.logout();
+            FlowRouter.go('/login');
         }
     });
 
@@ -75,6 +78,7 @@
             Meteor.call('successfullLogout', logoutId, logoutDate);
             Session.key = {};
             Meteor.logout();
+            FlowRouter.go('/login');
         }
     });
 
@@ -86,6 +90,7 @@
             Meteor.call('successfullLogout', logoutId, logoutDate);
             Session.key = {};
             Meteor.logout();
+            FlowRouter.go('/login');
         }
     });
     Template.MainLayout_3.events({
@@ -96,6 +101,7 @@
             Meteor.call('successfullLogout', logoutId, logoutDate);
             Session.key = {};
             Meteor.logout();
+            FlowRouter.go('/login');
         }
     });
 
@@ -107,6 +113,7 @@
             Meteor.call('successfullLogout', logoutId, logoutDate);
             Session.key = {};
             Meteor.logout();
+            FlowRouter.go('/login');
         }
     });
 

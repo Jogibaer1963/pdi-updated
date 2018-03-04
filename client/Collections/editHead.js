@@ -133,6 +133,19 @@ if(Meteor.isClient) {
            if(kit_9 === '003_03312') {
                return 'checked';
            }
+       },
+
+       'newKit10': function() {
+           const kit_10 = Session.get('kit_10');
+           if(kit_10 === '003_0220') {
+               return 'checked';
+           }
+       },
+       'newKit11': function() {
+           const kit_11 = Session.get('kit_11');
+           if(kit_11 === '003_03312') {
+               return 'checked';
+           }
        }
 
 
