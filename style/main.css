@@ -83,6 +83,13 @@ a:hover {
 .checkBoxMargin {
   margin: 5px; }
 
+.inputRange {
+  width: 220px; }
+
+.dependencies {
+  position: relative;
+  left: 30px; }
+
 .tableChecklist {
   position: absolute;
   top: 400px;

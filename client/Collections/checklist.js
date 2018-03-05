@@ -1,3 +1,5 @@
+Meteor.subscribe("variants_C77");
+
 if (Meteor.isClient) {
 
     Session.set("toggleActiveInactive", 0);
@@ -76,7 +78,16 @@ if (Meteor.isClient) {
             } else {
                 Session.set("toggleActiveInactive", 0);
             }
-        }
+        },
+
+        'click .omUnload': function() {
+            event.preventDefault();
+            Session.set('selectedUnloadOm', '');
+            const omUnload = this._id;
+            const selectedUnloadOm = ommUnload.findOne({_id: omUnload}).omUnload;
+            Session.set('selectedUnloadOm', selectedUnloadOm);
+        },
+
 
 
     });
@@ -121,7 +132,21 @@ if (Meteor.isClient) {
                 Session.set("statusEdit", 1);
               return "selected"
             }
-        }
+        },
+
+        // Dropdown Lisz
+        //------------------------------------------------------------//
+        ommUnload: function () {
+           return variants_C77.find({});
+        },
+
+        selectedUnloadOm: function() {
+            event.preventDefault();
+            return Session.get('selectedUnloadOm');
+        },
+        //--------------------------------------------------------------//
+
+
     });
 
 }

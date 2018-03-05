@@ -53,9 +53,39 @@
                 <div class="inputMargin title">
                    <label for="machineRange">Machine Range, divide by white space like "C7800200 C7900300 "</label>
                 <br>
-                   <label for="machineRangeStart" class=""><input type="text" class="input" id="machineRangeStart" name="machineRangeStart" placeholder="Range Start"></label>
-                   <label for="machineRangeEnd" class=""> <input type="text" class="input" id="machineRangeEnd" name="machineRangeEnd" placeholder="Range End"></label>
+                   <label for="machineRangeStart" class="">
+                       <input type="text" class="inputRange" id="machineRangeStart" name="machineRangeStart" placeholder="Range Start">
+                   </label>
+                   <label for="machineRangeEnd" class="machineRangeEnd">
+                       <input type="text" class="inputRange" id="machineRangeEnd" name="machineRangeEnd" placeholder="Range End">
+                   </label>
                 </div>
+            <div class="dependencies">
+                <h3>Dependencies</h3>
+
+                <div class="">
+                    {{#dropdownTrigger  name="ommUnloadBooks"}}
+                        <button class="loginSubmit omInputButton">Om Fitting</button>
+                    {{/dropdownTrigger}}
+                    <label for="locationId" class="mLocationId" ></label>
+                    <input type="text" class="omInput " id="locationId" name="omUnload" value="{{selectedUnloadOm}}" required>
+                    {{#dropdown name="ommUnloadBooks" align="left" top="-50" left="-270"}}
+                        <div class="rTable tablePosDropDown">
+                            {{#each ommUnload}}
+                                <div class="rTableRow omUnload omTable">
+                                    <div class="rTableCell">{{variant}}</div>
+                                    <div class="rTableCell">{{description}}</div>
+                                </div>
+                            {{/each}}
+                        </div>
+                    {{/dropdown}}
+                </div>
+
+
+
+
+
+            </div>
             <br><br><br>
             <div>
                 <div>

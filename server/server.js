@@ -14,6 +14,10 @@ if(Meteor.isServer){
             return MachineReady.find()
         });
 
+        Meteor.publish("variants_C77", function () {
+            return variants_C77.find()
+        });
+
         Meteor.publish("machineReadyToGo_2016", function () {
             return MachineReady_2016.find()
         });
