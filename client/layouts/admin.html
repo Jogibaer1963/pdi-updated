@@ -1,17 +1,12 @@
 <template name="admin">
     {{#if currentUser}}
-        <div class="top-nav">
-           {{> AdminLayout}}
-        </div>
         {{> adminViewUser}}
     {{else}}
         {{> login}}
     {{/if}}
 </template>
 
-<template name="AdminLayout">
 
-</template>
 
 <template name="adminViewUser">
     <div id="logo">
@@ -81,9 +76,10 @@
 </template>
 
 <template name="adminNewUser">
-    <nav class="top-nav">
-        <a href="/admin">Overview User |</a>
-        <a href="/overView">Over View</a>
+    <nav class="topNav">
+        <a class="btn" href="/admin">Overview User</a>
+        <a>|</a>
+        <a class="btn" href="/overViewUser">Over View</a>
     </nav>
     <div id="logo">
         <img src="claas_logo.png" />

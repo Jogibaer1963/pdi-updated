@@ -1,5 +1,5 @@
 
-    Template.si.events({
+    Template.siTable.events({
         'click .selectedSiItem': function () {
             const checkPoint = this._id;
             Session.set('selectedItem', checkPoint);
@@ -22,7 +22,7 @@
         }
     });
 
-    Template.si.helpers({
+    Template.siTable.helpers({
 
         siList: function() {
             event.preventDefault();
@@ -96,13 +96,9 @@ Template.upload.helpers({
     uploading() {
         return Template.instance().uploading.get();
     },
-
-
         siNew: function() {
           return Session.get('siList');
         }
-
-
 });
 
 Template.uploadList.events({

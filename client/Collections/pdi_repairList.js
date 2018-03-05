@@ -34,7 +34,7 @@ if(Meteor.isClient) {
             const result = MachineReady.find({_id:machineId}, {fields: {machineId: 1}}).fetch();
             const machineNr = JSON.stringify(result).slice(15, 23);
             const nameFile = 'fileDownloaded.csv';
-           Meteor.call('download_2', machineNr, function (err, fileContent) {
+            Meteor.call('download_2', machineNr, function (err, fileContent) {
                 if (fileContent) {
                     const blob = new Blob([fileContent], {type: "text/plain;charset=utf-8"});
                     saveAs(blob, nameFile);

@@ -12,12 +12,18 @@
                  {{> shippingLayout}}
               {{/if}}
               {{#if isInRole 'pdi'}}
-                 {{> pdiLayout}}
+                  {{> topNav}}
+                  {{> overView}}
+                  {{> pdiLayout}}
               {{/if}}
               {{#if isInRole 'repair'}}
+                  {{> topNav}}
+                  {{> overView}}
                  {{> repairLayout}}
               {{/if}}
               {{#if isInRole 'outBound'}}
+                  {{> topNav}}
+                  {{> overView}}
                  {{> washLayout}}
               {{/if}}
        {{else}}
@@ -74,12 +80,15 @@
 </template>
 
 <template name="pdiLayout">
-    <div class="">
+    <div class="pdiOverViewNav">
         <nav>
             <a class="btn" href="/inspectionStart">Inspection</a>
-                <a href="/checkList">Checklist |</a>
-                <a href="/pdiRepairList">Review Repair List |</a>
-                <a href="/si">SI's or special Item's </a>
+            <a>|</a>
+            <a class="btn" href="/checkList">Checklist</a>
+            <a>|</a>
+            <a class="btn" href="/pdiRepairList">Review Repair List</a>
+            <a>|</a>
+            <a class="btn" href="/si">SI's or special Item's</a>
         </nav>
     </div>
 </template>

@@ -1,8 +1,6 @@
 <template name="pdiRepairList">
 {{#if currentUser}}
-    <a class="btn" href="/">Back to Main Overview</a>
-   {{> pdi_repairList}}
-    <br><br>
+    {{> pdi_repairList}}
     {{> pdiInspectList}}
 {{else}}
     {{> login}}
@@ -10,24 +8,46 @@
 </template>
 
 <template name="pdi_repairList">
-    <h1>PDI Print to Excel</h1>
-    <button type="button" class="loginSubmit" id="buttonDownload">Download</button>
-    <a class="loginSubmit" style="text-decoration: none" href="/pdi_printOut">Print Out</a>
-    <br><br><br><br><br>
-    <div class="rTable showPdiList">
-        <div class="rTableRow ">
-            <div class="rTableHead"><strong>Machine</strong></div>
-            <div class="rTableHead"><strong>Ship Date</strong></div>
-            <div class="rTableHead"><strong>PDI</strong></div>
+    <div>
+        <nav class="mainLayout">
+            <a class="btn" href="/overViewUser">Over View</a>
+            <a>|</a>
+            <a class="btn" href="/inspectionStart">PDI Overview</a>
+            <a>|</a>
+            <a class="btn" href="/statistics" disabled>Statistics</a>
+            <a>|</a>
+            <a class="btn" href="/logout" >Logout</a>
+        </nav>
+        <br>
+        <div id="logo">
+            <img src="claas_logo.png" />
         </div>
-        {{#each showList}}
-            <div class="rTableRow showPdiResult {{selectedClass}}">
-                <div class="rTableCell">{{machineId}}{{newHeadId}}</div>
-                <div class="rTableCell">{{date}}</div>
-                <div class="rTableCell {{getStatusColor pdiStatus}}" style="background-color:{{getStatusColor pdiStatus}}; color:{{getStatusColor pdiStatus}}">{{pdiStatus}}</div>
-            </div>
-        {{/each}}
     </div>
+        <br>
+    <div class="repairListButton">
+       <h1>PDI Print to Excel</h1>
+       <button type="button" class="btn btn-default" id="buttonDownload">Download</button>
+       <a class="btn btn-default"  href="/pdi_printOut">Print Out</a>
+    </div>
+    <br><br>
+    <table class="blueTable pdiRepairList">
+       <thead>
+          <tr>
+            <th class="pdiMachineField"><strong>Machine</strong></th>
+            <th class="pdiShipDate"><strong>Ship Date</strong></th>
+            <th class="pdiRepField"><strong>PDI</strong></th>
+          </tr>
+       </thead>
+       <tbody>
+         {{#each showList}}
+            <tr class="showPdiResult {{selectedClass}}">
+                <td class="pdiMachineField">{{machineId}}{{newHeadId}}</td>
+                <td class="pdiShipDate">{{date}}</td>
+                <td class="pdiRepField {{getStatusColor pdiStatus}}" style="background-color:{{getStatusColor pdiStatus}}; color:{{getStatusColor pdiStatus}}">{{pdiStatus}}</td>
+            </tr>
+         {{/each}}
+       </tbody>
+    </table>
 </template>
 
 <template name="pdiInspectList">
@@ -38,38 +58,38 @@
               <h3>Machine Id : {{machineId}}</h3>
             </div>
             {{#each repairOrder}}
-                <div class="pdiUser">
-                <h3>PDI performed by : {{user}}</h3>
+                <div class="">
+                   <h3>PDI performed by : {{user}}</h3>
+                </div>
+                <br>
+                <div>
+                   <h3>Main OMM : {{ommMain}}</h3>
                 </div>
                 <div>
-                <h3>Main OMM :&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {{ommMain}}</h3>
+                   <h3>Supplement OMM : {{ommSupp}}</h3>
                 </div>
                 <div>
-                <h3>Supplement OMM : &nbsp;&nbsp;{{ommSupp}}</h3>
+                   <h3>Unload Instructions : {{ommFitting}}</h3>
                 </div>
                 <div>
-                <h3>Unload Instructions : {{ommFitting}}</h3>
+                   <h3>Cebis Mobil OMM : {{ommCebis}}</h3>
                 </div>
-                <div class="sumRightSide">
-                <h3>Cebis Mobil OMM : {{ommCebis}}</h3>
+                <div>
+                   <h3>Tera Track OMM      : {{ommTerra}}</h3>
                 </div>
-                <div class="sumRightSide">
-                <h3>Tera Track OMM : {{ommTerra}}</h3>
-                </div>
-                <div class="sumRightSide">
-                <h3>Profi Cam OMM : {{ommProfiCam}}</h3>
+                <div>
+                   <h3>Profi Cam OMM : {{ommProfiCam}}</h3>
                 </div>
             <div class="repairList">
-            <h3>Repair List:</h3>
-            </div>
-                <br><br><br>
-              <ul>
+               <h3>Repair List:</h3>
+               <ul>
                   {{#each repOrder}}
                       <div>
-                       {{errorNr}}  {{errorDescription}}
+                         {{errorDescription}}
                       </div>
                   {{/each}}
-              </ul>
+               </ul>
+            </div>
             {{/each}}
         {{/each}}
      </div>

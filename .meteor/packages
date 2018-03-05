@@ -42,3 +42,4 @@ zimme:active-route
 npm-container
 twbs:bootstrap
 simple:reactive-method
+reactive-var

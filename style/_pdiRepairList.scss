@@ -1,0 +1,41 @@
+
+
+table.pdiRepairList {
+  position: absolute;
+  top: 320px;
+  margin-left: 25px;
+  width: 242px;
+}
+
+.repairListButton {
+  position: absolute;
+  top: 200px;
+  margin-left: 25px;
+}
+
+.container {
+  overflow: scroll;
+  position: absolute;
+  top: 100px;
+  left: 400px;
+
+  height: 800px;
+  width: 900px;
+  border: black 1px solid;
+  padding: 10px;
+}
+
+.pdiUser {
+  padding: 25px;
+}
+
+.sumRightSide {
+  position: relative;
+  top: -122px;
+  left: 300px;
+}
+
+.repairList {
+  position: relative;
+  top: 50px;
+}

@@ -609,6 +609,11 @@ td {
   top: 240px;
   margin-left: 25px; }
 
+.pdiOverViewNav {
+  position: absolute;
+  top: 50px;
+  left: 559px; }
+
 .washBayLinks {
   position: relative;
   left: 40em; }
@@ -651,6 +656,97 @@ table.historyMessageTable {
 
 .washBayToggleButton {
   margin-left: 300px; }
+
+table.pdiRepairList {
+  position: absolute;
+  top: 320px;
+  margin-left: 25px;
+  width: 242px; }
+
+.repairListButton {
+  position: absolute;
+  top: 200px;
+  margin-left: 25px; }
+
+.container {
+  overflow: scroll;
+  position: absolute;
+  top: 100px;
+  left: 400px;
+  height: 800px;
+  width: 900px;
+  border: black 1px solid;
+  padding: 10px; }
+
+.pdiUser {
+  padding: 25px; }
+
+.sumRightSide {
+  position: relative;
+  top: -122px;
+  left: 300px; }
+
+.repairList {
+  position: relative;
+  top: 50px; }
+
+.siTable {
+  position: absolute;
+  top: 100px;
+  margin-left: 25px; }
+
+table.siSingleTable {
+  width: 390px; }
+
+table.siType {
+  position: absolute;
+  top: 180px;
+  width: 100px; }
+
+table.siMachineList {
+  position: absolute;
+  top: 180px;
+  left: 150px;
+  width: 155px; }
+
+.multipleSiTable {
+  position: absolute;
+  top: 100px;
+  left: 500px; }
+
+.siMdList {
+  position: absolute;
+  top: 80px;
+  left: 400px; }
+
+.siSubmit {
+  position: absolute;
+  top: 20px;
+  left: 200px; }
+
+.siButtons {
+  position: absolute;
+  top: 350px;
+  left: 60em; }
+
+.siUpload {
+  position: absolute;
+  top: 120px;
+  left: 400px; }
+
+.removeSiButton {
+  position: absolute;
+  top: 140px;
+  left: 10px; }
+
+.siText {
+  position: absolute;
+  top: -40px;
+  left: 400px;
+  width: 450px; }
+
+.buttonNotWorking {
+  background: repeating-linear-gradient(45deg, #e6e6e6, #bc171b 10px, #e6e6e6 10px, #bc171b 20px); }
 
 .insideNavBar {
   margin-top: 25px; }

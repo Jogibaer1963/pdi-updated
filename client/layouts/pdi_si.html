@@ -1,93 +1,133 @@
 <template name="si">
     {{#if currentUser}}
-            {{> MainLayout_3}}
-        <br>
-        <a class="btn" href="/">Back to Main Overview</a>
-        <a class="btn" href="/inspectionStart">Back to Inspections Over View</a>
-            <br>
-   {{> upload}}
+          {{> siTable}}
+          {{> upload}}
 
-    <h1 class="posSingle">Single Machines</h1>
-    <form class="siItems">
-        <label for="siItem" class="mLocationId" ></label>
-        <input type="text" class="siItemMachine" id="siItem" name="siMachine" placeholder="Machine" required>
-        <label for="siItem" class="" ></label>
-        <input type="text" class="siItem" id="siItem" name="siItemText" placeholder="Description" required>
-        <button type="submit" class="reserveId">Submit</button>
-    </form>
-    <form class="removeSiItem">
-        <button type="submit" class="removeSiItem removeList">Remove SI Item</button>
-    </form>
-        <br>
-        <div class="activeSiList">
-            <div class="rTable">
-                <div class="rTableRow ">
-                    <div class="rTableHead"><strong>Machine</strong></div>
-                    <div class="rTableHead tableWidth"><strong>SI Description</strong></div>
-                </div>
-                {{#each siList}}
-                    <div class="rTableRow selectedSiItem {{selectedLineItem}}">
-                        <div class="rTableCell">{{machineNr}}</div>
-                        <div class="rTableCell tableWidth">{{errorDescription}}</div>
-                    </div>
-                {{/each}}
-            </div>
-        </div>
     {{else}}
         {{> login}}
     {{/if}}
 </template>
 
+
+<template name="siTable">
+    <div>
+        <nav class="mainLayout">
+            <a class="btn" href="/overViewUser">Over View</a>
+            <a>|</a>
+            <a class="btn" href="/inspectionStart">PDI Overview</a>
+            <a>|</a>
+            <a class="btn" href="/statistics" disabled>Statistics</a>
+            <a>|</a>
+            <a class="btn" href="/logout" >Logout</a>
+        </nav>
+        <br>
+        <div id="logo">
+            <img src="claas_logo.png" />
+        </div>
+    </div>
+    <div class="siTable">
+         <h1 class="posSingle">Single Machines</h1>
+       <form class="siItems">
+          <label for="siItem" class="mLocationId" ></label>
+          <input type="text" class="siItemMachine" id="siItem" name="siMachine" placeholder="Machine" required>
+          <label for="siItem" class="" ></label>
+          <input type="text" class="siItem" id="siItem" name="siItemText" placeholder="Description" required>
+          <button type="submit" class="reserveId">Submit</button>
+       </form>
+        <br><br>
+       <form class="removeSiItem">
+          <button type="submit" class="removeSiItem">Remove SI Item</button>
+       </form>
+          <br>
+       <table class="blueTable siSingleTable">
+            <thead>
+                <tr class="rTableRow ">
+                    <th class="pdiMachineField"><strong>Machine</strong></th>
+                    <th class="pdiComments"><strong>SI Description</strong></th>
+                </tr>
+            </thead>
+            <tbody>
+                {{#each siList}}
+                   <tr class="rTableRow selectedSiItem {{selectedLineItem}}">
+                       <td class="pdiMachineField">{{machineNr}}</td>
+                       <td class="pdiComments">{{errorDescription}}</td>
+                   </tr>
+                {{/each}}
+            </tbody>
+       </table>
+    </div>
+</template>
+
 <template name="upload">
-    {{> changeStat}}
-    {{> uploadList}}
-    <h1 class="posBulkText">Multiple Machines</h1>
-        <form class="siMdList posBulk">
-            <label for="siMdList" class="mLocationId" ></label>
-            <input type="text" id="siMdList" class="siItemMachine" name="siMdList" placeholder="Si Nr" required>
-            <button type="submit" class="reserveId">Submit</button>
-        </form>
-    <h3 class="siUpload">Upload for: {{siNew}}</h3>
-    {{#unless uploading}}
-        <input class="posDatei" type="file" name="uploadCSV">
-    {{else}}
-        <p><i class="fa fa-spin fa-refresh"></i>uploading files</p>
-    {{/unless}}
-    <form class="removeSI">
-        <button type="submit" class="removeSI">Remove SI</button>
-    </form>
+    <div class="siButtons">
+        {{> changeStat}}
+    </div>
+  <div class="multipleSiTable">
+      {{> uploadList}}
+         <h1 class="posBulkText">Multiple Machines</h1>
+      <div class="siText">
+      <h2>How to use:</h2>
+          <h4>1. Enter a SI Nr or SI description and Submit.</h4>
+          <h4>2. Choose the Machine List ( must be a CSV File )</h4>
+      </div>
+           <form class="siMdList posBulk">
+              <label for="siMdList" class="mLocationId" ></label>
+              <input type="text" id="siMdList" class="siItemMachine" name="siMdList" placeholder="Si Nr" required>
+              <button type="submit" class="siSubmit">Submit</button>
+           </form>
+      <div class="siUpload">
+         <h3>Upload for: {{siNew}}</h3>
+           {{#unless uploading}}
+              <input class="posDatei" type="file" name="uploadCSV">
+           {{else}}
+              <p><i class="fa fa-spin fa-refresh"></i>uploading files</p>
+           {{/unless}}
+      </div>
+      <div class="removeSiButton">
+         <form class="removeSI">
+            <button type="submit" class="removeSI">Remove SI</button>
+         </form>
+      </div>
+  </div>
 </template>
 
 <template name="uploadList">
-    <div class="rTable posTable">
-        <div class="rTableRow ">
-            <div class="rTableHead"><strong>SI</strong></div>
-        </div>
+    <table class="blueTable siType">
+        <thead>
+          <tr class="">
+            <th class="pdiDestination"><strong>SI</strong></th>
+          </tr>
+        </thead>
+        <tbody>
         {{#each siTable}}
-            <div class="rTableRow selectedSiItem {{selectedSingleItem}}">
-                <div class="rTableCell">{{siNumber}}</div>
-            </div>
+          <tr class=" selectedSiItem {{selectedSingleItem}}">
+             <td class="pdiDestination">{{siNumber}}</td>
+          </tr>
         {{/each}}
-    </div>
+        </tbody>
+    </table>
     <div>
-        <div class="rTable posMachineTable clearfix">
-            <div class="rTableRow ">
-                <div class="rTableHead"><strong>Machine List</strong></div>
-                <div class="rTableHead"><strong>Status</strong></div>
-            </div>
+        <table class="blueTable siMachineList">
+            <thead>
+              <tr>
+                <th class="pdiMachineField"><strong>Machine List</strong></th>
+                <th class="pdiRepField"><strong>Status</strong></th>
+              </tr>
+            </thead>
+            <tbody>
                 {{#each siContent}}
-                    <div class="rTableRow selectedSi {{selectedSiMachine}}">
-                        <div class="rTableCell">{{machine}}</div>
-                        <div class="rTableCell {{getSiStatusColor siStatus}}" style="background-color:{{getSiStatusColor
-                                siStatus}}; color:{{getSiStatusColor siStatus}}">{{siStatus}}</div>
-                    </div>
+                    <tr class="rTableRow selectedSi {{selectedSiMachine}}">
+                       <td class="pdiMachineField">{{machine}}</td>
+                       <td class="pdiRepField {{getSiStatusColor siStatus}}" style="background-color:{{getSiStatusColor
+                                siStatus}}; color:{{getSiStatusColor siStatus}}">{{siStatus}}</td>
+                    </tr>
                 {{/each}}
-        </div>
+            </tbody>
+        </table>
     </div>
 </template>
 
 <template name="changeStat">
-    <div>
         <form class="statusChange">
             <button type="submit" class="statusButton statusBackground_0">Not Touched</button>
             <p></p>
@@ -99,7 +139,6 @@
             <p></p>
             <button type="submit" class="statusButton statusBackground_4">Move to SI Field List</button>
         </form>
-    </div>
 </template>
 
 
