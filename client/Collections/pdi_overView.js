@@ -93,11 +93,30 @@ if(Meteor.isClient) {
             FlowRouter.go('machineInspect_2');
         },
 
-        'click .loadConfig': () => {
+        'change .loadConfig': () => {
             event.preventDefault();
-            const readTextFile = require('read-text-file');
-            const textFile = readTextFile.read("c:/Downloads/C7700180_00.txt");
-                console.log(textFile);
+            const singleConfig = [];
+            let i = 0;
+            let k = 11;
+            const file = event.target.files[0];
+            if (!file) {
+                return;
+            }
+            let reader = new FileReader();
+                reader.onload = function(e) {
+                const contents = e.target.result;
+                let configLength = contents.length;
+                const machineId = contents.slice(5, 13);
+                let config = contents.slice(31, configLength);
+                let trimConfig = config.replace(/\s+/g, '').trim();
+                const newConfig = (trimConfig.length) / 12;
+                for (j = 0; j < newConfig; j++) {
+                        singleConfig[j] = (trimConfig.substr(i, k).trim()).replace(';', '_');
+                        i = i + 12;
+                }
+                Meteor.call('readConfig', machineId, singleConfig);
+                };
+            reader.readAsText(file);
         },
     });
 

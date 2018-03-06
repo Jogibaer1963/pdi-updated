@@ -11,6 +11,7 @@
     "less": "^2.7.3",
     "meteor-node-stubs": "^0.3.2",
     "qm-fs-readtxtfile": "^0.1.1",
+    "read-file": "^0.2.0",
     "read-text-file": "^1.1.0",
     "spin.js": "^3.1.0",
     "sticky-table-headers": "^0.1.24",

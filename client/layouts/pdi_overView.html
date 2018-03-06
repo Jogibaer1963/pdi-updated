@@ -42,8 +42,10 @@
         <button class="cancelPdiProcess">Cancel PDI</button>
         <button class="machineSkipPdi">Skip PDI</button>
         <button class="resumePdi">Resume PDI</button>
-        <button class="loadConfig buttonNotWorking" disabled>Load Config</button>
     </form>
+        <form class="loadConfig">
+        <input type="file" id="files" name="files[]" value="{{empty}}">
+        </form>
     </div>
     <table class="pdiTable blueTable tablePdiOverview" cellpadding="10">
          <thead>
