@@ -23,7 +23,9 @@ if(Meteor.isClient) {
         },
 
         upcomingList: function () {
-            return MachineReady.find({$and: [{pdiStatus: 0}, {$or: [{shipStatus: 0}, {shipStatus: 2}]}]}, {sort: {date: 1}});
+            return MachineReady.find({$and: [{pdiStatus: 0},
+                    {$or: [{shipStatus: 0}, {shipStatus: 2}]}]},
+                    {sort: {date: 1}});
         },
 
         'selectedClass': function () {
@@ -50,17 +52,6 @@ if(Meteor.isClient) {
             Meteor.call('machineRep', machineRepaired, workingHour);
         },
 
-        'submit .locationId': function (event) {
-            event.preventDefault();
-            const selectedPdiMachine = Session.get('selectedMachineId');
-            if (typeof selectedPdiMachine === 'undefined') {
-                alert('Mark the Machine first before update the Location');
-            }
-            const locationId = event.target.locationId.value;
-            Meteor.call('locationUpdate', selectedPdiMachine, locationId);
-            event.target.locationId.value = "";
-            Session.set('selectedMachineId', '');
-        },
 
         'click .upcomingList': function () {
             const upcomingMachine = this._id;
@@ -88,14 +79,8 @@ if(Meteor.isClient) {
             const machineTestId = MachineReady.findOne({_id: machine_id}).machineId;
             Meteor.call('messageToWashBay', machineTestId, washMessage, machine_id);
             event.target.message.value = '';
-        },
-
-        'click .removeSi': function (e) {
-            e.preventDefault();
-            const siItem = Session.get('selectedItem');
-            console.log(siItem);
-            Meteor.call('removeSi', siItem);
         }
+
 
     });
 

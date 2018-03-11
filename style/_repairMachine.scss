@@ -18,11 +18,12 @@ table.repairTable {
 .machineHours {
   position: relative;
   left: 20em;
+  top: 3em;
 }
 
 .repairLoad {
   position: relative;
-  top: 3em;
+  top: 6em;
   margin-left: 25px;
 }
 
@@ -30,6 +31,7 @@ table.repairTable {
   position: relative;
   top: 3em;
   left: 1em;
+  width: 130px;
 }
 
 .washBayText {
@@ -40,4 +42,15 @@ table.repairTable {
 
 #textMessage {
   width: 400px;
+}
+
+.repNav {
+  position: absolute;
+  left: 40em;
+}
+
+.kitListButton {
+  position: absolute;
+  left: 71em;
+  top: 20em;
 }

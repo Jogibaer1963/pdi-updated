@@ -797,17 +797,19 @@ table.repairTable {
 
 .machineHours {
   position: relative;
-  left: 20em; }
+  left: 20em;
+  top: 3em; }
 
 .repairLoad {
   position: relative;
-  top: 3em;
+  top: 6em;
   margin-left: 25px; }
 
 .repairButton {
   position: relative;
   top: 3em;
-  left: 1em; }
+  left: 1em;
+  width: 130px; }
 
 .washBayText {
   position: relative;
@@ -816,6 +818,15 @@ table.repairTable {
 
 #textMessage {
   width: 400px; }
+
+.repNav {
+  position: absolute;
+  left: 40em; }
+
+.kitListButton {
+  position: absolute;
+  left: 71em;
+  top: 20em; }
 
 .buttonNotWorking {
   background: repeating-linear-gradient(45deg, #e6e6e6, #bc171b 10px, #e6e6e6 10px, #bc171b 20px); }
