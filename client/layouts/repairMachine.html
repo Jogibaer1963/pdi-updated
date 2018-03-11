@@ -1,17 +1,8 @@
 <template name="repairView">
     {{#if currentUser}}
         {{> topNav}}
+        {{> repairNav}}
         {{> repairMachine}}
-    <div class="bulkSi">
-        <h1 class="repSiHead">SI-List</h1>
-        {{> removeSi}}
-        {{> uploadList}}
-        {{> changeStat}}
-    </div>
-        <br><br>
-        {{> washBayRepairMessage}}
-        <br><br><br>
-        {{> upcomings}}
     {{else}}
         {{> login}}
     {{/if}}
@@ -21,37 +12,42 @@
     <div id="logo">
         <img src="claas_logo.png" />
     </div>
-    <h1>Work Load Repair</h1>
-    <form class="repairFinnish">
-        <div>
-          <button type="submit" class="shipMeButton startRepair">Repair Complete</button>
-            <div class="machineHours">
-               <h2>Machine Hours After Repair :</h2>
-            </div>
-           <label for="workingHours" class="mLocationId" ></label>
-           <input type="text" class="machineWorkingHours" id="workingHours" name="workingHours"  required>
-        </div>
-    </form>
-    <form class="locationId">
-        <div>
-            <button type="submit" class="machineLocation">Update Location</button>
-            <label for="locationId" class="mLocationId" ></label>
-            <input type="text" class="machineLocationInput" id="locationId" name="locationId" required>
-        </div>
-    </form>
-    <table class="pdiTable blueTable tablePdiOverview" cellpadding="10">
+    <div class="repairLoad">
+       <h1>Work Load Repair</h1>
+          <form class="repairFinnish">
+             <button type="submit" class="btn btn-default repairButton">Repair Complete</button>
+          </form>
+    </div>
+    <div class="machineHours">
+        <h3>Machine Hours</h3>
+        <label for="workingHours"></label>
+        <input type="text" class="" id="workingHours" name="workingHours"  required>
+    </div>
+    <div class="washBayText">
+        <form class="messageToWashBay">
+            <input type="text"
+                   id="textMessage"
+                   name="message"
+                   placeholder="Message to WashBay"
+                   required>
+            <br><br>
+            <button class="washBayMessage" type="submit">Submit Message to Wash Bay</button>
+        </form>
+    </div>
+    <div>
+      <table class="blueTable repairTable" cellpadding="10">
         <thead>
-        <tr>
-            <th class="pdiMachineField"><strong>Machine</strong></th>
-            <th class="pdiShipDate"><strong>Ship Date</strong></th>
-            <th class="pdiComments"><strong>Comments</strong></th>
-            <th class="pdiKitList"><strong>Ship with Kit</strong></th>
-            <th class="pdiRepField"><strong>Rep</strong></th>
-            <th class="pdiWashField"><strong>Wash</strong></th>
-            <th class="pdiLocation"><strong>Location</strong></th>
-            <th class="pdiKitField"><strong>Kit List printed</strong></th>
-            <th class=""><strong>Parts on Order</strong></th>
-        </tr>
+           <tr>
+              <th class="pdiMachineField"><strong>Machine</strong></th>
+              <th class="pdiShipDate"><strong>Ship Date</strong></th>
+              <th class="pdiComments"><strong>Comments</strong></th>
+              <th class="pdiKitField"><strong>Ship with Kit</strong></th>
+              <th class="pdiRepField"><strong>Rep</strong></th>
+              <th class="pdiWashField"><strong>Wash</strong></th>
+              <th class="pdiLocation"><strong>Location</strong></th>
+              <th class="pdiKitList"><strong>Kit List printed</strong></th>
+              <th class="partsOnOrder"><strong>Parts on Order</strong></th>
+           </tr>
         </thead>
         <tbody>
           {{#each shippList}}
@@ -59,71 +55,58 @@
                 <td class="pdiMachineField ">{{machineId}}{{newHeadId}}</td>
                 <td class="pdiShipDate">{{date}}</td>
                 <td class="pdiComments" style="width: 250px" >{{shippingComment}}</td>
-                <td class="pdiKitList">{{kit}}</td>
+                <td class="pdiKitField">{{kit}}</td>
                 <td class="pdiRepField  {{getStatusColor repairStatus}}" style="background-color:{{getStatusColor repairStatus}}; color:{{getStatusColor repairStatus}}" >{{repairStatus}}</td>
                 <td class="pdiWashField  {{getStatusColor washStatus}}" style="background-color:{{getStatusColor washStatus}}; color:{{getStatusColor washStatus}}" >{{washStatus}}</td>
-                <td class="pdiLocation" style="background-color: #6fd981">{{locationId}}</td>
-                <td class="pdiKitField {{getStatusKit KitStatus}}" style="background-color:{{getStatusKit KitStatus}}; color:{{getStatusKit KitStatus}}" >{{KitStatus}}</td>
-                <td class=" {{getOrderStatusColor orderStatus}}" style="background-color:{{getOrderStatusColor
+                <td class="pdiLocation">{{locationId}}</td>
+                <td class="pdiKitList {{getStatusKit KitStatus}}" style="background-color:{{getStatusKit KitStatus}}; color:{{getStatusKit KitStatus}}" >{{KitStatus}}</td>
+                <td class="partsOnOrder {{getOrderStatusColor orderStatus}}" style="background-color:{{getOrderStatusColor
                         orderStatus}}; color:{{getOrderStatusColor orderStatus}}" >{{orderStatus}}</td>
+              </tr>
+           {{/each}}
+         </tbody>
+       </table>
+    </div>
+    <div class="upComings">
+        <h1>Forecast</h1>
+           <br>
+       <table class="blueTable upComingTable" cellpadding="10">
+          <thead>
+             <tr>
+               <th class="pdiMachineField"><strong>Machine</strong></th>
+               <th class="pdiShipDate"><strong>Shipdate</strong></th>
+               <th class="pdiDestination"><strong>Destination</strong></th>
+               <th class="pdiTransporter"><strong>Transporter</strong></th>
+               <th class="pdiLocation"><strong>Location</strong></th>
+               <th class="pdiComments" style="width: 200px"><strong>Shipping Comments</strong></th>
+               <th class="pdiKitField"><strong>Ship with Kit</strong></th>
+               <th class="pdiKitList"><strong>Kit List printed</strong></th>
              </tr>
-          {{/each}}
-        </tbody>
-    </table>
-</template>
-
-<template name="removeSi">
-    <form class="removeSiItem">
-        <button class="removeSi removeRepList">Remove SI Item</button>
-    </form>
-</template>
-
-<template name="washBayRepairMessage">
-    <div class="">
-        <form class="messageToWashBay">
-            <input type="text" id="pdiDescription" name="message" placeholder="Message to WashBay" required>
-            <br><br>
-            <button class="washBayMessage" type="submit">Submit Message to Wash Bay</button>
-        </form>
+          </thead>
+          <tbody>
+            {{#each upcomingList}}
+               <tr class="rTableRow readyList upcomingList {{selectedClass}}">
+                  <td class="pdiMachineField">{{machineId}}{{newHeadId}}</td>
+                  <td class="pdiShipDate">{{date}}</td>
+                  <td class="pdiDestination">{{destination}}</td>
+                  <td class="pdiTransporter">{{transporter}}</td>
+                  <td class="pdiLocation">{{locationId}}</td>
+                  <td class="pdiComments">{{shippingComment}}</td>
+                  <td class="pdiKitField">{{kit}}</td>
+                  <td class="pdiKitList {{getStatusKit KitStatus}}" style="background-color:{{getStatusKit KitStatus}}; color:{{getStatusKit KitStatus}}" >{{KitStatus}}</td>
+               </tr>
+            {{/each}}
+          </tbody>
+       </table>
     </div>
 </template>
 
-<template name="upcomings">
-    <div class="upcoming">
-    <h1>Upcoming Shipments</h1>
+<template name="repairNav">
+    <div>
+        <nav class="mainLayout">
+            <a class="btn" href="/pdiRepairList">Review Repair List</a>
+            <a>|</a>
+            <a class="btn" href="/si">SI's or special Item's </a>
+        </nav>
     </div>
-    <br><br><br><br>
-   <div>
-       <form>
-           <button type="submit" class="removeList">Remove Kit List</button>
-        <button type="submit" class="addList">Kit List Printed</button>
-       </form>
-   </div>
-    <div class="rTableUpcoming">
-        <div class="rTableRow">
-            <div class="rTableHead"><strong>Machine</strong></div>
-            <div class="rTableHead"><strong><span>Shipdate</span></strong></div>
-            <div class="rTableHead"><strong>Destination</strong></div>
-            <div class="rTableHead"><strong>Transporter</strong></div>
-            <div class="rTableHead"><strong>Location</strong></div>
-            <div class="rTableHead" style="width: 200px"><strong>Shipping Comments</strong></div>
-            <div class="rTableHead"><strong>Ship with Kit</strong></div>
-            <div class="rTableHeadOverView"><strong>Kit List printed</strong></div>
-        </div>
-        {{#each upcomingList}}
-            <div class="rTableRow readyList upcomingList {{selectedClass}}">
-                <div class="rTableCell">{{machineId}}{{newHeadId}}</div>
-                <div class="rTableCell">{{date}}</div>
-                <div class="rTableCell">{{destination}}</div>
-                <div class="rTableCell">{{transporter}}</div>
-                <div class="rTableCell" style="background-color: #6fd981">{{locationId}}</div>
-                <div class="rTableCellComment">{{shippingComment}}</div>
-                <div class="rTableCell">{{kit}}</div>
-                <div class="rTableCellOverView {{getStatusKit KitStatus}}" style="background-color:{{getStatusKit KitStatus}}; color:{{getStatusKit KitStatus}}" >{{KitStatus}}</div>
-            </div>
-        {{/each}}
-    </div>
-
-
-
 </template>

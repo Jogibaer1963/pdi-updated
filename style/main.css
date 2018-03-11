@@ -134,6 +134,10 @@ table.tableAdminPos {
   max-width: 60px;
   min-width: 60px; }
 
+.partsOnOrder {
+  max-width: 50px;
+  min-width: 50px; }
+
 .userLogOut {
   max-width: 50px;
   min-width: 50px;
@@ -177,8 +181,8 @@ table.shippingTable {
   min-width: 70px; }
 
 .pdiKitList {
-  max-width: 50px;
-  min-width: 50px; }
+  max-width: 80px;
+  min-width: 80px; }
 
 .pdiComments {
   max-width: 310px;
@@ -778,6 +782,40 @@ table.siMachineList {
   top: -40px;
   left: 400px;
   width: 450px; }
+
+.upComings {
+  position: absolute;
+  top: 65em;
+  margin-left: 25px; }
+
+table.upComingTable {
+  width: 1010px; }
+
+table.repairTable {
+  margin-left: 35px;
+  width: 960px; }
+
+.machineHours {
+  position: relative;
+  left: 20em; }
+
+.repairLoad {
+  position: relative;
+  top: 3em;
+  margin-left: 25px; }
+
+.repairButton {
+  position: relative;
+  top: 3em;
+  left: 1em; }
+
+.washBayText {
+  position: relative;
+  top: -5em;
+  left: 50em; }
+
+#textMessage {
+  width: 400px; }
 
 .buttonNotWorking {
   background: repeating-linear-gradient(45deg, #e6e6e6, #bc171b 10px, #e6e6e6 10px, #bc171b 20px); }

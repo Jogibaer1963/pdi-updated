@@ -84,7 +84,7 @@ $pdiOverviewMachine: 80px;
 $pdiDestination: 100px;
 $pdiTransporter: 100px;
 $pdiTruckOnOrder: 70px;
-$pdiKitList: 50px;
+$pdiKitList: 80px;
 $pdiComments: 310px;
 $pdiKitField: 180px;
 $headerKit: 320px;
@@ -95,7 +95,7 @@ $pdiShipField: 60px;
 $pdiLocation: 70px;
 $config: 60px;
 
-
+$partsOnOrder: 50px;
 
 
 $headerTable: 230px;
@@ -162,6 +162,11 @@ $eraseUser: 50px;
    max-width: $loggedIn;
    min-width: $loggedIn;
  }
+
+.partsOnOrder {
+  max-width: $partsOnOrder;
+  min-width: $partsOnOrder;
+}
 
 .userLogOut {
   max-width: $logOut;
