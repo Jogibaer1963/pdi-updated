@@ -33,92 +33,6 @@
   top: 290px;
   left: 25px; }
 
-.checklistReturn-btn {
-  position: fixed;
-  right: 250px;
-  color: black; }
-
-a:hover {
-  background-color: lightgrey;
-  text-align: right;
-  text-decoration: none; }
-
-.checkpointHeader .title {
-  height: 40px;
-  line-height: 30px;
-  background: gray;
-  font-size: 18px;
-  font-family: verdana, serif;
-  display: block;
-  color: white;
-  padding: 10px;
-  vertical-align: center; }
-
-.tableHeadFixed {
-  position: fixed;
-  z-index: 1; }
-
-.scroll {
-  max-height: 60px;
-  overflow: auto; }
-
-.input {
-  border: black 1px;
-  background-color: #e6e6e6; }
-
-.inputMargin {
-  float: left;
-  margin-top: 30px;
-  margin-left: 25px; }
-
-.descriptionBox {
-  width: 350px; }
-
-.checkBoxHeader {
-  padding-left: 40px; }
-
-.checkpointCheckbox {
-  margin-left: 525px; }
-
-.checkBoxMargin {
-  margin: 5px; }
-
-.inputRange {
-  width: 220px; }
-
-.dependencies {
-  position: relative;
-  left: 30px; }
-
-.tableChecklist {
-  position: absolute;
-  top: 400px;
-  margin-left: 25px; }
-
-.position {
-  max-width: 142px;
-  min-width: 142px; }
-
-.failure {
-  max-width: 500px;
-  min-width: 500px; }
-
-.failureRow {
-  max-width: 500px;
-  min-width: 500px; }
-
-.type {
-  max-width: 100px;
-  min-width: 100px; }
-
-.rangeStart {
-  max-width: 220px;
-  min-width: 220px; }
-
-.rangeEnd {
-  max-width: 220px;
-  min-width: 220px; }
-
 thead {
   background-color: lightgrey; }
 
@@ -147,7 +61,7 @@ table.blueTable tbody td {
   word-wrap: break-word; }
 
 table.blueTable tr:nth-child(even) {
-  background-color: #b5e1e4; }
+  background-color: #b7d9e4; }
 
 table.blueTable thead {
   background: #1C6EA4;
@@ -166,7 +80,7 @@ table.blueTable tfoot {
   font-size: 14px;
   font-weight: bold;
   color: #FFFFFF;
-  background: #D0E4F5;
+  background: #d6e0f5;
   border-top: 2px solid #444444; }
 
 table.blueTable tfoot td {
@@ -233,9 +147,6 @@ table.tableAdminPos {
 .shippingMachines {
   height: 100px; }
 
-table.pdiTable {
-  width: 570px; }
-
 table.shippingTable {
   position: absolute;
   top: 400px;
@@ -262,8 +173,8 @@ table.shippingTable {
   min-width: 100px; }
 
 .pdiTruckOnOrder {
-  max-width: 50px;
-  min-width: 50px; }
+  max-width: 70px;
+  min-width: 70px; }
 
 .pdiKitList {
   max-width: 50px;
@@ -399,17 +310,26 @@ table.locationTable {
 .secondKit {
   float: left; }
 
+.thirdKit {
+  position: relative;
+  top: 24px;
+  float: left; }
+
 .comment {
   position: absolute;
   left: 440px;
   width: 500px; }
 
 .newMachineSubmit {
-  margin-top: 30px; }
+  margin-top: 50px;
+  margin-left: 350px; }
 
 .shippingMachinesTable {
   position: relative;
   top: 40px; }
+
+.shippingTable {
+  margin-top: 3em; }
 
 .searchField {
   margin-left: 15px; }
@@ -417,12 +337,6 @@ table.locationTable {
 .delete_Machine {
   float: left;
   margin-right: 25px; }
-
-.editMachine {
-  background: repeating-linear-gradient(45deg, #e6e6e6, #bc171b 10px, #e6e6e6 10px, #bc171b 20px); }
-
-.searchMachine {
-  background: repeating-linear-gradient(45deg, #e6e6e6, #bc171b 10px, #e6e6e6 10px, #bc171b 20px); }
 
 .firstKit {
   margin-top: 25px; }
@@ -540,6 +454,94 @@ table.locationTable {
   100% {
     background-color: #1cbdee;
     box-shadow: 0 0 3px #ec67ff; } }
+.checklistReturn-btn {
+  position: fixed;
+  right: 250px;
+  color: black; }
+
+a:hover {
+  background-color: lightgrey;
+  text-align: right;
+  text-decoration: none; }
+
+.checkpointHeader .title {
+  margin-top: 40px;
+  height: 40px;
+  line-height: 30px;
+  background: gray;
+  font-size: 18px;
+  font-family: verdana, serif;
+  display: block;
+  color: white;
+  padding: 10px;
+  vertical-align: center; }
+
+.tableHeadFixed {
+  position: fixed;
+  z-index: 1; }
+
+.scroll {
+  max-height: 60px;
+  overflow: auto; }
+
+.input {
+  border: black 1px;
+  background-color: #e6e6e6; }
+
+.inputMargin {
+  float: left;
+  margin-top: 30px;
+  margin-left: 25px; }
+
+.descriptionBox {
+  width: 350px; }
+
+.checkBoxHeader {
+  padding-left: 40px; }
+
+.checkpointCheckbox {
+  margin-left: 525px; }
+
+.checkBoxMargin {
+  margin: 5px; }
+
+.inputRange {
+  width: 220px; }
+
+.dependencies {
+  position: relative;
+  left: 30px;
+  top: 19px; }
+
+.tableChecklist {
+  position: absolute;
+  top: 440px;
+  margin-left: 25px; }
+
+.position {
+  max-width: 142px;
+  min-width: 142px; }
+
+.failure {
+  max-width: 500px;
+  min-width: 500px; }
+
+.failureRow {
+  max-width: 500px;
+  min-width: 500px; }
+
+.type {
+  max-width: 100px;
+  min-width: 100px; }
+
+.rangeStart {
+  max-width: 220px;
+  min-width: 220px; }
+
+.rangeEnd {
+  max-width: 220px;
+  min-width: 220px; }
+
 .ommInput {
   margin-left: 15px; }
 
@@ -620,6 +622,31 @@ td {
   position: absolute;
   top: 50px;
   left: 559px; }
+
+.loadConfig {
+  float: left; }
+
+.fileContainer {
+  overflow: hidden;
+  position: relative;
+  left: 30em;
+  top: -1.9em; }
+
+.fileContainer [type=file] {
+  cursor: inherit;
+  display: block;
+  font-size: 999px;
+  filter: alpha(opacity=0);
+  min-height: 100%;
+  min-width: 100%;
+  opacity: 0;
+  position: absolute;
+  right: 0;
+  text-align: right;
+  top: 0; }
+
+table.pdiTable {
+  width: 570px; }
 
 .washBayLinks {
   position: relative;
@@ -773,7 +800,7 @@ table.siMachineList {
 
 .selected {
   background-color: #978f93;
-  z-index: revert; }
+  z-index: 1; }
 
 .selectedBackgroundGreen {
   background-color: green; }
@@ -792,5 +819,14 @@ table.siMachineList {
   left: 450px;
   margin-top: 10px;
   color: black; }
+
+.editMachine {
+  background: repeating-linear-gradient(45deg, #e6e6e6, #bc171b 10px, #e6e6e6 10px, #bc171b 20px); }
+
+.searchMachine {
+  background: repeating-linear-gradient(45deg, #e6e6e6, #bc171b 10px, #e6e6e6 10px, #bc171b 20px); }
+
+.inActive {
+  background: repeating-linear-gradient(45deg, #e6e6e6, #bc171b 10px, #e6e6e6 10px, #bc171b 20px); }
 
 /*# sourceMappingURL=main.css.map */

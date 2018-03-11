@@ -6,8 +6,6 @@
     {{/if}}
 </template>
 
-
-
 <template name="inspection">
   <div>
       <nav class="mainLayout">
@@ -37,14 +35,15 @@
        Average Fuel Consumption per Pdi : {{countConsumption}} Gallon
     </div>
     <div class="pdiButton">
-    <form>
-        <button class="machinePdi">Perform PDI</button>
-        <button class="cancelPdiProcess">Cancel PDI</button>
-        <button class="machineSkipPdi">Skip PDI</button>
-        <button class="resumePdi">Resume PDI</button>
-    </form>
-        <form class="loadConfig">
-        <input type="file" id="files" name="files[]" value="{{empty}}">
+        <form>
+            <button class="machinePdi">Perform PDI</button>
+            <button class="cancelPdiProcess">Cancel PDI</button>
+            <button class="machineSkipPdi">Skip PDI</button>
+            <button class="resumePdi">Resume PDI</button>
+        </form>
+        <form class="fileContainer">
+            <button>Load config</button>
+            <input type="file" id="files" name="files[]" value="{{empty}}">
         </form>
     </div>
     <table class="pdiTable blueTable tablePdiOverview" cellpadding="10">

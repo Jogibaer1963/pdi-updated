@@ -7,9 +7,11 @@
   "dependencies": {
     "@babel/runtime": "^7.0.0-beta.36",
     "bcrypt": "^1.0.3",
+    "buffer": "^5.1.0",
     "highcharts": "^5.0.14",
     "less": "^2.7.3",
     "meteor-node-stubs": "^0.3.2",
+    "mongodb": "^3.0.4",
     "qm-fs-readtxtfile": "^0.1.1",
     "read-file": "^0.2.0",
     "read-text-file": "^1.1.0",

@@ -24,6 +24,12 @@
   float: left;
 }
 
+.thirdKit {
+  position: relative;
+  top: 24px;
+  float: left;
+}
+
 .comment {
   position: absolute;
   left: 440px;
@@ -31,12 +37,17 @@
 }
 
 .newMachineSubmit {
-  margin-top: 30px ;
+  margin-top: 50px ;
+  margin-left: 350px;
 }
 
 .shippingMachinesTable {
   position: relative;
   top: 40px;
+}
+
+.shippingTable {
+  margin-top: 3em;
 }
 
 .searchField {
@@ -48,22 +59,3 @@
   margin-right: 25px;
 }
 
-.editMachine {
-  background: repeating-linear-gradient(
-                  45deg,
-                  #e6e6e6,
-                  #bc171b 10px,
-                  #e6e6e6 10px,
-                  #bc171b 20px
-  );
-}
-
-.searchMachine {
-  background: repeating-linear-gradient(
-                  45deg,
-                  #e6e6e6,
-                  #bc171b 10px,
-                  #e6e6e6 10px,
-                  #bc171b 20px
-  );
-}

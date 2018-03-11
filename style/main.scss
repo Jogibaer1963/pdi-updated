@@ -1,6 +1,5 @@
 @import "admin";
 @import 'login';
-@import 'checklist';
 @import "tables";
 @import "overView";
 @import "machineLocation";
@@ -13,6 +12,7 @@
 @import "washList";
 @import "pdiRepairList";
 @import "siTable";
+@import "repairMachine";
 
 @import "buttonNotWorking";
 
@@ -40,7 +40,7 @@
 
 .selected {
   background-color: #978f93;
-  z-index: revert;
+  z-index: 1;
 }
 
 .selectedBackgroundGreen {
@@ -64,4 +64,36 @@
   left: 450px;
   margin-top: 10px;
   color: black;
+}
+
+//  Inactive Buttons
+
+.editMachine {
+  background: repeating-linear-gradient(
+                  45deg,
+                  #e6e6e6,
+                  #bc171b 10px,
+                  #e6e6e6 10px,
+                  #bc171b 20px
+  );
+}
+
+.searchMachine {
+   background: repeating-linear-gradient(
+                   45deg,
+                   #e6e6e6,
+                   #bc171b 10px,
+                   #e6e6e6 10px,
+                   #bc171b 20px
+   );
+ }
+
+.inActive {
+  background: repeating-linear-gradient(
+                  45deg,
+                  #e6e6e6,
+                  #bc171b 10px,
+                  #e6e6e6 10px,
+                  #bc171b 20px
+  );
 }

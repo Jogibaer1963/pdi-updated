@@ -1,4 +1,136 @@
 
+// variables
+
+$positionTable: 142px;
+$failureTable: 500px;
+$failureTableRow: 500px;
+$typeTable: 100px;
+$rangeStartEndTable: 220px;
+
+
+
+// Buttons
+
+.checklistReturn-btn {
+  position: fixed;
+  right: 250px;
+  color: black;
+}
+
+// Anker tags
+
+a:hover {
+  background-color: lightgrey;
+  text-align: right;
+  text-decoration: none;
+}
+
+// Headers and Title
+
+.checkpointHeader .title {
+  margin-top: 40px;
+  height:40px;
+  line-height:30px;
+  background:gray;
+  font-size:18px;
+  font-family: verdana, serif;
+  display:block;
+  color:white;
+  padding:10px;
+  vertical-align: center;
+}
+
+.tableHeadFixed {
+  position: fixed;
+  z-index: 1;
+}
+
+.scroll {
+  max-height: 60px;
+  overflow: auto;
+}
+
+// Input Fields
+
+.input {
+  border: black 1px;
+  background-color: #e6e6e6;
+}
+
+.inputMargin {
+  float: left;
+  margin-top: 30px;
+  margin-left: 25px;
+}
+
+.descriptionBox {
+  width: 350px;
+}
+
+.checkBoxHeader {
+  padding-left: 40px;
+}
+
+.checkpointCheckbox {
+  margin-left: 525px;
+}
+
+.checkBoxMargin {
+  margin: 5px;
+}
+
+.inputRange {
+  width: 220px;
+}
+
+.dependencies {
+  position: relative;
+  left: 30px;
+  top: 19px;
+}
+
+// table position
+
+.tableChecklist {
+  position: absolute;
+  top: 440px;
+  margin-left: 25px;
+}
+
+
+.position {
+  max-width: $positionTable;
+  min-width: $positionTable;
+
+}
+
+.failure {
+  max-width: $failureTable;
+  min-width: $failureTable;
+}
+
+.failureRow {
+  max-width: $failureTableRow;
+  min-width: $failureTableRow;
+}
+
+.type {
+  max-width: $typeTable;
+  min-width: $typeTable;
+}
+
+.rangeStart {
+  max-width: $rangeStartEndTable;
+  min-width: $rangeStartEndTable;
+}
+
+.rangeEnd {
+  max-width: $rangeStartEndTable;
+  min-width: $rangeStartEndTable;
+}
+
+
+
 .ommInput {
   margin-left: 15px;
 }
@@ -51,6 +183,8 @@ td {
   margin-left: 260px;
   bottom: 0;
 }
+
+
 
 .pdiCell {
   font-size: 16px;

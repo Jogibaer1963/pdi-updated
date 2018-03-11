@@ -4,6 +4,7 @@
 if(Meteor.isClient) {
 
 
+
     Template.inspection.helpers({
 
          shipList: function () {

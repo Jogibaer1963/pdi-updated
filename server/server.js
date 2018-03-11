@@ -111,6 +111,7 @@ if(Meteor.isServer){
 
     Meteor.methods({
 
+
         'readConfig': function(machineId, configArray) {
             MachineReady.update({machineId: machineId}, {$set: {config: configArray, configStatus: 1}});
         },

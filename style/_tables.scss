@@ -36,7 +36,7 @@ table.blueTable {
     word-wrap: break-word;
   }
   table.blueTable tr:nth-child(even) {
-    background-color: #b5e1e4;
+    background-color: #b7d9e4;
   }
   table.blueTable thead {
     background: #1C6EA4;
@@ -56,7 +56,7 @@ table.blueTable {
     font-size: 14px;
     font-weight: bold;
     color: #FFFFFF;
-    background: #D0E4F5;
+    background: #d6e0f5;
     border-top: 2px solid #444444;
   }
   table.blueTable tfoot td {
@@ -83,7 +83,7 @@ $shipDate: 90px;
 $pdiOverviewMachine: 80px;
 $pdiDestination: 100px;
 $pdiTransporter: 100px;
-$pdiTruckOnOrder: 50px;
+$pdiTruckOnOrder: 70px;
 $pdiKitList: 50px;
 $pdiComments: 310px;
 $pdiKitField: 180px;
@@ -94,7 +94,7 @@ $pdiWashField: 50px;
 $pdiShipField: 60px;
 $pdiLocation: 70px;
 $config: 60px;
-$pdiTable: 570px;
+
 
 
 
@@ -182,9 +182,6 @@ $eraseUser: 50px;
 
 // end Admin Table
 
-table.pdiTable {
-  width: $pdiTable;
-}
 
 
 

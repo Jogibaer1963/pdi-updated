@@ -1,6 +1,6 @@
 <template name="repairView">
     {{#if currentUser}}
-        {{> MainLayout_3}}
+        {{> topNav}}
         {{> repairMachine}}
     <div class="bulkSi">
         <h1 class="repSiHead">SI-List</h1>
@@ -8,7 +8,6 @@
         {{> uploadList}}
         {{> changeStat}}
     </div>
-
         <br><br>
         {{> washBayRepairMessage}}
         <br><br><br>
@@ -18,13 +17,10 @@
     {{/if}}
 </template>
 
-<template name="removeSi">
-    <form class="removeSiItem">
-        <button class="removeSi removeRepList">Remove SI Item</button>
-    </form>
-</template>
-
 <template name="repairMachine">
+    <div id="logo">
+        <img src="claas_logo.png" />
+    </div>
     <h1>Work Load Repair</h1>
     <form class="repairFinnish">
         <div>
@@ -36,7 +32,6 @@
            <input type="text" class="machineWorkingHours" id="workingHours" name="workingHours"  required>
         </div>
     </form>
-
     <form class="locationId">
         <div>
             <button type="submit" class="machineLocation">Update Location</button>
@@ -44,35 +39,43 @@
             <input type="text" class="machineLocationInput" id="locationId" name="locationId" required>
         </div>
     </form>
-    <br><br><br><br><br><br>
-    <div class="rTable">
-        <div class="rTableRow ">
-            <div class="rTableHead"><strong>Machine</strong></div>
-            <div class="rTableHead"><strong>Ship Date</strong></div>
-            <div class="rTableHead"><strong>Comments</strong></div>
-            <div class="rTableHead"><strong>Ship with Kit</strong></div>
-            <div class="rTableHead"><strong>Rep</strong></div>
-            <div class="rTableHead"><strong>Wash</strong></div>
-            <div class="rTableHead"><strong>Location</strong></div>
-            <div class="rTableHeadOverView"><strong>Kit List printed</strong></div>
-            <div class="rTableHeadOverView"><strong>Parts on Order</strong></div>
+    <table class="pdiTable blueTable tablePdiOverview" cellpadding="10">
+        <thead>
+        <tr>
+            <th class="pdiMachineField"><strong>Machine</strong></th>
+            <th class="pdiShipDate"><strong>Ship Date</strong></th>
+            <th class="pdiComments"><strong>Comments</strong></th>
+            <th class="pdiKitList"><strong>Ship with Kit</strong></th>
+            <th class="pdiRepField"><strong>Rep</strong></th>
+            <th class="pdiWashField"><strong>Wash</strong></th>
+            <th class="pdiLocation"><strong>Location</strong></th>
+            <th class="pdiKitField"><strong>Kit List printed</strong></th>
+            <th class=""><strong>Parts on Order</strong></th>
+        </tr>
+        </thead>
+        <tbody>
+          {{#each shippList}}
+             <tr class=" openInspections {{selectedClass2}}">
+                <td class="pdiMachineField ">{{machineId}}{{newHeadId}}</td>
+                <td class="pdiShipDate">{{date}}</td>
+                <td class="pdiComments" style="width: 250px" >{{shippingComment}}</td>
+                <td class="pdiKitList">{{kit}}</td>
+                <td class="pdiRepField  {{getStatusColor repairStatus}}" style="background-color:{{getStatusColor repairStatus}}; color:{{getStatusColor repairStatus}}" >{{repairStatus}}</td>
+                <td class="pdiWashField  {{getStatusColor washStatus}}" style="background-color:{{getStatusColor washStatus}}; color:{{getStatusColor washStatus}}" >{{washStatus}}</td>
+                <td class="pdiLocation" style="background-color: #6fd981">{{locationId}}</td>
+                <td class="pdiKitField {{getStatusKit KitStatus}}" style="background-color:{{getStatusKit KitStatus}}; color:{{getStatusKit KitStatus}}" >{{KitStatus}}</td>
+                <td class=" {{getOrderStatusColor orderStatus}}" style="background-color:{{getOrderStatusColor
+                        orderStatus}}; color:{{getOrderStatusColor orderStatus}}" >{{orderStatus}}</td>
+             </tr>
+          {{/each}}
+        </tbody>
+    </table>
+</template>
 
-        </div>
-        {{#each shippList}}
-            <div class="rTableRow openInspections {{selectedClass2}}">
-                <div class="rTableCell">{{machineId}}{{newHeadId}}</div>
-                <div class="rTableCell">{{date}}</div>
-                <div class="rTableCell" style="width: 250px" >{{shippingComment}}</div>
-                <div class="rTableCell">{{kit}}</div>
-                <div class="rTableCell  {{getStatusColor repairStatus}}" style="background-color:{{getStatusColor repairStatus}}; color:{{getStatusColor repairStatus}}" >{{repairStatus}}</div>
-                <div class="rTableCell  {{getStatusColor washStatus}}" style="background-color:{{getStatusColor washStatus}}; color:{{getStatusColor washStatus}}" >{{washStatus}}</div>
-                <div class="rTableCell" style="background-color: #6fd981">{{locationId}}</div>
-                <div class="rTableCellOverView {{getStatus KitStatus}}" style="background-color:{{getStatus KitStatus}}; color:{{getStatus KitStatus}}" >{{KitStatus}}</div>
-                <div class="rTableCellOverView {{getOrderStatusColor orderStatus}}" style="background-color:{{getOrderStatusColor
-                        orderStatus}}; color:{{getOrderStatusColor orderStatus}}" >{{orderStatus}}</div>
-            </div>
-        {{/each}}
-    </div>
+<template name="removeSi">
+    <form class="removeSiItem">
+        <button class="removeSi removeRepList">Remove SI Item</button>
+    </form>
 </template>
 
 <template name="washBayRepairMessage">
@@ -116,7 +119,7 @@
                 <div class="rTableCell" style="background-color: #6fd981">{{locationId}}</div>
                 <div class="rTableCellComment">{{shippingComment}}</div>
                 <div class="rTableCell">{{kit}}</div>
-                <div class="rTableCellOverView {{getStatus KitStatus}}" style="background-color:{{getStatus KitStatus}}; color:{{getStatus KitStatus}}" >{{KitStatus}}</div>
+                <div class="rTableCellOverView {{getStatusKit KitStatus}}" style="background-color:{{getStatusKit KitStatus}}; color:{{getStatusKit KitStatus}}" >{{KitStatus}}</div>
             </div>
         {{/each}}
     </div>
