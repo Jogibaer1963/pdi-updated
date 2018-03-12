@@ -28,7 +28,7 @@ table.historyMessageTable {
 
 .washListButtons {
   position: absolute;
-  top: 12em;
+  top: 16em;
   margin-left: 25px;
 }
 
@@ -44,10 +44,16 @@ table.historyMessageTable {
 
 .messageClearButton {
   position: absolute;
-  top: 20em;
+  top: 20.5em;
   left: 32em;
 }
 
 .washBayToggleButton {
   margin-left: 300px;
+}
+
+.locationButton {
+  position: relative;
+  top: 10em;
+  left: 31em;
 }

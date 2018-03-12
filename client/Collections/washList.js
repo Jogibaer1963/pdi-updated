@@ -102,7 +102,7 @@ if (Meteor.isClient) {
             Meteor.call('finishWashing', selectedMachineId, dateStop, washDuration, waitWashTime);
         },
 
-        'submit .locationId': function(event) {
+        'submit .locationNew': function(event) {
             event.preventDefault();
             const selectedPdiMachine = Session.get('selectedMachineId');
             if(typeof selectedPdiMachine === 'undefined') {

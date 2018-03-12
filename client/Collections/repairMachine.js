@@ -15,10 +15,11 @@ if(Meteor.isClient) {
         },
 
         'selectedClass2': function () {
-            const openRepair = this._id;
+            const selectedRepair = this._id;
             const selectedMachineId = Session.get('selectedMachineId');
-            if (selectedMachineId === openRepair) {
-                return "selected_2"
+            if (selectedMachineId === selectedRepair) {
+                console.log(selectedMachineId, selectedRepair);
+                return "selected"
             }
         },
 
@@ -32,7 +33,7 @@ if(Meteor.isClient) {
             const upcomingMachineId = this._id;
             const selectedMachineId = Session.get('selectedMachineId');
             if (selectedMachineId === upcomingMachineId) {
-                return "selected_2"
+                return "selected"
             }
         }
     });
@@ -58,14 +59,16 @@ if(Meteor.isClient) {
             Session.set('selectedMachineId', upcomingMachine);
         },
 
-        'click .addList': function () {
+        'click .addToList': function () {
             event.preventDefault();
             const KitStatus = 1;
             const machineId = Session.get('selectedMachineId');
+            console.log('Machine', machineId);
             Meteor.call('listPrinted', machineId, KitStatus);
+            Session.set('selectedMachineId', '');
         },
 
-        'click .removeList': function () {
+        'click .removeFromList': function () {
             event.preventDefault();
             const KitStatus = 0;
             const machineId = Session.get('selectedMachineId');

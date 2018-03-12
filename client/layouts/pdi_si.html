@@ -1,8 +1,8 @@
 <template name="si">
     {{#if currentUser}}
+          {{> topNav}}
           {{> siTable}}
           {{> upload}}
-
     {{else}}
         {{> login}}
     {{/if}}
@@ -10,21 +10,9 @@
 
 
 <template name="siTable">
-    <div>
-        <nav class="mainLayout">
-            <a class="btn" href="/overViewUser">Over View</a>
-            <a>|</a>
-            <a class="btn" href="/inspectionStart">PDI Overview</a>
-            <a>|</a>
-            <a class="btn" href="/statistics" disabled>Statistics</a>
-            <a>|</a>
-            <a class="btn" href="/logout" >Logout</a>
-        </nav>
-        <br>
         <div id="logo">
             <img src="claas_logo.png" />
         </div>
-    </div>
     <div class="siTable">
          <h1 class="posSingle">Single Machines</h1>
        <form class="siItems">

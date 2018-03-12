@@ -35,9 +35,9 @@
         </form>
     </div>
     <div class="kitListButton">
-        <button type="submit" class="btn btn-default repairButton">Kitlist printed</button>
+        <button type="submit" class="btn btn-default repairButton addToList">Kitlist printed</button>
         <br><br>
-        <button type="submit" class="btn btn-default repairButton">Remove Kitlist</button>
+        <button type="submit" class="btn btn-default repairButton removeFromList" >Remove Kitlist</button>
     </div>
     <div>
       <table class="blueTable repairTable" cellpadding="10">
@@ -56,7 +56,7 @@
         </thead>
         <tbody>
           {{#each shippList}}
-             <tr class=" openInspections {{selectedClass2}}">
+             <tr class="openInspections {{selectedClass2}}">
                 <td class="pdiMachineField ">{{machineId}}{{newHeadId}}</td>
                 <td class="pdiShipDate">{{date}}</td>
                 <td class="pdiComments" style="width: 250px" >{{shippingComment}}</td>
@@ -90,7 +90,7 @@
           </thead>
           <tbody>
             {{#each upcomingList}}
-               <tr class="rTableRow readyList upcomingList {{selectedClass}}">
+               <tr class="upcomingList {{selectedClass}}">
                   <td class="pdiMachineField">{{machineId}}{{newHeadId}}</td>
                   <td class="pdiShipDate">{{date}}</td>
                   <td class="pdiDestination">{{destination}}</td>

@@ -1,5 +1,6 @@
 <template name="washList">
     {{#if currentUser}}
+        {{> topNav}}
          <div class="washBayLinks">
          {{> washLayout}}
          </div>
@@ -26,15 +27,16 @@
     <div class="washListButtons">
     <h2>Wash List</h2>
         <form>
-             <label for="locationId" class="mLocationId" ></label>
-             <input type="text" id="locationId" name="locationId" required>
-             <button type="submit" class="locationId">Update Location</button>
-        </form>
-            <br>
-        <form>
               <button type="submit" class="washButton machineInWashBay">Wash Start</button>
               <button type="submit" class="washButton stopWashProcess">Wash cancled</button>
               <button type="submit" class="washButton machineOutWashBay">Wash Done</button>
+        </form>
+    </div>
+    <div class="locationButton">
+        <form>
+            <label for="locationNew" id="mLocationNew" ></label>
+            <input type="text" id="locationNew" name="locationNew" placeholder="Location" required>
+            <button type="submit" class="locationNew">Update Location</button>
         </form>
     </div>
     <table class="blueTable washTable">

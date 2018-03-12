@@ -1,5 +1,6 @@
 <template name="inspectionStart">
     {{#if currentUser}}
+        {{> topNav}}
         {{> inspection}}
     {{else}}
         {{> login}}
@@ -8,16 +9,6 @@
 
 <template name="inspection">
   <div>
-      <nav class="mainLayout">
-        <a class="btn" href="/overViewUser">Over View</a>
-          <a>|</a>
-        <a class="btn" href="/machineLocation">Locations</a>
-          <a>|</a>
-        <a class="btn" href="/statistics" disabled>Statistics</a>
-          <a>|</a>
-        <a class="btn" href="/logout" >Logout</a>
-      </nav>
-    <br>
     <div id="logo">
         <img src="claas_logo.png" />
     </div>
