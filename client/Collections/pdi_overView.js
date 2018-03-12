@@ -101,6 +101,7 @@ if(Meteor.isClient) {
             let k = 11;
             const file = event.target.files[0];
             if (!file) {
+                console.log('kein File');
                 return;
             }
             let reader = new FileReader();

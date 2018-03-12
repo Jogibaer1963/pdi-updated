@@ -1,9 +1,7 @@
 <template name="readyShipList">
 <body>
 {{#if currentUser}}
-    <h2>List of Availiable Machines</h2>
     {{> overViewReadyList}}
-
 {{else}}
     {{> login}}
 {{/if}}
@@ -25,26 +23,26 @@
             <input type="text" class="machineLocationInput" id="locationId" name="locationId" required>
         </div>
     </form>
-   <table class="blueTable ">
+   <table class="blueTable shippingTable">
        <thead>
        <tr>
-            <th class="rTableHead"><strong>Machine</strong></th>
-            <th class="rTableHead"><strong><span>Shipdate</span></strong></th>
-            <th class="rTableHead"><strong>Destination</strong></th>
-            <th class="rTableHead"><strong>Transporter</strong></th>
-            <th class="rTableHead"><strong>Location</strong></th>
-            <th class="rTableHead" style="width: 200px"><strong>Shipping Comments</strong></th>
+            <th class="pdiMachineField"><strong>Machine</strong></th>
+            <th class="pdiShipDate"><strong><span>Shipdate</span></strong></th>
+            <th class="pdiDestination"><strong>Destination</strong></th>
+            <th class="pdiTransporter"><strong>Transporter</strong></th>
+            <th class="pdiLocation"><strong>Location</strong></th>
+            <th class="pdiComments" style="width: 200px"><strong>Shipping Comments</strong></th>
        </tr>
        </thead>
        <tbody>
         {{#each overView}}
-            <tr class="rTableRow readyList {{selectedClass}}">
-                <td class="rTableCell">{{machineId}}{{newHeadId}}</td>
-                <td class="rTableCell">{{date}}</td>
-                <td class="rTableCell">{{destination}}</td>
-                <td class="rTableCell">{{transporter}}</td>
-                <td class="rTableCell" style="background-color: #6fd981">{{locationId}}</td>
-                <td class="rTableCellComment">{{shippingComment}}</td>
+            <tr class=" readyList {{selectedClass}}">
+                <td class="pdiMachineField">{{machineId}}{{newHeadId}}</td>
+                <td class="pdiShipDate">{{date}}</td>
+                <td class="pdiDestination">{{destination}}</td>
+                <td class="pdiTransporter">{{transporter}}</td>
+                <td class="pdiLocation" style="background-color: #6fd981">{{locationId}}</td>
+                <td class="pdiComments">{{shippingComment}}</td>
             </tr>
         {{/each}}
        </tbody>
