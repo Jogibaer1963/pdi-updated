@@ -106,11 +106,32 @@ if(Meteor.isServer){
             return usersProfil.find();
         });
 
+        Meteor.publish("variants_C79", function() {
+            return variants_C79.find();
+        });
+
     });
 
 
     Meteor.methods({
 
+        'readVariant': function (contents) {
+            let newContent = contents.replace(/[\t\r\n]/g, '');
+            let newContent_2 = newContent.replace(/"/g, "'");
+            let newContent_3 = newContent_2.split(/\s*,\s*/);
+            let contentLength = newContent_3.length;
+            for (i = 0; i < contentLength; i++) {
+                let variant_id = JSON.stringify(newContent_3[i]);
+                let variantMarker = variant_id.slice(1, 12);
+                let stringLength = variant_id.length;
+                let variantPart = variant_id.slice(15, (stringLength - 1));
+                let variantDescription = variantPart.replace(/'/g, '');
+                variants_C79.insert({variant: variantMarker,
+                    variantDescription: variantDescription,
+                    imagePath: "http://",
+                    status: 1 });
+            }
+        },
 
         'readConfig': function(machineId, configArray) {
             MachineReady.update({machineId: machineId}, {$set: {config: configArray, configStatus: 1}});

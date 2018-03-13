@@ -9,6 +9,7 @@
 @import "glowingBox";
 @import "pdiCheckList";
 @import "pdi_overView";
+@import "pdi_variants";
 @import "washList";
 @import "pdiRepairList";
 @import "siTable";
@@ -61,9 +62,8 @@
 }
 
 .mainLayout {
-  position: fixed;
-  left: 450px;
-  margin-top: 10px;
+  position: relative;
+  left: 560px;
   color: black;
 }
 

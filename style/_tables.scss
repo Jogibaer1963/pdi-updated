@@ -93,6 +93,7 @@ $pdiRepField: 50px;
 $pdiWashField: 50px;
 $pdiShipField: 60px;
 $pdiLocation: 70px;
+$pdiVariantsDescription: 250px;
 $config: 60px;
 
 $partsOnOrder: 50px;
@@ -117,7 +118,7 @@ $user: 80px;
 $userRole: 80px;
 $dateCreated: 110px;
 $createdBy: 50px;
-$lastLogin: 110px;
+$userLastLogin: 110px;
 $clientIp: 80px;
 $loggedIn: 60px;
 $logOut: 50px;
@@ -149,8 +150,8 @@ $eraseUser: 50px;
 }
 
 .userLastLogin {
-  max-width: $lastLogin;
-  min-width: $lastLogin;
+  max-width: $userLastLogin;
+  min-width: $userLastLogin;
 }
 
 .userIP {
@@ -172,7 +173,6 @@ $eraseUser: 50px;
   max-width: $logOut;
   min-width: $logOut;
   text-align: center;
-
 }
 
 .userErase {
@@ -256,6 +256,11 @@ table.shippingTable {
 .pdiRepField {
   max-width: $pdiRepField;
   min-width: $pdiRepField;
+}
+
+.pdiVariantDescription {
+  max-width: $pdiVariantsDescription;
+  min-width: $pdiVariantsDescription;
 }
 
 .pdiWashField {

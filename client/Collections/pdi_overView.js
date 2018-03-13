@@ -121,6 +121,11 @@ if(Meteor.isClient) {
                 };
             reader.readAsText(file);
         },
+
+
+
+
+
     });
 
     Handlebars.registerHelper('inActive', function() {

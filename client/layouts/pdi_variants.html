@@ -1,0 +1,70 @@
+<template name="variants">
+    {{#if currentUser}}
+        {{> topNav}}
+        {{> variantsViewer}}
+    {{else}}
+        {{> login}}
+    {{/if}}
+</template>
+
+<template name="variantsViewer">
+        <div id="logo">
+            <img src="claas_logo.png" />
+        </div>
+    <nav class="mainLayout">
+        <a class="btn" href="/inspectionStart">PDI Overview</a>
+        <a>|</a>
+        <a class="btn" href="/checkList">Checklist</a>
+        <a>|</a>
+        <a class="btn" href="/pdiRepairList">Review Repair List</a>
+        <a>|</a>
+        <a class="btn" href="/si">SI's or special Item's </a>
+
+
+    </nav>
+        <br>
+    <div class="variantViewer">
+        <h3>Variant Viewer</h3>
+    </div>
+
+    <div class="loadVariantButton">
+        <form class="fileContainer">
+            <button>Load / Update Variant</button>
+            <input class="loadVariant" type="file" id="variant" name="variant[]" >
+        </form>
+    </div>
+<div class="variantButtons">
+    <button class="btn btn-default">Variants C77</button>
+    <button class="btn btn-default">Variants C78</button>
+    <button class="btn btn-default">Variants C79</button>
+    <button class="btn btn-default">Variants C87</button>
+    <button class="btn btn-default">Variants C88</button>
+    <button class="btn btn-default">Variants C89</button>
+</div>
+<div class="variantTable">
+    <table class="pdiTable blueTable tablePdiOverview" cellpadding="10">
+        <thead>
+        <tr>
+            <th class="userLastLogin"><strong>Variant</strong></th>
+            <th class="pdiVariantDescription"><strong>Description</strong></th>
+            <th class="pdiShipDate"><strong>Image</strong></th>
+            <th class="pdiShipDate"><strong>Visability</strong></th>
+        </tr>
+        </thead>
+        <tbody>
+        {{#each variants}}
+            <tr class="openInspections {{selectedClass}}">
+                <td class="userLastLogin">{{variant}}</td>
+                <td class="pdiVariantDescription">{{variantDescription}}</td>
+                <td class="pdiShipDate"><strong>{{imagePath}}</strong></td>
+                <td class="variantVisible pdiShipDate">
+                    <label>
+                        <input class="rTableStyle" type="checkbox" name="visible" id="visible"  value="{{status}}">
+                    </label>
+                </td>
+            </tr>
+        {{/each}}
+        </tbody>
+    </table>
+</div>
+</template>

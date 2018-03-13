@@ -204,6 +204,10 @@ table.shippingTable {
   max-width: 50px;
   min-width: 50px; }
 
+.pdiVariantDescription {
+  max-width: 250px;
+  min-width: 250px; }
+
 .pdiWashField {
   max-width: 50px;
   min-width: 50px; }
@@ -652,6 +656,26 @@ td {
 table.pdiTable {
   width: 570px; }
 
+.loadVariantButton {
+  position: relative;
+  top: 5em;
+  left: -15em; }
+
+.variantViewer {
+  margin-left: 25px; }
+
+.variantButtons {
+  position: relative;
+  top: 10em;
+  margin: 10px; }
+
+.variantTable {
+  position: relative;
+  top: -5em; }
+
+.variantVisible {
+  text-align: center; }
+
 .washBayLinks {
   position: relative;
   left: 40em; }
@@ -873,9 +897,8 @@ table.repairTable {
   margin-left: 25px; }
 
 .mainLayout {
-  position: fixed;
-  left: 450px;
-  margin-top: 10px;
+  position: relative;
+  left: 560px;
   color: black; }
 
 .editMachine {
