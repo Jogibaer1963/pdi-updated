@@ -110,6 +110,26 @@ if(Meteor.isServer){
             return variants_C79.find();
         });
 
+        Meteor.publish("variants_C78", function() {
+            return variants_C78.find();
+        });
+
+        Meteor.publish("variants_C77", function() {
+            return variants_C77.find();
+        });
+
+        Meteor.publish("variants_C89", function() {
+            return variants_C89.find();
+        });
+
+        Meteor.publish("variants_C88", function() {
+            return variants_C88.find();
+        });
+
+        Meteor.publish("variants_C87", function() {
+            return variants_C87.find();
+        });
+
     });
 
 

@@ -1,4 +1,9 @@
 Meteor.subscribe("variants_C79");
+Meteor.subscribe("variants_C78");
+Meteor.subscribe("variants_C77");
+Meteor.subscribe("variants_C89");
+Meteor.subscribe("variants_C88");
+Meteor.subscribe("variants_C87");
 
 
 if(Meteor.isClient) {

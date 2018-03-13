@@ -19,27 +19,38 @@
         <a class="btn" href="/pdiRepairList">Review Repair List</a>
         <a>|</a>
         <a class="btn" href="/si">SI's or special Item's </a>
-
-
     </nav>
         <br>
     <div class="variantViewer">
         <h3>Variant Viewer</h3>
     </div>
-
+    <div>
+        <button class="btn btn-default btn-info howTo">!! How to upload a Variant !!</button>
+    </div>
     <div class="loadVariantButton">
         <form class="fileContainer">
-            <button>Load / Update Variant</button>
+            <button class="singleVariantButton">Load / Update Variant C77</button>
+            <input class="loadVariant" type="file" id="variant" name="variant[]" >
+            <button class="singleVariantButton">Load / Update Variant C78</button>
+            <input class="loadVariant" type="file" id="variant" name="variant[]" >
+            <button class="singleVariantButton">Load / Update Variant C79</button>
+            <input class="loadVariant" type="file" id="variant" name="variant[]" >
+            <br>
+            <button class="singleVariantButton">Load / Update Variant C87</button>
+            <input class="loadVariant" type="file" id="variant" name="variant[]" >
+            <button class="singleVariantButton">Load / Update Variant C88</button>
+            <input class="loadVariant" type="file" id="variant" name="variant[]" >
+            <button class="singleVariantButton">Load / Update Variant C89</button>
             <input class="loadVariant" type="file" id="variant" name="variant[]" >
         </form>
     </div>
 <div class="variantButtons">
-    <button class="btn btn-default">Variants C77</button>
-    <button class="btn btn-default">Variants C78</button>
-    <button class="btn btn-default">Variants C79</button>
-    <button class="btn btn-default">Variants C87</button>
-    <button class="btn btn-default">Variants C88</button>
-    <button class="btn btn-default">Variants C89</button>
+    <button class="btn btn-default c77">Variants C77</button>
+    <button class="btn btn-default c78">Variants C78</button>
+    <button class="btn btn-default c79">Variants C79</button>
+    <button class="btn btn-default c87">Variants C87</button>
+    <button class="btn btn-default c88">Variants C88</button>
+    <button class="btn btn-default c89">Variants C89</button>
 </div>
 <div class="variantTable">
     <table class="pdiTable blueTable tablePdiOverview" cellpadding="10">
@@ -47,7 +58,7 @@
         <tr>
             <th class="userLastLogin"><strong>Variant</strong></th>
             <th class="pdiVariantDescription"><strong>Description</strong></th>
-            <th class="pdiShipDate"><strong>Image</strong></th>
+            <th class="pdiShipDate"><strong>Image / Description</strong></th>
             <th class="pdiShipDate"><strong>Visability</strong></th>
         </tr>
         </thead>

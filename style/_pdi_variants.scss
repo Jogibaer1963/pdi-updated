@@ -1,9 +1,13 @@
 
 .loadVariantButton {
   position: relative;
-  top: 5em;
-  left: -15em;
+  top: 3em;
+  left: -30em;
+}
 
+.howTo {
+  position: relative;
+  margin-left: 100px;
 }
 
 .variantViewer {
@@ -12,13 +16,17 @@
 
 .variantButtons {
   position: relative;
-  top: 10em;
+  top: 1em;
   margin: 10px;
+}
+
+.singleVariantButton {
+  margin: 15px;
 }
 
 .variantTable {
   position: relative;
-  top: -5em;
+  top: -20em;
 }
 
 .variantVisible {
