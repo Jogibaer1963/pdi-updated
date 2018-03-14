@@ -10,6 +10,7 @@
 @import "pdiCheckList";
 @import "pdi_overView";
 @import "pdi_variants";
+@import "pdi_machineinspect";
 @import "washList";
 @import "pdiRepairList";
 @import "siTable";
@@ -41,8 +42,7 @@
 }
 
 .selected {
-  background-color: #978f93;
-  z-index: 1;
+  background-color: #978f93
 }
 
 .selectedBackgroundGreen {

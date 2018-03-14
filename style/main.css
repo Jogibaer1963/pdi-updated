@@ -522,8 +522,8 @@ a:hover {
   top: 19px; }
 
 .tableChecklist {
-  position: absolute;
-  top: 440px;
+  position: relative;
+  top: 30px;
   margin-left: 25px; }
 
 .position {
@@ -889,7 +889,7 @@ table.repairTable {
 
 .selected {
   background-color: #978f93;
-  z-index: 1; }
+}
 
 .selectedBackgroundGreen {
   background-color: green; }

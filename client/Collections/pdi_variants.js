@@ -35,7 +35,9 @@ if(Meteor.isClient) {
             reader.onload = function(e) {
                 const contents = e.target.result;
                 document.getElementById('variant').value = '';
-                Meteor.call('readVariant', contents);
+                const  newContent = JSON.stringify(contents);
+               console.log(newContent);
+               // Meteor.call('readVariant', contents);
             };
             reader.readAsText(file);
         },

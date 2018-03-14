@@ -6,7 +6,6 @@ if (Meteor.isClient) {
     Session.set("statusEdit", 0);
 
     Template.inputNewCheckPoint.events({
-
         'submit .inputNewCheck': function (event) {
             event.preventDefault();
             const errorPos = event.target.newPosition.value;
@@ -40,7 +39,9 @@ if (Meteor.isClient) {
             event.target.C79.checked = false;
             event.target.machineRangeStart.value = "";
             event.target.machineRangeEnd.value = "";
+
         },
+
 
         // get the _id of the selected checkpoint
         'click .showCheckList': function () {

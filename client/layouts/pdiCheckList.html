@@ -2,7 +2,6 @@
 <template name="checkList">
 {{#if currentUser}}
 {{> inputNewCheckPoint}}
-
 {{else}}
     {{> login}}
 {{/if}}
@@ -47,8 +46,9 @@
             <div class="inputMargin">
               <label for="errorDescription">Error Description *</label>
                 <br>
-              <input type="text" id="errorDescription" name="errorDescription" class="input descriptionBox"
-                     placeholder="Description" value="{{errorEdit}}" required>
+                <input type="text" id="errorDescription" name="errorDescription" class="input descriptionBox"
+                       placeholder="Description" value="{{errorEdit}}" required>
+                <br><br><br>
             </div>
                 <div class="inputMargin title">
                    <label for="machineRange">Machine Range, divide by white space like "C7800200 C7900300 "</label>
@@ -60,12 +60,12 @@
                        <input type="text" class="inputRange" id="machineRangeEnd" name="machineRangeEnd" placeholder="Range End">
                    </label>
                 </div>
+            <!--
             <div class="dependencies">
                 <h3>Dependencies</h3>
-
                 <div class="">
                     {{#dropdownTrigger  name="ommUnloadBooks"}}
-                        <button class="loginSubmit omInputButton inActive" disabled>Variants</button>
+                        <button class="loginSubmit omInputButton inActive" >Variants</button>
                     {{/dropdownTrigger}}
                     <label for="locationId" class="mLocationId" ></label>
                     <input type="text" class="omInput " id="locationId" name="omUnload" value="{{selectedUnloadOm}}" required>
@@ -80,12 +80,8 @@
                         </div>
                     {{/dropdown}}
                 </div>
-
-
-
-
-
             </div>
+            -->
             <br><br><br>
             <div>
                 <div>
@@ -129,5 +125,4 @@
     {{/each}}
         </tbody>
     </table>
-
 </template>

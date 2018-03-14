@@ -41,8 +41,7 @@ a:hover {
 }
 
 .tableHeadFixed {
-  position: fixed;
-  z-index: 1;
+  position: fixed
 }
 
 .scroll {
@@ -92,8 +91,8 @@ a:hover {
 // table position
 
 .tableChecklist {
-  position: absolute;
-  top: 440px;
+  position: relative;
+  top: 50px;
   margin-left: 25px;
 }
 
