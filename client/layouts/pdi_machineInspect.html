@@ -1,9 +1,7 @@
 <template name="machineInspect">
 
     {{#if currentUser}}
-        <div id="">
-            <img src="claas_logo.png" />
-        </div>
+
         {{> ommBook}}
     {{else}}
         {{> login}}
@@ -12,6 +10,10 @@
 
 
 <template name="ommBook">
+
+    <div id="">
+        <img src="claas_logo.png" />
+    </div>
     <div class="ommInput">
     {{#with machineNow}}
         <h2>Machine to Inspect: {{machine}}</h2>
