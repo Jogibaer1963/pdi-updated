@@ -43,3 +43,4 @@ npm-container
 twbs:bootstrap
 simple:reactive-method
 reactive-var
+dburles:mongo-collection-instances

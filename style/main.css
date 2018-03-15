@@ -1,61 +1,918 @@
-/*
-Error: File to import not found or unreadable: pdi_machineinspect.
-        on line 13 of main.scss
+.submitAdmin {
+  position: absolute;
+  left: 57em; }
 
-8: @import "maryView";
-9: @import "glowingBox";
-10: @import "pdiCheckList";
-11: @import "pdi_overView";
-12: @import "pdi_variants";
-13: @import "pdi_machineinspect";
-14: @import "washList";
-15: @import "pdiRepairList";
-16: @import "siTable";
-17: @import "repairMachine";
-18: @import "readyShipList";
+.totalUsers {
+  margin-left: 25px;
+  position: absolute;
+  top: 100px; }
 
-Backtrace:
-main.scss:13
-D:/Ruby24-x64/lib/ruby/gems/2.4.0/gems/sass-3.5.5/lib/sass/tree/import_node.rb:67:in `rescue in import'
-D:/Ruby24-x64/lib/ruby/gems/2.4.0/gems/sass-3.5.5/lib/sass/tree/import_node.rb:44:in `import'
-D:/Ruby24-x64/lib/ruby/gems/2.4.0/gems/sass-3.5.5/lib/sass/tree/import_node.rb:28:in `imported_file'
-D:/Ruby24-x64/lib/ruby/gems/2.4.0/gems/sass-3.5.5/lib/sass/tree/import_node.rb:37:in `css_import?'
-D:/Ruby24-x64/lib/ruby/gems/2.4.0/gems/sass-3.5.5/lib/sass/tree/visitors/perform.rb:314:in `visit_import'
-D:/Ruby24-x64/lib/ruby/gems/2.4.0/gems/sass-3.5.5/lib/sass/tree/visitors/base.rb:36:in `visit'
-D:/Ruby24-x64/lib/ruby/gems/2.4.0/gems/sass-3.5.5/lib/sass/tree/visitors/perform.rb:162:in `block in visit'
-D:/Ruby24-x64/lib/ruby/gems/2.4.0/gems/sass-3.5.5/lib/sass/stack.rb:79:in `block in with_base'
-D:/Ruby24-x64/lib/ruby/gems/2.4.0/gems/sass-3.5.5/lib/sass/stack.rb:135:in `with_frame'
-D:/Ruby24-x64/lib/ruby/gems/2.4.0/gems/sass-3.5.5/lib/sass/stack.rb:79:in `with_base'
-D:/Ruby24-x64/lib/ruby/gems/2.4.0/gems/sass-3.5.5/lib/sass/tree/visitors/perform.rb:162:in `visit'
-D:/Ruby24-x64/lib/ruby/gems/2.4.0/gems/sass-3.5.5/lib/sass/tree/visitors/base.rb:52:in `block in visit_children'
-D:/Ruby24-x64/lib/ruby/gems/2.4.0/gems/sass-3.5.5/lib/sass/tree/visitors/base.rb:52:in `map'
-D:/Ruby24-x64/lib/ruby/gems/2.4.0/gems/sass-3.5.5/lib/sass/tree/visitors/base.rb:52:in `visit_children'
-D:/Ruby24-x64/lib/ruby/gems/2.4.0/gems/sass-3.5.5/lib/sass/tree/visitors/perform.rb:171:in `block in visit_children'
-D:/Ruby24-x64/lib/ruby/gems/2.4.0/gems/sass-3.5.5/lib/sass/tree/visitors/perform.rb:183:in `with_environment'
-D:/Ruby24-x64/lib/ruby/gems/2.4.0/gems/sass-3.5.5/lib/sass/tree/visitors/perform.rb:170:in `visit_children'
-D:/Ruby24-x64/lib/ruby/gems/2.4.0/gems/sass-3.5.5/lib/sass/tree/visitors/base.rb:36:in `block in visit'
-D:/Ruby24-x64/lib/ruby/gems/2.4.0/gems/sass-3.5.5/lib/sass/tree/visitors/perform.rb:190:in `visit_root'
-D:/Ruby24-x64/lib/ruby/gems/2.4.0/gems/sass-3.5.5/lib/sass/tree/visitors/base.rb:36:in `visit'
-D:/Ruby24-x64/lib/ruby/gems/2.4.0/gems/sass-3.5.5/lib/sass/tree/visitors/perform.rb:161:in `visit'
-D:/Ruby24-x64/lib/ruby/gems/2.4.0/gems/sass-3.5.5/lib/sass/tree/visitors/perform.rb:10:in `visit'
-D:/Ruby24-x64/lib/ruby/gems/2.4.0/gems/sass-3.5.5/lib/sass/tree/root_node.rb:36:in `css_tree'
-D:/Ruby24-x64/lib/ruby/gems/2.4.0/gems/sass-3.5.5/lib/sass/tree/root_node.rb:29:in `render_with_sourcemap'
-D:/Ruby24-x64/lib/ruby/gems/2.4.0/gems/sass-3.5.5/lib/sass/engine.rb:389:in `_render_with_sourcemap'
-D:/Ruby24-x64/lib/ruby/gems/2.4.0/gems/sass-3.5.5/lib/sass/engine.rb:307:in `render_with_sourcemap'
-D:/Ruby24-x64/lib/ruby/gems/2.4.0/gems/sass-3.5.5/lib/sass/plugin/compiler.rb:462:in `update_stylesheet'
-D:/Ruby24-x64/lib/ruby/gems/2.4.0/gems/sass-3.5.5/lib/sass/plugin/compiler.rb:215:in `block in update_stylesheets'
-D:/Ruby24-x64/lib/ruby/gems/2.4.0/gems/sass-3.5.5/lib/sass/plugin/compiler.rb:209:in `each'
-D:/Ruby24-x64/lib/ruby/gems/2.4.0/gems/sass-3.5.5/lib/sass/plugin/compiler.rb:209:in `update_stylesheets'
-D:/Ruby24-x64/lib/ruby/gems/2.4.0/gems/sass-3.5.5/lib/sass/plugin.rb:82:in `update_stylesheets'
-D:/Ruby24-x64/lib/ruby/gems/2.4.0/gems/sass-3.5.5/lib/sass/exec/sass_scss.rb:340:in `watch_or_update'
-D:/Ruby24-x64/lib/ruby/gems/2.4.0/gems/sass-3.5.5/lib/sass/exec/sass_scss.rb:51:in `process_result'
-D:/Ruby24-x64/lib/ruby/gems/2.4.0/gems/sass-3.5.5/lib/sass/exec/base.rb:52:in `parse'
-D:/Ruby24-x64/lib/ruby/gems/2.4.0/gems/sass-3.5.5/lib/sass/exec/base.rb:19:in `parse!'
-D:/Ruby24-x64/lib/ruby/gems/2.4.0/gems/sass-3.5.5/bin/sass:13:in `<top (required)>'
-D:/Ruby24-x64/bin/sass:23:in `load'
-D:/Ruby24-x64/bin/sass:23:in `<main>'
-*/
-body:before {
-  white-space: pre;
-  font-family: monospace;
-  content: "Error: File to import not found or unreadable: pdi_machineinspect.\A         on line 13 of main.scss\A \A 8: @import \"maryView\";\A 9: @import \"glowingBox\";\A 10: @import \"pdiCheckList\";\A 11: @import \"pdi_overView\";\A 12: @import \"pdi_variants\";\A 13: @import \"pdi_machineinspect\";\A 14: @import \"washList\";\A 15: @import \"pdiRepairList\";\A 16: @import \"siTable\";\A 17: @import \"repairMachine\";\A 18: @import \"readyShipList\";"; }
+.newUser {
+  position: absolute;
+  top: 120px;
+  margin-left: 10px; }
+
+#logo {
+  margin: 25px; }
+
+.loginImage {
+  margin-top: 100px; }
+
+.userName {
+  position: absolute;
+  top: 150px;
+  left: 25px; }
+
+.loginPasswd {
+  position: absolute;
+  top: 220px;
+  left: 25px; }
+
+.loginButton {
+  position: absolute;
+  top: 290px;
+  left: 25px; }
+
+thead {
+  background-color: lightgrey; }
+
+table tbody, table thead {
+  display: block; }
+
+table tbody {
+  overflow: auto;
+  height: 500px; }
+
+table.blueTable {
+  width: 1195px; }
+
+table.blueTable {
+  border: 1px solid #a49892;
+  background-color: #EEEEEE;
+  text-align: left;
+  border-collapse: collapse; }
+
+table.blueTable td, table.blueTable th {
+  border: 1px solid #AAAAAA;
+  padding: 3px 5px; }
+
+table.blueTable tbody td {
+  font-size: 13px;
+  word-wrap: break-word; }
+
+table.blueTable tr:nth-child(even) {
+  background-color: #b7d9e4; }
+
+table.blueTable thead {
+  background: #1C6EA4;
+  border-bottom: 2px solid #444444; }
+
+table.blueTable thead th {
+  font-size: 15px;
+  font-weight: bold;
+  color: #FFFFFF;
+  border-left: 2px solid #D0E4F5; }
+
+table.blueTable thead th:first-child {
+  border-left: none; }
+
+table.blueTable tfoot {
+  font-size: 14px;
+  font-weight: bold;
+  color: #FFFFFF;
+  background: #d6e0f5;
+  border-top: 2px solid #444444; }
+
+table.blueTable tfoot td {
+  font-size: 14px; }
+
+table.blueTable tfoot .links {
+  text-align: right; }
+
+table.blueTable tfoot .links a {
+  display: inline-block;
+  background: #8f8e8c;
+  color: #FFFFFF;
+  padding: 2px 8px;
+  border-radius: 5px; }
+
+th {
+  height: 50px; }
+
+table.tableAdminPos {
+  width: 853px; }
+
+.adminUserId {
+  max-width: 150px;
+  min-width: 150px; }
+
+.adminUser {
+  max-width: 80px;
+  min-width: 80px; }
+
+.userRole {
+  max-width: 80px;
+  min-width: 80px; }
+
+.userCreated {
+  max-width: 110px;
+  min-width: 110px; }
+
+.userCreatedBy {
+  max-width: 80px;
+  min-width: 80px; }
+
+.userLastLogin {
+  max-width: 110px;
+  min-width: 110px; }
+
+.userIP {
+  max-width: 80px;
+  min-width: 80px; }
+
+.userStatus {
+  max-width: 60px;
+  min-width: 60px; }
+
+.partsOnOrder {
+  max-width: 50px;
+  min-width: 50px; }
+
+.userLogOut {
+  max-width: 50px;
+  min-width: 50px;
+  text-align: center; }
+
+.userErase {
+  max-width: 50px;
+  min-width: 50px;
+  text-align: center; }
+
+.shippingMachines {
+  height: 100px; }
+
+table.shippingTable {
+  position: absolute;
+  top: 400px;
+  width: 600px; }
+
+.tablePdiOverview {
+  position: absolute;
+  top: 300px; }
+
+.pdiMachineField {
+  max-width: 80px;
+  min-width: 80px; }
+
+.pdiShipDate {
+  max-width: 90px;
+  min-width: 90px; }
+
+.pdiDestination {
+  max-width: 100px;
+  min-width: 100px; }
+
+.pdiTransporter {
+  max-width: 100px;
+  min-width: 100px; }
+
+.pdiTruckOnOrder {
+  max-width: 70px;
+  min-width: 70px; }
+
+.pdiKitList {
+  max-width: 80px;
+  min-width: 80px; }
+
+.pdiComments {
+  max-width: 310px;
+  min-width: 310px; }
+
+.pdiKitField {
+  max-width: 180px;
+  min-width: 180px; }
+
+.pdiTireField {
+  max-width: 180px;
+  min-width: 180px; }
+
+.pdiPDIField {
+  max-width: 50px;
+  min-width: 50px; }
+
+.pdiRepField {
+  max-width: 50px;
+  min-width: 50px; }
+
+.pdiVariantDescription {
+  max-width: 250px;
+  min-width: 250px; }
+
+.pdiWashField {
+  max-width: 50px;
+  min-width: 50px; }
+
+.pdiShipField {
+  max-width: 60px;
+  min-width: 60px; }
+
+.pdiLocation {
+  max-width: 70px;
+  min-width: 70px; }
+
+.pdiConfig {
+  max-width: 60px;
+  min-width: 60px; }
+
+.pdiTrailer {
+  max-width: 80px;
+  min-width: 80px; }
+
+.headerKit {
+  max-width: 320px;
+  min-width: 320px; }
+
+.pdiUser {
+  max-width: 200px;
+  min-width: 200px; }
+
+table.headerTable {
+  width: 230px; }
+
+.headerId {
+  max-width: 80px;
+  min-width: 80px; }
+
+.headerShipDate {
+  max-width: 90px;
+  min-width: 90px; }
+
+.headerStatus {
+  max-width: 80px;
+  min-width: 80px; }
+
+.headerPos {
+  position: absolute;
+  left: 450px;
+  top: 300px; }
+
+table.trailerTable {
+  position: absolute;
+  width: 180px;
+  top: 420px; }
+
+.trailerTableOnTheMove {
+  position: relative;
+  left: 250px; }
+
+.overView {
+  position: relative;
+  top: 80px;
+  left: 200px; }
+
+.openStatus {
+  position: relative;
+  top: 80px;
+  margin-left: 25px; }
+
+.headerTablePosition {
+  position: absolute;
+  left: 450px;
+  top: 300px; }
+
+table.overViewTable {
+  position: absolute;
+  top: 350px;
+  width: 415px; }
+
+.locationTable {
+  position: absolute;
+  top: 200px;
+  margin-left: 25px; }
+
+.locationId {
+  position: absolute;
+  top: 150px;
+  margin-left: 25px; }
+
+table.locationTable {
+  width: 464px; }
+
+.shippingNav {
+  position: absolute;
+  top: 70px;
+  left: 40em; }
+
+.newMachineShipping {
+  position: absolute;
+  top: 100px;
+  margin-left: 25px; }
+
+.shippingInputs {
+  margin-left: 20px;
+  float: left; }
+
+.firstKit {
+  float: left; }
+
+.secondKit {
+  float: left; }
+
+.thirdKit {
+  position: relative;
+  top: 24px;
+  float: left; }
+
+.comment {
+  position: absolute;
+  left: 440px;
+  width: 500px; }
+
+.newMachineSubmit {
+  margin-top: 50px;
+  margin-left: 350px; }
+
+.shippingMachinesTable {
+  position: relative;
+  top: 40px; }
+
+.shippingTable {
+  margin-top: 3em; }
+
+.searchField {
+  margin-left: 15px; }
+
+.delete_Machine {
+  float: left;
+  margin-right: 25px; }
+
+.firstKit {
+  margin-top: 25px; }
+
+.secondKit {
+  margin-top: 25px; }
+
+.headerComment {
+  position: absolute;
+  top: 230px;
+  left: 10px; }
+
+.headerInputComment {
+  position: absolute;
+  width: 500px; }
+
+.headerSubmit {
+  position: absolute;
+  top: 235px;
+  left: 610px;
+  width: 80px; }
+
+.headerTable {
+  margin-top: 50px;
+  margin-left: 30px; }
+
+.buttonDelete {
+  position: absolute;
+  top: 390px;
+  left: 270px; }
+
+.buttonEdit {
+  position: absolute;
+  top: 390px;
+  left: 100px; }
+
+.editHead {
+  background: repeating-linear-gradient(45deg, #e6e6e6, #bc171b 10px, #e6e6e6 10px, #bc171b 20px); }
+
+.newTrailerInput {
+  position: absolute;
+  top: 220px; }
+
+.deleteTrailer {
+  position: absolute;
+  top: 300px;
+  left: 185px; }
+
+.newTrailer {
+  margin-top: 10px; }
+
+.trailerSection {
+  position: relative;
+  top: 2.2em;
+  left: 80em; }
+
+.trailerHome {
+  position: absolute;
+  top: 350px;
+  left: 50px; }
+
+.trailerOnDuty {
+  position: absolute;
+  top: 350px;
+  left: 300px; }
+
+.moveButton {
+  position: absolute;
+  top: 340px;
+  left: 185px; }
+
+.headerKit {
+  white-space: pre-wrap; }
+
+.buttonField {
+  margin-left: 25px;
+  position: absolute;
+  top: 300px; }
+
+.machineSearch {
+  margin-left: 25px;
+  position: absolute;
+  top: 150px; }
+
+.inputSearchMary {
+  background: repeating-linear-gradient(45deg, #e6e6e6, #bc171b 10px, #e6e6e6 10px, #bc171b 20px); }
+
+.addList {
+  margin-left: 25px; }
+
+.removeList {
+  margin-left: 25px; }
+
+.inProcess {
+  animation: glowing 1500ms infinite;
+  color: transparent; }
+
+@keyframes glowing {
+  0% {
+    background-color: #AA3939;
+    box-shadow: 0 0 3px  #AA5939; }
+  50% {
+    background-color: #FFB232;
+    box-shadow: 0 0 10px #FFB232; }
+  100% {
+    background-color: #FFE800;
+    box-shadow: 0 0 3px #FFE800; } }
+@keyframes Siglowing {
+  0% {
+    background-color: #481317;
+    box-shadow: 0 0 3px  #AA5939; }
+  50% {
+    background-color: #cb2aff;
+    box-shadow: 0 0 10px #ffd855; }
+  100% {
+    background-color: #1cbdee;
+    box-shadow: 0 0 3px #ec67ff; } }
+.checklistReturn-btn {
+  position: fixed;
+  right: 250px;
+  color: black; }
+
+a:hover {
+  background-color: lightgrey;
+  text-align: right;
+  text-decoration: none; }
+
+.checkpointHeader .title {
+  margin-top: 40px;
+  height: 40px;
+  line-height: 30px;
+  background: gray;
+  font-size: 18px;
+  font-family: verdana, serif;
+  display: block;
+  color: white;
+  padding: 10px;
+  vertical-align: center; }
+
+.tableHeadFixed {
+  position: fixed; }
+
+.scroll {
+  max-height: 60px;
+  overflow: auto; }
+
+.input {
+  border: black 1px;
+  background-color: #e6e6e6; }
+
+.inputMargin {
+  float: left;
+  margin-top: 30px;
+  margin-left: 25px; }
+
+.descriptionBox {
+  width: 350px; }
+
+.checkBoxHeader {
+  padding-left: 40px; }
+
+.checkpointCheckbox {
+  margin-left: 525px; }
+
+.checkBoxMargin {
+  margin: 5px; }
+
+.inputRange {
+  width: 220px; }
+
+.dependencies {
+  position: relative;
+  left: 30px;
+  top: 19px; }
+
+.tableChecklist {
+  position: relative;
+  top: 50px;
+  margin-left: 25px; }
+
+.position {
+  max-width: 142px;
+  min-width: 142px; }
+
+.failure {
+  max-width: 500px;
+  min-width: 500px; }
+
+.failureRow {
+  max-width: 500px;
+  min-width: 500px; }
+
+.type {
+  max-width: 100px;
+  min-width: 100px; }
+
+.rangeStart {
+  max-width: 220px;
+  min-width: 220px; }
+
+.rangeEnd {
+  max-width: 220px;
+  min-width: 220px; }
+
+.ommInput {
+  margin-left: 15px; }
+
+table {
+  width: 411px;
+  margin-left: 10px; }
+
+tbody.pdiCheckList {
+  height: 500px;
+  overflow: auto; }
+
+.pdiCheckList {
+  border: 1px solid #a49892;
+  background-color: #EEEEEE; }
+
+td {
+  border: 2px solid #AA3939;
+  position: relative; }
+
+.buttonOK {
+  color: green;
+  font-weight: bold;
+  float: left;
+  width: 130px;
+  position: absolute;
+  bottom: 0; }
+
+.buttonNOK {
+  color: red;
+  font-weight: bold;
+  float: left;
+  width: 130px;
+  position: absolute;
+  margin-left: 130px;
+  bottom: 0; }
+
+.buttonNA {
+  color: lightgrey;
+  font-weight: bold;
+  float: left;
+  width: 130px;
+  position: absolute;
+  margin-left: 260px;
+  bottom: 0; }
+
+.pdiCell {
+  font-size: 16px;
+  height: 200px; }
+
+.positionCheckPos {
+  position: absolute;
+  margin: 10px;
+  top: 0;
+  font-weight: bold;
+  font-size: 16px; }
+
+.positionCheckText {
+  margin: 10px;
+  font-weight: bold;
+  font-size: 16px; }
+
+#logo {
+  position: absolute;
+  top: 25px; }
+
+.overviewHeader {
+  position: absolute;
+  top: 150px;
+  font-size: 25px;
+  margin-left: 25px; }
+
+.pdiButton {
+  position: absolute;
+  top: 240px;
+  margin-left: 25px; }
+
+.pdiOverViewNav {
+  position: absolute;
+  top: 50px;
+  left: 559px; }
+
+.loadConfig {
+  float: left; }
+
+.fileContainer {
+  overflow: hidden;
+  position: relative;
+  left: 30em;
+  top: -1.9em; }
+
+.fileContainer [type=file] {
+  cursor: inherit;
+  display: block;
+  font-size: 999px;
+  filter: alpha(opacity=0);
+  min-height: 100%;
+  min-width: 100%;
+  opacity: 0;
+  position: absolute;
+  right: 0;
+  text-align: right;
+  top: 0; }
+
+table.pdiTable {
+  width: 570px; }
+
+.loadVariantButton {
+  position: relative;
+  top: 3em;
+  left: -30em; }
+
+.howTo {
+  position: relative;
+  margin-left: 100px; }
+
+.variantViewer {
+  margin-left: 25px; }
+
+.variantButtons {
+  position: relative;
+  top: 1em;
+  margin: 10px; }
+
+.singleVariantButton {
+  margin: 15px; }
+
+.variantTable {
+  position: relative;
+  top: -20em; }
+
+.variantVisible {
+  text-align: center; }
+
+.washBayLinks {
+  position: relative;
+  left: 40em; }
+
+table.washTable {
+  width: 393px; }
+
+.washTable {
+  position: absolute;
+  top: 24em; }
+
+table.messageTable {
+  width: 700px;
+  position: absolute;
+  top: 24em;
+  left: 30em; }
+
+table.historyMessageTable {
+  position: absolute;
+  top: 24em;
+  left: 40em; }
+
+.washListButtons {
+  position: absolute;
+  top: 16em;
+  margin-left: 25px; }
+
+.washMessage {
+  position: absolute;
+  top: 10em;
+  margin-left: 25px; }
+
+.textBox {
+  width: 480px; }
+
+.messageClearButton {
+  position: absolute;
+  top: 20.5em;
+  left: 32em; }
+
+.washBayToggleButton {
+  margin-left: 300px; }
+
+.locationButton {
+  position: relative;
+  top: 10em;
+  left: 31em; }
+
+table.pdiRepairList {
+  position: absolute;
+  top: 320px;
+  margin-left: 25px;
+  width: 242px; }
+
+.repairListButton {
+  position: absolute;
+  top: 200px;
+  margin-left: 25px; }
+
+.container {
+  overflow: scroll;
+  position: absolute;
+  top: 100px;
+  left: 400px;
+  height: 800px;
+  width: 900px;
+  border: black 1px solid;
+  padding: 10px; }
+
+.pdiUser {
+  padding: 25px; }
+
+.sumRightSide {
+  position: relative;
+  top: -122px;
+  left: 300px; }
+
+.repairList {
+  position: relative;
+  top: 50px; }
+
+.siTable {
+  position: absolute;
+  top: 100px;
+  margin-left: 25px; }
+
+table.siSingleTable {
+  width: 390px; }
+
+table.siType {
+  position: absolute;
+  top: 180px;
+  width: 100px; }
+
+table.siMachineList {
+  position: absolute;
+  top: 180px;
+  left: 150px;
+  width: 155px; }
+
+.multipleSiTable {
+  position: absolute;
+  top: 100px;
+  left: 500px; }
+
+.siMdList {
+  position: absolute;
+  top: 80px;
+  left: 400px; }
+
+.siSubmit {
+  position: absolute;
+  top: 20px;
+  left: 200px; }
+
+.siButtons {
+  position: absolute;
+  top: 350px;
+  left: 60em; }
+
+.siUpload {
+  position: absolute;
+  top: 120px;
+  left: 400px; }
+
+.removeSiButton {
+  position: absolute;
+  top: 140px;
+  left: 10px; }
+
+.siText {
+  position: absolute;
+  top: -40px;
+  left: 400px;
+  width: 450px; }
+
+.upComings {
+  position: absolute;
+  top: 65em;
+  margin-left: 25px; }
+
+table.upComingTable {
+  width: 1010px; }
+
+table.repairTable {
+  margin-left: 35px;
+  width: 960px; }
+
+.machineHours {
+  position: relative;
+  left: 20em;
+  top: 3em; }
+
+.repairLoad {
+  position: relative;
+  top: 6em;
+  margin-left: 25px; }
+
+.repairButton {
+  position: relative;
+  top: 3em;
+  left: 1em;
+  width: 130px; }
+
+.washBayText {
+  position: relative;
+  top: -5em;
+  left: 50em; }
+
+#textMessage {
+  width: 400px; }
+
+.repNav {
+  position: absolute;
+  left: 40em; }
+
+.kitListButton {
+  position: absolute;
+  left: 71em;
+  top: 20em; }
+
+.shippingTable {
+  position: relative;
+  top: 15em; }
+
+.buttonNotWorking {
+  background: repeating-linear-gradient(45deg, #e6e6e6, #bc171b 10px, #e6e6e6 10px, #bc171b 20px); }
+
+.insideNavBar {
+  margin-top: 25px; }
+
+.topNav {
+  position: relative;
+  margin-top: 25px;
+  left: 40em; }
+
+.templateNav {
+  position: absolute;
+  left: 40em;
+  top: 6em; }
+
+#logo {
+  margin: 10px; }
+
+.selected {
+  background-color: #978f93; }
+
+.selectedBackgroundGreen {
+  background-color: green; }
+
+.individualNavigation {
+  font-size: 16px; }
+
+.navigation {
+  margin-left: 25px; }
+
+.marginMain {
+  margin-left: 25px; }
+
+.mainLayout {
+  position: relative;
+  left: 560px;
+  color: black; }
+
+.editMachine {
+  background: repeating-linear-gradient(45deg, #e6e6e6, #bc171b 10px, #e6e6e6 10px, #bc171b 20px); }
+
+.searchMachine {
+  background: repeating-linear-gradient(45deg, #e6e6e6, #bc171b 10px, #e6e6e6 10px, #bc171b 20px); }
+
+.inActive {
+  background: repeating-linear-gradient(45deg, #e6e6e6, #bc171b 10px, #e6e6e6 10px, #bc171b 20px); }
+
+/*# sourceMappingURL=main.css.map */

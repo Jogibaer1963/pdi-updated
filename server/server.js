@@ -142,7 +142,8 @@ if(Meteor.isServer){
                 let stringLength = variant_id.length;
                 let variantPart = variant_id.slice(15, (stringLength - 1));
                 let variantDescription = variantPart.replace(/'/g, '');
-                variants_C79.insert({variant: variantMarker,
+                console.log(variantMarker, variantDescription);
+                variants_C77.insert({variant: variantMarker,
                     variantDescription: variantDescription,
                     imagePath: "http://",
                     status: 1 });
@@ -396,20 +397,36 @@ if(Meteor.isServer){
         },
 
         'generatePdiList': function(selectedPdiMachineId, selectedPdiMachineNr, dateStart, pdiUser, range) {
-            siArrayList = [];
-            // remove double key... just in case...
-         //   InspectedMachines.remove({_id: selectedPdiMachineId});
-            // set machine status into pdi active (2)
+            machineConfig = [];
+            variant = [];
+            siArrayList = [];  /*
             MachineReady.update({_id: selectedPdiMachineId}, {$set: {pdiStatus: 2, startPdiDate: dateStart}});
-            // prepare database for incoming pdi checkpoints
-         //   InspectedMachines.insert({_id: selectedPdiMachineId, machineId: selectedPdiMachineNr,
-         //       dateStart: dateStart, user: user});
-            // generate Checklist (checkpoint must have active status 1 and only machine in range
             checkPoints.find({status: 1, machineType: {$in: range}},
                 {fields: {errorDescription: 1, errorPos: 1, checkStatus: 1, _id: -1}}, {sort: {errorPos: 1}}).forEach(function (copy) {
                      MachineReady.update({_id: selectedPdiMachineId}, {$addToSet: {checkList: (copy)}});
                        });
-            MachineReady.update({_id: selectedPdiMachineId}, {$set: {pdiPerformer: pdiUser}});
+            MachineReady.update({_id: selectedPdiMachineId}, {$set: {pdiPerformer: pdiUser}});   */
+            // Load Type Variant
+            /*
+            console.log(selectedPdiMachineNr);
+            let type = selectedPdiMachineNr.slice(0,3);
+            let newVariant = 'variants_' + type;
+            console.log(newVariant);
+            let variantsList = Mongo.Collection.get(newVariant).find().fetch();
+            for (i = 0; i < variantsList.length; i++) {
+                machineConfig[i] = variantsList[i].variant;
+            }
+            */
+            let combineVariant = MachineReady.find({_id: selectedPdiMachineId}, {fields: {config: 1, _id: 0}}).fetch();
+
+            console.log(combineVariant.config.length);
+
+
+
+
+
+
+            /*
 
             // SI added to repair list
             const list = siList.find({machineNr: selectedPdiMachineNr}, {limit:1}).fetch();
@@ -443,6 +460,7 @@ if(Meteor.isServer){
                     }
                 }
             }
+            */
         },
 
         'cancelPdi': function(pdiMachineId) {

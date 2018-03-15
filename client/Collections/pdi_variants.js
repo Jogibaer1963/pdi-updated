@@ -12,9 +12,21 @@ if(Meteor.isClient) {
     Template.variantsViewer.helpers({
 
        variants: function () {
-            Session.set('selectedPdiMachine', '');
-            // Order of shipping date
-            return variants_C79.find();
+           let type = Session.get('variantType');
+           switch(type) {
+               case 1:
+                   return variants_C77.find();
+               case 2:
+                   return variants_C78.find();
+               case 3:
+                   return variants_C79.find();
+               case 4:
+                   return variants_C87.find();
+               case 5:
+                   return variants_C88.find();
+               case 6:
+                   return variants_C89.find();
+           }
         },
 
 
@@ -37,10 +49,42 @@ if(Meteor.isClient) {
                 document.getElementById('variant').value = '';
                 const  newContent = JSON.stringify(contents);
                console.log(newContent);
-               // Meteor.call('readVariant', contents);
+                Meteor.call('readVariant', contents);
             };
             reader.readAsText(file);
         },
+
+        'click .c77': () => {
+            event.preventDefault();
+            Session.set('variantType', 1);
+        },
+
+        'click .c78': () => {
+            event.preventDefault();
+            Session.set('variantType', 2);
+        },
+
+        'click .c79': () => {
+            event.preventDefault();
+            Session.set('variantType', 3);
+        },
+
+        'click .c87': () => {
+            event.preventDefault();
+            Session.set('variantType', 4);
+        },
+
+        'click .c88': () => {
+            event.preventDefault();
+            Session.set('variantType', 5);
+        },
+
+        'click .c89': () => {
+            event.preventDefault();
+            Session.set('variantType', 6);
+        }
+
+
 
     });
 
