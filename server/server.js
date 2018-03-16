@@ -142,7 +142,6 @@ if(Meteor.isServer){
                 let stringLength = variant_id.length;
                 let variantPart = variant_id.slice(15, (stringLength - 1));
                 let variantDescription = variantPart.replace(/'/g, '');
-                console.log(variantMarker, variantDescription);
                 variants_C77.insert({variant: variantMarker,
                     variantDescription: variantDescription,
                     imagePath: "http://",
@@ -155,13 +154,11 @@ if(Meteor.isServer){
         },
 
         'analyzeRepair': function (startUnix, endUnix) {
-            console.log(startUnix, endUnix);
             if (startUnix) {
-                console.log('in Loop');
+
             let machineList = MachineReady.find({startPdiDate: {$gt: startUnix}}).count();
-                console.log(machineList);
-            } else {
-               console.log('nicht im Loop');
+
+            } else { console.log('nicht im Loop');
             }
         },
 
@@ -399,27 +396,40 @@ if(Meteor.isServer){
         'generatePdiList': function(selectedPdiMachineId, selectedPdiMachineNr, dateStart, pdiUser, range) {
             machineConfig = [];
             variant = [];
-            siArrayList = [];  /*
+            siArrayList = [];
+            variantMachine = [];
+            configDescription = [];
+            variantMD = [];
+            variantItem = [];
+            machineConfiguration = [];
+            configStyle = [];
             MachineReady.update({_id: selectedPdiMachineId}, {$set: {pdiStatus: 2, startPdiDate: dateStart}});
             checkPoints.find({status: 1, machineType: {$in: range}},
                 {fields: {errorDescription: 1, errorPos: 1, checkStatus: 1, _id: -1}}, {sort: {errorPos: 1}}).forEach(function (copy) {
                      MachineReady.update({_id: selectedPdiMachineId}, {$addToSet: {checkList: (copy)}});
                        });
-            MachineReady.update({_id: selectedPdiMachineId}, {$set: {pdiPerformer: pdiUser}});   */
+            MachineReady.update({_id: selectedPdiMachineId}, {$set: {pdiPerformer: pdiUser}});
             // Load Type Variant
-            /*
-            console.log(selectedPdiMachineNr);
             let type = selectedPdiMachineNr.slice(0,3);
             let newVariant = 'variants_' + type;
-            console.log(newVariant);
             let variantsList = Mongo.Collection.get(newVariant).find().fetch();
-            for (i = 0; i < variantsList.length; i++) {
-                machineConfig[i] = variantsList[i].variant;
-            }
-            */
+            variantsList.forEach((variantValue, k) => {
+              variantMD[k] = variantValue.variant;
+              variantItem[k] = variantValue.variantDescription;
+            });
+            // Load Machine Configuration and select config items
             let combineVariant = MachineReady.find({_id: selectedPdiMachineId}, {fields: {config: 1, _id: 0}}).fetch();
+            let k = (combineVariant[0]).config;
+            k.forEach((variantMarker, i) => {
+               variantMachine[i] = variantMarker;
+               let match = variantMD.indexOf(variantMachine[i]);
+               configStyle[match] = variantMD[match]+ ' ' + variantItem[match];
+               machineConfiguration.push(configStyle[match]);
+            });
+            MachineReady.update({_id: selectedPdiMachineId}, {$set: {machineConfig: machineConfiguration}});
 
-            console.log(combineVariant.config.length);
+
+
 
 
 
