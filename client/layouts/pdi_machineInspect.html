@@ -77,7 +77,30 @@
         <input type="text" class="omInput" id="locationId" name="omDualTire" value="dualTire" placeholder="Dual Tires">
     </form>
     </div>
+    <br><br>
+    <h3>Configuration</h3>
+    <table class="pdiCheckList">
+        <tbody>
+        {{#each machineConfig}}
+            <tr class=" ">
+                <td class="pdiCell">
+                    <div class="positionCheckPos" >
+                        {{{config}}}
+                    </div>
+                    <div class="positionCheckText" >
+                        {{{configItem}}}
+                    </div>
+                    <button class="buttonOK" id={{_id}}>OK</button>
+
+                    <button class="buttonNOK" id={{_id}}>NOK</button>
+
+                </td>
+            </tr>
+        {{/each}}
+        </tbody>
+    </table>
         <br><br>
+    <h3>Checklist</h3>
         <table class="pdiCheckList">
             <tbody>
                 {{#each checkList}}

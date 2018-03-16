@@ -423,21 +423,11 @@ if(Meteor.isServer){
             k.forEach((variantMarker, i) => {
                variantMachine[i] = variantMarker;
                let match = variantMD.indexOf(variantMachine[i]);
-               configStyle[match] = variantMD[match]+ ' ' + variantItem[match];
+               configStyle[match] = {'config': variantMD[match], 'configItem': variantItem[match]};
+
                machineConfiguration.push(configStyle[match]);
             });
             MachineReady.update({_id: selectedPdiMachineId}, {$set: {machineConfig: machineConfiguration}});
-
-
-
-
-
-
-
-
-
-            /*
-
             // SI added to repair list
             const list = siList.find({machineNr: selectedPdiMachineNr}, {limit:1}).fetch();
             if(list === '') {
@@ -470,7 +460,6 @@ if(Meteor.isServer){
                     }
                 }
             }
-            */
         },
 
         'cancelPdi': function(pdiMachineId) {

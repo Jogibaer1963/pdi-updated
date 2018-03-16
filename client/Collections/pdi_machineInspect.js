@@ -41,6 +41,14 @@ if(Meteor.isClient) {
             return result;
         },
 
+        machineConfig: function() {
+            event.preventDefault();
+            Session.set('selectedPdiMachineNr', localStorage.getItem('pdiMachineNr'));
+            const machineId = Session.get('selectedPdiMachineNr');
+            result = MachineReady.findOne({machineId: machineId}).machineConfig;
+            return result;
+        },
+
         'selectedFailure': function(){
             const failure = this._id;
          //   console.log(failure);
