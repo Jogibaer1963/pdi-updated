@@ -85,8 +85,8 @@ $pdiDestination: 100px;
 $pdiTransporter: 100px;
 $pdiTruckOnOrder: 70px;
 $pdiKitList: 80px;
-$pdiComments: 310px;
-$pdiKitField: 180px;
+$pdiComments: 450px;
+$pdiKitField: 150px;
 $headerKit: 320px;
 $pdiPDIField: 50px;
 $pdiRepField: 50px;
@@ -190,11 +190,6 @@ $eraseUser: 50px;
 
 
 
-table.shippingTable {
-  position: absolute;
-  top: 400px;
-  width: 600px;
-}
 
 
 .tablePdiOverview {

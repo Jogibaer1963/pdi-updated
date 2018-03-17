@@ -13,7 +13,7 @@
         <div id="logo">
             <img src="claas_logo.png" />
         </div>
-    <div class="siTable">
+    <div class="siSingle">
          <h1 class="posSingle">Single Machines</h1>
        <form class="siItems">
           <label for="siItem" class="mLocationId" ></label>
@@ -27,6 +27,8 @@
           <button type="submit" class="removeSiItem">Remove SI Item</button>
        </form>
           <br>
+    </div>
+    <div>
        <table class="blueTable siSingleTable">
             <thead>
                 <tr class="rTableRow ">
@@ -47,12 +49,15 @@
 </template>
 
 <template name="upload">
+    <div class="headerMultiple">
+        <h1>Multiple Machines</h1>
+    </div>
     <div class="siButtons">
         {{> changeStat}}
     </div>
   <div class="multipleSiTable">
       {{> uploadList}}
-         <h1 class="posBulkText">Multiple Machines</h1>
+
       <div class="siText">
       <h2>How to use:</h2>
           <h4>1. Enter a SI Nr or SI description and Submit.</h4>
@@ -116,6 +121,7 @@
 </template>
 
 <template name="changeStat">
+    <h3>Alter status of SI</h3>
         <form class="statusChange">
             <button type="submit" class="statusButton statusBackground_0">Not Touched</button>
             <p></p>

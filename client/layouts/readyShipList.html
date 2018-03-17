@@ -1,6 +1,7 @@
 <template name="readyShipList">
 <body>
 {{#if currentUser}}
+    {{> topNav}}
     {{> overViewReadyList}}
 {{else}}
     {{> login}}
@@ -11,9 +12,12 @@
 
 
 <template name="overViewReadyList">
+    <div id="logo">
+        <img src="claas_logo.png" />
+    </div>
     <form class="shipMe">
         <div>
-            <button type="submit" class="shipMeButton">Ship me</button>
+            <button type="submit" class="shipMeButton">Machine is shipped</button>
         </div>
     </form>
     <form class="locationId">
@@ -23,13 +27,14 @@
             <input type="text" class="machineLocationInput" id="locationId" name="locationId" required>
         </div>
     </form>
-   <table class="blueTable shippingTable">
+   <table class="blueTable readyTable">
        <thead>
        <tr>
             <th class="pdiMachineField"><strong>Machine</strong></th>
             <th class="pdiShipDate"><strong><span>Shipdate</span></strong></th>
             <th class="pdiDestination"><strong>Destination</strong></th>
             <th class="pdiTransporter"><strong>Transporter</strong></th>
+            <th class="pdiTruckOnOrder"><strong>Truck on Order</strong></th>
             <th class="pdiLocation"><strong>Location</strong></th>
             <th class="pdiComments" style="width: 200px"><strong>Shipping Comments</strong></th>
        </tr>
@@ -41,6 +46,7 @@
                 <td class="pdiShipDate">{{date}}</td>
                 <td class="pdiDestination">{{destination}}</td>
                 <td class="pdiTransporter">{{transporter}}</td>
+                <td class="pdiTruckOnOrder {{getStatusTruck truckStatus}}" style="background-color:{{getStatusTruck truckStatus}}; color:{{getStatusTruck truckStatus}}" >{{truckStatus}}</td>
                 <td class="pdiLocation" style="background-color: #6fd981">{{locationId}}</td>
                 <td class="pdiComments">{{shippingComment}}</td>
             </tr>

@@ -1,16 +1,19 @@
 
-.siTable {
-  position: absolute;
-  top: 100px;
-  margin-left: 25px;
+.siSingle {
+  position: relative;
+  top: 5em;
+  left: 3em;
 }
 
 table.siSingleTable {
+  position: relative;
+  top: 6em;
+  left: 2em;
   width: 390px;
 }
 
 table.siType {
-  position: absolute;
+  position: relative;
   top: 180px;
   width: 100px;
 }
@@ -22,10 +25,16 @@ table.siMachineList {
   width: 155px;
 }
 
+.headerMultiple {
+  position: relative;
+  top: -47em;
+  left: 50em;
+}
+
 .multipleSiTable {
-  position: absolute;
-  top: 100px;
-  left: 500px;
+  position: relative;
+  top: -67em;
+  left: 50em;
 }
 
 .siMdList {
@@ -41,9 +50,9 @@ table.siMachineList {
 }
 
 .siButtons {
-  position: absolute;
-  top: 350px;
-  left: 60em;
+  position: relative;
+  top: -15em;
+  left: 78em;
 }
 
 .siUpload {

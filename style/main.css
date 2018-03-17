@@ -151,11 +151,6 @@ table.tableAdminPos {
 .shippingMachines {
   height: 100px; }
 
-table.shippingTable {
-  position: absolute;
-  top: 400px;
-  width: 600px; }
-
 .tablePdiOverview {
   position: absolute;
   top: 300px; }
@@ -185,16 +180,16 @@ table.shippingTable {
   min-width: 80px; }
 
 .pdiComments {
-  max-width: 310px;
-  min-width: 310px; }
+  max-width: 450px;
+  min-width: 450px; }
 
 .pdiKitField {
-  max-width: 180px;
-  min-width: 180px; }
+  max-width: 150px;
+  min-width: 150px; }
 
 .pdiTireField {
-  max-width: 180px;
-  min-width: 180px; }
+  max-width: 150px;
+  min-width: 150px; }
 
 .pdiPDIField {
   max-width: 50px;
@@ -334,7 +329,7 @@ table.locationTable {
 
 .shippingMachinesTable {
   position: relative;
-  top: 40px; }
+  top: 30em; }
 
 .shippingTable {
   margin-top: 3em; }
@@ -384,9 +379,13 @@ table.locationTable {
 .editHead {
   background: repeating-linear-gradient(45deg, #e6e6e6, #bc171b 10px, #e6e6e6 10px, #bc171b 20px); }
 
+.shippingHeaderTable {
+  position: relative;
+  top: 30em; }
+
 .trailerSection {
   position: relative;
-  left: 80em; }
+  left: 90em; }
 
 .newTrailerInput {
   position: absolute;
@@ -771,16 +770,19 @@ table.pdiRepairList {
   position: relative;
   top: 50px; }
 
-.siTable {
-  position: absolute;
-  top: 100px;
-  margin-left: 25px; }
+.siSingle {
+  position: relative;
+  top: 5em;
+  left: 3em; }
 
 table.siSingleTable {
+  position: relative;
+  top: 6em;
+  left: 2em;
   width: 390px; }
 
 table.siType {
-  position: absolute;
+  position: relative;
   top: 180px;
   width: 100px; }
 
@@ -790,10 +792,15 @@ table.siMachineList {
   left: 150px;
   width: 155px; }
 
+.headerMultiple {
+  position: relative;
+  top: -47em;
+  left: 50em; }
+
 .multipleSiTable {
-  position: absolute;
-  top: 100px;
-  left: 500px; }
+  position: relative;
+  top: -67em;
+  left: 50em; }
 
 .siMdList {
   position: absolute;
@@ -806,9 +813,9 @@ table.siMachineList {
   left: 200px; }
 
 .siButtons {
-  position: absolute;
-  top: 350px;
-  left: 60em; }
+  position: relative;
+  top: -15em;
+  left: 78em; }
 
 .siUpload {
   position: absolute;
@@ -871,9 +878,21 @@ table.repairTable {
   left: 71em;
   top: 20em; }
 
-.shippingTable {
+.locationId {
   position: relative;
-  top: 15em; }
+  left: 13em;
+  top: 12.1em; }
+
+.shipMe {
+  position: relative;
+  top: 14em;
+  left: 3em; }
+
+table.readyTable {
+  position: relative;
+  top: 16em;
+  left: 2em;
+  width: 600px; }
 
 .buttonNotWorking {
   background: repeating-linear-gradient(45deg, #e6e6e6, #bc171b 10px, #e6e6e6 10px, #bc171b 20px); }

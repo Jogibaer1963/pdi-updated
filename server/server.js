@@ -433,7 +433,7 @@ if(Meteor.isServer){
             if(list === '') {
             } else {
                 siList.find({machineNr: selectedPdiMachineNr}).forEach(function(repOrder){
-                    machineReadyToGo.upsert({_id: selectedPdiMachineId}, {$addToSet: {issues}});
+                    MachineReady.upsert({_id: selectedPdiMachineId}, {$addToSet: {issues}});
                     siListDone.upsert({_id: selectedPdiMachineId}, {$addToSet: {repOrder}});
                     });
                 }
