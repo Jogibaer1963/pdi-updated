@@ -1,26 +1,24 @@
 <template name="maryView">
 {{#if currentUser}}
-    <div id="logo">
-        <img src="claas_logo.png" />
-    </div>
-{{> searchMaryView}}
     {{> overViewListMaryView}}
 {{else}}
     {{> login}}
 {{/if}}
 </template>
 
-<template name="searchMaryView">
-    <form class="machineSearch">
-        <button class="inputSearchMary" disabled>Search</button>
-        <label for="machine"></label>
-        <input class="inputSearchMachine" id="machine" name="machine" placeholder="Machine">
-    </form>
-</template>
-
 <template name="overViewListMaryView">
-    <div class="mainLayout">
-    {{> MainLayout_mary}}
+    <nav class="navTruckStatus">
+        <a class="btn" href="/shippingMachines">Back to Shipping</a>
+    </nav>
+    <div id="logo">
+        <img src="claas_logo.png" />
+    </div>
+    <div class="machineSearchButton">
+       <form class="machineSearch">
+          <button class="inputSearchMary" disabled>Search</button>
+          <label for="machine"></label>
+          <input class="inputSearchMachine" id="machine" name="machine" placeholder="Machine">
+       </form>
     </div>
     <div class="buttonField">
       <form>
@@ -31,7 +29,7 @@
         <button type="submit" class="removeList">Remove List</button>
        </form>
     </div>
-    <table class="shippingTable blueTable" cellpadding="10">
+    <table class="blueTable truckTable" cellpadding="10">
         <thead class="">
           <tr class="">
             <th class="pdiMachineField"><strong>Machine</strong></th>

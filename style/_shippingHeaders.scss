@@ -8,13 +8,13 @@
 }
 
 .headerComment {
-  position: absolute;
-  top: 230px;
-  left: 10px;
+  position: relative;
+  top: 1em;
+  left: 1.2em;
 }
 
 .headerInputComment {
-  position: absolute;
+  position: relative;
   width: 500px;
 }
 
@@ -52,6 +52,11 @@
   );
 }
 
+.trailerSection {
+  position: relative;
+  left: 80em;
+}
+
 .newTrailerInput {
   position: absolute;
   top: 220px;
@@ -67,13 +72,6 @@
   margin-top: 10px;
 }
 
-
-.trailerSection {
-  position: relative;
-  top: 2.2em;
-  left: 80em;
-
-}
 
 .trailerHome {
   position: absolute;

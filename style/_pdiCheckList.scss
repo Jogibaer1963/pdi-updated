@@ -58,8 +58,7 @@ a:hover {
 
 .inputMargin {
   float: left;
-  margin-top: 30px;
-  margin-left: 25px;
+  margin-left: 2em;
 }
 
 .descriptionBox {
@@ -71,7 +70,7 @@ a:hover {
 }
 
 .checkpointCheckbox {
-  margin-left: 525px;
+
 }
 
 .checkBoxMargin {
@@ -88,12 +87,17 @@ a:hover {
   top: 19px;
 }
 
+.checkBoxCheckList {
+  position: relative;
+  left: 3em;
+}
+
 // table position
 
 .tableChecklist {
-  position: relative;
-  top: 50px;
-  margin-left: 25px;
+  position: absolute;
+  top: 27em;
+  margin-left: 2em;
 }
 
 

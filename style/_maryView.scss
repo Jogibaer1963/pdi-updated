@@ -1,14 +1,23 @@
 
+.navTruckStatus {
+  position: relative;
+  left: 50em;
+}
+
 .buttonField {
   margin-left: 25px;
-  position: absolute;
-  top: 300px;
+  position: relative;
+  top: 10em;
+}
+
+.machineSearchButton {
+  position: relative;
+  top: 15em;
+  left: 20em;
 }
 
 .machineSearch {
-  margin-left: 25px;
-  position: absolute;
-  top: 150px;
+
 }
 
 .inputSearchMary {
@@ -27,4 +36,10 @@
 
 .removeList {
   margin-left: 25px;
+}
+
+table.truckTable {
+  position:relative;
+  top: 15em;
+  margin-left: 2em;
 }

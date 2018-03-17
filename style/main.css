@@ -353,12 +353,12 @@ table.locationTable {
   margin-top: 25px; }
 
 .headerComment {
-  position: absolute;
-  top: 230px;
-  left: 10px; }
+  position: relative;
+  top: 1em;
+  left: 1.2em; }
 
 .headerInputComment {
-  position: absolute;
+  position: relative;
   width: 500px; }
 
 .headerSubmit {
@@ -384,6 +384,10 @@ table.locationTable {
 .editHead {
   background: repeating-linear-gradient(45deg, #e6e6e6, #bc171b 10px, #e6e6e6 10px, #bc171b 20px); }
 
+.trailerSection {
+  position: relative;
+  left: 80em; }
+
 .newTrailerInput {
   position: absolute;
   top: 220px; }
@@ -395,11 +399,6 @@ table.locationTable {
 
 .newTrailer {
   margin-top: 10px; }
-
-.trailerSection {
-  position: relative;
-  top: 2.2em;
-  left: 80em; }
 
 .trailerHome {
   position: absolute;
@@ -419,15 +418,19 @@ table.locationTable {
 .headerKit {
   white-space: pre-wrap; }
 
+.navTruckStatus {
+  position: relative;
+  left: 50em; }
+
 .buttonField {
   margin-left: 25px;
-  position: absolute;
-  top: 300px; }
+  position: relative;
+  top: 10em; }
 
-.machineSearch {
-  margin-left: 25px;
-  position: absolute;
-  top: 150px; }
+.machineSearchButton {
+  position: relative;
+  top: 15em;
+  left: 20em; }
 
 .inputSearchMary {
   background: repeating-linear-gradient(45deg, #e6e6e6, #bc171b 10px, #e6e6e6 10px, #bc171b 20px); }
@@ -437,6 +440,11 @@ table.locationTable {
 
 .removeList {
   margin-left: 25px; }
+
+table.truckTable {
+  position: relative;
+  top: 15em;
+  margin-left: 2em; }
 
 .inProcess {
   animation: glowing 1500ms infinite;
@@ -497,17 +505,13 @@ a:hover {
 
 .inputMargin {
   float: left;
-  margin-top: 30px;
-  margin-left: 25px; }
+  margin-left: 2em; }
 
 .descriptionBox {
   width: 350px; }
 
 .checkBoxHeader {
   padding-left: 40px; }
-
-.checkpointCheckbox {
-  margin-left: 525px; }
 
 .checkBoxMargin {
   margin: 5px; }
@@ -520,10 +524,14 @@ a:hover {
   left: 30px;
   top: 19px; }
 
-.tableChecklist {
+.checkBoxCheckList {
   position: relative;
-  top: 50px;
-  margin-left: 25px; }
+  left: 3em; }
+
+.tableChecklist {
+  position: absolute;
+  top: 27em;
+  margin-left: 2em; }
 
 .position {
   max-width: 142px;

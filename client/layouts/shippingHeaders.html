@@ -1,6 +1,5 @@
 <template name="headerShipList">
     {{#if currentUser}}
-        {{> headerNav}}
         {{> inputHead}}
         {{> headerTrailer}}
     {{else}}
@@ -11,6 +10,17 @@
 <template name="inputHead">
     <div id="logo">
         <img src="claas_logo.png" />
+    </div>
+    <div class="mainLayout">
+        <nav>
+            <a class="btn" href="/shippingMachines">Switch to Combines</a>
+            <a>|</a>
+            <a class="btn" href="/overViewUser">Over View</a>
+            <a>|</a>
+            <a class="btn" href="/statistics">Statistics</a>
+            <a>|</a>
+            <a class="btn" href="/logout" >Logout</a>
+        </nav>
     </div>
     <div class="newMachineShipping">
         <form class="inputNewHead">
@@ -35,6 +45,11 @@
                 <input type="text" class="inputComment" id="newTransporter" name="newTransporter" placeholder="Transporter">
             </div>
                 <br>
+            <div class="headerComment">
+                <label for="newComment" class="inputComment">Comments</label>
+                <br>
+                <input type="text" class="headerInputComment" id="newComment" name="newComment" placeholder="Comments">
+            </div>
             <div>
                 <ul class="firstKit">
                                                                   <!-- Be aware of white space for list view in table cell !!!  FIND BETTER SOLUTION !!            -->
@@ -110,11 +125,6 @@
                     </li>
 
                 </ul>
-            </div>
-            <div class="headerComment">
-                <label for="newComment" class="inputComment">Comments</label>
-                <br>
-                <input type="text" class="headerInputComment" id="newComment" name="newComment" placeholder="Comments">
             </div>
             <br>
             <div class="headerSubmit">
