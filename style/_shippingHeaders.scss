@@ -1,4 +1,11 @@
 
+.newHeadShipping {
+  position: relative;
+  top: 8em;
+  margin-left: 25px;
+}
+
+
 .firstKit {
   margin-top: 25px;
 }
@@ -25,21 +32,27 @@
   width: 80px;
 }
 
+.headerSection {
+  position: relative;
+  top: 20em;
+  left: -35em;
+}
+
 .headerTable {
   margin-top: 50px;
   margin-left: 30px;
 }
 
 .buttonDelete {
-  position: absolute;
-  top: 390px;
-  left: 270px;
+  position: relative;
+  top: 5em;
+  left: 27em;
 }
 
 .buttonEdit {
-  position: absolute;
-  top: 390px;
-  left: 100px;
+  position: relative;
+  top: 2.5em;
+  left: 10em;
 }
 
 .editHead {
@@ -52,14 +65,11 @@
   );
 }
 
-.shippingHeaderTable {
-  position: relative;
-  top: 30em;
-}
 
 .trailerSection {
   position: relative;
   left: 90em;
+  top: -49.5em;
 }
 
 .newTrailerInput {
@@ -87,15 +97,33 @@
 .trailerOnDuty {
   position: absolute;
   top: 350px;
-  left: 300px;
+  left: 27em;
 }
 
 .moveButton {
-  position: absolute;
-  top: 340px;
-  left: 185px;
+  position: relative;
+  top: 35em;
+  left: 15em;
+}
+
+.imageButton {
+  width: 8em;
+  height: 4em;
+
 }
 
 .headerKit {
   white-space: pre-wrap;
 }
+
+table.trailerTable {
+  position: absolute;
+  width: 180px;
+  top: 420px;
+}
+
+.trailerTableOnTheMove {
+  position: relative;
+  left: 25em;
+}
+

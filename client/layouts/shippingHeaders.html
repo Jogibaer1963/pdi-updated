@@ -22,7 +22,7 @@
             <a class="btn" href="/logout" >Logout</a>
         </nav>
     </div>
-    <div class="newMachineShipping">
+    <div class="newHeadShipping">
         <form class="inputNewHead">
             <div class="shippingInputs">
                 <label for="MachineId" class="" >Head-Id</label>
@@ -30,21 +30,21 @@
                 <input type="text" class="inputComment" id="headId" name="newHead" placeholder="Head Id" value="{{headId}}" required>
             </div>
             <div class="shippingInputs">
-                <label for="shippingDate" class="input">Shipping-Date</label>
+                <label for="shippingDate" class="">Shipping-Date</label>
                 <br>
-                <input type="Date" class="inputComment" id="shippingDate" name="newDate" required>
+                <input type="Date" class="" id="shippingDate" name="newDate" required>
             </div>
             <div class="shippingInputs">
-                <label for="newDestination" class="input">Destination</label>
+                <label for="newDestination" class="">Destination</label>
                 <br>
                 <input type="text" class="inputComment" id="newDestination" name="newDestination" placeholder="Destination">
             </div>
             <div class="shippingInputs">
-                <label for="newTransporter" class="input">Transporter</label>
+                <label for="newTransporter" class="">Transporter</label>
                 <br>
                 <input type="text" class="inputComment" id="newTransporter" name="newTransporter" placeholder="Transporter">
             </div>
-                <br>
+                <br><br><br>
             <div class="headerComment">
                 <label for="newComment" class="inputComment">Comments</label>
                 <br>
@@ -132,6 +132,7 @@
             </div>
         </form>
     </div>
+    <div class="headerSection">
         <div class="buttonDelete">
             <button class="btn btn-default btn-danger deleteHeader" type="submit">Delete marked Machine</button>
         </div>
@@ -164,6 +165,7 @@
                {{/each}}
            </tbody>
         </table>
+    </div>
 </template>
 
 <template name="headerTrailer">
@@ -178,14 +180,14 @@
          <input type="text" class="inputTrailerId newTrailer" id="trailerId" name="trailerId" placeholder="Trailer Id">
        </div>
        <div class="trailerButton">
-         <button class="trailerSubmit newTrailer" type="submit">Add new Trailer</button>
+         <button class="btn btn-default trailerSubmit newTrailer" type="submit">Add new Trailer</button>
        </div>
     </form>
        <div class="deleteTrailer">
-         <button class="trailerDelete" type="submit">Delete Trailer</button>
+         <button class="btn btn-default trailerDelete" type="submit">Delete Trailer</button>
        </div>
      <div class="moveButton">
-         <button class="trailerMove" type="submit">Move Trailer</button>
+         <button class="btn btn-success trailerMove" type="submit"><img class="imageButton" src="move-trailer.JPG"></button>
      </div>
      <div class="trailerHome">
          <h2>On Lot</h2>
