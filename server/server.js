@@ -26,10 +26,6 @@ if(Meteor.isServer){
             return checkPoints.find();
         });
 
-    //    Meteor.publish("inspectedMachines", function() {
-    //        return InspectedMachines.find();
-    //    });
-
         Meteor.publish("pdiCheckList", function(){
             return pdiCheckList.find();
         });
@@ -153,15 +149,6 @@ if(Meteor.isServer){
             MachineReady.update({machineId: machineId}, {$set: {config: configArray, configStatus: 1}});
         },
 
-        'analyzeRepair': function (startUnix, endUnix) {
-            if (startUnix) {
-
-            let machineList = MachineReady.find({startPdiDate: {$gt: startUnix}}).count();
-
-            } else { console.log('nicht im Loop');
-            }
-        },
-
         'fuelConsumption': function () {
             let elementMachine = [];
             let elementFuelStart = [];
@@ -204,12 +191,7 @@ if(Meteor.isServer){
                 usersProfil.remove({username: userName});
             }
         },
-    /*
-        'adminUserLoggedIn': function (err, usersReturn) {
-          usersReturn = Meteor.usersProfil.find().fetch();
-         return usersReturn;
-        },
-    */
+
         'newUser' : function (userConst, passwordConst, role,  createdAt, loggedUser) {
             Accounts.createUser({username: userConst, password: passwordConst});
             setTimeout(function () {
@@ -312,10 +294,10 @@ if(Meteor.isServer){
         },
 
         'download_statistics': function () {
-        const collection = MachineReady.find({}, {fields: {machineId: 1, dateOfCreation: 1, waitPdiTime: 1, date: 1,  pdiDuration: 1, _id: 0 }}).fetch();
-        const heading = true;
-        const delimiter = ";";
-        return exportcsv.exportToCSV(collection, heading, delimiter);
+            const collection = MachineReady.find({}, {fields: {machineId: 1, dateOfCreation: 1, waitPdiTime: 1, date: 1,  pdiDuration: 1, _id: 0 }}).fetch();
+            const heading = true;
+            const delimiter = ";";
+            return exportcsv.exportToCSV(collection, heading, delimiter);
         },
 
         // called by washList.js set washBay message to inactive, add user, add date
@@ -466,11 +448,7 @@ if(Meteor.isServer){
             MachineReady.update({_id: pdiMachineId}, {$set: {pdiStatus: 0, checkList: [], pdiPerformer: ''}});
             siListDone.remove({_id: pdiMachineId});
         },
-/*
-        'removeRepairItem': function(id, id2) {
-            InspectedMachines.update({_id: id}, {$pull: {repOrder: {_id: id2}}});
-        },
-*/
+
         'removeCheckPoint': function(selectedPdiMachineId, selectedCheckPoint) {
             pdiCheckList.update({_id: selectedPdiMachineId},
                 {$pull: {checkList: {_id: selectedCheckPoint}}});
@@ -483,20 +461,7 @@ if(Meteor.isServer){
                 errorPos: bigFingerBase.errorPos, errorDescription: bigFingerBase.errorDescription,
                 machineType: bigFingerBase.machineType}}});
         },
-/*
-        'addToCheckList': function(selectedPdiMachineId, repOrder, selectedCheckPoint, machineNr) {
-            InspectedMachines.upsert({_id: selectedPdiMachineId}, {$addToSet: {repOrder}});
-            pdiCheckList.update({_id: selectedPdiMachineId}, {$pull: {checkList: {_id: selectedCheckPoint}}});
-            const errorNr = checkPoints.find({_id:selectedCheckPoint}, {fields: {errorNr: 1}}).fetch();
-           const stringError = JSON.stringify(errorNr).slice(39,-3);
-            const descriptionNr = checkPoints.find({_id:selectedCheckPoint}, {fields: {errorDescription: 1}}).fetch();
-            const stringDescription = JSON.stringify(descriptionNr).slice(48,-3);
-            repairOrderPrint.insert({Machine_Nr: machineNr, Error_Nr: stringError, Error_Description:
-             stringDescription,
-               Repair_Comments: " ", Issue_Resolved: " "});
 
-        },
-*/
         // pdi Checklist buttons
 
         'okButton': (machineId, idFailure) => {
@@ -511,18 +476,6 @@ if(Meteor.isServer){
             MachineReady.update({_id: machineId, "checkList._id": idFailure}, {$set: {"checkList.$.checkStatus": 3}})
         },
 
-/*
-        'findMe': function (machineNr, selectedPdiMachine) {
-            InspectedMachines.update({machineId: machineNr}, {$pull: {repOrder: {_id:selectedPdiMachine}}});
-        },
-*/
-/*
-        'addToCheckListNew': function(selectedPdiMachineId, repOrder, machineNr) {
-            InspectedMachines.upsert({_id: selectedPdiMachineId}, {$addToSet: {repOrder}});
-            const stringDescription = JSON.stringify(repOrder).slice(68,-2);
-            repairOrderPrint.insert({Machine_Nr: machineNr, Error_Description: stringDescription});
-        },
-*/
         'orderParts': function (machineNr, loggedInUser, failureAddDescription) {
             const orderStatus = 1;
             orderParts.insert({machineNr: machineNr, user: loggedInUser, description: failureAddDescription,
@@ -536,16 +489,7 @@ if(Meteor.isServer){
          //       ommSupp: ommSupp, Fitting: ommFitting, ommTerra: ommTerra, ommCebis: ommCebis, ommProfiCam: ommProfiCam}});
 
         },
-/*
-        'machineInspected': function(selectedPdiMachine, dateStop, pdiDuration, waitPdiTime, pdiMachine) {
-            MachineReady.update({_id:selectedPdiMachine}, {$set: {pdiStatus: 1, stopPdiDate: dateStop,
-                pdiDuration: pdiDuration, waitPdiTime: waitPdiTime}});
-            pdiCheckList.remove({_id: selectedPdiMachine});
-            const repairOrder = InspectedMachines.findOne({_id: selectedPdiMachine});
-            MachineReady.upsert({_id: selectedPdiMachine}, {$addToSet: {repairOrder: repairOrder}});
-            siList.remove({machineNr: pdiMachine});
-        },
-*/
+
         'fuelAfterPdi': function (selectedPdiMachine, fuelAfter, consumption) {
           MachineReady.update({_id: selectedPdiMachine}, {$set: {fuelAfter: fuelAfter, consumption: consumption}});
           fuelAverage.update({}, {$push: {consumption: consumption}});
@@ -627,16 +571,10 @@ if(Meteor.isServer){
         'removeFromSiList': function (siItem) {
            siList.remove({_id: siItem});
         },
-/*
-        'machineRep': function(machineRepaired, workingHour) {
-            InspectedMachines.remove({_id: machineRepaired});
-            MachineReady.update({_id: machineRepaired}, {$set: {repairStatus: 1, machineHour: workingHour}});
-        },
-*/
+
         'updateWashList': function(selectedCheckPoint, dateStart) {
             MachineReady.update({_id:selectedCheckPoint}, {$set: {washStatus: 2, startWashDate: dateStart}});
         },
-
 
         'updateRepairList': function(selectedCheckPoint, dateStart) {
             MachineReady.update({_id:selectedCheckPoint}, {$set: {repairStatus: 2, startRepairDate: dateStart}});

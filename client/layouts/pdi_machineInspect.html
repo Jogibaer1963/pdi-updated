@@ -78,29 +78,33 @@
     </form>
     </div>
     <br><br>
-    <h3>Configuration</h3>
-    <table class="pdiCheckList">
-        <tbody>
-        {{#each machineConfig}}
-            <tr class=" ">
-                <td class="pdiCell">
-                    <div class="positionCheckPos" >
-                        {{{config}}}
-                    </div>
-                    <div class="positionCheckText" >
-                        {{{configItem}}}
-                    </div>
-                    <button class="buttonOK" id={{_id}}>OK</button>
+    <div>
+       <h3>Configuration</h3>
+         <table class="pdiCheckList">
+            <tbody>
+               {{#each machineConfig}}
+                  <tr class=" ">
+                     <td class="pdiCell">
+                        <div class="positionCheckPos" >
+                          {{{config}}}
+                        </div>
+                        <div class="positionCheckText" >
+                          {{{configItem}}}
+                        </div>
+                       <button class="btn btn-success buttonOK" id={{_id}}>OK</button>
 
-                    <button class="buttonNOK" id={{_id}}>NOK</button>
+                       <button class="btn btn-danger buttonNOK" id={{_id}}>NOK</button>
 
-                </td>
-            </tr>
-        {{/each}}
-        </tbody>
-    </table>
+                       <button class="btn btn-info buttonNA buttonNotWorking" id={{_id}}>info</button>
+                     </td>
+                  </tr>
+               {{/each}}
+            </tbody>
+         </table>
+    </div>
         <br><br>
-    <h3>Checklist</h3>
+    <div>
+      <h3>Checklist</h3>
         <table class="pdiCheckList">
             <tbody>
                 {{#each checkList}}
@@ -112,16 +116,17 @@
                             <div class="positionCheckText">
                             {{{errorDescription}}}
                             </div>
-                            <button class="buttonOK" id={{_id}}>OK</button>
+                            <button class="btn btn-success buttonOK" id={{_id}}>OK</button>
 
-                            <button class="buttonNOK" id={{_id}}>NOK</button>
+                            <button class="btn btn-danger buttonNOK" id={{_id}}>NOK</button>
 
-                            <button class="buttonNA" id={{_id}}>N/A</button>
+                            <button class="btn btn-info buttonNA" id={{_id}}>N/A</button>
                         </td>
                     </tr>
                 {{/each}}
             </tbody>
         </table>
+    </div>
     <br><br>
     <form action="">
         <div>
