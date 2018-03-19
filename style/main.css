@@ -744,6 +744,9 @@ table.newIssuesTable {
 .deleteRepair {
   width: 30em; }
 
+.endOfList {
+  margin-bottom: 10em; }
+
 .washBayLinks {
   position: relative;
   left: 40em; }
