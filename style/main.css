@@ -567,9 +567,6 @@ a:hover {
   max-width: 220px;
   min-width: 220px; }
 
-.ommInput {
-  margin-left: 15px; }
-
 table {
   width: 411px;
   margin-left: 10px; }
@@ -666,6 +663,24 @@ table.pdiTable {
 .variantVisible {
   text-align: center; }
 
+.ommInput {
+  margin-left: 5em; }
+
+.configButtonOK {
+  font-weight: bold;
+  float: left;
+  width: 130px;
+  position: absolute;
+  bottom: 0; }
+
+.configButtonNOK {
+  font-weight: bold;
+  float: left;
+  width: 130px;
+  position: absolute;
+  margin-left: 130px;
+  bottom: 0; }
+
 .buttonOK {
   font-weight: bold;
   float: left;
@@ -692,7 +707,27 @@ table.pdiTable {
 .pdiCell {
   position: relative;
   font-size: 16px;
-  height: 200px; }
+  height: 10em;
+  width: 39em; }
+
+.configHeader {
+  position: relative;
+  left: 5em; }
+
+.configTable {
+  margin-left: 3em; }
+
+.checkListTable {
+  margin-left: 3em; }
+
+.issueField {
+  margin-left: 3em; }
+
+.addIssueText {
+  width: 30em; }
+
+.pdiInputFields {
+  margin: 0.8em; }
 
 .washBayLinks {
   position: relative;

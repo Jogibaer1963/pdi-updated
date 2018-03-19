@@ -1,7 +1,5 @@
 <template name="machineInspect">
-
     {{#if currentUser}}
-
         {{> ommBook}}
     {{else}}
         {{> login}}
@@ -10,7 +8,6 @@
 
 
 <template name="ommBook">
-
     <div id="">
         <img src="claas_logo.png" />
     </div>
@@ -40,6 +37,7 @@
         <input type="text" class="batteryC13" id="batteryC13" name="batteryC13" placeholder="Battery MAN Batt-2 CCA">
         <input type="text" class="batteryC13" id="batteryC13" name="batteryC13" placeholder="Battery MAN Batt-2 Volt">
         <br><br>
+        <div class="ommInput">
         <label for="fuelMe" class="fuel">Fuel consumption before PDI</label>
         <br>
         <input type="text" class="omInput" id="fuelMe" name="fuelMe" placeholder="Gallon" required>
@@ -75,25 +73,28 @@
         <label for="ommMain">Dual Tire New Version</label>
         <br>
         <input type="text" class="omInput" id="locationId" name="omDualTire" value="dualTire" placeholder="Dual Tires">
+        </div>
     </form>
     </div>
     <br><br>
-    <div>
-       <h3>Configuration</h3>
+    <td class="pdiPDIField {{getStatusColor pdiStatus}}" style="background-color:{{getStatusColor pdiStatus}}; color:{{getStatusColor pdiStatus}}">{{pdiStatus}}</td>
+    <div class="configTable">
+       <h3 class="configHeader">Configuration</h3>
          <table class="pdiCheckList">
             <tbody>
                {{#each machineConfig}}
                   <tr class=" ">
-                     <td class="pdiCell">
-                        <div class="positionCheckPos" >
+                     <td class="pdiCell positionCheckPos {{getMachineConfigStatus machineConfigStatus}}"
+                         style="background-color:{{getMachineConfigStatus machineConfigStatus}}">
+                        <div class="" >
                           {{{config}}}
                         </div>
-                        <div class="positionCheckText" >
+                        <div class="positionCheckText">
                           {{{configItem}}}
                         </div>
-                       <button class="btn btn-success buttonOK" id={{_id}}>OK</button>
+                       <button class="btn btn-success configButtonOK" id={{_id}}>OK</button>
 
-                       <button class="btn btn-danger buttonNOK" id={{_id}}>NOK</button>
+                       <button class="btn btn-danger configButtonNOK" id={{_id}}>NOK</button>
 
                        <button class="btn btn-info buttonNA buttonNotWorking" id={{_id}}>info</button>
                      </td>
@@ -103,13 +104,14 @@
          </table>
     </div>
         <br><br>
-    <div>
-      <h3>Checklist</h3>
+    <div class="checkListTable">
+      <h3 class="configHeader">Checklist</h3>
         <table class="pdiCheckList">
             <tbody>
                 {{#each checkList}}
                     <tr class=" ">
-                        <td class="pdiCell">
+                        <td class="pdiCell positionCheckPos {{getMachineConfigStatus checkStatus}}"
+                            style="background-color:{{getMachineConfigStatus checkStatus}}">
                             <div class="positionCheckPos" >
                             {{{errorPos}}}
                             </div>
@@ -127,13 +129,24 @@
             </tbody>
         </table>
     </div>
-    <br><br>
-    <form action="">
-        <div>
-            <label for="addIssueLabel">Add Issue</label>
-            <input type="text" id="addIssue" class="addIssue" placeholder="Add issue">
+    <div class="pdiInputFields">
+      <form class="addNewIssue">
+        <div class="issueField">
+            <input type="text" class="addIssueText" name="addIssue" placeholder="Add issue">
+            <br><br>
+            <button type="submit" class="btn btn-default addIssueText">Submit New Issue</button>
         </div>
-    </form>
+      </form>
+    </div>
+    <div class="pdiInputFields">
+      <form class="addressToWashBay">
+        <div class="issueField">
+            <input type="text" class="addIssueText" name="addWashBay" placeholder="Add WashBay Message">
+            <br><br>
+            <button type="submit" class="btn btn-default addIssueText">Submit Message</button>
+        </div>
+      </form>
+    </div>
 
 </template>
 

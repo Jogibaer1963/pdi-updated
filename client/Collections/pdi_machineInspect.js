@@ -11,10 +11,7 @@ if(Meteor.isClient) {
             const user = Meteor.user().username;
             Session.set('selectedPdiMachineId', localStorage.getItem('pdiMachineId'));
             Session.set('selectedPdiMachineNr', localStorage.getItem('pdiMachineNr'));
-            const selectedPdiMachineId = Session.get('selectedPdiMachineId');
             const selectedPdiMachineNr = Session.get('selectedPdiMachineNr');
-            console.log(selectedPdiMachineId, selectedPdiMachineNr);
-
             return {machine: selectedPdiMachineNr, userLoggedIn: user};
         },
 
@@ -103,13 +100,37 @@ if(Meteor.isClient) {
           //  FlowRouter.go('machineInspect_2');
         },
 
+        'click .configButtonOK': (event) => {
+            event.preventDefault();
+            Session.set('selectedPdiMachineId', localStorage.getItem('pdiMachineId'));
+            const selectedPdiMachineId = Session.get('selectedPdiMachineId');
+            let idFailure = event.currentTarget.id;
+            if(selectedPdiMachineId) {
+                Meteor.call('configOkButton', selectedPdiMachineId, idFailure);
+            } else {
+                console.log("Lost Machine Number")
+            }
+        },
+
+        'click .configButtonNOK': (event) => {
+            event.preventDefault();
+            Session.set('selectedPdiMachineId', localStorage.getItem('pdiMachineId'));
+            const selectedPdiMachineId = Session.get('selectedPdiMachineId');
+            let idFailure = event.currentTarget.id;
+            if(selectedPdiMachineId) {
+                Meteor.call('configNokButton', selectedPdiMachineId, idFailure);
+            } else {
+                console.log("Lost Machine Number")
+            }
+        },
+
+
         'click .buttonOK': (event) => {
             event.preventDefault();
             Session.set('selectedPdiMachineId', localStorage.getItem('pdiMachineId'));
             const selectedPdiMachineId = Session.get('selectedPdiMachineId');
             let idFailure = event.currentTarget.id;
             if(selectedPdiMachineId) {
-                console.log(selectedPdiMachineId, idFailure);
                 Meteor.call('okButton', selectedPdiMachineId, idFailure);
             } else {
                 console.log("Lost Machine Number")
@@ -122,7 +143,6 @@ if(Meteor.isClient) {
             const selectedPdiMachineId = Session.get('selectedPdiMachineId');
             let idFailure = event.currentTarget.id;
             if(selectedPdiMachineId) {
-                console.log(selectedPdiMachineId, idFailure);
                 Meteor.call('nokButton', selectedPdiMachineId, idFailure);
             } else {
                 console.log("Lost Machine Number")
@@ -135,13 +155,23 @@ if(Meteor.isClient) {
             const selectedPdiMachineId = Session.get('selectedPdiMachineId');
             let idFailure = event.currentTarget.id;
             if(selectedPdiMachineId) {
-                console.log(selectedPdiMachineId, idFailure);
                 Meteor.call('naButton', selectedPdiMachineId, idFailure);
             } else {
                 console.log("Lost Machine Number")
             }
-        }
+        },
 
+        'submit .addNewIssue': (event) => {
+            event.preventDefault();
+            Session.set('selectedPdiMachineId', localStorage.getItem('pdiMachineId'));
+            const selectedPdiMachineId = Session.get('selectedPdiMachineId');
+            let addNewFailure = event.target.addIssue.value;
+            if(selectedPdiMachineId) {
+                Meteor.call('addNewFailure', selectedPdiMachineId, addNewFailure);
+            } else {
+                console.log("Lost Machine Number")
+            }
+        }
     });
 
 }

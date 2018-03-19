@@ -1,4 +1,5 @@
 import {Email} from 'meteor/email';
+import { Random } from 'meteor/random';
 
 
 if(Meteor.isServer){
@@ -391,7 +392,9 @@ if(Meteor.isServer){
                      MachineReady.update({_id: selectedPdiMachineId}, {$addToSet: {checkList: (copy)}});
                        });
             MachineReady.update({_id: selectedPdiMachineId}, {$set: {pdiPerformer: pdiUser}});
+
             // Load Type Variant
+
             let type = selectedPdiMachineNr.slice(0,3);
             let newVariant = 'variants_' + type;
             let variantsList = Mongo.Collection.get(newVariant).find().fetch();
@@ -399,18 +402,26 @@ if(Meteor.isServer){
               variantMD[k] = variantValue.variant;
               variantItem[k] = variantValue.variantDescription;
             });
+
             // Load Machine Configuration and select config items
+
             let combineVariant = MachineReady.find({_id: selectedPdiMachineId}, {fields: {config: 1, _id: 0}}).fetch();
             let k = (combineVariant[0]).config;
-            k.forEach((variantMarker, i) => {
-               variantMachine[i] = variantMarker;
-               let match = variantMD.indexOf(variantMachine[i]);
-               configStyle[match] = {'config': variantMD[match], 'configItem': variantItem[match]};
-
+                k.forEach((variantMarker, i) => {
+                   uniqueId= Random.id();
+                   variantMachine[i] = variantMarker;
+                   let match = variantMD.indexOf(variantMachine[i]);
+                   configStyle[match] = {_id: uniqueId,
+                                         'config': variantMD[match],
+                                         'configItem': variantItem[match],
+                                         machineConfigStatus: 0
+                                        };
                machineConfiguration.push(configStyle[match]);
             });
             MachineReady.update({_id: selectedPdiMachineId}, {$set: {machineConfig: machineConfiguration}});
+
             // SI added to repair list
+            /*
             const list = siList.find({machineNr: selectedPdiMachineNr}, {limit:1}).fetch();
             if(list === '') {
             } else {
@@ -441,11 +452,15 @@ if(Meteor.isServer){
                          {$set:{"machineList.$.siStatus": 3}});
                     }
                 }
-            }
+            } */
         },
 
         'cancelPdi': function(pdiMachineId) {
-            MachineReady.update({_id: pdiMachineId}, {$set: {pdiStatus: 0, checkList: [], pdiPerformer: ''}});
+            MachineReady.update({_id: pdiMachineId}, {$set: {pdiStatus: 0,
+                                                             checkList: [],
+                                                             machineConfig: [],
+                                                             pdiPerformer: ''
+                                                     }});
             siListDone.remove({_id: pdiMachineId});
         },
 
@@ -462,6 +477,17 @@ if(Meteor.isServer){
                 machineType: bigFingerBase.machineType}}});
         },
 
+        //pdi Config Buttons
+
+        'configOkButton': (machineId, idFailure) => {
+            MachineReady.update({_id: machineId, "machineConfig._id": idFailure}, {$set: {"machineConfig.$.machineConfigStatus": 1}})
+        },
+
+        'configNokButton': (machineId, idFailure) => {
+            MachineReady.update({_id: machineId, "machineConfig._id": idFailure}, {$set: {"machineConfig.$.machineConfigStatus": 2}})
+        },
+
+
         // pdi Checklist buttons
 
         'okButton': (machineId, idFailure) => {
@@ -476,6 +502,13 @@ if(Meteor.isServer){
             MachineReady.update({_id: machineId, "checkList._id": idFailure}, {$set: {"checkList.$.checkStatus": 3}})
         },
 
+        // Add additional Failure to checklist
+
+        'addNewFailure': (selectedPdiMachineId, addNewFailure) => {
+            let uniqueId = Random.id();
+            MachineReady.upsert({_id: selectedPdiMachineId}, {$push: {newIssues: {_id: uniqueId, checkStatus: 2, errorDescription: addNewFailure}}});
+        },
+
         'orderParts': function (machineNr, loggedInUser, failureAddDescription) {
             const orderStatus = 1;
             orderParts.insert({machineNr: machineNr, user: loggedInUser, description: failureAddDescription,
@@ -485,9 +518,6 @@ if(Meteor.isServer){
         'pdiMachineInspected': function(selectedPdiMachineId, loggedInUser, fuelMe, ommMain, ommSupp, ommFitting,
                                         ommTerra, ommCebis, ommProfiCam) {
             MachineReady.update({_id: selectedPdiMachineId}, {$set: {fuelStart: fuelMe}});
-         //   InspectedMachines.update({_id: selectedPdiMachineId}, {$set: {user: loggedInUser, ommMain: ommMain,
-         //       ommSupp: ommSupp, Fitting: ommFitting, ommTerra: ommTerra, ommCebis: ommCebis, ommProfiCam: ommProfiCam}});
-
         },
 
         'fuelAfterPdi': function (selectedPdiMachine, fuelAfter, consumption) {
