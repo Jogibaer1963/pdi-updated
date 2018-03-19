@@ -720,6 +720,10 @@ table.pdiTable {
 .checkListTable {
   margin-left: 3em; }
 
+.pdiDivider {
+  position: relative;
+  left: 3.5em; }
+
 .issueField {
   margin-left: 3em; }
 
@@ -728,6 +732,17 @@ table.pdiTable {
 
 .pdiInputFields {
   margin: 0.8em; }
+
+table.newIssuesTable {
+  position: relative;
+  left: 2em;
+  width: 32em; }
+
+.repairPointStyle {
+  height: 2em; }
+
+.deleteRepair {
+  width: 30em; }
 
 .washBayLinks {
   position: relative;

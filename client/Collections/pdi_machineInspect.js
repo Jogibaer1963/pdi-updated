@@ -59,7 +59,15 @@ if(Meteor.isClient) {
             event.preventDefault();
 
             return 'selectedBackgroundGreen';
-        }
+        },
+
+        newIssue: function() {
+            event.preventDefault();
+            Session.set('selectedPdiMachineNr', localStorage.getItem('pdiMachineNr'));
+            const machineId = Session.get('selectedPdiMachineNr');
+            result = MachineReady.findOne({machineId: machineId}).newIssues;
+            return result;
+        },
 
 
 

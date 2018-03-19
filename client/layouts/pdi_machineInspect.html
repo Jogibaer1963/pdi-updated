@@ -129,6 +129,9 @@
             </tbody>
         </table>
     </div>
+    <div class="pdiDivider">
+       <h1>_____________________</h1>
+    </div>
     <div class="pdiInputFields">
       <form class="addNewIssue">
         <div class="issueField">
@@ -137,6 +140,9 @@
             <button type="submit" class="btn btn-default addIssueText">Submit New Issue</button>
         </div>
       </form>
+    </div>
+    <div class="pdiDivider">
+        <h1>_____________________</h1>
     </div>
     <div class="pdiInputFields">
       <form class="addressToWashBay">
@@ -147,7 +153,40 @@
         </div>
       </form>
     </div>
-
+    <div class="pdiDivider">
+        <h1>_____________________</h1>
+    </div>
+    <div>
+        <h3 class="configHeader">New Issues Found</h3>
+        <table class="blueTable newIssuesTable">
+            <tbody>
+            {{#each newIssue}}
+                <tr class="repairPointStyle ">
+                   <td class="pdiComments ">{{errorDescription}}</td>
+                </tr>
+            {{/each}}
+            </tbody>
+        </table>
+    </div>
+    <br><br>
+    <div class="issueField">
+        <button type="button" class="btn btn-danger deleteRepair">Delete selected repair</button>
+    </div>
+    <div class="pdiDivider">
+        <h1>_____________________</h1>
+    </div>
+    <div>
+        <h3 class="configHeader">Pdi finnished</h3>
+    </div>
+    <div>
+       <form class="afterPdiFuel">
+          <div class="issueField">
+             <input type="text" class="addIssueText" name="afterFuel" placeholder="Fuel after PDI" required>
+              <br><br>
+              <button type="button" class="btn btn-success addIssueText afterFuel">Submit and back to over view</button>
+          </div>
+       </form>
+    </div>
 </template>
 
 
