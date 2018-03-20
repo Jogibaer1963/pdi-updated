@@ -158,13 +158,13 @@
     </div>
     <div>
         <h3 class="configHeader">New Issues Found</h3>
-        <table class="blueTable newIssuesTable">
+        <table class="blueTable newIssuesTable " cellpadding="10">
             <tbody>
-            {{#each newIssue}}
-                <tr class="repairPointStyle ">
+              {{#each newIssue}}
+                <tr class="openFailure {{selectedFailure}}">
                    <td class="pdiComments ">{{errorDescription}}</td>
                 </tr>
-            {{/each}}
+              {{/each}}
             </tbody>
         </table>
     </div>

@@ -509,6 +509,10 @@ if(Meteor.isServer){
             MachineReady.upsert({_id: selectedPdiMachineId}, {$push: {newIssues: {_id: uniqueId, checkStatus: 2, errorDescription: addNewFailure}}});
         },
 
+        'removeFailure': (selectedPdiMachineId, openFailure) => {
+          MachineReady.update({_id: selectedPdiMachineId}, {$pull: {newIssues : {_id: openFailure}}});
+        },
+
         'orderParts': function (machineNr, loggedInUser, failureAddDescription) {
             const orderStatus = 1;
             orderParts.insert({machineNr: machineNr, user: loggedInUser, description: failureAddDescription,

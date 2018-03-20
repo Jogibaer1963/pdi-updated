@@ -21,14 +21,6 @@ if(Meteor.isClient) {
             return Session.get('selectedProfiCam');
         },
 
-        selectedClass: function() {
-            event.preventDefault();
-            const omId = this._id;
-            const selectedProfiOmId = Session.get('selectedProfiId');
-            if(selectedProfiOmId === omId) {
-                return "selected";
-            }
-        },
 
         checkList: function() {
             event.preventDefault();
@@ -47,18 +39,11 @@ if(Meteor.isClient) {
         },
 
         'selectedFailure': function(){
-            const failure = this._id;
-         //   console.log(failure);
-          //  const selectedfailure = Session.get('selectedPdiMachine');
-           // if (selectedPdiMachine === openInspect) {
-          //      return "selected";
-          //  }
-        },
-
-        'selectedGreenButton': () => {
-            event.preventDefault();
-
-            return 'selectedBackgroundGreen';
+           const failure = this._id;
+           const selectedFailure = Session.get('openFailure');
+           if (failure === selectedFailure) {
+               return "selected";
+           }
         },
 
         newIssue: function() {
@@ -68,6 +53,8 @@ if(Meteor.isClient) {
             result = MachineReady.findOne({machineId: machineId}).newIssues;
             return result;
         },
+
+
 
 
 
@@ -168,6 +155,23 @@ if(Meteor.isClient) {
                 console.log("Lost Machine Number")
             }
         },
+
+        'click .openFailure': function () {
+            const openFailure = this._id;
+            Session.set('openFailure', openFailure);
+        },
+
+        'click .deleteRepair': () => {
+            event.preventDefault();
+            const selectedPdiMachineId = Session.get('selectedPdiMachineId');
+            const openFailure = Session.get('openFailure');
+            if(selectedPdiMachineId) {
+                Meteor.call('removeFailure', selectedPdiMachineId, openFailure);
+            } else {
+                console.log('Lost Machine Number');
+            }
+        },
+
 
         'submit .addNewIssue': (event) => {
             event.preventDefault();
