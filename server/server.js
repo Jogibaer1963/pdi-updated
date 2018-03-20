@@ -522,6 +522,7 @@ if(Meteor.isServer){
         'pdiMachineInspected': function(selectedPdiMachineId, loggedInUser, fuelMe, ommMain, ommSupp, ommFitting,
                                         ommTerra, ommCebis, ommProfiCam) {
             MachineReady.update({_id: selectedPdiMachineId}, {$set: {fuelStart: fuelMe}});
+
         },
 
         'fuelAfterPdi': function (selectedPdiMachine, fuelAfter, consumption) {

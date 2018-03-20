@@ -1,83 +1,85 @@
 <template name="machineInspect">
     {{#if currentUser}}
-        {{> ommBook}}
+        {{> pdiToDoList}}
     {{else}}
         {{> login}}
     {{/if}}
 </template>
 
 
-<template name="ommBook">
-    <div id="">
+<template name="pdiToDoList">
+    <div class="pdiToDo">
         <img src="claas_logo.png" />
     </div>
-    <div class="ommInput">
-    {{#with machineNow}}
-        <h2>Machine to Inspect: {{machine}}</h2>
-        <h2>Performed by: {{userLoggedIn}}</h2>
-    {{/with}}
-    <form class="omBooklets">
-        <label for="batteryC13" class="batteryC13">Battery Volt & CCA</label>
-        <br>
-        <input type="text" class="batteryC13" id="batteryC13" name="batteryC13" placeholder="Battery C13 CCA">
-        <input type="text" class="batteryC13" id="batteryC13" name="batteryC13" placeholder="Battery C13 Volt">
-        <br>
-        <input type="text" class="batteryC13" id="batteryC13" name="batteryC13" placeholder="Battery MTU G001 CCA">
-        <input type="text" class="batteryC13" id="batteryC13" name="batteryC13" placeholder="Battery MTU G001 Volt">
-        <br>
-        <input type="text" class="batteryC13" id="batteryC13" name="batteryC13" placeholder="Battery MTU G005 CCA">
-        <input type="text" class="batteryC13" id="batteryC13" name="batteryC13" placeholder="Battery MTU G005 Volt">
-        <br>
-        <input type="text" class="batteryC13" id="batteryC13" name="batteryC13" placeholder="Battery MTU G004 CCA">
-        <input type="text" class="batteryC13" id="batteryC13" name="batteryC13" placeholder="Battery MTU G004 Volt">
-        <br>
-        <input type="text" class="batteryC13" id="batteryC13" name="batteryC13" placeholder="Battery MAN Batt-1 CCA">
-        <input type="text" class="batteryC13" id="batteryC13" name="batteryC13" placeholder="Battery MAN Batt-1 Volt">
-        <br>
-        <input type="text" class="batteryC13" id="batteryC13" name="batteryC13" placeholder="Battery MAN Batt-2 CCA">
-        <input type="text" class="batteryC13" id="batteryC13" name="batteryC13" placeholder="Battery MAN Batt-2 Volt">
-        <br><br>
-        <div class="ommInput">
-        <label for="fuelMe" class="fuel">Fuel consumption before PDI</label>
-        <br>
-        <input type="text" class="omInput" id="fuelMe" name="fuelMe" placeholder="Gallon" required>
-        <br>
-        <label for="ommMain">Main OMM</label>
-        <br>
-        <input type="text" class="omInput" id="ommMain" name="omMain" value="ommMain" placeholder="Main OMM" required>
-        <br>
-        <label for="suppOmm">Supplemental OMM</label>
-        <br>
-        <input type="text" class="omInput" id="ommSupp" name="omSupp" value="suppOmm" placeholder="Supplemental OMM" required>
-        <br>
-        <label for="unloadOmm">Unload OMM</label>
-        <br>
-        <input type="text" class="omInput" id="unloadOmm" name="omUnload" value="unloadOmm" placeholder="Unload OMM" required>
-        <br>
-        <label for="ommMain">Profi Cam</label>
-        <br>
-        <input type="text" class="omInput" id="locationId" name="omProfiCam" value="dualTire" placeholder="Profi Cam">
-        <br>
-        <label for="cebisOmm">Cebis Mobil</label>
-        <br>
-        <input type="text" class="omInput" id="cebisOmm" name="omCebis" value="cebisMobilOmm" placeholder="Cebis Mobil OMM">
-        <br>
-        <label for="ommMain">Mobile Touch</label>
-        <br>
-        <input type="text" class="omInput" id="locationId" name="omMobileTouch" value="mobileTouchOmm" placeholder="Mobile Touch">
-        <br>
-        <label for="ommMain">Terra Track</label>
-        <br>
-        <input type="text" class="omInput" id="locationId" name="omTerra" value="terraTrack" placeholder="Terra Track">
-        <br>
-        <label for="ommMain">Dual Tire New Version</label>
-        <br>
-        <input type="text" class="omInput" id="locationId" name="omDualTire" value="dualTire" placeholder="Dual Tires">
-        </div>
-    </form>
+    <div class="pdiToDo">
+      {{#with machineNow}}
+         <h2>Machine to Inspect: {{machine}}</h2>
+         <h2>Performed by: {{userLoggedIn}}</h2>
+      {{/with}}
+       <form class="batts_and_omms">
+         <label for="batteryC13" class="batteryC13">Battery Volt & CCA</label>
+         <br>
+         <input type="text" class="batteryC13CCA" id="batteryC13CCA" name="batteryC13CCA" placeholder="Battery C13 CCA">
+         <input type="text" class="batteryC13Volt" id="batteryC13Volt" name="batteryC13Volt" placeholder="Battery C13 Volt">
+         <br><br>
+         <input type="text" class="batteryC13" id="mtuG001CCA" name="mtuG001CCA" placeholder="Battery MTU G001 CCA">
+         <input type="text" class="batteryC13" id="mtuG001Volt" name="mtuG001Volt" placeholder="Battery MTU G001 Volt">
+         <br><br>
+         <input type="text" class="batteryC13" id="mtuG005CCA" name="mtuG005CCA" placeholder="Battery MTU G005 CCA">
+         <input type="text" class="batteryC13" id="mtuG005Volt" name="mtuG005Volt" placeholder="Battery MTU G005 Volt">
+         <br><br>
+         <input type="text" class="batteryC13" id="mtuG004CCA" name="mtuG004CCA" placeholder="Battery MTU G004 CCA">
+         <input type="text" class="batteryC13" id="mtuG004Volt" name="mtuG004Volt" placeholder="Battery MTU G004 Volt">
+         <br><br>
+         <input type="text" class="batteryC13" id="manBatt_1CCA" name="manBatt_1CCA" placeholder="Battery MAN Batt-1 CCA">
+         <input type="text" class="batteryC13" id="manBatt_1Volt" name="manBatt_1Volt" placeholder="Battery MAN Batt-1 Volt">
+         <br><br>
+         <input type="text" class="batteryC13" id="manBatt_2CCA" name="manBatt_2CCA" placeholder="Battery MAN Batt-2 CCA">
+         <input type="text" class="batteryC13" id="manBatt_2Volt" name="manBatt_2Volt" placeholder="Battery MAN Batt-2 Volt">
+         <br><br>
+         <div class="ommInput">
+           <label for="fuelMe" class="fuel">Fuel consumption before PDI</label>
+           <br>
+           <input type="text" class="omInput" id="fuelMe" name="fuelMe" placeholder="Gallon" required>
+           <br>
+           <label for="ommMain">Main OMM</label>
+           <br>
+           <input type="text" class="omInput" id="ommMain" name="omMain" value="ommMain" placeholder="Main OMM" required>
+           <br>
+           <label for="suppOmm">Supplemental OMM</label>
+           <br>
+           <input type="text" class="omInput" id="ommSupp" name="omSupp" value="suppOmm" placeholder="Supplemental OMM" required>
+           <br>
+           <label for="unloadOmm">Unload OMM</label>
+           <br>
+           <input type="text" class="omInput" id="unloadOmm" name="omUnload" value="unloadOmm" placeholder="Unload OMM" required>
+           <br>
+           <label for="ommMain">Profi Cam</label>
+           <br>
+           <input type="text" class="omInput" id="locationId" name="omProfiCam" value="dualTire" placeholder="Profi Cam">
+           <br>
+           <label for="cebisOmm">Cebis Mobil</label>
+           <br>
+           <input type="text" class="omInput" id="cebisOmm" name="omCebis" value="cebisMobilOmm" placeholder="Cebis Mobil OMM">
+           <br>
+           <label for="ommMain">Mobile Touch</label>
+           <br>
+           <input type="text" class="omInput" id="locationId" name="omMobileTouch" value="mobileTouchOmm" placeholder="Mobile Touch">
+           <br>
+           <label for="ommMain">Terra Track</label>
+           <br>
+           <input type="text" class="omInput" id="locationId" name="omTerra" value="terraTrack" placeholder="Terra Track">
+           <br>
+           <label for="ommMain">Dual Tire New Version</label>
+           <br>
+           <input type="text" class="omInput" id="locationId" name="omDualTire" value="dualTire" placeholder="Dual Tires">
+         </div>
+       </form>
     </div>
     <br><br>
-    <td class="pdiPDIField {{getStatusColor pdiStatus}}" style="background-color:{{getStatusColor pdiStatus}}; color:{{getStatusColor pdiStatus}}">{{pdiStatus}}</td>
+    <td class="pdiPDIField {{getStatusColor pdiStatus}}"
+                style="background-color:{{getStatusColor pdiStatus}};
+                color:{{getStatusColor pdiStatus}}">{{pdiStatus}}</td>
     <div class="configTable">
        <h3 class="configHeader">Configuration</h3>
          <table class="pdiCheckList">

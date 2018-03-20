@@ -663,8 +663,8 @@ table.pdiTable {
 .variantVisible {
   text-align: center; }
 
-.ommInput {
-  margin-left: 5em; }
+.pdiToDo {
+  margin-left: 3em; }
 
 .configButtonOK {
   font-weight: bold;
@@ -712,7 +712,7 @@ table.pdiTable {
 
 .configHeader {
   position: relative;
-  left: 5em; }
+  left: 3em; }
 
 .configTable {
   margin-left: 3em; }

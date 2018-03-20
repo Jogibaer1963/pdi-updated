@@ -3,7 +3,7 @@
 if(Meteor.isClient) {
 
 
-    Template.ommBook.helpers({
+    Template.pdiToDoList.helpers({
 
 
         'machineNow': function () {
@@ -61,16 +61,26 @@ if(Meteor.isClient) {
     });
 
 
-    Template.ommBook.events({
+    Template.pdiToDoList.events({
 
 
-        'submit .omBooklets': function (event) {
+        'submit .batts_and_omms': function (event) {
             event.preventDefault();
             Session.set('selectedPdiMachine', localStorage.getItem('selectedPdi'));
             const loggedInUser = Session.get('currentLoggedInUser');
             const pdiMachineId = Session.get('selectedPdiMachine');
+            const battC13CCA = event.target.batteryC13CCA.value;
+            const battC13Volt = event.target.batteryC13Volt.value;
+            const mtuG001CCA = event.target.mtuG001CCA.value;
+            const mtuG001Volt = event.target.mtuG001Volt.value;
+            const mtuG005CCA = event.target.mtuG005CCA.value;
+            const mtuG005Volt = event.target.mtuG005Volt.value;
+            const mtuG004CCA = event.target.mtuG004CCA.value;
+            const mtuG004Volt = event.target.mtuG004Volt.value;
+
+
+
             const fuelMe = event.target.fuelMe.value;
-            Session.set('fuelBeforePdi', fuelMe);
             const ommMain = event.target.omMain.value;
             const ommSupp = event.target.omSupp.value;
             const ommFitting = event.target.omUnload.value;
@@ -92,7 +102,7 @@ if(Meteor.isClient) {
             event.target.omCebis.value = '';
             event.target.omTerra.value = '';
             event.target.omProfiCam.value = '';
-          //  FlowRouter.go('machineInspect_2');
+
         },
 
         'click .configButtonOK': (event) => {
