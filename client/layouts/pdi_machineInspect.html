@@ -16,7 +16,7 @@
          <h2>Machine to Inspect: {{machine}}</h2>
          <h2>Performed by: {{userLoggedIn}}</h2>
       {{/with}}
-       <form class="batts_and_omms">
+       <form class="batts">
          <label for="batteryC13" class="batteryC13">Battery Volt & CCA</label>
          <br>
          <input type="text" class="batteryC13CCA" id="batteryC13CCA" name="batteryC13CCA" placeholder="Battery C13 CCA">
@@ -37,6 +37,10 @@
          <input type="text" class="batteryC13" id="manBatt_2CCA" name="manBatt_2CCA" placeholder="Battery MAN Batt-2 CCA">
          <input type="text" class="batteryC13" id="manBatt_2Volt" name="manBatt_2Volt" placeholder="Battery MAN Batt-2 Volt">
          <br><br>
+           <button type="submit" class="btn btn-success buttonBatt">Save Batteries</button><br>
+       </form>
+        <br><br>
+        <form class="omms">
          <div class="ommInput">
            <label for="fuelMe" class="fuel">Fuel consumption before PDI</label>
            <br>
@@ -64,7 +68,7 @@
            <br>
            <label for="ommMain">Mobile Touch</label>
            <br>
-           <input type="text" class="omInput" id="locationId" name="omMobileTouch" value="mobileTouchOmm" placeholder="Mobile Touch">
+           <input type="text" class="omInput" id="locationId" name="omTouch" value="mobileTouchOmm" placeholder="Mobile Touch">
            <br>
            <label for="ommMain">Terra Track</label>
            <br>
@@ -72,8 +76,10 @@
            <br>
            <label for="ommMain">Dual Tire New Version</label>
            <br>
-           <input type="text" class="omInput" id="locationId" name="omDualTire" value="dualTire" placeholder="Dual Tires">
+           <input type="text" class="omInput" id="locationId" name="dualTire" value="dualTire" placeholder="Dual Tires">
          </div>
+            <br><br>
+           <button type="submit" class="btn btn-success buttonBatt">Save OMM's</button><br>
        </form>
     </div>
     <br><br>
@@ -185,7 +191,7 @@
           <div class="issueField">
              <input type="text" class="addIssueText" name="afterFuel" placeholder="Fuel after PDI" required>
               <br><br>
-              <button type="button" class="btn btn-success addIssueText afterFuel">Submit and back to over view</button>
+              <button type="submit" class="btn btn-success addIssueText">Submit and back to over view</button>
           </div>
        </form>
     </div>

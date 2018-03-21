@@ -9,6 +9,7 @@ if(Meteor.isClient) {
         'machineNow': function () {
             event.preventDefault();
             const user = Meteor.user().username;
+            Session.set('currentLoggedInUser', user);
             Session.set('selectedPdiMachineId', localStorage.getItem('pdiMachineId'));
             Session.set('selectedPdiMachineNr', localStorage.getItem('pdiMachineNr'));
             const selectedPdiMachineNr = Session.get('selectedPdiMachineNr');
@@ -64,11 +65,11 @@ if(Meteor.isClient) {
     Template.pdiToDoList.events({
 
 
-        'submit .batts_and_omms': function (event) {
+        'submit .batts': (event) => {
             event.preventDefault();
             Session.set('selectedPdiMachine', localStorage.getItem('selectedPdi'));
             const loggedInUser = Session.get('currentLoggedInUser');
-            const pdiMachineId = Session.get('selectedPdiMachine');
+            const pdiMachineId = Session.get('selectedPdiMachineId');
             const battC13CCA = event.target.batteryC13CCA.value;
             const battC13Volt = event.target.batteryC13Volt.value;
             const mtuG001CCA = event.target.mtuG001CCA.value;
@@ -77,18 +78,32 @@ if(Meteor.isClient) {
             const mtuG005Volt = event.target.mtuG005Volt.value;
             const mtuG004CCA = event.target.mtuG004CCA.value;
             const mtuG004Volt = event.target.mtuG004Volt.value;
+            const manBatt_1CCA = event.target.manBatt_1CCA.value;
+            const manBatt_1Volt = event.target.manBatt_1Volt.value;
+            const manBatt_2CCA = event.target.manBatt_2CCA.value;
+            const manBatt_2Volt = event.target.manBatt_2Volt.value;
+            console.log(pdiMachineId, mtuG004Volt);
+            Meteor.call('pdiMachineBattery', pdiMachineId, loggedInUser, battC13CCA, battC13Volt,
+                mtuG001CCA, mtuG001Volt, mtuG005CCA, mtuG005Volt, mtuG004CCA, mtuG004Volt,
+                manBatt_1CCA, manBatt_1Volt, manBatt_2CCA, manBatt_2Volt);
+        },
 
-
-
+         'submit .omms': (event) => {
+            event.preventDefault();
+            const loggedInUser = Session.get('currentLoggedInUser');
+            const pdiMachineId = Session.get('selectedPdiMachineId');
             const fuelMe = event.target.fuelMe.value;
             const ommMain = event.target.omMain.value;
             const ommSupp = event.target.omSupp.value;
-            const ommFitting = event.target.omUnload.value;
+            const ommUnload = event.target.omUnload.value;
+             const ommProfiCam = event.target.omProfiCam.value;
             const ommCebis = event.target.omCebis.value;
+             const ommTouch = event.target.omTouch.value;
             const ommTerra = event.target.omTerra.value;
-            const ommProfiCam = event.target.omProfiCam.value;
-            Meteor.call('pdiMachineInspected', pdiMachineId, loggedInUser, fuelMe, ommMain, ommSupp,
-                ommFitting, ommTerra, ommCebis, ommProfiCam);
+             const ommDual = event.target.dualTire.value;
+            Meteor.call('pdiMachineOmm', pdiMachineId, loggedInUser, fuelMe, ommMain, ommSupp,
+                ommUnload,ommProfiCam, ommCebis, ommTouch, ommTerra, ommDual);
+            /*
             Session.set('selectedProfiCam', '');
             Session.set('selectedTeraTrackOm', '');
             Session.set('selectedCemosOm', '');
@@ -102,7 +117,7 @@ if(Meteor.isClient) {
             event.target.omCebis.value = '';
             event.target.omTerra.value = '';
             event.target.omProfiCam.value = '';
-
+            */
         },
 
         'click .configButtonOK': (event) => {
@@ -193,6 +208,19 @@ if(Meteor.isClient) {
             } else {
                 console.log("Lost Machine Number")
             }
+        },
+
+        'submit .afterPdiFuel': (event) => {
+            event.preventDefault();
+            Session.set('selectedPdiMachineId', localStorage.getItem('pdiMachineId'));
+            const selectedPdiMachineId = Session.get('selectedPdiMachineId');
+            let fuelAfter = event.target.afterFuel.value;
+            if(selectedPdiMachineId) {
+                Meteor.call('fuelAfterPdi', selectedPdiMachineId, fuelAfter);
+            } else {
+                console.log("Lost Machine Number")
+            }
+
         }
     });
 

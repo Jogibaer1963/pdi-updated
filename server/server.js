@@ -519,15 +519,22 @@ if(Meteor.isServer){
                 orderStatus: orderStatus});
         },
 
-        'pdiMachineInspected': function(selectedPdiMachineId, loggedInUser, fuelMe, ommMain, ommSupp, ommFitting,
-                                        ommTerra, ommCebis, ommProfiCam) {
-            MachineReady.update({_id: selectedPdiMachineId}, {$set: {fuelStart: fuelMe}});
-
+        'pdiMachineBattery': function(selectedPdiMachineId, loggedInUser, battC13CCA, battC13Volt,
+                                      mtuG001CCA, mtuG001Volt, mtuG005CCA, mtuG005Volt, mtuG004CCA, mtuG004Volt,
+                                      manBatt_1CCA, manBatt_1Volt, manBatt_2CCA, manBatt_2Volt  ) {
+            MachineReady.update({_id: selectedPdiMachineId}, {$set: {batteries: {user: loggedInUser, battC13CCA, battC13Volt,
+                                       mtuG001CCA, mtuG001Volt, mtuG005CCA, mtuG005Volt, mtuG004CCA, mtuG004Volt,
+                                                        manBatt_1CCA, manBatt_1Volt, manBatt_2CCA, manBatt_2Volt}}});
         },
 
-        'fuelAfterPdi': function (selectedPdiMachine, fuelAfter, consumption) {
-          MachineReady.update({_id: selectedPdiMachine}, {$set: {fuelAfter: fuelAfter, consumption: consumption}});
-          fuelAverage.update({}, {$push: {consumption: consumption}});
+        'pdiMachineOmm': function(selectedPdiMachineId, loggedInUser, fuelMe, ommMain, ommSupp,
+                                  ommUnload,ommProfiCam, ommCebis, ommTouch, ommTerra, ommDual) {
+            MachineReady.update({_id: selectedPdiMachineId}, {$set: {omms: {user: loggedInUser, fuelStart: fuelMe,
+                    ommMain, ommSupp, ommUnload,ommProfiCam, ommCebis, ommTouch, ommTerra, ommDual}}});
+        },
+
+        'fuelAfterPdi': function (selectedPdiMachine, fuelAfter) {
+          MachineReady.update({_id: selectedPdiMachine}, {$set: {fuelAfter: fuelAfter, pdiStatus: 1}});
         },
 
         'machineUser': function (machineId, userLoggedIn, arrayOrder) {
