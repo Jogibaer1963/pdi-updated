@@ -309,13 +309,14 @@ if(Meteor.isServer){
             }
         },
 
-        'messageToWashBay': function(machineNr, washMessage, machine_id) {
+        'messageToWashBay': function(machine_id, machineNr, washMessage ) {
             washBayText.insert({machineNr: machineNr, washBayMessage: washMessage, active: 1});
             MachineReady.update({_id: machine_id}, {$set: {washStatus: 0}});
         },
 
-        'messageToWashBay_2': function(washMessage, machineId) {
-            washBayText.insert({machineNr: machineId, washBayMessage: washMessage, active: 1});
+        'messageToWashBay_2': function(machineId, machineNr, washMessage) {
+            washBayText.insert({machineNr: machineNr, washBayMessage: washMessage, active: 1});
+            MachineReady.update({_id: machineId}, {$set: {washBayMessages: {washMessage}}});
         },
 
         'truckRemoved': function(machineId, truckStatus) {

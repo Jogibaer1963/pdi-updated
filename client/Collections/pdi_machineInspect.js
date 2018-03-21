@@ -210,6 +210,21 @@ if(Meteor.isClient) {
             }
         },
 
+        'submit .addressToWashBay': (event) => {
+            event.preventDefault();
+            Session.set('selectedPdiMachineId', localStorage.getItem('pdiMachineId'));
+            Session.set('selectedPdiMachineNr', localStorage.getItem('pdiMachineNr'));
+            const selectedPdiMachineNr = Session.get('selectedPdiMachineNr');
+            const selectedPdiMachineId = Session.get('selectedPdiMachineId');
+            let addWashBay = event.target.addWashBay.value;
+            if(selectedPdiMachineId) {
+                Meteor.call('messageToWashBay_2',selectedPdiMachineId, selectedPdiMachineNr, addWashBay);
+            } else {
+                console.log("Lost Machine Number")
+            }
+            event.target.addWashBay.value = '';
+        },
+
         'submit .afterPdiFuel': (event) => {
             event.preventDefault();
             Session.set('selectedPdiMachineId', localStorage.getItem('pdiMachineId'));
@@ -220,6 +235,7 @@ if(Meteor.isClient) {
             } else {
                 console.log("Lost Machine Number")
             }
+            FlowRouter.go('/inspectionStart');
 
         }
     });

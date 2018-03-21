@@ -56,41 +56,26 @@
         {{#each listContent}}
             <div>
               <h3>Machine Id : {{machineId}}</h3>
-            </div>
-            {{#each repairOrder}}
                 <div class="">
-                   <h3>PDI performed by : {{user}}</h3>
+                    <h3>PDI performed by {{pdiPerformer}}</h3>
                 </div>
+            </div>
+            {{#each machineConfig}}
                 <br>
                 <div>
-                   <h3>Main OMM : {{ommMain}}</h3>
+                   <h4>{{config}} : {{configItem}}</h4>
                 </div>
-                <div>
-                   <h3>Supplement OMM : {{ommSupp}}</h3>
-                </div>
-                <div>
-                   <h3>Unload Instructions : {{ommFitting}}</h3>
-                </div>
-                <div>
-                   <h3>Cebis Mobil OMM : {{ommCebis}}</h3>
-                </div>
-                <div>
-                   <h3>Tera Track OMM      : {{ommTerra}}</h3>
-                </div>
-                <div>
-                   <h3>Profi Cam OMM : {{ommProfiCam}}</h3>
-                </div>
+            {{/each }}
             <div class="repairList">
                <h3>Repair List:</h3>
                <ul>
-                  {{#each repOrder}}
+                  {{#each newIssues}}
                       <div>
                          {{errorDescription}}
                       </div>
                   {{/each}}
                </ul>
             </div>
-            {{/each}}
         {{/each}}
      </div>
  </div>
