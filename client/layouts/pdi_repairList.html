@@ -55,18 +55,36 @@
      <div class="printList">
         {{#each listContent}}
             <div>
-              <h3>Machine Id : {{machineId}}</h3>
-                <div class="">
-                    <h3>PDI performed by {{pdiPerformer}}</h3>
-                </div>
+               <h3>Machine Id : {{machineId}}</h3>
+               <h3>PDI performed by {{pdiPerformer}}</h3>
             </div>
-            {{#each machineConfig}}
-                <br>
+            <div class="printList">
+              {{#each machineConfig}}
                 <div>
                    <h4>{{config}} : {{configItem}}</h4>
                 </div>
-            {{/each }}
-            <div class="repairList">
+              {{/each }}
+            </div>
+            <div class="printList">
+                <h3>Batteries result</h3>
+                {{#if battC13CCA}}
+                    <h4>{{battC13CCA}} Amp      {{battC13Volt}} Volt</h4>
+                  {{else}}
+                     {{#if  mtuG001CCA}}
+                        <h4>G001: {{mtuG001CCA}} Amp    {{mtuG001Volt}} Volt</h4>
+                        <h4>------------------------------------------------</h4>
+                        <h4>G005: {{mtuG005CCA}} Amp    {{mtuG005Volt}} Volt</h4>
+                        <h4>------------------------------------------------</h4>
+                        <h4>G004: {{mtuG004CCA}} Amp    {{mtuG004Volt}} Volt</h4>
+                     {{else}}
+                        {{#if manBatt_1CCA}}
+                            <h4>{{manBatt_1CCA}} Amp    {{manBatt_1Volt}} Volt</h4>
+                            <h4>{{manBatt_2CCA}} Amp    {{manBatt_2Volt}} Volt</h4>
+                        {{/if}}
+                     {{/if}}
+                {{/if}}
+            </div>
+            <div class="printList">
                <h3>Repair List:</h3>
                <ul>
                   {{#each newIssues}}
