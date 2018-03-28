@@ -825,8 +825,12 @@ table.pdiRepairList {
 
 .printList {
   position: relative;
-  top: 6em;
+  top: 9em;
   left: 2em; }
+
+.ommList {
+  position: relative;
+  top: 8em; }
 
 .siSingle {
   position: relative;

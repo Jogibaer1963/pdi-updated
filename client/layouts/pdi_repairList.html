@@ -65,6 +65,17 @@
                 </div>
               {{/each }}
             </div>
+        <div class="ommList">
+           <h2>Operatot Maintanace Manual</h2>
+            <h3>Omm Main : {{ommMain}}</h3>
+            <h3>Omm Supplemental : {{ommSupp}}</h3>
+            <h3>Omm Unload : {{ommUnload}}</h3>
+            <h3>Omm Cebis : {{ommCebis}}</h3>
+            <h3>Omm Cebis Touch : {{ommTouch}}</h3>
+            <h3>Omm Terra Track : {{ommTerra}}</h3>
+            <h3>Omm Dual : {{ommDual}}</h3>
+            <h3>Omm Profi Cam : {{ommProfiCam}}</h3>
+        </div>
             <div class="printList">
                 <h3>Batteries result</h3>
                 {{#if battC13CCA}}
@@ -93,6 +104,13 @@
                       </div>
                   {{/each}}
                </ul>
+                <ul>
+                    {{#each checkListIssues}}
+                        <div>
+                            {{errorDescription}}
+                        </div>
+                    {{/each}}
+                </ul>
             </div>
         {{/each}}
      </div>
