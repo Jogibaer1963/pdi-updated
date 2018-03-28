@@ -103,8 +103,8 @@ table.tableAdminPos {
   width: 853px; }
 
 .adminUserId {
-  max-width: 150px;
-  min-width: 150px; }
+  max-width: 160px;
+  min-width: 160px; }
 
 .adminUser {
   max-width: 80px;
@@ -115,8 +115,8 @@ table.tableAdminPos {
   min-width: 80px; }
 
 .userCreated {
-  max-width: 110px;
-  min-width: 110px; }
+  max-width: 120px;
+  min-width: 120px; }
 
 .userCreatedBy {
   max-width: 80px;
@@ -127,8 +127,8 @@ table.tableAdminPos {
   min-width: 110px; }
 
 .userIP {
-  max-width: 80px;
-  min-width: 80px; }
+  max-width: 90px;
+  min-width: 90px; }
 
 .userStatus {
   max-width: 60px;
@@ -359,9 +359,8 @@ table.locationTable {
   width: 80px; }
 
 .headerSection {
-  position: relative;
-  top: 20em;
-  left: -35em; }
+  position: absolute;
+  top: 30em; }
 
 .headerTable {
   margin-top: 50px;
@@ -383,7 +382,7 @@ table.locationTable {
 .trailerSection {
   position: relative;
   left: 90em;
-  top: -49.5em; }
+  top: -3.5em; }
 
 .newTrailerInput {
   position: absolute;
@@ -410,7 +409,7 @@ table.locationTable {
 .moveButton {
   position: relative;
   top: 35em;
-  left: 15em; }
+  left: -21.5em; }
 
 .imageButton {
   width: 8em;
@@ -947,11 +946,22 @@ table.repairTable {
   top: 14em;
   left: 3em; }
 
+.toggleCombineHeader {
+  position: relative;
+  top: 3em;
+  left: 12em; }
+
 table.readyTable {
   position: relative;
   top: 16em;
   left: 2em;
   width: 600px; }
+
+.not-active {
+  pointer-events: none;
+  cursor: default;
+  text-decoration: none;
+  color: black; }
 
 .buttonNotWorking {
   background: repeating-linear-gradient(45deg, #e6e6e6, #bc171b 10px, #e6e6e6 10px, #bc171b 20px); }

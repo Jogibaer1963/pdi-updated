@@ -33,10 +33,9 @@
 }
 
 .headerSection {
-  position: relative;
-  top: 20em;
-  left: -35em;
-}
+  position: absolute;
+  top: 30em;
+ }
 
 .headerTable {
   margin-top: 50px;
@@ -69,7 +68,7 @@
 .trailerSection {
   position: relative;
   left: 90em;
-  top: -49.5em;
+  top: -3.5em;
 }
 
 .newTrailerInput {
@@ -103,7 +102,7 @@
 .moveButton {
   position: relative;
   top: 35em;
-  left: 15em;
+  left: -21.5em;
 }
 
 .imageButton {

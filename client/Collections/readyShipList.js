@@ -1,10 +1,16 @@
 if (Meteor.isClient) {
 
+    Meteor.subscribe("headerReady");
+
 
     Template.overViewReadyList.helpers({
         overView: function () {
             return MachineReady.find({shipStatus: 0, pdiStatus: 1, repairStatus: 1, washStatus: 1}, {sort: {date: 1}});
         },
+
+
+
+
 
         'selectedClass': function () {
             const checkPoint = this._id;
@@ -23,6 +29,12 @@ if (Meteor.isClient) {
         },
 
         'click .shipMeButton': function () {
+            event.preventDefault();
+            const selectedCheckPoint = Session.get('selectedMachine');
+            Meteor.call('machineIsGone', selectedCheckPoint);
+        },
+
+        'click .toggleCombineHeader': function () {
             event.preventDefault();
             const selectedCheckPoint = Session.get('selectedMachine');
             Meteor.call('machineIsGone', selectedCheckPoint);

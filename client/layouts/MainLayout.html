@@ -36,15 +36,17 @@
 <template name="topNav">
     <div class="topNav">
         <nav>
-            <a class="btn " href="/overViewUser">Over View</a>
+            <a class="btn" href="/overViewUser">Over View</a>
             <a>|</a>
             <a class="btn" href="/machineLocation">Locations</a>
             <a>|</a>
-            <a class="btn" href="/machineSearch" disabled>Search by Machine</a>
+            <a class="btn not-active" href="/machineSearch">Search by Machine</a>
             <a>|</a>
-            <a class="btn" href="/wordSearch" disabled>Search by Key Word</a>
+            <a class="btn not-active" href="/wordSearch">Search by Key Word</a>
             <a>|</a>
-            <a class="btn" href="/statistics" disabled>Statistics</a>
+            <a class="btn not-active" href="/statistics">Statistics</a>
+            <a>|</a>
+            <a class="btn" href="/toDoList">L O P</a>
             <a>|</a>
             <a class="btn logout" href="/logout" >Logout</a>
         </nav>

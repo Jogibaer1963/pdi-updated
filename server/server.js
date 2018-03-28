@@ -15,6 +15,10 @@ if(Meteor.isServer){
             return MachineReady.find()
         });
 
+        Meteor.publish("headerReady", function () {
+            return headerReady.find()
+        });
+
         Meteor.publish("machineReadyToGo_2016", function () {
             return MachineReady_2016.find()
         });

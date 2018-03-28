@@ -1,3 +1,7 @@
+<!-- ToDo
+        make confirmed ship date editable
+-->
+
 <template name="maryView">
 {{#if currentUser}}
     {{> overViewListMaryView}}
@@ -39,6 +43,7 @@
             <th class="pdiWashField"><strong>Wash</strong></th>
             <th class="pdiShipField"><strong>Load</strong></th>
             <th class="pdiTruckOnOrder"><strong>Truck ordered</strong></th>
+              <th class="pdiTruckDate"><strong>Confirmed Ship Date</strong></th>
             <th class="pdiKitList"><strong>Kit List</strong></th>
             <th class="pdiTransporter"><strong>Transporter</strong></th>
             <th class="pdiDestination"><strong>City</strong></th>
@@ -57,6 +62,7 @@
                 <td class="pdiWashField {{getStatusColor washStatus}}" style="background-color:{{getStatusColor washStatus}}; color:{{getStatusColor washStatus}}" >{{washStatus}}</td>
                 <td class="pdiShipField {{getStatusColor shipStatus}}" style="background-color:{{getStatusColor shipStatus}}; color:{{getStatusColor shipStatus}}" >{{shipStatus}}</td>
                 <td class="pdiTruckOnOrder {{getStatusTruck truckStatus}}" style="background-color:{{getStatusTruck truckStatus}}; color:{{getStatusTruck truckStatus}}" >{{truckStatus}}</td>
+                <td class="pdiShipDate">{{date}}</td>
                 <td class="pdiKitList {{getStatusKit KitStatus}}" style="background-color:{{getStatusKit KitStatus}}; color:{{getStatusKit KitStatus}}" >{{KitStatus}}</td>
                 <td class="pdiTransporter" style="background-color: #6fd981">{{transporter}}</td>
                 <td class="pdiDestination" style="background-color: #6fd981">{{destination}}</td>
