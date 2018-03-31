@@ -18,7 +18,6 @@ if(Meteor.isClient) {
             const selectedRepair = this._id;
             const selectedMachineId = Session.get('selectedMachineId');
             if (selectedMachineId === selectedRepair) {
-
                 return "selected"
             }
         },

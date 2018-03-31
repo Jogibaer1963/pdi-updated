@@ -232,6 +232,10 @@ if(Meteor.isServer){
           siMd.upsert({_id: siMdList},{machineList: item});
         },
 
+        'machineRep': function(machineRepaired, workingHour) {
+          MachineReady.update({_id: machineRepaired}, {$set: {machineHours: workingHour}});
+        },
+
         'changeStatus': function (siNumber, selectedMachineId, setStatus) {
           siMd.update({_id: siNumber, "machineList._id": selectedMachineId}, {$set: {"machineList.$.siStatus": setStatus}});
         },

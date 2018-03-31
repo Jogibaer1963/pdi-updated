@@ -930,8 +930,22 @@ table.repairTable {
 .repairButton {
   position: relative;
   top: 3em;
-  left: 1em;
-  width: 130px; }
+  left: 1em; }
+
+.machineHourHeader {
+  position: relative;
+  top: -2em;
+  left: 8em; }
+
+.workingHours {
+  position: relative;
+  left: 13em;
+  top: -3em; }
+
+.toggleRepairUpcoming {
+  position: relative;
+  left: 30em;
+  top: 4em; }
 
 .washBayText {
   position: relative;
@@ -947,8 +961,7 @@ table.repairTable {
 
 .kitListButton {
   position: absolute;
-  left: 80em;
-  top: 20em; }
+  left: 80em; }
 
 .locationId {
   position: relative;
