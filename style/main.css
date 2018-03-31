@@ -60,9 +60,18 @@ table.blueTable tbody td {
   font-size: 13px;
   word-wrap: break-word; }
 
-table.blueTable tr:nth-child(even) {
-  background-color: #b7d9e4; }
+/*
+:root {
+  --tableBackGroundColor: #b7d9e4;
+}
 
+
+
+table.blueTable tr:nth-child(even) {
+    background-color: var(--tableBackGroundColor);
+}
+
+*/
 table.blueTable thead {
   background: #1C6EA4;
   border-bottom: 2px solid #444444; }
@@ -262,27 +271,28 @@ table.headerTable {
   margin-left: 25px; }
 
 .headerTablePosition {
-  position: absolute;
-  left: 450px;
-  top: 300px; }
+  position: relative;
+  left: 5em;
+  top: 3em; }
 
 table.overViewTable {
-  position: absolute;
-  top: 350px;
-  width: 415px; }
+  float: left;
+  position: relative;
+  top: 6em;
+  width: 21em; }
 
 .locationTable {
-  position: absolute;
-  top: 200px;
-  margin-left: 25px; }
-
-.locationId {
-  position: absolute;
-  top: 150px;
-  margin-left: 25px; }
+  position: relative;
+  top: 13em;
+  margin-left: 2.5em; }
 
 table.locationTable {
-  width: 464px; }
+  width: 30em; }
+
+.mLocationId {
+  position: relative;
+  top: 10em;
+  margin-left: 2.8em; }
 
 .shippingNav {
   position: absolute;
@@ -865,14 +875,10 @@ table.siMachineList {
   left: 50em; }
 
 .siMdList {
-  position: absolute;
-  top: 80px;
-  left: 400px; }
-
-.siSubmit {
-  position: absolute;
-  top: 20px;
-  left: 200px; }
+  float: left;
+  position: relative;
+  top: -15em;
+  left: 25em; }
 
 .siButtons {
   position: relative;
@@ -880,9 +886,13 @@ table.siMachineList {
   left: 78em; }
 
 .siUpload {
-  position: absolute;
-  top: 120px;
-  left: 400px; }
+  position: relative;
+  top: -13em;
+  left: 8em; }
+
+.posDatei {
+  position: relative;
+  left: 20em; }
 
 .removeSiButton {
   position: absolute;
@@ -937,7 +947,7 @@ table.repairTable {
 
 .kitListButton {
   position: absolute;
-  left: 71em;
+  left: 80em;
   top: 20em; }
 
 .locationId {
@@ -966,6 +976,10 @@ table.readyTable {
   cursor: default;
   text-decoration: none;
   color: black; }
+
+.repairNavButton {
+  position: relative;
+  left: 40em; }
 
 .buttonNotWorking {
   background: repeating-linear-gradient(45deg, #e6e6e6, #bc171b 10px, #e6e6e6 10px, #bc171b 20px); }

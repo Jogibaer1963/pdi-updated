@@ -5,7 +5,7 @@ if (Meteor.isClient) {
 
         overView: function() {
             const machineLoc = MachineReady.find( {machineId: {$gt: 'C00000'}, $or: [{shipStatus: 0},
-                {shipStatus: 2}]}, {sort: {date: 1}}).fetch();
+                {shipStatus: 2}]}, {sort: {date: -1}}).fetch();
             return machineLoc;
             },
 
@@ -26,7 +26,7 @@ if (Meteor.isClient) {
             Session.set('selectedLocation', newLocation);
         },
 
-        'submit .locationId': function() {
+        'submit .mLocationId': function() {
             event.preventDefault();
             const machineId = Session.get('selectedLocation');
             const locationUpdate = event.target.locationId.value;

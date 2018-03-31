@@ -1,16 +1,17 @@
 
 .locationTable {
-  position: absolute;
-  top: 200px;
-  margin-left: 25px;
-}
-
-.locationId {
-  position: absolute;
-  top: 150px;
-  margin-left: 25px;
+  position: relative;
+  top: 13em;
+  margin-left: 2.5em;
 }
 
 table.locationTable {
-  width: 464px;
+  width: 30em;
 }
+
+.mLocationId {
+  position: relative;
+  top: 10em;
+  margin-left: 2.8em;
+}
+

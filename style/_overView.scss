@@ -12,13 +12,14 @@
 }
 
 .headerTablePosition {
-  position: absolute;
-  left: 450px;
-  top: 300px;
+  position: relative;
+  left: 5em;
+  top: 3em;
 }
 
 table.overViewTable {
-  position: absolute;
-  top: 350px;
-  width: 415px;
+  float: left;
+  position: relative;
+  top: 6em;
+  width: 21em;
 }

@@ -18,7 +18,7 @@ if(Meteor.isClient) {
             const selectedRepair = this._id;
             const selectedMachineId = Session.get('selectedMachineId');
             if (selectedMachineId === selectedRepair) {
-                console.log(selectedMachineId, selectedRepair);
+
                 return "selected"
             }
         },
@@ -63,7 +63,6 @@ if(Meteor.isClient) {
             event.preventDefault();
             const KitStatus = 1;
             const machineId = Session.get('selectedMachineId');
-            console.log('Machine', machineId);
             Meteor.call('listPrinted', machineId, KitStatus);
             Session.set('selectedMachineId', '');
         },

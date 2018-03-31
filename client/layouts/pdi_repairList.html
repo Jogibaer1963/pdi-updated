@@ -64,36 +64,37 @@
                    <h4>{{config}} : {{configItem}}</h4>
                 </div>
               {{/each }}
+                <h4>---------------------------------------------------------------------------</h4>
             </div>
+
         <div class="ommList">
-           <h2>Operatot Maintanace Manual</h2>
-            <h3>Omm Main : {{ommMain}}</h3>
-            <h3>Omm Supplemental : {{ommSupp}}</h3>
-            <h3>Omm Unload : {{ommUnload}}</h3>
-            <h3>Omm Cebis : {{ommCebis}}</h3>
-            <h3>Omm Cebis Touch : {{ommTouch}}</h3>
-            <h3>Omm Terra Track : {{ommTerra}}</h3>
-            <h3>Omm Dual : {{ommDual}}</h3>
-            <h3>Omm Profi Cam : {{ommProfiCam}}</h3>
+           <h2>Operator Maintenance Manual</h2>
+            <h3>Omm Main : {{omms.ommMain}}</h3>
+            <h3>Omm Supplemental : {{omms.ommSupp}}</h3>
+            <h3>Omm Unload : {{omms.ommUnload}}</h3>
+            <h3>Omm Cebis : {{omms.ommCebis}}</h3>
+            <h3>Omm Cebis Touch : {{omms.ommTouch}}</h3>
+            <h3>Omm Terra Track : {{omms.ommTerra}}</h3>
+            <h3>Omm Dual : {{omms.ommDual}}</h3>
+            <h3>Omm Profi Cam : {{omms.ommProfiCam}}</h3>
+            <h4>---------------------------------------------------------------------------</h4>
         </div>
+
             <div class="printList">
-                <h3>Batteries result</h3>
-                {{#if battC13CCA}}
-                    <h4>{{battC13CCA}} Amp      {{battC13Volt}} Volt</h4>
-                  {{else}}
-                     {{#if  mtuG001CCA}}
-                        <h4>G001: {{mtuG001CCA}} Amp    {{mtuG001Volt}} Volt</h4>
-                        <h4>------------------------------------------------</h4>
-                        <h4>G005: {{mtuG005CCA}} Amp    {{mtuG005Volt}} Volt</h4>
-                        <h4>------------------------------------------------</h4>
-                        <h4>G004: {{mtuG004CCA}} Amp    {{mtuG004Volt}} Volt</h4>
-                     {{else}}
-                        {{#if manBatt_1CCA}}
-                            <h4>{{manBatt_1CCA}} Amp    {{manBatt_1Volt}} Volt</h4>
-                            <h4>{{manBatt_2CCA}} Amp    {{manBatt_2Volt}} Volt</h4>
-                        {{/if}}
-                     {{/if}}
-                {{/if}}
+                <h3>Battery result</h3>
+                <br>
+                    <h4>{{batteries.battC13CCA}} Amp      {{batteries.battC13Volt}} Volt</h4>
+                <h4>------------------------------------------------</h4>
+                    <h4>G001: {{batteries.mtuG001CCA}} Amp    {{batteries.mtuG001Volt}} Volt</h4>
+                    <h4>------------------------------------------------</h4>
+                    <h4>G005: {{batteries.mtuG005CCA}} Amp    {{batteries.mtuG005Volt}} Volt</h4>
+                    <h4>------------------------------------------------</h4>
+                    <h4>G004: {{batteries.mtuG004CCA}} Amp    {{batteries.mtuG004Volt}} Volt</h4>
+                <h4>------------------------------------------------</h4>
+                    <h4>CCA: {{batteries.manBatt_1CCA}} Amp    {{batteries.manBatt_1Volt}} Volt</h4>
+                <h4>------------------------------------------------</h4>
+                    <h4>CCA: {{batteries.manBatt_2CCA}} Amp    {{batteries.manBatt_2Volt}} Volt</h4>
+                <h4>---------------------------------------------------------------------------</h4>
             </div>
             <div class="printList">
                <h3>Repair List:</h3>

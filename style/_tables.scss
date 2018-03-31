@@ -21,61 +21,80 @@ table.blueTable {
 }
 
 
-  table.blueTable {
+table.blueTable {
     border: 1px solid #a49892;
     background-color: #EEEEEE;
     text-align: left;
     border-collapse: collapse;
-  }
-  table.blueTable td, table.blueTable th {
+}
+
+table.blueTable td, table.blueTable th {
     border: 1px solid #AAAAAA;
     padding: 3px 5px;
-  }
-  table.blueTable tbody td {
+}
+
+table.blueTable tbody td {
     font-size: 13px;
     word-wrap: break-word;
-  }
-  table.blueTable tr:nth-child(even) {
-    background-color: #b7d9e4;
-  }
-  table.blueTable thead {
+}
+
+
+/*
+:root {
+  --tableBackGroundColor: #b7d9e4;
+}
+
+
+
+table.blueTable tr:nth-child(even) {
+    background-color: var(--tableBackGroundColor);
+}
+
+*/
+
+table.blueTable thead {
     background: #1C6EA4;
     border-bottom: 2px solid #444444;
-  }
-  table.blueTable thead th {
+}
+
+table.blueTable thead th {
     font-size: 15px;
     font-weight: bold;
     color: #FFFFFF;
     border-left: 2px solid #D0E4F5;
-  }
-  table.blueTable thead th:first-child {
-    border-left: none;
-  }
+}
 
-  table.blueTable tfoot {
+table.blueTable thead th:first-child {
+    border-left: none;
+}
+
+table.blueTable tfoot {
     font-size: 14px;
     font-weight: bold;
     color: #FFFFFF;
     background: #d6e0f5;
     border-top: 2px solid #444444;
-  }
-  table.blueTable tfoot td {
+}
+
+table.blueTable tfoot td {
     font-size: 14px;
-  }
-  table.blueTable tfoot .links {
+}
+
+table.blueTable tfoot .links {
     text-align: right;
-  }
-  table.blueTable tfoot .links a{
+}
+
+table.blueTable tfoot .links a{
     display: inline-block;
     background: #8f8e8c;
     color: #FFFFFF;
     padding: 2px 8px;
     border-radius: 5px;
-  }
+}
 
-  th {
+th {
     height: 50px;
-  }
+}
 
 
 $shipDate: 90px;

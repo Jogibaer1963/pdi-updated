@@ -38,15 +38,10 @@ table.siMachineList {
 }
 
 .siMdList {
-  position: absolute;
-  top: 80px;
-  left: 400px;
-}
-
-.siSubmit {
-  position: absolute;
-  top: 20px;
-  left: 200px;
+  float: left;
+  position: relative;
+  top: -15em;
+  left: 25em;
 }
 
 .siButtons {
@@ -56,9 +51,14 @@ table.siMachineList {
 }
 
 .siUpload {
-  position: absolute;
-  top: 120px;
-  left: 400px;
+  position: relative;
+  top: -13em;
+  left: 8em;
+}
+
+.posDatei {
+  position: relative;
+  left: 20em;
 }
 
 .removeSiButton {
@@ -72,4 +72,8 @@ table.siMachineList {
   top: -40px;
   left: 400px;
   width: 450px;
+}
+
+#csvFile {
+
 }
