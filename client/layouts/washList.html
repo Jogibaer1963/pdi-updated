@@ -1,10 +1,7 @@
 <template name="washList">
     {{#if currentUser}}
         {{> topNav}}
-         <div class="washBayLinks">
-         {{> washLayout}}
-         </div>
-         {{> overViewWashList}}
+        {{> overViewWashList}}
       {{else}}
           {{> login}}
         {{/if}}
@@ -14,6 +11,7 @@
     <div id="logo">
         <img src="claas_logo.png" />
     </div>
+
     <div class="washMessage">
        <form class="washBayMessanger">
           <button type="submit" class="messangerWashBay">Message to Wash Bay</button>

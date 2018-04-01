@@ -1,5 +1,6 @@
 <template name="pdiRepairList">
 {{#if currentUser}}
+    {{> topNav}}
     {{> pdi_repairList}}
     {{> pdiInspectList}}
 {{else}}
@@ -10,13 +11,7 @@
 <template name="pdi_repairList">
     <div>
         <nav class="mainLayout">
-            <a class="btn" href="/overViewUser">Over View</a>
-            <a>|</a>
             <a class="btn" href="/inspectionStart">PDI Overview</a>
-            <a>|</a>
-            <a class="btn" href="/statistics" disabled>Statistics</a>
-            <a>|</a>
-            <a class="btn" href="/logout" >Logout</a>
         </nav>
         <br>
         <div id="logo">

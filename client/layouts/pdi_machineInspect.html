@@ -48,35 +48,35 @@
            <br>
            <label for="ommMain">Main OMM</label>
            <br>
-           <input type="text" class="omInput" id="ommMain" name="omMain" value="ommMain" placeholder="Main OMM" required>
+           <input type="text" class="omInput" id="ommMain" name="omMain" placeholder="Main OMM" required>
            <br>
            <label for="suppOmm">Supplemental OMM</label>
            <br>
-           <input type="text" class="omInput" id="ommSupp" name="omSupp" value="suppOmm" placeholder="Supplemental OMM" required>
+           <input type="text" class="omInput" id="ommSupp" name="omSupp" placeholder="Supplemental OMM" required>
            <br>
            <label for="unloadOmm">Unload OMM</label>
            <br>
-           <input type="text" class="omInput" id="unloadOmm" name="omUnload" value="unloadOmm" placeholder="Unload OMM" required>
+           <input type="text" class="omInput" id="unloadOmm" name="omUnload" placeholder="Unload OMM" required>
            <br>
            <label for="ommMain">Profi Cam</label>
            <br>
-           <input type="text" class="omInput" id="locationId" name="omProfiCam" value="dualTire" placeholder="Profi Cam">
+           <input type="text" class="omInput" id="locationId" name="omProfiCam" placeholder="Profi Cam">
            <br>
            <label for="cebisOmm">Cebis Mobil</label>
            <br>
-           <input type="text" class="omInput" id="cebisOmm" name="omCebis" value="cebisMobilOmm" placeholder="Cebis Mobil OMM">
+           <input type="text" class="omInput" id="cebisOmm" name="omCebis" placeholder="Cebis Mobil OMM">
            <br>
            <label for="ommMain">Mobile Touch</label>
            <br>
-           <input type="text" class="omInput" id="locationId" name="omTouch" value="mobileTouchOmm" placeholder="Mobile Touch">
+           <input type="text" class="omInput" id="locationId" name="omTouch" placeholder="Mobile Touch">
            <br>
            <label for="ommMain">Terra Track</label>
            <br>
-           <input type="text" class="omInput" id="locationId" name="omTerra" value="terraTrack" placeholder="Terra Track">
+           <input type="text" class="omInput" id="locationId" name="omTerra" placeholder="Terra Track">
            <br>
            <label for="ommMain">Dual Tire New Version</label>
            <br>
-           <input type="text" class="omInput" id="locationId" name="dualTire" value="dualTire" placeholder="Dual Tires">
+           <input type="text" class="omInput" id="locationId" name="dualTire" placeholder="Dual Tires">
          </div>
             <br><br>
            <button type="submit" class="btn btn-success buttonBatt">Save OMM's</button><br>
@@ -118,7 +118,7 @@
             <tbody>
                 {{#each checkList}}
                     <tr class=" ">
-                        <td class="pdiCell positionCheckPos {{getMachineConfigStatus checkStatus}}"
+                        <td class="pdiCell positionCheckPos {{getMachineConfigStatus failStatus}}"
                             style="background-color:{{getMachineConfigStatus checkStatus}}">
                             <div class="positionCheckPos" >
                             {{{errorPos}}}

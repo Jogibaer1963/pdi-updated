@@ -490,11 +490,11 @@ if(Meteor.isServer){
         //pdi Config Buttons
 
         'configOkButton': (machineId, idFailure) => {
-            MachineReady.update({_id: machineId, "machineConfig._id": idFailure}, {$set: {"machineConfig.$.machineConfigStatus": 1}})
+            MachineReady.update({_id: machineId, "machineConfig._id": idFailure}, {$set: {"machineConfig.$.machineConfigStatus": 1}});
         },
 
         'configNokButton': (machineId, idFailure) => {
-            MachineReady.update({_id: machineId, "machineConfig._id": idFailure}, {$set: {"machineConfig.$.machineConfigStatus": 2}})
+            MachineReady.update({_id: machineId, "machineConfig._id": idFailure}, {$set: {"machineConfig.$.machineConfigStatus": 2}});
             let uniqueId = Random.id();
             let addNewFailure = 'Check config' + '';
             MachineReady.upsert({_id: selectedPdiMachineId}, {$push: {newIssues: {_id: uniqueId, checkStatus: true, errorDescription: addNewFailure}}});
@@ -508,7 +508,7 @@ if(Meteor.isServer){
         },
 
         'nokButton': (machineId, idFailure) => {
-            MachineReady.update({_id: machineId, "checkList._id": idFailure}, {$set: {"checkList.$.checkStatus": true}})
+            MachineReady.update({_id: machineId, "checkList._id": idFailure}, {$set: {"checkList.$.checkStatus": true, "checkList.$.failStatus": 2}})
         },
 
         'naButton': (machineId, idFailure) => {

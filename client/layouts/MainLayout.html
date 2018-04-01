@@ -21,10 +21,15 @@
                   {{> repairLayout}}
                   {{> overView}}
               {{/if}}
+              {{#if isInRole 'washBay'}}
+                  {{> topNav}}
+                  {{> washLayout}}
+                  {{> overView}}
+              {{/if}}
               {{#if isInRole 'outBound'}}
                   {{> topNav}}
+                  {{> outBound}}
                   {{> overView}}
-                 {{> washLayout}}
               {{/if}}
        {{else}}
             {{> login}}
@@ -106,25 +111,17 @@
 </template>
 
 <template name="washLayout">
-    <div class="">
+    <div class="washBayLinks">
         <nav>
-            <a class="btn" href="/readyShipList">Machine Shipped</a>
-            <a class="logout btn" href="/logout" >Logout</a>
+            <a class="btn" href="/washList">Wash Bay</a>
         </nav>
     </div>
 </template>
 
 <template name="outBound">
-    <div class="">
+    <div class="outBoundNav">
         <nav>
-            <a class="btn " href="/overView">Over View</a>
-            <a class="btn " href="/shippingMachines">Shipping</a>
             <a class="btn" href="/readyShipList">Ready to Ship</a>
-            <a class="btn" href="/machineSearch">Search by Machine</a>
-            <a class="btn" href="/wordSearch">Search by Key Word</a>
-            <a class="btn" href="/machineLocation">Locations</a>
-            <a class="btn" href="/statistics">Statistics</a>
-            <a class="logout btn" href="/logout" >Logout</a>
         </nav>
     </div>
 </template>
@@ -135,12 +132,6 @@
             <a class="btn" href="/headerShipList">Switch to Headers</a>
             <a>|</a>
             <a class="btn" href="/maryView">Truck Status</a>
-            <a>|</a>
-            <a class="btn" href="/overViewUser">Over View</a>
-            <a>|</a>
-            <a class="btn" href="/statistics" disabled>Statistics</a>
-            <a>|</a>
-            <a class="btn logout" href="/logout" >Logout</a>
         </nav>
     </div>
 </template>

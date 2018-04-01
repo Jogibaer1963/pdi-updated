@@ -300,9 +300,9 @@ table.locationTable {
   left: 40em; }
 
 .newMachineShipping {
-  position: absolute;
-  top: 100px;
-  margin-left: 25px; }
+  position: relative;
+  top: 8em;
+  margin-left: 2.5em; }
 
 .shippingInputs {
   margin-left: 20px;
@@ -330,7 +330,7 @@ table.locationTable {
 
 .shippingMachinesTable {
   position: relative;
-  top: 30em; }
+  top: 10em; }
 
 .shippingTable {
   margin-top: 3em; }
@@ -958,6 +958,10 @@ table.repairTable {
 .kitListButton {
   position: absolute;
   left: 80em; }
+
+.outBoundNav {
+  position: relative;
+  left: 40em; }
 
 .locationId {
   position: relative;
