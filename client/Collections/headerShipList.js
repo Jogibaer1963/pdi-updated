@@ -58,7 +58,7 @@ if (Meteor.isClient) {
             Meteor.call('removeFromShipList', selectedHead)
         },
 
-        'click .buttonEdit': function() {
+        'click .editHead': function() {
             const selectedHead = Session.get('selectedHead');
             Session.set('editSelectedHead', selectedHead);
             if(typeof selectedHead === 'string' ) {
