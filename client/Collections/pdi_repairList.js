@@ -49,7 +49,12 @@ if(Meteor.isClient) {
         listContent: function() {
             const pdiMachine = Session.get('selectedPdiMachine');
             return MachineReady.find({_id: pdiMachine});
-        }
+        },
+
+
+
+
+
     });
 
 

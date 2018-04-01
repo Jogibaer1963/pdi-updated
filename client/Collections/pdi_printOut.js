@@ -4,7 +4,7 @@ if(Meteor.isClient) {
 
         listContent: function () {
             let pdiMachine = Session.get('selectedPdiMachine');
-            return MachineReady.find({_id: pdiMachine}).fetch();
+            return MachineReady.find({_id: pdiMachine});
         }
     });
 }

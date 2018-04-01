@@ -3,54 +3,69 @@ ToDo rewrite_template
 -->
 
 <template name="pdi_printOut">
-    <div>
-        <div>
+    <div class="printoutMargin">
+        <div class="">
             {{#each listContent}}
                 <div>
-                    <h3>Machine Id : {{machineId}}</h3>
+                    <h4>Machine Id : {{machineId}}</h4>
+                    <h4>PDI performed by {{pdiPerformer}}</h4>
                 </div>
-                {{#each repairOrder}}
-                    <div class="pdiUser">
-                        <h3>PDI performed by : {{user}}</h3>
-                    </div>
-                    <div>
-                        <h3>Main OMM :&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {{ommMain}}</h3>
-                    </div>
-                    <div>
-                        <h3>Supplement OMM : &nbsp;&nbsp;{{ommSupp}}</h3>
-                    </div>
-                    <div>
-                        <h3>Unload Instructions : {{ommFitting}}</h3>
-                    </div>
-                    <div class="sumRightSide">
-                        <h3>Cebis Mobil OMM : {{ommCebis}}</h3>
-                    </div>
-                    <div class="sumRightSide">
-                        <h3>Tera Track OMM : {{ommTerra}}</h3>
-                    </div>
-                    <div class="sumRightSide">
-                        <h3>Profi Cam OMM : {{ommProfiCam}}</h3>
-                    </div>
-                    <div class="repairList">
-                        <h3>Repair List:</h3>
-                    </div>
-                    <br>
-                        <div class="rTable repairList">
-                            <div class="rTableRow ">
-                                <div class="rTableHead" style="width: 700px"><strong>Error Description</strong></div>
-                                <div class="rTableHead" style="width: 150px"><strong>Repair Comments</strong></div>
-                                <div class="rTableHead" style="width: 150px"><strong>Issue Resolved</strong></div>
-                            </div>
-                          {{#each repOrder}}
-                            <div>
-                                <div class="rTableCell" style="width: 80px; align-items: center">{{errorNr}}</div>
-                                <div class="rTableCell" style="width: 700px">{{errorDescription}}</div>
-                                <div class="rTableCell" style="width: 150px">{{repairComment}}</div>
-                                <div class="rTableCell" style="width: 150px">{{issueResolved}}</div>
-                            </div>
-                          {{/each}}
+                <br>
+                <div class="">
+                    {{#each machineConfig}}
+                        <div>
+                            {{config}} : {{configItem}}
                         </div>
-                {{/each}}
+                    {{/each }}
+                </div>
+                <p style="page-break-after: always;">&nbsp;</p>
+                <p style="page-break-before: always;">&nbsp;</p>
+                <div class="">
+                    <h3>Operator Maintenance Manual</h3>
+                    <h4>Omm Main : {{omms.ommMain}}</h4>
+                    <h4>Omm Supplemental : {{omms.ommSupp}}</h4>
+                    <h4>Omm Unload : {{omms.ommUnload}}</h4>
+                    <h4>Omm Cebis : {{omms.ommCebis}}</h4>
+                    <h4>Omm Cebis Touch : {{omms.ommTouch}}</h4>
+                    <h4>Omm Terra Track : {{omms.ommTerra}}</h4>
+                    <h4>Omm Dual : {{omms.ommDual}}</h4>
+                    <h4>Omm Profi Cam : {{omms.ommProfiCam}}</h4>
+                    <h4>---------------------------------------------------------------------------</h4>
+                </div>
+                <br>
+                <div class="">
+                    <h3>Battery result</h3>
+                    <br>
+                    <h4>{{batteries.battC13CCA}} Amp      {{batteries.battC13Volt}} Volt</h4>
+                    <h4>------------------------------------------------</h4>
+                    <h4>G001: {{batteries.mtuG001CCA}} Amp    {{batteries.mtuG001Volt}} Volt</h4>
+                    <h4>------------------------------------------------</h4>
+                    <h4>G005: {{batteries.mtuG005CCA}} Amp    {{batteries.mtuG005Volt}} Volt</h4>
+                    <h4>------------------------------------------------</h4>
+                    <h4>G004: {{batteries.mtuG004CCA}} Amp    {{batteries.mtuG004Volt}} Volt</h4>
+                    <h4>------------------------------------------------</h4>
+                    <h4>CCA: {{batteries.manBatt_1CCA}} Amp    {{batteries.manBatt_1Volt}} Volt</h4>
+                    <h4>------------------------------------------------</h4>
+                    <h4>CCA: {{batteries.manBatt_2CCA}} Amp    {{batteries.manBatt_2Volt}} Volt</h4>
+                </div>
+                <p style="page-break-after: always;">&nbsp;</p>
+                <p style="page-break-before: always;">&nbsp;</p>
+                <div class="">
+                    <h3>Repair List:</h3>
+                    {{#each newIssues}}
+                        <div>
+                            <h4>{{errorDescription}}</h4>
+                        </div>
+                    {{/each}}
+                </div>
+                <br>
+                <div class="">
+                    {{#each checkList}}
+                        {{#if checkStatus}}
+                            <h4>{{errorDescription}}</h4>
+                        {{/if}}
+                    {{/each}}
+                </div>
             {{/each}}
         </div>
     </div>

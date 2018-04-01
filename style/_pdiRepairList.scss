@@ -16,9 +16,8 @@ table.pdiRepairList {
 .container {
   overflow: scroll;
   position: absolute;
-  top: 100px;
-  left: 400px;
-
+  top: 10em;
+  left: 30em;
   height: 800px;
   width: 900px;
   border: black 1px solid;
@@ -37,12 +36,7 @@ table.pdiRepairList {
 
 .printList {
   position: relative;
-  top: 9em;
+  top: 4em;
   left: 2em;
-}
-
-.ommList {
-  position: relative;
-  top: 8em;
 }
 

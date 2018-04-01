@@ -430,7 +430,7 @@ if(Meteor.isServer){
             MachineReady.update({_id: selectedPdiMachineId}, {$set: {machineConfig: machineConfiguration}});
 
             // SI added to repair list
-            /*
+
             const list = siList.find({machineNr: selectedPdiMachineNr}, {limit:1}).fetch();
             if(list === '') {
             } else {
@@ -443,7 +443,8 @@ if(Meteor.isServer){
             let siTableRead = siTable.find().fetch();
             for (k = 0; k < siTableRead.length; k++) {
                 let siName = siTableRead[k].siNumber;
-                let resultSi = siMd.findOne({_id: siName}, {machineList: {$in: {machine: selectedPdiMachineNr}}}).machineList;
+                let resultSi = siMd.findOne({_id: siName},
+                            {machineList: {$in: {machine: selectedPdiMachineNr}}}).machineList;
                     for (i = 0; i < resultSi.length; i++) {
                           if (resultSi[i].siStatus < 1) {
                                  machineSi.push(resultSi[i]);
@@ -461,7 +462,7 @@ if(Meteor.isServer){
                          {$set:{"machineList.$.siStatus": 3}});
                     }
                 }
-            } */
+            }
         },
 
         'cancelPdi': function(pdiMachineId) {
@@ -494,28 +495,31 @@ if(Meteor.isServer){
 
         'configNokButton': (machineId, idFailure) => {
             MachineReady.update({_id: machineId, "machineConfig._id": idFailure}, {$set: {"machineConfig.$.machineConfigStatus": 2}})
+            let uniqueId = Random.id();
+            let addNewFailure = 'Check config' + '';
+            MachineReady.upsert({_id: selectedPdiMachineId}, {$push: {newIssues: {_id: uniqueId, checkStatus: true, errorDescription: addNewFailure}}});
         },
 
 
         // pdi Checklist buttons
 
         'okButton': (machineId, idFailure) => {
-            MachineReady.update({_id: machineId, "checkList._id": idFailure}, {$set: {"checkList.$.checkStatus": 1}})
+            MachineReady.update({_id: machineId, "checkList._id": idFailure}, {$set: {"checkList.$.checkStatus": false}})
         },
 
         'nokButton': (machineId, idFailure) => {
-            MachineReady.update({_id: machineId, "checkList._id": idFailure}, {$set: {"checkList.$.checkStatus": 2}})
+            MachineReady.update({_id: machineId, "checkList._id": idFailure}, {$set: {"checkList.$.checkStatus": true}})
         },
 
         'naButton': (machineId, idFailure) => {
-            MachineReady.update({_id: machineId, "checkList._id": idFailure}, {$set: {"checkList.$.checkStatus": 3}})
+            MachineReady.update({_id: machineId, "checkList._id": idFailure}, {$set: {"checkList.$.checkStatus": false}})
         },
 
         // Add additional Failure to checklist
 
         'addNewFailure': (selectedPdiMachineId, addNewFailure) => {
             let uniqueId = Random.id();
-            MachineReady.upsert({_id: selectedPdiMachineId}, {$push: {newIssues: {_id: uniqueId, checkStatus: 2, errorDescription: addNewFailure}}});
+            MachineReady.upsert({_id: selectedPdiMachineId}, {$push: {newIssues: {_id: uniqueId, checkStatus: true, errorDescription: addNewFailure}}});
         },
 
         'removeFailure': (selectedPdiMachineId, openFailure) => {

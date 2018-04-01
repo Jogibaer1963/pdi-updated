@@ -818,8 +818,8 @@ table.pdiRepairList {
 .container {
   overflow: scroll;
   position: absolute;
-  top: 100px;
-  left: 400px;
+  top: 10em;
+  left: 30em;
   height: 800px;
   width: 900px;
   border: black 1px solid;
@@ -835,12 +835,8 @@ table.pdiRepairList {
 
 .printList {
   position: relative;
-  top: 9em;
+  top: 4em;
   left: 2em; }
-
-.ommList {
-  position: relative;
-  top: 8em; }
 
 .siSingle {
   position: relative;
@@ -996,6 +992,9 @@ table.readyTable {
 
 .buttonNotWorking {
   background: repeating-linear-gradient(45deg, #e6e6e6, #bc171b 10px, #e6e6e6 10px, #bc171b 20px); }
+
+.printoutMargin {
+  margin-left: 2em; }
 
 .insideNavBar {
   margin-top: 25px; }
