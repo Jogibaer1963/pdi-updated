@@ -112,8 +112,8 @@ table.tableAdminPos {
   width: 853px; }
 
 .adminUserId {
-  max-width: 160px;
-  min-width: 160px; }
+  max-width: 170px;
+  min-width: 170px; }
 
 .adminUser {
   max-width: 80px;
@@ -136,8 +136,8 @@ table.tableAdminPos {
   min-width: 110px; }
 
 .userIP {
-  max-width: 90px;
-  min-width: 90px; }
+  max-width: 100px;
+  min-width: 100px; }
 
 .userStatus {
   max-width: 60px;
@@ -271,9 +271,9 @@ table.headerTable {
   margin-left: 25px; }
 
 .headerTablePosition {
-  position: relative;
-  left: 5em;
-  top: 3em; }
+  position: absolute;
+  left: 30em;
+  top: 21em; }
 
 table.overViewTable {
   float: left;
@@ -999,6 +999,16 @@ table.readyTable {
 
 .printoutMargin {
   margin-left: 2em; }
+
+table.toDoListTable {
+  position: relative;
+  margin-left: 2.5em;
+  top: 14em;
+  width: 60.5em; }
+
+.toDoMessage {
+  position: relative;
+  top: 10em; }
 
 .insideNavBar {
   margin-top: 25px; }

@@ -127,10 +127,20 @@ if(Meteor.isServer){
             return variants_C87.find();
         });
 
+        Meteor.publish("toDoMessage", function() {
+            return toDoMesssage.find();
+        });
+
     });
 
 
     Meteor.methods({
+
+        'submitToDo': function(toDoText, dateNow, needDate, toDoUser) {
+            const toDoStatus = 0;
+            const clearDate = 0;
+            toDoMesssage.insert({toDoText, dateNow, needDate, clearDate, toDoUser, toDoStatus});
+        },
 
         'readVariant': function (contents) {
             let newContent = contents.replace(/[\t\r\n]/g, '');
@@ -497,22 +507,22 @@ if(Meteor.isServer){
             MachineReady.update({_id: machineId, "machineConfig._id": idFailure}, {$set: {"machineConfig.$.machineConfigStatus": 2}});
             let uniqueId = Random.id();
             let addNewFailure = 'Check config' + '';
-            MachineReady.upsert({_id: selectedPdiMachineId}, {$push: {newIssues: {_id: uniqueId, checkStatus: true, errorDescription: addNewFailure}}});
+            MachineReady.upsert({_id: machineId}, {$push: {newIssues: {_id: uniqueId, checkStatus: 2, errorDescription: addNewFailure}}});
         },
 
 
         // pdi Checklist buttons
 
         'okButton': (machineId, idFailure) => {
-            MachineReady.update({_id: machineId, "checkList._id": idFailure}, {$set: {"checkList.$.checkStatus": false}})
+            MachineReady.update({_id: machineId, "checkList._id": idFailure}, {$set: {"checkList.$.checkStatus": 1, "checkList.$.failStatus": false}})
         },
 
         'nokButton': (machineId, idFailure) => {
-            MachineReady.update({_id: machineId, "checkList._id": idFailure}, {$set: {"checkList.$.checkStatus": true, "checkList.$.failStatus": 2}})
+            MachineReady.update({_id: machineId, "checkList._id": idFailure}, {$set: {"checkList.$.checkStatus": 2, "checkList.$.failStatus": true}})
         },
 
         'naButton': (machineId, idFailure) => {
-            MachineReady.update({_id: machineId, "checkList._id": idFailure}, {$set: {"checkList.$.checkStatus": false}})
+            MachineReady.update({_id: machineId, "checkList._id": idFailure}, {$set: {"checkList.$.checkStatus": 3}})
         },
 
         // Add additional Failure to checklist
