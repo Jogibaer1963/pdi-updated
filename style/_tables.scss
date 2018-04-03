@@ -103,6 +103,7 @@ $pdiOverviewMachine: 80px;
 $pdiDestination: 100px;
 $pdiTransporter: 100px;
 $pdiTruckOnOrder: 70px;
+$pdiTruckDate: 6em;
 $pdiKitList: 80px;
 $pdiComments: 450px;
 $pdiKitField: 150px;
@@ -240,6 +241,15 @@ $eraseUser: 50px;
 .pdiTruckOnOrder {
   max-width: $pdiTruckOnOrder;
   min-width: $pdiTruckOnOrder;
+}
+
+.pdiTruckDate {
+  min-width: $pdiTruckDate;
+  max-width: $pdiTruckDate;
+}
+
+.truckDateCorrection {
+  min-width: 6.8em;
 }
 
 .pdiKitList {

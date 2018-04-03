@@ -184,6 +184,13 @@ table.tableAdminPos {
   max-width: 70px;
   min-width: 70px; }
 
+.pdiTruckDate {
+  min-width: 6em;
+  max-width: 6em; }
+
+.truckDateCorrection {
+  min-width: 6.8em; }
+
 .pdiKitList {
   max-width: 80px;
   min-width: 80px; }
@@ -973,7 +980,7 @@ table.repairTable {
   left: 80em; }
 
 .outBoundNav {
-  position: relative;
+  position: absolute;
   left: 40em; }
 
 .locationId {
