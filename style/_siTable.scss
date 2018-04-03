@@ -35,6 +35,7 @@ table.siMachineList {
   position: relative;
   top: -67em;
   left: 50em;
+  width: 20em;
 }
 
 .siMdList {
@@ -50,14 +51,30 @@ table.siMachineList {
   left: 78em;
 }
 
-.siUpload {
+
+.siHeader {
+  position: absolute;
+  top: 15em;
+  left: 16.3em;
+  width: 5em;
+}
+
+.siFile {
+  position: absolute;
+  top: 30em;
+  left: 28em;
+
+}
+
+.siSubmit {
   position: relative;
-  top: -13em;
-  left: 8em;
+  top: -1.9em;
+  left: 16em;
 }
 
 .posDatei {
   position: relative;
+  top: -8em;
   left: 20em;
 }
 

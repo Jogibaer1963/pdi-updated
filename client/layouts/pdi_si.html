@@ -1,8 +1,9 @@
 <template name="si">
     {{#if currentUser}}
           {{> topNav}}
-          {{> siTable}}
+        {{> siTable}}
           {{> upload}}
+
     {{else}}
         {{> login}}
     {{/if}}
@@ -64,18 +65,20 @@
           <h4>2. Choose the Machine List ( must be a CSV File )</h4>
               <img src="csv_machine_table.JPG" />
       </div>
+      <div class="siUpload">
+          <h3 class="siHeader">Upload for: {{siNew}}</h3>
+          {{#unless uploading}}
+              <input class="siFile" type="file" name="uploadCSV">
+          {{else}}
+              <p><i class="fa fa-spin fa-refresh"></i>uploading files</p>
+          {{/unless}}
+      </div>
+      <div>
            <form class="siMdList posBulk">
               <label for="siMdList" class="mLocationId" ></label>
               <input type="text" id="siMdList" class="siItemMachine" name="siMdList" placeholder="Si Nr" required>
               <button type="submit" class="siSubmit">Submit</button>
            </form>
-      <div class="siUpload">
-         <h3>Upload for: {{siNew}}</h3>
-           {{#unless uploading}}
-              <input class="posDatei" type="file" name="uploadCSV">
-           {{else}}
-              <p><i class="fa fa-spin fa-refresh"></i>uploading files</p>
-           {{/unless}}
       </div>
       <div class="removeSiButton">
          <form class="removeSI">

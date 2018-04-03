@@ -243,7 +243,7 @@ if(Meteor.isServer){
         },
 
         'machineRep': function(machineRepaired, workingHour) {
-          MachineReady.update({_id: machineRepaired}, {$set: {machineHours: workingHour}});
+          MachineReady.update({_id: machineRepaired}, {$set: {machineHours: workingHour, repairStatus: 1}});
         },
 
         'changeStatus': function (siNumber, selectedMachineId, setStatus) {
