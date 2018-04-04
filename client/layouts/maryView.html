@@ -74,28 +74,3 @@
         </tbody>
     </table>
 </template>
-
-<template name="headerListMaryView">
-    <div class="headerList ">
-        <div class="rTableHeaders">
-            <div class="rTableRow">
-                <div class="rTableHeadOverView"><strong>Header</strong></div>
-                <div class="rTableHeadOverView"><strong>Shippdate</strong></div>
-                <div class="rTableHeadOverView"><strong>PDI</strong></div>
-                <div class="rTableHeadOverView"><strong>Rep</strong></div>
-                <div class="rTableHeadOverView"><strong>Load</strong></div>
-                <div class="rTableHeadOverView"><strong>Location</strong></div>
-            </div>
-            {{#each overView}}
-                <div class="rTableRow">
-                    <div class="rTableCellOverView">{{newHeadId}}</div>
-                    <div class="rTableCellOverView" style="width: 50px">{{date}}</div>
-                    <div class="rTableCellOverView {{getStatusColor pdiStatus}}" style="background-color:{{getStatusColor pdiStatus}}; color:{{getStatusColor pdiStatus}}" >{{pdiStatus}}</div>
-                    <div class="rTableCellOverView {{getStatusColor repairStatus}}" style="background-color:{{getStatusColor repairStatus}}; color:{{getStatusColor repairStatus}}" >{{repairStatus}}</div>
-                    <div class="rTableCellOverView {{getStatusColor shipStatus}}" style="background-color:{{getStatusColor shipStatus}}; color:{{getStatusColor shipStatus}}" >{{shipStatus}}</div>
-                    <div class="rTableCell" style="background-color: #6fd981">{{locationId}}</div>
-                </div>
-            {{/each}}
-        </div>
-    </div>
-</template>
