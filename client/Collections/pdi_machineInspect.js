@@ -208,6 +208,7 @@ if(Meteor.isClient) {
             } else {
                 console.log("Lost Machine Number")
             }
+            event.target.addIssue.value = '';
         },
 
         'submit .addressToWashBay': (event) => {

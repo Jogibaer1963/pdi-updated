@@ -50,23 +50,30 @@ ToDo rewrite_template
                 </div>
                 <p style="page-break-after: always;">&nbsp;</p>
                 <p style="page-break-before: always;">&nbsp;</p>
-                <div class="">
                     <h3>Repair List:</h3>
-                    {{#each newIssues}}
-                        <div>
-                            <h4>{{errorDescription}}</h4>
-                        </div>
-                    {{/each}}
-                </div>
-                <br>
-                <div class="">
-                    {{#each checkList}}
-                        {{#if failStatus}}
-                            <h4>{{errorDescription}}</h4>
-                        {{/if}}
-                    {{/each}}
-                </div>
+                    <br>
+                <table class="printOutTableWidth" cellpadding="10">
+                    <tbody>
+                       {{#each newIssues}}
+                          <tr>
+                             <td class="pdiCommentsPrintOut">{{errorDescription}}</td>
+                              <td class="pdiEmptyField"></td>
+                              <td class="pdiSignOffField"></td>
+                          </tr>
+                       {{/each}}
+                       {{#each checkList}}
+                          {{#if failStatus}}
+                            <tr>
+                              <td class="pdiComments">{{errorDescription}}</td>
+                                <td class="pdiEmptyField"></td>
+                                <td class="pdiSignOffField"></td>
+                            </tr>
+                          {{/if}}
+                      {{/each}}
+                    </tbody>
+                </table>
             {{/each}}
+
         </div>
     </div>
 </template>

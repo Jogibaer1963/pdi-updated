@@ -2,3 +2,35 @@
 .printoutMargin {
   margin-left: 2em;
 }
+
+.pdiCommentsPrintOut {
+  min-width: 35em;
+  max-width: 35em;
+}
+
+.pdiEmptyField {
+  min-width: 12em;
+  max-width: 12em;
+}
+
+.pdiSignOffField {
+  min-width: 8em;
+  max-width: 8em;
+}
+
+
+
+table.printOutTableWidth {
+  min-width: 80em;
+  max-width: 80em;
+  padding: 3px 5px;
+  word-wrap: break-word;
+  display: block;
+  font-size: 18px;
+}
+
+table.printOutTableWidth td {
+  border: 3px solid #a49892;
+  text-align: left;
+  border-collapse: collapse;
+}
