@@ -11,6 +11,9 @@
 
 
 <template name="siTable">
+    {{#if isInRole 'repair'}}
+        {{> repairLayout}}
+    {{/if}}
         <div id="logo">
             <img src="claas_logo.png" />
         </div>

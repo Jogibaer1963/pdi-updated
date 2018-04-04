@@ -9,10 +9,16 @@
 </template>
 
 <template name="pdi_repairList">
+    {{#if isInRole 'pdi'}}
+        {{> pdiPrintLayout}}
+    {{/if}}
+    {{#if isInRole 'admin'}}
+        {{> pdiPrintLayout}}
+    {{/if}}
+    {{#if isInRole 'repair'}}
+        {{> repairLayout}}
+    {{/if}}
     <div>
-        <nav class="mainLayout">
-            <a class="btn" href="/inspectionStart">PDI Overview</a>
-        </nav>
         <br>
         <div id="logo">
             <img src="claas_logo.png" />
