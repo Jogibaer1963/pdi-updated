@@ -99,9 +99,12 @@
                <h3>Repair List:</h3>
                   {{#each newIssues}}
                       <div>
-                       <h4>{{errorDescription}}</h4>
+                       <h4>{{siNumber}}</h4>
                       </div>
                   {{/each}}
+                {{#each machineConfigIssues}}
+                    <h4>Check config {{configItem}}</h4>
+                {{/each}}
             </div>
             <div class="printList">
                {{#each checkList}}

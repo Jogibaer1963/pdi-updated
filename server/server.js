@@ -454,7 +454,9 @@ if(Meteor.isServer){
             for (k = 0; k < siTableRead.length; k++) {
                 let siName = siTableRead[k].siNumber;
                 let resultSi = siMd.findOne({_id: siName},
-                            {machineList: {$in: {machine: selectedPdiMachineNr}}}).machineList;
+                    {"machineList.machine": {$eq: selectedPdiMachineNr}}, {"machineList.$": 1});
+                console.log(resultSi, siName);
+               /*
                     for (i = 0; i < resultSi.length; i++) {
                           if (resultSi[i].siStatus < 1) {
                                  machineSi.push(resultSi[i]);
@@ -464,14 +466,14 @@ if(Meteor.isServer){
                     if (machineSi[i].machine === selectedPdiMachineNr) {
                         let machineId = machineSi[i]._id;
                         let repOrder = {};
-                        repOrder.errorNr = "--SI--";
                         repOrder.errorDescription = siName;
                         repOrder._id = machineId;
+                   //     console.log(repOrder);
                 //        InspectedMachines.upsert({_id: selectedPdiMachineId}, {$addToSet: {repOrder}});
-                        siMd.update({_id: siName, "machineList._id": machineId},
-                         {$set:{"machineList.$.siStatus": 3}});
+                 //       siMd.update({_id: siName, "machineList._id": machineId},
+                 //        {$set:{"machineList.$.siStatus": 3}});
                     }
-                }
+                }  */
             }
         },
 
@@ -479,7 +481,8 @@ if(Meteor.isServer){
             MachineReady.update({_id: pdiMachineId}, {$set: {pdiStatus: 0,
                                                              checkList: [],
                                                              machineConfig: [],
-                                                             pdiPerformer: ''
+                                                             pdiPerformer: '',
+                                                             startPdiDate: ''
                                                      }});
             siListDone.remove({_id: pdiMachineId});
         },

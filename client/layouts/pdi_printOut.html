@@ -56,10 +56,17 @@ ToDo rewrite_template
                     <tbody>
                        {{#each newIssues}}
                           <tr>
-                             <td class="pdiCommentsPrintOut">{{errorDescription}}</td>
+                             <td class="pdiCommentsPrintOut">{{siNumber}}</td>
                               <td class="pdiEmptyField"></td>
                               <td class="pdiSignOffField"></td>
                           </tr>
+                       {{/each}}
+                       {{#each machineConfigIssues}}
+                           <tr>
+                               <td class="pdiCommentsPrintOut">Check config {{configItem}}</td>
+                               <td class="pdiEmptyField"></td>
+                               <td class="pdiSignOffField"></td>
+                           </tr>
                        {{/each}}
                        {{#each checkList}}
                           {{#if failStatus}}
