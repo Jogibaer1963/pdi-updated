@@ -1044,6 +1044,9 @@ table.printOutTableWidth td {
   text-align: left;
   border-collapse: collapse; }
 
+.tbodyOverflow {
+  overflow: unset; }
+
 table.toDoListTable {
   position: relative;
   margin-left: 2.5em;
