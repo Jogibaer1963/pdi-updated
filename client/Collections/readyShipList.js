@@ -16,7 +16,7 @@ if (Meteor.isClient) {
             const checkPoint = this._id;
             const selectedCheckPoint = Session.get('selectedMachine');
             if (selectedCheckPoint === checkPoint) {
-                return "selected_2"
+                return "selected"
             }
         }
     });

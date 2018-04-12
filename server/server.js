@@ -332,8 +332,15 @@ if(Meteor.isServer){
             MachineReady.update({_id: machine_id}, {$set: {washStatus: 0}});
         },
 
-        'messageToWashBay_2': function(machineId, machineNr, washMessage) {
+        'messageToWashBay_2': function(machineNr, washMessage) {
+            console.log(machineNr, washMessage);
             washBayText.insert({machineNr: machineNr, washBayMessage: washMessage, active: 1});
+       //     MachineReady.update({_id: machineId}, {$set: {washBayMessages: {washMessage}}});
+        },
+
+        'messageToWashBay_3': function(machineId, machineNr, washMessage) {
+            washBayText.insert({machineNr: machineNr, washBayMessage: washMessage, active: 1});
+           console.log(machineId, machineNr, washMessage);
             MachineReady.update({_id: machineId}, {$set: {washBayMessages: {washMessage}}});
         },
 

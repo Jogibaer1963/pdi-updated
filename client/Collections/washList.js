@@ -118,7 +118,7 @@ if (Meteor.isClient) {
             event.preventDefault();
             const messageId = event.target.messageId.value;
             const machineId = event.target.machineId.value;
-            Meteor.call('messageToWashBay_2', messageId, machineId);
+            Meteor.call('messageToWashBay_2', machineId, messageId);
             event.target.messageId.value="";
             event.target.machineId.value="";
         },

@@ -219,7 +219,7 @@ if(Meteor.isClient) {
             const selectedPdiMachineId = Session.get('selectedPdiMachineId');
             let addWashBay = event.target.addWashBay.value;
             if(selectedPdiMachineId) {
-                Meteor.call('messageToWashBay_2',selectedPdiMachineId, selectedPdiMachineNr, addWashBay);
+                Meteor.call('messageToWashBay_3',selectedPdiMachineId, selectedPdiMachineNr, addWashBay);
             } else {
                 console.log("Lost Machine Number")
             }
