@@ -38,20 +38,19 @@
 
 .newMachineSubmit {
   margin-top: 50px ;
-  margin-left: 350px;
 }
 
 .shippingMachinesTable {
   position: relative;
-  top: 10em;
+  top: 5em;
 }
 
 .shippingTable {
   margin-top: 3em;
 }
 
-.searchField {
-  margin-left: 15px;
+.searchMachine {
+   margin-left: 0.8em;
 }
 
 .delete_Machine {
@@ -59,3 +58,33 @@
   margin-right: 25px;
 }
 
+.buttonField {
+  margin-left: 30em;
+  position: relative;
+  top: -5em;
+}
+
+.shipDate {
+  margin-left: 0.5em;
+}
+
+.confirmedShipDate {
+  position: relative;
+  left: 39em;
+  top: -4.5em;
+}
+
+.confirmedDate {
+  font-weight: bold;
+}
+
+.addList {
+  position: relative;
+  top: -3.8em;
+  left: 12em;
+}
+
+.removeList {
+  position: relative;
+  left: 3.4em;
+}

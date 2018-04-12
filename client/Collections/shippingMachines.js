@@ -32,6 +32,8 @@ if (Meteor.isClient) {
             document.getElementById('newKit5').checked= false;
             document.getElementById('newKit6').checked= false;
             document.getElementById('newKit7').checked= false;
+            document.getElementById('newKit8').checked= false;
+            document.getElementById('newKit9').checked= false;
             event.target.newTireTrack.value="";
             event.target.newComment.value="";
         },
@@ -64,6 +66,36 @@ if (Meteor.isClient) {
         'click .shippingMachine': function () {
             const newMachine = this._id;
             Session.set('selectedMachine', newMachine);
+        },
+
+        'submit .truckDate': function() {
+            event.preventDefault();
+            const confirmedShipDate = event.target.inputDate.value;
+            const truckStatus = 1;
+            const machineId = Session.get('selectedMachine');
+            console.log(confirmedShipDate);
+            Meteor.call('truckOrdered', machineId, truckStatus, confirmedShipDate);
+        },
+
+        'click .removeTruck': function() {
+            event.preventDefault();
+            const truckStatus = 0;
+            const machineId = Session.get('selectedMachine');
+            Meteor.call('truckRemoved', machineId, truckStatus);
+        },
+
+        'click .addList': function() {
+            event.preventDefault();
+            const KitStatus = 1;
+            const machineId = Session.get('selectedMachine');
+            Meteor.call('listPrinted', machineId, KitStatus);
+        },
+
+        'click .removeList': function() {
+            event.preventDefault();
+            const KitStatus = 0;
+            const machineId = Session.get('selectedMachine');
+            Meteor.call('listRemoved', machineId, KitStatus);
         }
 
 

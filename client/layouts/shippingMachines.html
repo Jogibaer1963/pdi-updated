@@ -108,13 +108,13 @@
                   <li>
                       <div>
                           <label for="newKit7">
-                            <input type="checkbox" value="G03_0112" id="newKit7" name="newKit" class="newKit8">G03 0112</label>
+                            <input type="checkbox" value="G03_0112" id="newKit8" name="newKit" class="newKit8">G03 0112</label>
                       </div>
                   </li>
                   <li>
                       <div class="newKit4Pos">
                           <label for="newKit4">
-                            <input type="checkbox" value="G03_0120" id="newKit4" name="newKit" class="newKit9">G03 0120</label>
+                            <input type="checkbox" value="G03_0120" id="newKit9" name="newKit" class="newKit9">G03 0120</label>
                       </div>
                   </li>
               </ul>
@@ -125,14 +125,14 @@
        </div>
           <br><br><br>
        <div class="newMachineSubmit">
-           <button class="" type="submit">Submit shipping machine</button>
+           <button class="btn btn-success" type="submit">Submit shipping machine</button>
        </div>
       </form>
         <br>
       <div>
          <form class="find_Machine">
-           <button class="searchMachine" type="submit" disabled >Find Machine</button>
            <input class="searchField" type="text" name="inputSearch" placeholder=" Machine Search" />
+           <button class="searchMachine" type="submit" disabled >Find Machine</button>
          </form>
        </div>
         <br>
@@ -144,6 +144,19 @@
                 <button class="editMachine" type="submit">Edit marked machine</button>
             </form>
         </div>
+        <div class="confirmedShipDate">
+            <h5 class="confirmedDate">!! Confirmed Ship Date !!</h5>
+        </div>
+        <div class="buttonField">
+            <form class="truckDate">
+                <button type="submit" class="btn btn-success addTruck">Truck Ordered</button>
+                <input class="shipDate" type="date" name="inputDate" placeholder="Confirmed Ship Date" />
+            </form>
+            <br>
+            <button type="submit" class="btn btn-danger removeTruck">Remove Truck</button>
+            <button type="submit" class="btn btn-success addList">Kit List Printed</button>
+            <button type="submit" class="btn btn-danger removeList">Remove Kit List</button>
+        </div>
     </div>
         <table class="shippingMachinesTable blueTable" cellpadding="10">
           <thead class="">
@@ -152,6 +165,9 @@
                <th class="pdiShipDate"><strong>ShipDate</strong></th>
                <th class="pdiDestination"><strong>Destination</strong></th>
                <th class="pdiTransporter"><strong>Transporter</strong></th>
+                <th class="pdiTruckOnOrder"><strong>Truck ordered</strong></th>
+                <th class="pdiTruckDate"><strong>Confirmed Ship Date</strong></th>
+                <th class="pdiKitList"><strong>Kit List</strong></th>
                <th class="pdiKitField"><strong>Ship with Kit</strong></th>
                <th class="pdiTireField"><strong>Tire / Track</strong></th>
                <th class="pdiComments"><strong>Shipping Comments</strong></th>
@@ -165,6 +181,9 @@
                     <td class="pdiShipDate">{{date}}</td>
                     <td class="pdiDestination">{{destination}}</td>
                     <td class="pdiTransporter">{{transporter}}</td>
+                    <td class="pdiTruckOnOrder {{getStatusTruck truckStatus}}" style="background-color:{{getStatusTruck truckStatus}}; color:{{getStatusTruck truckStatus}}" >{{truckStatus}}</td>
+                    <td class="pdiTruckDate truckDateCorrection">{{confirmedShipDate}}</td>
+                    <td class="pdiKitList {{getStatusKit KitStatus}}" style="background-color:{{getStatusKit KitStatus}}; color:{{getStatusKit KitStatus}}" >{{KitStatus}}</td>
                     <td class="pdiKitField">{{kit}}</td>
                     <td class="pdiTireField">{{tireTrack}}</td>
                     <td class="pdiComments">{{shippingComment}}</td>

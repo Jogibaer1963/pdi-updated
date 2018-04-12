@@ -348,8 +348,8 @@ if(Meteor.isServer){
             MachineReady.update({_id: machineId}, {$set: {truckStatus: truckStatus}});
         },
 
-        'truckOrdered': function(machineId, truckStatus) {
-            MachineReady.update({_id: machineId}, {$set: {truckStatus: truckStatus}});
+        'truckOrdered': function(machineId, truckStatus, confirmedShipDate) {
+            MachineReady.update({_id: machineId}, {$set: {truckStatus: truckStatus, confirmedShipDate: confirmedShipDate}});
         },
 
         'listRemoved': function(machineId, KitStatus) {

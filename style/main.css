@@ -331,22 +331,46 @@ table.locationTable {
   width: 500px; }
 
 .newMachineSubmit {
-  margin-top: 50px;
-  margin-left: 350px; }
+  margin-top: 50px; }
 
 .shippingMachinesTable {
   position: relative;
-  top: 10em; }
+  top: 5em; }
 
 .shippingTable {
   margin-top: 3em; }
 
-.searchField {
-  margin-left: 15px; }
+.searchMachine {
+  margin-left: 0.8em; }
 
 .delete_Machine {
   float: left;
   margin-right: 25px; }
+
+.buttonField {
+  margin-left: 30em;
+  position: relative;
+  top: -5em; }
+
+.shipDate {
+  margin-left: 0.5em; }
+
+.confirmedShipDate {
+  position: relative;
+  left: 39em;
+  top: -4.5em; }
+
+.confirmedDate {
+  font-weight: bold; }
+
+.addList {
+  position: relative;
+  top: -3.8em;
+  left: 12em; }
+
+.removeList {
+  position: relative;
+  left: 3.4em; }
 
 .newHeadShipping {
   position: relative;
@@ -447,11 +471,6 @@ table.trailerTable {
   position: relative;
   left: 50em; }
 
-.buttonField {
-  margin-left: 25px;
-  position: relative;
-  top: 10em; }
-
 .machineSearchButton {
   position: relative;
   top: 15em;
@@ -459,12 +478,6 @@ table.trailerTable {
 
 .inputSearchMary {
   background: repeating-linear-gradient(45deg, #e6e6e6, #bc171b 10px, #e6e6e6 10px, #bc171b 20px); }
-
-.addList {
-  margin-left: 25px; }
-
-.removeList {
-  margin-left: 25px; }
 
 table.truckTable {
   position: relative;
