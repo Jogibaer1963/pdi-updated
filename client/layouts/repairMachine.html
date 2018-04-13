@@ -56,6 +56,8 @@
            <tr>
               <th class="pdiMachineField"><strong>Machine</strong></th>
               <th class="pdiShipDate"><strong>Ship Date</strong></th>
+               <th class="pdiTruckOnOrder"><strong>Truck ordered</strong></th>
+               <th class="pdiTruckDate"><strong>Confirmed Ship Date</strong></th>
               <th class="pdiComments"><strong>Comments</strong></th>
               <th class="pdiKitField"><strong>Ship with Kit</strong></th>
               <th class="pdiRepField"><strong>Rep</strong></th>
@@ -70,6 +72,8 @@
              <tr class="openInspections {{selectedClass2}}">
                 <td class="pdiMachineField ">{{machineId}}{{newHeadId}}</td>
                 <td class="pdiShipDate">{{date}}</td>
+                 <td class="pdiTruckOnOrder {{getStatusTruck truckStatus}}" style="background-color:{{getStatusTruck truckStatus}}; color:{{getStatusTruck truckStatus}}" >{{truckStatus}}</td>
+                 <td class="pdiTruckDate truckDateCorrection">{{confirmedShipDate}}</td>
                 <td class="pdiComments" style="width: 250px" >{{shippingComment}}</td>
                 <td class="pdiKitField">{{kit}}</td>
                 <td class="pdiRepField  {{getStatusColor repairStatus}}" style="background-color:{{getStatusColor repairStatus}}; color:{{getStatusColor repairStatus}}" >{{repairStatus}}</td>

@@ -82,20 +82,6 @@ if (Meteor.isClient) {
             const truckStatus = 0;
             const machineId = Session.get('selectedMachine');
             Meteor.call('truckRemoved', machineId, truckStatus);
-        },
-
-        'click .addList': function() {
-            event.preventDefault();
-            const KitStatus = 1;
-            const machineId = Session.get('selectedMachine');
-            Meteor.call('listPrinted', machineId, KitStatus);
-        },
-
-        'click .removeList': function() {
-            event.preventDefault();
-            const KitStatus = 0;
-            const machineId = Session.get('selectedMachine');
-            Meteor.call('listRemoved', machineId, KitStatus);
         }
 
 
