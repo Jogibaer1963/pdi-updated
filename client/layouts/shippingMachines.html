@@ -169,6 +169,9 @@
                <th class="pdiKitField"><strong>Ship with Kit</strong></th>
                <th class="pdiTireField"><strong>Tire / Track</strong></th>
                <th class="pdiComments"><strong>Shipping Comments</strong></th>
+                <th class="pdiPDIField"><strong>PDI</strong></th>
+                <th class="pdiRepField"><strong>Rep</strong></th>
+                <th class="pdiWashField"><strong>Wash</strong></th>
                <th class="pdiShipField"><strong>Ship Status</strong></th>
             </tr>
           </thead>
@@ -185,6 +188,9 @@
                     <td class="pdiKitField">{{kit}}</td>
                     <td class="pdiTireField">{{tireTrack}}</td>
                     <td class="pdiComments">{{shippingComment}}</td>
+                    <td class="pdiPDIField {{getStatusColor pdiStatus}}" style="background-color:{{getStatusColor pdiStatus}}; color:{{getStatusColor pdiStatus}}" >{{pdiStatus}}</td>
+                    <td class="pdiRepField {{getStatusColor repairStatus}}" style="background-color:{{getStatusColor repairStatus}}; color:{{getStatusColor repairStatus}}" >{{repairStatus}}</td>
+                    <td class="pdiWashField {{getStatusColor washStatus}}" style="background-color:{{getStatusColor washStatus}}; color:{{getStatusColor washStatus}}" >{{washStatus}}</td>
                     <td class="pdiShipField {{getStatusColor shipStatus}}" style="background-color:{{getStatusColor shipStatus}}; color:{{getStatusColor shipStatus}}">{{shipStatus}}</td>
                 </tr>
               {{/each}}

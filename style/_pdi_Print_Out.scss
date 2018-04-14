@@ -36,3 +36,24 @@ table.printOutTableWidth td {
 .tbodyOverflow {
   overflow: unset;
 }
+
+#footer {
+  position: fixed;
+  bottom: 0px;
+  width: 100%;
+}
+
+#content {
+  padding-bottom: 30px;
+}
+
+#wrapper {
+  position: relative;
+  min-height: 100%;
+  height: auto !important;
+  height: 100%;
+}
+
+html, body {
+  height: 100%;
+}

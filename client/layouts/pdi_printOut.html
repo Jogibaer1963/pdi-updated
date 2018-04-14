@@ -3,84 +3,102 @@ ToDo rewrite_template
 -->
 
 <template name="pdi_printOut">
-    <div class="printoutMargin">
-        <div class="">
+        <div class="printoutMargin">
             {{#each listContent}}
                 <div>
-                    <h4>Machine Id : {{machineId}}</h4>
-                    <h4>PDI performed by {{pdiPerformer}}</h4>
+                   <div>
+                      <h4>Machine Id : {{machineId}}</h4>
+                      <h4>PDI performed by {{pdiPerformer}}</h4>
+                   </div>
+                   <br>
+                   <div class="">
+                      {{#each machineConfig}}
+                          <div>
+                              {{config}} : {{configItem}}
+                          </div>
+                      {{/each }}
+                   </div>
                 </div>
-                <br>
-                <div class="">
-                    {{#each machineConfig}}
-                        <div>
-                            {{config}} : {{configItem}}
-                        </div>
-                    {{/each }}
+                <div id="footer">
+                    <h6>Releaser:  Mroczek, Aaron  -  Date:  11.04.2018  - Version: 1.0</h6>
+                    <h6>Printed copies are not under control, the CLAAS BPM contains the controlled version</h6>
+                    <h6>Title:  Quality – PDI Checklist Template</h6>
                 </div>
-                <p style="page-break-after: always;">&nbsp;</p>
-                <p style="page-break-before: always;">&nbsp;</p>
-                <div class="">
-                    <h3>Operator Maintenance Manual</h3>
-                    <h4>Omm Main : {{omms.ommMain}}</h4>
-                    <h4>Omm Supplemental : {{omms.ommSupp}}</h4>
-                    <h4>Omm Unload : {{omms.ommUnload}}</h4>
-                    <h4>Omm Cebis : {{omms.ommCebis}}</h4>
-                    <h4>Omm Cebis Touch : {{omms.ommTouch}}</h4>
-                    <h4>Omm Terra Track : {{omms.ommTerra}}</h4>
-                    <h4>Omm Dual : {{omms.ommDual}}</h4>
-                    <h4>Omm Profi Cam : {{omms.ommProfiCam}}</h4>
-                    <h4>---------------------------------------------------------------------------</h4>
-                </div>
-                <br>
-                <div class="">
-                    <h3>Battery result</h3>
+                  <p style="page-break-after: always;">&nbsp;</p>
+                  <p style="page-break-before: always;">&nbsp;</p>
+                <div>
+                    <div class="">
+                       <h3>Operator Maintenance Manual</h3>
+                       <h4>Omm Main : {{omms.ommMain}}</h4>
+                       <h4>Omm Supplemental : {{omms.ommSupp}}</h4>
+                       <h4>Omm Unload : {{omms.ommUnload}}</h4>
+                       <h4>Omm Cebis : {{omms.ommCebis}}</h4>
+                       <h4>Omm Cebis Touch : {{omms.ommTouch}}</h4>
+                       <h4>Omm Terra Track : {{omms.ommTerra}}</h4>
+                       <h4>Omm Dual : {{omms.ommDual}}</h4>
+                       <h4>Omm Profi Cam : {{omms.ommProfiCam}}</h4>
+                       <h4>---------------------------------------------------------------------------</h4>
+                    </div>
                     <br>
-                    <h4>{{batteries.battC13CCA}} Amp      {{batteries.battC13Volt}} Volt</h4>
-                    <h4>------------------------------------------------</h4>
-                    <h4>G001: {{batteries.mtuG001CCA}} Amp    {{batteries.mtuG001Volt}} Volt</h4>
-                    <h4>------------------------------------------------</h4>
-                    <h4>G005: {{batteries.mtuG005CCA}} Amp    {{batteries.mtuG005Volt}} Volt</h4>
-                    <h4>------------------------------------------------</h4>
-                    <h4>G004: {{batteries.mtuG004CCA}} Amp    {{batteries.mtuG004Volt}} Volt</h4>
-                    <h4>------------------------------------------------</h4>
-                    <h4>CCA: {{batteries.manBatt_1CCA}} Amp    {{batteries.manBatt_1Volt}} Volt</h4>
-                    <h4>------------------------------------------------</h4>
-                    <h4>CCA: {{batteries.manBatt_2CCA}} Amp    {{batteries.manBatt_2Volt}} Volt</h4>
+                    <div class="">
+                       <h3>Battery result</h3>
+                       <br>
+                       <h4>{{batteries.battC13CCA}} Amp      {{batteries.battC13Volt}} Volt</h4>
+                       <h4>------------------------------------------------</h4>
+                       <h4>G001: {{batteries.mtuG001CCA}} Amp    {{batteries.mtuG001Volt}} Volt</h4>
+                       <h4>------------------------------------------------</h4>
+                       <h4>G005: {{batteries.mtuG005CCA}} Amp    {{batteries.mtuG005Volt}} Volt</h4>
+                       <h4>------------------------------------------------</h4>
+                       <h4>G004: {{batteries.mtuG004CCA}} Amp    {{batteries.mtuG004Volt}} Volt</h4>
+                       <h4>------------------------------------------------</h4>
+                       <h4>CCA: {{batteries.manBatt_1CCA}} Amp    {{batteries.manBatt_1Volt}} Volt</h4>
+                       <h4>------------------------------------------------</h4>
+                       <h4>CCA: {{batteries.manBatt_2CCA}} Amp    {{batteries.manBatt_2Volt}} Volt</h4>
+                    </div>
                 </div>
-                <p style="page-break-after: always;">&nbsp;</p>
-                <p style="page-break-before: always;">&nbsp;</p>
+                <div id="footer">
+                    <h6>Releaser:  Mroczek, Aaron  -  Date:  11.04.2018  - Version: 1.0</h6>
+                    <h6>Printed copies are not under control, the CLAAS BPM contains the controlled version</h6>
+                    <h6>Title:  Quality – PDI Checklist Template</h6>
+                </div>
+                   <p style="page-break-after: always;">&nbsp;</p>
+                   <p style="page-break-before: always;">&nbsp;</p>
+                <div>
                     <h3>Repair List:</h3>
                     <br>
-                <table class="printOutTableWidth " cellpadding="10">
-                    <tbody class="tbodyOverflow">
-                       {{#each newIssues}}
-                          <tr>
-                             <td class="pdiCommentsPrintOut">{{siNumber}} {{errorDescription}}</td>
-                              <td class="pdiEmptyField"></td>
-                              <td class="pdiSignOffField"></td>
-                          </tr>
-                       {{/each}}
-                       {{#each machineConfigIssues}}
-                           <tr>
-                               <td class="pdiCommentsPrintOut">Check config {{configItem}}</td>
-                               <td class="pdiEmptyField"></td>
-                               <td class="pdiSignOffField"></td>
-                           </tr>
-                       {{/each}}
-                       {{#each checkList}}
-                          {{#if failStatus}}
-                            <tr>
-                              <td class="pdiComments">{{errorDescription}}</td>
-                                <td class="pdiEmptyField"></td>
-                                <td class="pdiSignOffField"></td>
-                            </tr>
-                          {{/if}}
-                      {{/each}}
-                    </tbody>
-                </table>
+                        <table class="printOutTableWidth " cellpadding="10">
+                            <tbody class="tbodyOverflow">
+                               {{#each newIssues}}
+                                  <tr>
+                                     <td class="pdiCommentsPrintOut">{{siNumber}} {{errorDescription}}</td>
+                                     <td class="pdiEmptyField"></td>
+                                     <td class="pdiSignOffField"></td>
+                                   </tr>
+                               {{/each}}
+                               {{#each machineConfigIssues}}
+                                   <tr>
+                                     <td class="pdiCommentsPrintOut">Check config {{configItem}}</td>
+                                     <td class="pdiEmptyField"></td>
+                                     <td class="pdiSignOffField"></td>
+                                   </tr>
+                               {{/each}}
+                               {{#each checkList}}
+                                   {{#if failStatus}}
+                                        <tr>
+                                           <td class="pdiComments">{{errorDescription}}</td>
+                                           <td class="pdiEmptyField"></td>
+                                           <td class="pdiSignOffField"></td>
+                                        </tr>
+                                   {{/if}}
+                               {{/each}}
+                            </tbody>
+                        </table>
+                </div>
             {{/each}}
-
+            <div id="footer">
+                <h6>Releaser:  Mroczek, Aaron  -  Date:  11.04.2018  - Version: 1.0</h6>
+                <h6>Printed copies are not under control, the CLAAS BPM contains the controlled version</h6>
+                <h6>Title:  Quality – PDI Checklist Template</h6>
+            </div>
         </div>
-    </div>
 </template>
