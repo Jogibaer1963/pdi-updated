@@ -7,4 +7,8 @@ if(Meteor.isClient) {
             return MachineReady.find({_id: pdiMachine});
         }
     });
+
+
+
+
 }
