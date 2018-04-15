@@ -199,12 +199,12 @@ table.tableAdminPos {
   min-width: 450px; }
 
 .pdiKitField {
-  max-width: 150px;
-  min-width: 150px; }
+  max-width: 145px;
+  min-width: 145px; }
 
 .pdiTireField {
-  max-width: 150px;
-  min-width: 150px; }
+  max-width: 145px;
+  min-width: 145px; }
 
 .pdiPDIField {
   max-width: 50px;
@@ -326,9 +326,10 @@ table.locationTable {
   float: left; }
 
 .comment {
-  position: absolute;
-  left: 440px;
-  width: 500px; }
+  position: relative;
+  top: 3em;
+  left: 4.5em;
+  width: 35em; }
 
 .newMachineSubmit {
   margin-top: 50px; }
@@ -343,9 +344,12 @@ table.locationTable {
 .searchMachine {
   margin-left: 0.8em; }
 
-.delete_Machine {
-  float: left;
-  margin-right: 25px; }
+.find_delete_button {
+  position: relative;
+  top: 3em; }
+
+.find_Machine {
+  margin-bottom: 1em; }
 
 .buttonField {
   margin-left: 30em;
@@ -1123,12 +1127,6 @@ table.toDoListTable {
   position: relative;
   left: 560px;
   color: black; }
-
-.editMachine {
-  background: repeating-linear-gradient(45deg, #e6e6e6, #bc171b 10px, #e6e6e6 10px, #bc171b 20px); }
-
-.searchMachine {
-  background: repeating-linear-gradient(45deg, #e6e6e6, #bc171b 10px, #e6e6e6 10px, #bc171b 20px); }
 
 .inActive {
   background: repeating-linear-gradient(45deg, #e6e6e6, #bc171b 10px, #e6e6e6 10px, #bc171b 20px); }

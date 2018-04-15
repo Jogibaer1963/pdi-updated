@@ -1,36 +1,39 @@
 <template name="editMachine">
     {{#if currentUser}}
-        {{> shippingLayout}}
-        <h1>Edit Machine</h1>
+        {{> topNav}}
+        {{>navBackToShipping}}
         {{#with showEditMachine}}
-            <div class="">
-                <form class="orangeredShippingBox inputEditMachine">
-                    <div class="userBox">
+            <div id="logo">
+                <img src="claas_logo.png" />
+            </div>
+            <div class="newMachineShipping">
+                <h1>Edit Machine</h1>
+                <br><br>
+                <form class="inputEditMachine">
+                    <div class="shippingInputs">
                         <label for="MachineId" class="input" >Machine-Id</label>
                         <br>
                         <input type="text" class="inputComment" id="MachineId" name="newMachine" placeholder="Machine Id" value="{{machineId}}">
                     </div>
-                    <div class="userBox">
+                    <div class="shippingInputs">
                         <label for="shippingDate" class="input">Shipping-Date</label>
                         <br>
                         <input type="Date" class="inputComment" id="shippingDate" name="newDate" value="{{date}}" required>
                     </div>
-                    <div class="userBox">
+                    <div class="shippingInputs">
                         <label for="newDestination" class="input">Destination</label>
                         <br>
                         <input type="text" class="inputComment" id="newDestination" name="newDestination" placeholder="Destination" value="{{destination}}">
                     </div>
-                    <br><br><br><br>
-                    <div class="userBox">
+                    <div class="shippingInputs">
                         <label for="newTransporter" class="input">Transporter</label>
                         <br>
                         <input type="text" class="inputComment" id="newTransporter" name="newTransporter" placeholder="Transporter" value="{{transporter}}">
                     </div>
-                    <div class="userBox">
+                    <div class="shippingInputs">
                         <label for="selectMe" class="input">Tires / MTS </label>
                         <br>
                         <select name="newTireTrack" id="selectMe" class="inputComment">
-                            <option>{{tireTrack}}</option>
                             <option>Single Tire</option>
                             <option>520 GY / 2208 017.0</option>
                             <option>620 GY / 2208 016.0</option>
@@ -39,10 +42,15 @@
                             <option>MTS</option>
                         </select>
                     </div>
-                    <div class="userBox checkBoxChecked">
-                        <div class="inputKit">Ship with Kit</div>
-                        <br>
+                    <br><br><br>
+                    <div class="firstKit">
                         <ul class="checkbox">
+                            <li>
+                               <div>
+                                 <label for="noKit">
+                                  <input type="checkbox" value="No_Kit " id="noKit" name="newKit" class="newKit" {{noKit}}>No_Kit</label>
+                               </div>
+                            </li>
                           <li>
                             <div>
                               <label for="newKit1">
@@ -61,6 +69,10 @@
                                     <input type="checkbox" value="C03_0165" id="newKit3" name="newKit" class="newKit3"  {{newKit3}}>C03 0165</label>
                                 </div>
                             </li>
+                        </ul>
+                    </div>
+                    <div class="secondKit">
+                        <ul class="checkbox">
                             <li>
                                 <div>
                                     <label for="newKit7">
@@ -87,15 +99,29 @@
                             </li>
                         </ul>
                     </div>
-                    <br><br><br><br><br><br><br>
-                    <div class="userBox">
-                        <label for="newComment" class="inputComment">Comments</label>
-                        <br>
-                        <input type="text" class="comment inputComment" id="newComment" name="newComment" placeholder="Comments" value="{{shippingComment}}">
+                    <div class="thirdKit">
+                        <ul class="checkbox">
+                            <li>
+                                <div>
+                                    <label for="newKit7">
+                                        <input type="checkbox" value="G03_0112" id="newKit8" name="newKit" class="newKit8" {{newKit8}}>G03 0112</label>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="newKit4Pos">
+                                    <label for="newKit4">
+                                        <input type="checkbox" value="G03_0120" id="newKit9" name="newKit" class="newKit9" {{newKit9}}>G03 0120</label>
+                                </div>
+                            </li>
+                        </ul>
                     </div>
-                    <br><br><br><br>
-                    <div class="userBox">
-                        <button class="loginSubmit buttonEditPos" type="submit">Submit</button>
+                    <div>
+                        <label for="newComment"></label>
+                        <input type="text" class="comment" id="newComment" name="newComment" placeholder="Shipping Comment" value={{shippingComment}}>
+                    </div>
+                    <br><br><br>
+                    <div class="newMachineSubmit">
+                        <button class="btn btn-success" type="submit">Submit shipping machine</button>
                     </div>
                 </form>
             </div>
@@ -103,4 +129,12 @@
     {{else}}
         {{> login}}
     {{/if}}
+</template>
+
+<template name="navBackToShipping">
+    <div class="mainLayout">
+        <nav>
+            <a class="btn" href="/shippingMachines">Back to Shipping</a>
+        </nav>
+    </div>
 </template>

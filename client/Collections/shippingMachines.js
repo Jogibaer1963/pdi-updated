@@ -38,7 +38,7 @@ if (Meteor.isClient) {
             event.target.newComment.value="";
         },
 
-        'submit .searchMachines': function() {
+        'submit .find_Machine': function() {
             event.preventDefault();
             const selectedMachine = event.target.inputSearch.value;
             const idFinder = MachineReady.find({machineId: selectedMachine}, {fields: {_id: 1}}).fetch();
@@ -54,13 +54,6 @@ if (Meteor.isClient) {
             event.preventDefault();
             const deleteMachine = Session.get('selectedMachine');
             Meteor.call('removeFromShipList', deleteMachine);
-        },
-
-        'click .editMachine': () => {
-            event.preventDefault();
-            const editMachine = Session.get('selectedMachine');
-            console.log(editMachine);
-
         },
 
         'click .shippingMachine': function () {

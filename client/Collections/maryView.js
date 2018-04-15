@@ -1,4 +1,4 @@
-
+/*
     Template.overViewListMaryView.helpers({
 
        overView: function() {
@@ -47,6 +47,6 @@
     });
 
 
-    
+    */
 
 

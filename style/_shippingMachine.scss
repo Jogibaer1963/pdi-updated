@@ -31,9 +31,10 @@
 }
 
 .comment {
-  position: absolute;
-  left: 440px;
-  width: 500px;
+  position: relative;
+  top: 3em;
+  left: 4.5em;
+  width: 35em;
 }
 
 .newMachineSubmit {
@@ -53,9 +54,13 @@
    margin-left: 0.8em;
 }
 
-.delete_Machine {
-  float: left;
-  margin-right: 25px;
+.find_delete_button {
+  position: relative;
+  top: 3em;
+  }
+
+.find_Machine {
+  margin-bottom: 1em;
 }
 
 .buttonField {

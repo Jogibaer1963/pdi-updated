@@ -8,6 +8,14 @@ if(Meteor.isClient) {
             const kitExtract = kitString.slice(8, -28);
             const myString = kitExtract.replace(/"/g, "");
 
+            const x = myString.indexOf('No_Kit  ', 0);
+            if(x >= 0){
+                const kit_0 = 'No_Kit   ';
+                Session.set('kit_0', kit_0);
+            } else {
+                Session.set('kit_0', undefined);
+            }
+
             const a = myString.indexOf('C03_0019', 0);
             if(a >= 0){
                 const kit_1 = 'C03_0019';
@@ -64,7 +72,30 @@ if(Meteor.isClient) {
                 Session.set('kit_6', undefined);
             }
 
+            const gg = myString.indexOf('G03_0112', 0);
+            if(gg >= 0){
+                const kit_8 = 'G03_0112';
+                Session.set('kit_8', kit_8);
+            } else {
+                Session.set('kit_8', undefined);
+            }
+
+            const h = myString.indexOf('G03_0120', 0);
+            if(h >= 0){
+                const kit_9 = 'G03_0120';
+                Session.set('kit_9', kit_9);
+            } else {
+                Session.set('kit_9', undefined);
+            }
+
             return MachineReady.findOne({_id: selectedMachine});
+        },
+
+        'noKit': function() {
+            const kit_0 = Session.get('kit_0');
+            if(kit_0 === 'No_Kit  ') {
+                return 'checked';
+            }
         },
 
          'newKit1': function() {
@@ -112,6 +143,20 @@ if(Meteor.isClient) {
         'newKit6': function() {
             const kit_6 = Session.get('kit_6');
             if(kit_6 === 'D06_0030') {
+                return 'checked';
+            }
+        },
+
+        'newKit8': function() {
+            const kit_8 = Session.get('kit_8');
+            if(kit_8 === 'G03_0112') {
+                return 'checked';
+            }
+        },
+
+        'newKit9': function() {
+            const kit_9 = Session.get('kit_9');
+            if(kit_9 === 'G03_0120') {
                 return 'checked';
             }
         }
