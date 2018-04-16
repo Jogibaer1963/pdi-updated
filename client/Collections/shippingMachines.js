@@ -66,7 +66,6 @@ if (Meteor.isClient) {
             const confirmedShipDate = event.target.inputDate.value;
             const truckStatus = 1;
             const machineId = Session.get('selectedMachine');
-            console.log(confirmedShipDate);
             Meteor.call('truckOrdered', machineId, truckStatus, confirmedShipDate);
         },
 

@@ -90,11 +90,9 @@
            let startUnix = Session.get('startUnix');
            let endUnix = Session.get('endUnix');
            if (startUnix) {
-               console.log('Huhuuu');
            Session.set('startUnix', '');
            Session.set('endUnix', '');
            Meteor.call('analyzeRepair', startUnix, endUnix);
-           console.log(startUnix, endUnix);
            }
         }
 

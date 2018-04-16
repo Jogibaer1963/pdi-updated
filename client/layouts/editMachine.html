@@ -124,7 +124,35 @@
                         <button class="btn btn-success" type="submit">Submit shipping machine</button>
                     </div>
                 </form>
+                <div class="buttonEditField">
+                    <form class="truckEditDate">
+                        <button type="submit" class="btn btn-success addTruck">Truck Ordered</button>
+                        <input class="shipDate" type="date" name="inputDate" placeholder="Confirmed Ship Date" value={{confirmedShipDate}} />
+                    </form>
+                    <br>
+                    <button type="submit" class="btn btn-danger removeEditTruck">Remove Truck</button>
+                </div>
             </div>
+        <table class="editTable" cellpadding="10">
+            <thead class="editTableHead">
+              <tr class="">
+                 <th class="pdiPDIField"><strong>PDI</strong></th>
+                 <th class="pdiRepField"><strong>Rep</strong></th>
+                 <th class="pdiWashField"><strong>Wash</strong></th>
+                 <th class="pdiShipField"><strong>Ship Status</strong></th>
+              </tr>
+            </thead>
+            <tbody class="">
+               {{#if shippEditList}}
+                   <tr class="editTableBody">
+                      <td class="pdiPDIField {{getStatusColor pdiStatus}}" style="background-color:{{getStatusColor pdiStatus}}; color:{{getStatusColor pdiStatus}}" >{{pdiStatus}}</td>
+                      <td class="pdiRepField {{getStatusColor repairStatus}}" style="background-color:{{getStatusColor repairStatus}}; color:{{getStatusColor repairStatus}}" >{{repairStatus}}</td>
+                      <td class="pdiWashField {{getStatusColor washStatus}}" style="background-color:{{getStatusColor washStatus}}; color:{{getStatusColor washStatus}}" >{{washStatus}}</td>
+                      <td class="pdiShipField {{getStatusColor shipStatus}}" style="background-color:{{getStatusColor shipStatus}}; color:{{getStatusColor shipStatus}}">{{shipStatus}}</td>
+                   </tr>
+               {{/if}}
+            </tbody>
+        </table>
             {{/with}}
     {{else}}
         {{> login}}

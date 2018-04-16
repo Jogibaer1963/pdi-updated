@@ -82,7 +82,6 @@ if(Meteor.isClient) {
             const manBatt_1Volt = event.target.manBatt_1Volt.value;
             const manBatt_2CCA = event.target.manBatt_2CCA.value;
             const manBatt_2Volt = event.target.manBatt_2Volt.value;
-            console.log(pdiMachineId, mtuG004Volt);
             Meteor.call('pdiMachineBattery', pdiMachineId, loggedInUser, battC13CCA, battC13Volt,
                 mtuG001CCA, mtuG001Volt, mtuG005CCA, mtuG005Volt, mtuG004CCA, mtuG004Volt,
                 manBatt_1CCA, manBatt_1Volt, manBatt_2CCA, manBatt_2Volt);

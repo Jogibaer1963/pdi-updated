@@ -1,6 +1,12 @@
 if(Meteor.isClient) {
 
     Template.editMachine.helpers({
+
+        shippEditList: function () {
+            const selectedMachine = Session.get('editSelectedMachine');
+            return MachineReady.findOne({_id: selectedMachine});
+        },
+
         showEditMachine: function() {
             const selectedMachine = Session.get('editSelectedMachine');
             const kitSaved = MachineReady.find({_id: selectedMachine}, {fields: {"kit": 1}}).fetch();
@@ -164,6 +170,7 @@ if(Meteor.isClient) {
     });
 
     Template.editMachine.events({
+
         "submit .inputEditMachine": function(event) {
             event.preventDefault();
             const selectedMachine = Session.get('editSelectedMachine');
@@ -179,7 +186,24 @@ if(Meteor.isClient) {
             const newShippingComment = event.target.newComment.value;
             Meteor.call('editShipInfo', selectedMachine, newMachine, newShippingDate, newShippingDestination, newShippingTransporter, newShippingTireTrack, newShippingKit, newShippingComment );
             FlowRouter.go ('shippingMachines');
+        },
+
+        'submit .truckEditDate': function() {
+            event.preventDefault();
+            const confirmedShipDate = event.target.inputDate.value;
+            const truckStatus = 1;
+            const machineId = Session.get('editSelectedMachine');
+            Meteor.call('truckOrdered', machineId, truckStatus, confirmedShipDate);
+        },
+
+        'click .removeEditTruck': function() {
+            event.preventDefault();
+            const truckStatus = 0;
+            const machineId = Session.get('editSelectedMachine');
+            Meteor.call('truckRemoved', machineId, truckStatus);
         }
+
+
     });
 
 }

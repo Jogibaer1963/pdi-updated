@@ -40,15 +40,13 @@ if(Meteor.isClient) {
             event.preventDefault();
             const file = event.target.files[0];
             if (!file) {
-                console.log('kein File');
+
                 return;
             }
             let reader = new FileReader();
             reader.onload = function(e) {
                 const contents = e.target.result;
                 document.getElementById('variant').value = '';
-                const  newContent = JSON.stringify(contents);
-               console.log(newContent);
                 Meteor.call('readVariant', contents);
             };
             reader.readAsText(file);
