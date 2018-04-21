@@ -1,0 +1,45 @@
+<template name="commissionAdmin">
+    {{#if currentUser}}
+        <div class="commNav">
+        {{> commNav}}
+        </div>
+    {{else}}
+        {{> login}}
+    {{/if}}
+    <div id="logo">
+        <img src="claas_logo.png" />
+    </div>
+    <br><br>
+    <div class="topNav commissionNav">
+        <nav>
+            <a  class="btn" href="/commissionOverView">Over View</a>
+        </nav>
+    </div>
+    <div class="commHead">Commission Administration</div>
+    <form class="newSupplyArea">
+        <div class="">
+           <label for="supplyArea" >New Supply Area</label>
+           <br>
+           <input type="text" name="supplyArea" id="supplyArea" placeholder="SupplyArea">
+        </div>
+        <br>
+        <button class="btn btn-success" type="submit">Submit</button>
+    </form>
+    <button class="btn btn-danger removeSupplyArea" type="click">Delete</button>
+    <div class="">
+        <table class="blueTable supplyTable" cellpadding="10">
+            <thead>
+            <tr>
+                <th class="userLastLogin"><strong>Variant</strong></th>
+            </tr>
+            </thead>
+            <tbody>
+            {{#each supplyAreaList}}
+                <tr class="supplyAreaList {{selected}}">
+                    <td class="supplyAreaField">{{supplyArea}}</td>
+                </tr>
+            {{/each}}
+            </tbody>
+        </table>
+    </div>
+</template>

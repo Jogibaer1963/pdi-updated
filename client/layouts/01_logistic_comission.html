@@ -1,46 +1,84 @@
 <template name="commission">
+    <!--
+
+    -->
     {{#if currentUser}}
-        {{> commNav}}
+        <div class="commNav">
+            {{> commNav}}
+        </div>
     {{else}}
         {{> login}}
     {{/if}}
+    <div id="logo">
+        <img src="claas_logo.png" />
+    </div>
+    <br><br>
     <div class="topNav">
         <nav>
-            <a class="btn" href="/carts">commissioning zone</a>
+            <a class="btn" href="/carts">Commissioning zone</a>
             <a>|</a>
             <a  class="btn" href="/commissionOverView">Over View</a>
+            <a>|</a>
+            <a  class="btn btn-danger" href="/commissionAdmin">Commission Admin</a>
         </nav>
     </div>
 <h2>commissioning Tables</h2>
 </template>
 
 <template name="carts">
+    <!--
+    Commission carts loading
+    Time scanner
+    Machine Number
+    Work place
+    -->
     {{#if currentUser}}
-        {{> commNav}}
+        <div class="commNav">
+            {{> commNav}}
+        </div>
     {{else}}
         {{> login}}
     {{/if}}
+    <div id="logo">
+        <img src="claas_logo.png" />
+    </div>
+    <br><br>
     <div class="topNav">
         <nav>
             <a class="btn" href="/commission">Commission Table</a>
             <a>|</a>
             <a  class="btn" href="/commissionOverView">Over View</a>
+            <a>|</a>
+            <a  class="btn btn-danger" href="/commissionAdmin">Commission Admin</a>
         </nav>
     </div>
     <h2>Carts</h2>
 </template>
 
 <template name="commissionOverView">
+    <!--
+    Overview of what is done
+    what needs to be done
+    -->
     {{#if currentUser}}
-        {{> commNav}}
+        <div class="commNav">
+            {{> commNav}}
+        </div>
     {{else}}
         {{> login}}
     {{/if}}
+    <div id="logo">
+        <img src="claas_logo.png" />
+    </div>
+    <br><br>
     <div class="topNav">
+
         <nav>
             <a class="btn" href="/carts">commissioning zone</a>
             <a>|</a>
             <a  class="btn" href="/commission">Commission Table</a>
+            <a>|</a>
+            <a  class="btn btn-danger" href="/commissionAdmin">Commission Admin</a>
         </nav>
     </div>
     <h2>Commission Over View</h2>

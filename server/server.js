@@ -123,10 +123,22 @@ if(Meteor.isServer){
             return toDoMesssage.find();
         });
 
+        Meteor.publish("supplyAreaList", function() {
+            return supplyAreaList.find();
+        });
+
     });
 
 
     Meteor.methods({
+
+        'removeSupply': function (removeSupplyArea) {
+          supplyAreaList.remove({_id: removeSupplyArea});
+        },
+
+        'supplyArea': function (supplyArea) {
+          supplyAreaList.insert({supplyArea});
+        },
 
         'submitToDo': function(toDoText, dateNow, needDate, toDoUser) {
             const toDoStatus = 0;
