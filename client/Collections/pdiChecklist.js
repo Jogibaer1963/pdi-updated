@@ -1,6 +1,6 @@
 Meteor.subscribe("variants_C77");
+Meteor.subscribe("checkpoints");
 
-if (Meteor.isClient) {
 
     Session.set("toggleActiveInactive", 0);
     Session.set("statusEdit", 0);
@@ -150,5 +150,5 @@ if (Meteor.isClient) {
 
     });
 
-}
+
 

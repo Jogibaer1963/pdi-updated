@@ -11,14 +11,19 @@
 </template>
 
 <template name="toDoTopNav">
+    {{#if isInRole 'commission'}}
+        {{> commissionNav}}
+        {{else}}
+            {{>lop}}
+        {{/if}}
+</template>
+
+<template name="lop">
     <div class="topNav">
         <nav>
             <a class="btn" href="/overViewUser">Over View</a>
         </nav>
     </div>
-</template>
-
-<template name="lop">
     <div id="logo">
         <img src="claas_logo.png" />
     </div>

@@ -1,5 +1,5 @@
-if (Meteor.isClient) {
 
+    Meteor.subscribe("washBayText");
     Template.overViewWashList.helpers({
 
         overView: function() {
@@ -150,7 +150,5 @@ if (Meteor.isClient) {
      return(   d + ' d '  + h + ' h ' + m + ' m '  + s +' s');
  }
 
-
-}
 
 

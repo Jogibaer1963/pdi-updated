@@ -1,6 +1,18 @@
-if (Meteor.isClient) {
 
     Meteor.subscribe("MachineReady");
+
+    Session.set('selectedPdiMachine', '');
+    Session.set('pdiMachineNumber', '');
+    Session.set('selectedErrorId', '');
+    Session.set('selectedNewErrorId', '');
+    Session.set('findMachine', '');
+    Session.set('selectedMainOm', '');
+    Session.set('selectedSuppOm', '');
+    Session.set('selectedUnloadOm', '');
+    Session.set('selectedCemosOm', '');
+    Session.set('selectedTeraTrackOm', '');
+    Session.set('selectedProfiCam', '');
+    Session.set('selectedProfiId', '');
 
     Template.overView.helpers({
 
@@ -16,7 +28,7 @@ if (Meteor.isClient) {
         }
     });
     
-}
+
 
 
 

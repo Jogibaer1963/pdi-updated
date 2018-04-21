@@ -31,12 +31,34 @@
                   {{> outBound}}
                   {{> overView}}
               {{/if}}
+              {{#if isInRole 'commission'}}
+                  {{> topNav}}
+                  {{> commissionNav}}
+              {{/if}}
        {{else}}
             {{> login}}
        {{/if}}
      </body>
 </template>
 
+<template name="commissionNav">
+    <div class="commissionHeadNav">
+        <nav>
+            <a class="btn " href="/commissionCarts">Commissioning Carts </a>
+            <a>|</a>
+            <a class="btn" href="/commissionOverview">Overview</a>
+        </nav>
+    </div>
+</template>
+
+
+<template name="commNav">
+    <nav>
+    <a class="btn" href="/toDoList">L O P</a>
+    <a>|</a>
+    <a class="btn logout" href="/logout" >Logout</a>
+    </nav>
+</template>
 
 <template name="topNav">
     <div class="topNav">
@@ -72,6 +94,8 @@
            <a class="btn" href="/readyShipList">Final Status</a>
             <a>|</a>
            <a class="btn" href="/ecnOverView">ECN Tracking</a>
+            <a>|</a>
+            <a class="btn" href="/commission">Commissioning</a>
             <a>|</a>
            <a class="btn btn-danger" href="/admin">Admin</a>
          </nav>

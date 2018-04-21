@@ -19,14 +19,6 @@ if(Meteor.isServer){
             return headerReady.find()
         });
 
-        Meteor.publish("machineReadyToGo_2016", function () {
-            return MachineReady_2016.find()
-        });
-
-        Meteor.publish("failures", function(){
-            return FailuresList.find();
-        });
-
         Meteor.publish("checkpoints", function(){
             return checkPoints.find();
         });
@@ -333,14 +325,12 @@ if(Meteor.isServer){
         },
 
         'messageToWashBay_2': function(machineNr, washMessage) {
-            console.log(machineNr, washMessage);
             washBayText.insert({machineNr: machineNr, washBayMessage: washMessage, active: 1});
        //     MachineReady.update({_id: machineId}, {$set: {washBayMessages: {washMessage}}});
         },
 
         'messageToWashBay_3': function(machineId, machineNr, washMessage) {
             washBayText.insert({machineNr: machineNr, washBayMessage: washMessage, active: 1});
-           console.log(machineId, machineNr, washMessage);
             MachineReady.update({_id: machineId}, {$set: {washBayMessages: {washMessage}}});
         },
 
@@ -605,14 +595,6 @@ if(Meteor.isServer){
                         });
                     }
             orderParts.remove({_id: loggedUser});
-        },
-
-        'removeFailureId': function(selectedFailurePoint) {
-            FailuresList.remove({_id: selectedFailurePoint});
-        },
-
-        'insertFailureId': function(newErrorId, newErrorDescribe) {
-            FailuresList.insert({errorid: newErrorId, error_describ: newErrorDescribe});
         },
 
         'stopWashing': function(selectedCheckPoint) {

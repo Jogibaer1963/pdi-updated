@@ -1,6 +1,6 @@
 
-
-if(Meteor.isClient) {
+Meteor.subscribe("pdiCheckList");
+Meteor.subscribe("orderParts");
 
 
     Template.pdiToDoList.helpers({
@@ -240,5 +240,5 @@ if(Meteor.isClient) {
         }
     });
 
-}
+
 

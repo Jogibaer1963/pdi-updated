@@ -1,3 +1,9 @@
+Meteor.subscribe("siList");
+Meteor.subscribe("reworkMachineList");
+Meteor.subscribe("siListDone");
+Meteor.subscribe("siMd");
+Meteor.subscribe("siTable");
+
 
     Template.siTable.events({
         'click .selectedSiItem': function () {

@@ -1,5 +1,4 @@
-if (Meteor.isClient) {
-
+Meteor.subscribe("headerTrailer");
 
     Template.headerShipList.events({
         'click .headerShip': function() {
@@ -169,4 +168,4 @@ if (Meteor.isClient) {
 
 
 
-}
+

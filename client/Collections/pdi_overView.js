@@ -1,8 +1,5 @@
 
-
-
-if(Meteor.isClient) {
-
+    Meteor.subscribe("fuelAverage");
 
 
     Template.inspection.helpers({
@@ -134,7 +131,7 @@ if(Meteor.isClient) {
         }
     });
         
-}
+
 
 
 

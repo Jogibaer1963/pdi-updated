@@ -37,7 +37,7 @@ if (Meteor.isClient) {
         'click .toggleCombineHeader': function () {
             event.preventDefault();
             const selectedCheckPoint = Session.get('selectedMachine');
-            Meteor.call('machineIsGone', selectedCheckPoint);
+          //  Meteor.call('machineIsGone', selectedCheckPoint);
         },
 
         'submit .locationId': function (event) {
