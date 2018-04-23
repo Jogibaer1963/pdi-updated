@@ -3,6 +3,12 @@
   margin-left: 5em;
 }
 
+.commFinished {
+  position: relative;
+  top: 10em;
+  left: 77em;
+}
+
 /*-----------------------------------Switch--------------------------------------*/
 .switch {
   position: relative;
@@ -74,6 +80,8 @@ input:checked + .slider:before {
   display: flex;
   margin-left: 1em;
   position: relative;
+  top: -1em;
+  left: 1em;
   /*background: green;*/
   overflow: hidden;
 }
