@@ -1123,6 +1123,9 @@ table.toDoListTable {
   font-size: x-large;
   margin-bottom: 5em; }
 
+.supplyCommissionTable {
+  float: left; }
+
 .newSupplyArea {
   position: relative;
   left: 2em; }
@@ -1143,6 +1146,186 @@ table.supplyTable {
   left: 9em;
   top: -2.4em; }
 
+.machineCommissionTable {
+  position: absolute;
+  left: 20em; }
+
+.commMachineField {
+  width: 5em; }
+
+.removeMachine {
+  position: relative;
+  left: 7em;
+  top: -2.4em; }
+
+.table-header-rotated th.row-header {
+  width: auto; }
+
+.table-header-rotated td {
+  width: 40px;
+  border-top: 1px solid #dddddd;
+  border-left: 1px solid #dddddd;
+  border-right: 1px solid #dddddd;
+  vertical-align: middle;
+  text-align: center; }
+
+.table-header-rotated th.rotate-45 {
+  height: 80px;
+  width: 40px;
+  min-width: 40px;
+  max-width: 40px;
+  position: relative;
+  vertical-align: bottom;
+  padding: 0;
+  font-size: 12px;
+  line-height: 0.8; }
+
+.table-header-rotated th.rotate-45 > div {
+  position: relative;
+  top: 0px;
+  left: 40px;
+  /* 80 * tan(45) / 2 = 40 where 80 is the height on the cell and 45 is the transform angle*/
+  height: 100%;
+  -ms-transform: skew(-45deg, 0deg);
+  -moz-transform: skew(-45deg, 0deg);
+  -webkit-transform: skew(-45deg, 0deg);
+  -o-transform: skew(-45deg, 0deg);
+  transform: skew(-45deg, 0deg);
+  overflow: hidden;
+  border-left: 1px solid #dddddd;
+  border-right: 1px solid #dddddd;
+  border-top: 1px solid #dddddd; }
+
+.table-header-rotated th.rotate-45 span {
+  -ms-transform: skew(45deg, 0deg) rotate(315deg);
+  -moz-transform: skew(45deg, 0deg) rotate(315deg);
+  -webkit-transform: skew(45deg, 0deg) rotate(315deg);
+  -o-transform: skew(45deg, 0deg) rotate(315deg);
+  transform: skew(45deg, 0deg) rotate(315deg);
+  position: absolute;
+  bottom: 30px;
+  /* 40 cos(45) = 28 with an additional 2px margin*/
+  left: -25px;
+  /*Because it looked good, but there is probably a mathematical link here as well*/
+  display: inline-block;
+  width: 85px;
+  /* 80 / cos(45) - 40 cos (45) = 85 where 80 is the height of the cell, 40 the width of the cell and 45 the transform angle*/
+  text-align: left; }
+
+.marginLeft {
+  margin-left: 1em; }
+
+.chooseMachineTable {
+  float: left; }
+
+.pickedMachineField {
+  width: 2em; }
+
+.supplyAreaTable {
+  position: absolute;
+  left: 13em; }
+
+.tabletStart {
+  position: relative;
+  left: 25em; }
+
+.tabletCommissioning {
+  margin-left: 5em; }
+
+/*-----------------------------------Switch--------------------------------------*/
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 34px; }
+
+/* Hide default HTML checkbox */
+.switch input {
+  display: none; }
+
+/* The slider */
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #cc7616;
+  -webkit-transition: .4s;
+  transition: .4s; }
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s; }
+
+input:checked + .slider {
+  background-color: #71f323; }
+
+input:focus + .slider {
+  box-shadow: 0 0 1px #f37e09; }
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px); }
+
+/* Rounded sliders */
+.slider.round {
+  border-radius: 34px; }
+
+.slider.round:before {
+  border-radius: 50%; }
+
+/*---------------------------------------------------- clock -------------------------------------*/
+.clock {
+  height: 20vh;
+  color: white;
+  font-size: 22vh;
+  font-family: sans-serif;
+  line-height: 20.4vh;
+  display: flex;
+  margin-left: 1em;
+  position: relative;
+  /*background: green;*/
+  overflow: hidden; }
+
+.clock::before, .clock::after {
+  content: '';
+  width: 7ch;
+  height: 3vh;
+  background: linear-gradient(to top, transparent, black);
+  position: absolute;
+  z-index: 2; }
+
+.clock::after {
+  bottom: 0;
+  background: linear-gradient(to bottom, transparent, black); }
+
+.clock > div {
+  display: flex; }
+
+.tick {
+  line-height: 17vh; }
+
+.tick-hidden {
+  opacity: 0; }
+
+.move {
+  animation: move linear 1s infinite; }
+
+@keyframes move {
+  from {
+    transform: translateY(0vh); }
+  to {
+    transform: translateY(-20vh); } }
 .insideNavBar {
   margin-top: 25px; }
 
@@ -1160,6 +1343,12 @@ table.supplyTable {
   margin: 10px; }
 
 .selected {
+  background-color: #978f93; }
+
+.selectedMachine {
+  background-color: #978f93; }
+
+.selectedArea {
   background-color: #978f93; }
 
 .selectedBackgroundGreen {

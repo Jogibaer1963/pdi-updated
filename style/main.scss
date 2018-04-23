@@ -21,6 +21,8 @@
 @import "pdi_Print_Out";
 @import "toDoList";
 @import "commission";
+@import "commission_tablet";
+@import "tabletStart";
 
 
 .insideNavBar {
@@ -44,6 +46,14 @@
 }
 
 .selected {
+  background-color: #978f93
+}
+
+.selectedMachine {
+  background-color: #978f93
+}
+
+.selectedArea {
   background-color: #978f93
 }
 

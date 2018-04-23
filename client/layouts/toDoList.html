@@ -3,8 +3,12 @@
 
 <template name="toDoList">
     {{#if currentUser}}
-        {{> toDoTopNav}}
-        {{>lop}}
+        {{#if isInRole 'commission'}}
+             {{> commissionNav}}
+             {{>lop}}
+           {{else}}
+             {{>lop}}
+         {{/if}}
     {{else}}
         {{> login}}
     {{/if}}

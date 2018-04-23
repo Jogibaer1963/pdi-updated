@@ -32,8 +32,7 @@
                   {{> overView}}
               {{/if}}
               {{#if isInRole 'commission'}}
-                  {{> topNav}}
-                  {{> commissionNav}}
+                  {{> commissionOverView}}
               {{/if}}
        {{else}}
             {{> login}}
@@ -54,7 +53,7 @@
     <nav>
     <a class="btn" href="/toDoList">L O P</a>
     <a>|</a>
-    <a class="btn logout" href="/logout" >Logout</a>
+        <a class="btn logout" href="/logout" >Logout</a>
     </nav>
 </template>
 

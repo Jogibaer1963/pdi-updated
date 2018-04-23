@@ -16,6 +16,7 @@
         </nav>
     </div>
     <div class="commHead">Commission Administration</div>
+    <div class="supplyCommissionTable">
     <form class="newSupplyArea">
         <div class="">
            <label for="supplyArea" >New Supply Area</label>
@@ -25,12 +26,12 @@
         <br>
         <button class="btn btn-success" type="submit">Submit</button>
     </form>
-    <button class="btn btn-danger removeSupplyArea" type="click">Delete</button>
+    <button class="btn btn-danger removeSupplyArea" type="button">Delete</button>
     <div class="">
         <table class="blueTable supplyTable" cellpadding="10">
             <thead>
             <tr>
-                <th class="userLastLogin"><strong>Variant</strong></th>
+                <th class="userLastLogin"><strong>Supply Area</strong></th>
             </tr>
             </thead>
             <tbody>
@@ -42,4 +43,65 @@
             </tbody>
         </table>
     </div>
+    </div>
+<div class="machineCommissionTable">
+    <form class="newCommMachine">
+
+            <label for="newMachine" >Adding Machine</label>
+            <br>
+            <input type="text" name="newMachine" id="newMachine" placeholder="Machine Number">
+        <br><br>
+        <button class="btn btn-success" type="submit">Submit</button>
+    </form>
+    <button class="btn btn-danger removeMachine" type="button">Delete</button>
+    <div class="">
+
+        <table class="table table-striped table-header-rotated">
+            <thead>
+            <tr>
+                <th class=""><strong>Machine Id</strong></th>
+                <th class="rotate-45"><div><span>L4MSB020</span></div></th>
+                <th class="rotate-45"><div><span>L4MSB030</span></div></th>
+                <th class="rotate-45"><div><span>L4MSB040</span></div></th>
+                <th class="rotate-45"><div><span>L4MSB045</span></div></th>
+                <th class="rotate-45"><div><span>L4MSB050</span></div></th>
+                <th class="rotate-45"><div><span>L4MSB060</span></div></th>
+                <th class="rotate-45"><div><span>L4MSB070</span></div></th>
+                <th class="rotate-45"><div><span>L4MSB090</span></div></th>
+                <th class="rotate-45"><div><span>L4PAXL10</span></div></th>
+                <th class="rotate-45"><div><span>L4PCAB10</span></div></th>
+                <th class="rotate-45"><div><span>L4PCHP10</span></div></th>
+                <th class="rotate-45"><div><span>L4PCLN20</span></div></th>
+                <th class="rotate-45"><div><span>L4PCOL05</span></div></th>
+                <th class="rotate-45"><div><span>L4PCOL10</span></div></th>
+                <th class="rotate-45"><div><span>L4PCOL20/30</span></div></th>
+                <th class="rotate-45"><div><span>L4PENG10</span></div></th>
+                <th class="rotate-45"><div><span>L4PENG20</span></div></th>
+                <th class="rotate-45"><div><span>L4PENG30</span></div></th>
+                <th class="rotate-45"><div><span>L4PENG40</span></div></th>
+                <th class="rotate-45"><div><span>L4PFDR10</span></div></th>
+                <th class="rotate-45"><div><span>L4PGRT10</span></div></th>
+                <th class="rotate-45"><div><span>L4PHYD10</span></div></th>
+                <th class="rotate-45"><div><span>L4MSB090</span></div></th>
+                <th class="rotate-45"><div><span>L4PRTR10</span></div></th>
+                <th class="rotate-45"><div><span>L4PRTR20</span></div></th>
+                <th class="rotate-45"><div><span>L4PTHR10</span></div></th>
+                <th class=""><strong>Machine Id</strong></th>
+            </tr>
+            </thead>
+            <tbody>
+            {{#each machineCommList}}
+                <tr class="commissionMachine {{selectedMachine}}">
+                    <td class="commMachineField">{{machineId}}</td>
+                {{#each supplyArea}}
+                    <td class="{{getStatusColor supplyStatus}}" style="background-color:{{getStatusColor supplyStatus}}; color:{{getStatusColor supplyStatus}}" >{{supplyStatus}}</td>
+                {{/each}}
+                    <td class="commMachineField">{{machineId}}</td>
+                </tr>
+
+            {{/each}}
+            </tbody>
+        </table>
+    </div>
+</div>
 </template>

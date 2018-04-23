@@ -1,0 +1,70 @@
+<template name="commission">
+    <!--
+
+    -->
+    {{#if currentUser}}
+        <div class="commNav">
+            {{> commNav}}
+        </div>
+    {{else}}
+        {{> login}}
+    {{/if}}
+    <div id="logo">
+        <img src="claas_logo.png" />
+    </div>
+    <br><br>
+    <div class="topNav">
+        <nav>
+            <a class="btn" href="/carts">Commissioning zone</a>
+            <a>|</a>
+            <a  class="btn" href="/commissionOverView">Over View</a>
+            <a>|</a>
+            <a  class="btn btn-danger" href="/commissionAdmin">Commission Admin</a>
+        </nav>
+    </div>
+    <h2 class="marginLeft">Commissioning Tablet</h2>
+    <br><br>
+    <div class="chooseMachineTable">
+        <h2 class="marginLeft">Machine</h2>
+        <div class="">
+            <table class="blueTable supplyTable" cellpadding="10">
+                <thead>
+                <tr>
+                    <th class="userLastLogin"><strong>Machines</strong></th>
+                </tr>
+                </thead>
+                <tbody>
+                {{#each machineCommList}}
+                    <tr class="pickedMachine {{selectedMachine}}">
+                        <td class="pickedMachineField">{{machineId}}</td>
+                    </tr>
+                {{/each}}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="chooseSupplyTable">
+        <h2>Work center</h2>
+        <div class="supplyAreaTable">
+            <table class="blueTable supplyTable" cellpadding="10">
+                <thead>
+                <tr>
+                    <th class="userLastLogin"><strong>Supply Area</strong></th>
+                </tr>
+                </thead>
+                <tbody>
+                {{#each supplyAreaList}}
+                    <tr class="supplyAreaList {{selectedArea}}">
+                        <td class="supplyAreaField">{{supplyArea}}</td>
+                    </tr>
+                {{/each}}
+                </tbody>
+            </table>
+        </div>
+    </div>
+<div>
+    <button class="btn btn-success tabletStart" type="button">Commissioning Start</button>
+</div>
+
+
+</template>

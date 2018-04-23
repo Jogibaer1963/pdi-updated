@@ -1,29 +1,4 @@
-<template name="commission">
-    <!--
 
-    -->
-    {{#if currentUser}}
-        <div class="commNav">
-            {{> commNav}}
-        </div>
-    {{else}}
-        {{> login}}
-    {{/if}}
-    <div id="logo">
-        <img src="claas_logo.png" />
-    </div>
-    <br><br>
-    <div class="topNav">
-        <nav>
-            <a class="btn" href="/carts">Commissioning zone</a>
-            <a>|</a>
-            <a  class="btn" href="/commissionOverView">Over View</a>
-            <a>|</a>
-            <a  class="btn btn-danger" href="/commissionAdmin">Commission Admin</a>
-        </nav>
-    </div>
-<h2>commissioning Tables</h2>
-</template>
 
 <template name="carts">
     <!--
@@ -45,14 +20,14 @@
     <br><br>
     <div class="topNav">
         <nav>
-            <a class="btn" href="/commission">Commission Table</a>
+            <a class="btn" href="/commission">Commission Tablet</a>
             <a>|</a>
             <a  class="btn" href="/commissionOverView">Over View</a>
             <a>|</a>
             <a  class="btn btn-danger" href="/commissionAdmin">Commission Admin</a>
         </nav>
     </div>
-    <h2>Carts</h2>
+    <h2>Commission zone</h2>
 </template>
 
 <template name="commissionOverView">
@@ -76,7 +51,7 @@
         <nav>
             <a class="btn" href="/carts">commissioning zone</a>
             <a>|</a>
-            <a  class="btn" href="/commission">Commission Table</a>
+            <a  class="btn" href="/commission">Commission Tablet</a>
             <a>|</a>
             <a  class="btn btn-danger" href="/commissionAdmin">Commission Admin</a>
         </nav>

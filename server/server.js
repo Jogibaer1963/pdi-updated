@@ -127,17 +127,39 @@ if(Meteor.isServer){
             return supplyAreaList.find();
         });
 
+        Meteor.publish("machineCommTable", function() {
+            return machineCommTable.find();
+        });
+
     });
 
 
     Meteor.methods({
+
+        'removeCommMachine': function (removeMachine) {
+            machineCommTable.remove({_id: removeMachine});
+        },
+
+        'newCommMachine': function (newMachine) {
+            machineCommTable.insert({machineId: newMachine, commissionStatus: 0});
+             supplyAreaList.find({}).forEach(function(copy) {
+                machineCommTable.update({machineId: newMachine}, {$addToSet: {supplyArea: (copy)}})
+             });
+
+/*
+            checkPoints.find({status: 1, machineType: {$in: range}},
+                {fields: {errorDescription: 1, errorPos: 1, checkStatus: 1, _id: -1}}, {sort: {errorPos: 1}}).forEach(function (copy) {
+                MachineReady.update({_id: selectedPdiMachineId}, {$addToSet: {checkList: (copy)}});
+            });
+            */
+        },
 
         'removeSupply': function (removeSupplyArea) {
           supplyAreaList.remove({_id: removeSupplyArea});
         },
 
         'supplyArea': function (supplyArea) {
-          supplyAreaList.insert({supplyArea});
+          supplyAreaList.insert({supplyArea: supplyArea, supplyStatus: 0});
         },
 
         'submitToDo': function(toDoText, dateNow, needDate, toDoUser) {
