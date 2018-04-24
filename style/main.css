@@ -1218,6 +1218,10 @@ table.supplyTable {
 .chooseMachineTable {
   float: left; }
 
+.workCenter {
+  position: relative;
+  left: 2em; }
+
 .pickedMachineField {
   width: 2em; }
 

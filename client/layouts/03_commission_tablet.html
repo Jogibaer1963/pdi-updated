@@ -27,10 +27,10 @@
     <div class="chooseMachineTable">
         <h2 class="marginLeft">Machine</h2>
         <div class="">
-            <table class="blueTable supplyTable" cellpadding="10">
-                <thead>
+            <table class="blueTable supplyTable pdiMachineField" cellpadding="10">
+                <thead class="pdiMachineField">
                 <tr>
-                    <th class=""><strong>Machines</strong></th>
+                    <th class="pdiMachineField"><strong>Machines</strong></th>
                 </tr>
                 </thead>
                 <tbody>
@@ -44,7 +44,7 @@
         </div>
     </div>
     <div class="chooseSupplyTable">
-        <h2>Work center</h2>
+        <h2 class="workCenter">Work center</h2>
         <div class="supplyAreaTable">
             <table class="blueTable supplyTable" cellpadding="10">
                 <thead>
@@ -55,7 +55,7 @@
                 <tbody>
                 {{#each supplyAreaList}}
                     <tr class="supplyAreaList {{selectedArea}}">
-                        <td class="supplyAreaField">{{supplyArea}}</td>
+                        <td class="supplyAreaField">{{supplyArea}} {{supplyStatus}}</td>
                     </tr>
                 {{/each}}
                 </tbody>

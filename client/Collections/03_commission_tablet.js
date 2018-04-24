@@ -12,7 +12,6 @@ Template.commission.helpers ({
     'selectedMachine': function(){
         const commMachine = this._id;
         const selectedMachine = Session.get('selectedMachine');
-        console.log(selectedMachine);
         if (selectedMachine === commMachine) {
             return "selectedMachine";
         }
@@ -30,17 +29,15 @@ Template.commission.helpers ({
 
 Template.commission.events ({
 
-    'click .pickedMachine': (e) => {
+    'click .pickedMachine':function(e)  {
         e.preventDefault();
         const pickedMachineId = this._id;
-        console.log(pickedMachineId);
         Session.set('selectedMachine', pickedMachineId);
     },
 
-    'click .supplyAreaList': (e) => {
+    'click .supplyAreaList': function(e) {
         e.preventDefault();
         const pickedSupplyArea = this._id;
-        console.log(pickedSupplyArea);
         Session.set('selectedArea', pickedSupplyArea);
     },
 
