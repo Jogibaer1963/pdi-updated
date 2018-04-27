@@ -1,50 +1,53 @@
 <template name="commission">
-    <!--
-
-    -->
     {{#if currentUser}}
-        <div class="commNav">
-            {{> commNav}}
+        <div id="logo">
+            <img src="claas_logo.png" />
+        </div>
+        <div class="tabletCommissioning">
+            {{> commTablet}}
         </div>
     {{else}}
         {{> login}}
     {{/if}}
-    <div id="logo">
-        <img src="claas_logo.png" />
+</template>
+
+<template name="commTablet">
+ <html>
+    <style>
+         body{
+            background-color:black;
+          }
+    </style>
+       <div class="commissionInitials input-group input-group-lg">
+           <h3><label for="commInitial" class="machineTablet">Initials</label></h3>
+        <input type="text" class="form-control"  id="commInitial"  required>
     </div>
-    <br><br>
-    <div class="topNav">
-        <nav>
-            <a class="btn" href="/carts">Commissioning zone</a>
-            <a>|</a>
-            <a  class="btn" href="/commissionOverView">Over View</a>
-            <a>|</a>
-            <a  class="btn btn-danger" href="/commissionAdmin">Commission Admin</a>
-        </nav>
+    <div class="arrowDown">
+        <div class="chevron"></div>
+        <div class="chevron"></div>
+        <div class="chevron"></div>
     </div>
-    <h2 class="marginLeft">Commissioning Tablet</h2>
-    <br><br>
     <div class="chooseMachineTable">
-        <h2 class="marginLeft">Machine</h2>
         <div class="">
-            <table class="blueTable supplyTable pdiMachineField" cellpadding="10">
+            <table class="blueTable pdiMachineField " cellpadding="10">
                 <thead class="pdiMachineField">
                 <tr>
-                    <th class="pdiMachineField"><strong>Machines</strong></th>
+                    <th class="pdiMachineField "><strong>Machines</strong></th>
                 </tr>
                 </thead>
-                <tbody>
+                <tbody class="bodyHeight">
                 {{#each machineCommList}}
                     <tr class="pickedMachine {{selectedMachine}}">
-                        <td class="pickedMachine">{{machineId}}</td>
+                        <td class="pickedMachine machineTablet">{{machineId}}</td>
                     </tr>
                 {{/each}}
                 </tbody>
             </table>
         </div>
     </div>
-    <div class="chooseSupplyTable">
-        <h2 class="workCenter">Work center</h2>
+    <div class="buttonSupply">
+        <button class="btn btn-success btn-group-lg">Load Supply Area</button>
+    </div>
         <div class="supplyAreaTable">
             <table class="blueTable supplyTable" cellpadding="10">
                 <thead>
@@ -52,19 +55,43 @@
                     <th class="userLastLogin"><strong>Supply Area</strong></th>
                 </tr>
                 </thead>
-                <tbody>
+                <tbody class="supplyTableHeight">
                 {{#each supplyAreaList}}
                     <tr class="supplyAreaList {{selectedArea}}">
-                        <td class="supplyAreaField">{{supplyArea}} {{supplyStatus}}</td>
+                        <td class="supplyAreaField machineTablet">{{supplyArea}}</td>
                     </tr>
                 {{/each}}
                 </tbody>
             </table>
         </div>
-    </div>
-<div>
-    <button class="btn btn-success tabletStart" type="button">Commissioning Start</button>
-</div>
 
+    <div class="tabletMainField">
+       <div class="tabletCommissioning">
+          <h2>Start</h2>
+            <label class="switch">
+              <input type="checkbox">
+              <span class="slider round"></span>
+            </label>
+       </div>
+
+       <div class="tabletCommissioning">
+          <h2>Pause</h2>
+             <label class="switch">
+             <input type="checkbox">
+             <span class="slider round"></span>
+          </label>
+       </div>
+       <div class="tabletCommissioning">
+          <h2>Cancel</h2>
+            <label class="switch">
+            <input type="checkbox">
+            <span class="slider round"></span>
+          </label>
+       </div>
+       <div class="marginLeft commFinished">
+          <button class="btn btn-success btn-lg" type="button">Commission Finished</button>
+       </div>
+    </div>
+ </html>
 
 </template>

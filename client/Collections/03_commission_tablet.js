@@ -1,5 +1,5 @@
 
-Template.commission.helpers ({
+Template.commTablet.helpers ({
 
     supplyAreaList: function () {
         return supplyAreaList.find();
@@ -27,7 +27,7 @@ Template.commission.helpers ({
 
 });
 
-Template.commission.events ({
+Template.commTablet.events ({
 
     'click .pickedMachine':function(e)  {
         e.preventDefault();
@@ -46,7 +46,7 @@ Template.commission.events ({
         let commMachine = Session.get('commMachine');
         let commArea = Session.get('commArea');
      //   Meteor.call('commissionStart', commMachine, commArea);
-        FlowRouter.go('tabletStart');
+
 
 
 

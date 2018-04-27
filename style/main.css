@@ -1215,26 +1215,50 @@ table.supplyTable {
 .marginLeft {
   margin-left: 1em; }
 
-.chooseMachineTable {
-  float: left; }
+.machineTablet {
+  color: #71f323; }
 
-.workCenter {
+.chooseMachineTable {
+  float: left;
   position: relative;
-  left: 2em; }
+  top: 8em; }
 
 .pickedMachineField {
   width: 2em; }
 
+.buttonSupply {
+  position: absolute;
+  top: 20em;
+  left: 10em; }
+
+.bodyHeight {
+  height: 250px; }
+
 .supplyAreaTable {
   position: absolute;
-  left: 13em; }
+  top: 19em;
+  left: 23em; }
+
+.supplyTableHeight {
+  height: 65.1em; }
+
+.tabletMainField {
+  position: relative;
+  left: 30em; }
+
+.commissionInitials {
+  position: relative;
+  left: 1.5em;
+  width: 5em; }
 
 .tabletStart {
   position: relative;
   left: 25em; }
 
 .tabletCommissioning {
-  margin-left: 5em; }
+  position: relative;
+  top: 10em;
+  left: 2em; }
 
 .commFinished {
   position: relative;
@@ -1293,50 +1317,58 @@ input:checked + .slider:before {
 .slider.round:before {
   border-radius: 50%; }
 
-/*---------------------------------------------------- clock -------------------------------------*/
-.clock {
-  height: 20vh;
-  color: white;
-  font-size: 22vh;
-  font-family: sans-serif;
-  line-height: 20.4vh;
-  display: flex;
-  margin-left: 1em;
-  position: relative;
-  top: -1em;
-  left: 1em;
-  /*background: green;*/
-  overflow: hidden; }
-
-.clock::before, .clock::after {
-  content: '';
-  width: 7ch;
-  height: 3vh;
-  background: linear-gradient(to top, transparent, black);
+/*---------------------------  Arrow Down ----------------------*/
+.arrowDown {
   position: absolute;
-  z-index: 2; }
+  display: flex;
+  width: 100%;
+  height: 100vh;
+  left: 4em; }
 
-.clock::after {
-  bottom: 0;
-  background: linear-gradient(to bottom, transparent, black); }
+.chevron {
+  position: absolute;
+  width: 2.1rem;
+  height: 0.48rem;
+  opacity: 0;
+  transform: scale(0.5);
+  animation: move-chevron 3s ease-out infinite; }
 
-.clock > div {
-  display: flex; }
+.chevron:first-child {
+  animation: move-chevron 3s ease-out 1s infinite; }
 
-.tick {
-  line-height: 17vh; }
+.chevron:nth-child(2) {
+  animation: move-chevron 3s ease-out 2s infinite; }
 
-.tick-hidden {
-  opacity: 0; }
+.chevron:before,
+.chevron:after {
+  content: '';
+  position: absolute;
+  top: 0;
+  height: 100%;
+  width: 50%;
+  background: #dd7e1f; }
 
-.move {
-  animation: move linear 1s infinite; }
+.chevron:before {
+  left: 0;
+  transform: skewY(30deg); }
 
-@keyframes move {
-  from {
-    transform: translateY(0vh); }
-  to {
-    transform: translateY(-20vh); } }
+.chevron:after {
+  right: 0;
+  width: 50%;
+  transform: skewY(-30deg); }
+
+@keyframes move-chevron {
+  25% {
+    opacity: 1; }
+  33.3% {
+    opacity: 1;
+    transform: translateY(2.28rem); }
+  66.6% {
+    opacity: 1;
+    transform: translateY(3.12rem); }
+  100% {
+    opacity: 0;
+    transform: translateY(4.8rem) scale(0.5); } }
 .insideNavBar {
   margin-top: 25px; }
 
