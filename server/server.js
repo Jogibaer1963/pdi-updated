@@ -119,6 +119,10 @@ if(Meteor.isServer){
             return variants_C87.find();
         });
 
+        Meteor.publish("variants_C68", function() {
+            return variants_C68.find();
+        });
+
         Meteor.publish("toDoMessage", function() {
             return toDoMesssage.find();
         });
@@ -142,16 +146,9 @@ if(Meteor.isServer){
 
         'newCommMachine': function (newMachine) {
             machineCommTable.insert({machineId: newMachine, commissionStatus: 0});
-             supplyAreaList.find({}).forEach(function(copy) {
+             supplyAreaList.find({}, {sort: {supplyPosition: 1}}).forEach(function(copy) {
                 machineCommTable.update({machineId: newMachine}, {$addToSet: {supplyArea: (copy)}})
              });
-
-/*
-            checkPoints.find({status: 1, machineType: {$in: range}},
-                {fields: {errorDescription: 1, errorPos: 1, checkStatus: 1, _id: -1}}, {sort: {errorPos: 1}}).forEach(function (copy) {
-                MachineReady.update({_id: selectedPdiMachineId}, {$addToSet: {checkList: (copy)}});
-            });
-            */
         },
 
         'removeSupply': function (removeSupplyArea) {
@@ -179,7 +176,7 @@ if(Meteor.isServer){
                 let stringLength = variant_id.length;
                 let variantPart = variant_id.slice(15, (stringLength - 1));
                 let variantDescription = variantPart.replace(/'/g, '');
-                variants_C77.insert({variant: variantMarker,
+                variants_C68.insert({variant: variantMarker,
                     variantDescription: variantDescription,
                     imagePath: "http://",
                     status: 1 });

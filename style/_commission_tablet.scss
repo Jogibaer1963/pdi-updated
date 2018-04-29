@@ -1,4 +1,10 @@
 
+.commissionTablet {
+  position: absolute;
+  top: 20em;
+  left: 2em;
+}
+
 .marginLeft {
   margin-left: 1em;
 }
@@ -17,20 +23,13 @@
   width: 2em;
 }
 
-.buttonSupply {
-  position: absolute;
-  top: 20em;
-  left: 10em;
-}
-
-
 .bodyHeight {
   height: 250px;
 }
 
 .supplyAreaTable {
   position: absolute;
-  top: 19em;
+  top: -2em;
   left: 23em;
 }
 
@@ -38,10 +37,6 @@
   height: 65.1em;
 }
 
-.tabletMainField {
-  position: relative;
-  left: 30em;
-}
 
 .commissionInitials {
   position: relative;
@@ -49,81 +44,11 @@
   width: 5em;
 }
 
-.tabletStart {
+.supplyButtonField {
   position: relative;
-  left:25em;
-}
-
-
-.tabletCommissioning {
-  position: relative;
-  top: 10em;
-  left: 2em;
-}
-
-.commFinished {
-  position: relative;
-  top: 10em;
-  left: 77em;
-}
-
-/*-----------------------------------Switch--------------------------------------*/
-.switch {
-  position: relative;
-  display: inline-block;
-  width: 60px;
-  height: 34px;
-}
-
-/* Hide default HTML checkbox */
-.switch input {display:none;}
-
-/* The slider */
-.slider {
-  position: absolute;
-  cursor: pointer;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: #cc7616;
-  -webkit-transition: .4s;
-  transition: .4s;
-}
-
-.slider:before {
-  position: absolute;
-  content: "";
-  height: 26px;
-  width: 26px;
-  left: 4px;
-  bottom: 4px;
-  background-color: white;
-  -webkit-transition: .4s;
-  transition: .4s;
-}
-
-input:checked + .slider {
-  background-color: #71f323;
-}
-
-input:focus + .slider {
-  box-shadow: 0 0 1px #f37e09;
-}
-
-input:checked + .slider:before {
-  -webkit-transform: translateX(26px);
-  -ms-transform: translateX(26px);
-  transform: translateX(26px);
-}
-
-/* Rounded sliders */
-.slider.round {
-  border-radius: 34px;
-}
-
-.slider.round:before {
-  border-radius: 50%;
+  top: -10em;
+  left: 35em;
+  color: #D0E4F5;
 }
 
 /*---------------------------  Arrow Down ----------------------*/
@@ -133,9 +58,16 @@ $base: 0.6rem;
 .arrowDown {
   position: absolute;
   display: flex;
-  width: 100%;
-  height: 100vh;
   left: 4em;
+}
+
+.arrowSide {
+  transform: rotate(-90deg);
+  position: absolute;
+  top: 35em;
+  left: 14em;
+  display: flex;
+
 }
 
 .chevron {

@@ -4,7 +4,7 @@ Meteor.subscribe('machineCommTable');
 Template.commissionAdmin.helpers ({
 
     supplyAreaList: function () {
-        return supplyAreaList.find();
+        return supplyAreaList.find({}, {sort: {supplyPosition: 1}});
     },
 
     machineCommList: function () {
@@ -38,7 +38,7 @@ Template.commissionAdmin.events ({
         const pickedSupplyArea = this._id;
         Session.set('selectedArea', pickedSupplyArea);
     },
-
+  /*
    'submit .newSupplyArea': (e) => {
        e.preventDefault();
        const newSupplyArea = e.target.supplyArea.value;
@@ -51,7 +51,7 @@ Template.commissionAdmin.events ({
         const removableSupply = Session.get('selectedArea');
         Meteor.call('removeSupply', removableSupply);
     },
-
+  */
     'click .commissionMachine': function(e) {
         e.preventDefault();
         const pickedMachineId = this._id;

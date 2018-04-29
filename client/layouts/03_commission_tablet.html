@@ -18,36 +18,39 @@
             background-color:black;
           }
     </style>
-       <div class="commissionInitials input-group input-group-lg">
+    <div class="commissionTablet">
+        <div class="commissionInitials input-group input-group-lg">
            <h3><label for="commInitial" class="machineTablet">Initials</label></h3>
-        <input type="text" class="form-control"  id="commInitial"  required>
-    </div>
-    <div class="arrowDown">
-        <div class="chevron"></div>
-        <div class="chevron"></div>
-        <div class="chevron"></div>
-    </div>
-    <div class="chooseMachineTable">
-        <div class="">
-            <table class="blueTable pdiMachineField " cellpadding="10">
-                <thead class="pdiMachineField">
-                <tr>
-                    <th class="pdiMachineField "><strong>Machines</strong></th>
-                </tr>
-                </thead>
-                <tbody class="bodyHeight">
-                {{#each machineCommList}}
-                    <tr class="pickedMachine {{selectedMachine}}">
-                        <td class="pickedMachine machineTablet">{{machineId}}</td>
-                    </tr>
-                {{/each}}
-                </tbody>
-            </table>
+           <input type="text" class="form-control"  id="commInitial"  required>
         </div>
-    </div>
-    <div class="buttonSupply">
-        <button class="btn btn-success btn-group-lg">Load Supply Area</button>
-    </div>
+           <div class="arrowDown">
+              <div class="chevron"></div>
+              <div class="chevron"></div>
+              <div class="chevron"></div>
+           </div>
+        <div class="chooseMachineTable">
+           <div class="">
+              <table class="blueTable pdiMachineField " cellpadding="10" >
+                  <thead class="pdiMachineField">
+                    <tr>
+                      <th class="pdiMachineField "><strong>Machines</strong></th>
+                    </tr>
+                  </thead>
+                  <tbody class="bodyHeight" >
+                     {{#each machineCommList}}
+                        <tr class="pickedMachine {{selectedMachine}}">
+                          <td class="pickedMachine machineTablet" >{{machineId}}</td>
+                        </tr>
+                     {{/each}}
+                  </tbody>
+              </table>
+           </div>
+        </div>
+        <div class="arrowSide">
+          <div class="chevron"></div>
+          <div class="chevron"></div>
+          <div class="chevron"></div>
+        </div>
         <div class="supplyAreaTable">
             <table class="blueTable supplyTable" cellpadding="10">
                 <thead>
@@ -56,41 +59,21 @@
                 </tr>
                 </thead>
                 <tbody class="supplyTableHeight">
-                {{#each supplyAreaList}}
+                {{#with supplyAreaList}}
+                   {{#each supplyArea}}
                     <tr class="supplyAreaList {{selectedArea}}">
-                        <td class="supplyAreaField machineTablet">{{supplyArea}}</td>
+                        <td class="supplyAreaField machineTablet {{getCommStatus supplyStatus}}" style="background-color: {{getCommStatus supplyStatus}}">{{supplyArea}}</td>
                     </tr>
-                {{/each}}
+                       {{/each}}
+                {{/with}}
                 </tbody>
             </table>
         </div>
+        <div class="supplyButtonField">
+            <h1>Selected Machine:  {{selectedSupplyMachine}}</h1>
+           <h1>Selected Supply Area:  {{supplyStart}}</h1>
+        </div>
 
-    <div class="tabletMainField">
-       <div class="tabletCommissioning">
-          <h2>Start</h2>
-            <label class="switch">
-              <input type="checkbox">
-              <span class="slider round"></span>
-            </label>
-       </div>
-
-       <div class="tabletCommissioning">
-          <h2>Pause</h2>
-             <label class="switch">
-             <input type="checkbox">
-             <span class="slider round"></span>
-          </label>
-       </div>
-       <div class="tabletCommissioning">
-          <h2>Cancel</h2>
-            <label class="switch">
-            <input type="checkbox">
-            <span class="slider round"></span>
-          </label>
-       </div>
-       <div class="marginLeft commFinished">
-          <button class="btn btn-success btn-lg" type="button">Commission Finished</button>
-       </div>
     </div>
  </html>
 

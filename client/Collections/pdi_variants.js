@@ -4,6 +4,7 @@ Meteor.subscribe("variants_C77");
 Meteor.subscribe("variants_C89");
 Meteor.subscribe("variants_C88");
 Meteor.subscribe("variants_C87");
+Meteor.subscribe("variants_C68");
 
 
 if(Meteor.isClient) {
@@ -26,6 +27,8 @@ if(Meteor.isClient) {
                    return variants_C88.find();
                case 6:
                    return variants_C89.find();
+               case 7:
+                   return variants_C68.find();
            }
         },
 
@@ -80,6 +83,11 @@ if(Meteor.isClient) {
         'click .c89': () => {
             event.preventDefault();
             Session.set('variantType', 6);
+        },
+
+        'click .c68': () => {
+            event.preventDefault();
+            Session.set('variantType', 7);
         }
 
 
