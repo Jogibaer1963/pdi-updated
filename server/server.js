@@ -140,6 +140,21 @@ if(Meteor.isServer){
 
     Meteor.methods({
 
+        'startPicking': function (pickedMachineId, pickedSupplyAreaId, status, user) {
+            machineCommTable.update({_id: pickedMachineId, "supplyArea._id": pickedSupplyAreaId}, {$set: {"supplyArea.$.supplyStatus": status
+                                                             ,"supplyArea.$.pickerStart": user }} )
+        },
+
+        'finishedPicking': function (pickedMachineId, pickedSupplyAreaId, status, user) {
+            machineCommTable.update({_id: pickedMachineId, "supplyArea._id": pickedSupplyAreaId}, {$set: {"supplyArea.$.supplyStatus": status
+                    ,"supplyArea.$.pickerFinished": user }} )
+        },
+
+        'canceledPicking': function (pickedMachineId, pickedSupplyAreaId, status, user) {
+            machineCommTable.update({_id: pickedMachineId, "supplyArea._id": pickedSupplyAreaId}, {$set: {"supplyArea.$.supplyStatus": status
+                    ,"supplyArea.$.pickerCanceled": user }} )
+        },
+
         'removeCommMachine': function (removeMachine) {
             machineCommTable.remove({_id: removeMachine});
         },

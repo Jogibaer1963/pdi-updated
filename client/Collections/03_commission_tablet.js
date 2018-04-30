@@ -2,6 +2,9 @@
 Template.commTablet.helpers ({
 
 
+    userLoggedIn: () => {
+
+    },
 
     machineCommList: function () {
         return machineCommTable.find();
@@ -15,15 +18,18 @@ Template.commTablet.helpers ({
     selectedSupplyMachine: () => {
       const machineNr = Session.get('commMachine');
       if(machineNr) {
-          return machineCommTable.findOne({_id: machineNr}).machineId;
+          let pickedMachine = machineCommTable.findOne({_id: machineNr}).machineId;
+          Session.set('pickedMachine', pickedMachine);
+          return pickedMachine;
       }
-
     },
 
     supplyStart: () => {
         const supply = Session.get('selectedArea');
         if(supply) {
-            return supplyAreaList.findOne({_id: supply}).supplyArea;
+            let pickedArea = supplyAreaList.findOne({_id: supply}).supplyArea;
+            Session.set('pickedArea', pickedArea);
+            return pickedArea;
         }
     },
 
@@ -48,34 +54,47 @@ Template.commTablet.helpers ({
 
 Template.commTablet.events ({
 
-    'click .pickedMachine':function(e)  {
+    'click .pickedMachine': function(e)  {
         e.preventDefault();
         const pickedMachineId = this._id;
         Session.set('selectedMachine', pickedMachineId);
     },
 
-    'click .supplyAreaList':function(e)  {
+    'click .supplyAreaList': function(e) {
         e.preventDefault();
         const pickedSupplyArea = this._id;
         Session.set('selectedArea', pickedSupplyArea);
     },
 
 
-    'click .loadSupply': (e) => {
+    'click .commStart': function(e) {
         e.preventDefault();
-        const supplyMachine = Session.get('selectedMachine');
-        console.log(supplyMachine);
+        const userStart = Meteor.user().username;
+        let status = 2;
+        let pickedMachineId = Session.get('selectedMachine');
+        let pickedSupplyAreaId = Session.get('selectedArea');
+        Meteor.call('startPicking', pickedMachineId, pickedSupplyAreaId, status, userStart);
 
     },
 
-    'click .tabletStart': (e) => {
+    'click .commFinished': function(e) {
         e.preventDefault();
-        let commMachine = Session.get('commMachine');
-        let commArea = Session.get('commArea');
-        //   Meteor.call('commissionStart', commMachine, commArea);
+        const userFinished = Meteor.user().username;
+        let status = 1;
+        let pickedMachineId = Session.get('selectedMachine');
+        let pickedSupplyAreaId = Session.get('selectedArea');
+        Meteor.call('finishedPicking', pickedMachineId, pickedSupplyAreaId, status, userFinished);
+
+    },
+
+    'click .commCanceled': function(e) {
+        e.preventDefault();
+        const userCanceled = Meteor.user().username;
+        let status = 0;
+        let pickedMachineId = Session.get('selectedMachine');
+        let pickedSupplyAreaId = Session.get('selectedArea');
+        Meteor.call('canceledPicking', pickedMachineId, pickedSupplyAreaId, status, userCanceled);
+
     }
-
-
-
 
 });

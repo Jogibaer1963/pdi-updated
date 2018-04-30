@@ -20,8 +20,9 @@
     </style>
     <div class="commissionTablet">
         <div class="commissionInitials input-group input-group-lg">
-           <h3><label for="commInitial" class="machineTablet">Initials</label></h3>
-           <input type="text" class="form-control"  id="commInitial"  required>
+           <h3 class="machineTablet">Tablet User</h3>
+            <h3 class="tabletUser">{{currentUser.username}}</h3>
+
         </div>
            <div class="arrowDown">
               <div class="chevron"></div>
@@ -69,11 +70,27 @@
                 </tbody>
             </table>
         </div>
-        <div class="supplyButtonField">
-            <h1>Selected Machine:  {{selectedSupplyMachine}}</h1>
-           <h1>Selected Supply Area:  {{supplyStart}}</h1>
-        </div>
-
+        <div class="supplyExecuteField">
+          <h1>Selected Machine:  {{selectedSupplyMachine}}</h1>
+          <h1>Selected Supply Area:  {{supplyStart}}</h1>
+            <div class="supplyButtonField" >
+               <button class="btn btn-lg btn-success commStart">Commissioning Start</button>
+               <button class="btn btn-lg btn-primary commPause">Commissioning Pause</button>
+               <button class="btn btn-lg btn-primary commResume">Commissioning Resume</button>
+               <button class="btn btn-lg btn-success commFinished">Commissioning Finished</button>
+                <div class="cancellationRequest">
+                <form class="form-inline">
+                    <label for="cancelRequest"></label>
+                    <input type="text" class="form-control form-control-lg cancelRequest"
+                           id="cancelRequest"
+                           name="cancelRequest"
+                           placeholder="Reason for Cancellation"
+                           required="required" />
+                </form>
+                    <button type="submit" class="btn btn-lg btn-danger commCanceled">Commissioning Canceled</button>
+                </div>
+            </div>
+      </div>
     </div>
  </html>
 

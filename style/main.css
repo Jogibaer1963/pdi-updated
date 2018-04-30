@@ -1221,7 +1221,12 @@ table.supplyTable {
   margin-left: 1em; }
 
 .machineTablet {
-  color: #71f323; }
+  color: #71f323;
+  white-space: nowrap; }
+
+.tabletUser {
+  color: #D0E4F5;
+  margin-left: 1em; }
 
 .chooseMachineTable {
   float: left;
@@ -1247,11 +1252,38 @@ table.supplyTable {
   left: 1.5em;
   width: 5em; }
 
-.supplyButtonField {
+.supplyExecuteField {
   position: relative;
   top: -10em;
   left: 35em;
   color: #D0E4F5; }
+
+.supplyButtonField {
+  position: relative;
+  top: 5em; }
+
+.commStart {
+  position: relative;
+  top: 2.5em; }
+
+.commPause {
+  margin-left: 1em; }
+
+.commResume {
+  position: relative;
+  top: 5em;
+  left: -12.4em; }
+
+.commFinished {
+  position: relative;
+  left: 26em; }
+
+.cancellationRequest {
+  position: relative;
+  top: 15em; }
+
+.commCanceled {
+  margin-top: 1em; }
 
 /*---------------------------  Arrow Down ----------------------*/
 .arrowDown {
