@@ -88,7 +88,8 @@ if (Meteor.isClient) {
 
         shippList: function () {
             // Order of shipping date
-            return MachineReady.find({machineId: {$gt:'C0000000'}}, {sort: {date: -1}});
+            return MachineReady.find({machineId: {$gt:'C0000000'}},
+                {sort: {date: -1}});
         },
 
         'selected': function() {

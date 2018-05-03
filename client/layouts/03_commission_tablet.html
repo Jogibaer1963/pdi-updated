@@ -37,7 +37,7 @@
                       <th class="pdiMachineField "><strong>Machines</strong></th>
                     </tr>
                   </thead>
-                  <tbody class="bodyHeight" >
+                  <tbody class="bodyHeight {{inActive_1}} {{inActive_2}}  {{inActive_3}}" >
                      {{#each machineCommList}}
                         <tr class="pickedMachine {{selectedMachine}}">
                           <td class="pickedMachine machineTablet" >{{machineId}}</td>
@@ -59,7 +59,7 @@
                     <th class="userLastLogin"><strong>Supply Area</strong></th>
                 </tr>
                 </thead>
-                <tbody class="supplyTableHeight">
+                <tbody class="supplyTableHeight {{inActive_1}} {{inActive_2}}  {{inActive_3}}">
                 {{#with supplyAreaList}}
                    {{#each supplyArea}}
                     <tr class="supplyAreaList {{selectedArea}}">
@@ -74,20 +74,21 @@
           <h1>Selected Machine:  {{selectedSupplyMachine}}</h1>
           <h1>Selected Supply Area:  {{supplyStart}}</h1>
             <div class="supplyButtonField" >
-               <button class="btn btn-lg btn-success commStart">Commissioning Start</button>
-               <button class="btn btn-lg btn-primary commPause">Commissioning Pause</button>
-               <button class="btn btn-lg btn-primary commResume">Commissioning Resume</button>
-               <button class="btn btn-lg btn-success commFinished">Commissioning Finished</button>
+               <button type="button" class="btn btn-lg btn-success commStart {{inActive_1}} {{inActive_2}}  {{inActive_3}}">Commissioning Start</button>
+               <button class="btn btn-lg btn-primary commPause {{inActive_2}} {{inActive_4}} {{inActive_0}}">Commissioning Pause</button>
+               <button class="btn btn-lg btn-primary commResume {{inActive_1}} {{inActive_3}} {{inActive_4}} {{inActive_0}}">Commissioning Resume</button>
+               <button class="btn btn-lg btn-success commFinished {{inActive_2}} {{inActive_4}} {{inActive_0}}">Commissioning Finished</button>
                 <div class="cancellationRequest">
-                <form class="form-inline">
+                <form class="form-inline cancelForm">
                     <label for="cancelRequest"></label>
                     <input type="text" class="form-control form-control-lg cancelRequest"
                            id="cancelRequest"
                            name="cancelRequest"
                            placeholder="Reason for Cancellation"
-                           required="required" />
-                </form>
+                           required="required"/>
                     <button type="submit" class="btn btn-lg btn-danger commCanceled">Commissioning Canceled</button>
+                </form>
+
                 </div>
             </div>
       </div>

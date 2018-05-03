@@ -81,8 +81,15 @@
 
 //  Inactive Buttons
 
+.inActiveButton {
+  opacity: .5;
+  pointer-events: none;
+}
 
-
+.activeButton {
+  opacity: 1;
+  pointer-events: auto;
+}
 
 .inActive {
   background: repeating-linear-gradient(

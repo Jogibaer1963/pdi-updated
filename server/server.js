@@ -140,19 +140,49 @@ if(Meteor.isServer){
 
     Meteor.methods({
 
-        'startPicking': function (pickedMachineId, pickedSupplyAreaId, status, user) {
-            machineCommTable.update({_id: pickedMachineId, "supplyArea._id": pickedSupplyAreaId}, {$set: {"supplyArea.$.supplyStatus": status
-                                                             ,"supplyArea.$.pickerStart": user }} )
+        'startPicking': function (pickedMachineId, pickedSupplyAreaId, status, user, pickingStart, dateStartNow) {
+            machineCommTable.update({_id: pickedMachineId, "supplyArea._id": pickedSupplyAreaId},
+                                    {$set: {"supplyArea.$.supplyStatus": status,
+                                            "supplyArea.$.pickerStart": user,
+                                            "supplyArea.$.pickingStart": pickingStart,
+                                            "supplyArea.$.pickingDateAndTime": dateStartNow}} )
         },
 
-        'finishedPicking': function (pickedMachineId, pickedSupplyAreaId, status, user) {
-            machineCommTable.update({_id: pickedMachineId, "supplyArea._id": pickedSupplyAreaId}, {$set: {"supplyArea.$.supplyStatus": status
-                    ,"supplyArea.$.pickerFinished": user }} )
+        'finishedPicking': function (pickedMachineId, pickedSupplyAreaId, status, user, pickingTime, dateEndNow, pickingEnd) {
+            machineCommTable.update({_id: pickedMachineId, "supplyArea._id": pickedSupplyAreaId},
+                                    {$set: {"supplyArea.$.supplyStatus": status,
+                                            "supplyArea.$.pickerFinished": user,
+                                            "supplyArea.$.pickingTime": pickingTime,
+                                            "supplyArea.$.pickingEnd": pickingEnd,
+                                            "supplyArea.$.pickingEndDateAndTime": dateEndNow}} )
         },
 
-        'canceledPicking': function (pickedMachineId, pickedSupplyAreaId, status, user) {
-            machineCommTable.update({_id: pickedMachineId, "supplyArea._id": pickedSupplyAreaId}, {$set: {"supplyArea.$.supplyStatus": status
-                    ,"supplyArea.$.pickerCanceled": user }} )
+        'canceledPicking': function (pickedMachineId, pickedSupplyAreaId, status, user,cancellationReason) {
+            machineCommTable.update({_id: pickedMachineId, "supplyArea._id": pickedSupplyAreaId},
+                                    {$set: {"supplyArea.$.supplyStatus": status,
+                                            "supplyArea.$.pickerCanceled": user,
+                                            "supplyArea.$.pickerCanceledReason": cancellationReason,
+                                            "supplyArea.$.pickingStart": '',
+                                            "supplyArea.$.pickingDateAndTime": '',
+                                            "supplyArea.$.pickingEnd": '',
+                                            "supplyArea.$.pickingTime": '',
+                                            "supplyArea.$.pickingEndDateAndTime": '',
+                                            "supplyArea.$.pickingPauseStart": '',
+                                            "supplyArea.$.pickingPauseEnd": ''}} )
+        },
+
+        'pausePickingStart': function (pickedMachineId, pickedSupplyAreaId, status, pickingPauseStart) {
+             machineCommTable.update({_id: pickedMachineId, "supplyArea._id": pickedSupplyAreaId},
+                                    {$set: {"supplyArea.$.supplyStatus": status,
+                                        "supplyArea.$.pickingPauseStart": pickingPauseStart }})
+
+        },
+
+        'pausePickingEnd': function (pickedMachineId, pickedSupplyAreaId, status, pickingPauseEnd) {
+            machineCommTable.update({_id: pickedMachineId, "supplyArea._id": pickedSupplyAreaId},
+                                    {$set: {"supplyArea.$.supplyStatus": status,
+                                            "supplyArea.$.pickingPauseEnd": pickingPauseEnd}})
+
         },
 
         'removeCommMachine': function (removeMachine) {
@@ -597,9 +627,9 @@ if(Meteor.isServer){
         },
 
         'pdiMachineOmm': function(selectedPdiMachineId, loggedInUser, fuelMe, ommMain, ommSupp,
-                                  ommUnload,ommProfiCam, ommCebis, ommTouch, ommTerra, ommDual) {
+                                  ommUnload,ommProfiCam, ommCebis, ommTouch, ommTerra, ommDuals) {
             MachineReady.update({_id: selectedPdiMachineId}, {$set: {omms: {user: loggedInUser, fuelStart: fuelMe,
-                    ommMain, ommSupp, ommUnload,ommProfiCam, ommCebis, ommTouch, ommTerra, ommDual}}});
+                    ommMain, ommSupp, ommUnload,ommProfiCam, ommCebis, ommTouch, ommTerra, ommDuals}}});
         },
 
         'fuelAfterPdi': function (selectedPdiMachine, fuelAfter) {
