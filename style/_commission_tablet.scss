@@ -58,28 +58,37 @@
 }
 
 .supplyButtonField {
-  position: relative;
-  top: 5em;
+  position: absolute;
+  top: 20em;
+  left: 15em;
 }
 
 .commStart {
-  position: relative;
-  top: 2.5em;
+  float: left;
 }
 
 .commPause {
-  margin-left: 1em;
+  float: left;
+  position: absolute;
+  margin-left: 3em;
 }
 
 .commResume {
-  position: relative;
+  float: left;
+  position: absolute;
   top: 5em;
-  left: -12.4em;
+  left: 13.6em;
 }
 
 .commFinished {
-  position: relative;
-  left:26em;
+  float: left;
+  position: absolute;
+  left: 28em;
+}
+
+.cancelRequest {
+  width: 240px;
+  margin-bottom: 10px;
 }
 
 .cancellationRequest {
@@ -87,8 +96,32 @@
   top: 15em;
 }
 
+.tabletHeader {
+  position: absolute;
+  top: -10em;
+  width: 21em;
+  left: 15em;
+}
 
+.machineIdHeader {
+  position: absolute;
+  top: -0.5em;
+  left: 3em;
+  font-size: 80px;
+}
 
+.supplyIdHeader {
+  position: absolute;
+  top: 1em;
+  left: 3em;
+  font-size: 80px;
+}
+
+.textSupply {
+  position: absolute;
+  top: 3em;
+
+}
 
 
 
