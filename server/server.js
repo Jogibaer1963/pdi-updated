@@ -160,7 +160,9 @@ if(Meteor.isServer){
                                             "supplyAreaList.$.pickerFinished": user,
                                             "supplyAreaList.$.pickingTime": pickingTime,
                                             "supplyAreaList.$.pickingEnd": pickingEnd,
-                                            "supplyAreaList.$.pickingEndDateAndTime": dateEndNow}} )
+                                            "supplyAreaList.$.pickingEndDateAndTime": dateEndNow}},
+                                    );
+            machineCommTable.update({_id: pickedMachineId}, {$inc: {commissionStatus: 1}});
         },
 
         'canceledPicking': function (pickedMachineId, pickedSupplyAreaId, status, user,cancellationReason) {

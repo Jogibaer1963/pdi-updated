@@ -6,7 +6,7 @@ Template.commTablet.helpers ({
     },
 
     machineCommList: function () {
-        return machineCommTable.find();
+        return machineCommTable.find({commissionStatus: {$lt: 25}});
     },
 
     supplyAreaShow: function() {

@@ -4,7 +4,7 @@ Meteor.subscribe('machineCommTable');
 Template.commissionOverView.helpers ({
 
     machineCommList: function () {
-        return machineCommTable.find();
+        return machineCommTable.find({}, {sort: {commissionStatus: 1}});
     },
 
 
