@@ -635,9 +635,9 @@ if(Meteor.isServer){
         },
 
         'pdiMachineOmm': function(selectedPdiMachineId, loggedInUser, fuelMe, ommMain, ommSupp,
-                                  ommUnload,ommProfiCam, ommCebis, ommTouch, ommTerra, ommDuals) {
+                                  ommUnload,ommProfiCam, ommCebis, ommCebisTouch, ommTerra, ommDuals) {
             MachineReady.update({_id: selectedPdiMachineId}, {$set: {omms: {user: loggedInUser, fuelStart: fuelMe,
-                    ommMain, ommSupp, ommUnload,ommProfiCam, ommCebis, ommTouch, ommTerra, ommDuals}}});
+                    ommMain, ommSupp, ommUnload,ommProfiCam, ommCebis, ommCebisTouch, ommTerra, ommDuals}}});
         },
 
         'fuelAfterPdi': function (selectedPdiMachine, fuelAfter) {
