@@ -1385,7 +1385,7 @@ table.supplyTable {
 
 .machineCommissionTable {
   position: absolute;
-  left: 30em; }
+  left: 40em; }
 
 .commMachineField {
   width: 5em; }
@@ -1396,6 +1396,9 @@ table.supplyTable {
   top: -2.4em; }
 
 /*--------------------------- table head down wards --------------------------------*/
+.tableSizeDate {
+  width: 8em; }
+
 /*---------------------------- rotated table head ----------------------------------*/
 .table-header-rotated th.row-header {
   width: auto; }

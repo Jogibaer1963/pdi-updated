@@ -60,8 +60,8 @@
                 </tr>
                 </thead>
                 <tbody class="supplyTableHeight {{inActive_1}} {{inActive_2}}  {{inActive_3}}">
-                {{#with supplyAreaList}}
-                   {{#each supplyArea}}
+                {{#with supplyAreaShow}}
+                   {{#each supplyAreaList}}
                     <tr class="supplyAreaList {{selectedArea}}">
                         <td class="supplyAreaField machineTablet {{getCommStatus supplyStatus}}" style="background-color: {{getCommStatus supplyStatus}}">{{supplyArea}}</td>
                     </tr>

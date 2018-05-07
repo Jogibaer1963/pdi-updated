@@ -9,7 +9,7 @@ Template.commTablet.helpers ({
         return machineCommTable.find();
     },
 
-    supplyAreaList: function() {
+    supplyAreaShow: function() {
         const commMachine = Session.get('selectedMachine');
         return machineCommTable.findOne({_id: commMachine});
     },
