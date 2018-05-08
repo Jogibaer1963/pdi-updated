@@ -136,16 +136,17 @@
          </form>
             <button class="btn btn-danger deleteMachine" type="button">Delete marked machine</button>
         </div>
-        <div class="confirmedShipDate">
-            <h5 class="confirmedDate">!! Confirmed Ship Date !!</h5>
-        </div>
         <div class="buttonField">
+            <h5 class="confirmedDate">!! Confirmed Ship Date !!</h5>
             <form class="truckDate">
                 <button type="submit" class="btn btn-success addTruck">Truck Ordered</button>
                 <input class="shipDate" type="date" name="inputDate" placeholder="Confirmed Ship Date" />
             </form>
             <br>
             <button type="submit" class="btn btn-danger removeTruck">Remove Truck</button>
+        </div>
+        <div>
+            <button type="button" class="btn btn-info toggleShippedAll">Toggle All / Not Shipped</button>
         </div>
     </div>
         <table class="shippingMachinesTable blueTable" cellpadding="10">

@@ -1,3 +1,6 @@
+Session.set('toggleShipList', 0);
+
+
 if (Meteor.isClient) {
 
     Template.inputMachine.events({
@@ -74,6 +77,16 @@ if (Meteor.isClient) {
             const truckStatus = 0;
             const machineId = Session.get('selectedMachine');
             Meteor.call('truckRemoved', machineId, truckStatus);
+        },
+
+        'click .toggleShippedAll': () => {
+            event.preventDefault();
+            let choice = Session.get('toggleShipList');
+            if(choice === 0) {
+                Session.set('toggleShipList', 1)
+            } else {
+                Session.set('toggleShipList', 0);
+            }
         }
 
 
@@ -88,8 +101,13 @@ if (Meteor.isClient) {
 
         shippList: function () {
             // Order of shipping date
-            return MachineReady.find({machineId: {$gt:'C0000000'}},
-                {sort: {date: -1}});
+            let shipToggleList = Session.get('toggleShipList');
+            switch(shipToggleList) {
+                case 1:
+                    return MachineReady.find({machineId: {$gt:'C0000000'}, shipStatus: 0}, {sort: {date: -1}});
+                case 0:
+                    return MachineReady.find({machineId: {$gt:'C0000000'}}, {sort: {date: -1}});
+            }
         },
 
         'selected': function() {

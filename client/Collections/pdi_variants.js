@@ -16,19 +16,19 @@ if(Meteor.isClient) {
            let type = Session.get('variantType');
            switch(type) {
                case 1:
-                   return variants_C77.find();
+                   return variants_C77.find({}, {sort: {variant: 1}});
                case 2:
-                   return variants_C78.find();
+                   return variants_C78.find({}, {sort: {variant: 1}});
                case 3:
-                   return variants_C79.find();
+                   return variants_C79.find({}, {sort: {variant: 1}});
                case 4:
-                   return variants_C87.find();
+                   return variants_C87.find({}, {sort: {variant: 1}});
                case 5:
-                   return variants_C88.find();
+                   return variants_C88.find({}, {sort: {variant: 1}});
                case 6:
-                   return variants_C89.find();
+                   return variants_C89.find({}, {sort: {variant: 1}});
                case 7:
-                   return variants_C68.find();
+                   return variants_C68.find({}, {sort: {variant: 1}});
            }
         },
 

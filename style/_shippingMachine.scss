@@ -7,7 +7,7 @@
 
 .newMachineShipping {
   position: relative;
-  top: 8em;
+  top: 3em;
   margin-left: 2.5em;
  }
 
@@ -41,9 +41,15 @@
   margin-top: 50px ;
 }
 
+.toggleShippedAll {
+  position: absolute;
+  top: 16em;
+  left: 35em;
+}
+
 .shippingMachinesTable {
   position: relative;
-  top: 5em;
+  top: -9em;
 }
 
 .shippingTable {
@@ -56,7 +62,8 @@
 
 .find_delete_button {
   position: relative;
-  top: 3em;
+  top: -18em;
+  left: 80em;
   }
 
 .find_Machine {
@@ -66,7 +73,8 @@
 .buttonField {
   margin-left: 30em;
   position: relative;
-  top: -5em;
+  top: -15em;
+  left: 50em;
 }
 
 .buttonEditField {

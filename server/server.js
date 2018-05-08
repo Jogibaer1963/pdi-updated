@@ -497,7 +497,7 @@ if(Meteor.isServer){
 
             let type = selectedPdiMachineNr.slice(0,3);
             let newVariant = 'variants_' + type;
-            let variantsList = Mongo.Collection.get(newVariant).find().fetch();
+            let variantsList = Mongo.Collection.get(newVariant).find({}).fetch();
             variantsList.forEach((variantValue, k) => {
               variantMD[k] = variantValue.variant;
               variantItem[k] = variantValue.variantDescription;
@@ -536,7 +536,7 @@ if(Meteor.isServer){
                 let siName = siTableRead[k].siNumber;
                 let resultSi = siMd.findOne({_id: siName},
                     {"machineList.machine": {$eq: selectedPdiMachineNr}}, {"machineList.$": 1});
-                console.log(resultSi, siName);
+             //   console.log(resultSi, siName);
                /*
                     for (i = 0; i < resultSi.length; i++) {
                           if (resultSi[i].siStatus < 1) {
