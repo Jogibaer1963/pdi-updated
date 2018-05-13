@@ -59,18 +59,6 @@ table.blueTable tbody td {
   font-size: 13px;
   word-wrap: break-word; }
 
-/*
-:root {
-  --tableBackGroundColor: #b7d9e4;
-}
-
-
-
-table.blueTable tr:nth-child(even) {
-    background-color: var(--tableBackGroundColor);
-}
-
-*/
 table.blueTable thead {
   background: #1C6EA4;
   border-bottom: 2px solid #444444; }
@@ -1155,10 +1143,17 @@ table.supplyTable {
 
 .machineCommissionTable {
   position: absolute;
+  top: 25em;
   left: 20em; }
 
 .commMachineField {
   width: 5em; }
+
+.overViewTable {
+  position: absolute;
+  top: 20em;
+  left: 2em;
+}
 
 .removeMachine {
   position: relative;

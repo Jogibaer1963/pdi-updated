@@ -197,11 +197,19 @@ if(Meteor.isServer){
             machineCommTable.remove({_id: removeMachine});
         },
 
-        'newCommMachine': function (newMachine) {
-            machineCommTable.insert({machineId: newMachine, commissionStatus: 0});
+        'newCommMachine': function (newMachine, inLineDate) {
+            machineCommTable.insert({machineId: newMachine, inLineDate: inLineDate, commissionStatus: 0});
              supplyAreaList.find({}, {sort: {supplyPosition: 1}}).forEach(function(copy) {
                 machineCommTable.update({machineId: newMachine}, {$addToSet: {supplyAreaList: (copy)}})
              });
+        },
+
+        'doubleMachine': (newMachine) => {
+                if(typeof machineCommTable.findOne({machineId: newMachine}) === 'undefined') {
+
+                } else {
+                    return newMachine;
+                  }
         },
 
         'removeSupply': function (removeSupplyArea) {

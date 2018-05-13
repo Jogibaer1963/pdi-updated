@@ -1,28 +1,31 @@
-@import "admin";
+@import 'admin';
 @import 'login';
-@import "tables";
-@import "overView";
-@import "machineLocation";
-@import "shippingMachine";
-@import "shippingHeaders";
-@import "maryView";
-@import "glowingBox";
-@import "pdiCheckList";
-@import "pdi_overView";
-@import "pdi_variants";
-@import "pdiMachineInspect";
-@import "washList";
-@import "pdiRepairList";
-@import "siTable";
-@import "repairMachine";
-@import "readyShipList";
-@import "mainLayout";
-@import "buttonNotWorking";
-@import "pdi_Print_Out";
-@import "toDoList";
-@import "commission";
-@import "commission_tablet";
-@import "commissionOverView";
+@import 'tables';
+@import 'overView';
+@import 'machineLocation';
+@import 'shippingMachine';
+@import 'shippingHeaders';
+@import 'maryView';
+@import 'glowingBox';
+@import 'pdiCheckList';
+@import 'pdi_overView';
+@import 'pdi_variants';
+@import 'pdiMachineInspect';
+@import 'washList';
+@import 'pdiRepairList';
+@import 'siTable';
+@import 'repairMachine';
+@import 'readyShipList';
+@import 'mainLayout';
+@import 'buttonNotWorking';
+@import 'pdi_Print_Out';
+@import 'toDoList';
+@import 'commission';
+@import 'commission_tablet';
+@import 'commissionOverView';
+
+
+
 
 
 
@@ -47,15 +50,15 @@
 }
 
 .selected {
-  background-color: #978f93
+  background-color: #978f93;
 }
 
 .selectedMachine {
-  background-color: #978f93
+  background-color: #978f93;
 }
 
 .selectedArea {
-  background-color: #978f93
+  background-color: #978f93;
 }
 
 .selectedBackgroundGreen {
@@ -77,7 +80,7 @@
 .mainLayout {
   position: relative;
   left: 560px;
-  color: black;
+  color: #0000;
 }
 
 //  Inactive Buttons
