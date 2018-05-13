@@ -4,9 +4,19 @@ Meteor.subscribe('machineCommTable');
 Template.commissionOverView.helpers ({
 
     machineCommList: function () {
-        return machineCommTable.find({}, {sort: {commissionStatus: 1}});
+        return machineCommTable.find({}, {sort: {commissionStatus: 1, inLineDate: -1}});
     },
 
+    machineNr: () => {
+        let id = Session.get('selectedMachine');
+        if(id) {
+            return machineCommTable.findOne({_id: id}).machineId;
+          }
+    },
+
+    alarmMachine: () => {
+      return Session.get('alarm');
+    },
 
     L4MSB020: () => {
         let machineId = Session.get('selectedMachine');
@@ -16,7 +26,7 @@ Template.commissionOverView.helpers ({
             let pickerStart = Session.get('pickerStart' + pickingArea);
             let pickingDuration = Session.get('pickingDuration' + pickingArea);
             let pickingDateAndTime = Session.get('pickingDateAndTime' + pickingArea);
-            return {pickingDateAndTime, pickingDuration, pickerStart};
+            return {machineId, pickingDateAndTime, pickingDuration, pickerStart};
         }
     },
 
@@ -28,7 +38,7 @@ Template.commissionOverView.helpers ({
             let pickerStart = Session.get('pickerStart' + pickingArea);
             let pickingDuration = Session.get('pickingDuration' + pickingArea);
             let pickingDateAndTime = Session.get('pickingDateAndTime' + pickingArea);
-            return {pickingDateAndTime, pickingDuration, pickerStart};
+            return {machineId, pickingDateAndTime, pickingDuration, pickerStart};
         }
     },
 
@@ -365,9 +375,20 @@ Template.commissionOverView.events ({
 
     'submit .newCommMachine': (e) => {
         e.preventDefault();
+        Session.set('alarm', '');
         const newMachine = e.target.newMachine.value;
-        Meteor.call('newCommMachine', newMachine);
+        const inLineDate = e.target.newDate.value;
+         if(newMachine) {
+             Meteor.call('doubleMachine', newMachine, function (err, response) {
+                 if (response) {
+                     Session.set('alarm', 'Attention, Machine already exists')
+                 } else {
+                     Meteor.call('newCommMachine', newMachine, inLineDate);
+                 }
+             });
+           }
         e.target.newMachine.value = '';
+        e.target.newDate.value = '';
     },
 
     'click .removeMachine': function (e) {

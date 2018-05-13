@@ -7,34 +7,24 @@
         <div class="commNav">
             {{> commNav}}
         </div>
+        {{#if isInRole 'admin'}}
+            <div style="position: relative; top: 13em; left:41em;">
+               {{> adminButton}}
+            </div>
+        {{/if}}
     {{else}}
         {{> login}}
     {{/if}}
     <div id="logo">
         <img src="claas_logo.png" />
     </div>
-    <br><br>
-    <div class="topNav">
-        <nav>
-            <a  class="btn" href="/commission">Commission Tablet</a>
-        </nav>
-    </div>
-    <h2>Commission Over View</h2>
-
     <div class="machineCommissionTable">
-        <form class="newCommMachine">
-            <label for="newMachine" >Adding Machine</label>
-            <br>
-            <input type="text" name="newMachine" id="newMachine" placeholder="Machine Number" required>
-            <br><br>
-            <button class="btn btn-success" type="submit">Submit</button>
-        </form>
-        <button class="btn btn-danger removeMachine" type="button">Delete</button>
         <div class="">
-            <table class="table table-striped table-header-rotated">
+            <table class="table table-header-rotated">
                 <thead>
                 <tr>
-                    <th class=""><strong>Machine Id</strong></th>
+                    <th class="pdiMachineField"><strong>Machine Id</strong></th>
+                    <th class="pdiShipDate"><strong>Date In Line</strong></th>
                     <th class="rotate-45"><div><span>L4MSB020</span></div></th>
                     <th class="rotate-45"><div><span>L4MSB030</span></div></th>
                     <th class="rotate-45"><div><span>L4MSB040</span></div></th>
@@ -67,7 +57,8 @@
                 <tbody>
                 {{#each machineCommList}}
                     <tr class="commissionMachine {{selectedMachine}}">
-                        <td class="commMachineField">{{machineId}}</td>
+                        <td class="pdiMachineField">{{machineId}}</td>
+                        <td class="pdiShipDate">{{inLineDate}}</td>
                         {{#each supplyAreaList}}
                             <td class="{{getStatusColor supplyStatus}}" style="background-color:{{getStatusColor supplyStatus}}; color:{{getStatusColor supplyStatus}}" >{{supplyStatus}}</td>
                         {{/each}}
@@ -78,11 +69,12 @@
             </table>
         </div>
     </div>
-    <div>
-        <table>
+    <div >
+        <h2>Commission Over View</h2>
+        <table  class="commOverView">
             <caption>Picking Result of single machine</caption>
             <tr>
-                <th scope="col">{{machineId}}</th>
+                <th scope="col"><h3><strong>{{machineNr}}</strong></h3></th>
                 <th scope="col">Date</th>
                 <th scope="col">Duration</th>
                 <th scope="col">Picker</th>
@@ -299,4 +291,19 @@
             </tr>
         </table>
     </div>
+</template>
+
+<template name="adminButton">
+        <h3><strong>{{alarmMachine}}</strong></h3>
+        <form class="newCommMachine">
+            <label for="newMachine" >Adding Machine&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Date in Line</label>
+            <br>
+            <input type="text" name="newMachine" id="newMachine" placeholder="Machine Number" required>
+            <label for="newDate" class="inLineDate" ></label>
+            <input type="date" name="newDate" id="newDate" required>
+            <br><br>
+            <button class="btn btn-success" type="submit">Submit</button>
+        </form>
+        <button class="btn btn-danger removeMachine" type="button">Delete</button>
 </template>

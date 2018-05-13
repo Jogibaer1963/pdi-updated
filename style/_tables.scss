@@ -34,34 +34,25 @@ table.blueTable td, table.blueTable th {
 }
 
 table.blueTable tbody td {
-    font-size: 13px;
-    word-wrap: break-word;
+  font-size: 13px;
+  word-wrap: break-word;
 }
 
 
-/*
-:root {
-  --tableBackGroundColor: #b7d9e4;
-}
-
-
-
-table.blueTable tr:nth-child(even) {
-    background-color: var(--tableBackGroundColor);
-}
-
-*/
 
 table.blueTable thead {
-    background: #1C6EA4;
-    border-bottom: 2px solid #444444;
+  background: #1C6EA4;
+  border-bottom: 2px solid #444444;
 }
 
 table.blueTable thead th {
-    font-size: 15px;
-    font-weight: bold;
-    color: #FFFFFF;
-    border-left: 2px solid #D0E4F5;
+  border-left: 2px solid #d0e4f5;
+  color: #FFF;
+
+  font-size: 15px;
+  font-weight: bold;
+
+
 }
 
 table.blueTable thead th:first-child {
@@ -97,7 +88,7 @@ th {
 }
 
 
-$shipDate: 90px;
+$ship-date: 90px;
 
 $pdiOverviewMachine: 80px;
 $pdiDestination: 100px;

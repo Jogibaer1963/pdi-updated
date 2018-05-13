@@ -197,11 +197,19 @@ if(Meteor.isServer){
             machineCommTable.remove({_id: removeMachine});
         },
 
-        'newCommMachine': function (newMachine) {
-            machineCommTable.insert({machineId: newMachine, commissionStatus: 0});
+        'newCommMachine': function (newMachine, inLineDate) {
+            machineCommTable.insert({machineId: newMachine, inLineDate: inLineDate, commissionStatus: 0});
              supplyAreaList.find({}, {sort: {supplyPosition: 1}}).forEach(function(copy) {
                 machineCommTable.update({machineId: newMachine}, {$addToSet: {supplyAreaList: (copy)}})
              });
+        },
+
+        'doubleMachine': (newMachine) => {
+                if(typeof machineCommTable.findOne({machineId: newMachine}) === 'undefined') {
+
+                } else {
+                    return newMachine;
+                  }
         },
 
         'removeSupply': function (removeSupplyArea) {
@@ -497,7 +505,7 @@ if(Meteor.isServer){
 
             let type = selectedPdiMachineNr.slice(0,3);
             let newVariant = 'variants_' + type;
-            let variantsList = Mongo.Collection.get(newVariant).find({}).fetch();
+            let variantsList = Mongo.Collection.get(newVariant).find({}, {sort: {variant: 1}}).fetch();
             variantsList.forEach((variantValue, k) => {
               variantMD[k] = variantValue.variant;
               variantItem[k] = variantValue.variantDescription;
@@ -505,7 +513,7 @@ if(Meteor.isServer){
 
             // Load Machine Configuration and select config items
 
-            let combineVariant = MachineReady.find({_id: selectedPdiMachineId}, {fields: {config: 1, _id: 0}}).fetch();
+            let combineVariant = MachineReady.find({_id: selectedPdiMachineId}, {fields: {config: 1, _id: 0}}, {sort: {variant: 1}}).fetch();
             let k = (combineVariant[0]).config;
                 k.forEach((variantMarker, i) => {
                    uniqueId= Random.id();
@@ -632,6 +640,7 @@ if(Meteor.isServer){
             MachineReady.update({_id: selectedPdiMachineId}, {$set: {batteries: {user: loggedInUser, battC13CCA, battC13Volt,
                                        mtuG001CCA, mtuG001Volt, mtuG005CCA, mtuG005Volt, mtuG004CCA, mtuG004Volt,
                                                         manBatt_1CCA, manBatt_1Volt, manBatt_2CCA, manBatt_2Volt}}});
+            console.log(battC13CCA);
         },
 
         'pdiMachineOmm': function(selectedPdiMachineId, loggedInUser, fuelMe, ommMain, ommSupp,
