@@ -64,10 +64,10 @@ table.blueTable thead {
   border-bottom: 2px solid #444444; }
 
 table.blueTable thead th {
+  border-left: 2px solid #d0e4f5;
+  color: #FFF;
   font-size: 15px;
-  font-weight: bold;
-  color: #FFFFFF;
-  border-left: 2px solid #D0E4F5; }
+  font-weight: bold; }
 
 table.blueTable thead th:first-child {
   border-left: none; }
@@ -1104,116 +1104,6 @@ table.toDoListTable {
   position: relative;
   top: 10em; }
 
-.commNav {
-  position: relative;
-  left: 50em; }
-
-.commissionNav {
-  top: -4em; }
-
-.commHead {
-  position: relative;
-  left: 20em;
-  font-weight: bolder;
-  font-size: x-large;
-  margin-bottom: 5em; }
-
-.supplyCommissionTable {
-  float: left; }
-
-.newSupplyArea {
-  position: relative;
-  left: 2em; }
-
-.supplyArea {
-  margin-left: 2.5em; }
-
-table.supplyTable {
-  position: relative;
-  width: 8em;
-  margin-left: 2.2em; }
-
-.supplyAreaField {
-  width: 9em; }
-
-.removeSupplyArea {
-  position: relative;
-  left: 9em;
-  top: -2.4em; }
-
-.machineCommissionTable {
-  position: absolute;
-  top: 25em;
-  left: 20em; }
-
-.commMachineField {
-  width: 5em; }
-
-.overViewTable {
-  position: absolute;
-  top: 20em;
-  left: 2em;
-}
-
-.removeMachine {
-  position: relative;
-  left: 7em;
-  top: -2.4em; }
-
-.table-header-rotated th.row-header {
-  width: auto; }
-
-.table-header-rotated td {
-  width: 40px;
-  border-top: 1px solid #dddddd;
-  border-left: 1px solid #dddddd;
-  border-right: 1px solid #dddddd;
-  vertical-align: middle;
-  text-align: center; }
-
-.table-header-rotated th.rotate-45 {
-  height: 80px;
-  width: 40px;
-  min-width: 40px;
-  max-width: 40px;
-  position: relative;
-  vertical-align: bottom;
-  padding: 0;
-  font-size: 12px;
-  line-height: 0.8; }
-
-.table-header-rotated th.rotate-45 > div {
-  position: relative;
-  top: 0px;
-  left: 40px;
-  /* 80 * tan(45) / 2 = 40 where 80 is the height on the cell and 45 is the transform angle*/
-  height: 100%;
-  -ms-transform: skew(-45deg, 0deg);
-  -moz-transform: skew(-45deg, 0deg);
-  -webkit-transform: skew(-45deg, 0deg);
-  -o-transform: skew(-45deg, 0deg);
-  transform: skew(-45deg, 0deg);
-  overflow: hidden;
-  border-left: 1px solid #dddddd;
-  border-right: 1px solid #dddddd;
-  border-top: 1px solid #dddddd; }
-
-.table-header-rotated th.rotate-45 span {
-  -ms-transform: skew(45deg, 0deg) rotate(315deg);
-  -moz-transform: skew(45deg, 0deg) rotate(315deg);
-  -webkit-transform: skew(45deg, 0deg) rotate(315deg);
-  -o-transform: skew(45deg, 0deg) rotate(315deg);
-  transform: skew(45deg, 0deg) rotate(315deg);
-  position: absolute;
-  bottom: 30px;
-  /* 40 cos(45) = 28 with an additional 2px margin*/
-  left: -25px;
-  /*Because it looked good, but there is probably a mathematical link here as well*/
-  display: inline-block;
-  width: 85px;
-  /* 80 / cos(45) - 40 cos (45) = 85 where 80 is the height of the cell, 40 the width of the cell and 45 the transform angle*/
-  text-align: left; }
-
 .commissionTablet {
   position: absolute;
   top: 20em;
@@ -1242,9 +1132,12 @@ table.supplyTable {
   height: 250px; }
 
 .supplyAreaTable {
+  left: 23em;
   position: absolute;
-  top: -2em;
-  left: 23em; }
+  top: -2em; }
+
+table.supply-table {
+  width: 22em; }
 
 .supplyTableHeight {
   height: 65.1em; }
@@ -1314,7 +1207,22 @@ table.supplyTable {
   position: absolute;
   top: 3em; }
 
-/*---------------------------  Arrow Down ----------------------*/
+.comm-in-process {
+  animation: glowing 1500ms infinite;
+  color: #000;
+  opacity: .4;
+  pointer-events: none; }
+
+@keyframes glowing {
+  0% {
+    background-color: #AA3939;
+    box-shadow: 0 0 3px  #AA5939; }
+  50% {
+    background-color: #FFB232;
+    box-shadow: 0 0 10px #FFB232; }
+  100% {
+    background-color: #FFE800;
+    box-shadow: 0 0 3px #FFE800; } }
 .arrowDown {
   position: absolute;
   display: flex;
@@ -1324,7 +1232,7 @@ table.supplyTable {
   transform: rotate(-90deg);
   position: absolute;
   top: 35em;
-  left: 14em;
+  left: 18em;
   display: flex; }
 
 .chevron {
@@ -1386,22 +1294,39 @@ table.supplyTable {
   margin-bottom: 5em; }
 
 .machineCommissionTable {
+  left: 40em;
   position: absolute;
-  left: 40em; }
+  top: 26em; }
 
 .commMachineField {
   width: 5em; }
 
 .removeMachine {
   position: relative;
-  left: 7em;
-  top: -2.4em; }
+  left: 50em;
+  top: 7.5em; }
 
-/*--------------------------- table head down wards --------------------------------*/
+.comm-statistics {
+  left: 59em;
+  position: absolute;
+  top: 18.9em; }
+
+.inLineDate {
+  position: absolute;
+  top: -.1em; }
+
+table.commOverView {
+  left: 2em;
+  position: absolute;
+  top: 20em; }
+
+.alarmHead {
+  position: absolute;
+  top: -4em; }
+
 .tableSizeDate {
   width: 8em; }
 
-/*---------------------------- rotated table head ----------------------------------*/
 .table-header-rotated th.row-header {
   width: auto; }
 
@@ -1428,7 +1353,6 @@ table.supplyTable {
   position: relative;
   top: 0px;
   left: 40px;
-  /* 80 * tan(45) / 2 = 40 where 80 is the height on the cell and 45 is the transform angle*/
   height: 100%;
   -ms-transform: skew(-45deg, 0deg);
   -moz-transform: skew(-45deg, 0deg);
@@ -1448,25 +1372,22 @@ table.supplyTable {
   transform: skew(45deg, 0deg) rotate(315deg);
   position: absolute;
   bottom: 30px;
-  /* 40 cos(45) = 28 with an additional 2px margin*/
   left: -25px;
-  /*Because it looked good, but there is probably a mathematical link here as well*/
   display: inline-block;
   width: 85px;
-  /* 80 / cos(45) - 40 cos (45) = 85 where 80 is the height of the cell, 40 the width of the cell and 45 the transform angle*/
   text-align: left; }
 
 .insideNavBar {
   margin-top: 25px; }
 
 .topNav {
-  position: relative;
+  left: 40em;
   margin-top: 25px;
-  left: 40em; }
+  position: relative; }
 
 .templateNav {
-  position: absolute;
   left: 40em;
+  position: absolute;
   top: 6em; }
 
 #logo {
@@ -1494,11 +1415,12 @@ table.supplyTable {
   margin-left: 25px; }
 
 .mainLayout {
-  position: relative;
+  color: #000;
   left: 560px;
-  color: black; }
+  position: relative; }
 
-.inActiveButton {
+.in-active-button {
+  background-color: #252525;
   opacity: .5;
   pointer-events: none; }
 

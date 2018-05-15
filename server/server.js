@@ -135,6 +135,10 @@ if(Meteor.isServer){
             return machineCommTable.find();
         });
 
+        Meteor.publish("pickersAtWork", function() {
+            return pickersAtWork.find();
+        });
+
     });
 
 
@@ -147,14 +151,17 @@ if(Meteor.isServer){
 
 
         'startPicking': function (pickedMachineId, pickedSupplyAreaId, status, user, pickingStart, dateStartNow) {
+            pickersAtWork.upsert({_id: user}, {$set: {machineNr: pickedMachineId, pickerSupplyArea: pickedSupplyAreaId, inActive: 1}});
             machineCommTable.update({_id: pickedMachineId, "supplyAreaList._id": pickedSupplyAreaId},
                                     {$set: {"supplyAreaList.$.supplyStatus": status,
                                             "supplyAreaList.$.pickerStart": user,
                                             "supplyAreaList.$.pickingStart": pickingStart,
                                             "supplyAreaList.$.pickingDateAndTime": dateStartNow}} )
+
         },
 
         'finishedPicking': function (pickedMachineId, pickedSupplyAreaId, status, user, pickingTime, dateEndNow, pickingEnd) {
+            pickersAtWork.remove({_id: user});
             machineCommTable.update({_id: pickedMachineId, "supplyAreaList._id": pickedSupplyAreaId},
                                     {$set: {"supplyAreaList.$.supplyStatus": status,
                                             "supplyAreaList.$.pickerFinished": user,
@@ -171,6 +178,8 @@ if(Meteor.isServer){
                                             "supplyAreaList.$.pickerCanceled": user,
                                             "supplyAreaList.$.pickerCanceledReason": cancellationReason,
                                             "supplyAreaList.$.pickingStart": '',
+                                            "supplyAreaList.$.pickerStart": '',
+                                            "supplyAreaList.$.pickerFinished": '',
                                             "supplyAreaList.$.pickingDateAndTime": '',
                                             "supplyAreaList.$.pickingEnd": '',
                                             "supplyAreaList.$.pickingTime": '',
@@ -179,14 +188,16 @@ if(Meteor.isServer){
                                             "supplyAreaList.$.pickingPauseEnd": ''}} )
         },
 
-        'pausePickingStart': function (pickedMachineId, pickedSupplyAreaId, status, pickingPauseStart) {
+        'pausePickingStart': function (pickedMachineId, pickedSupplyAreaId, status, pickingPauseStart, user) {
+             pickersAtWork.upsert({_id: user}, {$set: {inActive: 2}});
              machineCommTable.update({_id: pickedMachineId, "supplyAreaList._id": pickedSupplyAreaId},
                                     {$set: {"supplyAreaList.$.supplyStatus": status,
                                         "supplyAreaList.$.pickingPauseStart": pickingPauseStart }})
 
         },
 
-        'pausePickingEnd': function (pickedMachineId, pickedSupplyAreaId, status, pickingPauseEnd) {
+        'pausePickingEnd': function (pickedMachineId, pickedSupplyAreaId, status, pickingPauseEnd, user) {
+            pickersAtWork.upsert({_id: user}, {$set: {inActive: 3}});
             machineCommTable.update({_id: pickedMachineId, "supplyAreaList._id": pickedSupplyAreaId},
                                     {$set: {"supplyAreaList.$.supplyStatus": status,
                                             "supplyAreaList.$.pickingPauseEnd": pickingPauseEnd}})
@@ -197,18 +208,16 @@ if(Meteor.isServer){
             machineCommTable.remove({_id: removeMachine});
         },
 
-        'newCommMachine': function (newMachine, inLineDate) {
-            machineCommTable.insert({machineId: newMachine, inLineDate: inLineDate, commissionStatus: 0});
-             supplyAreaList.find({}, {sort: {supplyPosition: 1}}).forEach(function(copy) {
-                machineCommTable.update({machineId: newMachine}, {$addToSet: {supplyAreaList: (copy)}})
-             });
-        },
 
-        'doubleMachine': (newMachine) => {
+        'doubleMachine': (newMachine,inLineDate) => {
                 if(typeof machineCommTable.findOne({machineId: newMachine}) === 'undefined') {
-
+                    machineCommTable.insert({machineId: newMachine, inLineDate: inLineDate, commissionStatus: 0});
+                    supplyAreaList.find({}, {sort: {supplyPosition: 1}}).forEach(function(copy) {
+                        machineCommTable.update({machineId: newMachine}, {$addToSet: {supplyAreaList: (copy)}})
+                    });
                 } else {
                     return newMachine;
+
                   }
         },
 

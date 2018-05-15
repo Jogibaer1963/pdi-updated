@@ -1,13 +1,21 @@
+Meteor.subscribe("pickersAtWork");
+
 
 Template.commTablet.helpers ({
 
-    userLoggedIn: () => {
-
-    },
 
     machineCommList: function () {
-        return machineCommTable.find({commissionStatus: {$lt: 25}});
+        const picker = Meteor.user().username;
+        let k = pickersAtWork.findOne({_id: picker});
+        if(k) {
+            Session.set('inActiveState', k.inActive);
+            Session.set('selectedMachine', k.machineNr);
+            Session.set('selectedArea', k.pickerSupplyArea);
+        }
+        return machineCommTable.find({commissionStatus: {$lt: 25}}, {sort: {inLineDate: 1}});
     },
+
+
 
     supplyAreaShow: function() {
         const commMachine = Session.get('selectedMachine');
@@ -15,13 +23,14 @@ Template.commTablet.helpers ({
     },
 
     selectedSupplyMachine: () => {
-      const machineNr = Session.get('commMachine');
-      if(machineNr) {
-          let pickedMachine = machineCommTable.findOne({_id: machineNr}).machineId;
-          Session.set('pickedMachine', pickedMachine);
-          return pickedMachine;
-      }
+        const machineNr = Session.get('commMachine');
+        if(machineNr) {
+            let pickedMachine = machineCommTable.findOne({_id: machineNr}).machineId;
+            Session.set('pickedMachine', pickedMachine);
+            return pickedMachine;
+        }
     },
+
 
     supplyStart: () => {
         const supply = Session.get('selectedArea');
@@ -94,6 +103,7 @@ Template.commTablet.events ({
         let pickingTime = ((pickingEnd - pickingStart) / 60000).toFixed(0);
         let dateEndNow = moment().format('MMMM Do YYYY, h:mm:ss a' );
         Session.set('inActiveState', 4);
+        Session.set('selectedArea', '');
         Meteor.call('finishedPicking', pickedMachineId, pickedSupplyAreaId,
                      status, userFinished, pickingTime, dateEndNow, pickingEnd);
     },
@@ -102,7 +112,6 @@ Template.commTablet.events ({
         e.preventDefault();
         const userCanceled = Meteor.user().username;
         const cancellationReason = event.target.cancelRequest.value;
-        console.log(cancellationReason);
         let status = 0;
         let pickedMachineId = Session.get('selectedMachine');
         let pickedSupplyAreaId = Session.get('selectedArea');
@@ -113,25 +122,27 @@ Template.commTablet.events ({
 
     'click .commPause': function (e) {
         e.preventDefault();
+        const user = Meteor.user().username;
         let pickedMachineId = Session.get('selectedMachine');
         let pickedSupplyAreaId = Session.get('selectedArea');
         let pickingPauseStart = Date.now();
         let pickingStatus = 3;
         Session.set('inActiveState', 2);
         Meteor.call('pausePickingStart', pickedMachineId, pickedSupplyAreaId,
-                     pickingStatus, pickingPauseStart);
+                     pickingStatus, pickingPauseStart, user);
 
     },
 
     'click .commResume': function (e) {
         e.preventDefault();
+        const user = Meteor.user().username;
         let pickedMachineId = Session.get('selectedMachine');
         let pickedSupplyAreaId = Session.get('selectedArea');
         let pickingPauseEnd = Date.now();
         let pickingStatus = 2;
         Session.set('inActiveState',3);
         Meteor.call('pausePickingEnd', pickedMachineId, pickedSupplyAreaId,
-                     pickingStatus, pickingPauseEnd);
+                     pickingStatus, pickingPauseEnd, user);
     },
 
 });
@@ -141,35 +152,39 @@ Session.set('inActiveState', 0);
 Handlebars.registerHelper('inActive_0', function () {
     let inActiveState = Session.get('inActiveState');
     if(inActiveState === 0) {
-        return 'inActiveButton'
+        return 'in-active-button'
     }
 });
+
+// Commission start
 
 Handlebars.registerHelper('inActive_1', function () {
     let inActiveState = Session.get('inActiveState');
     if(inActiveState === 1) {
-        return 'inActiveButton'
+        return 'in-active-button'
     }
 });
 
 Handlebars.registerHelper('inActive_2', function () {
     let inActiveState = Session.get('inActiveState');
     if(inActiveState === 2) {
-        return 'inActiveButton'
+        return 'in-active-button'
     }
 });
 
 Handlebars.registerHelper('inActive_3', function () {
     let inActiveState = Session.get('inActiveState');
     if(inActiveState === 3) {
-        return 'inActiveButton'
+        return 'in-active-button'
     }
 });
+
+// finnished
 
 Handlebars.registerHelper('inActive_4', function () {
     let inActiveState = Session.get('inActiveState');
     if(inActiveState === 4) {
-        return 'inActiveButton'
+        return 'in-active-button'
     }
 });
 

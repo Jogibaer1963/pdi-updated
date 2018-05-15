@@ -34,9 +34,13 @@
 }
 
 .supplyAreaTable {
+  left: 23em;
   position: absolute;
   top: -2em;
-  left: 23em;
+}
+
+table.supply-table {
+  width: 22em;
 }
 
 .supplyTableHeight {
@@ -127,7 +131,24 @@
 
 
 
-/*---------------------------  Arrow Down ----------------------*/
+$comm-black: #000;
+
+.comm-in-process {
+  animation: glowing 1500ms infinite;
+  color: $comm-black;
+  opacity: .4;
+  pointer-events: none;
+
+}
+
+@keyframes glowing {
+  0% { background-color: #AA3939; box-shadow: 0 0 3px  #AA5939; }
+  50% { background-color: #FFB232; box-shadow: 0 0 10px #FFB232; }
+  100% { background-color: #FFE800; box-shadow: 0 0 3px #FFE800; }
+}
+
+
+//---------------------------  Arrow Down ----------------------*/
 
 $base: 0.6rem;
 
@@ -141,7 +162,7 @@ $base: 0.6rem;
   transform: rotate(-90deg);
   position: absolute;
   top: 35em;
-  left: 14em;
+  left: 18em;
   display: flex;
 
 }

@@ -1,14 +1,10 @@
 <template name="commissionOverView">
-    <!--
-    Overview of what is done
-    what needs to be done
-    -->
     {{#if currentUser}}
         <div class="commNav">
             {{> commNav}}
         </div>
         {{#if isInRole 'admin'}}
-            <div style="position: relative; top: 13em; left:41em;">
+            <div>
                {{> adminButton}}
             </div>
         {{/if}}
@@ -69,9 +65,8 @@
             </table>
         </div>
     </div>
-    <div >
-        <h2>Commission Over View</h2>
-        <table  class="commOverView">
+    <div  style="left: 2em; position: absolute; top: 10em;"> <h2>Commission Over View</h2>
+        <table>
             <caption>Picking Result of single machine</caption>
             <tr>
                 <th scope="col"><h3><strong>{{machineNr}}</strong></h3></th>
@@ -294,8 +289,10 @@
 </template>
 
 <template name="adminButton">
+    <div  style="position: relative; top: 10em; left:41em;">
         <h3><strong>{{alarmMachine}}</strong></h3>
-        <form class="newCommMachine">
+    </div>
+        <form class="newCommMachine"  style="position: relative; top: 10em; left:41em;">
             <label for="newMachine" >Adding Machine&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Date in Line</label>
             <br>
@@ -306,4 +303,5 @@
             <button class="btn btn-success" type="submit">Submit</button>
         </form>
         <button class="btn btn-danger removeMachine" type="button">Delete</button>
+        <button class="btn btn-success comm-statistics" type="button">Statistics</button>
 </template>

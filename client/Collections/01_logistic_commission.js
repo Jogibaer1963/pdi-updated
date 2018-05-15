@@ -14,9 +14,7 @@ Template.commissionOverView.helpers ({
           }
     },
 
-    alarmMachine: () => {
-      return Session.get('alarm');
-    },
+
 
     L4MSB020: () => {
         let machineId = Session.get('selectedMachine');
@@ -373,29 +371,47 @@ Template.commissionOverView.events ({
         Session.set('selectedMachine', pickedMachineId);
     },
 
-    'submit .newCommMachine': (e) => {
-        e.preventDefault();
-        Session.set('alarm', '');
-        const newMachine = e.target.newMachine.value;
-        const inLineDate = e.target.newDate.value;
-         if(newMachine) {
-             Meteor.call('doubleMachine', newMachine, function (err, response) {
-                 if (response) {
-                     Session.set('alarm', 'Attention, Machine already exists')
-                 } else {
-                     Meteor.call('newCommMachine', newMachine, inLineDate);
-                 }
-             });
-           }
-        e.target.newMachine.value = '';
-        e.target.newDate.value = '';
-    },
-
     'click .removeMachine': function (e) {
         e.preventDefault();
         const removableMachine = Session.get('selectedMachine');
         Meteor.call('removeCommMachine', removableMachine);
     },
 
+    'click .comm-statistics': (e) => {
+        e.preventDefault();
+        FlowRouter.go('commissionStatistics');
+    }
 
 });
+
+Template.adminButton.helpers ({
+
+    alarmMachine: () => {
+        return Session.get('alarm');
+    },
+
+});
+
+
+Template.adminButton.events ({
+
+    'submit .newCommMachine': (e) => {
+        e.preventDefault();
+        Session.set('alarm', '');
+        const newMachine = e.target.newMachine.value;
+        const inLineDate = e.target.newDate.value;
+        if(newMachine) {
+            Meteor.call('doubleMachine', newMachine,  inLineDate, function (err, response) {
+                if (response) {
+                    Session.set('alarm', 'Attention, Machine already exists');
+                } else {
+
+                }
+            });
+        }
+        e.target.newMachine.value = '';
+        e.target.newDate.value = '';
+    }
+
+});
+

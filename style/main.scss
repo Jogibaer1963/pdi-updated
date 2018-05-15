@@ -20,7 +20,6 @@
 @import 'buttonNotWorking';
 @import 'pdi_Print_Out';
 @import 'toDoList';
-@import 'commission';
 @import 'commission_tablet';
 @import 'commissionOverView';
 
@@ -34,14 +33,14 @@
 }
 
 .topNav {
-  position: relative;
-  margin-top: 25px;
   left: 40em;
+  margin-top: 25px;
+  position: relative;
 }
 
 .templateNav {
-  position: absolute;
   left: 40em;
+  position: absolute;
   top: 6em;
 }
 
@@ -78,16 +77,20 @@
 }
 
 .mainLayout {
-  position: relative;
+  color: $comm-black;
   left: 560px;
-  color: #0000;
+  position: relative;
 }
 
 //  Inactive Buttons
 
-.inActiveButton {
+$comm-status: #252525;
+
+.in-active-button {
+  background-color: $comm-status;
   opacity: .5;
   pointer-events: none;
+
 }
 
 .activeButton {

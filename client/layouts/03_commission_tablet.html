@@ -32,15 +32,17 @@
         <div class="chooseMachineTable">
            <div class="">
               <table class="blueTable pdiMachineField " cellpadding="10" >
-                  <thead class="pdiMachineField">
+                  <thead>
                     <tr>
                       <th class="pdiMachineField "><strong>Machines</strong></th>
+                        <th class="pdiShipDate "><strong>Date in Line</strong></th>
                     </tr>
                   </thead>
                   <tbody class="bodyHeight {{inActive_1}} {{inActive_2}}  {{inActive_3}}" >
                      {{#each machineCommList}}
                         <tr class="pickedMachine {{selectedMachine}}">
-                          <td class="pickedMachine machineTablet" >{{machineId}}</td>
+                          <td class="pdiMachineField machineTablet" >{{machineId}}</td>
+                            <td class="pdiShipDate machineTablet" >{{inLineDate}}</td>
                         </tr>
                      {{/each}}
                   </tbody>
@@ -53,7 +55,7 @@
           <div class="chevron"></div>
         </div>
         <div class="supplyAreaTable">
-            <table class="blueTable supplyTable" cellpadding="10">
+            <table class="blueTable supply-table" cellpadding="10">
                 <thead>
                 <tr>
                     <th class="userLastLogin"><strong>Supply Area</strong></th>
@@ -64,7 +66,7 @@
                 {{#with supplyAreaShow}}
                    {{#each supplyAreaList}}
                     <tr class="supplyAreaList {{selectedArea}}">
-                        <td class="supplyAreaField machineTablet {{getCommStatus supplyStatus}}" style="background-color: {{getCommStatus supplyStatus}}">{{supplyArea}}</td>
+                        <td class="supplyAreaField machineTablet {{getCommStatus supplyStatus}}" style="background-color: {{getCommStatus supplyStatus}}" >{{supplyArea}}</td>
                         <td class="supplyAreaField machineTablet ">{{pickerStart}}</td>
                     </tr>
                        {{/each}}
