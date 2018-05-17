@@ -148,7 +148,7 @@ if(Meteor.isServer){
 
     Meteor.methods({
 
-
+//----------------------------------------------- Commissioning Zone --------------------------------------------------------------
 
         'startPicking': function (pickedMachineId, pickedSupplyAreaId, status, user, pickingStart, dateStartNow) {
             pickersAtWork.upsert({_id: user}, {$set: {machineNr: pickedMachineId, pickerSupplyArea: pickedSupplyAreaId, inActive: 1}});
@@ -228,13 +228,13 @@ if(Meteor.isServer){
         'supplyArea': function (supplyArea) {
           supplyAreaList.insert({supplyArea: supplyArea, supplyStatus: 0});
         },
-
+//------------------------------------------------------------------------------------------------------------------------------------------
         'submitToDo': function(toDoText, dateNow, needDate, toDoUser) {
             const toDoStatus = 0;
             const clearDate = 0;
             toDoMesssage.insert({toDoText, dateNow, needDate, clearDate, toDoUser, toDoStatus});
         },
-
+//--------------------------------------------------------  Variants -----------------------------------------------------------------------
         'readVariant': function (contents) {
             let newContent = contents.replace(/[\t\r\n]/g, '');
             let newContent_2 = newContent.replace(/"/g, "'");
@@ -256,7 +256,7 @@ if(Meteor.isServer){
         'readConfig': function(machineId, configArray) {
             MachineReady.update({machineId: machineId}, {$set: {config: configArray, configStatus: 1}});
         },
-
+//-----------------------------------------------------------------------------------------------------------------------------------------------
         'fuelConsumption': function () {
             let elementMachine = [];
             let elementFuelStart = [];
@@ -283,7 +283,7 @@ if(Meteor.isServer){
                   elementConsumption: elementConsumption
           };
         },
-
+//------------------------------------------------------------ Admin User Control ------------------------------------------------------
        'userManualLogout': function (logOutUser) {
             for (i = 0; i < logOutUser.length; i++) {
                 const userName = usersProfil.findOne({_id: logOutUser[i]}).username;
@@ -308,7 +308,7 @@ if(Meteor.isServer){
           usersProfil.insert({username: userConst, role: role, createdAt: createdAt,
               createdBy: loggedUser, loginStatus: 0});
         },
-
+//-------------------------------------------------------------------------------------------------------------------------------------------
         'removeSi': function (siRemove) {
             const siNumberLoad = siTable.findOne({_id: siRemove});
             if(!!siNumberLoad) {
@@ -334,7 +334,7 @@ if(Meteor.isServer){
            }
           siMd.upsert({_id: siMdList},{machineList: item});
         },
-
+//------------------------------------------------------------------------------------------------------------------------------------------
         'machineRep': function(machineRepaired, workingHour) {
           MachineReady.update({_id: machineRepaired}, {$set: {machineHours: workingHour, repairStatus: 1}});
         },
@@ -590,14 +590,6 @@ if(Meteor.isServer){
                 {$pull: {checkList: {_id: selectedCheckPoint}}});
         },
 
-
-        'bigFinger': function (selectedPdiMachineId, selectedCheckPoint) {
-            let bigFingerBase = checkPoints.findOne({_id: selectedCheckPoint});
-            pdiCheckList.upsert({_id: selectedPdiMachineId}, {$push: {checkList: {_id: bigFingerBase._id,
-                errorPos: bigFingerBase.errorPos, errorDescription: bigFingerBase.errorDescription,
-                machineType: bigFingerBase.machineType}}});
-        },
-
         //pdi Config Buttons
 
         'configOkButton': (machineId, idFailure) => {
@@ -647,9 +639,8 @@ if(Meteor.isServer){
                                       mtuG001CCA, mtuG001Volt, mtuG005CCA, mtuG005Volt, mtuG004CCA, mtuG004Volt,
                                       manBatt_1CCA, manBatt_1Volt, manBatt_2CCA, manBatt_2Volt  ) {
             MachineReady.update({_id: selectedPdiMachineId}, {$set: {batteries: {user: loggedInUser, battC13CCA, battC13Volt,
-                                       mtuG001CCA, mtuG001Volt, mtuG005CCA, mtuG005Volt, mtuG004CCA, mtuG004Volt,
-                                                        manBatt_1CCA, manBatt_1Volt, manBatt_2CCA, manBatt_2Volt}}});
-            console.log(battC13CCA);
+                                      mtuG001CCA, mtuG001Volt, mtuG005CCA, mtuG005Volt, mtuG004CCA, mtuG004Volt,
+                                                       manBatt_1CCA, manBatt_1Volt, manBatt_2CCA, manBatt_2Volt}}});
         },
 
         'pdiMachineOmm': function(selectedPdiMachineId, loggedInUser, fuelMe, ommMain, ommSupp,

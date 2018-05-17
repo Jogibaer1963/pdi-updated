@@ -1,7 +1,7 @@
 
 .commissionTablet {
   position: absolute;
-  top: 20em;
+  top: 5em;
   left: 2em;
 }
 
@@ -12,6 +12,7 @@
 .machineTablet {
   color: #71f323;
   white-space: nowrap;
+  width: 9em;
 }
 
 .tabletUser {
@@ -41,10 +42,11 @@
 
 table.supply-table {
   width: 22em;
+  height: 50em;
 }
 
 .supplyTableHeight {
-  height: 65.1em;
+  height: 45em;
 }
 
 
@@ -63,7 +65,7 @@ table.supply-table {
 
 .supplyButtonField {
   position: absolute;
-  top: 20em;
+  top: 30em;
   left: 15em;
 }
 
@@ -72,22 +74,24 @@ table.supply-table {
 }
 
 .commPause {
-  float: left;
+  left: 10em;
   position: absolute;
-  margin-left: 3em;
+
 }
 
 .commResume {
   float: left;
+  left: 10em;
   position: absolute;
   top: 5em;
-  left: 13.6em;
+
 }
 
 .commFinished {
-  float: left;
+  left: -.2em;
   position: absolute;
-  left: 28em;
+  top: 5em;
+
 }
 
 .cancelRequest {
@@ -102,23 +106,23 @@ table.supply-table {
 
 .tabletHeader {
   position: absolute;
-  top: -10em;
+
   width: 21em;
   left: 15em;
 }
 
 .machineIdHeader {
   position: absolute;
-  top: -0.5em;
-  left: 3em;
-  font-size: 80px;
+  top: -.1em;
+  left: 4em;
+  font-size: 50px;
 }
 
 .supplyIdHeader {
   position: absolute;
-  top: 1em;
-  left: 3em;
-  font-size: 80px;
+  top: 2em;
+  left: 4.5em;
+  font-size: 50px;
 }
 
 .textSupply {

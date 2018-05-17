@@ -1106,7 +1106,7 @@ table.toDoListTable {
 
 .commissionTablet {
   position: absolute;
-  top: 20em;
+  top: 5em;
   left: 2em; }
 
 .marginLeft {
@@ -1114,7 +1114,8 @@ table.toDoListTable {
 
 .machineTablet {
   color: #71f323;
-  white-space: nowrap; }
+  white-space: nowrap;
+  width: 9em; }
 
 .tabletUser {
   color: #D0E4F5;
@@ -1137,10 +1138,11 @@ table.toDoListTable {
   top: -2em; }
 
 table.supply-table {
-  width: 22em; }
+  width: 22em;
+  height: 50em; }
 
 .supplyTableHeight {
-  height: 65.1em; }
+  height: 45em; }
 
 .commissionInitials {
   position: relative;
@@ -1155,27 +1157,26 @@ table.supply-table {
 
 .supplyButtonField {
   position: absolute;
-  top: 20em;
+  top: 30em;
   left: 15em; }
 
 .commStart {
   float: left; }
 
 .commPause {
-  float: left;
-  position: absolute;
-  margin-left: 3em; }
+  left: 10em;
+  position: absolute; }
 
 .commResume {
   float: left;
+  left: 10em;
   position: absolute;
-  top: 5em;
-  left: 13.6em; }
+  top: 5em; }
 
 .commFinished {
-  float: left;
+  left: -.2em;
   position: absolute;
-  left: 28em; }
+  top: 5em; }
 
 .cancelRequest {
   width: 240px;
@@ -1187,21 +1188,20 @@ table.supply-table {
 
 .tabletHeader {
   position: absolute;
-  top: -10em;
   width: 21em;
   left: 15em; }
 
 .machineIdHeader {
   position: absolute;
-  top: -0.5em;
-  left: 3em;
-  font-size: 80px; }
+  top: -.1em;
+  left: 4em;
+  font-size: 50px; }
 
 .supplyIdHeader {
   position: absolute;
-  top: 1em;
-  left: 3em;
-  font-size: 80px; }
+  top: 2em;
+  left: 4.5em;
+  font-size: 50px; }
 
 .textSupply {
   position: absolute;

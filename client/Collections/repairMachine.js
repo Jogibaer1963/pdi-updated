@@ -34,7 +34,15 @@ if(Meteor.isClient) {
             if (selectedMachineId === upcomingMachineId) {
                 return "selected"
             }
-        }
+        },
+
+        washMachine: () => {
+            const machine_id = Session.get('selectedMachineId');
+            const machineTestId = MachineReady.findOne({_id: machine_id}).machineId;
+            Session.set('washMachine', machineTestId);
+            return Session.get('washMachine');
+        },
+
     });
 
     Template.repairMachine.events({
@@ -76,9 +84,14 @@ if(Meteor.isClient) {
         'submit .messageToWashBay': function () {
             event.preventDefault();
             const washMessage = event.target.message.value;
-            const machine_id = Session.get('selectedMachineId');
-            const machineTestId = MachineReady.findOne({_id: machine_id}).machineId;
-            Meteor.call('messageToWashBay', machineTestId, washMessage, machine_id);
+            if(Session.get('selectedMachineId') === 'undefined') {
+                console.log('test');
+                Session.set('errorMachine', 'Choose Machine first');
+            } else {
+                const machine_id = Session.get('selectedMachineId');
+                const machineTestId = MachineReady.findOne({_id: machine_id}).machineId;
+                Meteor.call('messageToWashBay', machine_id, machineTestId, washMessage);
+            }
             event.target.message.value = '';
         }
 

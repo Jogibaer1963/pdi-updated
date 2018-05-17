@@ -1,8 +1,5 @@
 <template name="commission">
     {{#if currentUser}}
-        <div id="logo">
-            <img src="claas_logo.png" />
-        </div>
         <div class="tabletCommissioning">
             {{> commTablet}}
         </div>
@@ -80,11 +77,11 @@
                <h1 class="textSupply">Supply Area:</h1> <h1 class="supplyIdHeader">{{supplyStart}}</h1>
             </div>
             <div class="supplyButtonField" >
-               <button type="button" class="btn btn-lg btn-success commStart {{inActive_1}} {{inActive_2}}  {{inActive_3}}">Commissioning Start</button>
-               <button class="btn btn-lg btn-primary commPause {{inActive_2}} {{inActive_4}} {{inActive_0}}">Commissioning Pause</button>
-               <button class="btn btn-lg btn-primary commResume {{inActive_1}} {{inActive_3}} {{inActive_4}} {{inActive_0}}">Commissioning Resume</button>
-               <button class="btn btn-lg btn-success commFinished {{inActive_2}} {{inActive_4}} {{inActive_0}}">Commissioning Finished</button>
-                <div class="cancellationRequest">
+               <button type="button" class="btn btn-lg btn-success commStart {{inActive_1}} {{inActive_2}}  {{inActive_3}}">Start</button>
+               <button class="btn btn-lg btn-primary commPause {{inActive_2}} {{inActive_4}} {{inActive_0}}">Pause</button>
+               <button class="btn btn-lg btn-primary commResume {{inActive_1}} {{inActive_3}} {{inActive_4}} {{inActive_0}}">Resume</button>
+               <button class="btn btn-lg btn-success commFinished {{inActive_2}} {{inActive_4}} {{inActive_0}}">Finished</button>
+       <!--         <div class="cancellationRequest">
                    <form class="form-inline cancelForm">
                        <label for="cancelRequest"></label>
                        <input type="text" class="form-control form-control-lg cancelRequest"
@@ -94,7 +91,7 @@
                            required="required"/>
                        <button type="submit" class="btn btn-lg btn-danger commCanceled">Commissioning Canceled</button>
                    </form>
-                </div>
+                </div>  -->
             </div>
       </div>
     </div>
