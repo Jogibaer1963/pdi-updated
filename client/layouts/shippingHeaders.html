@@ -2,7 +2,6 @@
         switch Header to new their own database
 -->
 
-
 <template name="headerShipList">
     {{#if currentUser}}
         {{> inputHead}}
@@ -16,11 +15,9 @@
     <div id="logo">
         <img src="claas_logo.png" />
     </div>
-    <div class="mainLayout">
+    <div class="switchToCombine">
         <nav>
-            <a class="btn" href="/shippingMachines">Switch to Combines</a>
-            <a>|</a>
-            <a class="btn" href="/overViewUser">Over View</a>
+            <a class="btn btn-default btn-success" href="/shippingMachines">Switch to Combines</a>
         </nav>
     </div>
     <div class="newHeadShipping">

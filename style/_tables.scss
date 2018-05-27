@@ -109,7 +109,7 @@ $config: 60px;
 
 $partsOnOrder: 50px;
 
-
+$kitSet: 450px;
 $headerTable: 230px;
 $headerId: 80px;
 $headerStatus: 80px;
@@ -117,6 +117,8 @@ $headerStatus: 80px;
 $pdiTrailer: 80px;
 
 $pdiUser: 200px;
+
+$ecnTextFiled: 850px;
 
 //admin table
 
@@ -203,6 +205,10 @@ $eraseUser: 50px;
   top: 300px;
 }
 
+.kitSet {
+  max-width: $kitSet;
+  min-width: $kitSet;
+}
 
 .pdiMachineField {
   max-width: $pdiOverviewMachine;
@@ -325,6 +331,11 @@ table.headerTable {
 .headerStatus {
   max-width: $headerStatus;
   min-width: $headerStatus;
+}
+
+.ecnTextField {
+  max-width: $ecnTextFiled;
+  min-width: $ecnTextFiled;
 }
 
 .headerPos {

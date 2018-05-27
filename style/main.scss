@@ -20,12 +20,13 @@
 @import 'buttonNotWorking';
 @import 'pdi_Print_Out';
 @import 'toDoList';
-@import 'commission_tablet';
-@import 'commissionOverView';
 
 
 
-
+.mainLayout {
+  position: absolute;
+  left: 40em;
+}
 
 
 .insideNavBar {
@@ -76,22 +77,10 @@
   margin-left: 25px;
 }
 
-.mainLayout {
-  color: $comm-black;
-  left: 560px;
-  position: relative;
-}
+
 
 //  Inactive Buttons
 
-$comm-status: #252525;
-
-.in-active-button {
-  background-color: $comm-status;
-  opacity: .5;
-  pointer-events: none;
-
-}
 
 .activeButton {
   opacity: 1;

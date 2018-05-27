@@ -148,92 +148,6 @@ if(Meteor.isServer){
 
     Meteor.methods({
 
-//----------------------------------------------- Commissioning Zone --------------------------------------------------------------
-
-        'startPicking': function (pickedMachineId, pickedSupplyAreaId, status, user, pickingStart, dateStartNow) {
-            pickersAtWork.upsert({_id: user}, {$set: {machineNr: pickedMachineId, pickerSupplyArea: pickedSupplyAreaId, inActive: 1}});
-            machineCommTable.update({_id: pickedMachineId, "supplyAreaList._id": pickedSupplyAreaId},
-                                    {$set: {"supplyAreaList.$.supplyStatus": status,
-                                            "supplyAreaList.$.pickerStart": user,
-                                            "supplyAreaList.$.pickingStart": pickingStart,
-                                            "supplyAreaList.$.pickingDateAndTime": dateStartNow}} )
-
-        },
-
-        'finishedPicking': function (pickedMachineId, pickedSupplyAreaId, status, user, pickingTime, dateEndNow, pickingEnd) {
-            pickersAtWork.remove({_id: user});
-            machineCommTable.update({_id: pickedMachineId, "supplyAreaList._id": pickedSupplyAreaId},
-                                    {$set: {"supplyAreaList.$.supplyStatus": status,
-                                            "supplyAreaList.$.pickerFinished": user,
-                                            "supplyAreaList.$.pickingTime": pickingTime,
-                                            "supplyAreaList.$.pickingEnd": pickingEnd,
-                                            "supplyAreaList.$.pickingEndDateAndTime": dateEndNow}},
-                                    );
-            machineCommTable.update({_id: pickedMachineId}, {$inc: {commissionStatus: 1}});
-        },
-
-        'canceledPicking': function (pickedMachineId, pickedSupplyAreaId, status, user,cancellationReason) {
-            machineCommTable.update({_id: pickedMachineId, "supplyAreaList._id": pickedSupplyAreaId},
-                                    {$set: {"supplyAreaList.$.supplyStatus": status,
-                                            "supplyAreaList.$.pickerCanceled": user,
-                                            "supplyAreaList.$.pickerCanceledReason": cancellationReason,
-                                            "supplyAreaList.$.pickingStart": '',
-                                            "supplyAreaList.$.pickerStart": '',
-                                            "supplyAreaList.$.pickerFinished": '',
-                                            "supplyAreaList.$.pickingDateAndTime": '',
-                                            "supplyAreaList.$.pickingEnd": '',
-                                            "supplyAreaList.$.pickingTime": '',
-                                            "supplyAreaList.$.pickingEndDateAndTime": '',
-                                            "supplyAreaList.$.pickingPauseStart": '',
-                                            "supplyAreaList.$.pickingPauseEnd": ''}} )
-        },
-
-        'pausePickingStart': function (pickedMachineId, pickedSupplyAreaId, status, pickingPauseStart, user) {
-             pickersAtWork.upsert({_id: user}, {$set: {inActive: 2}});
-             machineCommTable.update({_id: pickedMachineId, "supplyAreaList._id": pickedSupplyAreaId},
-                                    {$set: {"supplyAreaList.$.supplyStatus": status,
-                                        "supplyAreaList.$.pickingPauseStart": pickingPauseStart }})
-
-        },
-
-        'pausePickingEnd': function (pickedMachineId, pickedSupplyAreaId, status, pickingPauseEnd, user) {
-            pickersAtWork.upsert({_id: user}, {$set: {inActive: 3}});
-            machineCommTable.update({_id: pickedMachineId, "supplyAreaList._id": pickedSupplyAreaId},
-                                    {$set: {"supplyAreaList.$.supplyStatus": status,
-                                            "supplyAreaList.$.pickingPauseEnd": pickingPauseEnd}})
-
-        },
-
-        'removeCommMachine': function (removeMachine) {
-            machineCommTable.remove({_id: removeMachine});
-        },
-
-
-        'doubleMachine': (newMachine,inLineDate) => {
-                if(typeof machineCommTable.findOne({machineId: newMachine}) === 'undefined') {
-                    machineCommTable.insert({machineId: newMachine, inLineDate: inLineDate, commissionStatus: 0});
-                    supplyAreaList.find({}, {sort: {supplyPosition: 1}}).forEach(function(copy) {
-                        machineCommTable.update({machineId: newMachine}, {$addToSet: {supplyAreaList: (copy)}})
-                    });
-                } else {
-                    return newMachine;
-
-                  }
-        },
-
-        'removeSupply': function (removeSupplyArea) {
-          supplyAreaList.remove({_id: removeSupplyArea});
-        },
-
-        'supplyArea': function (supplyArea) {
-          supplyAreaList.insert({supplyArea: supplyArea, supplyStatus: 0});
-        },
-//------------------------------------------------------------------------------------------------------------------------------------------
-        'submitToDo': function(toDoText, dateNow, needDate, toDoUser) {
-            const toDoStatus = 0;
-            const clearDate = 0;
-            toDoMesssage.insert({toDoText, dateNow, needDate, clearDate, toDoUser, toDoStatus});
-        },
 //--------------------------------------------------------  Variants -----------------------------------------------------------------------
         'readVariant': function (contents) {
             let newContent = contents.replace(/[\t\r\n]/g, '');
@@ -256,7 +170,7 @@ if(Meteor.isServer){
         'readConfig': function(machineId, configArray) {
             MachineReady.update({machineId: machineId}, {$set: {config: configArray, configStatus: 1}});
         },
-//-----------------------------------------------------------------------------------------------------------------------------------------------
+//----------------------------------------------------------- Fuel control ------------------------------------------------------------------
         'fuelConsumption': function () {
             let elementMachine = [];
             let elementFuelStart = [];
@@ -308,7 +222,7 @@ if(Meteor.isServer){
           usersProfil.insert({username: userConst, role: role, createdAt: createdAt,
               createdBy: loggedUser, loginStatus: 0});
         },
-//-------------------------------------------------------------------------------------------------------------------------------------------
+//-----------------------------------------------------------  SI Control -------------------------------------------------------
         'removeSi': function (siRemove) {
             const siNumberLoad = siTable.findOne({_id: siRemove});
             if(!!siNumberLoad) {
@@ -492,8 +406,8 @@ if(Meteor.isServer){
             checkPoints.update({_id: checkPointId}, {$set: {status: status, errorPos: errorPos,
                 errorDescription: errorDescription, machineType: machineType}});
         },
-
-        'generatePdiList': function(selectedPdiMachineId, selectedPdiMachineNr, dateStart, pdiUser, range) {
+  // -------------------------------------------- Generate PDI List -------------------------------------------------
+        'generatePdiList': function(selectedPdiMachineId, pdiMachineNr, dateStart, pdiUser, machineType) {
             machineConfig = [];
             variant = [];
             siArrayList = [];
@@ -504,12 +418,21 @@ if(Meteor.isServer){
             machineConfiguration = [];
             configStyle = [];
             MachineReady.update({_id: selectedPdiMachineId}, {$set: {pdiStatus: 2, startPdiDate: dateStart}});
-            checkPoints.find({status: 1, machineType: {$in: range}},
-                {fields: {errorDescription: 1, errorPos: 1, checkStatus: 1, _id: -1}}, {sort: {errorPos: 1}}).forEach(function (copy) {
+         let k =   checkPoints.find({status: 1, machineRangeEnd: {$lt: pdiMachineNr}},
+                            {fields: {errorDescription: 1, errorPos: 1}}).fetch();
+         let sortK = _.sortBy(k, 'errorPos');
+               console.log(sortK);
+
+
+            /*    .forEach(function (copy) {
+                    console.log(copy);
                      MachineReady.update({_id: selectedPdiMachineId}, {$addToSet: {checkList: (copy)}});
                        });
-            MachineReady.update({_id: selectedPdiMachineId}, {$set: {pdiPerformer: pdiUser}});
 
+
+
+            //   MachineReady.update({_id: selectedPdiMachineId}, {$set: {pdiPerformer: pdiUser}});
+     /*
             // Load Type Variant
 
             let type = selectedPdiMachineNr.slice(0,3);
@@ -572,7 +495,8 @@ if(Meteor.isServer){
                  //        {$set:{"machineList.$.siStatus": 3}});
                     }
                 }  */
-            }
+        //    }
+
         },
 
         'cancelPdi': function(pdiMachineId) {
@@ -580,7 +504,8 @@ if(Meteor.isServer){
                                                              checkList: [],
                                                              machineConfig: [],
                                                              pdiPerformer: '',
-                                                             startPdiDate: ''
+                                                             startPdiDate: '',
+                                                             fuelStart: ''
                                                      }});
             siListDone.remove({_id: pdiMachineId});
         },
@@ -689,9 +614,17 @@ if(Meteor.isServer){
                     }
             orderParts.remove({_id: loggedUser});
         },
-
+   // -------------------------------------------------- Wash List -------------------------------------------
         'stopWashing': function(selectedCheckPoint) {
             MachineReady.update({_id:selectedCheckPoint}, {$set: {washStatus: 0}});
+        },
+
+        'finishWashing': function(selectedCheckPoint, dateStop, washDuration, waitWashTime) {
+            MachineReady.update({_id:selectedCheckPoint}, {$set: {washStatus: 1, stopWashDate: dateStop, washDuration: washDuration, waitWashTime: waitWashTime}});
+        },
+
+        'updateWashList': function(selectedCheckPoint, dateStart) {
+            MachineReady.update({_id:selectedCheckPoint}, {$set: {washStatus: 2, startWashDate: dateStart}});
         },
 
         'stopPdi': function(selectedCheckPoint) {
@@ -706,24 +639,19 @@ if(Meteor.isServer){
             MachineReady.update({_id: pdiMachineId}, {$set: {pdiStatus: 1}});
         },
 
-        'finishWashing': function(selectedCheckPoint, dateStop, washDuration, waitWashTime) {
-            MachineReady.update({_id:selectedCheckPoint}, {$set: {washStatus: 1, stopWashDate: dateStop, washDuration: washDuration, waitWashTime: waitWashTime}});
-        },
-
         'locationUpdate': function(selectedPdiMachine, locationId) {
             MachineReady.update({_id: selectedPdiMachine}, {$set: {locationId: locationId}});
         },
+/*
 
         'reserveUpdate': function(selectedPdiMachine, reservedId) {
             MachineReady.update({_id: selectedPdiMachine}, {$set: {reservedFor: reservedId}});
         },
 
+*/
+
         'removeFromSiList': function (siItem) {
            siList.remove({_id: siItem});
-        },
-
-        'updateWashList': function(selectedCheckPoint, dateStart) {
-            MachineReady.update({_id:selectedCheckPoint}, {$set: {washStatus: 2, startWashDate: dateStart}});
         },
 
         'updateRepairList': function(selectedCheckPoint, dateStart) {

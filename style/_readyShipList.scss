@@ -5,22 +5,16 @@
   left: 40em;
 }
 
-.locationId {
-  position: relative;
-  left: 13em;
-  top: 12.1em;
-}
 
 .shipMe {
-  position: relative;
-  top: 14em;
-  left: 3em;
+  position: absolute;
+  left: 32em;
+  top: 15em;
 }
 
-.toggleCombineHeader {
-  position: relative;
-  top: 3em;
-  left: 12em;
+.shipMeButton {
+  left: -25em;
+  position: absolute;
 }
 
 table.readyTable {

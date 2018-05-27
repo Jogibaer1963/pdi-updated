@@ -1,6 +1,6 @@
 <template name="ecnOverView">
         <div >
-            <a class="btn " href="/overView">Back to Over View</a>
+            <a class="btn " href="/overViewUser">Back to Over View</a>
         </div>
     <div class="ecnOverView">
         <h2>Overview of all stored ECN's</h2>
@@ -25,26 +25,30 @@
 
 
 <template name="allEcnOverView">
-    <div class="rTableMachine">
-        <div class="rTableRow">
-            <div class="rTableHeadOverView" ><strong>MCO Number</strong></div>
-            <div class="rTableHeadOverView" ><strong>Effective Date</strong></div>
-            <div class="rTableHeadOverView" ><strong>Machine Recording</strong></div>
-            <div class="rTableHeadOverView" style="width: 100px"><strong>Status Machine Recording</strong></div>
-            <div class="rTableHeadOverView" ><strong>Status MCO implemented</strong></div>
-            <div class="rTableHeadOverView" ><strong>Internal MCO Notes</strong></div>
-        </div>
+    <table class="blueTable" cellpadding="10">
+        <thead>
+          <tr>
+             <th class="pdiTruckOnOrder" ><strong>MCO</strong></th>
+             <th class="pdiShipDate" ><strong>Effective Date</strong></th>
+             <th class="pdiShipField" ><strong>Serial Y/N</strong></th>
+             <th class="pdiShipField" ><strong>Serial Stored</strong></th>
+             <th class="pdiShipField" ><strong>MCO status</strong></th>
+             <th class="ecnTextField" ><strong>Internal MCO Notes</strong></th>
+          </tr>
+        </thead>
+        <tbody>
         {{#each mcoOverView}}
-            <div class="rTableRow locationUpdate {{selectedClass}}">
-                <div class="rTableCellOverView" >{{mcoId}}</div>
-                <div class="rTableCellOverView" >{{effectiveDate}}</div>
-                <div class="rTableCellOverView" >{{machineRecording}}</div>
-                <div class="rTableCellOverView" >{{statusMachine}}</div>
-                <div class="rTableCellOverView" >{{statusMco}}</div>
-                <div class="rTableCellOverView" >{{mcoNotes}}</div>
-            </div>
+            <tr class="rTableRow locationUpdate {{selectedClass}}">
+                <td class="pdiTruckOnOrder" >{{mcoId}}</td>
+                <td class="pdiShipDate" >{{effectiveDate}}</td>
+                <td class="pdiShipField" >{{machineRecording}}</td>
+                <td class="pdiShipField" >{{statusMachine}}</td>
+                <td class="pdiShipField" >{{statusMco}}</td>
+                <td class="ecnTextField" >{{mcoNotes}}</td>
+            </tr>
         {{/each}}
-    </div>
+        </tbody>
+    </table>
 </template>
 
 <template name="ecnNew">

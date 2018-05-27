@@ -31,42 +31,12 @@
                   {{> outBound}}
                   {{> overView}}
               {{/if}}
-              {{#if isInRole 'commission'}}
-                  {{> commissionOverView}}
-              {{/if}}
        {{else}}
             {{> login}}
        {{/if}}
      </body>
 </template>
 
-<template name="commissionNav">
-    <div class="commissionHeadNav">
-        <nav>
-            <a class="btn" href="/commissionOverview">Commission Overview</a>
-        </nav>
-    </div>
-</template>
-
-<template name="commissionStatisticsNav">
-    <nav>
-        <a class="btn" href="/commissionOverview">Commission Overview</a>
-        <a>|</a>
-        <a class="btn" href="/toDoList">L O P</a>
-        <a>|</a>
-        <a class="btn logout" href="/logout" >Logout</a>
-    </nav>
-</template>
-
-<template name="commNav">
-    <nav>
-    <a  class="btn" href="/commission">Commission Tablet</a>
-    <a>|</a>
-    <a class="btn" href="/toDoList">L O P</a>
-    <a>|</a>
-        <a class="btn logout" href="/logout" >Logout</a>
-    </nav>
-</template>
 
 <template name="topNav">
     <div class="topNav">
@@ -102,8 +72,6 @@
            <a class="btn" href="/readyShipList">Final Status</a>
             <a>|</a>
            <a class="btn" href="/ecnOverView">ECN Tracking</a>
-            <a>|</a>
-            <a class="btn" href="/commissionOverView">Commissioning</a>
             <a>|</a>
            <a class="btn btn-danger" href="/admin">Admin</a>
          </nav>
@@ -175,17 +143,9 @@
 <template name="MainLayout_3">
     <div class="mainLayout">
         <nav>
-            <a class="btn" href="/headerShipList">Switch to Headers</a>
+            <a class="btn btn-default btn-success switchToHeader" href="/headerShipList">Switch to Headers</a>
         </nav>
     </div>
-</template>
-
-<template name="headerNav">
-
-</template>
-
-<template name="MainLayout_mary">
-
 </template>
 
 

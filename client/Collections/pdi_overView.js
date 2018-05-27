@@ -88,7 +88,10 @@
 
         'click .resumePdi': function () {
             event.preventDefault();
-            FlowRouter.go('machineInspect_2');
+            const pdiMachineId = Session.get('selectedPdiMachine');
+            localStorage.setItem('joinMachine', pdiMachineId);
+
+          //  FlowRouter.go('joinMachine');
         },
 
         'change .loadConfig': () => {

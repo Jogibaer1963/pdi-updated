@@ -23,15 +23,8 @@
     </div>
     <form class="shipMe">
         <div>
-            <button type="submit" class="shipMeButton">Machine is shipped</button>
+            <button type="submit" class="btn btn-default btn-success shipMeButton">Machine is shipped</button>
             <button type="submit" class="btn btn-success toggleCombineHeader">Toggle List between Combine & Header</button>
-        </div>
-    </form>
-    <form class="locationId">
-        <div>
-            <button type="submit" class="machineLocation">Update Location</button>
-            <label for="locationId" class="mLocationId" ></label>
-            <input type="text" class="machineLocationInput" id="locationId" name="locationId" required>
         </div>
     </form>
    <table class="blueTable readyTable">
@@ -41,10 +34,11 @@
             <th class="pdiShipDate"><strong><span>Shipdate</span></strong></th>
             <th class="pdiDestination"><strong>Destination</strong></th>
             <th class="pdiTransporter"><strong>Transporter</strong></th>
-           <th class="pdiTruckOnOrder"><strong>Truck on Order</strong></th>
-           <th class="pdiShipDate"><strong>Confirmed Ship Date</strong></th>
+            <th class="pdiTruckOnOrder"><strong>Truck on Order</strong></th>
+            <th class="pdiShipDate"><strong>Confirmed Ship Date</strong></th>
             <th class="pdiLocation"><strong>Location</strong></th>
             <th class="pdiComments" style="width: 200px"><strong>Shipping Comments</strong></th>
+           <th class="kitSet"><strong>Kit</strong></th>
        </tr>
        </thead>
        <tbody>
@@ -58,6 +52,7 @@
                 <td class="pdiShipDate">{{date}}</td>
                 <td class="pdiLocation" style="background-color: #6fd981">{{locationId}}</td>
                 <td class="pdiComments">{{shippingComment}}</td>
+                <td class="kitSet">{{kit}}</td>
             </tr>
         {{/each}}
        </tbody>
