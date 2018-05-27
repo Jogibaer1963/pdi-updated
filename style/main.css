@@ -303,8 +303,8 @@ table.locationTable {
 
 .switchToHeader {
   position: absolute;
-  left: 27em;
-  top: 2em; }
+  left: -13em;
+  top: -2.5em; }
 
 .newMachineShipping {
   position: relative;
