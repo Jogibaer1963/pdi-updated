@@ -11,7 +11,7 @@ if(Meteor.isClient) {
             const openInspect = this._id;
             const selectedPdiMachine = Session.get('selectedPdiMachine');
             if (selectedPdiMachine === openInspect) {
-                return "selected_2"
+                return "selected"
             }
         }
 
@@ -19,6 +19,10 @@ if(Meteor.isClient) {
 
 
     Template.pdi_repairList.events({
+
+
+
+
 
         'click .showPdiResult': function() {
             const pdiMachine = this._id;
@@ -40,7 +44,16 @@ if(Meteor.isClient) {
                     saveAs(blob, nameFile);
                 }
             });
+        },
+
+        'click .repEdit': function() {
+            event.preventDefault();
+            let editMachine = Session.get('selectedPdiMachine');
+            localStorage.setItem('editMachine', editMachine);
+            FlowRouter.go('editRepair');
+
         }
+
 
     });
 

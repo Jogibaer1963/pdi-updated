@@ -11,9 +11,10 @@ Meteor.subscribe("checkpoints");
             const errorPos = event.target.newPosition.value;
             const errorDescription = event.target.errorDescription.value;
             const machineRangeStart = event.target.machineRangeStart.value;
-            const machineRangeEnd = event.target.machineRangeEnd.value;
+            const machineRangeEndC77 = event.target.machineRangeEndC77.value;
+            const machineRangeEndC78 = event.target.machineRangeEndC78.value;
+            const machineRangeEndC79 = event.target.machineRangeEndC79.value;
             const resultStart = machineRangeStart.split(" ");
-            const resultEnd = machineRangeEnd.split(" ");
             const checkStatus = 0;
             const range = [];
             $('input[name=range]:checked').each(function () {
@@ -23,11 +24,13 @@ Meteor.subscribe("checkpoints");
             let statusEdit = Session.get("statusEdit");
             if (statusEdit === 0 ) {
             Meteor.call('inputNewCheckPoint', status, errorPos, errorDescription,
-                range, resultStart, resultEnd, checkStatus);
+                            range, checkStatus, machineRangeEndC77,
+                            machineRangeEndC78, machineRangeEndC79);
             } else if (statusEdit === 1 ) {
                 let checkPointToActivateEdit = Session.get("selectedCheckPoint");
                 Meteor.call('editCheckPoint',checkPointToActivateEdit, status, errorPos,
-                    errorDescription, range, resultStart, resultEnd, checkStatus);
+                                errorDescription, range, checkStatus,
+                                machineRangeEndC77, machineRangeEndC78, machineRangeEndC79);
                 Session.set("statusEdit", 0);
                 Session.set("errorEdit", '');
 
@@ -38,7 +41,10 @@ Meteor.subscribe("checkpoints");
             event.target.C78.checked = false;
             event.target.C79.checked = false;
             event.target.machineRangeStart.value = "";
-            event.target.machineRangeEnd.value = "";
+            event.target.machineRangeEndC77.value = "";
+            event.target.machineRangeEndC78.value = "";
+            event.target.machineRangeEndC79.value = "";
+            console.log(machineRangeEndC79);
 
         },
 

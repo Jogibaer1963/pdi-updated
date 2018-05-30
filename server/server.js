@@ -305,11 +305,20 @@ if(Meteor.isServer){
         },
 
         'download_2': function (machineNr) {
-            const collection = repairOrderPrint.find({Machine_Nr: machineNr}, {fields: {Machine_Nr: 0, _id:
-             0}}).fetch();
+            const collection = MachineReady.find({machineId: machineNr}, {fields: {
+                                                                                   'checkListIssues.errorDescription': 1,
+                                                                                    _id: 0}}).fetch();
+            console.log(collection);
+            /*
             const heading = true;
             const delimiter = ";";
             return exportcsv.exportToCSV(collection, heading, delimiter);
+            */
+        },
+
+        'editRepair': function(editId) {
+          return MachineReady.find({_id: editId}, {fields: {newIssues: 1, checkListIssues: 1 }}).fetch();
+
         },
 
         'download_3': function (siId) {
@@ -382,16 +391,28 @@ if(Meteor.isServer){
             MachineReady.update({_id: pdiMachineId}, {$set: {pdiStatus: 1}});
         },
 
-        'inputNewCheckPoint': function(status, errorPos, errorDescription, range, machineRangeStart, machineRangeEnd) {
-            checkPoints.insert({status: status, errorPos: errorPos,
-                errorDescription: errorDescription, machineType: range, machineRangeStart: machineRangeStart,
-                          machineRangeEnd: machineRangeEnd, checkStatus: 0});
+        'inputNewCheckPoint': function(status, errorPos, errorDescription, range, checkStatus, machineRangeEndC77,
+                                                                                  machineRangeEndC78, machineRangeEndC79) {
+            checkPoints.insert({status: status,
+                                errorPos: errorPos,
+                                errorDescription: errorDescription,
+                                machineType: range,
+                                machineRangeEndC77: machineRangeEndC77,
+                                machineRangeEndC78: machineRangeEndC78,
+                                machineRangeEndC79: machineRangeEndC79,
+                                checkStatus: 0});
         },
 
-        'editCheckPoint': function(checkId, status, errorPos, errorDescription, range, machineRangeStart, machineRangeEnd, checkStatus) {
-            checkPoints.update({_id: checkId}, {$set: {status: status, errorPos: errorPos,
-                    errorDescription: errorDescription, machineType: range, machineRangeStart: machineRangeStart,
-                    machineRangeEnd: machineRangeEnd, checkStatus: 0}});
+        'editCheckPoint': function(checkId, status, errorPos, errorDescription, range, checkStatus, machineRangeEndC77,
+                                                                                machineRangeEndC78, machineRangeEndC79) {
+            checkPoints.update({_id: checkId}, {$set: {status: status,
+                                                        errorPos: errorPos,
+                                                        errorDescription: errorDescription,
+                                                        machineType: range,
+                                                        machineRangeEndC77: machineRangeEndC77,
+                                                        machineRangeEndC78: machineRangeEndC78,
+                                                        machineRangeEndC79: machineRangeEndC79,
+                                                        checkStatus: 0}});
         },
 
         'deactivateCheckPoint': function(deactivateCheck, status) {
@@ -407,6 +428,8 @@ if(Meteor.isServer){
                 errorDescription: errorDescription, machineType: machineType}});
         },
   // -------------------------------------------- Generate PDI List -------------------------------------------------
+
+
         'generatePdiList': function(selectedPdiMachineId, pdiMachineNr, dateStart, pdiUser, machineType) {
             machineConfig = [];
             variant = [];
@@ -417,25 +440,32 @@ if(Meteor.isServer){
             variantItem = [];
             machineConfiguration = [];
             configStyle = [];
-            MachineReady.update({_id: selectedPdiMachineId}, {$set: {pdiStatus: 2, startPdiDate: dateStart}});
-         let k =   checkPoints.find({status: 1, machineRangeEnd: {$lt: pdiMachineNr}},
-                            {fields: {errorDescription: 1, errorPos: 1}}).fetch();
-         let sortK = _.sortBy(k, 'errorPos');
-               console.log(sortK);
+            MachineReady.update({_id: selectedPdiMachineId}, {$set: {pdiStatus: 2,
+                                                                     startPdiDate: dateStart,
+                                                                     pdiPerformer: pdiUser}});
+            let checkType = [];
+            if(machineType === 'C77') {
+                 checkType = checkPoints.find({machineRangeEndC77: {$lt: pdiMachineNr}}, {fields: {errorDescription: 1,
+                                                                                         errorPos: 1}}).fetch();
+            } else if(machineType === 'C78') {
+                 checkType= checkPoints.find({machineRangeEndC78: {$lt: pdiMachineNr}}, {fields: {errorDescription: 1,
+                                                                                           errorPos: 1}}).fetch();
+            } else if(machineType.toString() === 'C79') {
+                 checkType = checkPoints.find({machineRangeEndC79: {$gt: pdiMachineNr}}, {fields: {errorDescription: 1,
+                                                                                           errorPos: 1}}).fetch();
+            }
+            let checkList = checkPoints.find({status: 1, machineType: {$in: [machineType.toString()]}},
+                                                               {fields: {errorDescription: 1,
+                                                                                 errorPos: 1,
+                                                                              machineType: 1 }}).fetch();
+            checkList.push.apply(checkList, checkType);
+            let sortK = _.sortBy(checkList, 'errorPos');
 
+            MachineReady.update({_id: selectedPdiMachineId}, {$set: {checkList: sortK}});
 
-            /*    .forEach(function (copy) {
-                    console.log(copy);
-                     MachineReady.update({_id: selectedPdiMachineId}, {$addToSet: {checkList: (copy)}});
-                       });
-
-
-
-            //   MachineReady.update({_id: selectedPdiMachineId}, {$set: {pdiPerformer: pdiUser}});
-     /*
             // Load Type Variant
 
-            let type = selectedPdiMachineNr.slice(0,3);
+            let type = pdiMachineNr.slice(0,3);
             let newVariant = 'variants_' + type;
             let variantsList = Mongo.Collection.get(newVariant).find({}, {sort: {variant: 1}}).fetch();
             variantsList.forEach((variantValue, k) => {
@@ -462,40 +492,32 @@ if(Meteor.isServer){
 
             // SI added to repair list
 
-            const list = siList.find({machineNr: selectedPdiMachineNr}, {limit:1}).fetch();
-            if(list === '') {
-            } else {
-                siList.find({machineNr: selectedPdiMachineNr}).forEach(function(repOrder){
-                    MachineReady.upsert({_id: selectedPdiMachineId}, {$addToSet: {issues}});
-                    siListDone.upsert({_id: selectedPdiMachineId}, {$addToSet: {repOrder}});
-                    });
-                }
-            let machineSi = [];
-            let siTableRead = siTable.find().fetch();
-            for (k = 0; k < siTableRead.length; k++) {
-                let siName = siTableRead[k].siNumber;
-                let resultSi = siMd.findOne({_id: siName},
-                    {"machineList.machine": {$eq: selectedPdiMachineNr}}, {"machineList.$": 1});
-             //   console.log(resultSi, siName);
-               /*
+                let resultSi = siMd.find({$and: [{'machineList.machine': "C7900669"}, {'machineList.siStatus': 0}]}).fetch();
+                let result = resultSi.shift();
+                let stringResult = JSON.stringify(result).toString();
+                let stringLength = stringResult.length
+                let firstComma = stringResult.indexOf(',');
+                let idSlice = stringResult.slice(7, firstComma);
+                let machineSlice = stringResult.slice(firstComma + 1, stringLength - 1);
+                console.log(machineSlice);
+
+/*
                     for (i = 0; i < resultSi.length; i++) {
                           if (resultSi[i].siStatus < 1) {
                                  machineSi.push(resultSi[i]);
                           }
                     }
                 for (i = 0; i < machineSi.length; i++) {
-                    if (machineSi[i].machine === selectedPdiMachineNr) {
+                    if (machineSi[i].machine === pdiMachineNr) {
                         let machineId = machineSi[i]._id;
                         let repOrder = {};
                         repOrder.errorDescription = siName;
                         repOrder._id = machineId;
-                   //     console.log(repOrder);
-                //        InspectedMachines.upsert({_id: selectedPdiMachineId}, {$addToSet: {repOrder}});
-                 //       siMd.update({_id: siName, "machineList._id": machineId},
-                 //        {$set:{"machineList.$.siStatus": 3}});
+                        console.log(repOrder);
+                        siMd.update({_id: siName, "machineList._id": machineId}, {$set:{"machineList.$.siStatus": 3}});
                     }
-                }  */
-        //    }
+                } */
+           // }
 
         },
 

@@ -60,9 +60,10 @@
             const firstRange = JSON.stringify(selectedPdiMachineNr).slice(1, 4);
             const range = [];
             range.push(firstRange);
-            const dateStart = new Date().toLocaleDateString();
+            const dateStart = new Date();
             Meteor.call('generatePdiList', selectedPdiMachineId, selectedPdiMachineNr, dateStart,
                 user, range);
+
             FlowRouter.go('machineInspect');
         },
 
