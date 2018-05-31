@@ -1,11 +1,16 @@
 <template name="machineSearch">
     {{#if currentUser}}
-    <div class="">
-        {{> MainLayout_3}}
-    </div>
-    <h1>Search and Edit a Machine</h1>
+        {{> searchMe}}
+    {{else}}
+        {{> login}}
+    {{/if}}
+</template>
+
+
+<template name="searchMe">
+    <h1>Search a Machine</h1>
     <form class="searchMachine">
-        <div class="userBox">
+        <div class="">
             <label for="machineId" class="input" >Machine-Id</label>
             <br>
             <input type="text" class="inputComment" id="searchId" name="searchId" placeholder="Machine Id" required />
@@ -16,60 +21,60 @@
     </form>
     <br><br><br><br><br><br>
     <h1>Shipping Content</h1>
-    <div class="rTable">
-        <div class="rTableRow">
-            <div class="rTableHead"><strong>Machine</strong></div>
-            <div class="rTableHead" ><strong>ShipDate</strong></div>
-            <div class="rTableHead"><strong>Destination</strong></div>
-            <div class="rTableHead"><strong>Transporter</strong></div>
-            <div class="rTableHead"><strong>Ship with Kit</strong></div>
-            <div class="rTableHead"><strong>Tire / Track</strong></div>
-            <div class="rTableHead" style="width: 200px"><strong>Shipping Comments</strong></div>
-            <div class="rTableHead"><strong>Machine Hours</strong></div>
-        </div>
+    <table class="blueTable">
+        <thead>
+        <tr>
+            <th class="pdiMachineField"><strong>Machine</strong></th>
+            <th class="pdiShipDate" ><strong>ShipDate</strong></th>
+            <th class="pdiDestination"><strong>Destination</strong></th>
+            <th class="pdiTransporter"><strong>Transporter</strong></th>
+            <th class="pdiKitList"><strong>Ship with Kit</strong></th>
+            <th class="pdiTireField"><strong>Tire / Track</strong></th>
+            <th class="pdiComments" style="width: 200px"><strong>Shipping Comments</strong></th>
+            <th class="pdiPDIField"><strong>Machine Hours</strong></th>
+        </tr>
+        </thead>
+       <tbody class="machineSearchTable">
         {{#each machineSearchShow}}
-            <div class="rTableRow {{selectedClass}}">
-                <div class="rTableCell">{{machineId}}</div>
-                <div class="rTableCell">{{date}}</div>
-                <div class="rTableCell">{{destination}}</div>
-                <div class="rTableCell">{{transporter}}</div>
-                <div class="rTableCell">{{kit}}</div>
-                <div class="rTableCell">{{tireTrack}}</div>
-                <div class="rTableCellComment">{{shippingComment}}</div>
-                <div class="rTableCell">{{machineHour}}</div>
-            </div>
+            <tr class="machineSearchTable {{selectedClass}}">
+                <td class="pdiMachineField">{{machineId}}</td>
+                <td class="pdiShipDate">{{date}}</td>
+                <td class="pdiDestination">{{destination}}</td>
+                <td class="pdiTransporter">{{transporter}}</td>
+                <td class="pdiKitList">{{kit}}</td>
+                <td class="pdiTireField">{{tireTrack}}</td>
+                <td class="pdiComments">{{shippingComment}}</td>
+                <td class="pdiPDIField">{{machineHours}}</td>
+            </tr>
         {{/each}}
-    </div>
+       </tbody>
+    </table>
     <br>
     <h1>Process Status</h1>
-    <div class="rTable">
-        <div class="rTableRow">
-            <div class="rTableHead"><strong>Date of creation</strong></div>
-            <div class="rTableHead" ><strong>Location</strong></div>
-            <div class="rTableHead"><strong>PDI Duration</strong></div>
-            <div class="rTableHead"><strong>PDI Status</strong></div>
-            <div class="rTableHead"><strong>Repair Status</strong></div>
-            <div class="rTableHead"><strong>Wash Duration</strong></div>
-            <div class="rTableHead"><strong>Wash Status</strong></div>
-            <div class="rTableHead"><strong>Ship Status</strong></div>
-        </div>
-        {{#each machineSearchShow}}
-            <div class="rTableRow {{selectedClass}}">
-                <div class="rTableCell">{{dateOfCreation}}</div>
-                <div class="rTableCell">{{locationId}}</div>
-                <div class="rTableCell">{{pdiDuration}}</div>
-                <div class="rTableCell {{getStatusColor pdiStatus}}" style="background-color:{{getStatusColor pdiStatus}}; color:{{getStatusColor pdiStatus}}">{{pdiStatus}}</div>
-                <div class="rTableCell {{getStatusColor repairStatus}}" style="background-color:{{getStatusColor repairStatus}}; color:{{getStatusColor repairStatus}}">{{repairStatus}}</div>
-                <div class="rTableCell">{{washDuration}}</div>
-                <div class="rTableCell {{getStatusColor washStatus}}" style="background-color:{{getStatusColor washStatus}}; color:{{getStatusColor washStatus}}">{{washStatus}}</div>
-                <div class="rTableCell {{getStatusColor shipStatus}}" style="background-color:{{getStatusColor shipStatus}}; color:{{getStatusColor shipStatus}}">{{shipStatus}}</div>
-            </div>
-        {{/each}}
-    </div>
+    <table class="blueTable ">
+        <thead>
+           <tr class="">
+                <th class="pdiPDIField"><strong>PDI</strong></th>
+                <th class="pdiRepField"><strong>Repair</strong></th>
+                <th class="pdiWashField"><strong>Wash</strong></th>
+                <th class="pdiShipField"><strong>Ship</strong></th>
+           </tr>
+        </thead>
+        <tbody class="machineSearchTable">
+          {{#each machineSearchShow}}
+             <tr class=" {{selectedClass}}">
+                <td class="pdiPDIField {{getStatusColor pdiStatus}}" style="background-color:{{getStatusColor pdiStatus}}; color:{{getStatusColor pdiStatus}}">{{pdiStatus}}</td>
+                <td class="pdiRepField {{getStatusColor repairStatus}}" style="background-color:{{getStatusColor repairStatus}}; color:{{getStatusColor repairStatus}}">{{repairStatus}}</td>
+                <td class="pdiWashField {{getStatusColor washStatus}}" style="background-color:{{getStatusColor washStatus}}; color:{{getStatusColor washStatus}}">{{washStatus}}</td>
+                <td class="pdiShipField {{getStatusColor shipStatus}}" style="background-color:{{getStatusColor shipStatus}}; color:{{getStatusColor shipStatus}}">{{shipStatus}}</td>
+             </tr>
+          {{/each}}
+        </tbody>
+    </table>
     <h1>PDI Content</h1>
     <div class="printList">
         {{#each machineSearchShow}}
-            {{#each repairOrder}}
+            {{#each newIssues}}
                 <div class="pdiUser">
                     <div>
                         <h3>PDI performed by: {{user}}</h3>
@@ -101,8 +106,6 @@
             {{/each}}
         {{/each}}
     </div>
-    {{else}}
-    {{> login}}
-    {{/if}}
+
 </template>
 

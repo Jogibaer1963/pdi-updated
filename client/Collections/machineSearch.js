@@ -1,21 +1,20 @@
-/**
- * Created by Jogibaer on 07.06.2016.
- */
-if (Meteor.isClient) {
+
+
 
     Meteor.subscribe("machineReadyToGo_2016");
 
-    Template.machineSearch.events({
+    Template.searchMe.events({
         "submit .searchMachine": function (event) {
             event.preventDefault();
             const findMachine = event.target.searchId.value;
             Session.set('findMachine', findMachine);
+            event.target.searchId.value = '';
            
         }
     });
 
 
-    Template.machineSearch.helpers({
+    Template.searchMe.helpers({
         machineSearchShow: function() {
             event.preventDefault();
             const findMachine = Session.get('findMachine');
@@ -33,4 +32,3 @@ if (Meteor.isClient) {
     });
 
 
-}

@@ -518,6 +518,9 @@ table.truckTable {
   top: 15em;
   margin-left: 2em; }
 
+tbody.machineSearchTable {
+  height: 50px; }
+
 .inProcess {
   animation: glowing 1500ms infinite;
   color: transparent; }
