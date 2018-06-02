@@ -582,6 +582,9 @@ a:hover {
   float: left;
   margin-left: 2em; }
 
+select > option[value=''] {
+  display: none; }
+
 .descriptionBox {
   width: 350px; }
 
@@ -603,10 +606,11 @@ a:hover {
   position: relative;
   left: 3em; }
 
-.tableChecklist {
+table.tableChecklist {
   position: absolute;
   top: 27em;
-  margin-left: 2em; }
+  margin-left: 2em;
+  width: 800px; }
 
 .position {
   max-width: 142px;
@@ -625,12 +629,12 @@ a:hover {
   min-width: 100px; }
 
 .rangeStart {
-  max-width: 220px;
-  min-width: 220px; }
+  max-width: 100px;
+  min-width: 100px; }
 
 .rangeEnd {
-  max-width: 220px;
-  min-width: 220px; }
+  max-width: 100px;
+  min-width: 100px; }
 
 table {
   width: 411px;

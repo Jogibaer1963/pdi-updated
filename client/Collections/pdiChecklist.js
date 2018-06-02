@@ -44,8 +44,6 @@ Meteor.subscribe("checkpoints");
             event.target.machineRangeEndC77.value = "";
             event.target.machineRangeEndC78.value = "";
             event.target.machineRangeEndC79.value = "";
-            console.log(machineRangeEndC79);
-
         },
 
 
@@ -108,7 +106,8 @@ Meteor.subscribe("checkpoints");
             let toggle = Session.get("toggleActiveInactive");
             if(toggle === 0) {
                 Session.set("activeHeader", 1);
-                return checkPoints.find({status: 1}, {sort: {errorPos: 1}});
+                let result = checkPoints.find({status: 1}, {sort: {errorPos: 1}}).fetch();
+                return result;
             } else {
                 Session.set("activeHeader", 0);
                 return checkPoints.find({status: 0}, {sort: {errorPos: 1}});
@@ -128,7 +127,42 @@ Meteor.subscribe("checkpoints");
         // edit description of a checkpoint
         errorEdit: () => {
             let checkPointToActivateEdit = Session.get('selectedCheckPoint');
-            return checkPoints.findOne({_id:checkPointToActivateEdit}).errorDescription;
+            let result = checkPoints.findOne({_id:checkPointToActivateEdit});
+            if(result) {
+                return result.errorDescription;
+            }
+        },
+
+        rangeC77: () => {
+            let checkPointToActivateEdit = Session.get('selectedCheckPoint');
+            let result = checkPoints.findOne({_id:checkPointToActivateEdit});
+            if(result) {
+                return result.machineRangeEndC77;
+            }
+        },
+
+        rangeC78: () => {
+            let checkPointToActivateEdit = Session.get('selectedCheckPoint');
+            let result = checkPoints.findOne({_id:checkPointToActivateEdit});
+            if(result) {
+                return result.machineRangeEndC78;
+            }
+        },
+
+        rangeC79: () => {
+            let checkPointToActivateEdit = Session.get('selectedCheckPoint');
+            let result = checkPoints.findOne({_id:checkPointToActivateEdit});
+            if(result) {
+                return result.machineRangeEndC79;
+            }
+        },
+
+       position: () => {
+            let checkPointToActivateEdit = Session.get('selectedCheckPoint');
+            let result = checkPoints.findOne({_id:checkPointToActivateEdit});
+            if(result) {
+                return result.errorPos;
+            }
         },
 
 

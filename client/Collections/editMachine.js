@@ -9,10 +9,13 @@ if(Meteor.isClient) {
 
         showEditMachine: function() {
             const selectedMachine = Session.get('editSelectedMachine');
-            const kitSaved = MachineReady.find({_id: selectedMachine}, {fields: {"kit": 1}}).fetch();
+            const kitSaved = MachineReady.find({_id: selectedMachine}, {fields: {"kit": 1, tireTrack: 1}}).fetch();
             const kitString = JSON.stringify(kitSaved);
             const kitExtract = kitString.slice(8, -28);
             const myString = kitExtract.replace(/"/g, "");
+            let tire = kitSaved.shift();
+            Session.set('tire', tire.tireTrack);
+            console.log(tire.tireTrack);
 
             const x = myString.indexOf('No_Kit  ', 0);
             if(x >= 0){
@@ -165,6 +168,10 @@ if(Meteor.isClient) {
             if(kit_9 === 'G03_0120') {
                 return 'checked';
             }
+        },
+
+        'tire': () => {
+            return Session.get('tire');
         }
 
     });

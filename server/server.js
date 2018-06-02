@@ -408,16 +408,21 @@ if(Meteor.isServer){
             MachineReady.update({_id: selectedPdiMachineId}, {$set: {pdiStatus: 2,
                                                                      startPdiDate: dateStart,
                                                                      pdiPerformer: pdiUser}});
+
+            //--------------------------------    Check points ----------------------------------------------------
+            let typeOfMachine = machineType.toString();
             let checkType = [];
-            if(machineType === 'C77') {
+            if(typeOfMachine === 'C77') {
                  checkType = checkPoints.find({machineRangeEndC77: {$lt: pdiMachineNr}}, {fields: {errorDescription: 1,
                                                                                          errorPos: 1}}).fetch();
-            } else if(machineType === 'C78') {
+            } else if(typeOfMachine === 'C78') {
                  checkType= checkPoints.find({machineRangeEndC78: {$lt: pdiMachineNr}}, {fields: {errorDescription: 1,
                                                                                            errorPos: 1}}).fetch();
-            } else if(machineType.toString() === 'C79') {
+            } else if(typeOfMachine === 'C79') {
                  checkType = checkPoints.find({machineRangeEndC79: {$gt: pdiMachineNr}}, {fields: {errorDescription: 1,
                                                                                            errorPos: 1}}).fetch();
+            } else {
+                console.log('nicht definierter Maschinen Typ', typeOfMachine);
             }
             let checkList = checkPoints.find({status: 1, machineType: {$in: [machineType.toString()]}},
                                                                {fields: {errorDescription: 1,
@@ -456,7 +461,7 @@ if(Meteor.isServer){
             MachineReady.update({_id: selectedPdiMachineId}, {$set: {machineConfig: machineConfiguration}});
 
             // SI added to repair list
-
+/*
                 let resultSi = siMd.find({$and: [{'machineList.machine': "C7900669"}, {'machineList.siStatus': 0}]}).fetch();
                 let result = resultSi.shift();
                 let stringResult = JSON.stringify(result).toString();
@@ -492,7 +497,9 @@ if(Meteor.isServer){
                                                              machineConfig: [],
                                                              pdiPerformer: '',
                                                              startPdiDate: '',
-                                                             fuelStart: ''
+                                                             fuelStart: '',
+                                                             newIssues: '',
+                                                             batteryStatus: ''
                                                      }});
             siListDone.remove({_id: pdiMachineId});
         },
