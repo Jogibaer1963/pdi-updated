@@ -405,21 +405,23 @@ if(Meteor.isServer){
             variantItem = [];
             machineConfiguration = [];
             configStyle = [];
+            checkType = [];
+            issueContent = [];
             MachineReady.update({_id: selectedPdiMachineId}, {$set: {pdiStatus: 2,
                                                                      startPdiDate: dateStart,
                                                                      pdiPerformer: pdiUser}});
 
             //--------------------------------    Check points ----------------------------------------------------
             let typeOfMachine = machineType.toString();
-            let checkType = [];
+
             if(typeOfMachine === 'C77') {
-                 checkType = checkPoints.find({machineRangeEndC77: {$lt: pdiMachineNr}}, {fields: {errorDescription: 1,
+                 checkType = checkPoints.find({machineRangeEndC77: {$gt: pdiMachineNr}, status: 1}, {fields: {errorDescription: 1,
                                                                                          errorPos: 1}}).fetch();
             } else if(typeOfMachine === 'C78') {
-                 checkType= checkPoints.find({machineRangeEndC78: {$lt: pdiMachineNr}}, {fields: {errorDescription: 1,
+                 checkType = checkPoints.find({machineRangeEndC78: {$gt: pdiMachineNr}, status: 1}, {fields: {errorDescription: 1,
                                                                                            errorPos: 1}}).fetch();
             } else if(typeOfMachine === 'C79') {
-                 checkType = checkPoints.find({machineRangeEndC79: {$gt: pdiMachineNr}}, {fields: {errorDescription: 1,
+                 checkType = checkPoints.find({machineRangeEndC79: {$gt: pdiMachineNr}, status: 1}, {fields: {errorDescription: 1,
                                                                                            errorPos: 1}}).fetch();
             } else {
                 console.log('nicht definierter Maschinen Typ', typeOfMachine);
@@ -445,10 +447,12 @@ if(Meteor.isServer){
 
             // Load Machine Configuration and select config items
 
-            let combineVariant = MachineReady.find({_id: selectedPdiMachineId}, {fields: {config: 1, _id: 0}}, {sort: {variant: 1}}).fetch();
+            let combineVariant = MachineReady.find({_id: selectedPdiMachineId},
+                                                    {fields: {config: 1, _id: 0}},
+                                                    {sort: {variant: 1}}).fetch();
             let k = (combineVariant[0]).config;
                 k.forEach((variantMarker, i) => {
-                   uniqueId= Random.id();
+                let uniqueId= Random.id();
                    variantMachine[i] = variantMarker;
                    let match = variantMD.indexOf(variantMachine[i]);
                    configStyle[match] = {_id: uniqueId,
@@ -461,35 +465,30 @@ if(Meteor.isServer){
             MachineReady.update({_id: selectedPdiMachineId}, {$set: {machineConfig: machineConfiguration}});
 
             // SI added to repair list
-/*
-                let resultSi = siMd.find({$and: [{'machineList.machine': "C7900669"}, {'machineList.siStatus': 0}]}).fetch();
-                let result = resultSi.shift();
-                let stringResult = JSON.stringify(result).toString();
-                let stringLength = stringResult.length
-                let firstComma = stringResult.indexOf(',');
-                let idSlice = stringResult.slice(7, firstComma);
-                let machineSlice = stringResult.slice(firstComma + 1, stringLength - 1);
-                console.log(machineSlice);
 
-/*
-                    for (i = 0; i < resultSi.length; i++) {
-                          if (resultSi[i].siStatus < 1) {
-                                 machineSi.push(resultSi[i]);
-                          }
+                let testResult = siTable.find({}, {projection: {_id: 0}}).fetch();
+                for(i = 0; i < testResult.length; i++) {
+                    let idSi = testResult[i].siNumber;
+                    let siIssue = '-SI- ' + idSi;
+                    let siMachine = (siMd.find({_id: idSi}).fetch()).shift();
+                    delete siMachine._id;
+                    let newArray = siMachine.machineList;
+                    let result = newArray.find(k => k.machine === pdiMachineNr);
+                    if(result) {
+                        let uniqueIdSi = Random.id();
+                        MachineReady.update({_id: selectedPdiMachineId}, {
+                            $push: {
+                                newIssues: {
+                                    _id: uniqueIdSi,
+                                    checkStatus: true,
+                                    errorDescription: siIssue
+                                }}
+                        });
                     }
-                for (i = 0; i < machineSi.length; i++) {
-                    if (machineSi[i].machine === pdiMachineNr) {
-                        let machineId = machineSi[i]._id;
-                        let repOrder = {};
-                        repOrder.errorDescription = siName;
-                        repOrder._id = machineId;
-                        console.log(repOrder);
-                        siMd.update({_id: siName, "machineList._id": machineId}, {$set:{"machineList.$.siStatus": 3}});
-                    }
-                } */
-           // }
-
+                }
         },
+
+        //---------------------------------------------  other PDI operations ------------------------------------------------------
 
         'cancelPdi': function(pdiMachineId) {
             MachineReady.update({_id: pdiMachineId}, {$set: {pdiStatus: 0,
@@ -498,7 +497,7 @@ if(Meteor.isServer){
                                                              pdiPerformer: '',
                                                              startPdiDate: '',
                                                              fuelStart: '',
-                                                             newIssues: '',
+                                                             newIssues: [],
                                                              batteryStatus: ''
                                                      }});
             siListDone.remove({_id: pdiMachineId});
@@ -541,7 +540,8 @@ if(Meteor.isServer){
 
         'addNewFailure': (selectedPdiMachineId, addNewFailure) => {
             let uniqueId = Random.id();
-            MachineReady.upsert({_id: selectedPdiMachineId}, {$push: {newIssues: {_id: uniqueId, checkStatus: true, errorDescription: addNewFailure}}});
+            MachineReady.upsert({_id: selectedPdiMachineId},
+                {$push: {newIssues: {_id: uniqueId, checkStatus: true, errorDescription: addNewFailure}}});
         },
 
         'removeFailure': (selectedPdiMachineId, openFailure) => {
