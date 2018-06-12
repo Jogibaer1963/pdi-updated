@@ -158,6 +158,7 @@
                <th class="pdiTransporter"><strong>Transporter</strong></th>
                 <th class="pdiTruckOnOrder"><strong>Truck ordered</strong></th>
                 <th class="pdiTruckDate"><strong>Confirmed Ship Date</strong></th>
+                <th class="userErase"><strong>Ready to go</strong></th>
                 <th class="pdiKitList"><strong>Kit List</strong></th>
                <th class="pdiKitField"><strong>Ship with Kit</strong></th>
                <th class="pdiTireField"><strong>Tire / Track</strong></th>
@@ -177,6 +178,7 @@
                     <td class="pdiTransporter">{{transporter}}</td>
                     <td class="pdiTruckOnOrder {{getStatusTruck truckStatus}}" style="background-color:{{getStatusTruck truckStatus}}; color:{{getStatusTruck truckStatus}}" >{{truckStatus}}</td>
                     <td class="pdiTruckDate truckDateCorrection">{{confirmedShipDate}}</td>
+                    <td class="userErase {{getStatusGo readyToGo}}" style="background-color:{{getStatusGo readyToGo}}; color:{{getStatusGo readyToGo}}" >{{readyToGo}}</td>
                     <td class="pdiKitList {{getStatusKit KitStatus}}" style="background-color:{{getStatusKit KitStatus}}; color:{{getStatusKit KitStatus}}" >{{KitStatus}}</td>
                     <td class="pdiKitField">{{kit}}</td>
                     <td class="pdiTireField">{{tireTrack}}</td>

@@ -1,26 +1,10 @@
 <template name="machineLocation">
     {{#if currentUser}}
-        {{> locationNav}}
+        {{> topNav}}
         {{> pdiLocation}}
     {{else}}
         {{> login}}
     {{/if}}
-</template>
-
-<template name="locationNav">
-    <div class="topNav">
-        <nav>
-            <a class="btn" href="/overViewUser">OverView</a>
-            <a>|</a>
-            <a class="btn" href="/machineSearch" disabled>Search by Machine</a>
-            <a>|</a>
-            <a class="btn" href="/wordSearch" disabled>Search by Key Word</a>
-            <a>|</a>
-            <a class="btn" href="/statistics" disabled>Statistics</a>
-            <a>|</a>
-            <a class="btn logout" href="/logout" >Logout</a>
-        </nav>
-    </div>
 </template>
 
 <template name="pdiLocation">

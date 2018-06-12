@@ -21,10 +21,6 @@ if (Meteor.isClient) {
 
             } },
 
-
-
-
-
         'selectedClass': function () {
             const checkPoint = this._id;
             const selectedCheckPoint = Session.get('selectedMachine');
@@ -34,7 +30,7 @@ if (Meteor.isClient) {
         }
     });
 
-    Session.set('k', 0);
+    Session.set('k', 1);
 
     Template.overViewReadyList.events({
 
@@ -49,8 +45,6 @@ if (Meteor.isClient) {
             Meteor.call('machineIsGone', selectedCheckPoint);
         },
 
-
-
         'click .toggleCombineHeader': function () {
             event.preventDefault();
             let k = Session.get('k');
@@ -61,17 +55,20 @@ if (Meteor.isClient) {
               }
         },
 
-        'submit .locationId': function (event) {
+        "click .submitReadyGo": function () {
             event.preventDefault();
-            const selectedPdiMachine = Session.get('selectedMachine');
-            if (typeof selectedPdiMachine === 'undefined') {
-                alert('Mark the Machine first before update the Location');
-            }
-            const locationId = event.target.locationId.value;
-            Meteor.call('locationUpdate', selectedPdiMachine, locationId);
-            event.target.locationId.value = "";
-            Session.set('selectedMachine', '');
+            const readyGo = [];
+            $('input[name=readyToGo]:checked').each(function () {
+                readyGo.push($(this).val());
+            });
+
+            Meteor.call('readyToGo', readyGo);
+            $( "#readyGo" ).prop( "checked", false );
+
         }
+
+
+
     });
 
 
