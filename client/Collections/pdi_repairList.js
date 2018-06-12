@@ -17,12 +17,10 @@ if(Meteor.isClient) {
 
     });
 
+/* ToDo make Battery, OMM and repairlist editable */
+
 
     Template.pdi_repairList.events({
-
-
-
-
 
         'click .showPdiResult': function() {
             const pdiMachine = this._id;
