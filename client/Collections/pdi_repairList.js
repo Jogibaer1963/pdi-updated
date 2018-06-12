@@ -46,15 +46,6 @@ if(Meteor.isClient) {
             });
         },
 
-        'click .repEdit': function() {
-            event.preventDefault();
-            let editMachine = Session.get('selectedPdiMachine');
-            localStorage.setItem('editMachine', editMachine);
-            FlowRouter.go('editRepair');
-
-        }
-
-
     });
 
     Template.pdiInspectList.helpers({
@@ -64,11 +55,30 @@ if(Meteor.isClient) {
             return MachineReady.find({_id: pdiMachine});
         },
 
+    });
+
+    Template.editButton.events({
+
+        'click .editEntries': (e) => {
+            e.preventDefault();
+            const pdiMachine = Session.get('selectedPdiMachine');
+            if(pdiMachine) {
+                let result = MachineReady.findOne({_id: pdiMachine}).pdiStatus;
+                    if(result === 1 ) {
+                        localStorage.setItem('editMachine', pdiMachine);
+                        FlowRouter.go('/editEntries');
+                    } else {
+                        console.log('not ready');
+                    }
+            } else {
+                console.log('no machine selected')
+            }
 
 
-
+        },
 
     });
+
 
 
 }

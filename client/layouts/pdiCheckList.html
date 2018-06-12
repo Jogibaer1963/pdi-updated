@@ -1,6 +1,7 @@
 
 <template name="checkList">
 {{#if currentUser}}
+{{> topNav}}
 {{> inputNewCheckPoint}}
 {{else}}
     {{> login}}
@@ -8,21 +9,21 @@
 </template>
 
 <template name="inputNewCheckPoint">
-    <div>
-        <nav class="mainLayout">
-            <a class="btn" href="/overViewUser">Over View</a>
-            <a>|</a>
-            <a class="btn" href="/inspectionStart">PDI Overview</a>
-            <a>|</a>
-            <a class="btn" href="/statistics" disabled>Statistics</a>
-            <a>|</a>
-            <a class="btn" href="/logout" >Logout</a>
-        </nav>
-        <br>
         <div id="logo">
             <img src="claas_logo.png" />
         </div>
+    <div>
+        <nav class="mainLayout">
+            <a class="btn" href="/inspectionStart">Inspection</a>
+            <a>|</a>
+            <a class="btn" href="/pdiRepairList">Review Repair List</a>
+            <a>|</a>
+            <a class="btn" href="/si">SI's or special Item's </a>
+            <a>|</a>
+            <a class="btn" href="/variants">Variants Viewer</a>
+        </nav>
     </div>
+
        <br><br>
       <div class="checkpointHeader">
           <div class="title"> PDI Checkpoints</div>

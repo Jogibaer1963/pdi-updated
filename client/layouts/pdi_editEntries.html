@@ -1,0 +1,21 @@
+<template name="editEntries">
+    {{#if currentUser}}
+        {{> topNav}}
+        {{> batteryEditTemplate}}
+    {{else}}
+        {{> login}}
+    {{/if}}
+</template>
+
+<template name="batteryEditTemplate">
+    <div id="logo">
+        <img src="claas_logo.png" />
+    </div>
+    <br><br>
+    <div>
+    {{#each showRepair}}
+       {{machineId}}
+
+    {{/each}}
+    </div>
+</template>
