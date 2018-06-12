@@ -92,12 +92,12 @@
         <item url="file://$USER_HOME$/AppData/Local/.meteor/packages/ddp-common/1.4.0/web.browser/utils.js" />
         <item url="file://$USER_HOME$/AppData/Local/.meteor/packages/diff-sequence/1.1.0/web.browser/diff.js" />
         <item url="file://$USER_HOME$/AppData/Local/.meteor/packages/diff-sequence/1.1.0/web.browser/tests.js" />
-        <item url="file://$USER_HOME$/AppData/Local/.meteor/packages/dynamic-import/0.4.0/web.browser/cache.js" />
-        <item url="file://$USER_HOME$/AppData/Local/.meteor/packages/dynamic-import/0.4.0/web.browser/client.js" />
-        <item url="file://$USER_HOME$/AppData/Local/.meteor/packages/dynamic-import/0.4.0/web.browser/common.js" />
-        <item url="file://$USER_HOME$/AppData/Local/.meteor/packages/dynamic-import/0.4.0/web.browser/dynamic-versions.js" />
-        <item url="file://$USER_HOME$/AppData/Local/.meteor/packages/dynamic-import/0.4.0/web.browser/security.js" />
-        <item url="file://$USER_HOME$/AppData/Local/.meteor/packages/dynamic-import/0.4.0/web.browser/server.js" />
+        <item url="file://$USER_HOME$/AppData/Local/.meteor/packages/dynamic-import/0.4.1/web.browser/cache.js" />
+        <item url="file://$USER_HOME$/AppData/Local/.meteor/packages/dynamic-import/0.4.1/web.browser/client.js" />
+        <item url="file://$USER_HOME$/AppData/Local/.meteor/packages/dynamic-import/0.4.1/web.browser/common.js" />
+        <item url="file://$USER_HOME$/AppData/Local/.meteor/packages/dynamic-import/0.4.1/web.browser/dynamic-versions.js" />
+        <item url="file://$USER_HOME$/AppData/Local/.meteor/packages/dynamic-import/0.4.1/web.browser/security.js" />
+        <item url="file://$USER_HOME$/AppData/Local/.meteor/packages/dynamic-import/0.4.1/web.browser/server.js" />
         <item url="file://$USER_HOME$/AppData/Local/.meteor/packages/ecmascript-runtime-client/0.7.1/web.browser/legacy.js" />
         <item url="file://$USER_HOME$/AppData/Local/.meteor/packages/ecmascript-runtime-client/0.7.1/web.browser/modern.js" />
         <item url="file://$USER_HOME$/AppData/Local/.meteor/packages/ecmascript-runtime-client/0.7.1/web.browser/versions.js" />
@@ -252,14 +252,16 @@
         <item url="file://$USER_HOME$/AppData/Local/.meteor/packages/url/1.2.0/web.browser/url_server.js" />
         <item url="file://$USER_HOME$/AppData/Local/.meteor/packages/url/1.2.0/web.browser/url_tests.js" />
         <item url="file://$USER_HOME$/AppData/Local/.meteor/packages/webapp-hashing/1.0.9/web.browser/webapp-hashing.js" />
-        <item url="file://$USER_HOME$/AppData/Local/.meteor/packages/webapp/1.6.0/web.browser/connect.js" />
-        <item url="file://$USER_HOME$/AppData/Local/.meteor/packages/webapp/1.6.0/web.browser/socket_file.js" />
-        <item url="file://$USER_HOME$/AppData/Local/.meteor/packages/webapp/1.6.0/web.browser/socket_file_tests.js" />
-        <item url="file://$USER_HOME$/AppData/Local/.meteor/packages/webapp/1.6.0/web.browser/webapp_client.js" />
-        <item url="file://$USER_HOME$/AppData/Local/.meteor/packages/webapp/1.6.0/web.browser/webapp_client_tests.js" />
-        <item url="file://$USER_HOME$/AppData/Local/.meteor/packages/webapp/1.6.0/web.browser/webapp_cordova.js" />
-        <item url="file://$USER_HOME$/AppData/Local/.meteor/packages/webapp/1.6.0/web.browser/webapp_server.js" />
-        <item url="file://$USER_HOME$/AppData/Local/.meteor/packages/webapp/1.6.0/web.browser/webapp_tests.js" />
+        <item url="file://$USER_HOME$/AppData/Local/.meteor/packages/webapp/1.6.1/web.browser/connect.js" />
+        <item url="file://$USER_HOME$/AppData/Local/.meteor/packages/webapp/1.6.1/web.browser/legacy_test_asset.js" />
+        <item url="file://$USER_HOME$/AppData/Local/.meteor/packages/webapp/1.6.1/web.browser/modern_test_asset.js" />
+        <item url="file://$USER_HOME$/AppData/Local/.meteor/packages/webapp/1.6.1/web.browser/socket_file.js" />
+        <item url="file://$USER_HOME$/AppData/Local/.meteor/packages/webapp/1.6.1/web.browser/socket_file_tests.js" />
+        <item url="file://$USER_HOME$/AppData/Local/.meteor/packages/webapp/1.6.1/web.browser/webapp_client.js" />
+        <item url="file://$USER_HOME$/AppData/Local/.meteor/packages/webapp/1.6.1/web.browser/webapp_client_tests.js" />
+        <item url="file://$USER_HOME$/AppData/Local/.meteor/packages/webapp/1.6.1/web.browser/webapp_cordova.js" />
+        <item url="file://$USER_HOME$/AppData/Local/.meteor/packages/webapp/1.6.1/web.browser/webapp_server.js" />
+        <item url="file://$USER_HOME$/AppData/Local/.meteor/packages/webapp/1.6.1/web.browser/webapp_tests.js" />
         <item url="file://$USER_HOME$/AppData/Local/.meteor/packages/zimme_active-route/2.3.2/web.browser/packages/zimme_active-route.js" />
       </sourceFilesUrls>
     </properties>
@@ -354,12 +356,12 @@
       <root url="file://$USER_HOME$/AppData/Local/.meteor/packages/ddp-common/1.4.0/web.browser/utils.js" />
       <root url="file://$USER_HOME$/AppData/Local/.meteor/packages/diff-sequence/1.1.0/web.browser/diff.js" />
       <root url="file://$USER_HOME$/AppData/Local/.meteor/packages/diff-sequence/1.1.0/web.browser/tests.js" />
-      <root url="file://$USER_HOME$/AppData/Local/.meteor/packages/dynamic-import/0.4.0/web.browser/cache.js" />
-      <root url="file://$USER_HOME$/AppData/Local/.meteor/packages/dynamic-import/0.4.0/web.browser/client.js" />
-      <root url="file://$USER_HOME$/AppData/Local/.meteor/packages/dynamic-import/0.4.0/web.browser/common.js" />
-      <root url="file://$USER_HOME$/AppData/Local/.meteor/packages/dynamic-import/0.4.0/web.browser/dynamic-versions.js" />
-      <root url="file://$USER_HOME$/AppData/Local/.meteor/packages/dynamic-import/0.4.0/web.browser/security.js" />
-      <root url="file://$USER_HOME$/AppData/Local/.meteor/packages/dynamic-import/0.4.0/web.browser/server.js" />
+      <root url="file://$USER_HOME$/AppData/Local/.meteor/packages/dynamic-import/0.4.1/web.browser/cache.js" />
+      <root url="file://$USER_HOME$/AppData/Local/.meteor/packages/dynamic-import/0.4.1/web.browser/client.js" />
+      <root url="file://$USER_HOME$/AppData/Local/.meteor/packages/dynamic-import/0.4.1/web.browser/common.js" />
+      <root url="file://$USER_HOME$/AppData/Local/.meteor/packages/dynamic-import/0.4.1/web.browser/dynamic-versions.js" />
+      <root url="file://$USER_HOME$/AppData/Local/.meteor/packages/dynamic-import/0.4.1/web.browser/security.js" />
+      <root url="file://$USER_HOME$/AppData/Local/.meteor/packages/dynamic-import/0.4.1/web.browser/server.js" />
       <root url="file://$USER_HOME$/AppData/Local/.meteor/packages/ecmascript-runtime-client/0.7.1/web.browser/legacy.js" />
       <root url="file://$USER_HOME$/AppData/Local/.meteor/packages/ecmascript-runtime-client/0.7.1/web.browser/modern.js" />
       <root url="file://$USER_HOME$/AppData/Local/.meteor/packages/ecmascript-runtime-client/0.7.1/web.browser/versions.js" />
@@ -514,14 +516,16 @@
       <root url="file://$USER_HOME$/AppData/Local/.meteor/packages/url/1.2.0/web.browser/url_server.js" />
       <root url="file://$USER_HOME$/AppData/Local/.meteor/packages/url/1.2.0/web.browser/url_tests.js" />
       <root url="file://$USER_HOME$/AppData/Local/.meteor/packages/webapp-hashing/1.0.9/web.browser/webapp-hashing.js" />
-      <root url="file://$USER_HOME$/AppData/Local/.meteor/packages/webapp/1.6.0/web.browser/connect.js" />
-      <root url="file://$USER_HOME$/AppData/Local/.meteor/packages/webapp/1.6.0/web.browser/socket_file.js" />
-      <root url="file://$USER_HOME$/AppData/Local/.meteor/packages/webapp/1.6.0/web.browser/socket_file_tests.js" />
-      <root url="file://$USER_HOME$/AppData/Local/.meteor/packages/webapp/1.6.0/web.browser/webapp_client.js" />
-      <root url="file://$USER_HOME$/AppData/Local/.meteor/packages/webapp/1.6.0/web.browser/webapp_client_tests.js" />
-      <root url="file://$USER_HOME$/AppData/Local/.meteor/packages/webapp/1.6.0/web.browser/webapp_cordova.js" />
-      <root url="file://$USER_HOME$/AppData/Local/.meteor/packages/webapp/1.6.0/web.browser/webapp_server.js" />
-      <root url="file://$USER_HOME$/AppData/Local/.meteor/packages/webapp/1.6.0/web.browser/webapp_tests.js" />
+      <root url="file://$USER_HOME$/AppData/Local/.meteor/packages/webapp/1.6.1/web.browser/connect.js" />
+      <root url="file://$USER_HOME$/AppData/Local/.meteor/packages/webapp/1.6.1/web.browser/legacy_test_asset.js" />
+      <root url="file://$USER_HOME$/AppData/Local/.meteor/packages/webapp/1.6.1/web.browser/modern_test_asset.js" />
+      <root url="file://$USER_HOME$/AppData/Local/.meteor/packages/webapp/1.6.1/web.browser/socket_file.js" />
+      <root url="file://$USER_HOME$/AppData/Local/.meteor/packages/webapp/1.6.1/web.browser/socket_file_tests.js" />
+      <root url="file://$USER_HOME$/AppData/Local/.meteor/packages/webapp/1.6.1/web.browser/webapp_client.js" />
+      <root url="file://$USER_HOME$/AppData/Local/.meteor/packages/webapp/1.6.1/web.browser/webapp_client_tests.js" />
+      <root url="file://$USER_HOME$/AppData/Local/.meteor/packages/webapp/1.6.1/web.browser/webapp_cordova.js" />
+      <root url="file://$USER_HOME$/AppData/Local/.meteor/packages/webapp/1.6.1/web.browser/webapp_server.js" />
+      <root url="file://$USER_HOME$/AppData/Local/.meteor/packages/webapp/1.6.1/web.browser/webapp_tests.js" />
       <root url="file://$USER_HOME$/AppData/Local/.meteor/packages/zimme_active-route/2.3.2/web.browser/packages/zimme_active-route.js" />
     </CLASSES>
     <SOURCES />
