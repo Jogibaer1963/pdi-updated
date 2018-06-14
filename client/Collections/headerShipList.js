@@ -1,6 +1,7 @@
 Meteor.subscribe("headerTrailer");
 
     Template.headerShipList.events({
+
         'click .headerShip': function() {
             FlowRouter.go('shippingMachines');
         }
@@ -8,6 +9,7 @@ Meteor.subscribe("headerTrailer");
     });
 
     Template.inputHead.events({
+
         "submit .inputNewHead": function(event) {
             event.preventDefault();
             const createUnixTime = Date.now();

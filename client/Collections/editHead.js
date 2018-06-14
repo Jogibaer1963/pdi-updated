@@ -7,6 +7,7 @@ if(Meteor.isClient) {
           const kitString = JSON.stringify(kitSaved);
           const kitExtract = kitString.slice(8, -28);
           const myString = kitExtract.replace(/"/g, "");
+
           const a = myString.indexOf('B07_0040', 0);
               if(a >= 0){
                   const kit_1 = 'B07_0040';
@@ -14,6 +15,7 @@ if(Meteor.isClient) {
               } else {
                 Session.set('kit_1', undefined);
               }
+
           const b = myString.indexOf('B07_0045', 0);
               if(b >= 0){
                  const kit_2 = 'B07_0045';
@@ -21,6 +23,7 @@ if(Meteor.isClient) {
               } else {
                   Session.set('kit_2', undefined);
               }
+
           const c = myString.indexOf('007_0300', 0);
               if(c >= 0){
                   const kit_3 = '007_0300';
@@ -28,6 +31,7 @@ if(Meteor.isClient) {
               } else {
                 Session.set('kit_3', undefined);
               }
+
           const d = myString.indexOf('007_0302', 0);
               if(d >= 0){
                  const kit_4 = '007_0302';
@@ -35,6 +39,7 @@ if(Meteor.isClient) {
               } else {
                 Session.set('kit_4', undefined);
               }
+
           const e = myString.indexOf('003_0301', 0);
               if(e >= 0){
                  const kit_5 = '003_0301';
@@ -42,6 +47,7 @@ if(Meteor.isClient) {
               } else {
                 Session.set('kit_5', undefined);
               }
+
           const f = myString.indexOf('003_0300', 0);
               if(f >= 0){
                  const kit_6 = '003_0300';
@@ -49,6 +55,7 @@ if(Meteor.isClient) {
               } else {
                 Session.set('kit_6', undefined);
           }
+
           const g = myString.indexOf('003_0302', 0);
               if(g >= 0){
                  const kit_7 = '003_0302';
@@ -56,6 +63,7 @@ if(Meteor.isClient) {
               } else {
                 Session.set('kit_7', undefined);
           }
+
           const h = myString.indexOf('003_0220', 0);
                if(h >= 0){
                   const kit_8 = '003_0220';
@@ -63,6 +71,7 @@ if(Meteor.isClient) {
                } else {
                  Session.set('kit_8', undefined);
           }
+
           const i = myString.indexOf('003_0312', 0);
                if(i >= 0){
                   const kit_9 = '003_0312';
@@ -70,17 +79,39 @@ if(Meteor.isClient) {
                } else {
                  Session.set('kit_9', undefined);
           }
+
+          const j = myString.indexOf('003_0220', 0);
+                  if(j >= 0){
+                      const kit_10 = '003_0220';
+                      Session.set('kit_10', kit_10);
+                  } else {
+                      Session.set('kit_10', undefined);
+                  }
+
+          const k = myString.indexOf('003_0230', 0);
+              if(k >= 0){
+                  const kit_11 = '003_0230';
+                  Session.set('kit_11', kit_11);
+              } else {
+                  Session.set('kit_11', undefined);
+              }
+
+
+
+
+
+
           return MachineReady.findOne({_id: selectedHead});
       },
 
-      'newKit1': function() {
+       'newKit1': function() {
           const kit_1 = Session.get('kit_1');
           if(kit_1 === 'B07_0040') {
                   return 'checked';
           }
       },
 
-      'newKit2': function() {
+       'newKit2': function() {
             const kit_2 = Session.get('kit_2');
             if(kit_2 === 'B07_0045') {
                  return 'checked';
@@ -92,7 +123,7 @@ if(Meteor.isClient) {
            if(kit_3 === '007_0300') {
                return 'checked';
            }
-       },
+      },
 
        'newKit4': function() {
            const kit_4 = Session.get('kit_4');
@@ -128,9 +159,10 @@ if(Meteor.isClient) {
                return 'checked';
            }
        },
+
        'newKit9': function() {
            const kit_9 = Session.get('kit_9');
-           if(kit_9 === '003_03312') {
+           if(kit_9 === '003_0312') {
                return 'checked';
            }
        },
@@ -141,9 +173,10 @@ if(Meteor.isClient) {
                return 'checked';
            }
        },
+
        'newKit11': function() {
            const kit_11 = Session.get('kit_11');
-           if(kit_11 === '003_03312') {
+           if(kit_11 === '003_0230') {
                return 'checked';
            }
        }
@@ -159,13 +192,13 @@ if(Meteor.isClient) {
              const newShippingDate = event.target.newDate.value;
              const newShippingDestination = event.target.newDestination.value;
              const newShippingTransporter = event.target.newTransporter.value;
-             const newShippingTireTrack = event.target.newTireTrack.value;
              const newShippingKit= [];
                 $('input[name=newKit]:checked').each(function() {
                     newShippingKit.push($(this).val());
                 });
              const newShippingComment = event.target.newComment.value;
-             Meteor.call('editShipHead', selectedHead, newHead, newShippingDate, newShippingDestination, newShippingTransporter, newShippingTireTrack, newShippingKit, newShippingComment );
+             Meteor.call('editShipHead', selectedHead, newHead, newShippingDate, newShippingDestination,
+                                         newShippingTransporter, newShippingKit, newShippingComment );
              FlowRouter.go ('headerShipList');
         }
    });

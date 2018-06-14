@@ -114,8 +114,15 @@ if (Meteor.isClient) {
             const shippingMachine = this._id;
             const selectedMachine = Session.get('selectedMachine');
             if (shippingMachine === selectedMachine) {
+                let result = MachineReady.findOne({_id: selectedMachine}).machineId;
+                Session.set('myMachine', result);
+                console.log(result);
                 return "selected"
             }
+        },
+
+        myMachine: () => {
+            return Session.get('myMachine');
         }
 
     });

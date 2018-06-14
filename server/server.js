@@ -727,13 +727,12 @@ if(Meteor.isServer){
         },
 
         'editShipHead': function(selectedHead, newHead, newShippingDate, newShippingDestination, newShippingTransporter,
-                                 newShippingTireTrack, newShippingKit, newShippingComment) {
+                                 newShippingKit, newShippingComment) {
             MachineReady.update({_id:selectedHead},
                 {$set: {newHeadId: newHead,
                     date: newShippingDate,
                     destination: newShippingDestination,
                     transporter: newShippingTransporter,
-                    tireTrack: newShippingTireTrack,
                     kit: newShippingKit,
                     shippingComment: newShippingComment}
                 });

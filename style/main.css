@@ -442,16 +442,13 @@ table.locationTable {
 
 .buttonDelete {
   position: relative;
-  top: 2em;
+  top: 5em;
   left: 27em; }
 
 .buttonEdit {
   position: relative;
   top: 2.5em;
   left: 10em; }
-
-.editHead {
-  background: repeating-linear-gradient(45deg, #e6e6e6, #bc171b 10px, #e6e6e6 10px, #bc171b 20px); }
 
 .trailerSection {
   position: relative;
@@ -1122,6 +1119,25 @@ table.toDoListTable {
 .toDoMessage {
   position: relative;
   top: 10em; }
+
+.inputEditHead {
+  position: absolute;
+  top: 10em;
+  left: 3em; }
+
+.headFloater {
+  float: left;
+  margin-left: 2em; }
+
+.headComment {
+  position: absolute;
+  top: 20em;
+  left: 4em; }
+
+.headSubmit {
+  position: absolute;
+  top: 25em;
+  left: 4em; }
 
 .mainLayout {
   position: absolute;
