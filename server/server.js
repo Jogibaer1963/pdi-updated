@@ -201,10 +201,9 @@ if(Meteor.isServer){
             siTable.insert({siNumber: siMdList});
         },
 
-        parseUpload(data, siMdList) {
+        'parseUpload': function (data, siMdList) {
             const item = [];
-           check(data, Array);
-           for (let i= 0; i < data.length -1; i++) {
+            for (let i= 0; i < data.length -1; i++) {
                let csvResult = JSON.stringify(data[i]);
                let csvString = csvResult.slice(12,20);
                let _id = new Mongo.Collection.ObjectID().valueOf();
@@ -213,6 +212,7 @@ if(Meteor.isServer){
            }
           siMd.upsert({_id: siMdList},{machineList: item});
         },
+
 //------------------------------------------------------------------------------------------------------------------------------------------
         'machineRep': function(machineRepaired, workingHour) {
           MachineReady.update({_id: machineRepaired}, {$set: {machineHours: workingHour, repairStatus: 1}});
