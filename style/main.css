@@ -452,8 +452,8 @@ table.locationTable {
 
 .trailerSection {
   position: relative;
-  left: 90em;
-  top: -3.5em; }
+  left: 105em;
+  top: 1em; }
 
 .newTrailerInput {
   position: absolute;
@@ -485,6 +485,11 @@ table.locationTable {
 .imageButton {
   width: 8em;
   height: 4em; }
+
+.headerButtonField {
+  position: absolute;
+  top: -2em;
+  left: 45em; }
 
 .headerKit {
   white-space: pre-wrap; }
@@ -828,7 +833,7 @@ table.messageTable {
   width: 700px;
   position: absolute;
   top: 24em;
-  left: 30em; }
+  left: 50em; }
 
 table.historyMessageTable {
   position: absolute;
@@ -949,11 +954,6 @@ table.siMachineList {
   position: absolute;
   top: 30em;
   left: 28em; }
-
-.siSubmit {
-  position: relative;
-  top: -1.9em;
-  left: 16em; }
 
 .posDatei {
   position: relative;

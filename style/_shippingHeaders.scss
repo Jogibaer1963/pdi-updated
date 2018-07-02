@@ -62,8 +62,8 @@
 
 .trailerSection {
   position: relative;
-  left: 90em;
-  top: -3.5em;
+  left: 105em;
+  top: 1em;
 }
 
 .newTrailerInput {
@@ -104,6 +104,12 @@
   width: 8em;
   height: 4em;
 
+}
+
+.headerButtonField {
+  position: absolute;
+  top: -2em;
+  left: 45em;
 }
 
 .headerKit {

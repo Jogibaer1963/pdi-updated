@@ -137,7 +137,15 @@
         <div class="buttonEdit">
             <button class="btn btn-default btn-info editHead" type="submit">Edit marked Machine</button>
         </div>
-
+        <div class="headerButtonField">
+            <h5 class="confirmedDate">!! Confirmed Ship Date !!</h5>
+            <form class="truckDate">
+                <button type="submit" class="btn btn-success addTruck">Truck Ordered</button>
+                <input class="shipDate" type="date" name="inputDate" placeholder="Confirmed Ship Date" />
+            </form>
+            <br>
+            <button type="submit" class="btn btn-danger removeTruck">Remove Truck</button>
+        </div>
         <table class="shippingHeaderTable blueTable headerTable" cellpadding="10">
             <thead class="">
             <tr class="">
@@ -145,6 +153,8 @@
                 <th class="pdiShipDate" ><strong>ShipDate</strong></th>
                 <th class="pdiDestination"><strong>Destination</strong></th>
                 <th class="pdiTransporter"><strong>Transporter</strong></th>
+                <th class="pdiTruckOnOrder"><strong>Truck ordered</strong></th>
+                <th class="pdiTruckDate"><strong>Confirmed Ship Date</strong></th>
                 <th class="headerKit"><strong>Ship with Kit</strong></th>
                 <th class="pdiComments"><strong>Shipping Comments</strong></th>
                 <th class="pdiShipField"><strong>Ship Status</strong></th>
@@ -157,6 +167,8 @@
                      <td class="pdiShipDate">{{date}}</td>
                      <td class="pdiDestination">{{destination}}</td>
                      <td class="pdiTransporter">{{transporter}}</td>
+                      <td class="pdiTruckOnOrder {{getStatusTruck truckStatus}}" style="background-color:{{getStatusTruck truckStatus}}; color:{{getStatusTruck truckStatus}}" >{{truckStatus}}</td>
+                      <td class="pdiTruckDate truckDateCorrection">{{confirmedShipDate}}</td>
                      <td class="headerKit"><strong>{{kit}}</strong></td>
                      <td class="pdiComments">{{shippingComment}}</td>
                      <td class="pdiShipField {{getStatusColor shipStatus}}" style="background-color:{{getStatusColor shipStatus}}; color:{{getStatusColor shipStatus}}">{{shipStatus}}</td>
