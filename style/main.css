@@ -828,7 +828,7 @@ table.messageTable {
   width: 700px;
   position: absolute;
   top: 24em;
-  left: 50em; }
+  left: 30em; }
 
 table.historyMessageTable {
   position: absolute;
@@ -951,9 +951,9 @@ table.siMachineList {
   left: 28em; }
 
 .siSubmit {
-  position: absolute;
-  top: -0.5em;
-  left: 15em; }
+  position: relative;
+  top: -1.9em;
+  left: 16em; }
 
 .posDatei {
   position: relative;
