@@ -45,6 +45,7 @@
               <th class="pdiMachineField"><strong>Machine</strong></th>
               <th class="pdiShipDate"><strong>Ship Date</strong></th>
                 <th class="pdiLocation"><strong>Location</strong></th>
+                <th class="pdiDestination"><strong>Destination</strong></th>
                 <th class="pdiTruckOnOrder"><strong>Truck ordered</strong></th>
                 <th class="pdiTruckDate"><strong>Confirmed Ship Date</strong></th>
               <th class="pdiComments"><strong>Comments</strong></th>
@@ -59,6 +60,7 @@
                <td class="pdiMachineField">{{machineId}}</td>
                <td class="pdiShipDate">{{date}}</td>
                 <td class="pdiLocation" style="background-color: #6fd981">{{locationId}}</td>
+                <td class="pdiDestination">{{destination}}</td>
                 <td class="pdiTruckOnOrder {{getStatusTruck truckStatus}}" style="background-color:{{getStatusTruck truckStatus}}; color:{{getStatusTruck truckStatus}}" >{{truckStatus}}</td>
                 <td class="pdiTruckDate truckDateCorrection">{{confirmedShipDate}}</td>
                <td class="pdiComments">{{shippingComment}}</td>

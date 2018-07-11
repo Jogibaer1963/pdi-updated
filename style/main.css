@@ -955,6 +955,15 @@ table.siMachineList {
   top: 30em;
   left: 28em; }
 
+.siItemMachine {
+  float: left;
+  margin-left: 3em; }
+
+.siSubmit {
+  margin-left: 1em;
+  position: absolute;
+  top: -0.2em; }
+
 .posDatei {
   position: relative;
   top: -8em;
