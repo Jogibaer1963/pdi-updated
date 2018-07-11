@@ -65,6 +65,21 @@ Meteor.subscribe("headerTrailer");
             if(typeof selectedHead === 'string' ) {
                 FlowRouter.go('editHead');
             }
+        },
+
+        'submit .headerTruckDate': function() {
+            event.preventDefault();
+            const confirmedShipDate = event.target.inputDate.value;
+            const truckStatus = 1;
+            const machineId = Session.get('selectedHead');
+            Meteor.call('truckOrdered', machineId, truckStatus, confirmedShipDate);
+        },
+
+        'click .removeTruck': function() {
+            event.preventDefault();
+            const truckStatus = 0;
+            const machineId = Session.get('selectedHead');
+            Meteor.call('truckRemoved', machineId, truckStatus);
         }
     });
 
