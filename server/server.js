@@ -560,13 +560,14 @@ if(Meteor.isServer){
                                       manBatt_1CCA, manBatt_1Volt, manBatt_2CCA, manBatt_2Volt  ) {
             MachineReady.update({_id: selectedPdiMachineId}, {$set: {batteries: {user: loggedInUser, battC13CCA, battC13Volt,
                                       mtuG001CCA, mtuG001Volt, mtuG005CCA, mtuG005Volt, mtuG004CCA, mtuG004Volt,
-                                                       manBatt_1CCA, manBatt_1Volt, manBatt_2CCA, manBatt_2Volt}}});
+                                                       manBatt_1CCA, manBatt_1Volt, manBatt_2CCA, manBatt_2Volt, battStatus: 1}}});
+
         },
 
         'pdiMachineOmm': function(selectedPdiMachineId, loggedInUser, fuelMe, ommMain, ommSupp,
                                   ommUnload,ommProfiCam, ommCebis, ommCebisTouch, ommTerra, ommDuals) {
             MachineReady.update({_id: selectedPdiMachineId}, {$set: {omms: {user: loggedInUser, fuelStart: fuelMe,
-                    ommMain, ommSupp, ommUnload,ommProfiCam, ommCebis, ommCebisTouch, ommTerra, ommDuals}}});
+                    ommMain, ommSupp, ommUnload,ommProfiCam, ommCebis, ommCebisTouch, ommTerra, ommDuals, ommStatus: 1}}});
         },
 
         'fuelAfterPdi': function (selectedPdiMachine, fuelAfter) {

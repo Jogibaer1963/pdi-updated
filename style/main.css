@@ -781,6 +781,14 @@ table.pdiTable {
   height: 10em;
   width: 39em; }
 
+.inputSize {
+  width: 10em;
+  height: 3em; }
+
+.inputIssueSize {
+  width: 25em;
+  height: 3em; }
+
 .configHeader {
   position: relative;
   left: 3em; }

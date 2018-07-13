@@ -7,7 +7,6 @@ Meteor.subscribe("orderParts");
 
 
         'machineNow': function () {
-            event.preventDefault();
             const user = Meteor.user().username;
             Session.set('currentLoggedInUser', user);
             Session.set('selectedPdiMachineId', localStorage.getItem('pdiMachineId'));
@@ -18,13 +17,11 @@ Meteor.subscribe("orderParts");
 
 
         selectedProfiCam: function() {
-            event.preventDefault();
             return Session.get('selectedProfiCam');
         },
 
 
         checkList: function() {
-            event.preventDefault();
             Session.set('selectedPdiMachineNr', localStorage.getItem('pdiMachineNr'));
             const machineId = Session.get('selectedPdiMachineNr');
             result = MachineReady.findOne({machineId: machineId}).checkList;
@@ -32,7 +29,6 @@ Meteor.subscribe("orderParts");
         },
 
         machineConfig: function() {
-            event.preventDefault();
             Session.set('selectedPdiMachineNr', localStorage.getItem('pdiMachineNr'));
             const machineId = Session.get('selectedPdiMachineNr');
             result = MachineReady.findOne({machineId: machineId}).machineConfig;
@@ -48,12 +44,34 @@ Meteor.subscribe("orderParts");
         },
 
         newIssue: function() {
-            event.preventDefault();
             Session.set('selectedPdiMachineNr', localStorage.getItem('pdiMachineNr'));
             const machineId = Session.get('selectedPdiMachineNr');
             result = MachineReady.findOne({machineId: machineId}).newIssues;
             return result;
         },
+
+        battSaved: function() {
+            Session.set('selectedPdiMachineNr', localStorage.getItem('pdiMachineNr'));
+            const machineId = Session.get('selectedPdiMachineNr');
+            result = MachineReady.findOne({machineId: machineId}).batteries;
+            if(result) {
+                return "Battery successfull saved";
+            } else {
+                return "Error, Battery not saved";
+            }
+
+        },
+
+        ommSaved: function() {
+            Session.set('selectedPdiMachineNr', localStorage.getItem('pdiMachineNr'));
+            const machineId = Session.get('selectedPdiMachineNr');
+            result = MachineReady.findOne({machineId: machineId}).omms;
+            if(result) {
+                return "OMM's successfull saved";
+            } else {
+                return "Error, OMM not saved";
+            }
+        }
 
 
     });
@@ -82,6 +100,9 @@ Meteor.subscribe("orderParts");
             Meteor.call('pdiMachineBattery', pdiMachineId, loggedInUser, battC13CCA, battC13Volt,
                 mtuG001CCA, mtuG001Volt, mtuG005CCA, mtuG005Volt, mtuG004CCA, mtuG004Volt,
                 manBatt_1CCA, manBatt_1Volt, manBatt_2CCA, manBatt_2Volt);
+
+
+
         },
 
          'submit .omms': (event) => {
