@@ -499,7 +499,8 @@ if(Meteor.isServer){
                                                              startPdiDate: '',
                                                              fuelStart: '',
                                                              newIssues: [],
-                                                             batteryStatus: ''
+                                                             batteries: "",
+                                                             omms: ""
                                                      }});
             siListDone.remove({_id: pdiMachineId});
         },
@@ -554,6 +555,22 @@ if(Meteor.isServer){
             orderParts.insert({machineNr: machineNr, user: loggedInUser, description: failureAddDescription,
                 orderStatus: orderStatus});
         },
+
+        // Add / remove issue to finished PDI list
+
+        'newPdiIssue': (machineId, newIssue) => {
+            let uniqueId = Random.id();
+            MachineReady.upsert({machineId: machineId}, {$push: {newIssues: {_id: uniqueId,
+                                                                checkStatus: true,
+                                                                errorDescription: newIssue}}
+                               });
+        },
+
+        'removePdiIssue': (machineId, pdiIssue) => {
+            MachineReady.update({machineId: machineId}, {$pull: {newIssues : {_id: pdiIssue}}});
+        },
+
+        // --------------------------------------------------------------------------------------------------------------
 
         'pdiMachineBattery': function(selectedPdiMachineId, loggedInUser, battC13CCA, battC13Volt,
                                       mtuG001CCA, mtuG001Volt, mtuG005CCA, mtuG005Volt, mtuG004CCA, mtuG004Volt,

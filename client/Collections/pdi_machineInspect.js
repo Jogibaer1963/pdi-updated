@@ -59,7 +59,6 @@ Meteor.subscribe("orderParts");
             } else {
                 return "Error, Battery not saved";
             }
-
         },
 
         ommSaved: function() {

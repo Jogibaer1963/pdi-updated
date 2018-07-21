@@ -1,0 +1,80 @@
+<template name="addIssueToPdi">
+    {{#if currentUser}}
+        {{> topNav}}
+        {{> addingIssue}}
+    {{else}}
+        {{> login}}
+    {{/if}}
+</template>
+
+
+<template name="addingIssue">
+    <div>
+        <div id="logo">
+            <img src="claas_logo.png" />
+        </div>
+        <br>
+        <nav class="mainLayout">
+            <a class="btn" href="/checkList">Checklist</a>
+            <a>|</a>
+            <a class="btn" href="/inspectionStart">Inspection</a>
+            <a>|</a>
+            <a class="btn" href="/pdiRepairList">Review Repair List</a>
+            <a>|</a>
+            <a class="btn" href="/si">SI's or special Item's </a>
+            <a>|</a>
+            <a class="btn" href="/variants">Variants Viewer</a>
+        </nav>
+    </div>
+    <div class="headLiner">
+        <h3><strong>Adding / Remove Issues to finished Pdi Machine</strong></h3>
+    </div>
+    <div class="addIssue">
+        <form class="pdiMachine">
+            <label for="machineId">Machine Number</label>
+            <br>
+            <input type="text" id="machineId" name="machineId">
+            <button type="submit" class="btn btn-default btn-success">Submit</button>
+        </form>
+    <div class="removeButton">
+        <button type="button" class="btn btn-default btn-danger removeIssue">Remove marked item</button>
+    </div>
+    </div>
+    {{#if pdiMachine}}
+        <div>
+            <form class="inputNewIssue">
+                <label for="newIssueInput">New Issue</label>
+                <br>
+                <input type="text" id="newIssueInput" name="newIssue">
+                <button type="submit" class="btn btn-default btn-success">Submit new Issue</button>
+            </form>
+        </div>
+    {{/if}}
+    <div class="issueList">
+        {{#each pdiMachine}}
+            <div>
+                <h3>Machine Id : <strong> {{machineId}} </strong></h3>
+                <h3>PDI performed by {{pdiPerformer}} |  Pdi-Date: {{startPdiDate}}</h3>
+            </div>
+            <div>
+                <h3>Repair List:</h3>
+                {{#each newIssues}}
+                    <tbody>
+                    <tr  class="newIssue {{selectedClass}}">
+                       <td>{{siNumber}} {{errorDescription}}</td>
+                    </tr>
+                    </tbody>
+                {{/each}}
+                {{#each checkList}}
+                    {{#if failStatus }}
+                        <tbody>
+                        <tr class="newIssue {{selectedClass}}">
+                            <td>{{errorDescription}}</td>
+                        </tr>
+                        </tbody>
+                    {{/if}}
+                {{/each}}
+            </div>
+        {{/each}}
+    </div>
+</template>

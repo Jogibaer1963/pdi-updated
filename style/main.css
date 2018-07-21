@@ -688,7 +688,7 @@ tbody.pdiCheckList {
 .fileContainer {
   overflow: hidden;
   position: relative;
-  left: 30em;
+  left: 35em;
   top: -1.9em; }
 
 .fileContainer [type=file] {
@@ -1155,6 +1155,33 @@ table.toDoListTable {
   position: absolute;
   top: 25em;
   left: 4em; }
+
+.headLiner {
+  position: absolute;
+  top: 10em;
+  left: 5em; }
+
+.addIssue {
+  position: absolute;
+  top: 20em;
+  left: 10em; }
+
+.inputNewIssue {
+  position: absolute;
+  top: 20em;
+  left: 40em; }
+
+#newIssueInput {
+  width: 50em; }
+
+.removeButton {
+  position: absolute;
+  top: 6em; }
+
+.issueList {
+  position: absolute;
+  top: 30em;
+  left: 10em; }
 
 .mainLayout {
   position: absolute;

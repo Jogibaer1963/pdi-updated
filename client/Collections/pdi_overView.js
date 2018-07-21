@@ -95,6 +95,12 @@
           //  FlowRouter.go('joinMachine');
         },
 
+        'click .addIssueButton': () => {
+          event.preventDefault();
+          FlowRouter.go('addIssueToPdi');
+        },
+
+
         'change .loadConfig': () => {
             event.preventDefault();
             const singleConfig = [];
