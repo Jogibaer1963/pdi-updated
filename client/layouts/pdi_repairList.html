@@ -11,11 +11,9 @@
 <template name="pdi_repairList">
     {{#if isInRole 'pdi'}}
         {{> pdiPrintLayout}}
-        {{> editButton}}
     {{/if}}
     {{#if isInRole 'admin'}}
         {{> pdiPrintLayout}}
-        {{> editButton}}
     {{/if}}
     {{#if isInRole 'repair'}}
         {{> repairLayout}}
@@ -28,9 +26,11 @@
     </div>
         <br>
     <div class="searchButton">
-        <input type="text" id="searchMachine" name="searchMachine" placeholder="Machine number" disabled>
-       <button type="button" class="btn btn-default" id="buttonDownload" disabled>Download</button>
-       <a class="btn btn-default"  href="/pdi_printOut">Print Out</a>
+        <form class="searchMe">
+            <input type="text" id="searchMachine" name="searchMachine" placeholder="Machine number" >
+            <button type="submit" class="btn btn-default btn-success" id="buttonSearch">Search</button>
+        </form>
+        <a class="btn btn-default btn-success printButton"  href="/pdi_printOut">Print Out</a>
         <br><br>
     </div>
     <br><br>
@@ -121,12 +121,3 @@
      </div>
  </div>
 </template>
-
-
-
-<template name="editButton">
-    <div class="repairListButton">
-    <button type="button" class="btn btn-default btn-success editEntries" disabled>Edit entries</button>
-    </div>
-</template>
-

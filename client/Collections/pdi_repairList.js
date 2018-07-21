@@ -27,10 +27,6 @@ if(Meteor.isClient) {
             Session.set('selectedPdiMachine', pdiMachine);
         },
 
-        'click .showPdiSummary': function() {
-            event.preventDefault();
-        },
-
         'click #buttonDownload': function () {
             const machineId = Session.get('selectedPdiMachine');
             const result = MachineReady.find({_id:machineId}, {fields: {machineId: 1}}).fetch();
@@ -44,6 +40,14 @@ if(Meteor.isClient) {
             });
         },
 
+        'submit .searchMe': () => {
+            event.preventDefault();
+            let machineId = event.target.searchMachine.value;
+            let id = MachineReady.findOne({machineId: machineId})._id;
+            Session.set('selectedPdiMachine', id);
+        }
+
+
     });
 
     Template.pdiInspectList.helpers({
@@ -54,29 +58,5 @@ if(Meteor.isClient) {
         },
 
     });
-
-    Template.editButton.events({
-
-        'click .editEntries': (e) => {
-            e.preventDefault();
-            const pdiMachine = Session.get('selectedPdiMachine');
-            if(pdiMachine) {
-                let result = MachineReady.findOne({_id: pdiMachine}).pdiStatus;
-                    if(result === 1 ) {
-                        localStorage.setItem('editMachine', pdiMachine);
-                        FlowRouter.go('/editEntries');
-                    } else {
-                        console.log('not ready');
-                    }
-            } else {
-                console.log('no machine selected')
-            }
-
-
-        },
-
-    });
-
-
 
 }

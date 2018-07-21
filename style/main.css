@@ -874,6 +874,13 @@ table.historyMessageTable {
   top: 10em;
   left: 31em; }
 
+.searchMe {
+  margin-left: 3em; }
+
+.printButton {
+  margin-left: 16em;
+  margin-top: 1em; }
+
 table.pdiRepairList {
   position: absolute;
   top: 320px;

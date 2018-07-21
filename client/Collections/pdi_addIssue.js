@@ -27,7 +27,6 @@ Template.addingIssue.events({
     'click .newIssue': function() {
         const pdiIssue = this._id;
         Session.set('selectedPdiIssue', pdiIssue);
-        console.log(pdiIssue);
     },
 
     'submit .pdiMachine': () => {
