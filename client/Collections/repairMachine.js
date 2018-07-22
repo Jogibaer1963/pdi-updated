@@ -4,14 +4,25 @@ if(Meteor.isClient) {
 
     Template.repairMachine.helpers({
 
+
+
+
+
         shippList: function () {
             // Order of shipping date
-            return MachineReady.find({
-                $and: [
-                    {pdiStatus: 1},
-                    {$or: [{repairStatus: 0}, {repairStatus: 2}]}
-                ]
-            }, {sort: {date: 1}});
+            let k = Session.get('toggleRepair');
+            if (k === 0) {
+                return MachineReady.find({
+                    $and: [
+                        {pdiStatus: 1},
+                        {$or: [{repairStatus: 0}, {repairStatus: 2}]}
+                    ]
+                }, {sort: {date: 1}});
+            } else {
+                return MachineReady.find({$and: [{pdiStatus: 0},
+                            {$or: [{shipStatus: 0}, {shipStatus: 2}]}]},
+                    {sort: {date: 1}});
+            }
         },
 
         'selectedClass2': function () {
@@ -21,13 +32,13 @@ if(Meteor.isClient) {
                 return "selected"
             }
         },
-
+   /*
         upcomingList: function () {
             return MachineReady.find({$and: [{pdiStatus: 0},
                     {$or: [{shipStatus: 0}, {shipStatus: 2}]}]},
                     {sort: {date: 1}});
         },
-
+*/
         'selectedClass': function () {
             const upcomingMachineId = this._id;
             const selectedMachineId = Session.get('selectedMachineId');
@@ -61,9 +72,17 @@ if(Meteor.isClient) {
         },
 
 
-        'click .upcomingList': function () {
-            const upcomingMachine = this._id;
-            Session.set('selectedMachineId', upcomingMachine);
+        'click .toggleRepairUpcoming': function () {
+            event.preventDefault();
+            let choice = Session.get('toggleRepair');
+            if(choice === 0) {
+                Session.set('toggleRepair', 1)
+            } else {
+                Session.set('toggleRepair', 0);
+            }
+
+
+
         },
 
         'click .addToList': function () {
