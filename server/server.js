@@ -104,6 +104,10 @@ if(Meteor.isServer){
             return toDoMesssage.find();
         });
 
+        Meteor.publish("addIssues", function() {
+            return addIssues.find();
+        });
+
     });
 
 
@@ -563,11 +567,16 @@ if(Meteor.isServer){
             MachineReady.upsert({machineId: machineId}, {$push: {newIssues: {_id: uniqueId,
                                                                 checkStatus: true,
                                                                 errorDescription: newIssue}}
-                               });
+            });
+            addIssues.insert({machineId: machineId, newIssues: newIssue, addStatus: 1});
         },
 
         'removePdiIssue': (machineId, pdiIssue) => {
             MachineReady.update({machineId: machineId}, {$pull: {newIssues : {_id: pdiIssue}}});
+        },
+
+        'issueNoticed': (_id) => {
+            addIssues.remove({_id: _id});
         },
 
         // --------------------------------------------------------------------------------------------------------------

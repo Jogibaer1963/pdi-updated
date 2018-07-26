@@ -18,7 +18,30 @@ table.repairTable {
 }
 
 tbody.tableHeight {
-  height: 400px;
+  height: 264px;
+}
+
+table.issueTable {
+  position: absolute;
+  top: 13em;
+  left: 49.3em;
+  width: 533px;
+}
+
+tbody.newIssueTableHeight {
+  height: 72px;
+}
+
+.addIssueToList {
+  position: absolute;
+  top: 15em;
+  left: 90em;
+}
+
+.issueHeader {
+  position: absolute;
+  top: 11em;
+  left: 60em;
 }
 
 .machineHours {
@@ -51,6 +74,12 @@ tbody.tableHeight {
   top: 5.1em;
 }
 
+.washHeader {
+  position: absolute;
+  top: -0.5em;
+  left: -7em;
+}
+
 .washBayText {
   position: relative;
   top: -5em;
@@ -59,7 +88,7 @@ tbody.tableHeight {
 
 .washBayMessage {
   position: absolute;
-  top: 2em;
+  top: -0.5em;
   left: 30em;
 }
 
@@ -74,5 +103,6 @@ tbody.tableHeight {
 
 .kitListButton {
   position: absolute;
-  left: 95em;
+  top: 20em;
+  left: 88em;
 }

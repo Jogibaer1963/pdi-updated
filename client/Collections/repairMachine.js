@@ -1,27 +1,42 @@
-
+Meteor.subscribe('addIssues');
 
 if(Meteor.isClient) {
 
     Template.repairMachine.helpers({
 
 
+        issueAdded: () => {
+          return addIssues.find();
+        },
 
-
+        choice: () => {
+          return Session.get('repair');
+        },
 
         shippList: function () {
             // Order of shipping date
             let k = Session.get('toggleRepair');
             if (k === 0) {
-                return MachineReady.find({
+                Session.set('repair', '**** Repair ****');
+                return  MachineReady.find({
                     $and: [
                         {pdiStatus: 1},
                         {$or: [{repairStatus: 0}, {repairStatus: 2}]}
                     ]
                 }, {sort: {date: 1}});
             } else {
+                Session.set('repair', '**** Upcoming Shipments****');
                 return MachineReady.find({$and: [{pdiStatus: 0},
                             {$or: [{shipStatus: 0}, {shipStatus: 2}]}]},
                     {sort: {date: 1}});
+            }
+        },
+
+        'selectedClass': function () {
+            const upcomingMachineId = this._id;
+            const selectedMachineId = Session.get('selectedMachineId');
+            if (selectedMachineId === upcomingMachineId) {
+                return "selected"
             }
         },
 
@@ -32,26 +47,22 @@ if(Meteor.isClient) {
                 return "selected"
             }
         },
-   /*
-        upcomingList: function () {
-            return MachineReady.find({$and: [{pdiStatus: 0},
-                    {$or: [{shipStatus: 0}, {shipStatus: 2}]}]},
-                    {sort: {date: 1}});
-        },
-*/
-        'selectedClass': function () {
-            const upcomingMachineId = this._id;
-            const selectedMachineId = Session.get('selectedMachineId');
-            if (selectedMachineId === upcomingMachineId) {
+
+        'selectedClass3': function () {
+            const selectedRepair = this._id;
+            const selectedMachineId = Session.get('addIssueToMachine');
+            if (selectedMachineId === selectedRepair) {
                 return "selected"
             }
         },
 
         washMachine: () => {
             const machine_id = Session.get('selectedMachineId');
-            const machineTestId = MachineReady.findOne({_id: machine_id}).machineId;
-            Session.set('washMachine', machineTestId);
-            return Session.get('washMachine');
+            if(machine_id) {
+                const machineTestId = MachineReady.findOne({_id: machine_id}).machineId;
+                Session.set('washMachine', machineTestId);
+                return Session.get('washMachine');
+            }
         },
 
     });
@@ -61,6 +72,12 @@ if(Meteor.isClient) {
         'click .openInspections': function () {
             const openRepair = this._id;
             Session.set('selectedMachineId', openRepair);
+
+        },
+
+        'click .addIssueToPdi': function () {
+            const openRepair = this._id;
+            Session.set('addIssueToMachine', openRepair);
 
         },
 
@@ -80,9 +97,6 @@ if(Meteor.isClient) {
             } else {
                 Session.set('toggleRepair', 0);
             }
-
-
-
         },
 
         'click .addToList': function () {
@@ -104,7 +118,6 @@ if(Meteor.isClient) {
             event.preventDefault();
             const washMessage = event.target.message.value;
             if(Session.get('selectedMachineId') === 'undefined') {
-                console.log('test');
                 Session.set('errorMachine', 'Choose Machine first');
             } else {
                 const machine_id = Session.get('selectedMachineId');
@@ -112,7 +125,15 @@ if(Meteor.isClient) {
                 Meteor.call('messageToWashBay', machine_id, machineTestId, washMessage);
             }
             event.target.message.value = '';
+        },
+
+        'click .addIssueToList': () => {
+            event.preventDefault();
+            const selectedMachineId = Session.get('addIssueToMachine');
+            Meteor.call('issueNoticed', selectedMachineId);
         }
+
+
 
 
     });
