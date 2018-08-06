@@ -78,9 +78,11 @@
            <br>
            <input type="text" class="omInput inputSize" id="locationId" name="dualTire" placeholder="Dual Tires">
          </div>
+
             <br><br>
            <button type="submit" class="btn btn-success buttonBatt">Save OMM's</button><h4>{{ommSaved}}</h4><br>
        </form>
+
     </div>
     <br><br>
     <td class="pdiPDIField {{getStatusColor pdiStatus}}"
@@ -91,7 +93,7 @@
          <table class="pdiCheckList">
             <tbody>
                {{#each machineConfig}}
-                  <tr class=" ">
+                  <tr >
                      <td class="pdiCell positionCheckPos {{getMachineConfigStatus machineConfigStatus}}"
                          style="background-color:{{getMachineConfigStatus machineConfigStatus}}">
                         <div class="" >
@@ -102,7 +104,7 @@
                         </div>
                        <button class="btn btn-success configButtonOK" id={{_id}}>OK</button>
 
-                       <button class="btn btn-danger configButtonNOK" id={{_id}}>NOK</button>
+                       <button class="btn btn-danger configButtonNOK" id={{configItem}} name={{_id}}>NOK</button>
 
                        <button class="btn btn-info buttonNA buttonNotWorking" id={{_id}}>info</button>
                      </td>

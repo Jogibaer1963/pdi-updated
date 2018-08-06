@@ -520,10 +520,10 @@ if(Meteor.isServer){
             MachineReady.update({_id: machineId, "machineConfig._id": idFailure}, {$set: {"machineConfig.$.machineConfigStatus": 1}});
         },
 
-        'configNokButton': (machineId, idFailure) => {
-            MachineReady.update({_id: machineId, "machineConfig._id": idFailure}, {$set: {"machineConfig.$.machineConfigStatus": 2}});
+        'configNokButton': (machineId, idFailure, idIdentifier) => {
+            MachineReady.update({_id: machineId, "machineConfig._id": idIdentifier}, {$set: {"machineConfig.$.machineConfigStatus": 2}});
             let uniqueId = Random.id();
-            let addNewFailure = 'Check config' + '';
+            let addNewFailure = 'Check config ' + idFailure;
             MachineReady.upsert({_id: machineId}, {$push: {newIssues: {_id: uniqueId, checkStatus: 2, errorDescription: addNewFailure}}});
         },
 

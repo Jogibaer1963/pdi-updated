@@ -15,7 +15,6 @@ Meteor.subscribe("orderParts");
             return {machine: selectedPdiMachineNr, userLoggedIn: user};
         },
 
-
         selectedProfiCam: function() {
             return Session.get('selectedProfiCam');
         },
@@ -153,9 +152,10 @@ Meteor.subscribe("orderParts");
             Session.set('selectedPdiMachineId', localStorage.getItem('pdiMachineId'));
             const selectedPdiMachineId = Session.get('selectedPdiMachineId');
             let idFailure = event.currentTarget.id;
-            if(selectedPdiMachineId) {
-                Meteor.call('configNokButton', selectedPdiMachineId, idFailure);
-            } else {
+            let idIdentifier = event.currentTarget.name;
+           if(selectedPdiMachineId) {
+               Meteor.call('configNokButton', selectedPdiMachineId, idFailure, idIdentifier);
+           } else {
                 console.log("Lost Machine Number")
             }
         },
@@ -163,6 +163,7 @@ Meteor.subscribe("orderParts");
 
         'click .buttonOK': (event) => {
             event.preventDefault();
+
             Session.set('selectedPdiMachineId', localStorage.getItem('pdiMachineId'));
             const selectedPdiMachineId = Session.get('selectedPdiMachineId');
             let idFailure = event.currentTarget.id;
