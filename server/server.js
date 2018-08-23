@@ -101,7 +101,7 @@ if(Meteor.isServer){
         });
 
         Meteor.publish("toDoMessage", function() {
-            return toDoMesssage.find();
+            return toDoMessage.find();
         });
 
         Meteor.publish("addIssues", function() {
@@ -495,6 +495,18 @@ if(Meteor.isServer){
 
         //---------------------------------------------  other PDI operations ------------------------------------------------------
 
+        'stopPdi': function(selectedCheckPoint) {
+            MachineReady.update({_id:selectedCheckPoint}, {$set: {pdiStatus: 0}});
+        },
+
+        'stopRepair': function(selectedCheckPoint) {
+            MachineReady.update({_id:selectedCheckPoint}, {$set: {repairStatus: 0}});
+        },
+
+        'skipPdi': function(pdiMachineId) {
+            MachineReady.update({_id: pdiMachineId}, {$set: {pdiStatus: 1}});
+        },
+
         'cancelPdi': function(pdiMachineId) {
             MachineReady.update({_id: pdiMachineId}, {$set: {pdiStatus: 0,
                                                              checkList: [],
@@ -649,28 +661,28 @@ if(Meteor.isServer){
             MachineReady.update({_id:selectedCheckPoint}, {$set: {washStatus: 2, startWashDate: dateStart}});
         },
 
-        'stopPdi': function(selectedCheckPoint) {
-            MachineReady.update({_id:selectedCheckPoint}, {$set: {pdiStatus: 0}});
-        },
-
-        'stopRepair': function(selectedCheckPoint) {
-            MachineReady.update({_id:selectedCheckPoint}, {$set: {repairStatus: 0}});
-        },
-
-        'skipPdi': function(pdiMachineId) {
-            MachineReady.update({_id: pdiMachineId}, {$set: {pdiStatus: 1}});
-        },
-
         'locationUpdate': function(selectedPdiMachine, locationId) {
             MachineReady.update({_id: selectedPdiMachine}, {$set: {locationId: locationId}});
         },
-/*
 
-        'reserveUpdate': function(selectedPdiMachine, reservedId) {
-            MachineReady.update({_id: selectedPdiMachine}, {$set: {reservedFor: reservedId}});
+    // ---------------------------------------- To Do -------------------------------------------------
+
+        'submitToDo': function(toDoText, dateNow, needDate, toDoUser) {
+            toDoMessage.insert({toDoText: toDoText, dateNow: dateNow, needDate: needDate, toDoUser: toDoUser, toDoStatus: 0});
         },
 
-*/
+        'setToDo': (inProcessItem, status) => {
+            if(status === 0) {
+            toDoMessage.update({_id: inProcessItem}, {$set: {toDoStatus: status}});
+            } else if(status === 1) {
+                toDoMessage.update({_id: inProcessItem}, {$set: {toDoStatus: status}});
+            } else if(status === 2) {
+                let dateNow = moment().format('L');
+                toDoMessage.update({_id: inProcessItem}, {$set: {toDoStatus: status, clearDate: dateNow}});
+            }
+        },
+
+    // ------------------------------------------- Repair ------------------------------------------------
 
         'removeFromSiList': function (siItem) {
            siList.remove({_id: siItem});

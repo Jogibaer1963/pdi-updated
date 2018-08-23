@@ -3,23 +3,17 @@
 
 <template name="toDoList">
     {{#if currentUser}}
-        {{#if isInRole 'commission'}}
-             {{> commissionNav}}
-             {{>lop}}
-           {{else}}
-             {{>lop}}
+        {{#if isInRole 'admin'}}
+            {{> topNav}}
+            {{>adminLop}}
+            {{>lop}}
+        {{else}}
+            {{> topNav}}
+            {{>lop}}
          {{/if}}
     {{else}}
         {{> login}}
     {{/if}}
-</template>
-
-<template name="toDoTopNav">
-    {{#if isInRole 'commission'}}
-        {{> commissionNav}}
-        {{else}}
-            {{>lop}}
-        {{/if}}
 </template>
 
 <template name="lop">
@@ -61,6 +55,15 @@
          </tbody>
        </table>
     </div>
+</template>
 
-
+<template name="adminLop">
+    <div class="adminLopMessage">
+        <form class="adminLopButtons">
+            <button type="button" class="btn btn-default btn-info inProcessToDo">in process</button>
+            <button type="button" class="btn btn-default btn-info cancelToDo">Cancel</button>
+            <button type="button" class="btn btn-default btn-info finishedToDo">Finished</button>
+            <button type="button" class="btn btn-default btn-info reOpenToDo">Re-open To Do</button>
+        </form>
+    </div>
 </template>

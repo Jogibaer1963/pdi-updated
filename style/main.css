@@ -1174,6 +1174,11 @@ table.toDoListTable {
   position: relative;
   top: 10em; }
 
+.adminLopMessage {
+  position: absolute;
+  top: 16em;
+  left: 70em; }
+
 .inputEditHead {
   position: absolute;
   top: 10em;
