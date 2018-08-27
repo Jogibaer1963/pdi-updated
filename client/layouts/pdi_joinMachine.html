@@ -1,6 +1,5 @@
 <template name="joinMachine">
     {{#if currentUser}}
-
         {{> joinPdiMachine}}
     {{else}}
         {{> login}}
@@ -8,7 +7,196 @@
 </template>
 
 <template name="joinPdiMachine">
+    <div class="pdiToDo">
+        <img src="claas_logo.png" />
+    </div>
+    <div class="pdiToDo">
+        {{#with joinMachineNow}}
+            <h2>Machine to Inspect: {{machine}}</h2>
+            <h2>Performed by: {{userLoggedIn}}</h2>
+        {{/with}}
+        <form class="batts">
+            <label for="batteryC13" class="batteryC13">Battery Volt & CCA</label>
+            <br>
+            <input type="text" class="batteryC13CCA inputSize" id="batteryC13CCA" name="batteryC13CCA" placeholder="Battery C13 CCA" value={{battC13CCA}}>
+            <input type="text" class="batteryC13Volt inputSize" id="batteryC13Volt" name="batteryC13Volt" placeholder="Battery C13 Volt" value={{battC13Volt}}>
+            <br><br>
+            <input type="text" class="batteryC13 inputSize" id="mtuG001CCA" name="mtuG001CCA" placeholder="Battery MTU G001 CCA" value={{mtuG001CCA}}>
+            <input type="text" class="batteryC13 inputSize" id="mtuG001Volt" name="mtuG001Volt" placeholder="Battery MTU G001 Volt" value={{mtuG001Volt}}>
+            <br><br>
+            <input type="text" class="batteryC13 inputSize" id="mtuG005CCA" name="mtuG005CCA" placeholder="Battery MTU G005 CCA" value={{mtuG005CCA}}>
+            <input type="text" class="batteryC13 inputSize" id="mtuG005Volt" name="mtuG005Volt" placeholder="Battery MTU G005 Volt" value={{mtuG005Volt}}>
+            <br><br>
+            <input type="text" class="batteryC13 inputSize" id="mtuG004CCA" name="mtuG004CCA" placeholder="Battery MTU G004 CCA" value={{mtuG004CCA}}>
+            <input type="text" class="batteryC13 inputSize" id="mtuG004Volt" name="mtuG004Volt" placeholder="Battery MTU G004 Volt" value={{mtuG004Volt}}>
+            <br><br>
+            <input type="text" class="batteryC13 inputSize" id="manBatt_1CCA" name="manBatt_1CCA" placeholder="Battery MAN Batt-1 CCA" value={{manBatt_1CCA}}>
+            <input type="text" class="batteryC13 inputSize" id="manBatt_1Volt" name="manBatt_1Volt" placeholder="Battery MAN Batt-1 Volt" value={{manBatt_1Volt}}>
+            <br><br>
+            <input type="text" class="batteryC13 inputSize" id="manBatt_2CCA" name="manBatt_2CCA" placeholder="Battery MAN Batt-2 CCA" value={{manBatt_2CCA}}>
+            <input type="text" class="batteryC13 inputSize" id="manBatt_2Volt" name="manBatt_2Volt" placeholder="Battery MAN Batt-2 Volt" value={{manBatt_2Volt}}>
+            <br><br>
+            <button type="submit" class="btn btn-success buttonBatt">Save Batteries</button><h4>{{battSaved}}</h4><br>
+        </form>
 
+        <br><br>
+        <form class="omms">
+            <div class="ommInput">
+                <label for="fuelMe" class="fuel">Fuel consumption before PDI</label>
+                <br>
+                <input type="text" class="omInput inputSize" id="fuelMe" name="fuelMe" placeholder="Gallon" value={{fuelStart}} required>
+                <br>
+                <label for="ommMain">Main OMM</label>
+                <br>
+                <input type="text" class="omInput inputSize" id="ommMain" name="omMain" placeholder="Main OMM" value={{ommMain}} required>
+                <br>
+                <label for="suppOmm">Supplemental OMM</label>
+                <br>
+                <input type="text" class="omInput inputSize" id="ommSupp" name="omSupp" placeholder="Supplemental OMM" value={{ommSupp}} required>
+                <br>
+                <label for="unloadOmm">Unload OMM</label>
+                <br>
+                <input type="text" class="omInput inputSize" id="unloadOmm" name="omUnload" placeholder="Unload OMM" value={{ommUnload}} required>
+                <br>
+                <label for="ommMain">Profi Cam</label>
+                <br>
+                <input type="text" class="omInput inputSize" id="locationId" name="omProfiCam" placeholder="Profi Cam" value={{ommProfiCam}}>
+                <br>
+                <label for="cebisOmm">Cebis Mobil</label>
+                <br>
+                <input type="text" class="omInput inputSize" id="cebisOmm" name="omCebis" placeholder="Cebis Mobil OMM" value={{ommCebis}}>
+                <br>
+                <label for="ommMain">Mobile Touch</label>
+                <br>
+                <input type="text" class="omInput inputSize" id="locationId" name="omTouch" placeholder="Mobile Touch" value={{ommTouch}}>
+                <br>
+                <label for="ommMain">Terra Track</label>
+                <br>
+                <input type="text" class="omInput inputSize" id="locationId" name="omTerra" placeholder="Terra Track" value={{ommTerra}}>
+                <br>
+                <label for="ommMain">Dual Tire New Version</label>
+                <br>
+                <input type="text" class="omInput inputSize" id="locationId" name="dualTire" placeholder="Dual Tires" value={{ommDual}}>
+            </div>
+
+            <br><br>
+            <button type="submit" class="btn btn-success buttonBatt">Save OMM's</button><h4>{{ommSaved}}</h4><br>
+        </form>
+
+    </div>
+    <br><br>
+    <td class="pdiPDIField {{getStatusColor pdiStatus}}"
+        style="background-color:{{getStatusColor pdiStatus}};
+                color:{{getStatusColor pdiStatus}}">{{pdiStatus}}</td>
+    <div class="configTable">
+        <h3 class="configHeader">Configuration</h3>
+        <table class="pdiCheckList">
+            <tbody>
+            {{#each machineConfig}}
+                <tr >
+                    <td class="pdiCell positionCheckPos {{getMachineConfigStatus machineConfigStatus}}"
+                        style="background-color:{{getMachineConfigStatus machineConfigStatus}}">
+                        <div class="" >
+                            {{{config}}}
+                        </div>
+                        <div class="positionCheckText">
+                            {{{configItem}}}
+                        </div>
+                        <button class="btn btn-success configButtonOK" id={{_id}}>OK</button>
+
+                        <button class="btn btn-danger configButtonNOK" id={{configItem}} name={{_id}}>NOK</button>
+
+                        <button class="btn btn-info buttonNA buttonNotWorking" id={{_id}}>info</button>
+                    </td>
+                </tr>
+            {{/each}}
+            </tbody>
+        </table>
+    </div>
+    <br><br>
+    <div class="checkListTable">
+        <h3 class="configHeader">Checklist</h3>
+        <table class="pdiCheckList">
+            <tbody>
+            {{#each checkList}}
+                <tr class=" ">
+                    <td class="pdiCell positionCheckPos {{getMachineConfigStatus failStatus}}"
+                        style="background-color:{{getMachineConfigStatus checkStatus}}">
+                        <div class="positionCheckPos" >
+                            {{{errorPos}}}
+                        </div>
+                        <div class="positionCheckText">
+                            {{{errorDescription}}}
+                        </div>
+                        <button class="btn btn-success buttonOK" id={{_id}}>OK</button>
+
+                        <button class="btn btn-danger buttonNOK" id={{_id}}>NOK</button>
+
+                        <button class="btn btn-info buttonNA" id={{_id}}>N/A</button>
+                    </td>
+                </tr>
+            {{/each}}
+            </tbody>
+        </table>
+    </div>
+    <div class="pdiDivider">
+        <h1>_____________________</h1>
+    </div>
+    <div class="pdiInputFields">
+        <form class="addNewIssue">
+            <div class="issueField">
+                <input type="text" class="addIssueText inputIssueSize" name="addIssue" placeholder="Add issue" required>
+                <br><br>
+                <button type="submit" class="btn btn-success addIssueText">Submit New Issue</button>
+            </div>
+        </form>
+    </div>
+    <div class="pdiDivider">
+        <h1>_____________________</h1>
+    </div>
+    <div class="pdiInputFields">
+        <form class="addressToWashBay">
+            <div class="issueField">
+                <input type="text" class="addIssueText inputIssueSize" name="addWashBay" placeholder="Add WashBay Message" required>
+                <br><br>
+                <button type="submit" class="btn btn-success addIssueText">Submit Message</button>
+            </div>
+        </form>
+    </div>
+    <div class="pdiDivider">
+        <h1>_____________________</h1>
+    </div>
+    <div>
+        <h3 class="configHeader">New Issues Found</h3>
+        <table class="blueTable newIssuesTable " cellpadding="10">
+            <tbody>
+            {{#each newIssue}}
+                <tr class="openFailure {{selectedFailure}}">
+                    <td class="pdiComments ">{{errorDescription}}</td>
+                </tr>
+            {{/each}}
+            </tbody>
+        </table>
+    </div>
+    <br><br>
+    <div class="issueField">
+        <button type="button" class="btn btn-danger deleteRepair">Delete selected repair</button>
+    </div>
+    <div class="pdiDivider">
+        <h1>_____________________</h1>
+    </div>
+    <div>
+        <h3 class="configHeader">Pdi finnished</h3>
+    </div>
+    <div class="endOfList">
+        <form class="afterPdiFuel">
+            <div class="issueField">
+                <input type="text" class="addIssueText" name="afterFuel" placeholder="Fuel after PDI" required>
+                <br><br>
+                <button type="submit" class="btn btn-success addIssueText">Submit and back to over view</button>
+            </div>
+        </form>
+    </div>
 
 
 

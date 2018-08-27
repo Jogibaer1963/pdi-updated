@@ -72,6 +72,8 @@
         'click .cancelPdiProcess': function () {
             event.preventDefault();
             const pdiMachineId = Session.get('selectedPdiMachine');
+            localStorage.removeItem('pdiMachineId');
+            localStorage.removeItem('pdiMachineNr');
             Meteor.call('cancelPdi', pdiMachineId);
             Session.set('selectedProfiCam', '');
             Session.set('selectedTeraTrackOm', '');
@@ -91,8 +93,7 @@
             event.preventDefault();
             const pdiMachineId = Session.get('selectedPdiMachine');
             localStorage.setItem('joinMachine', pdiMachineId);
-
-          //  FlowRouter.go('joinMachine');
+            FlowRouter.go('joinMachine');
         },
 
         'click .addIssueButton': () => {

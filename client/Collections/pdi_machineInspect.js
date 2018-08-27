@@ -118,21 +118,6 @@ Meteor.subscribe("orderParts");
              const ommDual = event.target.dualTire.value;
             Meteor.call('pdiMachineOmm', pdiMachineId, loggedInUser, fuelMe, ommMain, ommSupp,
                 ommUnload,ommProfiCam, ommCebis, ommTouch, ommTerra, ommDual);
-            /*
-            Session.set('selectedProfiCam', '');
-            Session.set('selectedTeraTrackOm', '');
-            Session.set('selectedCemosOm', '');
-            Session.set('selectedUnloadOm', '');
-            Session.set('selectedSuppOm', '');
-            Session.set('selectedMainOm', '');
-            event.target.fuelMe.value = '';
-            event.target.omMain.value = '';
-            event.target.omSupp.value = '';
-            event.target.omUnload.value = '';
-            event.target.omCebis.value = '';
-            event.target.omTerra.value = '';
-            event.target.omProfiCam.value = '';
-            */
         },
 
         'click .configButtonOK': (event) => {
@@ -163,7 +148,6 @@ Meteor.subscribe("orderParts");
 
         'click .buttonOK': (event) => {
             event.preventDefault();
-
             Session.set('selectedPdiMachineId', localStorage.getItem('pdiMachineId'));
             const selectedPdiMachineId = Session.get('selectedPdiMachineId');
             let idFailure = event.currentTarget.id;
