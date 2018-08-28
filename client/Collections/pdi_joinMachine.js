@@ -6,14 +6,14 @@ Template.joinPdiMachine.helpers({
     'joinMachineNow': function () {
         const user = Meteor.user().username;
         Session.set('currentLoggedInUser', user);
-        Session.set('selectedPdiMachineId', localStorage.getItem('pdiMachineId'));
-        Session.set('selectedPdiMachineNr', localStorage.getItem('pdiMachineNr'));
-        const selectedPdiMachineNr = Session.get('selectedPdiMachineNr');
-        return {machine: selectedPdiMachineNr, userLoggedIn: user};
+        Session.set('selectedPdiMachineId', localStorage.getItem('joinMachine'));
+        const selectedPdiMachineId = Session.get('selectedPdiMachineId');
+        const machineId = MachineReady.findOne({_id: selectedPdiMachineId}).machineId;
+        Session.set('selectedPdiMachineNr', machineId);
+        return {machine: machineId, userLoggedIn: user};
     },
 
     battSaved: function() {
-        Session.set('selectedPdiMachineNr', localStorage.getItem('pdiMachineNr'));
         const machineId = Session.get('selectedPdiMachineNr');
         const result = MachineReady.findOne({machineId: machineId}).batteries;
         Session.set('batteries', result);
@@ -25,15 +25,21 @@ Template.joinPdiMachine.helpers({
     },
 
     battC13CCA: () => {
+        console.log('in schleife');
         return Session.get('batteries').battC13CCA;
+
     },
 
     battC13Volt: () => {
+        if(result) {
         return Session.get('batteries').battC13Volt;
+        }
     },
 
     mtuG001CCA: () => {
+        if(result) {
         return Session.get('batteries').mtuG001CCA;
+        }
     },
 
     mtuG001Volt: () => {
@@ -73,7 +79,6 @@ Template.joinPdiMachine.helpers({
     },
 
     ommSaved: function() {
-        Session.set('selectedPdiMachineNr', localStorage.getItem('pdiMachineNr'));
         const machineId = Session.get('selectedPdiMachineNr');
         result2 = MachineReady.findOne({machineId: machineId}).omms;
         Session.set('omms', result2)

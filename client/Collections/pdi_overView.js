@@ -1,5 +1,6 @@
 
     Meteor.subscribe("fuelAverage");
+    Session.set('status', 0);
 
 
     Template.inspection.helpers({
@@ -147,7 +148,13 @@
     Handlebars.registerHelper('inActive_1', () => {
         let inActiveState = Session.get('status');
         if(inActiveState === 2) {
-            console.log('inActive', inActiveState);
+            return 'inActiveButton-1';
+        }
+    });
+
+    Handlebars.registerHelper('inActive_2', () => {
+        let inActiveState = Session.get('status');
+        if(inActiveState === 0) {
             return 'inActiveButton-1';
         }
     });
