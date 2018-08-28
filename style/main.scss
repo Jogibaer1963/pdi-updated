@@ -82,14 +82,20 @@
 
 
 //  Inactive Buttons
+$comm-status: #252525;
 
+.in-active-button {
+  background-color: $comm-status;
+  opacity: .5;
+  pointer-events: none;
+}
 
 .activeButton {
   opacity: 1;
   pointer-events: auto;
 }
 
-.inActive {
+.inActiveButton-1 {
   background: repeating-linear-gradient(
                   45deg,
                   #e6e6e6,
@@ -97,4 +103,9 @@
                   #e6e6e6 10px,
                   #bc171b 20px
   );
+    background-color: $comm-status;
+    opacity: .5;
+    pointer-events: none;
+
+
 }

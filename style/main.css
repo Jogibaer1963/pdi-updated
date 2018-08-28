@@ -682,14 +682,11 @@ tbody.pdiCheckList {
   top: 50px;
   left: 559px; }
 
-.loadConfig {
-  float: left; }
-
 .fileContainer {
   overflow: hidden;
   position: relative;
-  left: 35em;
-  top: -1.9em; }
+  left: 40em;
+  top: -2.5em; }
 
 .fileContainer [type=file] {
   cursor: inherit;
@@ -1266,11 +1263,19 @@ table.toDoListTable {
 .marginMain {
   margin-left: 25px; }
 
+.in-active-button {
+  background-color: #252525;
+  opacity: .5;
+  pointer-events: none; }
+
 .activeButton {
   opacity: 1;
   pointer-events: auto; }
 
-.inActive {
-  background: repeating-linear-gradient(45deg, #e6e6e6, #bc171b 10px, #e6e6e6 10px, #bc171b 20px); }
+.inActiveButton-1 {
+  background: repeating-linear-gradient(45deg, #e6e6e6, #bc171b 10px, #e6e6e6 10px, #bc171b 20px);
+  background-color: #252525;
+  opacity: .5;
+  pointer-events: none; }
 
 /*# sourceMappingURL=main.css.map */

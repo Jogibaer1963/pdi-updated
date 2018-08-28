@@ -16,9 +16,15 @@
             const openInspect = this._id;
             const selectedPdiMachine = Session.get('selectedPdiMachine');
             if (selectedPdiMachine === openInspect) {
+                let status = MachineReady.findOne({_id: selectedPdiMachine}).pdiStatus;
+                Session.set('status', status);
                 return "selected";
                   }
         },
+
+
+
+
 
         countPdi: function() {
             return MachineReady.find({$or:[{pdiStatus: 0},{pdiStatus: 2}]}, {sort: {date: 1}}) .count();
@@ -63,11 +69,11 @@
             const dateStart = new Date();
             Meteor.call('generatePdiList', selectedPdiMachineId, selectedPdiMachineNr, dateStart,
                 user, range);
-
+            Session.set('inActiveState', 1);
             FlowRouter.go('machineInspect');
         },
 
-        // Button Cancel PDI as long pdi is not finished
+        // Button Cancel PDI until pdi is not finished
 
         'click .cancelPdiProcess': function () {
             event.preventDefault();
@@ -137,15 +143,14 @@
 
     });
 
-    Handlebars.registerHelper('inActive', function() {
-        const inActiveStatus = Session.get('inActiveState');
-        if(inActiveStatus === 0) {
-            return 'inActiveButton';
+
+    Handlebars.registerHelper('inActive_1', () => {
+        let inActiveState = Session.get('status');
+        if(inActiveState === 2) {
+            console.log('inActive', inActiveState);
+            return 'inActiveButton-1';
         }
     });
-        
-
-
 
 
 
