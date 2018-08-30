@@ -8,80 +8,126 @@ Template.joinPdiMachine.helpers({
         Session.set('currentLoggedInUser', user);
         Session.set('selectedPdiMachineId', localStorage.getItem('joinMachine'));
         const selectedPdiMachineId = Session.get('selectedPdiMachineId');
+        console.log(selectedPdiMachineId);
         const machineId = MachineReady.findOne({_id: selectedPdiMachineId}).machineId;
         Session.set('selectedPdiMachineNr', machineId);
         return {machine: machineId, userLoggedIn: user};
     },
 
     battSaved: function() {
+        Session.set('batteries', '');
         const machineId = Session.get('selectedPdiMachineNr');
-        const result = MachineReady.findOne({machineId: machineId}).batteries;
-        Session.set('batteries', result);
-        if(result) {
-            return "Battery successfull saved";
-        } else {
-            return "Error, Battery not saved";
+        if(machineId) {
+            const result = MachineReady.findOne({machineId: machineId}).batteries;
+            Session.set('batteries', result);
+            if (result) {
+                return "Battery successfull saved";
+            } else {
+                return "Error, Battery not saved";
+            }
         }
     },
 
     battC13CCA: () => {
-        console.log('in schleife');
-        return Session.get('batteries').battC13CCA;
+        try {
+            return Session.get('batteries').battC13CCA;
+        } catch (e) {
 
+        }
     },
 
     battC13Volt: () => {
-        if(result) {
-        return Session.get('batteries').battC13Volt;
+        try {
+            return Session.get('batteries').battC13Volt;
+        } catch (e) {
+
         }
     },
 
     mtuG001CCA: () => {
-        if(result) {
-        return Session.get('batteries').mtuG001CCA;
+        try {
+            return Session.get('batteries').mtuG001CCA;
+        } catch (e) {
+
         }
     },
 
     mtuG001Volt: () => {
-        return Session.get('batteries').mtuG001Volt;
+        try {
+            return Session.get('batteries').mtuG001Volt;
+        } catch (e) {
+
+        }
     },
 
     mtuG005CCA: () => {
-        return Session.get('batteries').mtuG005CCA;
+        try {
+            return Session.get('batteries').mtuG005CCA;
+        } catch (e) {
+
+        }
     },
 
     mtuG005Volt: () => {
-        return Session.get('batteries').mtuG005Volt;
+        try {
+            return Session.get('batteries').mtuG005Volt;
+        } catch (e) {
+
+        }
     },
 
     mtuG004CCA: () => {
-        return Session.get('batteries').mtuG004CCA;
+        try {
+            return Session.get('batteries').mtuG004CCA;
+        } catch (e) {
+
+        }
     },
 
     mtuG004Volt: () => {
-        return Session.get('batteries').mtuG004Volt;
+        try {
+            return Session.get('batteries').mtuG004Volt;
+        } catch (e) {
+
+        }
     },
 
     manBatt_1CCA: () => {
-        return Session.get('batteries').manBatt_1CCA;
+        try {
+            return Session.get('batteries').manBatt_1CCA;
+        } catch (e) {
+
+        }
     },
 
     manBatt_1Volt: () => {
-        return Session.get('batteries').manBatt_1Volt;
+        try {
+            return Session.get('batteries').manBatt_1Volt;
+        } catch (e) {
+
+        }
     },
 
     manBatt_2CCA: () => {
-        return Session.get('batteries').manBatt_2CCA;
+        try {
+            return Session.get('batteries').manBatt_2CCA;
+        } catch (e) {
+
+        }
     },
 
     manBatt_2Volt: () => {
-        return Session.get('batteries').manBatt_2Volt;
+        try {
+            return Session.get('batteries').manBatt_2Volt;
+        } catch (e) {
+
+        }
     },
 
     ommSaved: function() {
         const machineId = Session.get('selectedPdiMachineNr');
         result2 = MachineReady.findOne({machineId: machineId}).omms;
-        Session.set('omms', result2)
+        Session.set('omms', result2);
         if(result2) {
             return "OMM's successfull saved";
         } else {
@@ -90,58 +136,82 @@ Template.joinPdiMachine.helpers({
     },
 
     fuelStart: () => {
+        try {
             return Session.get('omms').fuelStart;
+        } catch (e) {
+           }
     },
 
     ommMain: () => {
-        return Session.get('omms').ommMain;
+        try {
+            return Session.get('omms').ommMain;
+        } catch (e) {
+            }
     },
 
     ommSupp: () => {
-        return Session.get('omms').ommSupp;
+        try {
+            return Session.get('omms').ommSupp;
+        } catch (e) {
+        }
     },
 
     ommUnload: () => {
-        return Session.get('omms').ommUnload;
+        try {
+            return Session.get('omms').ommUnload;
+        } catch (e) {
+        }
     },
 
     ommProfiCam: () => {
-        return Session.get('omms').ommProfiCam;
+        try {
+            return Session.get('omms').ommProfiCam;
+        } catch (e) {
+        }
     },
 
     ommCebis: () => {
-        return Session.get('omms').ommCebis;
+        try {
+            return Session.get('omms').ommCebis;
+        } catch (e) {
+        }
     },
 
     ommTouch: () => {
-        return Session.get('omms').ommTouch;
+        try {
+            return Session.get('omms').ommTouch;
+        } catch (e) {
+        }
     },
 
     ommTerra: () => {
-        return Session.get('omms').ommTerra;
+        try {
+            return Session.get('omms').ommTerra;
+        } catch (e) {
+        }
     },
 
     ommDual: () => {
-        return Session.get('omms').ommDual;
+        try {
+            return Session.get('omms').ommDual;
+        } catch (e) {
+        }
     },
 
 
     machineConfig: function() {
-        Session.set('selectedPdiMachineNr', localStorage.getItem('pdiMachineNr'));
         const machineId = Session.get('selectedPdiMachineNr');
         result = MachineReady.findOne({machineId: machineId}).machineConfig;
         return result;
     },
 
     checkList: function() {
-        Session.set('selectedPdiMachineNr', localStorage.getItem('pdiMachineNr'));
         const machineId = Session.get('selectedPdiMachineNr');
         result = MachineReady.findOne({machineId: machineId}).checkList;
         return result;
     },
 
     newIssue: function() {
-        Session.set('selectedPdiMachineNr', localStorage.getItem('pdiMachineNr'));
         const machineId = Session.get('selectedPdiMachineNr');
         result = MachineReady.findOne({machineId: machineId}).newIssues;
         return result;
@@ -154,7 +224,6 @@ Template.joinPdiMachine.events({
 
     'submit .batts': (event) => {
         event.preventDefault();
-        Session.set('selectedPdiMachine', localStorage.getItem('selectedPdi'));
         const loggedInUser = Session.get('currentLoggedInUser');
         const pdiMachineId = Session.get('selectedPdiMachineId');
         const battC13CCA = event.target.batteryC13CCA.value;
@@ -196,7 +265,6 @@ Template.joinPdiMachine.events({
 
     'click .configButtonOK': (event) => {
         event.preventDefault();
-        Session.set('selectedPdiMachineId', localStorage.getItem('pdiMachineId'));
         const selectedPdiMachineId = Session.get('selectedPdiMachineId');
         let idFailure = event.currentTarget.id;
         if(selectedPdiMachineId) {
@@ -208,7 +276,6 @@ Template.joinPdiMachine.events({
 
     'click .configButtonNOK': (event) => {
         event.preventDefault();
-        Session.set('selectedPdiMachineId', localStorage.getItem('pdiMachineId'));
         const selectedPdiMachineId = Session.get('selectedPdiMachineId');
         let idFailure = event.currentTarget.id;
         let idIdentifier = event.currentTarget.name;
@@ -222,7 +289,6 @@ Template.joinPdiMachine.events({
 
     'click .buttonOK': (event) => {
         event.preventDefault();
-        Session.set('selectedPdiMachineId', localStorage.getItem('pdiMachineId'));
         const selectedPdiMachineId = Session.get('selectedPdiMachineId');
         let idFailure = event.currentTarget.id;
         if(selectedPdiMachineId) {
@@ -234,7 +300,6 @@ Template.joinPdiMachine.events({
 
     'click .buttonNOK': (event) => {
         event.preventDefault();
-        Session.set('selectedPdiMachineId', localStorage.getItem('pdiMachineId'));
         const selectedPdiMachineId = Session.get('selectedPdiMachineId');
         let idFailure = event.currentTarget.id;
         if(selectedPdiMachineId) {
@@ -246,7 +311,6 @@ Template.joinPdiMachine.events({
 
     'click .buttonNA': (event) => {
         event.preventDefault();
-        Session.set('selectedPdiMachineId', localStorage.getItem('pdiMachineId'));
         const selectedPdiMachineId = Session.get('selectedPdiMachineId');
         let idFailure = event.currentTarget.id;
         if(selectedPdiMachineId) {
@@ -263,7 +327,6 @@ Template.joinPdiMachine.events({
 
     'click .deleteRepair': () => {
         event.preventDefault();
-        const selectedPdiMachineId = Session.get('selectedPdiMachineId');
         const openFailure = Session.get('openFailure');
         if(selectedPdiMachineId) {
             Meteor.call('removeFailure', selectedPdiMachineId, openFailure);
@@ -275,7 +338,6 @@ Template.joinPdiMachine.events({
 
     'submit .addNewIssue': (event) => {
         event.preventDefault();
-        Session.set('selectedPdiMachineId', localStorage.getItem('pdiMachineId'));
         const selectedPdiMachineId = Session.get('selectedPdiMachineId');
         let addNewFailure = event.target.addIssue.value;
         if(selectedPdiMachineId) {
@@ -288,8 +350,6 @@ Template.joinPdiMachine.events({
 
     'submit .addressToWashBay': (event) => {
         event.preventDefault();
-        Session.set('selectedPdiMachineId', localStorage.getItem('pdiMachineId'));
-        Session.set('selectedPdiMachineNr', localStorage.getItem('pdiMachineNr'));
         const selectedPdiMachineNr = Session.get('selectedPdiMachineNr');
         const selectedPdiMachineId = Session.get('selectedPdiMachineId');
         let addWashBay = event.target.addWashBay.value;
@@ -303,7 +363,6 @@ Template.joinPdiMachine.events({
 
     'submit .afterPdiFuel': (event) => {
         event.preventDefault();
-        Session.set('selectedPdiMachineId', localStorage.getItem('pdiMachineId'));
         const selectedPdiMachineId = Session.get('selectedPdiMachineId');
         let fuelAfter = event.target.afterFuel.value;
         if(selectedPdiMachineId) {
