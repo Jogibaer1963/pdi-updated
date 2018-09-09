@@ -1,0 +1,87 @@
+<template name="dropDownList">
+    {{#if currentUser}}
+        {{> topNav}}
+
+        {{> dropDownIssue}}
+    {{else}}
+        {{> login}}
+    {{/if}}
+</template>
+
+<template name="dropDownIssue">
+
+    <div class="logoDropDown">
+        <div id="logo">
+            <img src="claas_logo.png" />
+        </div>
+    </div>
+        <br>
+     <div class="formDropDown">
+
+        <form class="addNewDropDownItem">
+            <div>
+                <input type="text" class="" name="component" placeholder="" required>
+                <button type="submit" class="btn btn-success newComponent">Submit Main Component</button>
+            </div>
+        </form>
+         <br>
+         <form class="addSubComponent">
+             <div>
+                 <input type="text" class="" name="subComponent" placeholder="" required>
+                 <button type="submit" class="btn btn-success newComponent">Submit Sub Component</button>
+             </div>
+         </form>
+     </div>
+
+
+    <table class="pdiTable blueTable mainCompTable componentTable" cellpadding="10">
+        <thead>
+        <tr>
+            <th class="boxWidth"><strong>Main Component</strong></th>
+        </tr>
+        </thead>
+        <tbody class="mainCompTbody">
+            {{#each mainComponent}}
+                <tr class="mainComp {{selectedClass}}">
+                    <td class="boxWidth">{{component}}</td>
+                </tr>
+            {{/each}}
+        </tbody>
+    </table>
+
+    <table class="pdiTable blueTable mainCompTable subComponentTable" cellpadding="10">
+        <thead>
+        <tr>
+            <th class="boxWidth"><strong>Sub Component</strong></th>
+        </tr>
+        </thead>
+        <tbody class="mainCompTbody">
+        {{#each subComp }}
+            <tr class="mainComp {{selectedClass}}">
+                <td class="boxWidth">{{component}}</td>
+            </tr>
+        {{/each}}
+        </tbody>
+    </table>
+
+
+    <!--
+
+    <div class="mainComponentsPos">
+        {{#dropdownTrigger  name="mainComponents"}}
+            <button class="loginSubmit omInputButton">Main Components</button>
+        {{/dropdownTrigger}}
+        {{#dropdown name="mainComponents" align="left" top="25" left="0"}}
+            <div class="rTable">
+                {{#each mainComponent}}
+                    <div class="rTableRow">
+                        <div class="rTableCell" style="font-size: 20px;height: 40px;width: 50px;white-space: nowrap;">{{this}}</div>
+                    </div>
+                {{/each}}
+            </div>
+        {{/dropdown}}
+    </div>
+
+    -->
+
+</template>

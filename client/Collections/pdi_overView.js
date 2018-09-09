@@ -23,10 +23,6 @@
                   }
         },
 
-
-
-
-
         countPdi: function() {
             return MachineReady.find({$or:[{pdiStatus: 0},{pdiStatus: 2}]}, {sort: {date: 1}}) .count();
         },

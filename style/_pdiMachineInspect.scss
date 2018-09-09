@@ -81,6 +81,37 @@
   left: 3.5em;
 }
 
+/*---------------- Drop Down -------------*/
+
+.mainComponentsPos {
+  position: relative;
+  left: 3.6em;
+}
+
+.subComponentPos {
+  position: relative;
+  left: 22em;
+}
+
+.dropDownStyle {
+
+}
+
+.dropdown {
+  font-size: 20px;
+  height: 40px;
+  width: 50px;
+  white-space: nowrap;
+  border-radius: 1px;
+  padding: 1rem;
+  z-index: 1001;
+  min-width: 220px;
+  // For opening transition
+  transform-origin: center top;
+ }
+
+/*-----------------------------------------*/
+
 .issueField {
   margin-left: 3em;
 }

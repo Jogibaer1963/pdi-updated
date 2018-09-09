@@ -108,6 +108,10 @@ if(Meteor.isServer){
             return addIssues.find();
         });
 
+        Meteor.publish("mainComponents", function() {
+            return mainComponents.find();
+        });
+
     });
 
 
@@ -116,6 +120,33 @@ if(Meteor.isServer){
 
 
     Meteor.methods({
+ //----------------------------------------------------- Components -----------------------------------------------------------------------
+
+        'subComponent': (id) => {
+            if(id) {
+                let k = mainComponents.findOne({_id: id});
+                let result = k.subComponent;
+                result.sort((a,b) => {
+                    if (a.component > b.component) {
+                        return 1;
+                    }
+                    if (a.component < b.component) {
+                        return 0;
+                    }
+                });
+                return result;
+            }
+        },
+
+        'addNewComponent': (newComponent) => {
+            let newId = Random.id();
+            mainComponents.insert({_id: newId, component: newComponent});
+        },
+
+        'addSubComponent': (component_id, newSubComponent) => {
+            let newId = Random.id();
+            mainComponents.upsert({_id: component_id}, {$push: {subComponent: {_id: newId, component: newSubComponent}}} )
+        },
 
 //--------------------------------------------------------  Variants -----------------------------------------------------------------------
         'readVariant': function (contents) {

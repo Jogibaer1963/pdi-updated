@@ -21,6 +21,8 @@
         <a class="btn" href="/si">SI's or special Item's </a>
         <a>|</a>
         <a class="btn" href="/variants">Variants Viewer</a>
+        <a>|</a>
+        <a class="btn" href="/dropDownList">Component Lists</a>
     </nav>
     <div class="overviewHeader">
         Open Pdi's : {{countPdi}}
@@ -56,16 +58,16 @@
         <tbody>
            {{#each shipList}}
             <tr class="openInspections {{selectedClass}}">
-               <td class="pdiMachineField">{{machineId}}</td>
-               <td class="pdiShipDate">{{date}}</td>
+                <td class="pdiMachineField">{{machineId}}</td>
+                <td class="pdiShipDate">{{date}}</td>
                 <td class="pdiLocation" style="background-color: #6fd981">{{locationId}}</td>
                 <td class="pdiDestination">{{destination}}</td>
                 <td class="pdiTruckOnOrder {{getStatusTruck truckStatus}}" style="background-color:{{getStatusTruck truckStatus}}; color:{{getStatusTruck truckStatus}}" >{{truckStatus}}</td>
                 <td class="pdiTruckDate truckDateCorrection">{{confirmedShipDate}}</td>
-               <td class="pdiComments">{{shippingComment}}</td>
-               <td class="pdiPDIField {{getStatusColor pdiStatus}}" style="background-color:{{getStatusColor pdiStatus}}; color:{{getStatusColor pdiStatus}}">{{pdiStatus}}</td>
-               <td class="pdiWashField {{getStatusColor washStatus}}" style="background-color:{{getStatusColor washStatus}}; color:{{getStatusColor washStatus}}" >{{washStatus}}</td>
-               <td class="pdiConfig {{getConfigColor configStatus}}" style="background-color:{{getConfigColor configStatus}}; color:{{getConfigColor configStatus}}">{{configStatus}}</td>
+                <td class="pdiComments">{{shippingComment}}</td>
+                <td class="pdiPDIField {{getStatusColor pdiStatus}}" style="background-color:{{getStatusColor pdiStatus}}; color:{{getStatusColor pdiStatus}}">{{pdiStatus}}</td>
+                <td class="pdiWashField {{getStatusColor washStatus}}" style="background-color:{{getStatusColor washStatus}}; color:{{getStatusColor washStatus}}" >{{washStatus}}</td>
+                <td class="pdiConfig {{getConfigColor configStatus}}" style="background-color:{{getConfigColor configStatus}}; color:{{getConfigColor configStatus}}">{{configStatus}}</td>
             </tr>
            {{/each}}
         </tbody>

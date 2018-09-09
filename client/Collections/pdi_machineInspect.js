@@ -5,7 +5,6 @@ Meteor.subscribe("orderParts");
 
     Template.pdiToDoList.helpers({
 
-
         'machineNow': function () {
             const user = Meteor.user().username;
             Session.set('currentLoggedInUser', user);
@@ -18,7 +17,6 @@ Meteor.subscribe("orderParts");
         selectedProfiCam: function() {
             return Session.get('selectedProfiCam');
         },
-
 
         checkList: function() {
             Session.set('selectedPdiMachineNr', localStorage.getItem('pdiMachineNr'));
@@ -41,6 +39,50 @@ Meteor.subscribe("orderParts");
                return "selected";
            }
         },
+
+        mainComponent: function () {
+            return mainComponents.find({}).fetch();
+        },
+
+        'selectedComponent': function () {
+            let component = this._id;
+            let selected = Session.get('selectedComponent');
+            if (component === selected) {
+                return 'selected'
+            }
+        },
+
+        'selectedSubComponent': function() {
+            let subComponent = this._id;
+            let selectedSub = Session.get('selectedSub');
+            if (subComponent === selectedSub) {
+                return 'selected';
+            }
+
+        },
+
+        subComp: function () {
+            let id = Session.get('selectedComponent');
+            Meteor.call('subComponent', id, (error, result) => {
+                if(error) {
+                    console.log('error',error);
+                } else {
+                    Session.set('componentResult', result);
+                }
+            });
+            return Session.get('componentResult');
+
+        },
+
+        issueComponent: () => {
+            try {
+                let k = Session.get('issueComp');
+                return k;
+            } catch (e) {
+
+            }
+        },
+
 
         newIssue: function() {
             Session.set('selectedPdiMachineNr', localStorage.getItem('pdiMachineNr'));
@@ -75,8 +117,10 @@ Meteor.subscribe("orderParts");
     });
 
 
-    Template.pdiToDoList.events({
+    Session.set('selectedComponent', '');
+    Session.set('selectedSub', '');
 
+    Template.pdiToDoList.events({
 
         'submit .batts': (event) => {
             event.preventDefault();
@@ -180,6 +224,22 @@ Meteor.subscribe("orderParts");
             } else {
                 console.log("Lost Machine Number")
             }
+        },
+
+
+
+        'click .comp': function () {
+            const selected = this._id;
+            let textMainComp = this.component;
+            Session.set('selectedComponent', selected);
+            Session.set('issueComp', textMainComp + ' - ');
+        },
+
+        'click .subComp': function () {
+             const subComp = this._id;
+             let textMainComp = this.component;
+             Session.set('selectedSub', subComp);
+             Session.set('issueComp', textMainComp + ' - ');
         },
 
         'click .openFailure': function () {

@@ -800,6 +800,27 @@ table.pdiTable {
   position: relative;
   left: 3.5em; }
 
+/*---------------- Drop Down -------------*/
+.mainComponentsPos {
+  position: relative;
+  left: 3.6em; }
+
+.subComponentPos {
+  position: relative;
+  left: 22em; }
+
+.dropdown {
+  font-size: 20px;
+  height: 40px;
+  width: 50px;
+  white-space: nowrap;
+  border-radius: 1px;
+  padding: 1rem;
+  z-index: 1001;
+  min-width: 220px;
+  transform-origin: center top; }
+
+/*-----------------------------------------*/
 .issueField {
   margin-left: 3em; }
 
@@ -1221,6 +1242,36 @@ table.toDoListTable {
   position: absolute;
   top: 30em;
   left: 10em; }
+
+.logoDropDown {
+  position: absolute;
+  top: 5em;
+  left: 2em; }
+
+.formDropDown {
+  position: absolute;
+  top: 15em;
+  left: 2em; }
+
+.componentTable {
+  position: absolute;
+  top: 25em;
+  left: 1.3em; }
+
+.boxWidth {
+  width: 11em; }
+
+table.mainCompTable {
+  width: 9.8em; }
+
+tbody.mainCompTbody {
+  overflow: unset;
+  height: 0; }
+
+.subComponentTable {
+  position: absolute;
+  top: 25em;
+  left: 15em; }
 
 .mainLayout {
   position: absolute;

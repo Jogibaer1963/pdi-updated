@@ -143,14 +143,44 @@
     <div class="pdiDivider">
        <h1>_____________________</h1>
     </div>
+
+
+    <div class="mainComponentsPos">
+        {{#dropdownTrigger  name="mainComponents"}}
+            <button class="loginSubmit omInputButton">Main Components</button>
+        {{/dropdownTrigger}}
+        {{#dropdown name="mainComponents" align="left" top="25" left="-450"}}
+            <tbody class="rTable">
+                {{#each mainComponent}}
+                    <tr class="comp {{selectedComponent}}">
+                        <td class="dropdown">{{component}}</td>
+                    </tr>
+                {{/each}}
+            </tbody>
+        {{/dropdown}}
+    </div>
+
+    <div class="subComponentPos">
+        {{#dropdown name="mainComponents" align="left" top="25" left="-450"}}
+            <tbody class="rTable">
+            {{#each subComp}}
+                <tr class="subComp {{selectedSubComponent}}">
+                    <td class="dropdown">{{component}}</td>
+                </tr>
+            {{/each}}
+            </tbody>
+        {{/dropdown}}
+    </div>
+
     <div class="pdiInputFields">
       <form class="addNewIssue">
         <div class="issueField">
-            <input type="text" class="addIssueText inputIssueSize" name="addIssue" placeholder="Add issue" required>
+            <input type="text" class="addIssueText inputIssueSize" name="addIssue" placeholder="Add issue" value={{issueComponent}} required>
             <br><br>
             <button type="submit" class="btn btn-success addIssueText">Submit New Issue</button>
         </div>
       </form>
+
     </div>
     <div class="pdiDivider">
         <h1>_____________________</h1>
@@ -167,6 +197,7 @@
     <div class="pdiDivider">
         <h1>_____________________</h1>
     </div>
+
     <div>
         <h3 class="configHeader">New Issues Found</h3>
         <table class="blueTable newIssuesTable " cellpadding="10">

@@ -1,0 +1,37 @@
+
+.logoDropDown {
+  position: absolute;
+  top: 5em;
+  left: 2em;
+}
+
+.formDropDown {
+  position: absolute;
+  top: 15em;
+  left: 2em;
+}
+
+.componentTable {
+  position: absolute;
+  top: 25em;
+  left: 1.3em;
+}
+
+.boxWidth {
+  width: 11em;
+}
+
+table.mainCompTable {
+    width: 9.8em;
+}
+
+tbody.mainCompTbody {
+  overflow: unset;
+  height: 0;
+}
+
+.subComponentTable {
+  position: absolute;
+  top: 25em;
+  left: 15em;
+}
