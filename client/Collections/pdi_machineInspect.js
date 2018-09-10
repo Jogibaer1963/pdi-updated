@@ -63,10 +63,12 @@ Meteor.subscribe("orderParts");
 
         subComp: function () {
             let id = Session.get('selectedComponent');
+            console.log(id);
             Meteor.call('subComponent', id, (error, result) => {
                 if(error) {
                     console.log('error',error);
                 } else {
+                    console.log('result');
                     Session.set('componentResult', result);
                 }
             });

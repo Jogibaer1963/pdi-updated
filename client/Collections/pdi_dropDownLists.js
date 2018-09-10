@@ -7,10 +7,11 @@ Template.dropDownIssue.helpers({
 
     mainComponent: function () {
         return mainComponents.find({}).fetch();
+    },
 
-        /*
-
-        Meteor.call('mainComponent', (error, result) => {
+    subComp: function () {
+        let id = Session.get('selectedComp');
+        Meteor.call('subComponent', id, (error, result) => {
             if(error) {
                 console.log('error',error);
             } else {
@@ -18,9 +19,7 @@ Template.dropDownIssue.helpers({
             }
         });
         return Session.get('componentResult');
-        */
     },
-
 
 
 
