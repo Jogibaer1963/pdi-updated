@@ -8,7 +8,6 @@ Template.joinPdiMachine.helpers({
         Session.set('currentLoggedInUser', user);
         Session.set('selectedPdiMachineId', localStorage.getItem('joinMachine'));
         const selectedPdiMachineId = Session.get('selectedPdiMachineId');
-        console.log(selectedPdiMachineId);
         const machineId = MachineReady.findOne({_id: selectedPdiMachineId}).machineId;
         Session.set('selectedPdiMachineNr', machineId);
         return {machine: machineId, userLoggedIn: user};
@@ -211,6 +210,48 @@ Template.joinPdiMachine.helpers({
         return result;
     },
 
+    'selectedComponent': function () {
+        let component = this._id;
+        let selected = Session.get('selectedComponent');
+        if (component === selected) {
+            return 'selected'
+        }
+    },
+
+    'selectedSubComponent': function() {
+        let subComponent = this._id;
+        let selectedSub = Session.get('selectedSub');
+        if (subComponent === selectedSub) {
+            return 'selected';
+        }
+    },
+
+    mainComponent: function () {
+        return mainComponents.find({}).fetch();
+    },
+
+    subComp: function () {
+        let id = Session.get('selectedComponent');
+        Meteor.call('subComponent', id, (error, result) => {
+            if(error) {
+                console.log('error',error);
+            } else {
+                Session.set('componentResult', result);
+            }
+        });
+        return Session.get('componentResult');
+    },
+
+    issueComponent: () => {
+        try {
+            let k = Session.get('issueComp');
+            return k;
+        } catch (e) {
+
+        }
+    },
+
+
     newIssue: function() {
         const machineId = Session.get('selectedPdiMachineNr');
         result = MachineReady.findOne({machineId: machineId}).newIssues;
@@ -318,6 +359,20 @@ Template.joinPdiMachine.events({
         } else {
             console.log("Lost Machine Number")
         }
+    },
+
+    'click .comp': function () {
+        const selected = this._id;
+        let textMainComp = this.component;
+        Session.set('selectedComponent', selected);
+        Session.set('issueComp', textMainComp + ' - ');
+    },
+
+    'click .subComp': function () {
+        const subComp = this._id;
+        let textMainComp = this.component;
+        Session.set('selectedSub', subComp);
+        Session.set('issueComp', textMainComp + ' - ');
     },
 
     'click .openFailure': function () {

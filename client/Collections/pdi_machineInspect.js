@@ -40,10 +40,6 @@ Meteor.subscribe("orderParts");
            }
         },
 
-        mainComponent: function () {
-            return mainComponents.find({}).fetch();
-        },
-
         'selectedComponent': function () {
             let component = this._id;
             let selected = Session.get('selectedComponent');
@@ -58,22 +54,22 @@ Meteor.subscribe("orderParts");
             if (subComponent === selectedSub) {
                 return 'selected';
             }
+        },
 
+        mainComponent: function () {
+            return mainComponents.find({}).fetch();
         },
 
         subComp: function () {
             let id = Session.get('selectedComponent');
-            console.log(id);
             Meteor.call('subComponent', id, (error, result) => {
                 if(error) {
                     console.log('error',error);
                 } else {
-                    console.log('result');
                     Session.set('componentResult', result);
                 }
             });
             return Session.get('componentResult');
-
         },
 
         issueComponent: () => {
