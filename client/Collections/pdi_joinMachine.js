@@ -260,6 +260,8 @@ Template.joinPdiMachine.helpers({
 
 });
 
+Session.set('selectedComponent', '');
+Session.set('selectedSub', '');
 
 Template.joinPdiMachine.events({
 
