@@ -44,6 +44,7 @@ Meteor.subscribe("orderParts");
             let component = this._id;
             let selected = Session.get('selectedComponent');
             if (component === selected) {
+                Session.set('componentChosen', 1);
                 return 'selected'
             }
         },
@@ -117,6 +118,7 @@ Meteor.subscribe("orderParts");
 
     Session.set('selectedComponent', '');
     Session.set('selectedSub', '');
+    Session.set('componentChosen', 0);
 
     Template.pdiToDoList.events({
 
@@ -268,6 +270,7 @@ Meteor.subscribe("orderParts");
                 console.log("Lost Machine Number")
             }
             event.target.addIssue.value = '';
+            Session.set('componentChosen', 0);
         },
 
         'submit .addressToWashBay': (event) => {
@@ -297,8 +300,14 @@ Meteor.subscribe("orderParts");
             }
             FlowRouter.go('/inspectionStart');
 
-        }
+        },
     });
 
+    Handlebars.registerHelper('inActive_Input', () => {
+        let inActiveState = Session.get('componentChosen');
+        if(inActiveState === 0) {
+            return 'in-active-button';
+        }
+    });
 
 

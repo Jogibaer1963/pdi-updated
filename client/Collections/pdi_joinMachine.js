@@ -214,6 +214,7 @@ Template.joinPdiMachine.helpers({
         let component = this._id;
         let selected = Session.get('selectedComponent');
         if (component === selected) {
+            Session.set('componentChosen', 1);
             return 'selected'
         }
     },
@@ -262,6 +263,7 @@ Template.joinPdiMachine.helpers({
 
 Session.set('selectedComponent', '');
 Session.set('selectedSub', '');
+Session.set('componentChosen', 0);
 
 Template.joinPdiMachine.events({
 
@@ -431,4 +433,11 @@ Template.joinPdiMachine.events({
 
     }
 
+});
+
+Handlebars.registerHelper('inActive_Input', () => {
+    let inActiveState = Session.get('componentChosen');
+    if(inActiveState === 0) {
+        return 'in-active-button';
+    }
 });

@@ -29,21 +29,8 @@
     </div>
     <div class="loadVariantButton">
         <form class="fileContainer">
-            <button class="singleVariantButton">Load / Update Variant C77</button>
+            <button class="singleVariantButton">Load / Update Variant</button>
             <input class="loadVariant" type="file" id="variant" name="variant[]" >
-            <!--
-            <button class="singleVariantButton">Load / Update Variant C78</button>
-            <input class="loadVariant" type="file" id="variant" name="variant[]" >
-            <button class="singleVariantButton">Load / Update Variant C79</button>
-            <input class="loadVariant" type="file" id="variant" name="variant[]" >
-            <br>
-            <button class="singleVariantButton">Load / Update Variant C87</button>
-            <input class="loadVariant" type="file" id="variant" name="variant[]" >
-            <button class="singleVariantButton">Load / Update Variant C88</button>
-            <input class="loadVariant" type="file" id="variant" name="variant[]" >
-            <button class="singleVariantButton">Load / Update Variant C89</button>
-            <input class="loadVariant" type="file" id="variant" name="variant[]" >
-            -->
         </form>
     </div>
 <div class="variantButtons">
@@ -61,7 +48,7 @@
         <tr>
             <th class="userLastLogin"><strong>Variant</strong></th>
             <th class="pdiVariantDescription"><strong>Description</strong></th>
-            <th class="pdiShipDate"><strong>Image / Description</strong></th>
+            <th class="pdiShipDate"><strong>Last Update</strong></th>
             <th class="pdiShipDate"><strong>Visability</strong></th>
         </tr>
         </thead>
@@ -70,7 +57,7 @@
             <tr class="openInspections {{selectedClass}}">
                 <td class="userLastLogin">{{variant}}</td>
                 <td class="pdiVariantDescription">{{variantDescription}}</td>
-                <td class="pdiShipDate"><strong>{{imagePath}}</strong></td>
+                <td class="pdiShipDate"><strong>{{dateLoaded}}</strong></td>
                 <td class="variantVisible pdiShipDate">
                     <label>
                         <input class="rTableStyle" type="checkbox" name="visible" id="visible"  value="{{status}}">

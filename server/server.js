@@ -151,10 +151,26 @@ if(Meteor.isServer){
 //--------------------------------------------------------  Variants -----------------------------------------------------------------------
         'readVariant': function (contents) {
             let k = 0;
-
             let contentString = JSON.stringify(contents);
             let dateVariant = contentString.substr(1, 10);
-            let typeVariant = contentString.substr(53, 3);
+            let typeVariant = contentString.substr(54, 3);
+                   if (typeVariant === 'C77') {
+                variants_C77.remove({});
+            } else if (typeVariant === 'C78') {
+                variants_C78.remove({});
+            } else if (typeVariant === 'C79') {
+                variants_C79.remove({});
+            } else if (typeVariant === 'C87') {
+                variants_C87.remove({});
+            } else if (typeVariant === 'C88') {
+                variants_C88.remove({});
+            } else if (typeVariant === 'C89') {
+                variants_C89.remove({});
+            } else {
+                       console.log('Type ', typeVariant, ' not found');
+                   }
+            let collectionNameVariant = ("variant_" + typeVariant);
+            console.log(collectionNameVariant);
             let re = /MD_[A-Z][0-9][0-9]/g;
             let variant = re[Symbol.match](contents);
             let uniqueArray = Array.from(new Set(variant));
@@ -181,15 +197,62 @@ if(Meteor.isServer){
                     let variantMatch = uniqueArray[i] + '_' + firstElement;
                     let variantModule = variantMatch.replace(/\s/g, '');
                     let variantDescription = stringArrayElement.slice(15);
-                    variants_C77.insert({variant: variantModule,
-                        variantDescription: variantDescription,
-                        imagePath: "http://",
-                        status: 1,
-                    dateLoaded: dateVariant,
-                    type: typeVariant});
+                    if (typeVariant === 'C77') {
+                        variants_C77.remove();
+                        variants_C77.insert({variant: variantModule,
+                            variantDescription: variantDescription,
+                            imagePath: "http://",
+                            status: 1,
+                            dateLoaded: dateVariant,
+                            type: typeVariant});
+                        } else if (typeVariant === 'C78') {
+                            variants_C78.insert({variant: variantModule,
+                            variantDescription: variantDescription,
+                            imagePath: "http://",
+                            status: 1,
+                            dateLoaded: dateVariant,
+                            type: typeVariant});
+                        } else if (typeVariant === 'C79') {
+                        variants_C79.remove();
+                        variants_C79.insert({variant: variantModule,
+                            variantDescription: variantDescription,
+                            imagePath: "http://",
+                            status: 1,
+                            dateLoaded: dateVariant,
+                            type: typeVariant});
+                        } else if (typeVariant === 'C87') {
+                        variants_C87.insert({variant: variantModule,
+                            variantDescription: variantDescription,
+                            imagePath: "http://",
+                            status: 1,
+                            dateLoaded: dateVariant,
+                            type: typeVariant});
+                        } else if (typeVariant === 'C88') {
+                        variants_C88.insert({variant: variantModule,
+                            variantDescription: variantDescription,
+                            imagePath: "http://",
+                            status: 1,
+                            dateLoaded: dateVariant,
+                            type: typeVariant});
+                        } else if (typeVariant === 'C89') {
+                        variants_C89.insert({variant: variantModule,
+                            variantDescription: variantDescription,
+                            imagePath: "http://",
+                            status: 1,
+                            dateLoaded: dateVariant,
+                            type: typeVariant});
+                        } else {
+                        console.log('Type ', typeVariant, ' not available');
                     }
+
+                    }
+
             }
+
         },
+
+
+
 
         'readConfig': function(machineId, configArray) {
             MachineReady.update({machineId: machineId}, {$set: {config: configArray, configStatus: 1}});
