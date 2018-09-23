@@ -405,6 +405,7 @@ Template.joinPdiMachine.events({
             console.log("Lost Machine Number")
         }
         event.target.addIssue.value = '';
+        Session.set('componentChosen', 0);
     },
 
     'submit .addressToWashBay': (event) => {
