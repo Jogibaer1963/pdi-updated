@@ -150,20 +150,44 @@ if(Meteor.isServer){
 
 //--------------------------------------------------------  Variants -----------------------------------------------------------------------
         'readVariant': function (contents) {
-            let newContent = contents.replace(/[\t\r\n]/g, '');
-            let newContent_2 = newContent.replace(/"/g, "'");
-            let newContent_3 = newContent_2.split(/\s*,\s*/);
-            let contentLength = newContent_3.length;
-            for (i = 0; i < contentLength; i++) {
-                let variant_id = JSON.stringify(newContent_3[i]);
-                let variantMarker = variant_id.slice(1, 12);
-                let stringLength = variant_id.length;
-                let variantPart = variant_id.slice(15, (stringLength - 1));
-                let variantDescription = variantPart.replace(/'/g, '');
-                variants_C68.insert({variant: variantMarker,
-                    variantDescription: variantDescription,
-                    imagePath: "http://",
-                    status: 1 });
+            let k = 0;
+
+            let contentString = JSON.stringify(contents);
+            let dateVariant = contentString.substr(1, 10);
+            let typeVariant = contentString.substr(53, 3);
+            let re = /MD_[A-Z][0-9][0-9]/g;
+            let variant = re[Symbol.match](contents);
+            let uniqueArray = Array.from(new Set(variant));
+            let arrayCount = uniqueArray.length;
+            let pattern = "\\t\\t\\t\\t";
+            for (i = 0; i < arrayCount; i++) {
+                let variantCatch_1a = uniqueArray[i];
+                let variantCatch_1b = variantCatch_1a + pattern;
+                let variantCatch_2a = uniqueArray[i + 1];
+                let variantCatch_2b = variantCatch_2a + pattern;
+                let variantPos_1 = contentString.indexOf(variantCatch_1b);
+                let variantPos_2 = contentString.indexOf(variantCatch_2b);
+                let newVariant = contentString.slice(variantPos_1, variantPos_2);
+                let newVariant_1 = newVariant.replace(/\\t/g, " ");
+                let textPosition = newVariant_1.indexOf("\\r\\n");
+                let newVariantText = newVariant_1.slice(textPosition + 4);
+                let newUniqueVariant = newVariantText.split("\\r\\n");
+                    newUniqueVariant.pop();
+                let count = newUniqueVariant.length;
+                for (k=0; k < count; k++) {
+                    let arrayElement = newUniqueVariant.shift();
+                    let stringArrayElement = JSON.stringify(arrayElement);
+                    let firstElement = stringArrayElement.slice(1, 8);
+                    let variantMatch = uniqueArray[i] + '_' + firstElement;
+                    let variantModule = variantMatch.replace(/\s/g, '');
+                    let variantDescription = stringArrayElement.slice(15);
+                    variants_C77.insert({variant: variantModule,
+                        variantDescription: variantDescription,
+                        imagePath: "http://",
+                        status: 1,
+                    dateLoaded: dateVariant,
+                    type: typeVariant});
+                    }
             }
         },
 
@@ -308,12 +332,7 @@ if(Meteor.isServer){
             const collection = MachineReady.find({machineId: machineNr}, {fields: {
                                                                                    'checkListIssues.errorDescription': 1,
                                                                                     _id: 0}}).fetch();
-            console.log(collection);
-            /*
-            const heading = true;
-            const delimiter = ";";
-            return exportcsv.exportToCSV(collection, heading, delimiter);
-            */
+
         },
 
         'editRepair': function(editId) {

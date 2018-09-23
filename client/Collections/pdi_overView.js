@@ -119,25 +119,20 @@
                 const contents = e.target.result;
                 let configLength = contents.length;
                 const machineId = contents.slice(5, 13);
-                let config = contents.slice(31, configLength);
+                let searchString = contents.search("000");
+                let config = contents.slice(searchString + 4, configLength);
                 let trimConfig = config.replace(/\s+/g, '').trim();
                 const newConfig = (trimConfig.length) / 12;
                 for (j = 0; j < newConfig; j++) {
                         singleConfig[j] = (trimConfig.substr(i, k).trim()).replace(';', '_');
                         i = i + 12;
                 }
-
                     document.getElementById('files').value = '';
                     singleConfig.sort();
-                Meteor.call('readConfig', machineId, singleConfig);
+                    Meteor.call('readConfig', machineId, singleConfig);
                 };
             reader.readAsText(file);
         },
-
-
-
-
-
     });
 
 
