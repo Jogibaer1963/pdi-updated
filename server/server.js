@@ -535,14 +535,23 @@ if(Meteor.isServer){
             if(typeOfMachine === 'C77') {
                  checkType = checkPoints.find({machineRangeEndC77: {$gt: pdiMachineNr}, status: 1}, {fields: {errorDescription: 1,
                                                                                          errorPos: 1}}).fetch();
-            } else if(typeOfMachine === 'C78') {
+            } else if (typeOfMachine === 'C78') {
                  checkType = checkPoints.find({machineRangeEndC78: {$gt: pdiMachineNr}, status: 1}, {fields: {errorDescription: 1,
                                                                                            errorPos: 1}}).fetch();
-            } else if(typeOfMachine === 'C79') {
+            } else if (typeOfMachine === 'C79') {
                  checkType = checkPoints.find({machineRangeEndC79: {$gt: pdiMachineNr}, status: 1}, {fields: {errorDescription: 1,
                                                                                            errorPos: 1}}).fetch();
+            } else if (typeOfMachine === 'C87') {
+                 checkType = checkPoints.find({machineRangeEndC79: {$gt: pdiMachineNr}, status: 1}, {fields: {errorDescription: 1,
+                        errorPos: 1}}).fetch();
+            } else if (typeOfMachine === 'C88') {
+                 checkType = checkPoints.find({machineRangeEndC79: {$gt: pdiMachineNr}, status: 1}, {fields: {errorDescription: 1,
+                        errorPos: 1}}).fetch();
+            } else if (typeOfMachine === 'C89') {
+                 checkType = checkPoints.find({machineRangeEndC79: {$gt: pdiMachineNr}, status: 1}, {fields: {errorDescription: 1,
+                        errorPos: 1}}).fetch();
             } else {
-                console.log('nicht definierter Maschinen Typ', typeOfMachine);
+                console.log('nicht definierter Maschinen Typ (server.js zeile 554)', typeOfMachine);
             }
             let checkList = checkPoints.find({status: 1, machineType: {$in: [machineType.toString()]}},
                                                                {fields: {errorDescription: 1,
@@ -825,7 +834,8 @@ if(Meteor.isServer){
         },
 
         'addToShipList': function(newMachineInput, newShippingDate, createUnixTime, createDate, createTime,
-            newShippingDestination, newShippingTransporter, newShippingKit, newShippingTireTrack, newShippingComment ) {
+            newShippingDestination, newShippingTransporter, newShippingKit, newShippingTireTrack,
+                                  newShippingReturns, newShippingComment ) {
 
             MachineReady.insert({
                 machineId: newMachineInput,
@@ -841,6 +851,7 @@ if(Meteor.isServer){
                 transporter: newShippingTransporter,
                 kit: newShippingKit,
                 tireTrack: newShippingTireTrack,
+                machineReturn: newShippingReturns,
                 shippingComment: newShippingComment
             });
         },
@@ -865,7 +876,7 @@ if(Meteor.isServer){
         },
 
         'editShipInfo': function(selectedMachine, newMachine, newShippingDate, newShippingDestination, newShippingTransporter,
-                                 newShippingTireTrack, newShippingKit, newShippingComment) {
+                                 newShippingTireTrack, newShippingKit, newShippingReturns, newShippingComment) {
             MachineReady.update({_id:selectedMachine},
                 {$set: {machineId: newMachine,
                     date: newShippingDate,
@@ -873,6 +884,7 @@ if(Meteor.isServer){
                     transporter: newShippingTransporter,
                     tireTrack: newShippingTireTrack,
                     kit: newShippingKit,
+                    machineReturn: newShippingReturns,
                     shippingComment: newShippingComment}
 
                 });

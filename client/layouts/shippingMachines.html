@@ -46,6 +46,16 @@
                   <option>MTS</option>
               </select>
           </div>
+          <div>
+              <div class="machineReturn">
+                  <label for="newReturn">Machine Returns</label>
+                  <br>
+                  <select name="newReturn" id="newReturn" class="">
+                      <option>No</option>
+                      <option>Yes</option>
+                  </select>
+              </div>
+          </div>
            <br><br><br>
           <div class="firstKit">
              <ul class="checkbox">
@@ -149,6 +159,7 @@
             <button type="button" class="btn btn-info toggleShippedAll">Toggle All / Not Shipped</button>
         </div>
     </div>
+    <div>
         <table class="shippingMachinesTable blueTable" cellpadding="10">
           <thead class="">
             <tr class="">
@@ -191,6 +202,29 @@
               {{/each}}
             </tbody>
         </table>
+    </div>
+    <div class="machineReturnTable">
+        <div class="returnButton">
+            <button type="button" class="btn btn-info">Return is back on Lot</button>
+        </div>
+        <h4 class="returnersHead">Returners</h4>
+        <table class="blueTable returnMachines" cellpadding="10">
+            <thead class="">
+            <tr class="">
+                <th class="pdiMachineField"><strong>Machine</strong></th>
+                <th class="pdiShipDate"><strong>ShipDate</strong></th>
+            </tr>
+            </thead>
+            <tbody>
+            {{#each returnList}}
+                <tr class="shippingMachine {{selected}}">
+                    <td class="pdiMachineField">{{machineId}}</td>
+                    <td class="pdiShipDate">{{date}}</td>
+                </tr>
+            {{/each}}
+            </tbody>
+        </table>
+    </div>
 </template>
 
 

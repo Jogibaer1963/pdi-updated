@@ -15,7 +15,6 @@ if(Meteor.isClient) {
             const myString = kitExtract.replace(/"/g, "");
             let tire = kitSaved.shift();
             Session.set('tire', tire.tireTrack);
-            console.log(tire.tireTrack);
 
             const x = myString.indexOf('No_Kit  ', 0);
             if(x >= 0){
@@ -190,8 +189,10 @@ if(Meteor.isClient) {
             $('input[name=newKit]:checked').each(function() {
                 newShippingKit.push($(this).val());
             });
+            const newShippingReturns = event.target.newReturn.value;
             const newShippingComment = event.target.newComment.value;
-            Meteor.call('editShipInfo', selectedMachine, newMachine, newShippingDate, newShippingDestination, newShippingTransporter, newShippingTireTrack, newShippingKit, newShippingComment );
+            Meteor.call('editShipInfo', selectedMachine, newMachine, newShippingDate, newShippingDestination,
+                newShippingTransporter, newShippingTireTrack, newShippingKit, newShippingReturns, newShippingComment );
             FlowRouter.go ('shippingMachines');
         },
 

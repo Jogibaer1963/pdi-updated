@@ -22,6 +22,11 @@
   float: left;
 }
 
+.machineReturn {
+  position: absolute;
+  left: 68em;
+}
+
 .firstKit {
   float: left;
 }
@@ -129,4 +134,27 @@
 .removeList {
   position: relative;
   left: 3.4em;
+}
+
+table.returnMachines {
+  width: 190px;
+}
+
+.returnButton {
+  position: absolute;
+  top: -5em;
+  left: 1.6em
+}
+
+.returnersHead {
+  font-weight: bold;
+  position: absolute;
+  top: -2em;
+  left: 3em;
+}
+
+.machineReturnTable {
+  position: absolute;
+  top: 27.7em;
+  left: 120em;
 }

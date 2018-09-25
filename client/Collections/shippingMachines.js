@@ -1,7 +1,45 @@
 Session.set('toggleShipList', 0);
 
 
-if (Meteor.isClient) {
+
+
+    Template.inputMachine.helpers({
+
+        editMachine: function() {
+            const selectedMachine = Session.get('selectedMachine');
+            return MachineReady.findOne({_id: selectedMachine});
+        },
+
+        shippList: function () {
+            // Order of shipping date
+            let shipToggleList = Session.get('toggleShipList');
+            switch(shipToggleList) {
+                case 1:
+                    return MachineReady.find({machineId: {$gt:'C0000000'}, shipStatus: 0}, {sort: {date: -1}});
+                case 0:
+                    return MachineReady.find({machineId: {$gt:'C0000000'}}, {sort: {date: -1}});
+            }
+        },
+
+        returnList: function () {
+             return MachineReady.find({machineReturn: "Yes"}, {sort: {date: -1}});
+        },
+
+        'selected': function() {
+            const shippingMachine = this._id;
+            const selectedMachine = Session.get('selectedMachine');
+            if (shippingMachine === selectedMachine) {
+                let result = MachineReady.findOne({_id: selectedMachine}).machineId;
+                Session.set('myMachine', result);
+                return "selected"
+            }
+        },
+
+        myMachine: () => {
+            return Session.get('myMachine');
+        }
+
+    });
 
     Template.inputMachine.events({
         "submit .inputNewMachine": function(event) {
@@ -15,14 +53,16 @@ if (Meteor.isClient) {
             const newShippingDestination = event.target.newDestination.value;
             const newShippingTransporter = event.target.newTransporter.value;
             const newShippingKit= [];
-            $('input[name=newKit]:checked').each(function() {
+            $('input[name = newKit]:checked').each(function() {
                 newShippingKit.push($(this).val());
             });
             const newShippingTireTrack = event.target.newTireTrack.value;
+            const newShippingReturns = event.target.newReturn.value;
             const newShippingComment = event.target.newComment.value;
             Meteor.call('addToShipList', newMachineInput, newShippingDate,
                 createUnixTime, createDate, createTime, newShippingDestination,
-                newShippingTransporter, newShippingKit, newShippingTireTrack, newShippingComment );
+                newShippingTransporter, newShippingKit, newShippingTireTrack,
+                newShippingReturns, newShippingComment );
             event.target.newMachine.value="";
             event.target.newDate.value="";
             event.target.newDestination.value="";
@@ -38,6 +78,7 @@ if (Meteor.isClient) {
             document.getElementById('newKit8').checked= false;
             document.getElementById('newKit9').checked= false;
             event.target.newTireTrack.value="";
+            event.target.newReturn.value = "";
             event.target.newComment.value="";
         },
 
@@ -92,40 +133,5 @@ if (Meteor.isClient) {
 
     });
 
-    Template.inputMachine.helpers({
 
-        editMachine: function() {
-            const selectedMachine = Session.get('selectedMachine');
-           return MachineReady.findOne({_id: selectedMachine});
-        },
-
-        shippList: function () {
-            // Order of shipping date
-            let shipToggleList = Session.get('toggleShipList');
-            switch(shipToggleList) {
-                case 1:
-                    return MachineReady.find({machineId: {$gt:'C0000000'}, shipStatus: 0}, {sort: {date: -1}});
-                case 0:
-                    return MachineReady.find({machineId: {$gt:'C0000000'}}, {sort: {date: -1}});
-            }
-        },
-
-        'selected': function() {
-            const shippingMachine = this._id;
-            const selectedMachine = Session.get('selectedMachine');
-            if (shippingMachine === selectedMachine) {
-                let result = MachineReady.findOne({_id: selectedMachine}).machineId;
-                Session.set('myMachine', result);
-                console.log(result);
-                return "selected"
-            }
-        },
-
-        myMachine: () => {
-            return Session.get('myMachine');
-        }
-
-    });
-
-}
 

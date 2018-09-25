@@ -119,7 +119,7 @@
                 const contents = e.target.result;
                 let configLength = contents.length;
                 const machineId = contents.slice(5, 13);
-                let searchString = contents.search("000");
+                let searchString = contents.search("000;");
                 let config = contents.slice(searchString + 4, configLength);
                 let trimConfig = config.replace(/\s+/g, '').trim();
                 const newConfig = (trimConfig.length) / 12;
