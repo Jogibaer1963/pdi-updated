@@ -14,7 +14,6 @@ Template.inputHead.helpers({
     editMachine: function() {
         const selectedHead = Session.get('selectedHead');
         return newHeadYear.findOne({_id: selectedHead});
-
     },
 
     shippList: function () {
@@ -33,13 +32,11 @@ Template.inputHead.helpers({
             return "selected"
         }
     }
-
 });
 
 Session.set('z', 1);
 
 Template.inputHead.events({
-
         "submit .inputNewHead": function(event) {
             event.preventDefault();
             const createUnixTime = Date.now();
@@ -80,7 +77,6 @@ Template.inputHead.events({
             event.preventDefault();
             const shippingHead = this._id;
             Session.set('selectedHead', shippingHead );
-
         },
 
         'click .deleteHeader': function() {
@@ -124,7 +120,6 @@ Template.inputHead.events({
     });
 
 
-
     Template.headerTrailer.helpers({
 
             availiableTrailer: function() {
@@ -152,11 +147,9 @@ Template.inputHead.events({
                 return "selected"
             }
         }
-
     });
 
     Template.headerTrailer.events({
-
        'submit .newTrailerInput': function() {
            event.preventDefault();
            const headTransporter = event.target.newTransporter.value;
@@ -170,14 +163,12 @@ Template.inputHead.events({
             event.preventDefault();
             const selectedTrailer = this._id;
             Session.set('selectedTrailer', selectedTrailer );
-
         },
 
         'click .moveTrailer': function() {
             event.preventDefault();
             const shippingTrailer = this._id;
             Session.set('selectedTrailer', shippingTrailer);
-
         },
 
         'click .trailerMove': function() {
@@ -198,7 +189,6 @@ Template.inputHead.events({
             const trailerId = Session.get('selectedTrailer');
             Meteor.call('deleteTrailer', trailerId);
         }
-
     });
 
 
