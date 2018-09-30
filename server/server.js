@@ -122,6 +122,24 @@ if(Meteor.isServer){
     Meteor.methods({
  //----------------------------------------------------- Components -----------------------------------------------------------------------
 
+        'moveMachines': (newMoveMe) => {
+            newMoveMe.forEach((result) => {
+                const machineToMove = MachineReady.findOne({_id: result});
+                newFiscalYear.insert(machineToMove);
+                MachineReady.remove({_id: result});
+            })
+
+        },
+
+        'moveHeads': (newMoveMe) => {
+            newMoveMe.forEach((result) => {
+                const machineToMove = MachineReady.findOne({_id: result});
+                newHeadYear.insert(machineToMove);
+                MachineReady.remove({_id: result});
+            })
+
+        },
+
         'subComponent': (id) => {
             if(id) {
                 let k = mainComponents.findOne({_id: id});
@@ -169,8 +187,6 @@ if(Meteor.isServer){
             } else {
                        console.log('Type ', typeVariant, ' not found');
                    }
-            let collectionNameVariant = ("variant_" + typeVariant);
-            console.log(collectionNameVariant);
             let re = /MD_[A-Z][0-9][0-9]/g;
             let variant = re[Symbol.match](contents);
             let uniqueArray = Array.from(new Set(variant));

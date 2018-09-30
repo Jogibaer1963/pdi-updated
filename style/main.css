@@ -12,6 +12,29 @@
   top: 120px;
   margin-left: 10px; }
 
+table.fiscalTable {
+  position: absolute;
+  top: 20em;
+  left: 3em; }
+
+table.tableWidth {
+  width: 210px; }
+
+.machineMovingTable {
+  position: absolute;
+  top: 1em;
+  left: 3em; }
+
+.moveMachineSubmit {
+  position: absolute;
+  top: 14em;
+  left: 15em; }
+
+.headMovingTable {
+  position: absolute;
+  left: 25em;
+  top: 1em; }
+
 #logo {
   margin: 25px; }
 

@@ -4,7 +4,6 @@ Accounts.ui.config({
     passwordSignupFields: "USERNAME_ONLY"
 });
 
-
 Template.adminViewUser.helpers({
 
     userResult: function () {
@@ -15,12 +14,9 @@ Template.adminViewUser.helpers({
         let totalUsers = usersProfil.find().fetch();
         return totalUsers.length;
     }
-
 });
 
-
 Template.adminViewUser.events({
-
     "click .submitAdmin": function () {
         event.preventDefault();
         const logOutUser = [];
@@ -36,8 +32,6 @@ Template.adminViewUser.events({
         Meteor.call('userManualDelete', deleteUser);
         document.getElementById('logOut').checked=false;
     },
-
-
 });
 
 Template.adminNewUser.events({
@@ -65,7 +59,6 @@ Template.adminNewUser.events({
         }else if (role === 'Commission') {
             roleConst = 'commission'
         }
-
         event.target.registerUser.value = '';
         event.target.registerPassword.value = '';
         const createdAt =  moment().format('MMMM Do YYYY, h:mm:ss a');
@@ -83,8 +76,42 @@ Template.adminNewUser.events({
 });
 
 Template.adminNewUser.helpers({
-
     result: function () {
         return Session.get('message');
     }
+});
+
+
+Template.adminFiscalYear.helpers({
+
+    machineLeft: () => {
+    return MachineReady.find({machineId: {$gt:'C0000000'}, shipStatus: 0}, {sort: {date: -1}});
+    },
+
+    headerLeft: function() {
+        return MachineReady.find( {newHeadId: {$gt:'00'}, $or: [{shipStatus: 0},
+                {shipStatus: 2}]}, {sort: {date: 1}});
+    }
+
+});
+
+Template.adminFiscalYear.events({
+    'submit .moveMachine': () => {
+        event.preventDefault();
+        const newMoveMe = [];
+        $('input[name = moveMe]:checked').each(function() {
+            newMoveMe.push($(this).val());
+        });
+    Meteor.call('moveMachines', newMoveMe);
+    },
+
+    'submit .moveHead': () => {
+        event.preventDefault();
+        const newHeadMove = [];
+        $('input[name = moveMe]:checked').each(function() {
+            newHeadMove.push($(this).val());
+        });
+        Meteor.call('moveHeads', newHeadMove);
+    }
+
 });

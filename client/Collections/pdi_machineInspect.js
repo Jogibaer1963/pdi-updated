@@ -219,11 +219,15 @@ Meteor.subscribe("orderParts");
             Session.set('selectedPdiMachineId', localStorage.getItem('pdiMachineId'));
             const selectedPdiMachineId = Session.get('selectedPdiMachineId');
             let idFailure = event.currentTarget.id;
+            console.log(idFailure);
+
             if(selectedPdiMachineId) {
                 Meteor.call('naButton', selectedPdiMachineId, idFailure);
             } else {
                 console.log("Lost Machine Number")
             }
+
+
         },
 
 
