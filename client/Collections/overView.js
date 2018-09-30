@@ -1,5 +1,6 @@
 
     Meteor.subscribe("MachineReady");
+    Meteor.subscribe('newHeadYear');
 
     Session.set('selectedPdiMachine', '');
     Session.set('pdiMachineNumber', '');
@@ -22,7 +23,7 @@
         },
 
         headerOverView: function() {
-            return MachineReady.find( {newHeadId: {$gt:'00'}, $or: [{shipStatus: 0},
+            return newHeadYear.find( {newHeadId: {$gt:'00'}, $or: [{shipStatus: 0},
               {shipStatus: 2}]}, {sort: {date: 1}});
         },
 

@@ -1,13 +1,13 @@
 if (Meteor.isClient) {
 
-    Meteor.subscribe("headerReady");
-
+    Meteor.subscribe('newHeadYear');
 
     Template.overViewReadyList.helpers({
+
         overView: function () {
             let k = Session.get('k');
             if(k === 0) {
-                return MachineReady.find( {newHeadId: {$gt:'00'},
+                return newHeadYear.find( {newHeadId: {$gt:'00'},
                         $or: [{shipStatus: 0},
                             {shipStatus: 2}]},
                     {sort: {date: 1}});
@@ -42,7 +42,7 @@ if (Meteor.isClient) {
         'click .shipMeButton': function () {
             event.preventDefault();
             const selectedCheckPoint = Session.get('selectedMachine');
-            Meteor.call('machineIsGone', selectedCheckPoint);
+            Meteor.call('headIsGone', selectedCheckPoint);
         },
 
         'click .toggleCombineHeader': function () {
@@ -62,7 +62,7 @@ if (Meteor.isClient) {
                 readyGo.push($(this).val());
             });
 
-            Meteor.call('readyToGo', readyGo);
+            Meteor.call('headReadyToGo', readyGo);
             $( "#readyGo" ).prop( "checked", false );
 
         }

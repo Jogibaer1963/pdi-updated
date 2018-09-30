@@ -16,10 +16,6 @@ if(Meteor.isServer){
             return MachineReady.find()
         });
 
-        Meteor.publish("headerReady", function () {
-            return headerReady.find()
-        });
-
         Meteor.publish("checkpoints", function(){
             return checkPoints.find();
         });
@@ -110,6 +106,10 @@ if(Meteor.isServer){
 
         Meteor.publish("mainComponents", function() {
             return mainComponents.find();
+        });
+
+        Meteor.publish("newHeadYear", function() {
+            return newHeadYear.find();
         });
 
     });
@@ -838,21 +838,77 @@ if(Meteor.isServer){
             MachineReady.update({_id:selectedCheckPoint}, {$set: {shipStatus: 1}});
         },
 
+        // ------------------------------------  Machine ------------------------------------
+
         'readyToGo': (readyGo) => {
             for (i = 0; i < readyGo.length; i++) {
                 MachineReady.update({_id: readyGo[i]}, {$set: {readyToGo: 1}});
             }
         },
 
-        // shipping Machines
-        'removeFromShipList': function(selectedMachine) {
-            MachineReady.remove(selectedMachine);
+        // -------------------------------------  Head  -------------------------------------
+
+        'addHeadToShipList': function(newHeadInput, newShippingDate, createUnixTime, createDate, createTime,
+                newShippingDestination, newShippingTransporter, newShippingKit, newShippingComment ) {
+            newHeadYear.insert({
+                newHeadId: newHeadInput,
+                dateOfCreation: createDate,
+                timeOfCreation: createTime,
+                pdiStatus: 1,
+                repairStatus: 1,
+                washStatus: 1,
+                shipStatus: 0,
+                unixTime: createUnixTime,
+                date: newShippingDate,
+                destination: newShippingDestination,
+                transporter: newShippingTransporter,
+                kit: newShippingKit,
+                shippingComment: newShippingComment
+            });
         },
+
+        'editShipHead': function(selectedHead, newHead, newShippingDate, newShippingDestination, newShippingTransporter,
+                                 newShippingKit, newShippingComment) {
+            newHeadYear.update({_id:selectedHead},
+                {$set: {newHeadId: newHead,
+                        date: newShippingDate,
+                        destination: newShippingDestination,
+                        transporter: newShippingTransporter,
+                        kit: newShippingKit,
+                        shippingComment: newShippingComment}
+                });
+        },
+
+        'headReadyToGo': (readyGo) => {
+            for (i = 0; i < readyGo.length; i++) {
+                newHeadYear.update({_id: readyGo[i]}, {$set: {readyToGo: 1}});
+            }
+        },
+
+        'headIsGone': function(selectedCheckPoint) {
+            newHeadYear.update({_id:selectedCheckPoint}, {$set: {shipStatus: 1}});
+        },
+
+        'removeHeadFromShipList': function(selectedMachine) {
+            newHeadYear.remove(selectedMachine);
+        },
+
+        'headTruckOrdered': function(machineId, truckStatus, confirmedShipDate) {
+            newHeadYear.update({_id: machineId}, {$set: {truckStatus: truckStatus, confirmedShipDate: confirmedShipDate}});
+        },
+
+        'headTruckRemoved': function(machineId, truckStatus) {
+            newHeadYear.update({_id: machineId}, {$set: {truckStatus: truckStatus, confirmedShipDate: ''}});
+        },
+
+        // -----------------------------------------------------------------------------------
+
+        // shipping Machines
+
 
         'addToShipList': function(newMachineInput, newShippingDate, createUnixTime, createDate, createTime,
             newShippingDestination, newShippingTransporter, newShippingKit, newShippingTireTrack,
-                                  newShippingReturns, newShippingComment ) {
-
+                          newShippingReturns, newShippingComment ) {
             MachineReady.insert({
                 machineId: newMachineInput,
                 dateOfCreation: createDate,
@@ -872,27 +928,8 @@ if(Meteor.isServer){
             });
         },
 
-        'addHeadToShipList': function(newHeadInput, newShippingDate, createUnixTime, createDate, createTime,
-                                      newShippingDestination, newShippingTransporter, newShippingKit, newShippingComment ) {
-            MachineReady.insert({
-                newHeadId: newHeadInput,
-                dateOfCreation: createDate,
-                timeOfCreation: createTime,
-                pdiStatus: 1,
-                repairStatus: 1,
-                washStatus: 1,
-                shipStatus: 0,
-                unixTime: createUnixTime,
-                date: newShippingDate,
-                destination: newShippingDestination,
-                transporter: newShippingTransporter,
-                kit: newShippingKit,
-                shippingComment: newShippingComment
-            });
-        },
-
         'editShipInfo': function(selectedMachine, newMachine, newShippingDate, newShippingDestination, newShippingTransporter,
-                                 newShippingTireTrack, newShippingKit, newShippingReturns, newShippingComment) {
+              newShippingTireTrack, newShippingKit, newShippingReturns, newShippingComment) {
             MachineReady.update({_id:selectedMachine},
                 {$set: {machineId: newMachine,
                     date: newShippingDate,
@@ -905,23 +942,7 @@ if(Meteor.isServer){
 
                 });
         },
-
-        'editShipHead': function(selectedHead, newHead, newShippingDate, newShippingDestination, newShippingTransporter,
-                                 newShippingKit, newShippingComment) {
-            MachineReady.update({_id:selectedHead},
-                {$set: {newHeadId: newHead,
-                    date: newShippingDate,
-                    destination: newShippingDestination,
-                    transporter: newShippingTransporter,
-                    kit: newShippingKit,
-                    shippingComment: newShippingComment}
-                });
-        }
-
-
-
     });
-
  }
 
 

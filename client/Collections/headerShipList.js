@@ -1,4 +1,5 @@
 Meteor.subscribe("headerTrailer");
+Meteor.subscribe("newHeadYear");
 
     Template.headerShipList.events({
 
@@ -8,7 +9,36 @@ Meteor.subscribe("headerTrailer");
 
     });
 
-    Template.inputHead.events({
+Template.inputHead.helpers({
+
+    editMachine: function() {
+        const selectedHead = Session.get('selectedHead');
+        return newHeadYear.findOne({_id: selectedHead});
+
+    },
+
+    shippList: function () {
+        let z = Session.get('z');
+        if(z === 0) {
+            return newHeadYear.find({shipStatus: 1}, {sort: {date: 1}});
+        } else {
+            return newHeadYear.find({shipStatus: 0}, {sort: {date: 1}});
+        }
+    },
+
+    'selectedClass': function() {
+        const shippingHead = this._id;
+        const selectedHead = Session.get('selectedHead');
+        if (shippingHead === selectedHead) {
+            return "selected"
+        }
+    }
+
+});
+
+Session.set('z', 1);
+
+Template.inputHead.events({
 
         "submit .inputNewHead": function(event) {
             event.preventDefault();
@@ -56,7 +86,17 @@ Meteor.subscribe("headerTrailer");
         'click .deleteHeader': function() {
             event.preventDefault();
             const selectedHead = Session.get('selectedHead');
-            Meteor.call('removeFromShipList', selectedHead)
+            Meteor.call('removeHeadFromShipList', selectedHead)
+        },
+
+        'click .buttonToggle': function () {
+            event.preventDefault();
+            let z = Session.get('z');
+            if(z === 0) {
+                Session.set('z', 1);
+            } else {
+                Session.set('z', 0);
+            }
         },
 
         'click .editHead': function() {
@@ -72,37 +112,15 @@ Meteor.subscribe("headerTrailer");
             const confirmedShipDate = event.target.inputDate.value;
             const truckStatus = 1;
             const machineId = Session.get('selectedHead');
-            Meteor.call('truckOrdered', machineId, truckStatus, confirmedShipDate);
+            Meteor.call('headTruckOrdered', machineId, truckStatus, confirmedShipDate);
         },
 
         'click .removeTruck': function() {
             event.preventDefault();
             const truckStatus = 0;
             const machineId = Session.get('selectedHead');
-            Meteor.call('truckRemoved', machineId, truckStatus);
+            Meteor.call('headTruckRemoved', machineId, truckStatus);
         }
-    });
-
-    Template.inputHead.helpers({
-        editMachine: function() {
-            const selectedHead = Session.get('selectedHead');
-            return MachineReady.findOne({_id: selectedHead});
-
-        },
-
-        shippList: function () {
-            // Order of shipping date
-            return MachineReady.find({newHeadId: {$gt: '00'}}, {sort: {date: -1}});
-        },
-
-        'selectedClass': function() {
-            const shippingHead = this._id;
-            const selectedHead = Session.get('selectedHead');
-            if (shippingHead === selectedHead) {
-                return "selected"
-            }
-        }
-
     });
 
 
@@ -110,7 +128,7 @@ Meteor.subscribe("headerTrailer");
     Template.headerTrailer.helpers({
 
             availiableTrailer: function() {
-                event.preventDefault();
+            event.preventDefault();
             return headerTrailer.find({status: '1'});
             },
 

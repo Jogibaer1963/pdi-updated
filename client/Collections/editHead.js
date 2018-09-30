@@ -3,7 +3,7 @@ if(Meteor.isClient) {
    Template.editHead.helpers({
       showEditHead: function() {
           const selectedHead = Session.get('editSelectedHead');
-          const kitSaved = MachineReady.find({_id: selectedHead}, {fields: {"kit": 1}}).fetch();
+          const kitSaved = newHeadYear.find({_id: selectedHead}, {fields: {"kit": 1}}).fetch();
           const kitString = JSON.stringify(kitSaved);
           const kitExtract = kitString.slice(8, -28);
           const myString = kitExtract.replace(/"/g, "");
@@ -96,12 +96,7 @@ if(Meteor.isClient) {
                   Session.set('kit_11', undefined);
               }
 
-
-
-
-
-
-          return MachineReady.findOne({_id: selectedHead});
+          return newHeadYear.findOne({_id: selectedHead});
       },
 
        'newKit1': function() {
