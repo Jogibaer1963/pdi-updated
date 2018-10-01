@@ -127,7 +127,7 @@
                         singleConfig[j] = (trimConfig.substr(i, k).trim()).replace(';', '_');
                         i = i + 12;
                 }
-                    document.getElementById('Photos').value = '';
+                   // document.getElementById('Photos').value = '';
                     singleConfig.sort();
                     Meteor.call('readConfig', machineId, singleConfig);
                 };
