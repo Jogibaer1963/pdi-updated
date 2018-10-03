@@ -5,7 +5,6 @@
       <list>
         <ServerConfiguration>
           <option name="connectOnIdeStartup" value="true" />
-          <option name="label" value="LocalHost" />
           <option name="serverUrls">
             <list>
               <option value="localhost:27017" />
@@ -14,7 +13,6 @@
           <option name="sshTunnelingConfiguration">
             <SshTunnelingConfiguration />
           </option>
-          <option name="userDatabase" value="production" />
         </ServerConfiguration>
       </list>
     </option>
