@@ -881,7 +881,6 @@ if(Meteor.isServer){
 
         'headReadyToGo': (readyGo) => {
             for (i = 0; i < readyGo.length; i++) {
-                console.log(i, readyGo[i]);
                 newHeadYear.update({_id: readyGo[i]}, {$set: {readyToGo: 1}});
             }
         },
