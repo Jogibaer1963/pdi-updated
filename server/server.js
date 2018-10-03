@@ -840,7 +840,7 @@ if(Meteor.isServer){
 
         // ------------------------------------  Machine ------------------------------------
 
-        'readyToGo': (readyGo) => {
+        'machineReadyToGo': (readyGo) => {
             for (i = 0; i < readyGo.length; i++) {
                 MachineReady.update({_id: readyGo[i]}, {$set: {readyToGo: 1}});
             }
@@ -881,6 +881,7 @@ if(Meteor.isServer){
 
         'headReadyToGo': (readyGo) => {
             for (i = 0; i < readyGo.length; i++) {
+                console.log(i, readyGo[i]);
                 newHeadYear.update({_id: readyGo[i]}, {$set: {readyToGo: 1}});
             }
         },
