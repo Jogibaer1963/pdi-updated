@@ -38,6 +38,13 @@ table.siMachineList {
   width: 20em;
 }
 
+.headSi {
+  position: absolute;
+  top: 6em;
+  left: 28em;
+  width: 20em;
+}
+
 .siMdList {
   left: 25em;
   position: absolute;
@@ -45,8 +52,8 @@ table.siMachineList {
 }
 
 .siButtons {
-  position: relative;
-  top: -15em;
+  position: absolute;
+  top: 30em;
   left: 78em;
 }
 
@@ -60,7 +67,7 @@ table.siMachineList {
 
 .siFile {
   position: absolute;
-  top: 30em;
+  top: 18em;
   left: 28em;
 }
 
@@ -71,7 +78,7 @@ table.siMachineList {
 
 .siSubmit {
   position: absolute;
-  top: 1em;
+  top: -0.5em;
   left: 18em;
 }
 
