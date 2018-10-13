@@ -1011,8 +1011,8 @@ table.siMachineList {
   left: 50em; }
 
 .multipleSiTable {
-  position: relative;
-  top: -67em;
+  position: absolute;
+  top: 10em;
   left: 50em;
   width: 20em; }
 

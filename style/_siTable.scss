@@ -26,23 +26,22 @@ table.siMachineList {
 }
 
 .headerMultiple {
-  position: relative;
-  top: -47em;
+  position: absolute;
+  top: 9.5em;
   left: 50em;
 }
 
 .multipleSiTable {
-  position: relative;
-  top: -67em;
+  position: absolute;
+  top: 10em;
   left: 50em;
   width: 20em;
 }
 
 .siMdList {
-  float: left;
-  position: relative;
-  top: -15em;
   left: 25em;
+  position: absolute;
+  top: 11em;
 }
 
 .siButtons {
@@ -53,9 +52,9 @@ table.siMachineList {
 
 
 .siHeader {
-  position: absolute;
-  top: 15em;
   left: 16.3em;
+  position: absolute;
+  top: 8em;
   width: 5em;
 }
 
@@ -71,9 +70,9 @@ table.siMachineList {
 }
 
 .siSubmit {
-  margin-left: 1em;
   position: absolute;
-  top: -0.2em;
+  top: 1em;
+  left: 18em;
 }
 
 .posDatei {
@@ -84,7 +83,7 @@ table.siMachineList {
 
 .removeSiButton {
   position: absolute;
-  top: 140px;
+  top: 32px;
   left: 10px;
 }
 
