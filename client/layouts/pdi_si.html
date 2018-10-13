@@ -3,7 +3,7 @@
           {{> topNav}}
         {{> siTable}}
           {{> upload}}
-
+        {{> siInActive}}
     {{else}}
         {{> login}}
     {{/if}}
@@ -120,15 +120,37 @@
 
 <template name="changeStat">
     <h3>Change SI status</h3>
-        <form class="removeSI">
-            <button type="submit" class="btn btn-danger removeSI">Remove marked SI</button>
-            <p></p>
-        </form>
         <form class="statusChange">
             <button type="submit" class="btn btn-success statusButton statusBackground_1">Solved by Repair</button>
             <p></p>
             <button type="submit" class="btn btn-info statusButton statusBackground_4">Move to SI Field List</button>
         </form>
+    <p></p>
+        <form class="removeSI">
+            <button type="submit" class="btn btn-danger removeSI">Deactivate marked SI</button>
+        </form>
 </template>
 
 
+<template name="siInActive">
+    <form class="reactivateSi">
+        <button type="submit" class="btn btn-info reactSi">Reactivate marked SI</button>
+    </form>
+    <div>
+    <table class="blueTable siInactive">
+        <thead>
+        <tr class="">
+            <th class="pdiDestination"><strong>SI inactive</strong></th>
+        </tr>
+        </thead>
+        <tbody class="tableHeight">
+        {{#each siInactiveTable}}
+            <tr class=" selectedInactiveSi {{selectedInactiveSi}}">
+                <td class="pdiDestination">{{siNumber}}</td>
+            </tr>
+        {{/each}}
+        </tbody>
+    </table>
+    </div>
+
+</template>

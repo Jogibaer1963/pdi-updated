@@ -41,7 +41,6 @@ Meteor.subscribe("siTable");
         },
 
         'selectedLineItem': function() {
-            event.preventDefault();
             const checkPoint = this._id;
             const selectedCheckPoint = Session.get('selectedItem');
             if (selectedCheckPoint === checkPoint) {
@@ -125,8 +124,7 @@ Template.uploadList.events({
 Template.uploadList.helpers({
 
     siTable: function() {
-        event.preventDefault();
-        return siTable.find();
+        return siTable.find({active: 1});
     },
 
     siContent: function() {
@@ -141,7 +139,6 @@ Template.uploadList.helpers({
     },
 
     'selectedSingleItem': function() {
-        event.preventDefault();
         const SiPoint = this._id;
         const selectedSiLine = Session.get('selectedItem');
         if(SiPoint === 'undefined') {
@@ -154,7 +151,6 @@ Template.uploadList.helpers({
     },
 
        'selectedSiMachine': function() {
-            event.preventDefault();
            const SiMachine = this._id;
            const selectedSiLine = Session.get('selectedSiLine');
            if(!SiMachine) {
@@ -169,7 +165,7 @@ Template.uploadList.helpers({
 });
 
 Template.changeStat.events({
-
+    /*
          'click .statusBackground_0': function (e) {
              e.preventDefault();
              let setStatus = 0;
@@ -179,6 +175,8 @@ Template.changeStat.events({
              Meteor.call('changeStatus', SiNumber, selectedMachineId, setStatus);
          },
 
+    */
+
          'click .statusBackground_1': function (e) {
              e.preventDefault();
              let setStatus = 1;
@@ -187,6 +185,8 @@ Template.changeStat.events({
              let SiNumber = siTable.findOne({_id: selectedSI}).siNumber;
              Meteor.call('changeStatus', SiNumber, selectedMachineId, setStatus);
          },
+
+    /*
 
          'click .statusBackground_2': function (e) {
              e.preventDefault();
@@ -206,6 +206,8 @@ Template.changeStat.events({
              Meteor.call('changeStatus', SiNumber, selectedMachineId, setStatus);
          },
 
+        */
+
          'click .statusBackground_4': function (e) {
             e.preventDefault();
             let setStatus = 4;
@@ -214,4 +216,38 @@ Template.changeStat.events({
             let SiNumber = siTable.findOne({_id: selectedSI}).siNumber;
             Meteor.call('changeStatus', SiNumber, selectedMachineId, setStatus);
          }
+});
+
+
+Template.siInActive.helpers({
+
+    siInactiveTable: function() {
+        return siTable.find({active: 0});
+    },
+
+    'selectedInactiveSi': function() {
+        const inactiveSi = this._id;
+        const selectedInactiveSi = Session.get('selectedItem');
+        if (selectedInactiveSi === inactiveSi) {
+            return "selected"
+        }
+    }
+
+});
+
+Template.siInActive.events({
+
+    'click .selectedInactiveSi': function () {
+        event.preventDefault();
+        const checkMe = this._id;
+        Session.set('selectedItem', checkMe);
+    },
+
+    'click .reactivateSi': function (e) {
+        e.preventDefault();
+        const siReact = Session.get('selectedItem');
+        Meteor.call('reactSi', siReact);
+    }
+
+
 });

@@ -25,6 +25,13 @@ table.siMachineList {
   width: 155px;
 }
 
+table.siInactive {
+  position: absolute;
+  top: 41em;
+  left: 77.5em;
+  width: 90px;
+}
+
 .headerMultiple {
   position: absolute;
   top: 9.5em;
@@ -40,7 +47,6 @@ table.siMachineList {
 
 .headSi {
   position: absolute;
-  top: 6em;
   left: 28em;
   width: 20em;
 }
@@ -48,12 +54,12 @@ table.siMachineList {
 .siMdList {
   left: 25em;
   position: absolute;
-  top: 11em;
+  top: 4em;
 }
 
 .siButtons {
   position: absolute;
-  top: 30em;
+  top: 22em;
   left: 78em;
 }
 
@@ -61,13 +67,13 @@ table.siMachineList {
 .siHeader {
   left: 16.3em;
   position: absolute;
-  top: 8em;
+  top: 3em;
   width: 5em;
 }
 
 .siFile {
   position: absolute;
-  top: 18em;
+  top: 9em;
   left: 28em;
 }
 
@@ -92,6 +98,12 @@ table.siMachineList {
   position: absolute;
   top: 32px;
   left: 10px;
+}
+
+.reactSi {
+  position: absolute;
+  top: 38em;
+  left: 78em;
 }
 
 .siText {

@@ -329,11 +329,20 @@ if(Meteor.isServer){
         'removeSi': function (siRemove) {
             const siNumberLoad = siTable.findOne({_id: siRemove});
             if(!!siNumberLoad) {
-                siNumber = siNumberLoad.siNumber;
-                siTable.remove({_id: siRemove});
-                siMd.remove({_id: siNumber});
+                let siNumber = siNumberLoad.siNumber;
+                siTable.update({_id: siRemove}, {$set: {active: 0}});
+                siMd.update({_id: siNumber}, {$set: {active: 0}});
                 }
             },
+
+        'reactSi': (siReact) => {
+            const siNumberLoad = siTable.findOne({_id: siReact});
+            if(!!siNumberLoad) {
+                let siNumber = siNumberLoad.siNumber;
+                siTable.update({_id: siReact}, {$set: {active: 1}});
+                siMd.update({_id: siNumber}, {$set: {active: 1}});
+            }
+        },
 
         'siInsert': function (siMdList) {
             siTable.insert({siNumber: siMdList});
