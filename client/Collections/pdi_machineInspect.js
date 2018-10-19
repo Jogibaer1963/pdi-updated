@@ -75,10 +75,8 @@ Meteor.subscribe("orderParts");
 
         issueComponent: () => {
             try {
-                let k = Session.get('issueComp');
-                return k;
+                return Session.get('issueComp');
             } catch (e) {
-
             }
         },
 

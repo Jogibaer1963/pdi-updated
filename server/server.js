@@ -112,6 +112,22 @@ if(Meteor.isServer){
             return newHeadYear.find();
         });
 
+        Meteor.publish("dropDownHistoricMachines", function() {
+            return dropDownHistoricMachines.find();
+        });
+
+        Meteor.publish("machineReadyToGo_2016", function() {
+            return machineReadyToGo_2016.find();
+        });
+
+        Meteor.publish("machineReadyToGo_2017", function() {
+            return machineReadyToGo_2017.find();
+        });
+
+        Meteor.publish("machineReadyToGo_2018", function() {
+            return machineReadyToGo_2018.find();
+        });
+
     });
 
 
@@ -120,6 +136,15 @@ if(Meteor.isServer){
 
 
     Meteor.methods({
+
+  //-------------------------------------------------- Historic PDI's ------------------------------------
+
+        'historicPdi': (selected) => {
+          return dropDownHistoricMachines.findOne({_id: selected}).id;
+        },
+
+
+
  //----------------------------------------------------- Components -----------------------------------------------------------------------
 
         'moveMachines': (newMoveMe) => {

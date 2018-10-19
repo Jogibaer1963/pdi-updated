@@ -1,18 +1,51 @@
 
+
+
+.searchButton {
+  top: 10em;
+  left: 10em;
+}
+
 .searchMe {
-  margin-left: 3em;
+  position: absolute;
+  top: 16em;
+  left: 40em;
 }
 
 .printButton {
-  margin-left: 16em;
-  margin-top: 1em;
+  position: absolute;
+  top: 16em;
+  left: 60em;
+}
+
+.historicButtonPos {
+  position: absolute;
+  top: 16em;
+  left: 8em;
+}
+
+.dropDownHistoric {
+  font-size: 20px;
+  white-space: nowrap;
+  border-radius: 1px;
+  padding: 1px;
+  z-index: 1001;
+  // For opening transition
+  transform-origin: center top;
+}
+
+.pdiYear {
+  position: absolute;
+  top: 16em;
+  left: 24em;
 }
 
 table.pdiRepairList {
   position: absolute;
-  top: 320px;
+  top: 280px;
   margin-left: 25px;
   width: 242px;
+  left: 20em;
 }
 
 .repairListButton {
@@ -24,10 +57,10 @@ table.pdiRepairList {
 .container {
   overflow: scroll;
   position: absolute;
-  top: 10em;
-  left: 30em;
-  height: 800px;
-  width: 900px;
+  top: 20em;
+  left: 40em;
+  height: 700px;
+  width: 800px;
   border: black 1px solid;
   padding: 10px;
 }

@@ -25,15 +25,27 @@
         </div>
     </div>
         <br>
-    <div class="searchButton">
+    <div>
         <form class="searchMe">
             <input type="text" id="searchMachine" name="searchMachine" placeholder="Machine number" >
             <button type="submit" class="btn btn-default btn-success" id="buttonSearch">Search</button>
         </form>
         <a class="btn btn-default btn-success printButton"  href="/pdi_printOut">Print Out</a>
-        <br><br>
     </div>
-    <br><br>
+        <div class="historicButtonPos">
+            {{#dropdownTrigger  name="mainComponents"}}
+                <button class="loginSubmit omInputButton">PDI past and present</button>
+            {{/dropdownTrigger}}
+            {{#dropdown name="mainComponents" align="left" top="25" left="0"}}
+                <tbody class="rTable">
+                {{#each historicPdi}}
+                    <tr class="histPdi {{selectedComponent}}">
+                        <td class="dropDownHistoric">{{historic}}</td>
+                    </tr>
+                {{/each}}
+                </tbody>
+            {{/dropdown}}
+        </div>
     <table class="blueTable pdiRepairList">
        <thead>
           <tr>
@@ -55,12 +67,16 @@
 </template>
 
 <template name="pdiInspectList">
+    <div class="pdiYear">
+        <h3>PDI Year: {{year}}</h3>
+
+    </div>
  <div class="container">
      <div class="printList">
         {{#each listContent}}
             <div>
                <h3>Machine Id : {{machineId}}</h3>
-               <h3>PDI performed by {{pdiPerformer}} |  Pdi-Date: {{startPdiDate}}</h3>
+               <h3>PDI performed by {{pdiPerformer}} {{user}} |  Pdi-Date: {{startPdiDate}}</h3>
             </div>
             <div class="printList">
               {{#each machineConfig}}
@@ -73,7 +89,7 @@
 
         <div class="printList">
            <h2>Operator Maintenance Manual</h2>
-            <h3>Omm Main : {{omms.ommMain}}</h3>
+            <h3>Omm Main : {{omms.ommMain}} {{ommMain}}</h3>
             <h3>Omm Supplemental : {{omms.ommSupp}}</h3>
             <h3>Omm Unload : {{omms.ommUnload}}</h3>
             <h3>Omm Cebis : {{omms.ommCebis}}</h3>
