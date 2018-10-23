@@ -79,6 +79,7 @@
 .pdiDivider {
   position: relative;
   left: 3.5em;
+  width: 30em;
 }
 
 /*---------------- Drop Down -------------*/
@@ -100,7 +101,7 @@
 .dropDown {
   font-size: 20px;
   height: 40px;
-  width: 50px;
+  width: 100px;
   white-space: nowrap;
   border-radius: 1px;
   padding: 1rem;
@@ -109,6 +110,10 @@
   // For opening transition
   transform-origin: center top;
  }
+
+.histPdi {
+  z-index: 1001;
+}
 
 /*-----------------------------------------*/
 
