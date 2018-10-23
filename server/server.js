@@ -976,6 +976,10 @@ if(Meteor.isServer){
 
                 });
         },
+
+        'removeFromShipList': function(selectedMachine) {
+            MachineReady.remove(selectedMachine);
+        },
     });
  }
 

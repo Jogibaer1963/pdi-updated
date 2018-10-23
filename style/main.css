@@ -871,9 +871,6 @@ table.pdiTable {
   min-width: 220px;
   transform-origin: center top; }
 
-.histPdi {
-  z-index: 1001; }
-
 /*-----------------------------------------*/
 .issueField {
   margin-left: 3em; }
