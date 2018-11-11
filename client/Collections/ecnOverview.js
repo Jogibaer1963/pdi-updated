@@ -1,6 +1,16 @@
 Meteor.subscribe("mcoReview");
 
-Template.ecnOverView.events({
+
+
+Template.ecnPage.helpers({
+
+    mcoOverView: function() {
+        return mcoReview.find({}, {sort: {effectiveDate: -1}});
+    }
+});
+
+
+Template.ecnPage.events({
 
    'submit .searchMachine': function() {
        event.preventDefault();
@@ -9,12 +19,8 @@ Template.ecnOverView.events({
        if (mcoFound === "") {
        } else {
        }
-   }
-});
+   },
 
-
-
-Template.ecnNew.events({
     'submit .addNewEcn': function() {
         event.preventDefault();
         const newEcn = event.target.newEcn.value;
@@ -27,7 +33,6 @@ Template.ecnNew.events({
         document.getElementById('machineRecording').checked = false;
         event.target.mcoNotes.value= "";
     }
-
 });
 
 
@@ -38,9 +43,6 @@ Template.ecnNew.events({
 
 
 
-Template.allEcnOverView.helpers({
 
-      mcoOverView: function() {
-           return mcoReview.find({}, {sort: {effectiveDate: -1}});
-      }
-});
+
+
