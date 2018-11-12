@@ -414,14 +414,14 @@ if(Meteor.isServer){
           mcoReview.find({mcoId: searchId});
         },
 
-        'mcoNew': function(newEcn, ecnEffectivity, machineRecording, mcoNotes) {
+        'mcoNew': function(newEcn, ecnEffectivity, machineRecording, mcoNotes, mcoTeam) {
             if(machineRecording === true) {
-                machineRecording = 1
+                machineRecording = "X";
             } else {
-                machineRecording = 0
+                machineRecording = "";
             }
              mcoReview.insert({mcoId: newEcn, effectiveDate: ecnEffectivity,
-                 machineRecording: machineRecording, statusMachine: 0, statusMco: 0, mcoNotes: mcoNotes});
+                 machineRecording: machineRecording, statusMachine: 0, statusMco: 0, mcoNotes: mcoNotes, mcoTeam: mcoTeam});
         },
 
         'deactivateRework': function(removeSiItem){

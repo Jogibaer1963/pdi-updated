@@ -1380,6 +1380,21 @@ tbody.mainCompTbody {
   top: 30em;
   left: 2em; }
 
+.checkBoxList {
+  position: absolute;
+  top: 0.5em;
+  left: 20em; }
+
+.searchMco {
+  position: absolute;
+  top: 5.5em;
+  left: 60em; }
+
+.goButton {
+  position: absolute;
+  top: 20em;
+  left: 60em; }
+
 .mainLayout {
   position: absolute;
   left: 40em; }
