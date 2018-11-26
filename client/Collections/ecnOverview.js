@@ -41,8 +41,6 @@ Template.ecnPage.events({
         }
         const materialScrap = Session.get('materialStatus');
 
-        console.log(newEcn, ecnEffectivity, machineSerial, materialScrap, mcoNotes, newMcoTeam);
-
         Meteor.call('mcoNew', newEcn, ecnEffectivity, machineSerial, materialScrap, mcoNotes, newMcoTeam);
         event.target.newEcn.value= "8100";
         event.target.ecnEffectivity.value= "";
