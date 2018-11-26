@@ -391,7 +391,8 @@ if(Meteor.isServer){
         },
 
         'changeStatus': function (siNumber, selectedMachineId, setStatus) {
-          siMd.update({_id: siNumber, "machineList._id": selectedMachineId}, {$set: {"machineList.$.siStatus": setStatus}});
+          siMd.update({_id: siNumber, "machineList._id": selectedMachineId},
+                                                  {$set: {"machineList.$.siStatus": setStatus}});
         },
 
         'unsuccessLogin': function (userVar, passwordVar, dateLogin) {
@@ -402,7 +403,9 @@ if(Meteor.isServer){
         'successfullLogin': function (userVar, dateLogin) {
              clientIp = this.connection.clientAddress;
              successfullLogin.insert({userId: userVar, dateLogin: dateLogin, clientIp: clientIp});
-             usersProfil.update({username: userVar}, {$set: {loginStatus: 1, lastLogin: dateLogin, clientIp: clientIp}});
+             usersProfil.update({username: userVar}, {$set: {loginStatus: 1,
+                                                                                lastLogin: dateLogin,
+                                                                                 clientIp: clientIp}});
         },
 
         'successfullLogout': function(logoutId, logoutDate) {
@@ -410,19 +413,32 @@ if(Meteor.isServer){
             usersProfil.update({username: logoutId}, {$set: {loginStatus: 0}});
         },
 
-        'mcoFind': function(searchId) {
-          mcoReview.find({mcoId: searchId});
+        /* ----------------------------------- MCO input and search ---------------------------------------------  */
+
+        'mcoNew': function(newEcn, ecnEffectivity, machineRecording, materialScrap, mcoNotes, mcoTeam) {
+
+             mcoReview.insert({mcoId: newEcn,
+                                    effectiveDate: ecnEffectivity,
+                                    machineRecording: machineRecording,
+                                    materialStatus: materialScrap,
+                                    statusMachine: 0,
+                                    statusMco: 0,
+                                    mcoNotes: mcoNotes,
+                                    mcoTeam: mcoTeam
+                                 });
         },
 
-        'mcoNew': function(newEcn, ecnEffectivity, machineRecording, mcoNotes, mcoTeam) {
-            if(machineRecording === true) {
-                machineRecording = "X";
-            } else {
-                machineRecording = "";
-            }
-             mcoReview.insert({mcoId: newEcn, effectiveDate: ecnEffectivity,
-                 machineRecording: machineRecording, statusMachine: 0, statusMco: 0, mcoNotes: mcoNotes, mcoTeam: mcoTeam});
+        'mcoSearch': function(newMcoSearch, mcoReCording, matStatus, mcoSearchString) {
+            console.log(newMcoSearch, mcoReCording, matStatus, mcoSearchString);
+
+
+            const result = mcoReview.find({mcoTeam: newMcoSearch}).fetch();
+
+
         },
+
+
+        /* -----------------------------------------------  Re work  ------------------------------------------------ */
 
         'deactivateRework': function(removeSiItem){
             reworkMachineList.update({_id: removeSiItem}, {$set: {active: 0}});

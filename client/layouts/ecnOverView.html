@@ -39,27 +39,34 @@
                                    name="machineRecording"
                                    class=" newKit1">Machine Recording</label>
                         </div>
+                        <div>
+                            <label for="materialStatus">
+                                <input type="radio"
+                                       id="materialStatus"
+                                       name="materialStatus"
+                                       class=" newKit1">Material Status L</label>
+                        </div>
                         <div class="checkBoxList">
                             <h3>MCO related to Team</h3>
-                            <input type="radio" id="team1"
+                            <input type="checkbox" id="mcoTeam_1"
                                    name="mco" value="1">
-                            <label for="team1">Team 1</label><br>
+                            <label for="mcoTeam_1">Team 1</label><br>
 
-                            <input type="radio" id="team2"
+                            <input type="checkbox" id="mcoTeam_2"
                                    name="mco" value="2">
-                            <label for="team2">Team 2</label><br>
+                            <label for="mcoTeam_2">Team 2</label><br>
 
-                            <input type="radio" id="team3"
+                            <input type="checkbox" id="mcoTeam_3"
                                    name="mco" value="3">
-                            <label for="team3">Team 3</label><br>
+                            <label for="mcoTeam_3">Team 3</label><br>
 
-                            <input type="radio" id="team4"
+                            <input type="checkbox" id="mcoTeam_4"
                                    name="mco" value="4">
-                            <label for="team4">Team 4 (Engine)</label><br>
+                            <label for="mcoTeam_4">Team 4 (Engine)</label><br>
 
-                            <input type="radio" id="team5"
+                            <input type="checkbox" id="mcoTeam_5"
                                    name="mco" value="5">
-                            <label for="team5">Team 5</label><br>
+                            <label for="mcoTeam_5">Team 5</label><br>
                         </div>
                         <div>
                             <label for="statusList">
@@ -78,28 +85,43 @@
                         </div>
                     </form>
                 </div>
-    <form action="">
-        <div class="searchMco">
-                <h3>Show MCO for Team only:</h3>
-                <input type="radio" id="team1"
-                       name="mco" value="1">
-                <label for="team1">Team 1</label><br>
+    <form class="searchMCO">
+        <div class="searchBoxes">
+            <h3>MCO search</h3>
+            <input type="checkbox" id="team1"
+                   name="mcoSearch" value="1">
+            <label for="team1">Team 1</label><br>
 
-                <input type="radio" id="team2"
-                       name="mco" value="2">
-                <label for="team2">Team 2</label><br>
+            <input type="checkbox" id="team2"
+                   name="mcoSearch" value="2">
+            <label for="team2">Team 2</label><br>
 
-                <input type="radio" id="team3"
-                       name="mco" value="3">
-                <label for="team3">Team 3</label><br>
+            <input type="checkbox" id="team3"
+                   name="mcoSearch" value="3">
+            <label for="team3">Team 3</label><br>
 
-                <input type="radio" id="team4"
-                       name="mco" value="4">
-                <label for="team4">Team 4 (Engine)</label><br>
+            <input type="checkbox" id="team4"
+                   name="mcoSearch" value="4">
+            <label for="team4">Team 4 (Engine)</label><br>
 
-                <input type="radio" id="team5"
-                       name="mco" value="5">
-                <label for="team5">Team 5</label><br>
+            <input type="checkbox" id="team5"
+                   name="mcoSearch" value="5">
+            <label for="team5">Team 5</label><br>
+        </div>
+        <div class="mcoReCording">
+            <input type="radio" id="reCording"
+                   name="mcoMachineReCording" value="X">
+            <label for="reCording">Machine recording</label><br>
+            <input type="radio" id="matStatus"
+                   name="matStatus" value="L">
+            <label for="reCording">Material Status L</label><br>
+            <label for="mcoNotes">
+                <input type="text"
+                       style ="width: 20em"
+                       id="mcoSearchNotes"
+                       name="mcoSearchNotes"
+                       placeholder="Search string" />
+            </label>
         </div>
         <div class="goButton">
             <button type="submit" class="btn btn-default btn-success goSearchButton" >Go</button>
@@ -113,7 +135,8 @@
                  <th class="pdiTruckOnOrder"><strong>MCO</strong></th>
                  <th class="pdiShipDate"><strong>Effective Date</strong></th>
                  <th class="pdiTruckOnOrder"><strong>Machine Serial</strong></th>
-                  <th class="pdiShipField"><strong>Team</strong></th>
+                  <th class="pdiTruckOnOrder"><strong>Material Status</strong></th>
+                  <th class="pdiTruckOnOrder"><strong>Team</strong></th>
                  <th class="ecnTextField"><strong>Internal MCO Notes</strong></th>
               </tr>
             </thead>
@@ -123,7 +146,8 @@
                     <td class="pdiTruckOnOrder" >{{mcoId}}</td>
                     <td class="pdiShipDate" >{{effectiveDate}}</td>
                     <td class="pdiTruckOnOrder" >{{machineRecording}}</td>
-                    <td class="pdiShipField"> {{mcoTeam}}</td>
+                    <td class="pdiTruckOnOrder" >{{materialStatus}}</td>
+                    <td class="pdiTruckOnOrder"> {{mcoTeam}}</td>
                     <td class="ecnTextField" >{{mcoNotes}}</td>
                 </tr>
             {{/each}}

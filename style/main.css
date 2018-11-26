@@ -1385,7 +1385,7 @@ tbody.mainCompTbody {
   top: 0.5em;
   left: 20em; }
 
-.searchMco {
+.searchBoxes {
   position: absolute;
   top: 5.5em;
   left: 60em; }
@@ -1394,6 +1394,11 @@ tbody.mainCompTbody {
   position: absolute;
   top: 20em;
   left: 60em; }
+
+.mcoReCording {
+  position: absolute;
+  top: 9.5em;
+  left: 70em; }
 
 .mainLayout {
   position: absolute;
