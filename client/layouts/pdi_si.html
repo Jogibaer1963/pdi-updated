@@ -11,9 +11,13 @@
 
 
 <template name="siTable">
-    {{#if isInRole 'repair'}}
-        {{> repairLayout}}
-    {{/if}}
+    <div class="templateNav">
+        <nav>
+            <a class="btn" href="/repairView">Repair</a>
+            <a>|</a>
+            <a class="btn" href="/addSpecialItems">Special Items</a>
+        </nav>
+    </div>
         <div id="logo">
             <img src="claas_logo.png" />
         </div>
@@ -152,5 +156,43 @@
         </tbody>
     </table>
     </div>
+</template>
 
+<template name="addSpecialItems">
+        {{> topNav}}
+        <div class="repairNavButton">
+            <nav>
+                <a class="btn" href="/repairView">Repair</a>
+            </nav>
+        </div>
+    <div id="logo">
+        <img src="claas_logo.png" />
+    </div>
+    <div style="margin-left: 3em">
+        <h1>Add / Edit / Remove special Items for each pdi machine</h1>
+      <p></p>
+        <form class="addItem">
+            <label for="specialPdiItem"></label>
+            <input type="text" class="" id="specialPdiItem" name="specialPdiItem" placeholder="Special Pdi Item" required>
+            <button type="submit" class="btn btn-success addItem">Add item</button>
+            <button type="submit" class="btn btn-info in-active-button">Edit item</button>
+            <button type="submit" class="btn btn-info in-active-button">Remove item</button>
+        </form>
+    </div>
+    <div>
+        <table class="blueTable siSingleTable">
+            <thead>
+            <tr class="">
+                <th class="pdiComments"><strong>Pdi Item</strong></th>
+            </tr>
+            </thead>
+            <tbody class="tableHeight">
+            {{#each pdiItemList}}
+                <tr class=" selectedSpecialPdiItem {{selectedPdiItem}}">
+                    <td class="pdiComments">{{specialItem}}</td>
+                </tr>
+            {{/each}}
+            </tbody>
+        </table>
+    </div>
 </template>

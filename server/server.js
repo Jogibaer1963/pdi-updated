@@ -128,6 +128,10 @@ if(Meteor.isServer){
             return machineReadyToGo_2018.find();
         });
 
+        Meteor.publish("specialPdiItems", function() {
+            return specialPdiItems.find();
+        });
+
     });
 
 
@@ -136,6 +140,14 @@ if(Meteor.isServer){
 
 
     Meteor.methods({
+
+   //------------------------------------------------- Add Special Tasks for PDI ------------------------
+
+        'addSpecialPdiItem': (addItem) => {
+            specialPdiItems.insert({specialItem: addItem});
+        },
+
+
 
   //-------------------------------------------------- Historic PDI's ------------------------------------
 

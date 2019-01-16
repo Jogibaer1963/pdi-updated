@@ -3,6 +3,7 @@ Meteor.subscribe("reworkMachineList");
 Meteor.subscribe("siListDone");
 Meteor.subscribe("siMd");
 Meteor.subscribe("siTable");
+Meteor.subscribe('specialPdiItems');
 
 
     Template.siTable.events({
@@ -165,17 +166,7 @@ Template.uploadList.helpers({
 });
 
 Template.changeStat.events({
-    /*
-         'click .statusBackground_0': function (e) {
-             e.preventDefault();
-             let setStatus = 0;
-             let selectedMachineId = Session.get('selectedSiLine');
-             let selectedSI =  Session.get('selectedItem');
-             let SiNumber = siTable.findOne({_id: selectedSI}).siNumber;
-             Meteor.call('changeStatus', SiNumber, selectedMachineId, setStatus);
-         },
 
-    */
 
          'click .statusBackground_1': function (e) {
              e.preventDefault();
@@ -186,27 +177,6 @@ Template.changeStat.events({
              Meteor.call('changeStatus', SiNumber, selectedMachineId, setStatus);
          },
 
-    /*
-
-         'click .statusBackground_2': function (e) {
-             e.preventDefault();
-             let setStatus = 2;
-             let selectedMachineId = Session.get('selectedSiLine');
-             let selectedSI =  Session.get('selectedItem');
-             let SiNumber = siTable.findOne({_id: selectedSI}).siNumber;
-             Meteor.call('changeStatus', SiNumber, selectedMachineId, setStatus);
-         },
-
-         'click .statusBackground_3': function (e) {
-             e.preventDefault();
-             let setStatus = 3;
-             let selectedMachineId = Session.get('selectedSiLine');
-             let selectedSI =  Session.get('selectedItem');
-             let SiNumber = siTable.findOne({_id: selectedSI}).siNumber;
-             Meteor.call('changeStatus', SiNumber, selectedMachineId, setStatus);
-         },
-
-        */
 
          'click .statusBackground_4': function (e) {
             e.preventDefault();
@@ -248,6 +218,35 @@ Template.siInActive.events({
         const siReact = Session.get('selectedItem');
         Meteor.call('reactSi', siReact);
     }
+
+});
+
+Template.addSpecialItems.helpers({
+
+    pdiItemList: () => {
+        return specialPdiItems.find();
+    },
+
+    'selectedPdiItem': function() {
+        const selectedItem = this._id;
+        console.log(selectedItem);
+    }
+});
+
+Template.addSpecialItems.events({
+
+    'click .selectedSpecialPdiItem': (e) => {
+        e.preventDefault();
+        const clickMe = this._id;
+        console.log(clickMe);
+    },
+
+    'submit .addItem': (e) => {
+        e.preventDefault();
+        const addItem = event.target.specialPdiItem.value;
+        Meteor.call('addSpecialPdiItem', addItem);
+    }
+
 
 
 });
