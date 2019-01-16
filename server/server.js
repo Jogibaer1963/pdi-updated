@@ -697,7 +697,6 @@ if(Meteor.isServer){
 
             const specialItems = specialPdiItems.find().fetch();
                 MachineReady.update({_id: selectedPdiMachineId}, {$set: {specialPdiItems: specialItems}});
-                console.log(specialItems);
         },
 
 
