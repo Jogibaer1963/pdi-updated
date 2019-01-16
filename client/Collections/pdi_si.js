@@ -245,6 +245,7 @@ Template.addSpecialItems.events({
         e.preventDefault();
         const addItem = event.target.specialPdiItem.value;
         Meteor.call('addSpecialPdiItem', addItem);
+        event.target.specialPdiItem.value = '';
     }
 
 
