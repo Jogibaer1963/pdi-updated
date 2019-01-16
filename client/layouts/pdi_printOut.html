@@ -25,6 +25,7 @@
 
                   <p style="page-break-before: always;">&nbsp;</p>
                 <div>
+                    <h4>Machine Id : {{machineId}}</h4>
                     <div class="">
                        <h3>Operator Maintenance Manual</h3>
                        <h4>Omm Main : {{omms.ommMain}}</h4>
@@ -58,6 +59,7 @@
                    <p style="page-break-after: always;">&nbsp;</p>
                    <p style="page-break-before: always;">&nbsp;</p>
                 <div>
+                    <h4>Machine Id : {{machineId}}</h4>
                     <h3>Repair List:</h3>
                     <br>
                         <table class="printOutTableWidth " cellpadding="10">
@@ -85,6 +87,16 @@
                                         </tr>
                                    {{/if}}
                                {{/each}}
+                               <p>
+                               </p>
+                                   {{#each specialPdiItems}}
+                                       <tr>
+                                           <td class="pdiCommentsPrintOut">{{specialItem}}</td>
+                                           <td class="pdiEmptyField"></td>
+                                           <td class="pdiSignOffField"></td>
+                                       </tr>
+                                   {{/each}}
+
                             </tbody>
                         </table>
                 </div>

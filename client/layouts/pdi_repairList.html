@@ -87,18 +87,18 @@
                 <h4>---------------------------------------------------------------------------</h4>
             </div>
 
-        <div class="printList">
-           <h2>Operator Maintenance Manual</h2>
-            <h3>Omm Main : {{omms.ommMain}} {{ommMain}}</h3>
-            <h3>Omm Supplemental : {{omms.ommSupp}}</h3>
-            <h3>Omm Unload : {{omms.ommUnload}}</h3>
-            <h3>Omm Cebis : {{omms.ommCebis}}</h3>
-            <h3>Omm Cebis Touch : {{omms.ommCebisTouch}}</h3>
-            <h3>Omm Terra Track : {{omms.ommTerra}}</h3>
-            <h3>Omm Dual : {{omms.ommDuals}}</h3>
-            <h3>Omm Profi Cam : {{omms.ommProfiCam}}</h3>
-            <h4>---------------------------------------------------------------------------</h4>
-        </div>
+            <div class="printList">
+               <h2>Operator Maintenance Manual</h2>
+                <h3>Omm Main : {{omms.ommMain}} {{ommMain}}</h3>
+                <h3>Omm Supplemental : {{omms.ommSupp}}</h3>
+                <h3>Omm Unload : {{omms.ommUnload}}</h3>
+                <h3>Omm Cebis : {{omms.ommCebis}}</h3>
+                <h3>Omm Cebis Touch : {{omms.ommCebisTouch}}</h3>
+                <h3>Omm Terra Track : {{omms.ommTerra}}</h3>
+                <h3>Omm Dual : {{omms.ommDuals}}</h3>
+                <h3>Omm Profi Cam : {{omms.ommProfiCam}}</h3>
+                <h4>---------------------------------------------------------------------------</h4>
+            </div>
             <div class="printList">
                 <h3>Battery result</h3>
                 <br>
@@ -133,7 +133,12 @@
                   {{/if}}
                {{/each}}
             </div>
-        {{/each}}
+            <div class="printList">
+                {{#each specialPdiItems}}
+                    <h4>{{specialItem}}</h4>
+                {{/each}}
+            </div>
+     {{/each}}
      </div>
  </div>
 </template>

@@ -144,7 +144,8 @@ if(Meteor.isServer){
    //------------------------------------------------- Add Special Tasks for PDI ------------------------
 
         'addSpecialPdiItem': (addItem) => {
-            specialPdiItems.insert({specialItem: addItem});
+            const addPdiItem = "repair - " + addItem;
+            specialPdiItems.insert({specialItem: addPdiItem});
         },
 
 
@@ -691,7 +692,17 @@ if(Meteor.isServer){
                         });
                     }
                 }
+
+            // add special pdi items
+
+            const specialItems = specialPdiItems.find().fetch();
+                MachineReady.update({_id: selectedPdiMachineId}, {$set: {specialPdiItems: specialItems}});
+                console.log(specialItems);
         },
+
+
+
+
 
         //---------------------------------------------  other PDI operations ------------------------------------------------------
 
