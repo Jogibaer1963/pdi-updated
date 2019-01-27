@@ -1,11 +1,10 @@
 Meteor.subscribe('preSeriesCheckList');
-
+const uploader = require('base64-image-upload');
 
 Template.checkGenerator.events({
 
    'change #inputGroupFile02': () => {
        event.preventDefault();
-    const uploader = require('base64-image-upload');
         console.log('upload');
         var image = 'iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAAHElEQVQI12P4//8/w38GIAXDIBKE0DHxgljNBAAO9TXL0Y4OHwAAAABJRU5ErkJggg==';
         uploader.setApiUrl("http://192.168.0.107:3300/dashboard/files/");
