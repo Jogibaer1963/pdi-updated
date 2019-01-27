@@ -600,6 +600,7 @@ if(Meteor.isServer){
             configDescription = [];
             variantMD = [];
             variantItem = [];
+            variantPath = [];
             machineConfiguration = [];
             configStyle = [];
             checkType = [];
@@ -649,12 +650,13 @@ if(Meteor.isServer){
             variantsList.forEach((variantValue, k) => {
               variantMD[k] = variantValue.variant;
               variantItem[k] = variantValue.variantDescription;
+              variantPath[k] = variantValue.imagePath;
             });
 
             // Load Machine Configuration and select config items
 
             let combineVariant = MachineReady.find({_id: selectedPdiMachineId},
-                                                    {fields: {config: 1, _id: 0}},
+                                                    {fields: {config: 1}},
                                                     {sort: {variant: 1}}).fetch();
             let k = (combineVariant[0]).config;
                 k.forEach((variantMarker, i) => {
@@ -664,6 +666,7 @@ if(Meteor.isServer){
                    configStyle[match] = {_id: uniqueId,
                                          'config': variantMD[match],
                                          'configItem': variantItem[match],
+                                         'imagePath': variantPath[match],
                                          machineConfigStatus: 0
                                         };
                machineConfiguration.push(configStyle[match]);
@@ -747,6 +750,10 @@ if(Meteor.isServer){
             let uniqueId = Random.id();
             let addNewFailure = 'Check config ' + idFailure;
             MachineReady.upsert({_id: machineId}, {$push: {newIssues: {_id: uniqueId, checkStatus: 2, errorDescription: addNewFailure}}});
+        },
+
+        'configInfoButton': (idFailure) => {
+            MachineReady.find({_id: machineId, "machineConfig._id": idFailure}, {$set: {"machineConfig.$.machineConfigStatus": 1}});
         },
 
 

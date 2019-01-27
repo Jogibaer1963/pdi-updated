@@ -187,6 +187,24 @@ Meteor.subscribe("orderParts");
             }
         },
 
+        'click .configButtonInfo': (event) => {
+            event.preventDefault();
+            Session.set('selectedPdiMachineId', localStorage.getItem('pdiMachineId'));
+            const selectedPdiMachineId = Session.get('selectedPdiMachineId');
+            let idIdentifier = event.currentTarget.name;
+            console.log(idIdentifier);
+
+            if(selectedPdiMachineId) {
+                Meteor.call('configInfoButton', selectedPdiMachineId, idIdentifier);
+            } else {
+                console.log("Lost Machine Number")
+            }
+
+        },
+
+
+
+
 
         'click .buttonOK': (event) => {
             event.preventDefault();

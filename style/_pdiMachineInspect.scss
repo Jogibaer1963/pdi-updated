@@ -13,59 +13,78 @@
 
 .configButtonNOK {
   font-weight: bold;
-  float:left;
+  float: left;
   width: 130px;
   position: absolute;
   margin-left: 130px;
   bottom: 0;
+}
+
+.configButtonInfo {
+  bottom: 0;
+  float: left;
+  font-weight: bold;
+  margin-left: 260px;
+  position: absolute;
+  width: 130px;
+}
+
+.resize {
+  height: auto;
+  width: 400px;
 }
 
 .buttonOK {
-  font-weight: bold;
-  float: left;
-  width: 130px;
-  position: absolute;
   bottom: 0;
+  float: left;
+  font-weight: bold;
+  position: absolute;
+  width: 130px;
+
 }
 
 .buttonNOK {
-  font-weight: bold;
-  float:left;
-  width: 130px;
-  position: absolute;
-  margin-left: 130px;
   bottom: 0;
+  float: left;
+  font-weight: bold;
+  margin-left: 130px;
+  position: absolute;
+  width: 130px;
+
 }
 
 .buttonNA {
-  font-weight: bold;
-  float: left;
-  width: 130px;
-  position: absolute;
-  margin-left: 260px;
   bottom: 0;
+  float: left;
+  font-weight: bold;
+  margin-left: 260px;
+  position: absolute;
+  width: 130px;
 }
 
+
 .pdiCell {
-  position: relative;
   font-size: 16px;
   height: 10em;
+  position: relative;
   width: 39em;
 }
 
 .inputSize {
-  width: 10em;
+
   height: 3em;
+  width: 10em;
 }
 
 .inputIssueSize {
-  width: 25em;
   height: 3em;
+  width: 25em;
 }
 
 .configHeader {
-  position: relative;
+
   left: 3em;
+  position: relative;
 }
 
 .configTable{
@@ -82,7 +101,7 @@
   width: 30em;
 }
 
-/*---------------- Drop Down -------------*/
+//---------------- Drop Down -------------*/
 
 .mainComponentsPos {
   position: relative;

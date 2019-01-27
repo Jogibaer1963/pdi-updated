@@ -799,46 +799,58 @@ table.pdiTable {
   margin-left: 130px;
   bottom: 0; }
 
-.buttonOK {
-  font-weight: bold;
+.configButtonInfo {
+  bottom: 0;
   float: left;
-  width: 130px;
+  font-weight: bold;
+  margin-left: 260px;
   position: absolute;
-  bottom: 0; }
+  width: 130px; }
+
+.resize {
+  height: auto;
+  width: 400px; }
+
+.buttonOK {
+  bottom: 0;
+  float: left;
+  font-weight: bold;
+  position: absolute;
+  width: 130px; }
 
 .buttonNOK {
-  font-weight: bold;
+  bottom: 0;
   float: left;
-  width: 130px;
-  position: absolute;
+  font-weight: bold;
   margin-left: 130px;
-  bottom: 0; }
+  position: absolute;
+  width: 130px; }
 
 .buttonNA {
-  font-weight: bold;
+  bottom: 0;
   float: left;
-  width: 130px;
-  position: absolute;
+  font-weight: bold;
   margin-left: 260px;
-  bottom: 0; }
+  position: absolute;
+  width: 130px; }
 
 .pdiCell {
-  position: relative;
   font-size: 16px;
   height: 10em;
+  position: relative;
   width: 39em; }
 
 .inputSize {
-  width: 10em;
-  height: 3em; }
+  height: 3em;
+  width: 10em; }
 
 .inputIssueSize {
-  width: 25em;
-  height: 3em; }
+  height: 3em;
+  width: 25em; }
 
 .configHeader {
-  position: relative;
-  left: 3em; }
+  left: 3em;
+  position: relative; }
 
 .configTable {
   margin-left: 3em; }
@@ -851,7 +863,6 @@ table.pdiTable {
   left: 3.5em;
   width: 30em; }
 
-/*---------------- Drop Down -------------*/
 .mainComponentsPos {
   position: relative;
   left: 3.6em; }
@@ -1008,6 +1019,16 @@ table.pdiRepairList {
 .printList {
   position: relative;
   top: 4em;
+  left: 2em; }
+
+.itemHeadLiner {
+  position: relative;
+  top: 2em;
+  left: 3em; }
+
+.itemButtons {
+  position: relative;
+  top: 3em;
   left: 2em; }
 
 .siSingle {

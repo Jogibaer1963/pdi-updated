@@ -3,5 +3,6 @@
   <component name="SassLintProjectComponent">
     <option name="lintExecutable" value="D:\Ruby24-x64\bin\sass-convert.bat" />
     <option name="nodeInterpreter" value="C:\Program Files\nodejs\node.exe" />
+    <option name="pluginEnabled" value="true" />
   </component>
 </project>
