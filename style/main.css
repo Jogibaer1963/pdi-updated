@@ -1421,6 +1421,18 @@ tbody.mainCompTbody {
   top: 9.5em;
   left: 70em; }
 
+.generatorForm {
+  left: 2em;
+  position: relative;
+  top: 10em; }
+
+.floater {
+  float: left; }
+
+.checkPreview {
+  left: 50em;
+  position: absolute; }
+
 .mainLayout {
   position: absolute;
   left: 40em; }

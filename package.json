@@ -8,6 +8,7 @@
     "@babel/runtime": "^7.1.2",
     "audit": "0.0.6",
     "babel": "^6.23.0",
+    "base64-image-upload": "^1.1.4",
     "bcrypt": "^1.0.3",
     "buffer": "^5.2.0",
     "eslint": "^4.19.1",

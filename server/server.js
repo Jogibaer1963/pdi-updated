@@ -132,6 +132,10 @@ if(Meteor.isServer){
             return specialPdiItems.find();
         });
 
+        Meteor.publish("preSeriesCheckList", function() {
+            return preSeriesCheckList.find();
+        });
+
     });
 
 
@@ -140,6 +144,13 @@ if(Meteor.isServer){
 
 
     Meteor.methods({
+
+
+        'file-upload': function (fileInfo, fileData) {
+            console.log("received file " + fileInfo.name + " data: " + fileData);
+            fs.writeFile(fileInfo.name, fileData);
+        },
+
 
    //------------------------------------------------- Add Special Tasks for PDI ------------------------
 
