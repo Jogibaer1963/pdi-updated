@@ -46,3 +46,6 @@ underscore@1.0.10
 
 npm-container
 ostrio:files
+cfs:standard-packages
+cfs:gridfs
+cfs:filesystem

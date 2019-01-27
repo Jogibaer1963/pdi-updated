@@ -136,6 +136,10 @@ if(Meteor.isServer){
             return preSeriesCheckList.find();
         });
 
+        Meteor.publish("images", function() {
+            return images.find();
+        });
+
     });
 
 

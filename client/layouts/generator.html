@@ -24,35 +24,15 @@
     <div>
         <h2 class="overView">Check list generator</h2>
     </div>
-    <div class="generatorForm">
-        <form action="">
-            <div>
-                <input type="text" placeholder="Machine Type">
-            </div>
             <br>
-            <div class="form-group">
-                <input type="file" class="form-control-file" placeholder="Image Path">
-            </div>
             <br>
-
+    <form method="post">
             <div class="input-group mb-3">
                 <div class="custom-file">
-                    <input type="file" class="custom-file-input" id="inputGroupFile02">
-                    <label class="custom-file-label" for="inputGroupFile02">Choose file</label>
+                    <label class="custom-file-label" for="file">Choose your image file</label>
+                    <input type="file" accept="image/*" id="files" name="file">
+                    <button>Submit</button>
                 </div>
-                <div class="input-group-append">
-                    <span class="input-group-text" id="">Upload</span>
-                </div>
-            </div>
-            <br>
-            <div class="floater form-group">
-                <textarea class="form-control" rows="5" placeholder="Description" ></textarea>
             </div>
         </form>
-    </div>
-    <div class="checkPreview">
-        <h3>Check point preview</h3>
-        <button>Preview OK</button>
-    </div>
-
 </template>
