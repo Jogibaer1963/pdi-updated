@@ -1,0 +1,18 @@
+<template name="pdi_checkViewer">
+    {{#if currentUser}}
+        {{> topNav}}
+        {{> checkViewer}}
+    {{else}}
+        {{> login}}
+    {{/if}}
+</template>
+
+<template name="checkViewer">
+
+    <h3>All checks:</h3>
+    {{#each preCheckList}}
+        <tr class="openInspections {{selectedClass}}">
+
+        </tr>
+    {{/each}}
+</template>

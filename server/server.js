@@ -132,8 +132,8 @@ if(Meteor.isServer){
             return specialPdiItems.find();
         });
 
-        Meteor.publish("preSeriesCheckList", function() {
-            return preSeriesCheckList.find();
+        Meteor.publish("preSeriesChecklist", function() {
+            return preSeriesChecklist.find();
         });
 
         Meteor.publish("images", function() {

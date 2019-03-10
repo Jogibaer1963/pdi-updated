@@ -1,16 +1,20 @@
 Meteor.subscribe('images');
+Meteor.subscribe('preSeriesChecklist');
+
+Template.checkListOverView.helpers({
+
+  checkMachines: () => {
+      const result = preSeriesChecklist.find().fetch();
+      console.log(result);
+      let picPath = result[0].picPath;
+      console.log(picPath);
+      return picPath;
+  }
+
+});
+
+Template.checkListOverView.events({
 
 
-Template.checkGenerator.events({
-
-   'change #files': function (event, template) {
-       const files = event.target.file;
-       console.log(files);
-           Image.insert(files, function (err, fileObj){
-               console.log(files);
-           });
-               // Inserted new doc with ID fileObj._id, and kicked off the data upload using HTTP
-
-   }
 
 });
