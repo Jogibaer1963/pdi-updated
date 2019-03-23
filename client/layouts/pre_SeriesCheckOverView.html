@@ -1,0 +1,57 @@
+<template name="preSeriesCheck">
+    {{#if currentUser}}
+        {{> topNav}}
+        {{> checkListOverView}}
+    {{else}}
+        {{> login}}
+    {{/if}}
+</template>
+
+<template name="checkListOverView">
+    <div>
+        <div id="logo">
+            <img src="claas_logo.png" />
+        </div>
+        <br>
+        <nav class="mainLayout">
+            <a class="btn" href="/generator">Checklist generator</a>
+            <a>|</a>
+            <a class="btn" href="/editor">Check list editor</a>
+            <a>|</a>
+            <a class="btn" href="/inspectionStart">Inspection Overview</a>
+        </nav>
+    </div>
+    <div class="preView">
+         <h3 >Pre series checklist overview</h3>
+    </div>
+    <br><br>
+
+<div class="tablePos">
+        {{#each listOutput}}
+            <div class="listContainer">
+                <div class="">
+                     <img class="imageSize" src={{imagePath}}>
+                </div>
+                <div class="headLinerPos">
+                     <h3> {{headLiner}}</h3>
+                </div>
+               <div class="description">
+                    {{description}}
+               </div>
+                <div class="checkPointPassed">
+                    <label>
+                        <input class="rTableStyle" type="checkbox" name="good"   value="{{_id}}">
+                    </label>
+                </div>
+                <div class="checkPointFailed">
+                    <label>
+                        <input class="rTableStyle" type="checkbox" name="bad" value="{{_id}}">
+                    </label>
+                </div>
+            </div>
+        {{/each}}
+</div>
+
+
+
+</template>
