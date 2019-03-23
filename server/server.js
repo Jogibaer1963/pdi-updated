@@ -132,8 +132,8 @@ if(Meteor.isServer){
             return specialPdiItems.find();
         });
 
-        Meteor.publish("preSeriesChecklist", function() {
-            return preSeriesChecklist.find();
+        Meteor.publish("preSeriesCheck", function() {
+            return preSeriesCheck.find();
         });
 
         Meteor.publish("images", function() {
@@ -149,7 +149,10 @@ if(Meteor.isServer){
 
     Meteor.methods({
 
-
+        'preSeriesCheckUp': () => {
+          const result = preSeriesCheck.find().fetch();
+          console.log(result);
+        },
 
    //------------------------------------------------- Add Special Tasks for PDI ------------------------
 

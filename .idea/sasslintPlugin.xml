@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="SassLintProjectComponent">
-    <option name="lintExecutable" value="D:\Ruby24-x64\bin\sass-convert.bat" />
+    <option name="configFile" value="C:\Ruby25-x64\bin\scss-lint.yml" />
+    <option name="lintExecutable" value="C:\Ruby25-x64\bin\sass-convert.bat" />
     <option name="nodeInterpreter" value="C:\Program Files\nodejs\node.exe" />
-    <option name="pluginEnabled" value="true" />
   </component>
 </project>

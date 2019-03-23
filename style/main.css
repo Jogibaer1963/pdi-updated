@@ -1421,17 +1421,30 @@ tbody.mainCompTbody {
   top: 9.5em;
   left: 70em; }
 
-.generatorForm {
-  left: 2em;
-  position: relative;
+.listContainer {
+  border-style: solid;
+  height: 20em;
+  left: 3em;
+  padding: 10px;
+  width: 50em; }
+
+.tablePos {
+  position: absolute;
+  top: 20em;
+  width: 40em; }
+
+.preView {
+  left: 20em;
+  position: absolute;
   top: 10em; }
 
-.floater {
+.imageSize {
+  width: 60%;
   float: left; }
 
-.checkPreview {
-  left: 50em;
-  position: absolute; }
+.description {
+  left: 40em;
+  top: -10em; }
 
 .mainLayout {
   position: absolute;

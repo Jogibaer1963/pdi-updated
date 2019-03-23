@@ -25,5 +25,6 @@
     "sticky-table-headers": "^0.1.24",
     "strip-bom": "^3.0.0",
     "yarn": "^1.11.1"
-  }
+  },
+  "devDependencies": {}
 }

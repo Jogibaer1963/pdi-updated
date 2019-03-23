@@ -1,0 +1,23 @@
+
+
+
+
+
+<template name="checkListEditor">
+    <h3>Pre Series Check List Editor</h3>
+
+
+    <table class="pdiTable" cellpadding="10">
+        <tbody>
+        {{#each listOverView}}
+            <tr >
+                <td>{{headLiner}}</td>
+                <td>{{description}}</td>
+                <td>{{section}}</td>
+                <td >{{imagePath}}</td>
+            </tr>
+        {{/each}}
+        </tbody>
+    </table>
+
+</template>
