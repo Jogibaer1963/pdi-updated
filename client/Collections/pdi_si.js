@@ -167,7 +167,7 @@ Template.uploadList.helpers({
 
 Template.changeStat.events({
 
-
+        // solved by Repair
          'click .statusBackground_1': function (e) {
              e.preventDefault();
              let setStatus = 1;
@@ -177,7 +177,7 @@ Template.changeStat.events({
              Meteor.call('changeStatus', SiNumber, selectedMachineId, setStatus);
          },
 
-
+        // moved to SI List
          'click .statusBackground_4': function (e) {
             e.preventDefault();
             let setStatus = 4;

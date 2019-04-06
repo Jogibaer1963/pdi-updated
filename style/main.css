@@ -924,27 +924,27 @@ table.messageTable {
   left: 50em; }
 
 table.historyMessageTable {
+  left: 40em;
   position: absolute;
-  top: 24em;
-  left: 40em; }
+  top: 24em; }
 
 .washListButtons {
+  margin-left: 25px;
   position: absolute;
-  top: 16em;
-  margin-left: 25px; }
+  top: 16em; }
 
 .washMessage {
+  margin-left: 25px;
   position: absolute;
-  top: 10em;
-  margin-left: 25px; }
+  top: 10em; }
 
 .textBox {
   width: 480px; }
 
 .messageClearButton {
+  left: 32em;
   position: absolute;
-  top: 20.5em;
-  left: 32em; }
+  top: 20.5em; }
 
 .washBayToggleButton {
   margin-left: 300px; }
@@ -1093,7 +1093,7 @@ table.siInactive {
 
 .siFile {
   position: absolute;
-  top: 9em;
+  top: 11em;
   left: 28em; }
 
 .siItemMachine {

@@ -396,7 +396,7 @@ if(Meteor.isServer){
         },
 
         'siInsert': function (siMdList) {
-            siTable.insert({siNumber: siMdList});
+            siTable.insert({siNumber: siMdList, active: 1});
         },
 
         'parseUpload': function (data, siMdList) {
@@ -418,7 +418,7 @@ if(Meteor.isServer){
 
         'changeStatus': function (siNumber, selectedMachineId, setStatus) {
           siMd.update({_id: siNumber, "machineList._id": selectedMachineId},
-                                                  {$set: {"machineList.$.siStatus": setStatus}});
+                                     {$set: {"machineList.$.siStatus": setStatus}});
         },
 
         'unsuccessLogin': function (userVar, passwordVar, dateLogin) {
@@ -688,15 +688,19 @@ if(Meteor.isServer){
 
             // SI added to repair list
 
-                let testResult = siTable.find({}, {projection: {_id: 0}}).fetch();
+                let testResult = siTable.find({active: 1}).fetch();
                 for(i = 0; i < testResult.length; i++) {
                     let idSi = testResult[i].siNumber;
                     let siIssue = '-SI- ' + idSi;
                     let siMachine = (siMd.find({_id: idSi}).fetch()).shift();
-                    delete siMachine._id;
                     let newArray = siMachine.machineList;
                     let result = newArray.find(k => k.machine === pdiMachineNr);
                     if(result) {
+                        console.log(siMachine._id ,result._id);
+                        let selectedMachineId = result._id;
+                        let setStatus = 2;
+                        siMd.update({_id: siMachine._id, "machineList._id": selectedMachineId},
+                            {$set: {"machineList.$.siStatus": setStatus}});
                         let uniqueIdSi = Random.id();
                         MachineReady.update({_id: selectedPdiMachineId}, {
                             $push: {
@@ -712,7 +716,8 @@ if(Meteor.isServer){
             // add special pdi items
 
             const specialItems = specialPdiItems.find().fetch();
-                MachineReady.update({_id: selectedPdiMachineId}, {$set: {specialPdiItems: specialItems}});
+                MachineReady.update({_id: selectedPdiMachineId},
+                    {$set: {specialPdiItems: specialItems}});
         },
 
 
