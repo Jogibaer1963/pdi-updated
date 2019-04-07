@@ -716,7 +716,6 @@ if(Meteor.isServer){
 
             // add Single Machines Item
 
-
             let siListResult = siList.find({machineNr: pdiMachineNr}).fetch();
             for(let i=0; i< siListResult.length; i++) {
                 let singleResult = siListResult[i];
