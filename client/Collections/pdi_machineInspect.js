@@ -311,10 +311,12 @@ Meteor.subscribe("orderParts");
         'submit .afterPdiFuel': (event) => {
             event.preventDefault();
             Session.set('selectedPdiMachineId', localStorage.getItem('pdiMachineId'));
+            Session.set('selectedPdiMachineNr', localStorage.getItem('pdiMachineNr'));
             const selectedPdiMachineId = Session.get('selectedPdiMachineId');
+            const selectedPdiMachineNr = Session.get('selectedPdiMachineNr');
             let fuelAfter = event.target.afterFuel.value;
             if(selectedPdiMachineId) {
-                Meteor.call('fuelAfterPdi', selectedPdiMachineId, fuelAfter);
+                Meteor.call('fuelAfterPdi', selectedPdiMachineId, selectedPdiMachineNr, fuelAfter);
             } else {
                 console.log("Lost Machine Number")
             }

@@ -1,5 +1,6 @@
 import {Email} from 'meteor/email';
-import { Random } from 'meteor/random';
+import {Random} from 'meteor/random';
+
 
 // ToDo si should be marked in SI Lists server.js Line 480
 
@@ -243,7 +244,7 @@ if(Meteor.isServer){
             let uniqueArray = Array.from(new Set(variant));
             let arrayCount = uniqueArray.length;
             let pattern = "\\t\\t\\t\\t";
-            for (i = 0; i < arrayCount; i++) {
+            for (let i = 0; i < arrayCount; i++) {
                 let variantCatch_1a = uniqueArray[i];
                 let variantCatch_1b = variantCatch_1a + pattern;
                 let variantCatch_2a = uniqueArray[i + 1];
@@ -353,7 +354,7 @@ if(Meteor.isServer){
         },
 //------------------------------------------------------------ Admin User Control ------------------------------------------------------
        'userManualLogout': function (logOutUser) {
-            for (i = 0; i < logOutUser.length; i++) {
+            for (let i = 0; i < logOutUser.length; i++) {
                 const userName = usersProfil.findOne({_id: logOutUser[i]}).username;
                Meteor.users.update({username: userName}, {$set: {'services.resume.loginTokens': []}});
                usersProfil.upsert({username: userName}, {$set: {loginStatus: 0}});
@@ -361,7 +362,7 @@ if(Meteor.isServer){
         },
 
         'userManualDelete': function (deleteUser) {
-            for (i = 0; i < deleteUser.length; i++) {
+            for (let i = 0; i < deleteUser.length; i++) {
                 const userName = usersProfil.findOne({_id: deleteUser[i]}).username;
                 Meteor.users.remove({username: userName});
                 usersProfil.remove({username: userName});
@@ -422,12 +423,12 @@ if(Meteor.isServer){
         },
 
         'unsuccessLogin': function (userVar, passwordVar, dateLogin) {
-            clientIp = this.connection.clientAddress;
+           let clientIp = this.connection.clientAddress;
             unsuccessLogin.insert({userId: userVar, password: passwordVar, dateLogin: dateLogin, clientIp: clientIp});
         },
 
         'successfullLogin': function (userVar, dateLogin) {
-             clientIp = this.connection.clientAddress;
+          let clientIp = this.connection.clientAddress;
              successfullLogin.insert({userId: userVar, dateLogin: dateLogin, clientIp: clientIp});
              usersProfil.update({username: userVar}, {$set: {loginStatus: 1,
                                                                                 lastLogin: dateLogin,
@@ -561,11 +562,6 @@ if(Meteor.isServer){
             headerTrailer.remove({_id: trailerId});
         },
 
-        'finnishPdi': function(pdiMachineId) {
-            pdiCheckList.remove({});
-            MachineReady.update({_id: pdiMachineId}, {$set: {pdiStatus: 1}});
-        },
-
         'inputNewCheckPoint': function(status, errorPos, errorDescription, range, checkStatus, machineRangeEndC77,
                                                                                   machineRangeEndC78, machineRangeEndC79) {
             checkPoints.insert({status: status,
@@ -606,18 +602,18 @@ if(Meteor.isServer){
 
 
         'generatePdiList': function(selectedPdiMachineId, pdiMachineNr, dateStart, pdiUser, machineType) {
-            machineConfig = [];
-            variant = [];
-            siArrayList = [];
-            variantMachine = [];
-            configDescription = [];
-            variantMD = [];
-            variantItem = [];
-            variantPath = [];
-            machineConfiguration = [];
-            configStyle = [];
-            checkType = [];
-            issueContent = [];
+
+            let variantMachine = [];
+
+            let  variantMD = [];
+            let  variantItem = [];
+            let  variantPath = [];
+            let  machineConfiguration = [];
+            let  configStyle = [];
+            let  checkType = [];
+
+
+
             MachineReady.update({_id: selectedPdiMachineId}, {$set: {pdiStatus: 2,
                                                                      startPdiDate: dateStart,
                                                                      pdiPerformer: pdiUser}});
@@ -644,7 +640,7 @@ if(Meteor.isServer){
                  checkType = checkPoints.find({machineRangeEndC79: {$gt: pdiMachineNr}, status: 1}, {fields: {errorDescription: 1,
                         errorPos: 1}}).fetch();
             } else {
-                console.log('nicht definierter Maschinen Typ (server.js zeile 554)', typeOfMachine);
+                console.log('nicht definierter Maschinen Typ (server.js zeile 625)', typeOfMachine);
             }
             let checkList = checkPoints.find({status: 1, machineType: {$in: [machineType.toString()]}},
                                                                {fields: {errorDescription: 1,
@@ -689,14 +685,13 @@ if(Meteor.isServer){
             // SI added to repair list
 
                 let testResult = siTable.find({active: 1}).fetch();
-                for(i = 0; i < testResult.length; i++) {
+                for(let i = 0; i < testResult.length; i++) {
                     let idSi = testResult[i].siNumber;
                     let siIssue = '-SI- ' + idSi;
                     let siMachine = (siMd.find({_id: idSi}).fetch()).shift();
                     let newArray = siMachine.machineList;
                     let result = newArray.find(k => k.machine === pdiMachineNr);
                     if(result) {
-                        console.log(siMachine._id ,result._id);
                         let selectedMachineId = result._id;
                         let setStatus = 2;
                         siMd.update({_id: siMachine._id, "machineList._id": selectedMachineId},
@@ -708,7 +703,7 @@ if(Meteor.isServer){
                                     _id: uniqueIdSi,
                                     checkStatus: true,
                                     errorDescription: siIssue
-                                }}
+                             }}
                         });
                     }
                 }
@@ -718,11 +713,37 @@ if(Meteor.isServer){
             const specialItems = specialPdiItems.find().fetch();
                 MachineReady.update({_id: selectedPdiMachineId},
                     {$set: {specialPdiItems: specialItems}});
+
+            // add Single Machines Item
+
+
+            let siListResult = siList.find({machineNr: pdiMachineNr}).fetch();
+            for(let i=0; i< siListResult.length; i++) {
+                let singleResult = siListResult[i];
+                let siIssue = '-SI- ' + singleResult.errorDescription;
+                let uniqueIdSi = Random.id();
+                MachineReady.update({_id: selectedPdiMachineId}, {
+                    $push: {
+                        newIssues: {
+                            _id: uniqueIdSi,
+                            checkStatus: true,
+                            errorDescription: siIssue
+                        }}
+                });
+            }
         },
 
-
-
-
+        'fuelAfterPdi': function (selectedPdiMachine, selectedPdiMachineNr, fuelAfter) {
+            MachineReady.update({_id: selectedPdiMachine}, {$set: {fuelAfter: fuelAfter, pdiStatus: 1}});
+            let result = siList.find({machineNr: selectedPdiMachineNr}).fetch();
+            if(result) {
+                for(let i=0; i<result.length; i++) {
+                    let removeSi = result[i];
+                    let removeId = removeSi._id;
+                    siList.remove({_id: removeId});
+                }
+            }
+        },
 
         //---------------------------------------------  other PDI operations ------------------------------------------------------
 
@@ -749,8 +770,10 @@ if(Meteor.isServer){
                                                              batteries: "",
                                                              omms: ""
                                                      }});
-            siListDone.remove({_id: pdiMachineId});
+
         },
+
+        //----------------------------------------  Check points -------------------------------------
 
         'removeCheckPoint': function(selectedPdiMachineId, selectedCheckPoint) {
             pdiCheckList.update({_id: selectedPdiMachineId},
@@ -770,7 +793,7 @@ if(Meteor.isServer){
             MachineReady.upsert({_id: machineId}, {$push: {newIssues: {_id: uniqueId, checkStatus: 2, errorDescription: addNewFailure}}});
         },
 
-        'configInfoButton': (idFailure) => {
+        'configInfoButton': (machineId, idFailure) => {
             MachineReady.find({_id: machineId, "machineConfig._id": idFailure}, {$set: {"machineConfig.$.machineConfigStatus": 1}});
         },
 
@@ -843,16 +866,12 @@ if(Meteor.isServer){
                     ommMain, ommSupp, ommUnload,ommProfiCam, ommCebis, ommCebisTouch, ommTerra, ommDuals, ommStatus: 1}}});
         },
 
-        'fuelAfterPdi': function (selectedPdiMachine, fuelAfter) {
-          MachineReady.update({_id: selectedPdiMachine}, {$set: {fuelAfter: fuelAfter, pdiStatus: 1}});
-        },
-
         'machineUser': function (machineId, userLoggedIn, arrayOrder) {
             orderParts.insert({_id: userLoggedIn, machineNr: machineId, user: userLoggedIn});
             setTimeout(function () {
             }, 1000);
 
-            for (i = 0; i < arrayOrder.length; i++) {
+            for (let i = 0; i < arrayOrder.length; i++) {
                 let repOrder = {};
                 repOrder._id = Random.id();
                 repOrder.description = arrayOrder[i];
@@ -860,6 +879,7 @@ if(Meteor.isServer){
             }
         },
 
+        /*
         'sendEmail': function (to, from, subject, loggedUser) {
             setTimeout(function () { }, 1000);
             const orderFind = orderParts.find({_id: loggedUser}).fetch();
@@ -883,14 +903,21 @@ if(Meteor.isServer){
                     }
             orderParts.remove({_id: loggedUser});
         },
+
+         */
    // -------------------------------------------------- Wash List -------------------------------------------
         'stopWashing': function(selectedCheckPoint) {
             MachineReady.update({_id:selectedCheckPoint}, {$set: {washStatus: 0}});
         },
 
         'finishWashing': function(selectedCheckPoint, dateStop, washDuration, waitWashTime) {
-            MachineReady.update({_id:selectedCheckPoint}, {$set: {washStatus: 1, stopWashDate: dateStop, washDuration: washDuration, waitWashTime: waitWashTime}});
+            MachineReady.update({_id:selectedCheckPoint},
+                {$set: {washStatus: 1,
+                        stopWashDate: dateStop,
+                        washDuration: washDuration,
+                        waitWashTime: waitWashTime}});
         },
+
 
         'updateWashList': function(selectedCheckPoint, dateStart) {
             MachineReady.update({_id:selectedCheckPoint}, {$set: {washStatus: 2, startWashDate: dateStart}});
@@ -938,7 +965,7 @@ if(Meteor.isServer){
         // ------------------------------------  Machine ------------------------------------
 
         'machineReadyToGo': (readyGo) => {
-            for (i = 0; i < readyGo.length; i++) {
+            for (let i = 0; i < readyGo.length; i++) {
                 MachineReady.update({_id: readyGo[i]}, {$set: {readyToGo: 1}});
             }
         },
@@ -977,7 +1004,7 @@ if(Meteor.isServer){
         },
 
         'headReadyToGo': (readyGo) => {
-            for (i = 0; i < readyGo.length; i++) {
+            for (let i = 0; i < readyGo.length; i++) {
                 newHeadYear.update({_id: readyGo[i]}, {$set: {readyToGo: 1}});
             }
         },
