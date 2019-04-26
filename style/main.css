@@ -842,7 +842,7 @@ table.pdiTable {
 
 .inputSize {
   height: 3em;
-  width: 10em; }
+  width: 12em; }
 
 .inputIssueSize {
   height: 3em;
@@ -850,7 +850,8 @@ table.pdiTable {
 
 .configHeader {
   left: 3em;
-  position: relative; }
+  position: relative;
+  width: 20em; }
 
 .configTable {
   margin-left: 3em; }
@@ -890,7 +891,8 @@ table.pdiTable {
   width: 30em; }
 
 .pdiInputFields {
-  margin: 0.8em; }
+  margin: 0.8em;
+  width: 30em; }
 
 table.newIssuesTable {
   position: relative;
@@ -902,6 +904,10 @@ table.newIssuesTable {
 
 .deleteRepair {
   width: 30em; }
+
+.batteries {
+  left: 3em;
+  position: relative; }
 
 .endOfList {
   margin-bottom: 10em; }

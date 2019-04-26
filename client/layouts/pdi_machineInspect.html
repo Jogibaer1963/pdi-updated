@@ -16,31 +16,8 @@
          <h2>Machine to Inspect: {{machine}}</h2>
          <h2>Performed by: {{userLoggedIn}}</h2>
       {{/with}}
-       <form class="batts">
-         <label for="batteryC13" class="batteryC13">Battery Volt & CCA</label>
-         <br>
-         <input type="text" class="batteryC13CCA inputSize" id="batteryC13CCA" name="batteryC13CCA" placeholder="Battery C13 CCA" >
-         <input type="text" class="batteryC13Volt inputSize" id="batteryC13Volt" name="batteryC13Volt" placeholder="Battery C13 Volt">
-         <br><br>
-         <input type="text" class="batteryC13 inputSize" id="mtuG001CCA" name="mtuG001CCA" placeholder="Battery MTU G001 CCA">
-         <input type="text" class="batteryC13 inputSize" id="mtuG001Volt" name="mtuG001Volt" placeholder="Battery MTU G001 Volt">
-         <br><br>
-         <input type="text" class="batteryC13 inputSize" id="mtuG005CCA" name="mtuG005CCA" placeholder="Battery MTU G005 CCA">
-         <input type="text" class="batteryC13 inputSize" id="mtuG005Volt" name="mtuG005Volt" placeholder="Battery MTU G005 Volt">
-         <br><br>
-         <input type="text" class="batteryC13 inputSize" id="mtuG004CCA" name="mtuG004CCA" placeholder="Battery MTU G004 CCA">
-         <input type="text" class="batteryC13 inputSize" id="mtuG004Volt" name="mtuG004Volt" placeholder="Battery MTU G004 Volt">
-         <br><br>
-         <input type="text" class="batteryC13 inputSize" id="manBatt_1CCA" name="manBatt_1CCA" placeholder="Battery MAN Batt-1 CCA">
-         <input type="text" class="batteryC13 inputSize" id="manBatt_1Volt" name="manBatt_1Volt" placeholder="Battery MAN Batt-1 Volt">
-         <br><br>
-         <input type="text" class="batteryC13 inputSize" id="manBatt_2CCA" name="manBatt_2CCA" placeholder="Battery MAN Batt-2 CCA">
-         <input type="text" class="batteryC13 inputSize" id="manBatt_2Volt" name="manBatt_2Volt" placeholder="Battery MAN Batt-2 Volt">
-         <br><br>
-           <button type="submit" class="btn btn-success buttonBatt">Save Batteries</button><h4>{{battSaved}}</h4><br>
-       </form>
 
-        <br><br>
+      <br><br>
         <form class="omms">
          <div class="ommInput">
            <label for="fuelMe" class="fuel">Fuel consumption before PDI</label>
@@ -158,7 +135,7 @@
             </tbody>
         {{/dropdown}}
     </div>
-
+<!--
     <div class="subComponentPos">
         {{#dropdown name="mainComponents" align="left" top="25" left="-450"}}
             <tbody class="rTable">
@@ -170,11 +147,14 @@
             </tbody>
         {{/dropdown}}
     </div>
-
+-->
     <div class="pdiInputFields">
       <form class="addNewIssue">
         <div class="issueField">
-            <input type="text" class="addIssueText inputIssueSize {{inActive_Input}}" name="addIssue" placeholder="Add issue" value={{issueComponent}} required>
+            <input type="text" class="addIssueText inputIssueSize {{inActive_Input}}"
+                   name="addIssue"
+                   placeholder="Add issue"
+                   value={{issueComponent}} required>
             <br><br>
             <button type="submit" class="btn btn-success addIssueText">Submit New Issue</button>
         </div>
@@ -216,6 +196,32 @@
     <div class="pdiDivider">
         <h1>_____________________</h1>
     </div>
+    <div class="batteries">
+        <form class="batts">
+            <label for="batteryC13" class="batteryC13">Battery Volt & CCA</label>
+            <br>
+            <input type="text" class="batteryC13CCA inputSize" id="batteryC13CCA" name="batteryC13CCA" placeholder="Battery C13 CCA" >
+            <input type="text" class="batteryC13Volt inputSize" id="batteryC13Volt" name="batteryC13Volt" placeholder="Battery C13 Volt">
+            <br><br>
+            <input type="text" class="batteryC13 inputSize" id="mtuG001CCA" name="mtuG001CCA" placeholder="Battery MTU G001 CCA">
+            <input type="text" class="batteryC13 inputSize" id="mtuG001Volt" name="mtuG001Volt" placeholder="Battery MTU G001 Volt">
+            <br><br>
+            <input type="text" class="batteryC13 inputSize" id="mtuG005CCA" name="mtuG005CCA" placeholder="Battery MTU G005 CCA">
+            <input type="text" class="batteryC13 inputSize" id="mtuG005Volt" name="mtuG005Volt" placeholder="Battery MTU G005 Volt">
+            <br><br>
+            <input type="text" class="batteryC13 inputSize" id="mtuG004CCA" name="mtuG004CCA" placeholder="Battery MTU G004 CCA">
+            <input type="text" class="batteryC13 inputSize" id="mtuG004Volt" name="mtuG004Volt" placeholder="Battery MTU G004 Volt">
+            <br><br>
+            <input type="text" class="batteryC13 inputSize" id="manBatt_1CCA" name="manBatt_1CCA" placeholder="Battery MAN Batt-1 CCA">
+            <input type="text" class="batteryC13 inputSize" id="manBatt_1Volt" name="manBatt_1Volt" placeholder="Battery MAN Batt-1 Volt">
+            <br><br>
+            <input type="text" class="batteryC13 inputSize" id="manBatt_2CCA" name="manBatt_2CCA" placeholder="Battery MAN Batt-2 CCA">
+            <input type="text" class="batteryC13 inputSize" id="manBatt_2Volt" name="manBatt_2Volt" placeholder="Battery MAN Batt-2 Volt">
+            <br><br>
+            <button type="submit" class="btn btn-success buttonBatt">Save Batteries</button><h4>{{battSaved}}</h4><br>
+        </form>
+    </div>
+
     <div>
         <h3 class="configHeader">Pdi finnished</h3>
     </div>

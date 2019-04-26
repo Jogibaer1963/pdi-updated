@@ -73,7 +73,7 @@
 .inputSize {
 
   height: 3em;
-  width: 10em;
+  width: 12em;
 }
 
 .inputIssueSize {
@@ -82,9 +82,9 @@
 }
 
 .configHeader {
-
   left: 3em;
   position: relative;
+  width: 20em;
 }
 
 .configTable{
@@ -142,6 +142,7 @@
 
 .pdiInputFields {
   margin: 0.8em;
+  width: 30em;
 }
 
 table.newIssuesTable {
@@ -156,6 +157,11 @@ table.newIssuesTable {
 
 .deleteRepair {
   width: 30em;
+}
+
+.batteries {
+  left: 3em;
+  position: relative;
 }
 
 .endOfList {

@@ -1,8 +1,7 @@
-import {Email} from 'meteor/email';
-import {Random} from 'meteor/random';
+//import {Email} from 'meteor/email';
+import { Random } from 'meteor/random';
 
 
-// ToDo si should be marked in SI Lists server.js Line 480
 
 if(Meteor.isServer){
 
@@ -459,7 +458,7 @@ if(Meteor.isServer){
             console.log(newMcoSearch, mcoReCording, matStatus, mcoSearchString);
 
 
-            const result = mcoReview.find({mcoTeam: newMcoSearch}).fetch();
+          //  const result = mcoReview.find({mcoTeam: newMcoSearch}).fetch();
 
 
         },
@@ -485,9 +484,9 @@ if(Meteor.isServer){
         },
 
         'download_2': function (machineNr) {
-            const collection = MachineReady.find({machineId: machineNr}, {fields: {
-                                                                                   'checkListIssues.errorDescription': 1,
-                                                                                    _id: 0}}).fetch();
+         //   const collection = MachineReady.find({machineId: machineNr}, {fields: {
+         //                                                                          'checkListIssues.errorDescription': 1,
+          //                                                                          _id: 0}}).fetch();
 
         },
 

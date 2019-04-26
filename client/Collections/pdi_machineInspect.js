@@ -48,7 +48,7 @@ Meteor.subscribe("orderParts");
                 return 'selected'
             }
         },
-
+/*
         'selectedSubComponent': function() {
             let subComponent = this._id;
             let selectedSub = Session.get('selectedSub');
@@ -56,11 +56,11 @@ Meteor.subscribe("orderParts");
                 return 'selected';
             }
         },
-
+*/
         mainComponent: function () {
             return mainComponents.find({}).fetch();
         },
-
+/*
         subComp: function () {
             let id = Session.get('selectedComponent');
             Meteor.call('subComponent', id, (error, result) => {
@@ -72,12 +72,10 @@ Meteor.subscribe("orderParts");
             });
             return Session.get('componentResult');
         },
+*/
 
         issueComponent: () => {
-            try {
                 return Session.get('issueComp');
-            } catch (e) {
-            }
         },
 
 
@@ -115,7 +113,7 @@ Meteor.subscribe("orderParts");
 
 
     Session.set('selectedComponent', '');
-    Session.set('selectedSub', '');
+ /*   Session.set('selectedSub', ''); */
     Session.set('componentChosen', 0);
 
     Template.pdiToDoList.events({
@@ -254,14 +252,14 @@ Meteor.subscribe("orderParts");
             Session.set('selectedComponent', selected);
             Session.set('issueComp', textMainComp + ' - ');
         },
-
+/*
         'click .subComp': function () {
              const subComp = this._id;
              let textMainComp = this.component;
              Session.set('selectedSub', subComp);
              Session.set('issueComp', textMainComp + ' - ');
         },
-
+*/
         'click .openFailure': function () {
             const openFailure = this._id;
             Session.set('openFailure', openFailure);
@@ -291,6 +289,8 @@ Meteor.subscribe("orderParts");
             }
             event.target.addIssue.value = '';
             Session.set('componentChosen', 0);
+            Session.set('selectedComponent', '');
+            Session.set('issueComp', '');
         },
 
         'submit .addressToWashBay': (event) => {
