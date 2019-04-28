@@ -686,12 +686,14 @@ if(Meteor.isServer){
             let type = pdiMachineNr.slice(0,3);
             let newVariant = 'variants_' + type;
             let variantsList = Mongo.Collection.get(newVariant).find({},
-                                                        {fields: {status: 1}},
-                                                        {sort: {variant: 1}}).fetch();
+                                    {fields: {status: 1, variant: 1, variantDescription: 1, image: 1}},
+                                    {sort: {variant: 1}}).fetch();
             variantsList.forEach((variantValue, k) => {
+                if (variantValue.status === 1) {
                   variantMD[k] = variantValue.variant;
                   variantItem[k] = variantValue.variantDescription;
                   variantPath[k] = variantValue.imagePath;
+                }
             });
 
             // Load Machine Configuration and select config items
@@ -704,13 +706,16 @@ if(Meteor.isServer){
                 let uniqueId= Random.id();
                    variantMachine[i] = variantMarker;
                    let match = variantMD.indexOf(variantMachine[i]);
-                   configStyle[match] = {_id: uniqueId,
-                                         'config': variantMD[match],
-                                         'configItem': variantItem[match],
-                                         'imagePath': variantPath[match],
-                                         machineConfigStatus: 0
-                                        };
-               machineConfiguration.push(configStyle[match]);
+                   if (match >= 1) {
+                       configStyle[match] = {
+                           _id: uniqueId,
+                           'config': variantMD[match],
+                           'configItem': variantItem[match],
+                           'imagePath': variantPath[match],
+                           machineConfigStatus: 0
+                       };
+                       machineConfiguration.push(configStyle[match]);
+                   }
             });
             MachineReady.update({_id: selectedPdiMachineId}, {$set: {machineConfig: machineConfiguration}});
 
