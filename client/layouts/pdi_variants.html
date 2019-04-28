@@ -25,7 +25,7 @@
         <h3>Variant Viewer</h3>
     </div>
     <div>
-        <button class="btn btn-default btn-info howTo">!! How to upload a Variant !!</button>
+        <button class="btn btn-default btn-info howTo" >!! How to upload a Variant !!</button>
     </div>
     <div class="loadVariantButton">
         <form class="fileContainer">
@@ -50,17 +50,29 @@
             <th class="pdiVariantDescription"><strong>Description</strong></th>
             <th class="pdiShipDate"><strong>Last Update</strong></th>
             <th class="pdiShipDate"><strong>Visability</strong></th>
+            <th class="pdiShipDate"><strong>Add Pic</strong></th>
         </tr>
         </thead>
         <tbody>
         {{#each variants}}
             <tr class="openInspections {{selectedClass}}">
-                <td class="userLastLogin">{{variant}}</td>
-                <td class="pdiVariantDescription">{{variantDescription}}</td>
-                <td class="pdiShipDate"><strong>{{dateLoaded}}</strong></td>
+                <td class="userLastLogin {{variantVisible status}}"
+                    style="background-color:{{variantVisible status}};
+                                      color:{{variantVisible status}}">{{variant}}</td>
+                <td class="pdiVariantDescription {{variantVisible status}}"
+                    style="background-color:{{variantVisible status}};
+                            color:{{variantVisible status}}">{{variantDescription}}</td>
+                <td class="pdiShipDate {{variantVisible status}}"
+                    style="background-color:{{variantVisible status}};
+                            color:{{variantVisible status}}"><strong>{{dateLoaded}}</strong></td>
                 <td class="variantVisible pdiShipDate">
                     <label>
-                        <input class="rTableStyle" type="checkbox" name="visible" id="visible"  value="{{status}}">
+                        <input class="rTableStyle" type="checkbox" name="visible" id="visible"  value="{{_id}}">
+                    </label>
+                </td>
+                <td class="variantVisible pdiShipDate">
+                    <label>
+                        <input class="rTableStyle" type="checkbox" name="pic_path" id="pic_path"  value="{{_id}}">
                     </label>
                 </td>
             </tr>
@@ -68,4 +80,12 @@
         </tbody>
     </table>
 </div>
+    <div>
+        <form class="submitViewer">
+            <button class="btn btn-default btn-success updateVariantViewer" >Update visible Variant</button>
+        </form>
+        <form class="submitPic">
+           <button class="btn btn-default btn-info addPicToVariant" >Add Pic to Variant</button>
+        </form>
+    </div>
 </template>

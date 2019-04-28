@@ -4,20 +4,20 @@
 }
 
 .configButtonOK {
-  font-weight: bold;
-  float: left;
-  width: 130px;
-  position: absolute;
   bottom: 0;
+  float: left;
+  font-weight: bold;
+  position: absolute;
+  width: 130px;
 }
 
 .configButtonNOK {
-  font-weight: bold;
-  float: left;
-  width: 130px;
-  position: absolute;
-  margin-left: 130px;
   bottom: 0;
+  float: left;
+  font-weight: bold;
+  margin-left: 130px;
+  position: absolute;
+  width: 130px;
 }
 
 .configButtonInfo {
@@ -96,41 +96,41 @@
 }
 
 .pdiDivider {
-  position: relative;
   left: 3.5em;
+  position: relative;
   width: 30em;
 }
 
 //---------------- Drop Down -------------*/
 
 .mainComponentsPos {
-  position: relative;
   left: 3.6em;
+  position: relative;
 }
 
 .subComponentPos {
-  position: relative;
   left: 22em;
+  position: relative;
 }
 
-.dropDownStyle {
-
-}
 
 .dropDown {
+  border-radius: 1px;
   font-size: 20px;
   height: 40px;
-  width: 100px;
-  white-space: nowrap;
-  border-radius: 1px;
-  padding: 1rem;
-  z-index: 1001;
   min-width: 220px;
+  padding: 1rem;
   // For opening transition
   transform-origin: center top;
+  white-space: nowrap;
+  width: 100px;
+  z-index: 1001;
+
+
+
  }
 
-/*-----------------------------------------*/
+//-----------------------------------------*/
 
 .issueField {
   margin-left: 3em;
@@ -141,13 +141,13 @@
 }
 
 .pdiInputFields {
-  margin: 0.8em;
+  margin: .8em;
   width: 30em;
 }
 
 table.newIssuesTable {
-  position: relative;
   left: 2em;
+  position: relative;
   width: 32em;
 }
 

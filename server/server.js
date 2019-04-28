@@ -273,6 +273,7 @@ if(Meteor.isServer){
                             dateLoaded: dateVariant,
                             type: typeVariant});
                         } else if (typeVariant === 'C78') {
+                            variants_C78.remove();
                             variants_C78.insert({variant: variantModule,
                             variantDescription: variantDescription,
                             imagePath: "http://",
@@ -288,6 +289,7 @@ if(Meteor.isServer){
                             dateLoaded: dateVariant,
                             type: typeVariant});
                         } else if (typeVariant === 'C87') {
+                        variants_C87.remove();
                         variants_C87.insert({variant: variantModule,
                             variantDescription: variantDescription,
                             imagePath: "http://",
@@ -295,6 +297,7 @@ if(Meteor.isServer){
                             dateLoaded: dateVariant,
                             type: typeVariant});
                         } else if (typeVariant === 'C88') {
+                        variants_C88.remove();
                         variants_C88.insert({variant: variantModule,
                             variantDescription: variantDescription,
                             imagePath: "http://",
@@ -302,6 +305,7 @@ if(Meteor.isServer){
                             dateLoaded: dateVariant,
                             type: typeVariant});
                         } else if (typeVariant === 'C89') {
+                        variants_C89.remove();
                         variants_C89.insert({variant: variantModule,
                             variantDescription: variantDescription,
                             imagePath: "http://",
@@ -311,19 +315,46 @@ if(Meteor.isServer){
                         } else {
                         console.log('Type ', typeVariant, ' not available');
                     }
-
-                    }
-
+                }
             }
-
         },
 
+        'readVariantPic': function (contents) {
 
-
+        },
 
         'readConfig': function(machineId, configArray) {
-            MachineReady.update({machineId: machineId}, {$set: {config: configArray, configStatus: 1}});
+            MachineReady.update({machineId: machineId},
+                {$set: {config: configArray, configStatus: 1}});
         },
+
+        'visibleVariants': function(variantChosen, variantVisible ) {
+            if (variantChosen === 1) {
+                    variantToChange = 'variants_' + 'C77';
+                } else if (variantChosen === 2) {
+                    variantToChange = 'variants_' + 'C78';
+                } else if (variantChosen === 3) {
+                    variantToChange = 'variants_' + 'C79';
+                } else if (variantChosen === 4) {
+                    variantToChange = 'variants_' + 'C87';
+                } else if (variantChosen === 5) {
+                    variantToChange = 'variants_' + 'C88';
+                } else if (variantChosen === 6) {
+                    variantToChange = 'variants_' + 'C89';
+                }
+            variantVisible.forEach((id) => {
+             let statusVariant =  Mongo.Collection.get(variantToChange).findOne({_id: id}, {fields: {status: 1}}).status;
+                if (statusVariant === 0) {
+                     Mongo.Collection.get(variantToChange).update({_id: id}, {$set: {status: 1}});
+                } else if (statusVariant === 1) {
+                      Mongo.Collection.get(variantToChange).update({_id: id}, {$set: {status: 0}});
+                }
+            })
+        },
+
+
+
+
 //----------------------------------------------------------- Fuel control ------------------------------------------------------------------
         'fuelConsumption': function () {
             let elementMachine = [];
@@ -332,7 +363,7 @@ if(Meteor.isServer){
             let elementConsumption = [];
           let data = MachineReady.find({}, {fields: {machineId: 1, fuelStart: 1, fuelAfter: 1,
                 _id: 0}}).fetch();
-            data.forEach(function (element) {
+            data.forEach( (element) => {
                 if (element.fuelStart) {
                     elementMachine.push(element.machineId);
                     let a = parseFloat(element.fuelStart);
@@ -617,27 +648,27 @@ if(Meteor.isServer){
                                                                      startPdiDate: dateStart,
                                                                      pdiPerformer: pdiUser}});
 
-            //--------------------------------    Check points ----------------------------------------------------
+            // Check points
             let typeOfMachine = machineType.toString();
 
             if(typeOfMachine === 'C77') {
-                 checkType = checkPoints.find({machineRangeEndC77: {$gt: pdiMachineNr}, status: 1}, {fields: {errorDescription: 1,
-                                                                                         errorPos: 1}}).fetch();
+                 checkType = checkPoints.find({machineRangeEndC77: {$gt: pdiMachineNr}, status: 1},
+                                                 {fields: {errorDescription: 1, errorPos: 1}}).fetch();
             } else if (typeOfMachine === 'C78') {
-                 checkType = checkPoints.find({machineRangeEndC78: {$gt: pdiMachineNr}, status: 1}, {fields: {errorDescription: 1,
-                                                                                           errorPos: 1}}).fetch();
+                 checkType = checkPoints.find({machineRangeEndC78: {$gt: pdiMachineNr}, status: 1},
+                                                 {fields: {errorDescription: 1, errorPos: 1}}).fetch();
             } else if (typeOfMachine === 'C79') {
-                 checkType = checkPoints.find({machineRangeEndC79: {$gt: pdiMachineNr}, status: 1}, {fields: {errorDescription: 1,
-                                                                                           errorPos: 1}}).fetch();
+                 checkType = checkPoints.find({machineRangeEndC79: {$gt: pdiMachineNr}, status: 1},
+                                                 {fields: {errorDescription: 1, errorPos: 1}}).fetch();
             } else if (typeOfMachine === 'C87') {
-                 checkType = checkPoints.find({machineRangeEndC79: {$gt: pdiMachineNr}, status: 1}, {fields: {errorDescription: 1,
-                        errorPos: 1}}).fetch();
+                 checkType = checkPoints.find({machineRangeEndC79: {$gt: pdiMachineNr}, status: 1},
+                                                 {fields: {errorDescription: 1, errorPos: 1}}).fetch();
             } else if (typeOfMachine === 'C88') {
-                 checkType = checkPoints.find({machineRangeEndC79: {$gt: pdiMachineNr}, status: 1}, {fields: {errorDescription: 1,
-                        errorPos: 1}}).fetch();
+                 checkType = checkPoints.find({machineRangeEndC79: {$gt: pdiMachineNr}, status: 1},
+                                                 {fields: {errorDescription: 1, errorPos: 1}}).fetch();
             } else if (typeOfMachine === 'C89') {
-                 checkType = checkPoints.find({machineRangeEndC79: {$gt: pdiMachineNr}, status: 1}, {fields: {errorDescription: 1,
-                        errorPos: 1}}).fetch();
+                 checkType = checkPoints.find({machineRangeEndC79: {$gt: pdiMachineNr}, status: 1},
+                                                 {fields: {errorDescription: 1, errorPos: 1}}).fetch();
             } else {
                 console.log('nicht definierter Maschinen Typ (server.js zeile 625)', typeOfMachine);
             }
@@ -654,11 +685,13 @@ if(Meteor.isServer){
 
             let type = pdiMachineNr.slice(0,3);
             let newVariant = 'variants_' + type;
-            let variantsList = Mongo.Collection.get(newVariant).find({}, {sort: {variant: 1}}).fetch();
+            let variantsList = Mongo.Collection.get(newVariant).find({},
+                                                        {fields: {status: 1}},
+                                                        {sort: {variant: 1}}).fetch();
             variantsList.forEach((variantValue, k) => {
-              variantMD[k] = variantValue.variant;
-              variantItem[k] = variantValue.variantDescription;
-              variantPath[k] = variantValue.imagePath;
+                  variantMD[k] = variantValue.variant;
+                  variantItem[k] = variantValue.variantDescription;
+                  variantPath[k] = variantValue.imagePath;
             });
 
             // Load Machine Configuration and select config items
@@ -1069,6 +1102,8 @@ if(Meteor.isServer){
             MachineReady.remove(selectedMachine);
         },
     });
+
+
  }
 
 

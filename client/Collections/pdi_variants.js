@@ -16,7 +16,10 @@ if(Meteor.isClient) {
            let type = Session.get('variantType');
            switch(type) {
                case 1:
-                   return variants_C77.find({}, {sort: {variant: 1}});
+                   let variant_C77 = variants_C77.find({}, {sort: {variant: 1}});
+                   let variant_C77_length = variants_C77.find().count();
+                   Session.set('variant-C77-count', variant_C77_length);
+                   return variant_C77;
                case 2:
                    return variants_C78.find({}, {sort: {variant: 1}});
                case 3:
@@ -88,8 +91,36 @@ if(Meteor.isClient) {
         'click .c68': () => {
             event.preventDefault();
             Session.set('variantType', 7);
-        }
+        },
 
+        'click .submitViewer': () => {
+          event.preventDefault();
+          var variantChosen = Session.get('variantType');
+          const variantVisible = [];
+          $('input[name=visible]:checked').each(function() {
+              variantVisible.push($(this).val());
+          });
+          Meteor.call('visibleVariants', variantChosen, variantVisible);
+          for (let i = 0; i < variantVisible.length; i++) {
+              visible[i].checked= false;
+          }
+        },
+
+        'click .submitPic': () => {
+            event.preventDefault();
+            const file = event.target.files[0];
+            if (!file) {
+
+                return;
+            }
+            let reader = new FileReader();
+            reader.onload = function(e) {
+                const contents = e.target.result;
+                document.getElementById('variant').value = '';
+                Meteor.call('readVariantPic', contents);
+            };
+            reader.readAsText(file);
+        },
 
 
     });

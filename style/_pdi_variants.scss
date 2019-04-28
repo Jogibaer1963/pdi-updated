@@ -32,3 +32,31 @@
 .variantVisible {
   text-align: center;
 }
+
+.updateVariantViewer {
+  left: 50em;
+  position: relative;
+  top: 2em;
+  width: 12em;
+}
+
+.addPicToVariant {
+  left: 50em;
+  position: relative;
+  top: 4em;
+  width: 12em;
+}
+
+
+
+
+.noVariant {
+
+  background: repeating-linear-gradient(
+                  45deg,
+                  #e8bf7e,
+                  #f4a4ae 10px,
+                  #f85558 10px
+  );
+}
+
