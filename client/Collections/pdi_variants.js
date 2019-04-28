@@ -60,9 +60,9 @@ if(Meteor.isClient) {
 
     Template.variantsViewer.events({
 
-        'change .loadVariant': () => {
-            event.preventDefault();
-            const file = event.target.files[0];
+        'change .loadVariant': (e) => {
+            e.preventDefault();
+            const file = e.target.files[0];
             if (!file) {
 
                 return;
@@ -140,21 +140,18 @@ if(Meteor.isClient) {
           }
         },
 
-        'click .submitPic': () => {
-            event.preventDefault();
-            const file = event.target.files[0];
-            if (!file) {
 
-                return;
+            'change .loadVariantPic': function(event) {
+                event.preventDefault();
+                console.log('inside');
+                var files = event.target.file;
+                console.log(files);
+                for (var i = 0, ln = files.length; i < ln; i++) {
+                    Images.insert(files[i], function (err, fileObj) {
+                        // Inserted new doc with ID fileObj._id, and kicked off the data upload using HTTP
+                    });
+                }
             }
-            let reader = new FileReader();
-            reader.onload = function(e) {
-                const contents = e.target.result;
-                document.getElementById('variant').value = '';
-                Meteor.call('readVariantPic', contents);
-            };
-            reader.readAsText(file);
-        },
 
 
     });
