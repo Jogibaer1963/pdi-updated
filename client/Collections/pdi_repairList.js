@@ -50,7 +50,7 @@ Meteor.subscribe("machineReadyToGo_2016");
 
     });
 
-/* ToDo make Battery, OMM and repairlist editable */
+/* ToDo make Battery, OMM and repair list editable */
 
 
     Template.pdi_repairList.events({

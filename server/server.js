@@ -140,6 +140,10 @@ if(Meteor.isServer){
             return images.find();
         });
 
+        Meteor.publish("oms", function() {
+            return oms.find();
+        });
+
 
 
     });
@@ -331,6 +335,7 @@ if(Meteor.isServer){
         },
 
         'visibleVariants': function(variantChosen, variantVisible ) {
+            let variantToChange = '';
             if (variantChosen === 1) {
                     variantToChange = 'variants_' + 'C77';
                 } else if (variantChosen === 2) {
