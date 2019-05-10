@@ -65,8 +65,7 @@ Meteor.subscribe('oms');
         newIssue: function() {
             Session.set('selectedPdiMachineNr', localStorage.getItem('pdiMachineNr'));
             const machineId = Session.get('selectedPdiMachineNr');
-            result = MachineReady.findOne({machineId: machineId}).newIssues;
-            return result;
+            return MachineReady.findOne({machineId: machineId}).newIssues;
         },
 
         battSaved: function() {
@@ -74,7 +73,7 @@ Meteor.subscribe('oms');
             const machineId = Session.get('selectedPdiMachineNr');
             result = MachineReady.findOne({machineId: machineId}).batteries;
             if(result) {
-                return "Battery successfull saved";
+                return "Battery successful saved";
             } else {
                 return "Error, Battery not saved";
             }
@@ -114,10 +113,6 @@ Meteor.subscribe('oms');
             const mtuG005Volt = event.target.mtuG005Volt.value;
             const mtuG004CCA = event.target.mtuG004CCA.value;
             const mtuG004Volt = event.target.mtuG004Volt.value;
-            const manBatt_1CCA = event.target.manBatt_1CCA.value;
-            const manBatt_1Volt = event.target.manBatt_1Volt.value;
-            const manBatt_2CCA = event.target.manBatt_2CCA.value;
-            const manBatt_2Volt = event.target.manBatt_2Volt.value;
             Meteor.call('pdiMachineBattery', pdiMachineId, loggedInUser, battC13CCA, battC13Volt,
                 mtuG001CCA, mtuG001Volt, mtuG005CCA, mtuG005Volt, mtuG004CCA, mtuG004Volt,
                 manBatt_1CCA, manBatt_1Volt, manBatt_2CCA, manBatt_2Volt);
