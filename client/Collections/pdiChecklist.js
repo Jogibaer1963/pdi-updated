@@ -175,7 +175,7 @@ Meteor.subscribe("checkpoints");
             }
         },
 
-        // Dropdown Lisz
+        // Dropdown List
         //------------------------------------------------------------//
         ommUnload: function () {
            return variants_C77.find({});

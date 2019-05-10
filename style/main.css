@@ -804,6 +804,14 @@ table.pdiTable {
 .pdiToDo {
   margin-left: 3em; }
 
+.profiCamInputPos {
+  position: relative;
+  top: 1em; }
+
+#om-profi-cam {
+  left: -180px;
+  top: -36px; }
+
 .configButtonOK {
   bottom: 0;
   float: left;
@@ -947,11 +955,6 @@ table.messageTable {
   position: absolute;
   top: 24em;
   left: 50em; }
-
-table.historyMessageTable {
-  left: 40em;
-  position: absolute;
-  top: 24em; }
 
 .washListButtons {
   margin-left: 25px;
@@ -1312,10 +1315,8 @@ table.printOutTableWidth td {
   padding-bottom: 30px; }
 
 #wrapper {
-  position: relative;
-  min-height: 100%;
-  height: auto !important;
-  height: 100%; }
+  height: auto;
+  position: relative; }
 
 html, body {
   height: 100%; }
@@ -1410,11 +1411,6 @@ tbody.mainCompTbody {
   position: absolute;
   top: 25em;
   left: 15em; }
-
-.headerEcn {
-  position: absolute;
-  top: 1em;
-  left: 20em; }
 
 .ecnOverView {
   position: absolute;

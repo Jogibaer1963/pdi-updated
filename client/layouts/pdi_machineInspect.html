@@ -36,7 +36,21 @@
            <br>
            <input type="text" class="omInput inputSize" id="unloadOmm" name="omUnload" placeholder="Unload OMM" required>
            <br>
-           <label for="ommMain">Profi Cam</label>
+             <div class="profiCamInputPos">
+                 {{#dropdownTrigger  name="omProfiCam"}}
+                     <button class="loginSubmit omInputButton">OMM Profi Cam</button>
+                 {{/dropdownTrigger}}
+                 {{#dropdown name="omProfiCam" id="dropDownProfiCam" align="left"}}
+                     <tbody class="rTable">
+                     {{#each ommProfiCam}}
+                         <tr class="comp {{selectedProfiCam}}">
+                             <td class="dropDown">{{partNumbers}}</td>
+                         </tr>
+                     {{/each}}
+                     </tbody>
+                 {{/dropdown}}
+             </div>
+
            <br>
            <input type="text" class="omInput inputSize" id="locationId" name="omProfiCam" placeholder="Profi Cam">
            <br>
@@ -135,19 +149,6 @@
             </tbody>
         {{/dropdown}}
     </div>
-<!--
-    <div class="subComponentPos">
-        {{#dropdown name="mainComponents" align="left" top="25" left="-450"}}
-            <tbody class="rTable">
-            {{#each subComp}}
-                <tr class="subComp {{selectedSubComponent}}">
-                    <td class="dropDown">{{component}}</td>
-                </tr>
-            {{/each}}
-            </tbody>
-        {{/dropdown}}
-    </div>
--->
     <div class="pdiInputFields">
       <form class="addNewIssue">
         <div class="issueField">

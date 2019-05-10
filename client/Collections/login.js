@@ -6,7 +6,7 @@
             event.preventDefault();
               const userVar = event.target.loginUser.value;
               const passwordVar = event.target.loginPassword.value;
-              const dateLogin = moment().format('MMMM Do YYYY, h:mm:ss a');
+              const dateLogin = moment().format('MM Do YYYY, h:mm:ss a');
             Meteor.loginWithPassword(userVar, passwordVar, function(){
                if(Meteor.userId()){
                    Meteor.call('successfullLogin', userVar, dateLogin);

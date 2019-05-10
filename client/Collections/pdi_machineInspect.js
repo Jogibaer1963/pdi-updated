@@ -1,6 +1,7 @@
 
 Meteor.subscribe("pdiCheckList");
 Meteor.subscribe("orderParts");
+Meteor.subscribe('oms');
 
 
     Template.pdiToDoList.helpers({
@@ -48,34 +49,16 @@ Meteor.subscribe("orderParts");
                 return 'selected'
             }
         },
-/*
-        'selectedSubComponent': function() {
-            let subComponent = this._id;
-            let selectedSub = Session.get('selectedSub');
-            if (subComponent === selectedSub) {
-                return 'selected';
-            }
-        },
-*/
+
         mainComponent: function () {
             return mainComponents.find({}).fetch();
         },
-/*
-        subComp: function () {
-            let id = Session.get('selectedComponent');
-            Meteor.call('subComponent', id, (error, result) => {
-                if(error) {
-                    console.log('error',error);
-                } else {
-                    Session.set('componentResult', result);
-                }
-            });
-            return Session.get('componentResult');
-        },
-*/
 
-        issueComponent: () => {
-                return Session.get('issueComp');
+        ommProfiCam: () => {
+            console.log("in Arbeit");
+            let result = oms.find({}).fetch();
+            console.log(result);
+            return result;
         },
 
 

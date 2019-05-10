@@ -36,11 +36,6 @@ Meteor.subscribe('specialPdiItems');
             return siList.find();
         },
 
-       failureList: function () {
-            Session.set('selectedNewFailure', "");
-            return FailuresList.find({}, {sort: {error_describ: 1}});
-        },
-
         'selectedLineItem': function() {
             const checkPoint = this._id;
             const selectedCheckPoint = Session.get('selectedItem');

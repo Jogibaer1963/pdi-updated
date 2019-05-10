@@ -49,10 +49,8 @@ table.printOutTableWidth td {
 }
 
 #wrapper {
+  height: auto;
   position: relative;
-  min-height: 100%;
-  height: auto !important;
-  height: 100%;
 }
 
 html, body {
