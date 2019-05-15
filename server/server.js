@@ -149,10 +149,6 @@ if(Meteor.isServer){
     });
 
 
-
-
-
-
     Meteor.methods({
 
         'preSeriesCheckUp': () => {
