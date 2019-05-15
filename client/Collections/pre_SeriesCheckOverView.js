@@ -5,16 +5,17 @@ Meteor.subscribe("images");
 Template.checkListOverView.helpers({
 
     listOutput: () => {
+        let checkResult = {} ;
         const result = images.find().fetch();
         let path1= "http://192.168.0.109:3300/images/C8500013/";
-        let resultArray = result.map(imagePathExtract => {
-             let newPath = path1 + imagePathExtract.imagePath;
-             console.log(newPath);
-             return newPath;
+        return resultArray = result.map(resultExtract => {
+             checkResult = {active: resultExtract.activeStatus,
+                            failure: resultExtract.failureStatus,
+                            imagePath : path1 + resultExtract.imagePath,
+                            position : resultExtract.position,
+                            issue : resultExtract.issueDescription};
+             return checkResult;
         });
-        console.log(resultArray);
-        return resultArray;
-
     }
 
 });
