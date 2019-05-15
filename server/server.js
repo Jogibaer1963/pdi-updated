@@ -156,7 +156,7 @@ if(Meteor.isServer){
     Meteor.methods({
 
         'preSeriesCheckUp': () => {
-          const result = preSeriesCheck.find().fetch();
+          const result = images.find().fetch();
           console.log(result);
         },
 

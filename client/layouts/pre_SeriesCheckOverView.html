@@ -24,30 +24,29 @@
     <div class="preView">
          <h3 >Pre series checklist overview</h3>
     </div>
+
+
+
     <br><br>
 
 <div class="tablePos">
         {{#each listOutput}}
             <div class="listContainer">
-                <div class="">
-                     <img class="imageSize" src={{imagePath}}>
+                <div class="image">
+                     <img src={{resultArray}}>
                 </div>
-                <div class="headLinerPos">
-                     <h3> {{headLiner}}</h3>
+                <div class="buttonPreSeries">
+                    <button type="submit" class="btn  btn-success submitButtonInside submitButtonActive">Active</button>
                 </div>
-               <div class="description">
-                    {{description}}
-               </div>
-                <div class="checkPointPassed">
-                    <label>
-                        <input class="rTableStyle" type="checkbox" name="good"   value="{{_id}}">
-                    </label>
+                <div class="buttonPreSeries">
+                    <button type="submit" class="btn btn-info btn-default submitButtonInside submitButtonInactive">Inactive</button>
                 </div>
-                <div class="checkPointFailed">
-                    <label>
-                        <input class="rTableStyle" type="checkbox" name="bad" value="{{_id}}">
-                    </label>
-                </div>
+                <div class="buttonPreSeries">
+                    <button type="submit" class="btn btn-danger btn-default submitButtonInside submitButtonDelete">Delete</button>
+                </div> <div class="description">
+                <h2>{{issueDescription}}</h2>
+            </div>
+
             </div>
         {{/each}}
 </div>
