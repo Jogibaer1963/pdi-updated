@@ -9,7 +9,8 @@ Template.checkListOverView.helpers({
         const result = images.find().fetch();
         let path1= "http://192.168.0.109:3300/images/C8500013/";
         return resultArray = result.map(resultExtract => {
-             checkResult = {active: resultExtract.activeStatus,
+             checkResult = {id : resultExtract._id,
+                            active: resultExtract.activeStatus,
                             failure: resultExtract.failureStatus,
                             imagePath : path1 + resultExtract.imagePath,
                             position : resultExtract.position,
@@ -22,20 +23,28 @@ Template.checkListOverView.helpers({
 
 Template.checkListOverView.events({
 
+    'click .submitButtonEdit': (e) => {
+        e.preventDefault();
+        let idCheck = e.currentTarget.id;
+        console.log('edit', idCheck);
+    },
 
    'click .submitButtonActive': (e) => {
        e.preventDefault();
-       console.log('active');
+       let idCheck = e.currentTarget.id;
+       console.log('active', idCheck);
    },
 
     'click .submitButtonInactive': (e) => {
         e.preventDefault();
-        console.log('inactive');
+        let idCheck = e.currentTarget.id;
+        console.log('inactive', idCheck);
     },
 
     'click .submitButtonDelete': (e) => {
         e.preventDefault();
-        console.log('delete');
+        let idCheck = e.currentTarget.id;
+        console.log('delete', idCheck);
     }
 
 });
