@@ -53,8 +53,8 @@
             //   Session.setPersistent('currentLoggedInUser', user);
         },
 
-        'click .machinePdi': function () {
-            event.preventDefault();
+        'click .machinePdi': function (e) {
+            e.preventDefault();
             const user = Meteor.user().username;
             const selectedPdiMachineId = Session.get('selectedPdiMachine');
             const selectedPdiMachineNr = Session.get('pdiMachineNumber');

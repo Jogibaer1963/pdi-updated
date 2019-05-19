@@ -6,7 +6,6 @@
   margin: 10px;
   padding: 10px;
   width: 60em;
-
 }
 
 .tablePos {
@@ -22,28 +21,44 @@
 }
 
 img {
-  max-width: 100%;
   max-height: 100%;
+  max-width: 100%;
 }
-
 
 .image {
   float: left;
   height: 80%;
   width: 80%;
-}
-
-.description {
-  position: relative;
-  width: fit-content;
-}
-
-.buttonPreSeries {
-  left: 30px;
-  margin: 10px;
-  position: relative;
+  margin-bottom: 10px;
 }
 
 .submitButtonInside {
+  margin: 10px;
   width: 100px;
+}
+
+table.preTable {
+  width: 10em;
+}
+
+.submitPre {
+  left: 20em;
+  position: relative;
+}
+
+tbody.preTbodyHeight {
+  height: 100em;
+  width: 80em;
+}
+
+.button  {
+  left: 10em;
+  margin-left: 40px;
+  position: relative;
+  width: 150px;
+
+}
+
+table, td {
+  border: 2px solid #333;
 }

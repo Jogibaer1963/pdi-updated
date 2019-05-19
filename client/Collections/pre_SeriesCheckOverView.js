@@ -7,7 +7,7 @@ Template.checkListOverView.helpers({
     listOutput: () => {
         let checkResult = {} ;
         const result = images.find().fetch();
-        let path1= "http://192.168.0.109:3300/images/C8500013/";
+        let path1= "http://192.168.0.109:3300/images/";
         return resultArray = result.map(resultExtract => {
              checkResult = {id : resultExtract._id,
                             active: resultExtract.activeStatus,
@@ -22,6 +22,13 @@ Template.checkListOverView.helpers({
 });
 
 Template.checkListOverView.events({
+
+    'click .submitButtonGenerate': (e) => {
+        e.preventDefault();
+        console.log('call Server');
+        Meteor.call('generateDataBase');
+
+    },
 
     'click .submitButtonEdit': (e) => {
         e.preventDefault();

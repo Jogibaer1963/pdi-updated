@@ -16,67 +16,59 @@
         <nav class="mainLayout">
             <a class="btn" href="/generator">Checklist generator</a>
             <a>|</a>
-            <a class="btn" href="/editor">Check list editor</a>
-            <a>|</a>
             <a class="btn" href="/inspectionStart">Inspection Overview</a>
+            <a>|</a>
+            <a class="btn" href="/preSeriesStart">Perform Check</a>
         </nav>
     </div>
     <div class="preView">
          <h3 >Pre series checklist overview</h3>
     </div>
 
+    <div class="">
+        <button type="submit" class="btn
+                                     btn-warning
+                                     btn-default
+                                     submitButtonInside
+                                     submitButtonGenerate"
+                                     >Generate</button>
+    </div>
 
+    <div class="tablePos">
+            {{#each listOutput}}
+                <div class="listContainer">
+                    <div class="image">
+                         <img src={{imagePath}}>
+                    </div>
+                        <button type="submit" class="btn
+                                                     btn-warning
+                                                     btn-default
+                                                     submitButtonInside
+                                                     submitButtonEdit"
+                                                     id={{id}}>Edit</button>
 
-    <br><br>
+                        <button type="submit" class="btn
+                                                     btn-success
+                                                     submitButtonInside
+                                                     submitButtonActive"
+                                                     id={{id}}>Active</button>
 
-<div class="tablePos">
-        {{#each listOutput}}
-            <div class="listContainer">
-                <div class="image">
-                     <img src={{imagePath}}>
+                        <button type="submit" class="btn
+                                                     btn-info
+                                                     btn-default
+                                                     submitButtonInside
+                                                     submitButtonInactive"
+                                                     id={{id}}>Inactive</button>
+
+                        <button type="submit" class="btn
+                                                     btn-danger
+                                                     btn-default
+                                                     submitButtonInside
+                                                     submitButtonDelete"
+                                                     id={{id}}>Delete</button>
                 </div>
-
-                <div class="buttonPreSeries">
-                    <button type="submit" class="btn
-                                                 btn-warning
-                                                 btn-default
-                                                 submitButtonInside
-                                                 submitButtonEdit"
-                                                 id={{id}}>Edit</button>
-                </div>
-
-                <div class="buttonPreSeries">
-                    <button type="submit" class="btn
-                                                 btn-success
-                                                 submitButtonInside
-                                                 submitButtonActive"
-                                                 id={{id}}>Active</button>
-                </div>
-
-                <div class="buttonPreSeries">
-                    <button type="submit" class="btn
-                                                 btn-info
-                                                 btn-default
-                                                 submitButtonInside
-                                                 submitButtonInactive"
-                                                 id={{id}}>Inactive</button>
-                </div>
-
-                <div class="buttonPreSeries">
-                    <button type="submit" class="btn
-                                                 btn-danger
-                                                 btn-default
-                                                 submitButtonInside
-                                                 submitButtonDelete"
-                                                 id={{id}}>Delete</button>
-                </div>
-
-                <div class="description">
-                    <h2>{{issue}}</h2>
-                </div>
-            </div>
-        {{/each}}
-</div>
+            {{/each}}
+    </div>
 
 
 

@@ -132,16 +132,16 @@ if(Meteor.isServer){
             return specialPdiItems.find();
         });
 
-        Meteor.publish("preSeriesCheck", function() {
-            return preSeriesCheck.find();
-        });
-
         Meteor.publish("images", function() {
             return images.find();
         });
 
         Meteor.publish("oms", function() {
             return oms.find();
+        });
+
+        Meteor.publish("preSeriesMachine", function() {
+            return preSeriesMachine.find();
         });
 
 
@@ -151,10 +151,135 @@ if(Meteor.isServer){
 
     Meteor.methods({
 
+
+
+
+
+    //-----------------------------------------Called 1 time to generate the Checklist Data base --------------
+        'generateDataBase': () => {
+            console.log('Server called');
+            for (i = 1; i <= 263; i++) {
+                let uniqueId= Random.id();
+                console.log(i, uniqueId);
+                images.insert({
+                    _id: uniqueId,
+                    imagePath: "Slide"+ i + ".JPG",
+                    activeStatus: 1,
+                    failureStatus: 0,
+                    timeOfFix: "",
+                    checkedBy: "",
+                    cantRepair: 0
+                });
+            }
+        },
+
+    //----------------------------------------------- Load checklist for preview or edit ------------------
+
         'preSeriesCheckUp': () => {
           const result = images.find().fetch();
           console.log(result);
         },
+
+
+    //----------------------------------------------- Load Pre series Machine numbers  --------------------
+
+        'enterPreMachine': (preMachine) => {
+            preSeriesMachine.insert({preMachineId: preMachine,
+                                          pdiStatus: 0,
+                                          configStatus: 0,
+                                          user: '',
+                                          dateStart: ''});
+
+        },
+
+        'readPreConfig': function(machineId, configArray) {
+            preSeriesMachine.update({preMachineId: machineId},
+                {$set: {config: configArray, configStatus: 1}});
+        },
+
+    //------------------------------------------  Prepare checklist for specific Machine --------------
+
+        'prepareCheckList': (user, selectedPreMachine, dateStart) => {
+
+            let type = '';
+            let variantPreMachine = [];
+            let variantPreMD = [];
+            let variantPreItem = [];
+            let variantPrePath = [];
+            let machinePreConfiguration = [];
+            let preConfigStyle = [];
+
+            if(selectedPreMachine) {
+                     result = preSeriesMachine.findOne({_id: selectedPreMachine},
+                                                       {fields: {preMachineId: 1}}).preMachineId;
+                     type = result.slice(0,3);
+                    }
+
+            // Load Type Variant
+
+            let newVariant = 'variants_' + type;
+            let variantsList = Mongo.Collection.get(newVariant).find({},
+                {fields: {status: 1, variant: 1, variantDescription: 1, image: 1}},
+                {sort: {variant: 1}}).fetch();
+
+            variantsList.forEach((variantValue, k) => {
+                if (variantValue.status === 1) {
+                         variantPreMD[k] = variantValue.variant;
+                         variantPreItem[k] = variantValue.variantDescription;
+                         variantPrePath[k] = variantValue.imagePath;
+                }
+            });
+
+            // Load Machine Configuration and select config items
+
+            let combineVariant = preSeriesMachine.find({_id: selectedPreMachine},
+                                                            {fields: {config: 1}},
+                                                            {sort: {variant: 1}}).fetch();
+            let k = (combineVariant[0]).config;
+
+            k.forEach((variantMarker, i) => {
+                let uniqueId= Random.id();
+                    variantPreMachine[i] = variantMarker;
+                let match = variantPreMD.indexOf(variantPreMachine[i]);
+                if (match >= 1) {
+                    preConfigStyle[match] = {
+                                _id: uniqueId,
+                                'config': variantPreMD[match],
+                                'configItem': variantPreItem[match],
+                                'imagePath': variantPrePath[match],
+                                machinePreConfigStatus: 0
+                    };
+                    machinePreConfiguration.push(preConfigStyle[match]);
+                }
+            });
+
+            preSeriesMachine.update({_id: selectedPreMachine}, {$set: {machineConfig: machinePreConfiguration,
+                                                                                        dateStart: dateStart,
+                                                                                        user: user,
+                                                                                        pdiStatus: 2}});
+
+            // Load Check List
+
+            let checkList = images.find().fetch();
+            preSeriesMachine.update({_id: selectedPreMachine}, {$set: {checkItems: checkList}});
+        },
+
+
+   //------------------------------ Cancel Pre Check ----------------------------------------------
+
+        'cancelPreCheck': (preMachine) => {
+            preSeriesMachine.update({_id: preMachine}, {$set: {checkItems: [],
+                                                                                pdiStatus: 0}})
+        },
+
+
+    //-------------------------------  Check point nok or Ok ---------------------------------------------------
+
+    'preCheckNok': (selectedPreMachineId, target, result, user) => {
+        preSeriesMachine.update({_id: selectedPreMachineId, 'checkItems._id': target},
+                               {$set: {'checkItems.$.failureStatus': result,
+                                                'checkItems.$.checkedBy': user}})
+    },
 
    //------------------------------------------------- Add Special Tasks for PDI ------------------------
 
@@ -822,7 +947,8 @@ if(Meteor.isServer){
         //pdi Config Buttons
 
         'configOkButton': (machineId, idFailure) => {
-            MachineReady.update({_id: machineId, "machineConfig._id": idFailure}, {$set: {"machineConfig.$.machineConfigStatus": 1}});
+            MachineReady.update({_id: machineId, "machineConfig._id": idFailure},
+                                  {$set: {"machineConfig.$.machineConfigStatus": 1}});
         },
 
         'configNokButton': (machineId, idFailure, idIdentifier) => {
@@ -840,15 +966,18 @@ if(Meteor.isServer){
         // pdi Checklist buttons
 
         'okButton': (machineId, idFailure) => {
-            MachineReady.update({_id: machineId, "checkList._id": idFailure}, {$set: {"checkList.$.checkStatus": 1, "checkList.$.failStatus": false}})
+            MachineReady.update({_id: machineId, "checkList._id": idFailure},
+                {$set: {"checkList.$.checkStatus": 1, "checkList.$.failStatus": false}})
         },
 
         'nokButton': (machineId, idFailure) => {
-            MachineReady.update({_id: machineId, "checkList._id": idFailure}, {$set: {"checkList.$.checkStatus": 2, "checkList.$.failStatus": true}})
+            MachineReady.update({_id: machineId, "checkList._id": idFailure},
+                {$set: {"checkList.$.checkStatus": 2, "checkList.$.failStatus": true}})
         },
 
         'naButton': (machineId, idFailure) => {
-            MachineReady.update({_id: machineId, "checkList._id": idFailure}, {$set: {"checkList.$.checkStatus": 3}})
+            MachineReady.update({_id: machineId, "checkList._id": idFailure},
+                {$set: {"checkList.$.checkStatus": 3}})
         },
 
         // Add additional Failure to checklist

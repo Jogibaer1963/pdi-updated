@@ -1,0 +1,131 @@
+<template name="preSeriesInspect">
+    {{#if currentUser}}
+        {{> preCheckToDoList}}
+    {{else}}
+        {{> login}}
+    {{/if}}
+</template>
+
+<template name="preCheckToDoList">
+    <div class="pdiToDo">
+        <img src="claas_logo.png" />
+    </div>
+    <div class="pdiToDo">
+        {{#with preMachineNow}}
+            <h2>Machine to Inspect: {{machine}}</h2>
+            <h2>Performed by: {{userLoggedIn}}</h2>
+        {{/with}}
+    <br><br>
+        <td class="pdiPDIField {{getStatusColor pdiStatus}}"
+        style="background-color:{{getStatusColor pdiStatus}};
+                color:{{getStatusColor pdiStatus}}">{{pdiStatus}}</td>
+        <div class="configTable">
+            <h3 class="configHeader">Configuration</h3>
+            <table class="preTableCheckList">
+                <tbody>
+                {{#each preMachineConfig}}
+                    <tr >
+                        <td class="pdiCell positionCheckPos {{getMachineConfigStatus machineConfigStatus}}"
+                            style="background-color:{{getMachineConfigStatus machineConfigStatus}}">
+                            <div class="" >
+                                {{{config}}}
+                            </div>
+                            <div class="positionCheckText">
+                                {{{configItem}}}
+                            </div>
+                            <button class="btn btn-success configButtonOK" id={{_id}}>OK</button>
+
+                            <button class="btn btn-danger configButtonNOK" id={{configItem}} name={{_id}}>NOK</button>
+
+                            <button class="btn btn-info buttonNA infoButton" id={{imagePath}}>info</button>
+                        </td>
+                    </tr>
+                {{/each}}
+                </tbody>
+            </table>
+        </div>
+    <br><br>
+        <div class="checkListTable">
+            <h3 class="configHeader">Checklist</h3>
+            <table class="pdiPreCheckList">
+                <tbody class="preTbodyHeight">
+                    {{#each listOutput}}
+                        <tr class="preTableCheckList">
+                            <td class=" {{getMachineConfigStatus failStatus}}"
+                                style="background-color:{{getMachineConfigStatus checkStatus}}">
+
+                                    <div class="image">
+                                        <img src={{imagePath}}>
+
+                                        <button class="btn btn-success button PreOk" id={{id}}>OK</button>
+
+                                        <button class="btn btn-danger button PreNok" id={{id}}>NOK</button>
+
+                                    </div>
+
+                            </td>
+                        </tr>
+                    {{/each}}
+                </tbody>
+            </table>
+        </div>
+        <div class="pdiDivider">
+            <h1>_____________________</h1>
+        </div>
+
+        <div class="mainComponentsPos">
+            {{#dropdownTrigger  name="mainComponents"}}
+                <button class="loginSubmit omInputButton">Main Components</button>
+            {{/dropdownTrigger}}
+            {{#dropdown name="mainComponents" align="left" top="25" left="-450"}}
+                <tbody class="rTable">
+                {{#each mainComponent}}
+                    <tr class="comp {{selectedComponent}}">
+                        <td class="dropDown">{{component}}</td>
+                    </tr>
+                {{/each}}
+                </tbody>
+            {{/dropdown}}
+        </div>
+        <div class="pdiInputFields">
+            <form class="addNewIssue">
+                <div class="issueField">
+                    <input type="text" class="addIssueText inputIssueSize {{inActive_Input}}"
+                           name="addIssue"
+                           placeholder="Add issue"
+                           value={{issueComponent}} required>
+                    <br><br>
+                    <button type="submit" class="btn btn-success addIssueText">Submit New Issue</button>
+                </div>
+            </form>
+        </div>
+        <div class="pdiDivider">
+            <h1>_____________________</h1>
+        </div>
+
+        <div>
+            <h3 class="configHeader">New Issues Found</h3>
+            <table class="blueTable newIssuesTable " cellpadding="10">
+                <tbody>
+                {{#each newIssue}}
+                    <tr class="openFailure {{selectedFailure}}">
+                        <td class="pdiComments ">{{errorDescription}}</td>
+                    </tr>
+                {{/each}}
+                </tbody>
+            </table>
+        </div>
+    <br><br>
+        <div class="issueField">
+            <button type="button" class="btn btn-danger deleteRepair">Delete selected repair</button>
+        </div>
+        <div class="pdiDivider">
+            <h1>_____________________</h1>
+        </div>
+        <div>
+            <h3 class="configHeader">Pdi finnished</h3>
+                    <button type="submit" class="btn btn-success addIssueText">Submit and back to over view</button>
+        </div>
+    </div>
+
+</template>
