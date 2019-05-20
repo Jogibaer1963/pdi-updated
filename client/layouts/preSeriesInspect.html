@@ -16,17 +16,14 @@
             <h2>Performed by: {{userLoggedIn}}</h2>
         {{/with}}
     <br><br>
-        <td class="pdiPDIField {{getStatusColor pdiStatus}}"
-        style="background-color:{{getStatusColor pdiStatus}};
-                color:{{getStatusColor pdiStatus}}">{{pdiStatus}}</td>
         <div class="configTable">
             <h3 class="configHeader">Configuration</h3>
             <table class="preTableCheckList">
                 <tbody>
                 {{#each preMachineConfig}}
                     <tr >
-                        <td class="pdiCell positionCheckPos {{getMachineConfigStatus machineConfigStatus}}"
-                            style="background-color:{{getMachineConfigStatus machineConfigStatus}}">
+                        <td class="pdiCell positionCheckPos {{getMachineConfigStatus machinePreConfigStatus}}"
+                            style="background-color:{{getMachineConfigStatus machinePreConfigStatus}}">
                             <div class="" >
                                 {{{config}}}
                             </div>
@@ -35,7 +32,7 @@
                             </div>
                             <button class="btn btn-success configButtonOK" id={{_id}}>OK</button>
 
-                            <button class="btn btn-danger configButtonNOK" id={{configItem}} name={{_id}}>NOK</button>
+                            <button class="btn btn-danger configButtonNOK" id={{_id}}>NOK</button>
 
                             <button class="btn btn-info buttonNA infoButton" id={{imagePath}}>info</button>
                         </td>
@@ -45,14 +42,27 @@
             </table>
         </div>
     <br><br>
+        <div class="progressWidth">
+            <div class="progress">
+                <div class="progress-bar w-75 progress-bar-striped bg-success" role="progressbar"
+                                                                            style="width: {{countDown}}%"
+                                                                            aria-valuenow="100"
+                                                                            aria-valuemin="0"
+                                                                            aria-valuemax="100"></div>
+            </div>
+        </div>
+        <div>
+          <h3>{{countDown}} % complete</h3>
+        </div>
+        <br><br>
         <div class="checkListTable">
             <h3 class="configHeader">Checklist</h3>
             <table class="pdiPreCheckList">
                 <tbody class="preTbodyHeight">
                     {{#each listOutput}}
                         <tr class="preTableCheckList">
-                            <td class=" {{getMachineConfigStatus failStatus}}"
-                                style="background-color:{{getMachineConfigStatus checkStatus}}">
+                            <td class="{{getMachineConfigStatus failureStatus}}"
+                                style="background-color:{{getMachineConfigStatus failureStatus}}">
 
                                     <div class="image">
                                         <img src={{imagePath}}>
@@ -80,7 +90,7 @@
             {{#dropdown name="mainComponents" align="left" top="25" left="-450"}}
                 <tbody class="rTable">
                 {{#each mainComponent}}
-                    <tr class="comp {{selectedComponent}}">
+                    <tr class="preComp {{selectedComponent}}">
                         <td class="dropDown">{{component}}</td>
                     </tr>
                 {{/each}}
@@ -102,7 +112,6 @@
         <div class="pdiDivider">
             <h1>_____________________</h1>
         </div>
-
         <div>
             <h3 class="configHeader">New Issues Found</h3>
             <table class="blueTable newIssuesTable " cellpadding="10">

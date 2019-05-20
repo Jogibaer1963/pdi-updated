@@ -49,7 +49,7 @@ Template.preInspection.events({
        const selectedPreMachine = Session.get('selectedPreMachine');
        localStorage.setItem('preMachineNr', selectedPreMachine);
        const dateStart = new Date();
-    //   Meteor.call('prepareCheckList', user, selectedPreMachine, dateStart);
+       Meteor.call('prepareCheckList', user, selectedPreMachine, dateStart);
        FlowRouter.go('preSeriesInspect');
 
     },

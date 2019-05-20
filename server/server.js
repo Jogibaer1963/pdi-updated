@@ -156,130 +156,172 @@ if(Meteor.isServer){
 
 
     //-----------------------------------------Called 1 time to generate the Checklist Data base --------------
-        'generateDataBase': () => {
-            console.log('Server called');
-            for (i = 1; i <= 263; i++) {
-                let uniqueId= Random.id();
-                console.log(i, uniqueId);
-                images.insert({
-                    _id: uniqueId,
-                    imagePath: "Slide"+ i + ".JPG",
-                    activeStatus: 1,
-                    failureStatus: 0,
-                    timeOfFix: "",
-                    checkedBy: "",
-                    cantRepair: 0
-                });
-            }
-        },
+    'generateDataBase': () => {
+        console.log('Server called');
+        for (i = 1; i <= 263; i++) {
+            let uniqueId= Random.id();
+            console.log(i, uniqueId);
+            images.insert({
+                _id: uniqueId,
+                imagePath: "Slide"+ i + ".JPG",
+                activeStatus: 1,
+                failureStatus: 0,
+                timeOfFix: "",
+                checkedBy: "",
+                cantRepair: 0
+            });
+        }
+    },
 
     //----------------------------------------------- Load checklist for preview or edit ------------------
 
-        'preSeriesCheckUp': () => {
-          const result = images.find().fetch();
-          console.log(result);
-        },
+    'preSeriesCheckUp': () => {
+      const result = images.find().fetch();
+      console.log(result);
+    },
 
 
     //----------------------------------------------- Load Pre series Machine numbers  --------------------
 
-        'enterPreMachine': (preMachine) => {
-            preSeriesMachine.insert({preMachineId: preMachine,
-                                          pdiStatus: 0,
-                                          configStatus: 0,
-                                          user: '',
-                                          dateStart: ''});
+    'enterPreMachine': (preMachine) => {
+        preSeriesMachine.insert({preMachineId: preMachine,
+                                      pdiStatus: 0,
+                                      configStatus: 0,
+                                      user: '',
+                                      dateStart: ''});
 
-        },
+    },
 
-        'readPreConfig': function(machineId, configArray) {
-            preSeriesMachine.update({preMachineId: machineId},
-                {$set: {config: configArray, configStatus: 1}});
-        },
+    'readPreConfig': function(machineId, configArray) {
+        preSeriesMachine.update({preMachineId: machineId},
+            {$set: {config: configArray, configStatus: 1}});
+    },
 
     //------------------------------------------  Prepare checklist for specific Machine --------------
 
-        'prepareCheckList': (user, selectedPreMachine, dateStart) => {
+    'prepareCheckList': (user, selectedPreMachine, dateStart) => {
 
-            let type = '';
-            let variantPreMachine = [];
-            let variantPreMD = [];
-            let variantPreItem = [];
-            let variantPrePath = [];
-            let machinePreConfiguration = [];
-            let preConfigStyle = [];
+        let type = '';
+        let variantPreMachine = [];
+        let variantPreMD = [];
+        let variantPreItem = [];
+        let variantPrePath = [];
+        let machinePreConfiguration = [];
+        let preConfigStyle = [];
 
-            if(selectedPreMachine) {
-                     result = preSeriesMachine.findOne({_id: selectedPreMachine},
-                                                       {fields: {preMachineId: 1}}).preMachineId;
-                     type = result.slice(0,3);
-                    }
-
-            // Load Type Variant
-
-            let newVariant = 'variants_' + type;
-            let variantsList = Mongo.Collection.get(newVariant).find({},
-                {fields: {status: 1, variant: 1, variantDescription: 1, image: 1}},
-                {sort: {variant: 1}}).fetch();
-
-            variantsList.forEach((variantValue, k) => {
-                if (variantValue.status === 1) {
-                         variantPreMD[k] = variantValue.variant;
-                         variantPreItem[k] = variantValue.variantDescription;
-                         variantPrePath[k] = variantValue.imagePath;
+        if(selectedPreMachine) {
+                 result = preSeriesMachine.findOne({_id: selectedPreMachine},
+                                                   {fields: {preMachineId: 1}}).preMachineId;
+                 type = result.slice(0,3);
                 }
-            });
 
-            // Load Machine Configuration and select config items
+        // Load Type Variant
 
-            let combineVariant = preSeriesMachine.find({_id: selectedPreMachine},
-                                                            {fields: {config: 1}},
-                                                            {sort: {variant: 1}}).fetch();
-            let k = (combineVariant[0]).config;
+        let newVariant = 'variants_' + type;
+        let variantsList = Mongo.Collection.get(newVariant).find({},
+            {fields: {status: 1, variant: 1, variantDescription: 1, image: 1}},
+            {sort: {variant: 1}}).fetch();
 
-            k.forEach((variantMarker, i) => {
-                let uniqueId= Random.id();
-                    variantPreMachine[i] = variantMarker;
-                let match = variantPreMD.indexOf(variantPreMachine[i]);
-                if (match >= 1) {
-                    preConfigStyle[match] = {
-                                _id: uniqueId,
-                                'config': variantPreMD[match],
-                                'configItem': variantPreItem[match],
-                                'imagePath': variantPrePath[match],
-                                machinePreConfigStatus: 0
-                    };
-                    machinePreConfiguration.push(preConfigStyle[match]);
-                }
-            });
+        variantsList.forEach((variantValue, k) => {
+            if (variantValue.status === 1) {
+                     variantPreMD[k] = variantValue.variant;
+                     variantPreItem[k] = variantValue.variantDescription;
+                     variantPrePath[k] = variantValue.imagePath;
+            }
+        });
 
-            preSeriesMachine.update({_id: selectedPreMachine}, {$set: {machineConfig: machinePreConfiguration,
-                                                                                        dateStart: dateStart,
-                                                                                        user: user,
-                                                                                        pdiStatus: 2}});
+        // Load Machine Configuration and select config items
 
-            // Load Check List
+        let combineVariant = preSeriesMachine.find({_id: selectedPreMachine},
+                                                        {fields: {config: 1}},
+                                                        {sort: {variant: 1}}).fetch();
+        let k = (combineVariant[0]).config;
 
-            let checkList = images.find().fetch();
-            preSeriesMachine.update({_id: selectedPreMachine}, {$set: {checkItems: checkList}});
-        },
+        k.forEach((variantMarker, i) => {
+            let uniqueId= Random.id();
+                variantPreMachine[i] = variantMarker;
+            let match = variantPreMD.indexOf(variantPreMachine[i]);
+            if (match >= 1) {
+                preConfigStyle[match] = {
+                            _id: uniqueId,
+                            'config': variantPreMD[match],
+                            'configItem': variantPreItem[match],
+                            'imagePath': variantPrePath[match],
+                            machinePreConfigStatus: 0
+                };
+                machinePreConfiguration.push(preConfigStyle[match]);
+            }
+        });
 
+        let checkList = images.find().fetch();
 
-   //------------------------------ Cancel Pre Check ----------------------------------------------
+        // Add all lists to the database after checklist is loaded
 
-        'cancelPreCheck': (preMachine) => {
-            preSeriesMachine.update({_id: preMachine}, {$set: {checkItems: [],
-                                                                                pdiStatus: 0}})
-        },
-
-
-    //-------------------------------  Check point nok or Ok ---------------------------------------------------
-
-    'preCheckNok': (selectedPreMachineId, target, result, user) => {
-        preSeriesMachine.update({_id: selectedPreMachineId, 'checkItems._id': target},
-                               {$set: {'checkItems.$.failureStatus': result,
-                                                'checkItems.$.checkedBy': user}})
+        if (checkList) {
+            preSeriesMachine.upsert({_id: selectedPreMachine},
+                                    {$set: {machineConfig: machinePreConfiguration,
+                                                    checkItems: checkList,
+                                                    dateStart: dateStart,
+                                                    user: user,
+                                                    pdiStatus: 2}});
+        }
     },
+
+
+              // Cancel Pre Check
+
+    'cancelPreCheck': (preMachine) => {
+        preSeriesMachine.update({_id: preMachine}, {$set: {checkItems: [],
+                                                                            machineConfig: [],
+                                                                            counter: [],
+                                                                            progressBar: 0,
+                                                                            user: '',
+                                                                            pdiStatus: 0}})
+    },
+
+
+        //  Config result
+
+    'configPreResult': (id, target, result) => {
+            preSeriesMachine.update({_id: id, 'machineConfig._id': target},
+                {$set: {'machineConfig.$.machinePreConfigStatus': result}});
+    },
+
+
+                //  Check point nok or Ok
+                //  target = image ID
+
+    'preCheckNok': (selectedPreMachineId, targetId, result, user) => {
+        preSeriesMachine.update({_id: selectedPreMachineId, 'checkItems._id': targetId},
+                               {$set: {'checkItems.$.failureStatus': result,
+                                                'checkItems.$.checkedBy': user}});
+        let checkResult = {
+                            id: targetId,
+                            result: result
+                          };
+        let checkCounter = preSeriesMachine.findOne({_id: selectedPreMachineId},
+                                                    {fields: {counter: 1, _id: 0}}).counter;
+
+        if(checkCounter) {
+
+            const foundCheck = checkCounter.find( checkId => checkId.id === targetId);
+
+            if (!foundCheck) {
+                preSeriesMachine.update({_id: selectedPreMachineId},
+                                        {$push: {counter: checkResult}});
+                let counter = preSeriesMachine.findOne({_id: selectedPreMachineId},
+                                                       {fields: {counter: 1, _id: 0}}).counter;
+                let checkPoints = images.find().count();
+                let progress =  ((100 / (checkPoints)) * counter.length).toFixed(2);
+                preSeriesMachine.update({_id: selectedPreMachineId},
+                    {$set: {progressBar: progress}})
+            } else {
+                preSeriesMachine.update({_id: selectedPreMachineId, 'counter.id': targetId},
+                                        {$set: {'counter.$.result': result}});
+            }
+        }
+    },
+
 
    //------------------------------------------------- Add Special Tasks for PDI ------------------------
 
@@ -341,7 +383,9 @@ if(Meteor.isServer){
 
         'addSubComponent': (component_id, newSubComponent) => {
             let newId = Random.id();
-            mainComponents.upsert({_id: component_id}, {$push: {subComponent: {_id: newId, component: newSubComponent}}} )
+            mainComponents.upsert({_id: component_id},
+                                 {$push: {subComponent:
+                                             {_id: newId, component: newSubComponent}}} )
         },
 
 //--------------------------------------------------------  Variants -----------------------------------------------------------------------
@@ -650,7 +694,9 @@ if(Meteor.isServer){
         },
 
         'editRepair': function(editId) {
-          return MachineReady.find({_id: editId}, {fields: {newIssues: 1, checkListIssues: 1 }}).fetch();
+          return MachineReady.find({_id: editId},
+                                   {fields: {newIssues: 1,
+                                            checkListIssues: 1 }}).fetch();
 
         },
 

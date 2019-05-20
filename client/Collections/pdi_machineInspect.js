@@ -222,22 +222,13 @@ Meteor.subscribe('oms');
 
         },
 
-
-
         'click .comp': function () {
             const selected = this._id;
             let textMainComp = this.component;
             Session.set('selectedComponent', selected);
             Session.set('issueComp', textMainComp + ' - ');
         },
-/*
-        'click .subComp': function () {
-             const subComp = this._id;
-             let textMainComp = this.component;
-             Session.set('selectedSub', subComp);
-             Session.set('issueComp', textMainComp + ' - ');
-        },
-*/
+
         'click .openFailure': function () {
             const openFailure = this._id;
             Session.set('openFailure', openFailure);
@@ -299,15 +290,9 @@ Meteor.subscribe('oms');
                 console.log("Lost Machine Number")
             }
             FlowRouter.go('/inspectionStart');
-
         },
     });
 
-    Handlebars.registerHelper('inActive_Input', () => {
-        let inActiveState = Session.get('componentChosen');
-        if(inActiveState === 0) {
-            return 'in-active-button';
-        }
-    });
+
 
 

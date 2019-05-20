@@ -1482,7 +1482,7 @@ table.preTable {
   position: relative; }
 
 tbody.preTbodyHeight {
-  height: 100em;
+  height: 55em;
   width: 80em; }
 
 .button {
@@ -1493,6 +1493,10 @@ tbody.preTbodyHeight {
 
 table, td {
   border: 2px solid #333; }
+
+.progressWidth {
+  margin-left: 50px;
+  width: 80em; }
 
 .mainLayout {
   position: absolute;
