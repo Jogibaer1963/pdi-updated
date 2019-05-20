@@ -100,26 +100,7 @@ Meteor.subscribe('oms');
 
     Template.pdiToDoList.events({
 
-        'submit .batts': (event) => {
-            event.preventDefault();
-            Session.set('selectedPdiMachine', localStorage.getItem('selectedPdi'));
-            const loggedInUser = Session.get('currentLoggedInUser');
-            const pdiMachineId = Session.get('selectedPdiMachineId');
-            const battC13CCA = event.target.batteryC13CCA.value;
-            const battC13Volt = event.target.batteryC13Volt.value;
-            const mtuG001CCA = event.target.mtuG001CCA.value;
-            const mtuG001Volt = event.target.mtuG001Volt.value;
-            const mtuG005CCA = event.target.mtuG005CCA.value;
-            const mtuG005Volt = event.target.mtuG005Volt.value;
-            const mtuG004CCA = event.target.mtuG004CCA.value;
-            const mtuG004Volt = event.target.mtuG004Volt.value;
-            Meteor.call('pdiMachineBattery', pdiMachineId, loggedInUser, battC13CCA, battC13Volt,
-                mtuG001CCA, mtuG001Volt, mtuG005CCA, mtuG005Volt, mtuG004CCA, mtuG004Volt,
-                manBatt_1CCA, manBatt_1Volt, manBatt_2CCA, manBatt_2Volt);
 
-
-
-        },
 
          'submit .omms': (event) => {
             event.preventDefault();
@@ -218,8 +199,6 @@ Meteor.subscribe('oms');
             } else {
                 console.log("Lost Machine Number")
             }
-
-
         },
 
         'click .comp': function () {
@@ -276,6 +255,24 @@ Meteor.subscribe('oms');
             }
             event.target.addWashBay.value = '';
         },
+
+        'submit .batts': (event) => {
+            event.preventDefault();
+            Session.set('selectedPdiMachine', localStorage.getItem('selectedPdi'));
+            const loggedInUser = Session.get('currentLoggedInUser');
+            const pdiMachineId = Session.get('selectedPdiMachineId');
+            const battC13CCA = event.target.batteryC13CCA.value;
+            const battC13Volt = event.target.batteryC13Volt.value;
+            const mtuG001CCA = event.target.mtuG001CCA.value;
+            const mtuG001Volt = event.target.mtuG001Volt.value;
+            const mtuG005CCA = event.target.mtuG005CCA.value;
+            const mtuG005Volt = event.target.mtuG005Volt.value;
+            const mtuG004CCA = event.target.mtuG004CCA.value;
+            const mtuG004Volt = event.target.mtuG004Volt.value;
+            Meteor.call('pdiMachineBattery', pdiMachineId, loggedInUser, battC13CCA, battC13Volt,
+                mtuG001CCA, mtuG001Volt, mtuG005CCA, mtuG005Volt, mtuG004CCA, mtuG004Volt);
+        },
+
 
         'submit .afterPdiFuel': (event) => {
             event.preventDefault();

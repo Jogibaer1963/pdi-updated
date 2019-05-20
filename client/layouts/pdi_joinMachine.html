@@ -15,29 +15,6 @@
             <h2>Machine to Inspect: {{machine}}</h2>
             <h2>Performed by: {{userLoggedIn}}</h2>
         {{/with}}
-        <form class="batts">
-            <label for="batteryC13" class="batteryC13">Battery Volt & CCA</label>
-            <br>
-            <input type="text" class="batteryC13CCA inputSize" id="batteryC13CCA" name="batteryC13CCA" placeholder="Battery C13 CCA" value={{battC13CCA}}>
-            <input type="text" class="batteryC13Volt inputSize" id="batteryC13Volt" name="batteryC13Volt" placeholder="Battery C13 Volt" value={{battC13Volt}}>
-            <br><br>
-            <input type="text" class="batteryC13 inputSize" id="mtuG001CCA" name="mtuG001CCA" placeholder="Battery MTU G001 CCA" value={{mtuG001CCA}}>
-            <input type="text" class="batteryC13 inputSize" id="mtuG001Volt" name="mtuG001Volt" placeholder="Battery MTU G001 Volt" value={{mtuG001Volt}}>
-            <br><br>
-            <input type="text" class="batteryC13 inputSize" id="mtuG005CCA" name="mtuG005CCA" placeholder="Battery MTU G005 CCA" value={{mtuG005CCA}}>
-            <input type="text" class="batteryC13 inputSize" id="mtuG005Volt" name="mtuG005Volt" placeholder="Battery MTU G005 Volt" value={{mtuG005Volt}}>
-            <br><br>
-            <input type="text" class="batteryC13 inputSize" id="mtuG004CCA" name="mtuG004CCA" placeholder="Battery MTU G004 CCA" value={{mtuG004CCA}}>
-            <input type="text" class="batteryC13 inputSize" id="mtuG004Volt" name="mtuG004Volt" placeholder="Battery MTU G004 Volt" value={{mtuG004Volt}}>
-            <br><br>
-            <input type="text" class="batteryC13 inputSize" id="manBatt_1CCA" name="manBatt_1CCA" placeholder="Battery MAN Batt-1 CCA" value={{manBatt_1CCA}}>
-            <input type="text" class="batteryC13 inputSize" id="manBatt_1Volt" name="manBatt_1Volt" placeholder="Battery MAN Batt-1 Volt" value={{manBatt_1Volt}}>
-            <br><br>
-            <input type="text" class="batteryC13 inputSize" id="manBatt_2CCA" name="manBatt_2CCA" placeholder="Battery MAN Batt-2 CCA" value={{manBatt_2CCA}}>
-            <input type="text" class="batteryC13 inputSize" id="manBatt_2Volt" name="manBatt_2Volt" placeholder="Battery MAN Batt-2 Volt" value={{manBatt_2Volt}}>
-            <br><br>
-            <button type="submit" class="btn btn-success buttonBatt">Save Batteries</button><h4>{{battSaved}}</h4><br>
-        </form>
 
         <br><br>
         <form class="omms">
@@ -214,6 +191,29 @@
     <div class="pdiDivider">
         <h1>_____________________</h1>
     </div>
+    <form class="batts">
+        <label for="batteryC13" class="batteryC13">Battery Volt & CCA</label>
+        <br>
+        <input type="text" class="batteryC13CCA inputSize" id="batteryC13CCA" name="batteryC13CCA" placeholder="Battery C13 CCA" value={{battC13CCA}}>
+        <input type="text" class="batteryC13Volt inputSize" id="batteryC13Volt" name="batteryC13Volt" placeholder="Battery C13 Volt" value={{battC13Volt}}>
+        <br><br>
+        <input type="text" class="batteryC13 inputSize" id="mtuG001CCA" name="mtuG001CCA" placeholder="Battery MTU G001 CCA" value={{mtuG001CCA}}>
+        <input type="text" class="batteryC13 inputSize" id="mtuG001Volt" name="mtuG001Volt" placeholder="Battery MTU G001 Volt" value={{mtuG001Volt}}>
+        <br><br>
+        <input type="text" class="batteryC13 inputSize" id="mtuG005CCA" name="mtuG005CCA" placeholder="Battery MTU G005 CCA" value={{mtuG005CCA}}>
+        <input type="text" class="batteryC13 inputSize" id="mtuG005Volt" name="mtuG005Volt" placeholder="Battery MTU G005 Volt" value={{mtuG005Volt}}>
+        <br><br>
+        <input type="text" class="batteryC13 inputSize" id="mtuG004CCA" name="mtuG004CCA" placeholder="Battery MTU G004 CCA" value={{mtuG004CCA}}>
+        <input type="text" class="batteryC13 inputSize" id="mtuG004Volt" name="mtuG004Volt" placeholder="Battery MTU G004 Volt" value={{mtuG004Volt}}>
+        <br><br>
+        <input type="text" class="batteryC13 inputSize" id="manBatt_1CCA" name="manBatt_1CCA" placeholder="Battery MAN Batt-1 CCA" value={{manBatt_1CCA}}>
+        <input type="text" class="batteryC13 inputSize" id="manBatt_1Volt" name="manBatt_1Volt" placeholder="Battery MAN Batt-1 Volt" value={{manBatt_1Volt}}>
+        <br><br>
+        <input type="text" class="batteryC13 inputSize" id="manBatt_2CCA" name="manBatt_2CCA" placeholder="Battery MAN Batt-2 CCA" value={{manBatt_2CCA}}>
+        <input type="text" class="batteryC13 inputSize" id="manBatt_2Volt" name="manBatt_2Volt" placeholder="Battery MAN Batt-2 Volt" value={{manBatt_2Volt}}>
+        <br><br>
+        <button type="submit" class="btn btn-success buttonBatt">Save Batteries</button><h4>{{battSaved}}</h4><br>
+    </form>
     <div>
         <h3 class="configHeader">Pdi finnished</h3>
     </div>
