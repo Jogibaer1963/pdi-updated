@@ -15,9 +15,6 @@ Meteor.subscribe('oms');
             return {machine: selectedPdiMachineNr, userLoggedIn: user};
         },
 
-        selectedProfiCam: function() {
-            return Session.get('selectedProfiCam');
-        },
 
         checkList: function() {
             try {
@@ -47,6 +44,29 @@ Meteor.subscribe('oms');
            }
         },
 
+       // drop down profi cam
+
+
+        'selectedProfiCam': function () {
+            let partNumbers = this._id;
+            let selected = Session.get('selectedValue');
+            if (partNumbers === selected) {
+                Session.set('selectedProfiCam', 1);
+                return 'selected'
+            }
+        },
+
+        profiCam: function() {
+            return Session.get('profiCam');
+        },
+
+        omProfiCam: () => {
+            return oms.find({}).fetch();
+        },
+
+
+        // drop down Components
+
         'selectedComponent': function () {
             let component = this._id;
             let selected = Session.get('selectedComponent');
@@ -60,12 +80,13 @@ Meteor.subscribe('oms');
             return mainComponents.find({}).fetch();
         },
 
-        ommProfiCam: () => {
-            let result = oms.find({}).fetch();
-            console.log(result);
-            return result;
-        },
+        issueComponent: () => {
+            try {
+                return Session.get('issueComp');
+            } catch (e) {
 
+            }
+        },
 
         newIssue: function() {
             try {
@@ -115,7 +136,15 @@ Meteor.subscribe('oms');
 
     Template.pdiToDoList.events({
 
-         'submit .omms': (event) => {
+        'click .profiCam': function () {
+            const selected = this._id;
+            let textProfiCam = this.partNumbers;
+            Session.set('selectedValue', selected);
+            Session.set('profiCam', textProfiCam );
+        },
+
+
+        'submit .omms': (event) => {
             event.preventDefault();
             const loggedInUser = Session.get('currentLoggedInUser');
             const pdiMachineId = Session.get('selectedPdiMachineId');
@@ -210,6 +239,8 @@ Meteor.subscribe('oms');
             }
         },
 
+        // drop down select component
+
         'click .comp': function () {
             const selected = this._id;
             let textMainComp = this.component;
@@ -298,5 +329,10 @@ Meteor.subscribe('oms');
     });
 
 
-
+Handlebars.registerHelper('inActive_Input', () => {
+    let inActiveState = Session.get('componentChosen');
+    if(inActiveState === 0) {
+        return 'in-active-button';
+    }
+});
 

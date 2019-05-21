@@ -4,210 +4,164 @@ Template.joinPdiMachine.helpers({
 
 
     'joinMachineNow': function () {
-        const user = Meteor.user().username;
-        Session.set('currentLoggedInUser', user);
-        Session.set('selectedPdiMachineId', localStorage.getItem('joinMachine'));
-        const selectedPdiMachineId = Session.get('selectedPdiMachineId');
-        const machineId = MachineReady.findOne({_id: selectedPdiMachineId}).machineId;
-        Session.set('selectedPdiMachineNr', machineId);
-        return {machine: machineId, userLoggedIn: user};
+        try {
+            const user = Meteor.user().username;
+            Session.set('currentLoggedInUser', user);
+            Session.set('selectedPdiMachineId', localStorage.getItem('joinMachine'));
+            const selectedPdiMachineId = Session.get('selectedPdiMachineId');
+            const machineId = MachineReady.findOne({_id: selectedPdiMachineId}).machineId;
+            Session.set('selectedPdiMachineNr', machineId);
+            return {machine: machineId, userLoggedIn: user};
+        } catch (e) {}
     },
 
     battSaved: function() {
-        Session.set('batteries', '');
-        const machineId = Session.get('selectedPdiMachineNr');
-        if(machineId) {
-            const result = MachineReady.findOne({machineId: machineId}).batteries;
-            Session.set('batteries', result);
-            if (result) {
-                return "Battery successfull saved";
-            } else {
-                return "Error, Battery not saved";
+        try {
+            Session.set('batteries', '');
+            const machineId = Session.get('selectedPdiMachineNr');
+            if(machineId) {
+                const result = MachineReady.findOne({machineId: machineId}).batteries;
+                Session.set('batteries', result);
+                if (result) {
+                    return "Battery successfull saved";
+                } else {
+                    return "Error, Battery not saved";
+                }
             }
-        }
+        } catch (e) {}
     },
 
     battC13CCA: () => {
         try {
             return Session.get('batteries').battC13CCA;
-        } catch (e) {
-
-        }
+        } catch (e) {}
     },
 
     battC13Volt: () => {
         try {
             return Session.get('batteries').battC13Volt;
-        } catch (e) {
-
-        }
+        } catch (e) {}
     },
 
     mtuG001CCA: () => {
         try {
             return Session.get('batteries').mtuG001CCA;
-        } catch (e) {
-
-        }
+        } catch (e) {}
     },
 
     mtuG001Volt: () => {
         try {
             return Session.get('batteries').mtuG001Volt;
-        } catch (e) {
-
-        }
+        } catch (e) {}
     },
 
     mtuG005CCA: () => {
         try {
             return Session.get('batteries').mtuG005CCA;
-        } catch (e) {
-
-        }
+        } catch (e) {}
     },
 
     mtuG005Volt: () => {
         try {
             return Session.get('batteries').mtuG005Volt;
-        } catch (e) {
-
-        }
+        } catch (e) {}
     },
 
     mtuG004CCA: () => {
         try {
             return Session.get('batteries').mtuG004CCA;
-        } catch (e) {
-
-        }
+        } catch (e) {}
     },
 
     mtuG004Volt: () => {
         try {
             return Session.get('batteries').mtuG004Volt;
-        } catch (e) {
-
-        }
+        } catch (e) {}
     },
 
-    manBatt_1CCA: () => {
-        try {
-            return Session.get('batteries').manBatt_1CCA;
-        } catch (e) {
-
-        }
-    },
-
-    manBatt_1Volt: () => {
-        try {
-            return Session.get('batteries').manBatt_1Volt;
-        } catch (e) {
-
-        }
-    },
-
-    manBatt_2CCA: () => {
-        try {
-            return Session.get('batteries').manBatt_2CCA;
-        } catch (e) {
-
-        }
-    },
-
-    manBatt_2Volt: () => {
-        try {
-            return Session.get('batteries').manBatt_2Volt;
-        } catch (e) {
-
-        }
-    },
 
     ommSaved: function() {
-        const machineId = Session.get('selectedPdiMachineNr');
-        result2 = MachineReady.findOne({machineId: machineId}).omms;
-        Session.set('omms', result2);
-        if(result2) {
-            return "OMM's successfull saved";
-        } else {
-            return "Error, OMM not saved";
-        }
+        try {
+            const machineId = Session.get('selectedPdiMachineNr');
+            result2 = MachineReady.findOne({machineId: machineId}).omms;
+            Session.set('omms', result2);
+            if(result2) {
+                return "OMM's successfull saved";
+            } else {
+                return "Error, OMM not saved";
+            }
+        } catch (e) {}
     },
 
     fuelStart: () => {
         try {
             return Session.get('omms').fuelStart;
-        } catch (e) {
-           }
+        } catch (e) {}
     },
 
     ommMain: () => {
         try {
             return Session.get('omms').ommMain;
-        } catch (e) {
-            }
+        } catch (e) {}
     },
 
     ommSupp: () => {
         try {
             return Session.get('omms').ommSupp;
-        } catch (e) {
-        }
+        } catch (e) {}
     },
 
     ommUnload: () => {
         try {
             return Session.get('omms').ommUnload;
-        } catch (e) {
-        }
+        } catch (e) {}
     },
 
     ommProfiCam: () => {
         try {
             return Session.get('omms').ommProfiCam;
-        } catch (e) {
-        }
+        } catch (e) {}
     },
 
     ommCebis: () => {
         try {
             return Session.get('omms').ommCebis;
-        } catch (e) {
-        }
+        } catch (e) {}
     },
 
     ommTouch: () => {
         try {
             return Session.get('omms').ommTouch;
-        } catch (e) {
-        }
+        } catch (e) {}
     },
 
     ommTerra: () => {
         try {
             return Session.get('omms').ommTerra;
-        } catch (e) {
-        }
+        } catch (e) {}
     },
 
     ommDual: () => {
         try {
             return Session.get('omms').ommDual;
-        } catch (e) {
-        }
+        } catch (e) {}
     },
 
 
     machineConfig: function() {
-        const machineId = Session.get('selectedPdiMachineNr');
-        result = MachineReady.findOne({machineId: machineId}).machineConfig;
-        return result;
+        try {
+            const machineId = Session.get('selectedPdiMachineNr');
+            result = MachineReady.findOne({machineId: machineId}).machineConfig;
+            return result;
+        }  catch (e) {}
     },
 
     checkList: function() {
-        const machineId = Session.get('selectedPdiMachineNr');
-        result = MachineReady.findOne({machineId: machineId}).checkList;
-        return result;
+        try {
+            const machineId = Session.get('selectedPdiMachineNr');
+            result = MachineReady.findOne({machineId: machineId}).checkList;
+            return result;
+        }  catch (e) {}
     },
 
     'selectedComponent': function () {
@@ -219,34 +173,15 @@ Template.joinPdiMachine.helpers({
         }
     },
 
-    'selectedSubComponent': function() {
-        let subComponent = this._id;
-        let selectedSub = Session.get('selectedSub');
-        if (subComponent === selectedSub) {
-            return 'selected';
-        }
-    },
 
     mainComponent: function () {
         return mainComponents.find({}).fetch();
     },
 
-    subComp: function () {
-        let id = Session.get('selectedComponent');
-        Meteor.call('subComponent', id, (error, result) => {
-            if(error) {
-                console.log('error',error);
-            } else {
-                Session.set('componentResult', result);
-            }
-        });
-        return Session.get('componentResult');
-    },
 
     issueComponent: () => {
         try {
-            let k = Session.get('issueComp');
-            return k;
+            return Session.get('issueComp');
         } catch (e) {
 
         }
@@ -254,9 +189,11 @@ Template.joinPdiMachine.helpers({
 
 
     newIssue: function() {
-        const machineId = Session.get('selectedPdiMachineNr');
-        result = MachineReady.findOne({machineId: machineId}).newIssues;
-        return result;
+        try {
+            const machineId = Session.get('selectedPdiMachineNr');
+            result = MachineReady.findOne({machineId: machineId}).newIssues;
+            return result;
+        }  catch (e) {}
     },
 
 });

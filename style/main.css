@@ -808,10 +808,6 @@ table.pdiTable {
   position: relative;
   top: 1em; }
 
-#om-profi-cam {
-  left: -180px;
-  top: -36px; }
-
 .configButtonOK {
   bottom: 0;
   float: left;
@@ -894,10 +890,6 @@ table.pdiTable {
 
 .mainComponentsPos {
   left: 3.6em;
-  position: relative; }
-
-.subComponentPos {
-  left: 22em;
   position: relative; }
 
 .dropDown {

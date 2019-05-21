@@ -40,10 +40,10 @@
                  {{#dropdownTrigger  name="omProfiCam"}}
                      <button class="loginSubmit omInputButton">OMM Profi Cam</button>
                  {{/dropdownTrigger}}
-                 {{#dropdown name="omProfiCam" id="dropDownProfiCam" align="left"}}
+                 {{#dropdown name="omProfiCam" id="dropDownProfiCam" align="left" left="-180"}}
                      <tbody class="rTable">
-                     {{#each ommProfiCam}}
-                         <tr class="comp {{selectedProfiCam}}">
+                     {{#each omProfiCam}}
+                         <tr class="profiCam {{selectedProfiCam}}">
                              <td class="dropDown">{{partNumbers}}</td>
                          </tr>
                      {{/each}}
@@ -52,7 +52,7 @@
              </div>
 
            <br>
-           <input type="text" class="omInput inputSize" id="locationId" name="omProfiCam" placeholder="Profi Cam">
+           <input type="text" class="omInput inputSize" id="locationId" name="omProfiCam" placeholder="Profi Cam" value="{{profiCam}}">
            <br>
            <label for="cebisOmm">Cebis Mobil</label>
            <br>
@@ -70,16 +70,11 @@
            <br>
            <input type="text" class="omInput inputSize" id="dualTire" name="dualTire" placeholder="Dual Tires">
          </div>
-
             <br><br>
            <button type="submit" class="btn btn-success buttonBatt">Save OMM's</button><h4>{{ommSaved}}</h4><br>
        </form>
-
     </div>
     <br><br>
-    <td class="pdiPDIField {{getStatusColor pdiStatus}}"
-                style="background-color:{{getStatusColor pdiStatus}};
-                color:{{getStatusColor pdiStatus}}">{{pdiStatus}}</td>
     <div class="configTable">
        <h3 class="configHeader">Configuration</h3>
          <table class="pdiCheckList">

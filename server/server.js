@@ -359,7 +359,7 @@ if(Meteor.isServer){
             })
 
         },
-
+/*
         'subComponent': (id) => {
             if(id) {
                 let k = mainComponents.findOne({_id: id});
@@ -374,7 +374,7 @@ if(Meteor.isServer){
                 });
                 return result;
             }
-        },
+        }, */
 
         'addNewComponent': (newComponent) => {
             let newId = Random.id();
