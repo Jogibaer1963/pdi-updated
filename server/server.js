@@ -357,24 +357,7 @@ if(Meteor.isServer){
                 newHeadYear.insert(machineToMove);
                 MachineReady.remove({_id: result});
             })
-
         },
-/*
-        'subComponent': (id) => {
-            if(id) {
-                let k = mainComponents.findOne({_id: id});
-                let result = k.subComponent;
-                result.sort((a,b) => {
-                    if (a.component > b.component) {
-                        return 1;
-                    }
-                    if (a.component < b.component) {
-                        return 0;
-                    }
-                });
-                return result;
-            }
-        }, */
 
         'addNewComponent': (newComponent) => {
             let newId = Random.id();
