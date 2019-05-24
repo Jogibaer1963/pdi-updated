@@ -157,10 +157,8 @@ if(Meteor.isServer){
 
     //-----------------------------------------Called 1 time to generate the Checklist Data base --------------
     'generateDataBase': () => {
-        console.log('Server called');
         for (i = 1; i <= 263; i++) {
             let uniqueId= Random.id();
-            console.log(i, uniqueId);
             images.insert({
                 _id: uniqueId,
                 imagePath: "Slide"+ i + ".JPG",
