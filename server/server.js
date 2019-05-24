@@ -274,7 +274,8 @@ if(Meteor.isServer){
                                                                             counter: [],
                                                                             progressBar: 0,
                                                                             user: '',
-                                                                            pdiStatus: 0}})
+                                                                            pdiStatus: 0,
+                                                                            newIssues: ''}})
     },
 
 
