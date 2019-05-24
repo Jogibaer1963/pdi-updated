@@ -57,7 +57,7 @@
        <tbody>
          {{#each showList}}
             <tr class="showPdiResult {{selectedClass}}">
-                <td class="pdiMachineField">{{machineId}}{{newHeadId}}</td>
+                <td class="pdiMachineField">{{machineId}}{{newHeadId}} {{preMachineId}}</td>
                 <td class="pdiShipDate">{{date}}</td>
                 <td class="pdiRepField {{getStatusColor pdiStatus}}" style="background-color:{{getStatusColor pdiStatus}}; color:{{getStatusColor pdiStatus}}">{{pdiStatus}}</td>
             </tr>
@@ -69,76 +69,92 @@
 <template name="pdiInspectList">
     <div class="pdiYear">
         <h3>PDI Year: {{year}}</h3>
-
     </div>
- <div class="container">
-     <div class="printList">
-        {{#each listContent}}
-            <div>
-               <h3>Machine Id : {{machineId}}</h3>
-               <h3>PDI performed by {{pdiPerformer}} {{user}} |  Pdi-Date: {{startPdiDate}}</h3>
-            </div>
-            <div class="printList">
-              {{#each machineConfig}}
+     <div class="container">
+         <div class="printList">
+            {{#each listContent}}
                 <div>
-                   <h4>{{config}} : {{configItem}}</h4>
+                   <h3>Machine Id : {{machineId}} {{preMachineId}}</h3>
+                   <h3>PDI performed by {{pdiPerformer}} {{user}} |  Pdi-Date: {{startPdiDate}} {{dateStart}}</h3>
                 </div>
-              {{/each }}
-                <h4>---------------------------------------------------------------------------</h4>
-            </div>
+                <div class="printList">
+                  {{#each machineConfig}}
+                    <div>
+                       <h4>{{config}} : {{configItem}}</h4>
+                    </div>
+                  {{/each }}
+                    <h4>---------------------------------------------------------------------------</h4>
+                </div>
+                <div class="printList">
+                   <h2>Operator Maintenance Manual</h2>
+                    <h3>Omm Main : {{omms.ommMain}} {{ommMain}}</h3>
+                    <h3>Omm Supplemental : {{omms.ommSupp}}</h3>
+                    <h3>Omm Unload : {{omms.ommUnload}}</h3>
+                    <h3>Omm Cebis : {{omms.ommCebis}}</h3>
+                    <h3>Omm Cebis Touch : {{omms.ommCebisTouch}}</h3>
+                    <h3>Omm Terra Track : {{omms.ommTerra}}</h3>
+                    <h3>Omm Dual : {{omms.ommDuals}}</h3>
+                    <h3>Omm Profi Cam : {{omms.ommProfiCam}}</h3>
+                    <h4>---------------------------------------------------------------------------</h4>
+                </div>
+                <div class="printList">
+                    <h3>Battery result</h3>
+                    <br>
+                        <h4>{{batteries.battC13CCA}} Amp      {{batteries.battC13Volt}} Volt</h4>
+                    <h4>------------------------------------------------</h4>
+                        <h4>G001: {{batteries.mtuG001CCA}} Amp    {{batteries.mtuG001Volt}} Volt</h4>
+                        <h4>------------------------------------------------</h4>
+                        <h4>G005: {{batteries.mtuG005CCA}} Amp    {{batteries.mtuG005Volt}} Volt</h4>
+                        <h4>------------------------------------------------</h4>
+                        <h4>G004: {{batteries.mtuG004CCA}} Amp    {{batteries.mtuG004Volt}} Volt</h4>
+                    <h4>------------------------------------------------</h4>
+                        <h4>CCA: {{batteries.manBatt_1CCA}} Amp    {{batteries.manBatt_1Volt}} Volt</h4>
+                    <h4>------------------------------------------------</h4>
+                        <h4>CCA: {{batteries.manBatt_2CCA}} Amp    {{batteries.manBatt_2Volt}} Volt</h4>
+                    <h4>---------------------------------------------------------------------------</h4>
+                </div>
+                <div class="printList">
+                   <h3>Repair List:</h3>
+                      {{#each newIssues}}
+                          <div>
+                           <h4>{{siNumber}} {{errorDescription}}</h4>
+                          </div>
+                      {{/each}}
+                      {{#each machineConfigIssues}}
+                          <h4>Check config {{configItem}}</h4>
+                      {{/each}}
+                </div>
+                <div class="printList">
+                   {{#each checkList}}
+                      {{#if failStatus }}
+                         <h4>{{errorDescription}}</h4>
+                      {{/if}}
+                   {{/each}}
+                </div>
+                <div class="printList">
+                    {{#each specialPdiItems}}
+                        <h4>{{specialItem}}</h4>
+                    {{/each}}
+                </div>
+            {{/each}}
+             <br><br><br>
+             <!-- Pre Series Output -->
+            <div>
+                 {{#each listOutput}}
+                     <tr class="preTableCheckList">
+                         <td class="{{getMachineConfigStatus failureStatus}}"
+                             style="background-color:{{getMachineConfigStatus failureStatus}}">
+                             <div class="image">
+                                 <img src={{imagePath}}>
 
-            <div class="printList">
-               <h2>Operator Maintenance Manual</h2>
-                <h3>Omm Main : {{omms.ommMain}} {{ommMain}}</h3>
-                <h3>Omm Supplemental : {{omms.ommSupp}}</h3>
-                <h3>Omm Unload : {{omms.ommUnload}}</h3>
-                <h3>Omm Cebis : {{omms.ommCebis}}</h3>
-                <h3>Omm Cebis Touch : {{omms.ommCebisTouch}}</h3>
-                <h3>Omm Terra Track : {{omms.ommTerra}}</h3>
-                <h3>Omm Dual : {{omms.ommDuals}}</h3>
-                <h3>Omm Profi Cam : {{omms.ommProfiCam}}</h3>
-                <h4>---------------------------------------------------------------------------</h4>
+                                 <button class="btn btn-success button PreOk" id={{id}}>OK</button>
+
+                                 <button class="btn btn-danger button PreNok" id={{id}}>NOK</button>
+                             </div>
+                         </td>
+                     </tr>
+                 {{/each}}
             </div>
-            <div class="printList">
-                <h3>Battery result</h3>
-                <br>
-                    <h4>{{batteries.battC13CCA}} Amp      {{batteries.battC13Volt}} Volt</h4>
-                <h4>------------------------------------------------</h4>
-                    <h4>G001: {{batteries.mtuG001CCA}} Amp    {{batteries.mtuG001Volt}} Volt</h4>
-                    <h4>------------------------------------------------</h4>
-                    <h4>G005: {{batteries.mtuG005CCA}} Amp    {{batteries.mtuG005Volt}} Volt</h4>
-                    <h4>------------------------------------------------</h4>
-                    <h4>G004: {{batteries.mtuG004CCA}} Amp    {{batteries.mtuG004Volt}} Volt</h4>
-                <h4>------------------------------------------------</h4>
-                    <h4>CCA: {{batteries.manBatt_1CCA}} Amp    {{batteries.manBatt_1Volt}} Volt</h4>
-                <h4>------------------------------------------------</h4>
-                    <h4>CCA: {{batteries.manBatt_2CCA}} Amp    {{batteries.manBatt_2Volt}} Volt</h4>
-                <h4>---------------------------------------------------------------------------</h4>
-            </div>
-            <div class="printList">
-               <h3>Repair List:</h3>
-                  {{#each newIssues}}
-                      <div>
-                       <h4>{{siNumber}} {{errorDescription}}</h4>
-                      </div>
-                  {{/each}}
-                {{#each machineConfigIssues}}
-                    <h4>Check config {{configItem}}</h4>
-                {{/each}}
-            </div>
-            <div class="printList">
-               {{#each checkList}}
-                  {{#if failStatus }}
-                     <h4>{{errorDescription}}</h4>
-                  {{/if}}
-               {{/each}}
-            </div>
-            <div class="printList">
-                {{#each specialPdiItems}}
-                    <h4>{{specialItem}}</h4>
-                {{/each}}
-            </div>
-     {{/each}}
+         </div>
      </div>
- </div>
 </template>

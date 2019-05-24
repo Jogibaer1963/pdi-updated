@@ -32,10 +32,8 @@ Template.preCheckToDoList.helpers({
     countDown: () => {
         const selectedPreMachineId = Session.get('selectedPreMachine');
         try {
-            let result =  preSeriesMachine.findOne({_id: selectedPreMachineId},
+           return preSeriesMachine.findOne({_id: selectedPreMachineId},
                 {fields: {progressBar: 1}}).progressBar;
-            console.log(result);
-            return result;
         } catch (e) {
         }
 
@@ -55,7 +53,6 @@ Template.preCheckToDoList.helpers({
                             imagePath : path1 + resultExtract.imagePath,
                             position : resultExtract.position,
                             issue : resultExtract.issueDescription};
-
                     return checkResult;
             });
                    }
@@ -76,6 +73,30 @@ Template.preCheckToDoList.helpers({
 
     mainComponent: function () {
         return mainComponents.find({}).fetch();
+    },
+
+    issueComponent: () => {
+        try {
+            return Session.get('issueComp');
+        } catch (e) {
+
+        }
+    },
+
+    newIssue: function() {
+        try {
+            const machineId = Session.get('selectedPreMachine');
+            return preSeriesMachine.findOne({_id: machineId}).newIssues;
+        } catch (e) {
+        }
+    },
+
+    'selectedPreFailure': function(){
+        const failure = this._id;
+        const selectedFailure = Session.get('openPreFailure');
+        if (failure === selectedFailure) {
+            return "selected";
+        }
     },
 
 });
@@ -125,6 +146,41 @@ Template.preCheckToDoList.events({
         Session.set('selectedComponent', selected);
         Session.set('issueComp', textMainComp + ' - ');
     },
+
+    'submit .addNewIssue': (e) => {
+        e.preventDefault();
+        const selectedPdiMachineId = Session.get('selectedPreMachine');
+        let addNewFailure = e.target.addIssue.value;
+            Meteor.call('addNewPreFailure', selectedPdiMachineId, addNewFailure);
+        e.target.addIssue.value = '';
+        Session.set('componentChosen', 0);
+        Session.set('selectedComponent', '');
+        Session.set('issueComp', '');
+    },
+
+    'click .openPreFailure': function () {
+        const openFailure = this._id;
+        Session.set('openPreFailure', openFailure);
+    },
+
+    'click .deletePreRepair': () => {
+        event.preventDefault();
+        const selectedPdiMachineId = Session.get('selectedPreMachine');
+        const openFailure = Session.get('openPreFailure');
+        if(selectedPdiMachineId) {
+            Meteor.call('removePreFailure', selectedPdiMachineId, openFailure);
+        } else {
+            console.log('Lost Machine Number');
+        }
+    },
+
+    'click .finished': (e) => {
+        e.preventDefault();
+        const selectedId = Session.get('selectedPreMachine');
+        Meteor.call('preSeriesFinished', selectedId);
+        FlowRouter.go('/preSeriesStart');
+
+     }
 
 });
 

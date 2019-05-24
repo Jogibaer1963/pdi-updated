@@ -36,6 +36,13 @@ Template.preInspection.events({
         Meteor.call('cancelPreCheck', preMachine);
     },
 
+    'click .joinPreCheck': (e) => {
+        e.preventDefault();
+        const preMachine = Session.get('selectedPreMachine');
+    //    Meteor.call('joinPreCheck', preMachine);
+        FlowRouter.go('preSeriesInspect');
+    },
+
    'submit .submitPre': (e) => {
        e.preventDefault();
        let preMachine = e.target.preMachine.value;

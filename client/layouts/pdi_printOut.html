@@ -96,7 +96,22 @@
                                            <td class="pdiSignOffField"></td>
                                        </tr>
                                    {{/each}}
+                                   <div>
+                                       {{#each listOutput}}
+                                           <tr class="preTableCheckList">
+                                               <td class="{{getMachineConfigStatus failureStatus}}"
+                                                   style="background-color:{{getMachineConfigStatus failureStatus}}">
+                                                   <div class="image">
+                                                       <img src={{imagePath}}>
 
+                                                       <button class="btn btn-success button PreOk" id={{id}}>OK</button>
+
+                                                       <button class="btn btn-danger button PreNok" id={{id}}>NOK</button>
+                                                   </div>
+                                               </td>
+                                           </tr>
+                                       {{/each}}
+                                   </div>
                             </tbody>
                         </table>
                 </div>

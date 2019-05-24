@@ -322,6 +322,19 @@ if(Meteor.isServer){
         }
     },
 
+    'addNewPreFailure': (id, addNewFailure) => {
+        let uniqueId = Random.id();
+        preSeriesMachine.upsert({_id: id},
+            {$push: {newIssues: {_id: uniqueId, checkStatus: true, errorDescription: addNewFailure}}});
+    },
+
+    'removePreFailure': (id, openFailure) => {
+        preSeriesMachine.update({_id: id}, {$pull: {newIssues : {_id: openFailure}}});
+    },
+
+    'preSeriesFinished': (id) => {
+        preSeriesMachine.update({_id: id}, {$set: {pdiStatus: 1}});
+    },
 
    //------------------------------------------------- Add Special Tasks for PDI ------------------------
 

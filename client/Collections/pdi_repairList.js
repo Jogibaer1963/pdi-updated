@@ -2,24 +2,34 @@ Meteor.subscribe('dropDownHistoricMachines');
 Meteor.subscribe("machineReadyToGo_2017");
 Meteor.subscribe("machineReadyToGo_2018");
 Meteor.subscribe("machineReadyToGo_2016");
+Meteor.subscribe("preSeriesMachine");
+
+Session.set('selectedPdiMachine', '');
+Session.set('selectedPreMachine', '');
 
     Template.pdi_repairList.helpers({
 
         showList: function() {
-            event.preventDefault();
             let collectionName = Session.get('collectionName');
             if (collectionName === '2016') {
                 Session.set('year', '2016');
-                return  machineReadyToGo_2016.find({machineId: {$gt:'C4700000'}}, {sort: {date: -1}});
+                return  machineReadyToGo_2016.find({machineId: {$gt:'C4700000'}},
+                                                   {sort: {date: -1}});
             } else if (collectionName === '2017') {
                 Session.set('year', '2017');
-                return  machineReadyToGo_2017.find({machineId: {$gt:'C4700000'}}, {sort: {date: -1}});
+                return  machineReadyToGo_2017.find({machineId: {$gt:'C4700000'}},
+                                                    {sort: {date: -1}});
             } else if (collectionName === '2018') {
                 Session.set('year', '2018');
-                return  machineReadyToGo_2018.find({machineId: {$gt:'C4700000'}}, {sort: {date: -1}});
-            } else {
+                return  machineReadyToGo_2018.find({machineId: {$gt:'C4700000'}},
+                                                   {sort: {date: -1}});
+            } else if (collectionName === '2019') {
                 Session.set('year', '2019');
-                return  MachineReady.find({machineId: {$gt:'C4700000'}}, {sort: {date: -1}});
+                return  MachineReady.find({machineId: {$gt:'C4700000'}},
+                                          {sort: {date: -1}});
+            } else if (collectionName === 'C8x-pre-Series' ) {
+                Session.set('year', 'Pre Series');
+                return preSeriesMachine.find({}, {sort: {preMachineId: 1}}).fetch();
             }
         },
 
@@ -58,6 +68,12 @@ Meteor.subscribe("machineReadyToGo_2016");
         'click .showPdiResult': function() {
             const pdiMachine = this._id;
             Session.set('selectedPdiMachine', pdiMachine);
+        },
+
+        'click .printButton': (e) => {
+            e.preventDefault();
+            FlowRouter.go('/pdi_printOut');
+
         },
 
         'click #buttonDownload': function () {
@@ -101,7 +117,6 @@ Meteor.subscribe("machineReadyToGo_2016");
                 case '2016':
                     let result =  machineReadyToGo_2016.find({_id: pdiMachine}).fetch();
                     let pdiTime = result._id;
-                    console.log(result, pdiTime);
                 break;
                 case '2017':
                     return  machineReadyToGo_2017.find({_id: pdiMachine});
@@ -112,13 +127,42 @@ Meteor.subscribe("machineReadyToGo_2016");
                 case '2019':
                     return  MachineReady.find({_id: pdiMachine});
                 break;
+                case 'Pre Series':
+                    return preSeriesMachine.find({_id: pdiMachine},
+                        {sort: {preMachineId: 1}});
             }
 
         },
 
         year: () => {
             return Session.get('year');
-        }
+        },
+
+        listOutput: () => {
+            const selectedPreMachineId = Session.get('selectedPdiMachine');
+            let checkResult = {} ;
+            try {
+                const result = preSeriesMachine.findOne({_id: selectedPreMachineId},
+                    {fields: {checkItems: 1}}).checkItems;
+                const resultArray = result.filter((fail) => {
+                    return fail.failureStatus === 2;
+                });
+
+                let path1= "http://192.168.0.109:3300/images/";
+                return returnArray = resultArray.map(resultExtract => {
+                    checkResult = {id : resultExtract._id,
+                        active: resultExtract.activeStatus,
+                        failureStatus: resultExtract.failureStatus,
+                        imagePath : path1 + resultExtract.imagePath,
+                        position : resultExtract.position,
+                        issue : resultExtract.issueDescription};
+                    return checkResult;
+                });
+
+            }
+            catch (e) {
+            }
+        },
 
     });
 

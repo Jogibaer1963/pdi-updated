@@ -63,16 +63,13 @@
                         <tr class="preTableCheckList">
                             <td class="{{getMachineConfigStatus failureStatus}}"
                                 style="background-color:{{getMachineConfigStatus failureStatus}}">
+                                <div class="image">
+                                    <img src={{imagePath}}>
 
-                                    <div class="image">
-                                        <img src={{imagePath}}>
+                                    <button class="btn btn-success button PreOk" id={{id}}>OK</button>
 
-                                        <button class="btn btn-success button PreOk" id={{id}}>OK</button>
-
-                                        <button class="btn btn-danger button PreNok" id={{id}}>NOK</button>
-
-                                    </div>
-
+                                    <button class="btn btn-danger button PreNok" id={{id}}>NOK</button>
+                                </div>
                             </td>
                         </tr>
                     {{/each}}
@@ -117,7 +114,7 @@
             <table class="blueTable newIssuesTable " cellpadding="10">
                 <tbody>
                 {{#each newIssue}}
-                    <tr class="openFailure {{selectedFailure}}">
+                    <tr class="openPreFailure {{selectedPreFailure}}">
                         <td class="pdiComments ">{{errorDescription}}</td>
                     </tr>
                 {{/each}}
@@ -126,15 +123,14 @@
         </div>
     <br><br>
         <div class="issueField">
-            <button type="button" class="btn btn-danger deleteRepair">Delete selected repair</button>
+            <button type="button" class="btn btn-danger deletePreRepair">Delete selected repair</button>
         </div>
         <div class="pdiDivider">
             <h1>_____________________</h1>
         </div>
         <div>
-            <h3 class="configHeader">Pdi finnished</h3>
-                    <button type="submit" class="btn btn-success addIssueText">Submit and back to over view</button>
+            <h3 class="configHeader">Pre Series Inspection finished</h3>
+               <button class="btn btn-success finished" type="submit">Save and back </button>
         </div>
     </div>
-
 </template>
