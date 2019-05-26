@@ -1,14 +1,14 @@
 
 <template name="pdi_printOut">
-        <div class="printoutMargin">
+        <div class="printoutMargin print">
             {{#each listContent}}
                 <div>
                    <div>
-                      <h4>Machine Id : {{machineId}}</h4>
-                      <h4>PDI performed by {{pdiPerformer}}</h4>
+                      <h4>Machine Id : {{preMachineId}} {{machineId}}</h4>
+                      <h4>PDI performed by {{pdiPerformer}} {{user}}</h4>
                    </div>
                    <br>
-                   <div class="">
+                   <div class="configPrint">
                       {{#each machineConfig}}
                           <div>
                               {{config}} : {{configItem}}
@@ -19,13 +19,10 @@
                 <div id="footer">
                     <h6>Released by:  Mroczek, Aaron  -  Date:  11.04.2018  - Version: 1.0</h6>
                     <h6>Printed copies are not under control, the CLAAS BPM contains the controlled version</h6>
-                    <h6>Title:  Quality – PDI Checklist Template</h6>
+                    <h6>Title:  Quality – PDI Checklist Template  Pdi Machine: {{machineId}} {{preMachineId}}</h6>
                 </div>
-                  <p style="page-break-after: always;">&nbsp;</p>
-
-                  <p style="page-break-before: always;">&nbsp;</p>
+                <p style="page-break-after: always;"></p>
                 <div>
-                    <h4>Machine Id : {{machineId}}</h4>
                     <div class="">
                        <h3>Operator Maintenance Manual</h3>
                        <h4>Omm Main : {{omms.ommMain}}</h4>
@@ -55,67 +52,45 @@
                        <h4>CCA: {{batteries.manBatt_2CCA}} Amp    {{batteries.manBatt_2Volt}} Volt</h4>
                     </div>
                 </div>
-
-                   <p style="page-break-after: always;">&nbsp;</p>
-                   <p style="page-break-before: always;">&nbsp;</p>
+        <p style="page-break-after: always;"></p>
                 <div>
-                    <h4>Machine Id : {{machineId}}</h4>
-                    <h3>Repair List:</h3>
-                    <br>
-                        <table class="printOutTableWidth " cellpadding="10">
-                            <tbody class="tbodyOverflow">
-                               {{#each newIssues}}
-                                  <tr>
-                                     <td class="pdiCommentsPrintOut">{{siNumber}} {{errorDescription}}</td>
-                                     <td class="pdiEmptyField"></td>
-                                     <td class="pdiSignOffField"></td>
-                                   </tr>
-                               {{/each}}
-                               {{#each machineConfigIssues}}
-                                   <tr>
-                                     <td class="pdiCommentsPrintOut">Check config {{configItem}}</td>
-                                     <td class="pdiEmptyField"></td>
-                                     <td class="pdiSignOffField"></td>
-                                   </tr>
-                               {{/each}}
-                               {{#each checkList}}
-                                   {{#if failStatus}}
-                                        <tr>
-                                           <td class="pdiComments">{{errorDescription}}</td>
-                                           <td class="pdiEmptyField"></td>
-                                           <td class="pdiSignOffField"></td>
-                                        </tr>
-                                   {{/if}}
-                               {{/each}}
-                               <p>
-                               </p>
-                                   {{#each specialPdiItems}}
-                                       <tr>
-                                           <td class="pdiCommentsPrintOut">{{specialItem}}</td>
-                                           <td class="pdiEmptyField"></td>
-                                           <td class="pdiSignOffField"></td>
-                                       </tr>
-                                   {{/each}}
-                                   <div>
-                                       {{#each listOutput}}
-                                           <tr class="preTableCheckList">
-                                               <td class="{{getMachineConfigStatus failureStatus}}"
-                                                   style="background-color:{{getMachineConfigStatus failureStatus}}">
-                                                   <div class="image">
-                                                       <img src={{imagePath}}>
-
-                                                       <button class="btn btn-success button PreOk" id={{id}}>OK</button>
-
-                                                       <button class="btn btn-danger button PreNok" id={{id}}>NOK</button>
-                                                   </div>
-                                               </td>
-                                           </tr>
-                                       {{/each}}
-                                   </div>
-                            </tbody>
+                    <div class="printList">
+                        <h3>Repair List:</h3>
+                        <table class="printOutTable">
+                            {{#each newIssues}}
+                                    <tr class="tableHeight">
+                                        <td class="tableWidthError"><h5>{{siNumber}} {{errorDescription}}</h5></td>
+                                        <td class="tableWidthComment"></td>
+                                        <td class="tableWidthSignOff"></td>
+                                    </tr>
+                            {{/each}}
                         </table>
+                    </div>
+                    <div class="printList">
+                        {{#each checkList}}
+                            {{#if failStatus }}
+                                <h4>{{errorDescription}}</h4>
+                            {{/if}}
+                        {{/each}}
+                    </div>
+                    <div class="printList">
+                        {{#each specialPdiItems}}
+                            <h4>{{specialItem}}</h4>
+                        {{/each}}
+                    </div>
                 </div>
             {{/each}}
+            <br><br><br>
+        <p style="page-break-after: always;">&nbsp;</p>
+            <!-- Pre Series Output -->
+            <div>
+                {{#each listOutput}}
+                    <div class="image">
+                        <img src={{imagePath}}>
+                    </div>
+                {{/each}}
+            </div>
         </div>
+
 
 </template>

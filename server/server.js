@@ -157,7 +157,7 @@ if(Meteor.isServer){
 
     //-----------------------------------------Called 1 time to generate the Checklist Data base --------------
     'generateDataBase': () => {
-        for (i = 1; i <= 263; i++) {
+        for (i = 1; i <= 337; i++) {
             let uniqueId= Random.id();
             images.insert({
                 _id: uniqueId,
@@ -261,7 +261,10 @@ if(Meteor.isServer){
                                                     checkItems: checkList,
                                                     dateStart: dateStart,
                                                     user: user,
-                                                    pdiStatus: 2}});
+                                                    pdiStatus: 2,
+                                                    newIssues: [],
+                                                    counter: []
+                                                                }});
         }
     },
 
@@ -275,7 +278,7 @@ if(Meteor.isServer){
                                                                             progressBar: 0,
                                                                             user: '',
                                                                             pdiStatus: 0,
-                                                                            newIssues: ''}})
+                                                                            newIssues: []}})
     },
 
 

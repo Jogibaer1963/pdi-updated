@@ -7,12 +7,13 @@ Template.checkListOverView.helpers({
     listOutput: () => {
         let checkResult = {} ;
         const result = images.find().fetch();
-        let path1= "http://192.168.0.109:3200/images/";
+        let path1= "http://192.168.0.109:3300/images/";
         return resultArray = result.map(resultExtract => {
+            let nods = "?a=" + Math.random();
              checkResult = {id : resultExtract._id,
                             active: resultExtract.activeStatus,
                             failure: resultExtract.failureStatus,
-                            imagePath : path1 + resultExtract.imagePath,
+                            imagePath : path1 + resultExtract.imagePath+ nods,
                             position : resultExtract.position,
                             issue : resultExtract.issueDescription};
              return checkResult;

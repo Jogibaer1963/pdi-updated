@@ -113,23 +113,23 @@
                         <h4>CCA: {{batteries.manBatt_2CCA}} Amp    {{batteries.manBatt_2Volt}} Volt</h4>
                     <h4>---------------------------------------------------------------------------</h4>
                 </div>
+                        <div class="printList">
+                <h3>Repair List:</h3>
+                {{#each newIssues}}
+                    <div>
+                        <h4>{{siNumber}} {{errorDescription}}</h4>
+                    </div>
+                {{/each}}
+                {{#each machineConfigIssues}}
+                    <h4>Check config {{configItem}}</h4>
+                {{/each}}
+            </div>
                 <div class="printList">
-                   <h3>Repair List:</h3>
-                      {{#each newIssues}}
-                          <div>
-                           <h4>{{siNumber}} {{errorDescription}}</h4>
-                          </div>
-                      {{/each}}
-                      {{#each machineConfigIssues}}
-                          <h4>Check config {{configItem}}</h4>
-                      {{/each}}
-                </div>
-                <div class="printList">
-                   {{#each checkList}}
-                      {{#if failStatus }}
-                         <h4>{{errorDescription}}</h4>
-                      {{/if}}
-                   {{/each}}
+                    {{#each checkList}}
+                        {{#if failStatus }}
+                            <h4>{{errorDescription}}</h4>
+                        {{/if}}
+                    {{/each}}
                 </div>
                 <div class="printList">
                     {{#each specialPdiItems}}
@@ -137,24 +137,20 @@
                     {{/each}}
                 </div>
             {{/each}}
-             <br><br><br>
-             <!-- Pre Series Output -->
-            <div>
-                 {{#each listOutput}}
-                     <tr class="preTableCheckList">
-                         <td class="{{getMachineConfigStatus failureStatus}}"
-                             style="background-color:{{getMachineConfigStatus failureStatus}}">
-                             <div class="image">
-                                 <img src={{imagePath}}>
-
-                                 <button class="btn btn-success button PreOk" id={{id}}>OK</button>
-
-                                 <button class="btn btn-danger button PreNok" id={{id}}>NOK</button>
-                             </div>
-                         </td>
-                     </tr>
-                 {{/each}}
-            </div>
+        <br><br><br>
+                 <!-- Pre Series Output -->
+                <div>
+                     {{#each listOutput}}
+                         <tr class="preTableCheckList">
+                             <td class="{{getMachineConfigStatus failureStatus}}"
+                                 style="background-color:{{getMachineConfigStatus failureStatus}}">
+                                 <div class="image">
+                                     <img class="NO-CACHE" src={{imagePath}}>
+                                 </div>
+                             </td>
+                         </tr>
+                     {{/each}}
+                </div>
+             </div>
          </div>
-     </div>
 </template>

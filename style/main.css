@@ -1267,51 +1267,54 @@ table.readyTable {
   background: repeating-linear-gradient(45deg, #e6e6e6, #bc171b 10px, #e6e6e6 10px, #bc171b 20px); }
 
 .printoutMargin {
-  margin-left: 2em; }
+  margin-left: 1em; }
 
-.pdiCommentsPrintOut {
-  min-width: 35em;
-  max-width: 35em; }
+@media print {
+  margin-bottom: 5cm;
+  margin-left: 2cm;
+  margin-right: 2cm;
+  margin-top: 1cm;
+  size: A4;
+  .configPrint {
+    page-break-inside: auto; }
 
-.pdiEmptyField {
-  min-width: 12em;
-  max-width: 12em; }
+  table {
+    page-break-after: auto; }
 
-.pdiSignOffField {
-  min-width: 8em;
-  max-width: 8em; }
+  tr {
+    page-break-inside: avoid;
+    page-break-after: auto; }
 
-table.printOutTableWidth {
-  min-width: 80em;
-  max-width: 80em;
-  padding: 3px 5px;
-  word-wrap: break-word;
-  display: block;
-  font-size: 18px; }
+  td {
+    page-break-inside: avoid;
+    page-break-after: auto; }
 
-table.printOutTableWidth td {
-  border: 3px solid #a49892;
-  text-align: left;
-  border-collapse: collapse; }
+  thead {
+    display: table-header-group; }
 
-.tbodyOverflow {
-  overflow: unset; }
-
+  tfoot {
+    display: table-footer-group; } }
 #footer {
-  position: fixed;
   bottom: 100px;
   height: 30px;
+  position: fixed;
   width: 100%; }
 
-#content {
-  padding-bottom: 30px; }
+.printOutTable {
+  height: 1000px;
+  width: 900px; }
 
-#wrapper {
-  height: auto;
-  position: relative; }
+tr.tableHeight {
+  height: 55px; }
 
-html, body {
-  height: 100%; }
+.tableWidthError {
+  width: 300px; }
+
+.tableWidthComment {
+  width: 200px; }
+
+.tableWidthSignOff {
+  width: 50px; }
 
 table.toDoListTable {
   position: relative;
