@@ -67,16 +67,28 @@
                         </table>
                     </div>
                     <div class="printList">
+                        <table class="printOutTable">
                         {{#each checkList}}
                             {{#if failStatus }}
-                                <h4>{{errorDescription}}</h4>
+                                <tr class="tableHeight">
+                                    <td class="tableWidthError"><h5>{{errorDescription}}</h5></td>
+                                    <td class="tableWidthComment"></td>
+                                    <td class="tableWidthSignOff"></td>
+                                </tr>
                             {{/if}}
                         {{/each}}
+                        </table>
                     </div>
                     <div class="printList">
+                        <table class="printOutTable">
                         {{#each specialPdiItems}}
-                            <h4>{{specialItem}}</h4>
+                            <tr class="tableHeight">
+                                <td class="tableWidthError"><h5>{{specialItem}}</h5></td>
+                                <td class="tableWidthComment"></td>
+                                <td class="tableWidthSignOff"></td>
+                            </tr>
                         {{/each}}
+                        </table>
                     </div>
                 </div>
             {{/each}}

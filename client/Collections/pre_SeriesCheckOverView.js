@@ -56,3 +56,7 @@ Template.checkListOverView.events({
     }
 
 });
+
+listOutputFunc = () => {
+
+};

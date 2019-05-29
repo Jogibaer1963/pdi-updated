@@ -37,10 +37,6 @@ if(Meteor.isClient) {
             }
         },
 
-
     });
-
-
-
 
 }
