@@ -3,33 +3,6 @@
   margin-left: 1em;
 }
 
-@media print {
-  margin-bottom: 5cm;
-  margin-left: 2cm;
-  margin-right: 2cm;
-  margin-top: 1cm;
-  size: A4;
-
-  .configPrint {page-break-inside: auto;}
-  table { page-break-after:auto; }
-
-  tr {
-    page-break-inside:avoid;
-    page-break-after:auto;
-  }
-
-  td {
-    page-break-inside:avoid;
-    page-break-after:auto;
-  }
-
-  thead { display:table-header-group; }
-  tfoot { display:table-footer-group; }
-}
-
-
-
-
 #footer {
   bottom: 100px;
   height: 30px;

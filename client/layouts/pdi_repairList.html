@@ -141,14 +141,17 @@
                  <!-- Pre Series Output -->
                 <div>
                      {{#each listOutput}}
-                         <tr class="preTableCheckList">
-                             <td class="{{getMachineConfigStatus failureStatus}}"
-                                 style="background-color:{{getMachineConfigStatus failureStatus}}">
-                                 <div class="image">
-                                     <img class="NO-CACHE" src={{imagePath}}>
-                                 </div>
-                             </td>
-                         </tr>
+                         <div class="imageMargin">
+                             <tr class="preTableCheckList">
+                                 <td class="{{getMachineConfigStatus failureStatus}}"
+                                     style="background-color:{{getMachineConfigStatus failureStatus}}">
+                                     <div class="image">
+                                         <img class="NO-CACHE" src={{imagePath}}>
+                                         <h3>{{errorDescription}}</h3>
+                                     </div>
+                                 </td>
+                             </tr>
+                         </div>
                      {{/each}}
                 </div>
              </div>

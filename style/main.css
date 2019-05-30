@@ -1002,9 +1002,9 @@ table.messageTable {
   transform-origin: center top; }
 
 .pdiYear {
+  left: 24em;
   position: absolute;
-  top: 16em;
-  left: 24em; }
+  top: 16em; }
 
 table.pdiRepairList {
   position: absolute;
@@ -1040,6 +1040,12 @@ table.pdiRepairList {
   position: relative;
   top: 4em;
   left: 2em; }
+
+.imageMargin {
+  margin-bottom: 20px; }
+
+.containerText {
+  font-weight: bolder; }
 
 .itemHeadLiner {
   position: relative;
@@ -1269,31 +1275,6 @@ table.readyTable {
 .printoutMargin {
   margin-left: 1em; }
 
-@media print {
-  margin-bottom: 5cm;
-  margin-left: 2cm;
-  margin-right: 2cm;
-  margin-top: 1cm;
-  size: A4;
-  .configPrint {
-    page-break-inside: auto; }
-
-  table {
-    page-break-after: auto; }
-
-  tr {
-    page-break-inside: avoid;
-    page-break-after: auto; }
-
-  td {
-    page-break-inside: avoid;
-    page-break-after: auto; }
-
-  thead {
-    display: table-header-group; }
-
-  tfoot {
-    display: table-footer-group; } }
 #footer {
   bottom: 100px;
   height: 30px;

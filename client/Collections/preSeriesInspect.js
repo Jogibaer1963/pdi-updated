@@ -50,8 +50,8 @@ Template.preCheckToDoList.helpers({
                 let nods = "?a=" + Math.random();
                     checkResult = {id : resultExtract._id,
                             failureStatus: resultExtract.failureStatus,
-                            imagePath : path1 + resultExtract.imagePath + nods};
-
+                            imagePath : path1 + resultExtract.imagePath + nods,
+                            errorDescription: resultExtract.errorDescription};
                     return checkResult;
             });
                    }
@@ -144,6 +144,14 @@ Template.preCheckToDoList.events({
         let textMainComp = this.component;
         Session.set('selectedComponent', selected);
         Session.set('issueComp', textMainComp + ' - ');
+    },
+
+    'submit .addressToRepair': (e) => {
+        e.preventDefault();
+        const selectedPreMachineId = Session.get('selectedPreMachine');
+        let message = e.currentTarget.addMessage.value;
+        let target = e.currentTarget.id;
+        Meteor.call('addMessageToPic',selectedPreMachineId, target, message);
     },
 
     'submit .addNewIssue': (e) => {

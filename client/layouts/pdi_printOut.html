@@ -82,7 +82,7 @@
                     <div class="printList">
                         <table class="printOutTable">
                         {{#each specialPdiItems}}
-                            <tr class="tableHeight">
+                            <tr class="tableHeight container">
                                 <td class="tableWidthError"><h5>{{specialItem}}</h5></td>
                                 <td class="tableWidthComment"></td>
                                 <td class="tableWidthSignOff"></td>
@@ -99,6 +99,7 @@
                 {{#each listOutput}}
                     <div class="image">
                         <img src={{imagePath}}>
+                        <h3>{{errorDescription}}</h3>
                     </div>
                 {{/each}}
             </div>

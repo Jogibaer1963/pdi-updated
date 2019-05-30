@@ -28,6 +28,7 @@ if(Meteor.isClient) {
                     let nods = "?a=" + Math.random();
                     checkResult = {id : resultExtract._id,
                         imagePath : path1 + resultExtract.imagePath + nods,
+                        errorDescription: resultExtract.errorDescription
                         };
                     return checkResult;
                 });

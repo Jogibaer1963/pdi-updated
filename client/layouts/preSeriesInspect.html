@@ -54,7 +54,6 @@
         <div>
           <h3>{{countDown}} % complete</h3>
         </div>
-        <br><br>
         <div class="checkListTable">
             <h3 class="configHeader">Checklist</h3>
             <table class="pdiPreCheckList">
@@ -69,6 +68,17 @@
                                     <button class="btn btn-success button PreOk" id={{id}}>OK</button>
 
                                     <button class="btn btn-danger button PreNok" id={{id}}>NOK</button>
+
+                                    <form class="addressToRepair" id={{id}}>
+                                        <div class="issueField">
+                                            <input type="text"
+                                                   class="inputIssueSize"
+                                                   name="addMessage"
+                                                   value={{errorDescription}}>
+                                            <button type="submit" class="btn btn-success">Submit Message</button>
+                                        </div>
+                                        <h4>{{errorDescription}}</h4>
+                                    </form>
                                 </div>
                             </td>
                         </tr>
@@ -79,7 +89,6 @@
         <div class="pdiDivider">
             <h1>_____________________</h1>
         </div>
-
         <div class="mainComponentsPos">
             {{#dropdownTrigger  name="mainComponents"}}
                 <button class="loginSubmit omInputButton">Main Components</button>

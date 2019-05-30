@@ -152,7 +152,8 @@ Session.set('selectedPreMachine', '');
                     let nods = "?a=" + Math.random();
                     checkResult = {id : resultExtract._id,
                         failureStatus: resultExtract.failureStatus,
-                        imagePath : path1 + resultExtract.imagePath + nods};
+                        imagePath : path1 + resultExtract.imagePath + nods,
+                        errorDescription: resultExtract.errorDescription};
                     return checkResult;
                 });
 

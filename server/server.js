@@ -1,6 +1,6 @@
 //import {Email} from 'meteor/email';
 import { Random } from 'meteor/random';
-
+import { Meteor } from 'meteor/meteor';
 
 
 if(Meteor.isServer){
@@ -149,6 +149,8 @@ if(Meteor.isServer){
     });
 
 
+
+
     Meteor.methods({
 
 
@@ -166,7 +168,8 @@ if(Meteor.isServer){
                 failureStatus: 0,
                 timeOfFix: "",
                 checkedBy: "",
-                cantRepair: 0
+                cantRepair: 0,
+                errorDescription: ""
             });
         }
     },
@@ -322,6 +325,14 @@ if(Meteor.isServer){
                                         {$set: {'counter.$.result': result}});
             }
         }
+    },
+
+    //---------------------------------------- evaluate ok, nok, add message to pic -----------------
+
+    'addMessageToPic': (selectedPreMachineId, target, message) => {
+        preSeriesMachine.update({_id: selectedPreMachineId, 'checkItems._id': target},
+            {$set: {'checkItems.$.errorDescription': message}})
+
     },
 
     'addNewPreFailure': (id, addNewFailure) => {

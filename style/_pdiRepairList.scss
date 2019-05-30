@@ -35,9 +35,10 @@
 }
 
 .pdiYear {
+  left: 24em;
   position: absolute;
   top: 16em;
-  left: 24em;
+
 }
 
 table.pdiRepairList {
@@ -79,4 +80,12 @@ table.pdiRepairList {
   position: relative;
   top: 4em;
   left: 2em;
+}
+
+.imageMargin {
+  margin-bottom: 20px;
+}
+
+.containerText {
+  font-weight: bolder;
 }
