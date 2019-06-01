@@ -204,43 +204,36 @@ Session.set('componentChosen', 0);
 
 Template.joinPdiMachine.events({
 
-    'submit .batts': (event) => {
-        event.preventDefault();
+    'submit .batts': (e) => {
+        e.preventDefault();
         const loggedInUser = Session.get('currentLoggedInUser');
         const pdiMachineId = Session.get('selectedPdiMachineId');
-        const battC13CCA = event.target.batteryC13CCA.value;
-        const battC13Volt = event.target.batteryC13Volt.value;
-        const mtuG001CCA = event.target.mtuG001CCA.value;
-        const mtuG001Volt = event.target.mtuG001Volt.value;
-        const mtuG005CCA = event.target.mtuG005CCA.value;
-        const mtuG005Volt = event.target.mtuG005Volt.value;
-        const mtuG004CCA = event.target.mtuG004CCA.value;
-        const mtuG004Volt = event.target.mtuG004Volt.value;
-        const manBatt_1CCA = event.target.manBatt_1CCA.value;
-        const manBatt_1Volt = event.target.manBatt_1Volt.value;
-        const manBatt_2CCA = event.target.manBatt_2CCA.value;
-        const manBatt_2Volt = event.target.manBatt_2Volt.value;
+        const battC13CCA = e.target.batteryC13CCA.value;
+        const battC13Volt = e.target.batteryC13Volt.value;
+        const mtuG001CCA = e.target.mtuG001CCA.value;
+        const mtuG001Volt = e.target.mtuG001Volt.value;
+        const mtuG005CCA = e.target.mtuG005CCA.value;
+        const mtuG005Volt = e.target.mtuG005Volt.value;
+        const mtuG004CCA = e.target.mtuG004CCA.value;
+        const mtuG004Volt = e.target.mtuG004Volt.value;
         Meteor.call('pdiMachineBattery', pdiMachineId, loggedInUser, battC13CCA, battC13Volt,
             mtuG001CCA, mtuG001Volt, mtuG005CCA, mtuG005Volt, mtuG004CCA, mtuG004Volt,
-            manBatt_1CCA, manBatt_1Volt, manBatt_2CCA, manBatt_2Volt);
-
-
-
+           );
     },
 
-    'submit .omms': (event) => {
-        event.preventDefault();
+    'submit .omms': (e) => {
+        e.preventDefault();
         const loggedInUser = Session.get('currentLoggedInUser');
         const pdiMachineId = Session.get('selectedPdiMachineId');
-        const fuelMe = event.target.fuelMe.value;
-        const ommMain = event.target.omMain.value;
-        const ommSupp = event.target.omSupp.value;
-        const ommUnload = event.target.omUnload.value;
-        const ommProfiCam = event.target.omProfiCam.value;
-        const ommCebis = event.target.omCebis.value;
-        const ommTouch = event.target.omTouch.value;
-        const ommTerra = event.target.omTerra.value;
-        const ommDual = event.target.dualTire.value;
+        const fuelMe = e.target.fuelMe.value;
+        const ommMain = e.target.omMain.value;
+        const ommSupp = e.target.omSupp.value;
+        const ommUnload = e.target.omUnload.value;
+        const ommProfiCam = e.target.omProfiCam.value;
+        const ommCebis = e.target.omCebis.value;
+        const ommTouch = e.target.omTouch.value;
+        const ommTerra = e.target.omTerra.value;
+        const ommDual = e.target.dualTire.value;
         Meteor.call('pdiMachineOmm', pdiMachineId, loggedInUser, fuelMe, ommMain, ommSupp,
             ommUnload,ommProfiCam, ommCebis, ommTouch, ommTerra, ommDual);
     },
@@ -330,7 +323,6 @@ Template.joinPdiMachine.events({
             console.log('Lost Machine Number');
         }
     },
-
 
     'submit .addNewIssue': (event) => {
         event.preventDefault();

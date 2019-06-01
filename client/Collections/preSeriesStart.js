@@ -3,7 +3,38 @@ Meteor.subscribe('preSeriesMachine');
 Template.preInspection.helpers({
 
    preCheckList: () => {
-       return preSeriesMachine.find({}, {sort: {preMachineId: 1}}).fetch();
+       resultArray = [];
+       try {
+        let resultStep1 = preSeriesMachine.find({}, {sort: {preMachineId: 1}}).fetch();
+        let arrayLength = resultStep1.length;
+        for (let i = 0; i <= arrayLength; i++) {
+            let _id = resultStep1[i]._id;
+            let newIssuesLength = resultStep1[i].newIssues.length;
+            let checkPointCount = resultStep1[i].checkItems.length;
+            let machineNumber = resultStep1[i].preMachineId;
+            let pdiStatusId = resultStep1[i].pdiStatus;
+            let configStatusId = resultStep1[i].configStatus;
+            let checkItemIssue = 0;
+            for (let k = 1; k <= checkPointCount; k++) {
+                try {
+                    if (resultStep1[i].checkItems[k].failureStatus === 2) {
+                        checkItemIssue++;
+                    }
+                } catch (e) {}
+            }
+            let result= ({
+                          _id : _id,
+                          machineNumber : machineNumber,
+                          pdiStatusId : pdiStatusId,
+                          configStatusId : configStatusId,
+                          newIssueCount : newIssuesLength,
+                          checkPointCount : checkPointCount,
+                          checkItemIssue : checkItemIssue
+                    });
+            resultArray.push(result);
+        }
+       } catch (e) {}
+       return resultArray;
    },
 
     countPreCheck: () => {
