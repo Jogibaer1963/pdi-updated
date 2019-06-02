@@ -189,7 +189,11 @@ if(Meteor.isServer){
                                       pdiStatus: 0,
                                       configStatus: 0,
                                       user: '',
-                                      dateStart: ''});
+                                      dateStart: '',
+                                      checkItems: [],
+                                      machineConfig: [],
+                                      newIssues: [],
+                                      counter: []});
 
     },
 

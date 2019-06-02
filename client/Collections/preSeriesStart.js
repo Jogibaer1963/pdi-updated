@@ -3,38 +3,51 @@ Meteor.subscribe('preSeriesMachine');
 Template.preInspection.helpers({
 
    preCheckList: () => {
+
        resultArray = [];
        try {
         let resultStep1 = preSeriesMachine.find({}, {sort: {preMachineId: 1}}).fetch();
-        let arrayLength = resultStep1.length;
-        for (let i = 0; i <= arrayLength; i++) {
-            let _id = resultStep1[i]._id;
-            let newIssuesLength = resultStep1[i].newIssues.length;
-            let checkPointCount = resultStep1[i].checkItems.length;
-            let machineNumber = resultStep1[i].preMachineId;
-            let pdiStatusId = resultStep1[i].pdiStatus;
-            let configStatusId = resultStep1[i].configStatus;
-            let checkItemIssue = 0;
-            for (let k = 1; k <= checkPointCount; k++) {
-                try {
-                    if (resultStep1[i].checkItems[k].failureStatus === 2) {
-                        checkItemIssue++;
-                    }
-                } catch (e) {}
+        console.log('result', resultStep1);
+            if (resultStep1 === []) {
+                console.log('leer ');
+            } else {
+                console.log('result in der schleife', resultStep1);
+                let arrayLength = resultStep1.length;
+                console.log(arrayLength );
+                for (let i = 0; i <= arrayLength; i++) {
+                    let _id = resultStep1[i]._id;
+                    console.log(_id, i, resultStep1[i] );
+                    let newIssuesLength = resultStep1[i].newIssues.length;
+                    let checkPointCount = resultStep1[i].checkItems.length;
+                    let machineNumber = resultStep1[i].preMachineId;
+                    let pdiStatusId = resultStep1[i].pdiStatus;
+                    let configStatusId = resultStep1[i].configStatus;
+                    let checkItemIssue = 0;
+                        for (let k = 1; k <= checkPointCount; k++) {
+                            try {
+                                if (resultStep1[i].checkItems[k].failureStatus === 2) {
+                                    checkItemIssue++;
+                                }
+                            } catch (e) {}
+                        }
+                    let result= ({
+                                  _id : _id,
+                                  machineNumber : machineNumber,
+                                  pdiStatusId : pdiStatusId,
+                                  configStatusId : configStatusId,
+                                  newIssueCount : newIssuesLength,
+                                  checkPointCount : checkPointCount,
+                                  checkItemIssue : checkItemIssue
+                            });
+                    resultArray.push(result);
+                }
             }
-            let result= ({
-                          _id : _id,
-                          machineNumber : machineNumber,
-                          pdiStatusId : pdiStatusId,
-                          configStatusId : configStatusId,
-                          newIssueCount : newIssuesLength,
-                          checkPointCount : checkPointCount,
-                          checkItemIssue : checkItemIssue
-                    });
-            resultArray.push(result);
-        }
-       } catch (e) {}
-       return resultArray;
+       } catch (e) {
+           console.log(e);
+       }
+           console.log(resultArray);
+           return resultArray;
+
    },
 
     countPreCheck: () => {

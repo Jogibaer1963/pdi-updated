@@ -23,7 +23,7 @@ if(Meteor.isClient) {
                     return fail.failureStatus === 2;
                 });
 
-                let path1= "http://192.168.0.109:3300/images/";
+                let path1= "http://10.40.1.47:3200/images/";
                 return returnArray = resultArray.map(resultExtract => {
                     let nods = "?a=" + Math.random();
                     checkResult = {id : resultExtract._id,
