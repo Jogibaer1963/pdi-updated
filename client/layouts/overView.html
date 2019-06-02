@@ -65,4 +65,32 @@
         </tbody>
     </table>
   </div>
+    <div class="preOverViewTable">
+        <table class="preTable blueTable preOverViewTable" cellpadding="10">
+            <thead>
+            <tr>
+                <th class="pdiMachineField"><strong>Machine</strong></th>
+                <th class="pdiPDIField"><strong>Pre Check</strong></th>
+                <th class="pdiConfig"><strong>Check points</strong></th>
+                <th class="pdiConfig"><strong>Check fault</strong></th>
+                <th class="pdiConfig"><strong>New issues</strong></th>
+            </tr>
+            </thead>
+            <tbody>
+            {{#each preOverViewCheckList}}
+                <tr class="openPreInspect {{selectedClass}}">
+                    <td class="pdiMachineField">{{machineNumber}}</td>
+
+                    <td class="pdiPDIField {{getStatusColor pdiStatusId}}"
+                        style="background-color:{{getStatusColor pdiStatusId}};
+                                color:{{getStatusColor pdiStatusId}}">{{pdiStatusId}}</td>
+
+                    <td class="pdiConfig">{{checkPointCount}}</td>
+                    <td class="pdiConfig">{{checkItemIssue}}</td>
+                    <td class="pdiConfig">{{newIssueCount}}</td>
+                </tr>
+            {{/each}}
+            </tbody>
+        </table>
+    </div>
 </template>

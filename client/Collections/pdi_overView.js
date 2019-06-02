@@ -134,19 +134,6 @@
     });
 
 
-    Handlebars.registerHelper('inActive_1', () => {
-        let inActiveState = Session.get('status');
-        if(inActiveState === 2) {
-            return 'inActiveButton-1';
-        }
-    });
-
-    Handlebars.registerHelper('inActive_2', () => {
-        let inActiveState = Session.get('status');
-        if(inActiveState === 0) {
-            return 'inActiveButton-1';
-        }
-    });
 
 
 

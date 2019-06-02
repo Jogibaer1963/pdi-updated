@@ -6,10 +6,10 @@ Template.preInspection.helpers({
        resultArray = [];
        try {
         let resultStep1 = preSeriesMachine.find({}, {sort: {preMachineId: 1}}).fetch();
-            if (resultStep1 !== []) {
+            if (resultStep1.length === 0) {
             } else {
                 let arrayLength = resultStep1.length;
-                for (let i = 0; i <= arrayLength; i++) {
+                for (let i = 0; i <= (arrayLength - 1); i++) {
                     let _id = resultStep1[i]._id;
                     let newIssuesLength = resultStep1[i].newIssues.length;
                     let checkPointCount = resultStep1[i].checkItems.length;
@@ -22,7 +22,8 @@ Template.preInspection.helpers({
                                 if (resultStep1[i].checkItems[k].failureStatus === 2) {
                                     checkItemIssue++;
                                 }
-                            } catch (e) {}
+                            } catch (e) {
+                            }
                         }
                     let result= ({
                                   _id : _id,

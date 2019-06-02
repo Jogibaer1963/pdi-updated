@@ -30,7 +30,7 @@
             Open pre series checks : {{countPreCheck}}
         </div>
         <div class="pdiButton">
-            <button class="btn btn-default startCheck {{inActive_1}}">Perform Check</button>
+            <button class="btn btn-default startCheck">Perform Check</button>
             <button class="btn btn-default cancelPreCheck">Cancel Check</button>
             <button class="btn btn-default joinPreCheck">Join Check</button>
             <form class="fileContainer">
@@ -42,16 +42,17 @@
                 <input type="text" id="preMachine">
             </form>
         </div>
+
         <table class="preTable blueTable tablePdiOverview" cellpadding="10">
             <thead>
-            <tr>
-                <th class="pdiMachineField"><strong>Machine</strong></th>
-                <th class="pdiPDIField"><strong>PDI</strong></th>
-                <th class="pdiConfig"><strong>Config loaded</strong></th>
-                <th class="pdiConfig"><strong>Check points</strong></th>
-                <th class="pdiConfig"><strong>Check points found</strong></th>
-                <th class="pdiConfig"><strong>New issues</strong></th>
-            </tr>
+                <tr>
+                    <th class="pdiMachineField"><strong>Machine</strong></th>
+                    <th class="pdiPDIField"><strong>PDI</strong></th>
+                    <th class="pdiConfig"><strong>Config loaded</strong></th>
+                    <th class="pdiConfig"><strong>Check points</strong></th>
+                    <th class="pdiConfig"><strong>Check points found</strong></th>
+                    <th class="pdiConfig"><strong>New issues</strong></th>
+                </tr>
             </thead>
             <tbody>
             {{#each preCheckList}}
@@ -75,3 +76,5 @@
         </table>
     </div>
 </template>
+
+
