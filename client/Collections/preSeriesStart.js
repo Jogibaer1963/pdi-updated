@@ -6,7 +6,7 @@ Template.preInspection.helpers({
        resultArray = [];
        try {
         let resultStep1 = preSeriesMachine.find({}, {sort: {preMachineId: 1}}).fetch();
-            if (resultStep1 === []) {
+            if (resultStep1 !== []) {
             } else {
                 let arrayLength = resultStep1.length;
                 for (let i = 0; i <= arrayLength; i++) {
