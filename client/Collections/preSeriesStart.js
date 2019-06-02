@@ -3,20 +3,14 @@ Meteor.subscribe('preSeriesMachine');
 Template.preInspection.helpers({
 
    preCheckList: () => {
-
        resultArray = [];
        try {
         let resultStep1 = preSeriesMachine.find({}, {sort: {preMachineId: 1}}).fetch();
-        console.log('result', resultStep1);
             if (resultStep1 === []) {
-                console.log('leer ');
             } else {
-                console.log('result in der schleife', resultStep1);
                 let arrayLength = resultStep1.length;
-                console.log(arrayLength );
                 for (let i = 0; i <= arrayLength; i++) {
                     let _id = resultStep1[i]._id;
-                    console.log(_id, i, resultStep1[i] );
                     let newIssuesLength = resultStep1[i].newIssues.length;
                     let checkPointCount = resultStep1[i].checkItems.length;
                     let machineNumber = resultStep1[i].preMachineId;
@@ -45,9 +39,7 @@ Template.preInspection.helpers({
        } catch (e) {
            console.log(e);
        }
-           console.log(resultArray);
            return resultArray;
-
    },
 
     countPreCheck: () => {
