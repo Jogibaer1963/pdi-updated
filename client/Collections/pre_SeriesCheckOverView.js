@@ -7,7 +7,8 @@ Template.checkListOverView.helpers({
     listOutput: () => {
         let checkResult = {} ;
         const result = images.find().fetch();
-        let path1= "http://192.168.0.103:3300/images/";
+        let path1 = Session.get('ipAndPort');
+      //  let path1= "http://192.168.0.103:3300/images/";
         return resultArray = result.map(resultExtract => {
              checkResult = {id : resultExtract._id,
                             active: resultExtract.activeStatus,

@@ -147,7 +147,8 @@ Session.set('selectedPreMachine', '');
                 const resultArray = result.filter((fail) => {
                     return fail.failureStatus === 2;
                 });
-                let path1= "http://192.168.0.109:3300/images/";
+                let path1 = Session.get('ipAndPort');
+             //   let path1= "http://192.168.0.109:3300/images/";
                 return returnArray = resultArray.map(resultExtract => {
                     let nods = "?a=" + Math.random();
                     checkResult = {id : resultExtract._id,
