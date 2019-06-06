@@ -1,5 +1,6 @@
 Meteor.subscribe("preSeriesCheck");
 Meteor.subscribe("images");
+Meteor.subscribe("preSeriesAddChecks");
 
 
 Template.checkListOverView.helpers({
@@ -18,6 +19,13 @@ Template.checkListOverView.helpers({
                             issue : resultExtract.issueDescription};
              return checkResult;
         });
+    },
+
+    preCheckList: () => {
+       let result = preSeriesAddChecks.find().fetch();
+       console.log(result);
+       return result;
+
     }
 
 });

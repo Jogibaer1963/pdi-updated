@@ -14,7 +14,7 @@
         </div>
         <br>
         <nav class="mainLayout">
-            <a class="btn" href="/generator">Checklist generator</a>
+       <!--     <a class="btn" href="/generator" >Checklist generator</a>  -->
             <a>|</a>
             <a class="btn" href="/inspectionStart">Inspection Overview</a>
             <a>|</a>
@@ -24,16 +24,14 @@
     <div class="preView">
          <h3 >Pre series checklist overview</h3>
     </div>
-
     <div class="">
         <button type="submit" class="btn
                                      btn-warning
                                      btn-default
                                      submitButtonInside
                                      submitButtonGenerate"
-                                     >Generate</button>
+                             disabled>Generate</button>
     </div>
-
     <div class="tablePos">
             {{#each listOutput}}
                 <div class="listContainer">
@@ -69,7 +67,31 @@
                 </div>
             {{/each}}
     </div>
-
+    <div class="preSeriesCheckPoints">
+        <form action="">
+            <input type="text">
+            <button type="submit" class="btn
+                                         btn-default
+                                         btn-success"
+                                         id="{{id}}">Submit</button>
+        </form>
+        <table class="blueTable preTableChecklist">
+            <thead>
+            <tr class="">
+                <th class="position">Position</th>
+                <th class="failure">Description</th>
+            </tr>
+            </thead>
+            <tbody>
+            {{#each preCheckList}}
+                <tr class="showCheckList {{selectedClass}}">
+                    <td class="position">{{position}}</td>
+                    <td class="failureRow">{{errorDescription}}</td>
+                </tr>
+            {{/each}}
+            </tbody>
+        </table>
+    </div>
 
 
 </template>

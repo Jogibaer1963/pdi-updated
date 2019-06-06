@@ -144,6 +144,10 @@ if(Meteor.isServer){
             return preSeriesMachine.find();
         });
 
+        Meteor.publish("preSeriesAddChecks", function() {
+            return preSeriesAddChecks.find();
+        });
+
 
 
     });
