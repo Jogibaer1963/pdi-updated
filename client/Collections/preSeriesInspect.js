@@ -1,4 +1,5 @@
 Meteor.subscribe('preSeriesMachine');
+Meteor.subscribe('preSeriesAddChecks');
 
 
 Template.preCheckToDoList.helpers({
@@ -46,7 +47,6 @@ Template.preCheckToDoList.helpers({
             const result = preSeriesMachine.findOne({_id: selectedPreMachineId},
                                                     {fields: {checkItems: 1}}).checkItems;
             let path1 = Session.get('ipAndPort');
-         //   let path1= "http://192.168.0.103:3300/images/";
             return resultArray = result.map(resultExtract => {
                 let nods = "?a=" + Math.random();
                     checkResult = {id : resultExtract._id,
@@ -58,6 +58,13 @@ Template.preCheckToDoList.helpers({
                    }
             catch (e) {
             }
+    },
+
+    //----------------------------  adding new discovered issues  -----------------
+
+    preCheckList: () => {
+        return preSeriesAddChecks.find().fetch();
+
     },
 
     //---------------  Drop down main components ---------------------
@@ -152,6 +159,22 @@ Template.preCheckToDoList.events({
         let message = e.currentTarget.addMessage.value;
         let target = e.currentTarget.id;
         Meteor.call('addMessageToPic',selectedPreMachineId, target, message);
+    },
+
+    //---------------------------------- add new checks  --------------------
+
+    'click .failureRow': function() {
+        let textAddFailure = this.errorDescription;
+        Session.set('issueComp', textAddFailure);
+    },
+
+    //------------------  drop down list ----------------------
+
+    'click .comp': function () {
+        const selected = this._id;
+        let textMainComp = this.component;
+        Session.set('selectedComponent', selected);
+        Session.set('issueComp', textMainComp + ' - ');
     },
 
     'submit .addNewIssue': (e) => {

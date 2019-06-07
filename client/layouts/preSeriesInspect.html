@@ -89,6 +89,25 @@
         <div class="pdiDivider">
             <h1>_____________________</h1>
         </div>
+    <div class="preSeriesAddCheck">
+        <table class="blueTable addCheck">
+            <thead>
+            <tr class="">
+                <th class="failure">Description</th>
+            </tr>
+            </thead>
+            <tbody>
+            {{#each preCheckList}}
+                <tr class="showCheckList">
+                    <td class="failureRow">{{errorDescription}}</td>
+                </tr>
+            {{/each}}
+            </tbody>
+        </table>
+    </div>
+        <div class="pdiDivider">
+            <h1>_____________________</h1>
+        </div>
         <div class="mainComponentsPos">
             {{#dropdownTrigger  name="mainComponents"}}
                 <button class="loginSubmit omInputButton">Main Components</button>

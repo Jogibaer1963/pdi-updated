@@ -60,6 +60,9 @@ Template.preInspection.helpers({
 
 
 
+
+
+
 Template.preInspection.events({
 
     'click .openPreInspect': function () {
@@ -75,8 +78,6 @@ Template.preInspection.events({
 
     'click .joinPreCheck': (e) => {
         e.preventDefault();
-        const preMachine = Session.get('selectedPreMachine');
-    //    Meteor.call('joinPreCheck', preMachine);
         FlowRouter.go('preSeriesInspect');
     },
 

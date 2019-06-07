@@ -9,7 +9,6 @@ Template.checkListOverView.helpers({
         let checkResult = {} ;
         const result = images.find().fetch();
         let path1 = Session.get('ipAndPort');
-      //  let path1= "http://192.168.0.103:3300/images/";
         return resultArray = result.map(resultExtract => {
              checkResult = {id : resultExtract._id,
                             active: resultExtract.activeStatus,
@@ -22,11 +21,31 @@ Template.checkListOverView.helpers({
     },
 
     preCheckList: () => {
-       let result = preSeriesAddChecks.find().fetch();
-       console.log(result);
-       return result;
+        return preSeriesAddChecks.find().fetch();
+    },
 
-    }
+    //------------------------------------------  drop down ------------------------------
+
+    'selectedComponent': function () {
+        let component = this._id;
+        let selected = Session.get('selectedComponent');
+        if (component === selected) {
+            Session.set('componentChosen', 1);
+            return 'selected'
+        }
+    },
+
+    mainComponent: function () {
+        return mainComponents.find({}).fetch();
+    },
+
+    issueComponent: () => {
+        try {
+            return Session.get('issueComp');
+        } catch (e) {
+
+        }
+    },
 
 });
 
@@ -61,10 +80,24 @@ Template.checkListOverView.events({
         e.preventDefault();
         let idCheck = e.currentTarget.id;
         console.log('delete', idCheck);
-    }
+    },
+
+    'click .comp': function () {
+        const selected = this._id;
+        let textMainComp = this.component;
+        Session.set('selectedComponent', selected);
+        Session.set('issueComp', textMainComp + ' - ');
+    },
+
+    'submit .addNewIssue': (event) => {
+        event.preventDefault();
+        let addNewFailure = event.target.addIssue.value;
+            Meteor.call('preSeriesAddCheck', addNewFailure);
+        event.target.addIssue.value = '';
+        Session.set('componentChosen', 0);
+        Session.set('selectedComponent', '');
+        Session.set('issueComp', '');
+    },
 
 });
 
-listOutputFunc = () => {
-
-};

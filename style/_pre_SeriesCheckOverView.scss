@@ -74,9 +74,23 @@ table, td {
 }
 
 table.preTableChecklist {
-  margin-left: 2em;
+  margin-left: 3em;
   position: absolute;
-  top: 27em;
+  top: 10em;
   width: 500px;
 }
 
+.addPreIssues {
+  left: 60em;
+  position: relative;
+}
+
+.preSeriesAddCheck {
+  position: relative;
+  top: 3em;
+}
+
+table.addCheck {
+  margin-left: 3.5em;
+  width: 400px;
+}

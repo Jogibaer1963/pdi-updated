@@ -158,7 +158,9 @@ if(Meteor.isServer){
     Meteor.methods({
 
 
-
+    'preSeriesAddCheck': (addNewFailure) => {
+        preSeriesAddChecks.insert({errorDescription: addNewFailure});
+    },
 
 
     //-----------------------------------------Called 1 time to generate the Checklist Data base --------------
