@@ -1,7 +1,6 @@
+Meteor.subscribe("overView");
+
 Session.set('toggleShipList', 0);
-
-
-
 
     Template.inputMachine.helpers({
 
@@ -13,12 +12,16 @@ Session.set('toggleShipList', 0);
         shippList: function () {
             // Order of shipping date
             let shipToggleList = Session.get('toggleShipList');
+            console.log(shipToggleList);
             switch(shipToggleList) {
                 case 1:
-                    return MachineReady.find({machineId: {$gt:'C0000000'}, shipStatus: 0}, {sort: {date: -1}});
+                    return MachineReady.find({shipStatus: 0},
+                                              {sort: {date: -1}});
                 case 0:
-                    return MachineReady.find({machineId: {$gt:'C0000000'}}, {sort: {date: -1}});
+                    return MachineReady.find({shipStatus: 1},
+                                                  {sort: {date: -1}});
             }
+
         },
 
         returnList: function () {

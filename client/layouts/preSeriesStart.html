@@ -37,9 +37,10 @@
                 <button class="btn btn-default">Load config</button>
                 <input class="loadConfig" type="file" id="files" name="files[]" >
             </form>
-            <form class="submitPre">
+            <form class="submit-pre">
                 <button class="btn btn-default btn-success">Submit Machine number</button>
                 <input type="text" id="preMachine">
+                <input type="date" id="shipDate">
             </form>
         </div>
 
@@ -47,29 +48,22 @@
             <thead>
                 <tr>
                     <th class="pdiMachineField"><strong>Machine</strong></th>
+                    <th class="headerShipDate"><strong>Shipp Date</strong></th>
                     <th class="pdiPDIField"><strong>PDI</strong></th>
                     <th class="pdiConfig"><strong>Config loaded</strong></th>
-                    <th class="pdiConfig"><strong>Check points</strong></th>
-                    <th class="pdiConfig"><strong>Check points found</strong></th>
-                    <th class="pdiConfig"><strong>New issues</strong></th>
                 </tr>
             </thead>
             <tbody>
             {{#each preCheckList}}
                 <tr class="openPreInspect {{selectedClass}}">
-                    <td class="pdiMachineField">{{machineNumber}}</td>
-
-                    <td class="pdiPDIField {{getStatusColor pdiStatusId}}"
-                        style="background-color:{{getStatusColor pdiStatusId}};
-                                color:{{getStatusColor pdiStatusId}}">{{pdiStatusId}}</td>
-
-                    <td class="pdiConfig {{getConfigColor configStatusId}}"
-                        style="background-color:{{getConfigColor configStatusId}};
-                                color:{{getConfigColor configStatusId}}">{{configStatusId}}</td>
-
-                    <td class="pdiConfig">{{checkPointCount}}</td>
-                    <td class="pdiConfig">{{checkItemIssue}}</td>
-                    <td class="pdiConfig">{{newIssueCount}}</td>
+                    <td class="pdiMachineField">{{preMachineId}}</td>
+                    <td class="headerShipDate" style="width: 50px">{{date}}</td>
+                    <td class="pdiPDIField {{getStatusColor pdiStatus}}"
+                        style="background-color:{{getStatusColor pdiStatus}};
+                                color:{{getStatusColor pdiStatus}}">{{pdiStatus}}</td>
+                    <td class="pdiConfig {{getConfigColor configStatus}}"
+                        style="background-color:{{getConfigColor configStatus}};
+                                color:{{getConfigColor configStatus}}">{{configStatus}}</td>
                 </tr>
             {{/each}}
             </tbody>

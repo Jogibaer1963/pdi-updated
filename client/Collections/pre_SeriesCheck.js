@@ -9,19 +9,19 @@ Template.checkListOverView.helpers({
         let checkResult = {} ;
         const result = images.find().fetch();
         let path1 = Session.get('ipAndPort');
-        return resultArray = result.map(resultExtract => {
+        return result.map(resultExtract => {
              checkResult = {id : resultExtract._id,
                             active: resultExtract.activeStatus,
                             failure: resultExtract.failureStatus,
                             imagePath : path1 + resultExtract.imagePath,
                             position : resultExtract.position,
-                            issue : resultExtract.issueDescription};
+                          };
              return checkResult;
         });
     },
 
     preCheckList: () => {
-        return preSeriesAddChecks.find().fetch();
+        return preSeriesAddChecks.find({}, {sort: {errorDescription: 1}}).fetch();
     },
 
     //------------------------------------------  drop down ------------------------------
@@ -58,28 +58,37 @@ Template.checkListOverView.events({
 
     },
 
-    'click .submitButtonEdit': (e) => {
+    'click .submitButtonTeam1': (e) => {
         e.preventDefault();
+        let team = 1;
         let idCheck = e.currentTarget.id;
-        console.log('edit', idCheck);
+        console.log(team, idCheck);
     },
 
-   'click .submitButtonActive': (e) => {
+   'click .submitButtonTeam2': (e) => {
        e.preventDefault();
+       let team = 2;
        let idCheck = e.currentTarget.id;
-       console.log('active', idCheck);
+       console.log(team, idCheck);
    },
 
-    'click .submitButtonInactive': (e) => {
+    'click .submitButtonTeam3': (e) => {
         e.preventDefault();
+        let team = 3;
         let idCheck = e.currentTarget.id;
-        console.log('inactive', idCheck);
+        console.log(team, idCheck);
     },
-
-    'click .submitButtonDelete': (e) => {
+    'click .submitButtonTeam4': (e) => {
         e.preventDefault();
+        let team = 4;
         let idCheck = e.currentTarget.id;
-        console.log('delete', idCheck);
+        console.log(team, idCheck);
+    },
+    'click .submitButtonTeam5': (e) => {
+        e.preventDefault();
+        let team = 5;
+        let idCheck = e.currentTarget.id;
+        console.log(team, idCheck);
     },
 
     'click .comp': function () {

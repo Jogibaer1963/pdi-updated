@@ -7,9 +7,38 @@ if(Meteor.isServer){
 
     Meteor.startup( function() {
 
-        Meteor.publish("overView", function () {
-            return MachineReady.find({}, {fields: {machineId: 1, date: 1, pdiStatus: 1,
-            repairStatus: 1, washStatus: 1, shipStatus: 1, locationId: 1}});
+        Meteor.publish("overView", () => {
+            return MachineReady.find({machineId: {$gt: 'C7700000'},
+                                               $or: [{shipStatus: 0}, {shipStatus: 1}]},
+                                        {fields: {machineId: 1,
+                                                          date: 1,
+                                                          pdiStatus: 1,
+                                                          repairStatus: 1,
+                                                          washStatus: 1,
+                                                          shipStatus: 1,
+                                                          destination: 1,
+                                                          transporter: 1,
+                                                          kit: 1,
+                                                          shippingComment: 1,
+                                                          tireTrack: 1,
+                                                          truckStatus: 1,
+                                                          confirmedShipDate: 1,
+                                                          kitStatus: 1,
+                                                          machineReturn: 1,
+                                                          readyToGo: 1,
+                                                          KitStatus: 1,
+                                                          locationId: 1}
+                                                 });
+
+        });
+
+        Meteor.publish("preOverView", () => {
+           return  preSeriesMachine.find({},
+                     {fields: {preMachineId: 1,
+                                       date: 1,
+                                       pdiStatus: 1,
+                                       configStatus: 1
+                                   }});
         });
 
         Meteor.publish("MachineReady", function () {
@@ -115,18 +144,12 @@ if(Meteor.isServer){
         Meteor.publish("dropDownHistoricMachines", function() {
             return dropDownHistoricMachines.find();
         });
-
-        Meteor.publish("machineReadyToGo_2016", function() {
-            return machineReadyToGo_2016.find();
-        });
-
-        Meteor.publish("machineReadyToGo_2017", function() {
-            return machineReadyToGo_2017.find();
-        });
-
+/*
         Meteor.publish("machineReadyToGo_2018", function() {
             return machineReadyToGo_2018.find();
         });
+
+ */
 
         Meteor.publish("specialPdiItems", function() {
             return specialPdiItems.find();
@@ -157,11 +180,47 @@ if(Meteor.isServer){
 
     Meteor.methods({
 
+       'preSeriesOverView': () => {
+           const resultArray = [];
+           let resultStep1 = preSeriesMachine.find({}).fetch();
+           if (resultStep1.length === 0) {
+               console.log("leer");
+           } else {
+               let arrayLength = resultStep1.length;
+               for (let i = 0; i <= (arrayLength - 1); i++) {
+                   let _id = resultStep1[i]._id;
+                   let newIssuesLength = resultStep1[i].newIssues.length;
+                   let checkPointCount = resultStep1[i].checkItems.length;
+                   let machineNumber = resultStep1[i].preMachineId;
+                   let date = resultStep1[i].date;
+                   let pdiStatusId = resultStep1[i].pdiStatus;
+                   let checkItemIssue = 0;
+                   for (let k = 1; k <= checkPointCount; k++) {
+                       try {
+                           if (resultStep1[i].checkItems[k].failureStatus === 2) {
+                               checkItemIssue++;
+                           }
+                       } catch (e) {
+                       }
+                   }
+                   let result = ({
+                       _id: _id,
+                       machineNumber: machineNumber,
+                       date: date,
+                       pdiStatusId: pdiStatusId,
+                       newIssueCount: newIssuesLength,
+                       checkPointCount: checkPointCount,
+                       checkItemIssue: checkItemIssue
+                   });
+                   resultArray.push(result);
+               }
+           }
+           return resultArray;
+       },
 
     'preSeriesAddCheck': (addNewFailure) => {
         preSeriesAddChecks.insert({errorDescription: addNewFailure});
     },
-
 
     //-----------------------------------------Called 1 time to generate the Checklist Data base --------------
     'generateDataBase': () => {
@@ -187,11 +246,11 @@ if(Meteor.isServer){
       console.log(result);
     },
 
-
     //----------------------------------------------- Load Pre series Machine numbers  --------------------
 
-    'enterPreMachine': (preMachine) => {
+    'enterPreMachine': (preMachine, shipDate) => {
         preSeriesMachine.insert({preMachineId: preMachine,
+                                      date: shipDate,
                                       pdiStatus: 0,
                                       configStatus: 0,
                                       user: '',

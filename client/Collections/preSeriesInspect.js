@@ -47,7 +47,7 @@ Template.preCheckToDoList.helpers({
             const result = preSeriesMachine.findOne({_id: selectedPreMachineId},
                                                     {fields: {checkItems: 1}}).checkItems;
             let path1 = Session.get('ipAndPort');
-            return resultArray = result.map(resultExtract => {
+            return  resultArray = result.map(resultExtract => {
                 let nods = "?a=" + Math.random();
                     checkResult = {id : resultExtract._id,
                             failureStatus: resultExtract.failureStatus,

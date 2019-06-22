@@ -1,9 +1,6 @@
 Meteor.subscribe('dropDownHistoricMachines');
-Meteor.subscribe("machineReadyToGo_2017");
 Meteor.subscribe("machineReadyToGo_2018");
-Meteor.subscribe("machineReadyToGo_2016");
 Meteor.subscribe("preSeriesMachine");
-
 Session.set('selectedPdiMachine', '');
 Session.set('selectedPreMachine', '');
 
@@ -114,13 +111,6 @@ Session.set('selectedPreMachine', '');
             const pdiMachine = Session.get('selectedPdiMachine');
             const pdiYear = Session.get('year');
             switch(pdiYear) {
-                case '2016':
-                    let result =  machineReadyToGo_2016.find({_id: pdiMachine}).fetch();
-                    let pdiTime = result._id;
-                break;
-                case '2017':
-                    return  machineReadyToGo_2017.find({_id: pdiMachine});
-                break;
                 case '2018':
                     return  machineReadyToGo_2018.find({_id: pdiMachine});
                 break;
@@ -148,7 +138,6 @@ Session.set('selectedPreMachine', '');
                     return fail.failureStatus === 2;
                 });
                 let path1 = Session.get('ipAndPort');
-             //   let path1= "http://192.168.0.109:3300/images/";
                 return returnArray = resultArray.map(resultExtract => {
                     let nods = "?a=" + Math.random();
                     checkResult = {id : resultExtract._id,
@@ -157,7 +146,6 @@ Session.set('selectedPreMachine', '');
                         errorDescription: resultExtract.errorDescription};
                     return checkResult;
                 });
-
             }
             catch (e) {
             }

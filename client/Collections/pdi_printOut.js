@@ -23,9 +23,7 @@ if(Meteor.isClient) {
                     return fail.failureStatus === 2;
                 });
                 let path1 = Session.get('ipAndPort');
-
-            //    let path1= "http://192.168.0.103:3300/images/";
-                return returnArray = resultArray.map(resultExtract => {
+                return resultArray.map(resultExtract => {
                     let nods = "?a=" + Math.random();
                     checkResult = {id : resultExtract._id,
                         imagePath : path1 + resultExtract.imagePath + nods,
