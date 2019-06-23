@@ -52,6 +52,7 @@ Template.preCheckToDoList.helpers({
                     checkResult = {id : resultExtract._id,
                             failureStatus: resultExtract.failureStatus,
                             imagePath : path1 + resultExtract.imagePath + nods,
+                            team: resultExtract.team,
                             errorDescription: resultExtract.errorDescription};
                     return checkResult;
             });

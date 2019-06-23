@@ -393,6 +393,12 @@ if(Meteor.isServer){
         preSeriesMachine.update({_id: id}, {$set: {pdiStatus: 1}});
     },
 
+    //-------------------------------------- Specify Team for each image --------------
+
+     'teamSpecifier': (team, idCheck) => {
+           images.update({_id: idCheck},  {$set: {team: team}});
+     },
+
    //------------------------------------------------- Add Special Tasks for PDI ------------------------
 
         'addSpecialPdiItem': (addItem) => {

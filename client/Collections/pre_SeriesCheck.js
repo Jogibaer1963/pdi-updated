@@ -15,6 +15,7 @@ Template.checkListOverView.helpers({
                             failure: resultExtract.failureStatus,
                             imagePath : path1 + resultExtract.imagePath,
                             position : resultExtract.position,
+                            team : resultExtract.team
                           };
              return checkResult;
         });
@@ -55,40 +56,39 @@ Template.checkListOverView.events({
         e.preventDefault();
         console.log('call Server');
         Meteor.call('generateDataBase');
-
     },
 
     'click .submitButtonTeam1': (e) => {
         e.preventDefault();
         let team = 1;
         let idCheck = e.currentTarget.id;
-        console.log(team, idCheck);
+        Meteor.call('teamSpecifier', team, idCheck);
     },
 
    'click .submitButtonTeam2': (e) => {
        e.preventDefault();
        let team = 2;
        let idCheck = e.currentTarget.id;
-       console.log(team, idCheck);
+       Meteor.call('teamSpecifier', team, idCheck);
    },
 
     'click .submitButtonTeam3': (e) => {
         e.preventDefault();
         let team = 3;
         let idCheck = e.currentTarget.id;
-        console.log(team, idCheck);
+        Meteor.call('teamSpecifier', team, idCheck);
     },
     'click .submitButtonTeam4': (e) => {
         e.preventDefault();
         let team = 4;
         let idCheck = e.currentTarget.id;
-        console.log(team, idCheck);
+        Meteor.call('teamSpecifier', team, idCheck);
     },
     'click .submitButtonTeam5': (e) => {
         e.preventDefault();
         let team = 5;
         let idCheck = e.currentTarget.id;
-        console.log(team, idCheck);
+        Meteor.call('teamSpecifier', team, idCheck);
     },
 
     'click .comp': function () {

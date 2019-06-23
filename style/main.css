@@ -1282,11 +1282,12 @@ table.readyTable {
 .printoutMargin {
   margin-left: 1em; }
 
-#footer {
-  bottom: 100px;
+.footer {
+  bottom: 40px;
+  font-size: x-small;
   height: 30px;
   position: fixed;
-  width: 100%; }
+  width: 70%; }
 
 .printOutTable {
   width: 900px; }
@@ -1502,6 +1503,11 @@ table.preTableChecklist {
 table.addCheck {
   margin-left: 3.5em;
   width: 400px; }
+
+.show-team {
+  left: 40em;
+  position: relative;
+  top: -2.5em; }
 
 .mainLayout {
   position: absolute;
