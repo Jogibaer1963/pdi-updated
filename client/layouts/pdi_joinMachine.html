@@ -35,9 +35,22 @@
                 <br>
                 <input type="text" class="omInput inputSize" id="unloadOmm" name="omUnload" placeholder="Unload OMM" value={{ommUnload}} required>
                 <br>
-                <label for="ommMain">Profi Cam</label>
+                <div class="profiCamInputPos">
+                    {{#dropdownTrigger  name="omProfiCam"}}
+                        <button class="loginSubmit omInputButton">OMM Profi Cam</button>
+                    {{/dropdownTrigger}}
+                    {{#dropdown name="omProfiCam" id="dropDownProfiCam" align="left" left="-180"}}
+                        <tbody class="rTable">
+                        {{#each omProfiCam}}
+                            <tr class="profiCam {{selectedProfiCam}}">
+                                <td class="dropDown">{{partNumbers}}</td>
+                            </tr>
+                        {{/each}}
+                        </tbody>
+                    {{/dropdown}}
+                </div>
                 <br>
-                <input type="text" class="omInput inputSize" id="locationId" name="omProfiCam" placeholder="Profi Cam" value={{ommProfiCam}}>
+                <input type="text" class="omInput inputSize" id="locationId" name="omProfiCam" placeholder="Profi Cam" value={{profiCam}}>
                 <br>
                 <label for="cebisOmm">Cebis Mobil</label>
                 <br>
@@ -45,7 +58,7 @@
                 <br>
                 <label for="ommMain">Mobile Touch</label>
                 <br>
-                <input type="text" class="omInput inputSize" id="locationId" name="omTouch" placeholder="Mobile Touch" value={{ommTouch}}>
+                <input type="text" class="omInput inputSize" id="locationId" name="omTouch" placeholder="Mobile Touch" value={{ommCebisTouch}}>
                 <br>
                 <label for="ommMain">Terra Track</label>
                 <br>
@@ -53,7 +66,7 @@
                 <br>
                 <label for="ommMain">Dual Tire New Version</label>
                 <br>
-                <input type="text" class="omInput inputSize" id="locationId" name="dualTire" placeholder="Dual Tires" value={{ommDual}}>
+                <input type="text" class="omInput inputSize" id="locationId" name="dualTire" placeholder="Dual Tires" value={{ommDuals}}>
             </div>
             <br><br>
             <button type="submit" class="btn btn-success buttonBatt">Save OMM's</button><h4>{{ommSaved}}</h4><br>

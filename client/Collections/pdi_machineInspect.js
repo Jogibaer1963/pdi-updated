@@ -1,6 +1,4 @@
 
-Meteor.subscribe("pdiCheckList");
-Meteor.subscribe("orderParts");
 Meteor.subscribe('oms');
 
 
@@ -20,8 +18,7 @@ Meteor.subscribe('oms');
             try {
                 Session.set('selectedPdiMachineNr', localStorage.getItem('pdiMachineNr'));
                 const machineId = Session.get('selectedPdiMachineNr');
-                result = MachineReady.findOne({machineId: machineId}).checkList;
-                return result;
+               return MachineReady.findOne({machineId: machineId}).checkList;
             } catch (e) {
             }
         },
@@ -30,8 +27,7 @@ Meteor.subscribe('oms');
             try {
                 Session.set('selectedPdiMachineNr', localStorage.getItem('pdiMachineNr'));
                 const machineId = Session.get('selectedPdiMachineNr');
-                result = MachineReady.findOne({machineId: machineId}).machineConfig;
-                return result;
+              return MachineReady.findOne({machineId: machineId}).machineConfig;
             } catch (e) {
             }
         },
@@ -56,16 +52,83 @@ Meteor.subscribe('oms');
             }
         },
 
-        profiCam: function() {
-            return Session.get('profiCam');
-        },
-
         omProfiCam: () => {
             return oms.find({}).fetch();
         },
 
+        ommSaved: function() {
+            try {
+                Session.set('selectedPdiMachineNr', localStorage.getItem('pdiMachineNr'));
+                const machineId = Session.get('selectedPdiMachineNr');
+                const result = MachineReady.findOne({machineId: machineId}).omms;
+                Session.set('omms', result);
+                if(result) {
+                    return "OMM's successfull saved";
+                } else {
+                    return "Error, OMM not saved";
+                }
+            } catch (e) {
+            }
+        },
 
-        // drop down Components
+        fuelStart: () => {
+            try {
+                return Session.get('omms').fuelStart;
+            } catch (e) {}
+        },
+
+        ommMain: () => {
+            try {
+                return Session.get('omms').ommMain;
+            } catch (e) {}
+        },
+
+        ommSupp: () => {
+            try {
+                return Session.get('omms').ommSupp;
+            } catch (e) {}
+        },
+
+        ommUnload: () => {
+            try {
+                return Session.get('omms').ommUnload;
+            } catch (e) {}
+        },
+
+        profiCam: () => {
+            try {
+                let result = Session.get('profiCam');
+                if (result) {
+                    return result;
+                } else {
+                return Session.get('omms').ommProfiCam;
+                }
+            } catch (e) {}
+        },
+
+        ommCebis: () => {
+            try {
+                return Session.get('omms').ommCebis;
+            } catch (e) {}
+        },
+
+        ommCebisTouch: () => {
+            try {
+                return Session.get('omms').ommCebisTouch;
+            } catch (e) {}
+        },
+
+        ommTerra: () => {
+            try {
+                return Session.get('omms').ommTerra;
+            } catch (e) {}
+        },
+
+        ommDuals: () => {
+            try {
+                return Session.get('omms').ommDuals;
+            } catch (e) {}
+        },
 
         'selectedComponent': function () {
             let component = this._id;
@@ -99,40 +162,73 @@ Meteor.subscribe('oms');
 
         battSaved: function() {
             try {
+                Session.set('batteries', '');
                 Session.set('selectedPdiMachineNr', localStorage.getItem('pdiMachineNr'));
                 const machineId = Session.get('selectedPdiMachineNr');
-                result = MachineReady.findOne({machineId: machineId}).batteries;
+                const result = MachineReady.findOne({machineId: machineId}).batteries;
+                Session.set('batteries', result);
                 if(result) {
                     return "Battery successful saved";
                 } else {
                     return "Error, Battery not saved";
                 }
-            } catch (e) {
-            }
+            } catch (e) {}
         },
 
-        ommSaved: function() {
+        battC13CCA: () => {
             try {
-                Session.set('selectedPdiMachineNr', localStorage.getItem('pdiMachineNr'));
-                const machineId = Session.get('selectedPdiMachineNr');
-                result = MachineReady.findOne({machineId: machineId}).omms;
-                if(result) {
-                    return "OMM's successfull saved";
-                } else {
-                    return "Error, OMM not saved";
-                }
-            } catch (e) {
-            }
+                return Session.get('batteries').battC13CCA;
+            } catch (e) {}
+        },
+
+        battC13Volt: () => {
+            try {
+                return Session.get('batteries').battC13Volt;
+            } catch (e) {}
+        },
+
+        mtuG001CCA: () => {
+            try {
+                return Session.get('batteries').mtuG001CCA;
+            } catch (e) {}
+        },
+
+        mtuG001Volt: () => {
+            try {
+                return Session.get('batteries').mtuG001Volt;
+            } catch (e) {}
+        },
+
+        mtuG005CCA: () => {
+            try {
+                return Session.get('batteries').mtuG005CCA;
+            } catch (e) {}
+        },
+
+        mtuG005Volt: () => {
+            try {
+                return Session.get('batteries').mtuG005Volt;
+            } catch (e) {}
+        },
+
+        mtuG004CCA: () => {
+            try {
+                return Session.get('batteries').mtuG004CCA;
+            } catch (e) {}
+        },
+
+        mtuG004Volt: () => {
+            try {
+                return Session.get('batteries').mtuG004Volt;
+            } catch (e) {}
         }
-
-
 
     });
 
 
     Session.set('selectedComponent', '');
- /*   Session.set('selectedSub', ''); */
     Session.set('componentChosen', 0);
+    Session.set('selectedValue', '');
 
     Template.pdiToDoList.events({
 
@@ -191,8 +287,6 @@ Meteor.subscribe('oms');
             Session.set('selectedPdiMachineId', localStorage.getItem('pdiMachineId'));
             const selectedPdiMachineId = Session.get('selectedPdiMachineId');
             let idIdentifier = event.currentTarget.name;
-            console.log(idIdentifier);
-
             if(selectedPdiMachineId) {
                 Meteor.call('configInfoButton', selectedPdiMachineId, idIdentifier);
             } else {
@@ -230,8 +324,6 @@ Meteor.subscribe('oms');
             Session.set('selectedPdiMachineId', localStorage.getItem('pdiMachineId'));
             const selectedPdiMachineId = Session.get('selectedPdiMachineId');
             let idFailure = event.currentTarget.id;
-            console.log(idFailure);
-
             if(selectedPdiMachineId) {
                 Meteor.call('naButton', selectedPdiMachineId, idFailure);
             } else {
@@ -253,8 +345,8 @@ Meteor.subscribe('oms');
             Session.set('openFailure', openFailure);
         },
 
-        'click .deleteRepair': () => {
-            event.preventDefault();
+        'click .deleteRepair': (e) => {
+            e.preventDefault();
             const selectedPdiMachineId = Session.get('selectedPdiMachineId');
             const openFailure = Session.get('openFailure');
             if(selectedPdiMachineId) {

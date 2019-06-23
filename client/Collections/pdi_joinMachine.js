@@ -1,7 +1,4 @@
-
-
 Template.joinPdiMachine.helpers({
-
 
     'joinMachineNow': function () {
         try {
@@ -79,11 +76,26 @@ Template.joinPdiMachine.helpers({
         } catch (e) {}
     },
 
+    // drop down profi cam
+
+
+    'selectedProfiCam': function () {
+        let partNumbers = this._id;
+        let selected = Session.get('selectedValue');
+        if (partNumbers === selected) {
+            Session.set('selectedProfiCam', 1);
+            return 'selected'
+        }
+    },
+
+    omProfiCam: () => {
+        return oms.find({}).fetch();
+    },
 
     ommSaved: function() {
         try {
             const machineId = Session.get('selectedPdiMachineNr');
-            result2 = MachineReady.findOne({machineId: machineId}).omms;
+         const result2 = MachineReady.findOne({machineId: machineId}).omms;
             Session.set('omms', result2);
             if(result2) {
                 return "OMM's successfull saved";
@@ -116,10 +128,15 @@ Template.joinPdiMachine.helpers({
             return Session.get('omms').ommUnload;
         } catch (e) {}
     },
-
-    ommProfiCam: () => {
+    profiCam: () => {
         try {
-            return Session.get('omms').ommProfiCam;
+            let result = Session.get('profiCam');
+            if (result) {
+
+                return result;
+            } else {
+             return Session.get('omms').ommProfiCam;
+            }
         } catch (e) {}
     },
 
@@ -129,9 +146,9 @@ Template.joinPdiMachine.helpers({
         } catch (e) {}
     },
 
-    ommTouch: () => {
+    ommCebisTouch: () => {
         try {
-            return Session.get('omms').ommTouch;
+            return Session.get('omms').ommCebisTouch;
         } catch (e) {}
     },
 
@@ -141,9 +158,9 @@ Template.joinPdiMachine.helpers({
         } catch (e) {}
     },
 
-    ommDual: () => {
+    ommDuals: () => {
         try {
-            return Session.get('omms').ommDual;
+            return Session.get('omms').ommDuals;
         } catch (e) {}
     },
 
@@ -151,16 +168,14 @@ Template.joinPdiMachine.helpers({
     machineConfig: function() {
         try {
             const machineId = Session.get('selectedPdiMachineNr');
-            result = MachineReady.findOne({machineId: machineId}).machineConfig;
-            return result;
+           return MachineReady.findOne({machineId: machineId}).machineConfig;
         }  catch (e) {}
     },
 
     checkList: function() {
         try {
             const machineId = Session.get('selectedPdiMachineNr');
-            result = MachineReady.findOne({machineId: machineId}).checkList;
-            return result;
+           return MachineReady.findOne({machineId: machineId}).checkList;
         }  catch (e) {}
     },
 
@@ -173,11 +188,9 @@ Template.joinPdiMachine.helpers({
         }
     },
 
-
     mainComponent: function () {
         return mainComponents.find({}).fetch();
     },
-
 
     issueComponent: () => {
         try {
@@ -187,22 +200,34 @@ Template.joinPdiMachine.helpers({
         }
     },
 
-
     newIssue: function() {
         try {
             const machineId = Session.get('selectedPdiMachineNr');
-            result = MachineReady.findOne({machineId: machineId}).newIssues;
-            return result;
+          return MachineReady.findOne({machineId: machineId}).newIssues;
         }  catch (e) {}
     },
+
+    'selectedFailure': function(){
+        const failure = this._id;
+        const selectedFailure = Session.get('openFailure');
+        if (failure === selectedFailure) {
+            return "selected";
+        }
+    }
 
 });
 
 Session.set('selectedComponent', '');
-Session.set('selectedSub', '');
 Session.set('componentChosen', 0);
 
 Template.joinPdiMachine.events({
+
+    'click .profiCam': function () {
+        const selected = this._id;
+        let textProfiCam = this.partNumbers;
+        Session.set('selectedValue', selected);
+        Session.set('profiCam', textProfiCam );
+    },
 
     'submit .batts': (e) => {
         e.preventDefault();
@@ -314,8 +339,9 @@ Template.joinPdiMachine.events({
         Session.set('openFailure', openFailure);
     },
 
-    'click .deleteRepair': () => {
-        event.preventDefault();
+    'click .deleteRepair': (e) => {
+        e.preventDefault();
+        const selectedPdiMachineId = Session.get('selectedPdiMachineId');
         const openFailure = Session.get('openFailure');
         if(selectedPdiMachineId) {
             Meteor.call('removeFailure', selectedPdiMachineId, openFailure);

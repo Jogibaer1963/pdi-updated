@@ -1,5 +1,5 @@
 //import {Email} from 'meteor/email';
-import { Random } from 'meteor/random';
+import {Random} from 'meteor/random';
 import { Meteor } from 'meteor/meteor';
 
 
@@ -9,26 +9,7 @@ if(Meteor.isServer){
 
         Meteor.publish("overView", () => {
             return MachineReady.find({machineId: {$gt: 'C7700000'},
-                                               $or: [{shipStatus: 0}, {shipStatus: 1}]},
-                                        {fields: {machineId: 1,
-                                                          date: 1,
-                                                          pdiStatus: 1,
-                                                          repairStatus: 1,
-                                                          washStatus: 1,
-                                                          shipStatus: 1,
-                                                          destination: 1,
-                                                          transporter: 1,
-                                                          kit: 1,
-                                                          shippingComment: 1,
-                                                          tireTrack: 1,
-                                                          truckStatus: 1,
-                                                          confirmedShipDate: 1,
-                                                          kitStatus: 1,
-                                                          machineReturn: 1,
-                                                          readyToGo: 1,
-                                                          KitStatus: 1,
-                                                          locationId: 1}
-                                                 });
+                                               $or: [{shipStatus: 0}, {shipStatus: 1}]});
 
         });
 
@@ -48,10 +29,12 @@ if(Meteor.isServer){
         Meteor.publish("checkpoints", function(){
             return checkPoints.find();
         });
-
+/*
         Meteor.publish("pdiCheckList", function(){
             return pdiCheckList.find();
         });
+
+ */
 
         Meteor.publish("headerTrailer", function(){
             return headerTrailer.find();
@@ -144,12 +127,10 @@ if(Meteor.isServer){
         Meteor.publish("dropDownHistoricMachines", function() {
             return dropDownHistoricMachines.find();
         });
-/*
+
         Meteor.publish("machineReadyToGo_2018", function() {
             return machineReadyToGo_2018.find();
         });
-
- */
 
         Meteor.publish("specialPdiItems", function() {
             return specialPdiItems.find();
@@ -224,7 +205,7 @@ if(Meteor.isServer){
 
     //-----------------------------------------Called 1 time to generate the Checklist Data base --------------
     'generateDataBase': () => {
-        for (i = 1; i <= 337; i++) {
+        for ( let i = 1; i <= 337; i++) {
             let uniqueId= Random.id();
             images.insert({
                 _id: uniqueId,
@@ -280,7 +261,7 @@ if(Meteor.isServer){
         let preConfigStyle = [];
 
         if(selectedPreMachine) {
-                 result = preSeriesMachine.findOne({_id: selectedPreMachine},
+              let result = preSeriesMachine.findOne({_id: selectedPreMachine},
                                                    {fields: {preMachineId: 1}}).preMachineId;
                  type = result.slice(0,3);
                 }
@@ -1062,11 +1043,13 @@ if(Meteor.isServer){
         },
 
         //----------------------------------------  Check points -------------------------------------
-
+/*
         'removeCheckPoint': function(selectedPdiMachineId, selectedCheckPoint) {
             pdiCheckList.update({_id: selectedPdiMachineId},
                 {$pull: {checkList: {_id: selectedCheckPoint}}});
         },
+
+ */
 
         //pdi Config Buttons
 
