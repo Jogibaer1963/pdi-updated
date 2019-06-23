@@ -63,7 +63,7 @@ Template.preCheckToDoList.helpers({
     //----------------------------  adding new discovered issues  -----------------
 
     preCheckList: () => {
-        return preSeriesAddChecks.find().fetch();
+        return preSeriesAddChecks.find({}, {sort: {errorDescription: 1}}).fetch();
 
     },
 

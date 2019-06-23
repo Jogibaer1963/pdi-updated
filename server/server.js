@@ -29,12 +29,6 @@ if(Meteor.isServer){
         Meteor.publish("checkpoints", function(){
             return checkPoints.find();
         });
-/*
-        Meteor.publish("pdiCheckList", function(){
-            return pdiCheckList.find();
-        });
-
- */
 
         Meteor.publish("headerTrailer", function(){
             return headerTrailer.find();

@@ -36,7 +36,7 @@ Template.checkListOverView.helpers({
     },
 
     mainComponent: function () {
-        return mainComponents.find({}).fetch();
+        return mainComponents.find({}, {sort: {description: 1}}).fetch();
     },
 
     issueComponent: () => {
