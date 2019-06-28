@@ -157,7 +157,7 @@ if(Meteor.isServer){
 
        'preSeriesOverView': () => {
            const resultArray = [];
-           let resultStep1 = preSeriesMachine.find({}).fetch();
+           let resultStep1 = preSeriesMachine.find({}, {sort: {date: 1}}).fetch();
            if (resultStep1.length === 0) {
                console.log("leer");
            } else {

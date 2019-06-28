@@ -8,15 +8,7 @@ Session.set('selectedPreMachine', '');
 
         showList: function() {
             let collectionName = Session.get('collectionName');
-            if (collectionName === '2016') {
-                Session.set('year', '2016');
-                return  machineReadyToGo_2016.find({machineId: {$gt:'C4700000'}},
-                                                   {sort: {date: -1}});
-            } else if (collectionName === '2017') {
-                Session.set('year', '2017');
-                return  machineReadyToGo_2017.find({machineId: {$gt:'C4700000'}},
-                                                    {sort: {date: -1}});
-            } else if (collectionName === '2018') {
+            if (collectionName === '2018') {
                 Session.set('year', '2018');
                 return  machineReadyToGo_2018.find({machineId: {$gt:'C4700000'}},
                                                    {sort: {date: -1}});
@@ -140,7 +132,7 @@ Session.set('selectedPreMachine', '');
                 let path1 = Session.get('ipAndPort');
                 return returnArray = resultArray.map(resultExtract => {
                     let nods = "?a=" + Math.random();
-                    checkResult = {id : resultExtract._id,
+                        checkResult = {id : resultExtract._id,
                         failureStatus: resultExtract.failureStatus,
                         imagePath : path1 + resultExtract.imagePath + nods,
                         errorDescription: resultExtract.errorDescription};

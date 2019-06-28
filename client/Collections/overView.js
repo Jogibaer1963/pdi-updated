@@ -37,7 +37,7 @@
 //------------------------------  Machine Table -----------------------------------------------------------
 
        machineOverView: function() {
-        return MachineReady.find({}, {sort: {date: -1}});
+        return MachineReady.find({$or: [{shipStatus: 0}]}, {sort: {date: -1}});
         },
 
 //------------------------------- Header Table --------------------------------------------------------------

@@ -129,6 +129,30 @@
        <h1>_____________________</h1>
     </div>
 
+    <div class="checkListTable">
+        <h3 class="configHeader">Checklist</h3>
+        <table class="pdiCheckList">
+            <tbody>
+            {{#each preCheck}}
+                <div class="imageMargin">
+                    <tr class="preTableCheckList">
+                        <td class="{{getMachineConfigStatus failureStatus}}"
+                            style="background-color:{{getMachineConfigStatus failureStatus}}">
+                            <div class="image">
+                                <img class="NO-CACHE" src={{imagePath}}>
+                                <h3>{{errorDescription}}</h3>
+                            </div>
+                        </td>
+                    </tr>
+                </div>
+            {{/each}}
+            </tbody>
+        </table>
+    </div>
+    <div class="pdiDivider">
+        <h1>_____________________</h1>
+    </div>
+
     <div class="mainComponentsPos">
         {{#dropdownTrigger  name="mainComponents"}}
             <button class="loginSubmit omInputButton">Main Components</button>

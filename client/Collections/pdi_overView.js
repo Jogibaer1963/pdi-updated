@@ -104,12 +104,12 @@
           FlowRouter.go('addIssueToPdi');
         },
 
-        'change .loadConfig': () => {
-            event.preventDefault();
+        'change .loadConfig': (e) => {
+            e.preventDefault();
             const singleConfig = [];
             let i = 0;
             let k = 11;
-            const file = event.target.files[0];
+            const file = e.target.files[0];
             if (!file) {
                 return;
             }
@@ -122,7 +122,7 @@
                 let config = contents.slice(searchString + 4, configLength);
                 let trimConfig = config.replace(/\s+/g, '').trim();
                 const newConfig = (trimConfig.length) / 12;
-                for (j = 0; j < newConfig; j++) {
+                for (let j = 0; j < newConfig; j++) {
                         singleConfig[j] = (trimConfig.substr(i, k).trim()).replace(';', '_');
                         i = i + 12;
                 }
