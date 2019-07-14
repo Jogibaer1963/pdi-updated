@@ -29,8 +29,8 @@
 
 
 .mainLayout {
-  position: absolute;
   left: 40em;
+  position: absolute;
 }
 
 .insideNavBar {
@@ -53,16 +53,18 @@
   margin: 10px;
 }
 
+$grey: #978f93;
+
 .selected {
-  background-color: #978f93;
+  background-color: $grey;
 }
 
 .selectedMachine {
-  background-color: #978f93;
+  background-color: $grey;
 }
 
 .selectedArea {
-  background-color: #978f93;
+  background-color: $grey;
 }
 
 .selectedBackgroundGreen {
@@ -105,9 +107,6 @@ $comm-status: #252525;
                   #e6e6e6 10px,
                   #bc171b 20px
   );
-    background-color: $comm-status;
-    opacity: .5;
-    pointer-events: none;
-
-
+  background-color: $comm-status;
+  opacity: .5;
 }

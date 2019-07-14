@@ -19,7 +19,8 @@ if(Meteor.isServer){
                                        date: 1,
                                        pdiStatus: 1,
                                        configStatus: 1
-                                   }});
+                                   }},
+                                {sort: {preMachineId: 1}});
         });
 
         Meteor.publish("MachineReady", function () {
@@ -157,7 +158,7 @@ if(Meteor.isServer){
 
        'preSeriesOverView': () => {
            const resultArray = [];
-           let resultStep1 = preSeriesMachine.find({}, {sort: {date: 1}}).fetch();
+           let resultStep1 = preSeriesMachine.find({}, {sort: {preMachineId: 1}}).fetch();
            if (resultStep1.length === 0) {
                console.log("leer");
            } else {
@@ -298,18 +299,21 @@ if(Meteor.isServer){
             }
         });
 
-        let checkList = images.find().fetch();
-
+        let checkList = images.find ({activeStatus: {$gt: 0} }).fetch();
+        let result = checkList.length;
+        console.log(result);
         // Add all lists to the database after checklist is loaded
 
         if (checkList) {
             preSeriesMachine.upsert({_id: selectedPreMachine},
-                                    {$set: {machineConfig: machinePreConfiguration,
+                                    {$set: {imageCount: result,
+                                                    machineConfig: machinePreConfiguration,
                                                     checkItems: checkList,
                                                     dateStart: dateStart,
                                                     user: user,
                                                     pdiStatus: 2,
                                                     newIssues: [],
+
                                                     counter: []
                                                                 }});
         }
@@ -359,9 +363,12 @@ if(Meteor.isServer){
                 preSeriesMachine.update({_id: selectedPreMachineId},
                                         {$push: {counter: checkResult}});
                 let counter = preSeriesMachine.findOne({_id: selectedPreMachineId},
-                                                       {fields: {counter: 1, _id: 0}}).counter;
-                let checkPoints = images.find().count();
-                let progress =  ((100 / (checkPoints)) * counter.length).toFixed(2);
+                                                       {fields: {counter: 1,
+                                                               imageCount:1,
+                                                               _id: 0}});
+                let checkPoints = counter.imageCount;
+                let counterFound = counter.counter;
+                let progress =  ((100 / (checkPoints)) * counterFound.length).toFixed(2);
                 preSeriesMachine.update({_id: selectedPreMachineId},
                     {$set: {progressBar: progress}})
             } else {
@@ -399,6 +406,12 @@ if(Meteor.isServer){
            images.update({_id: idCheck},  {$set: {team: team}});
      },
 
+     //------------------------------------- Activate / Deactivate images -------------------
+
+     'activeInactive': (activeInactive, idCheck) => {
+            images.update({_id: idCheck},  {$set: {activeStatus: activeInactive}});
+        },
+
    //------------------------------------------------- Add Special Tasks for PDI ------------------------
 
         'addSpecialPdiItem': (addItem) => {
@@ -406,15 +419,11 @@ if(Meteor.isServer){
             specialPdiItems.insert({specialItem: addPdiItem});
         },
 
-
-
   //-------------------------------------------------- Historic PDI's ------------------------------------
 
         'historicPdi': (selected) => {
           return dropDownHistoricMachines.findOne({_id: selected}).id;
         },
-
-
 
  //----------------------------------------------------- Components -----------------------------------------------------------------------
 

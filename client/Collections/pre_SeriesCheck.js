@@ -91,6 +91,20 @@ Template.checkListOverView.events({
         Meteor.call('teamSpecifier', team, idCheck);
     },
 
+    'click .submitButtonActive': (e) => {
+        e.preventDefault();
+        let active = 1;
+        let idCheck = e.currentTarget.id;
+        Meteor.call('activeInactive', active, idCheck);
+    },
+
+    'click .submitButtonInactive': (e) => {
+        e.preventDefault();
+        let inactive = 0;
+        let idCheck = e.currentTarget.id;
+        Meteor.call('activeInactive', inactive, idCheck);
+    },
+
     'click .comp': function () {
         const selected = this._id;
         let textMainComp = this.component;

@@ -1,4 +1,5 @@
     Meteor.subscribe("overView");
+    Meteor.subscribe("preOverView");
 
     Session.set('selectedPdiMachine', '');
     Session.set('pdiMachineNumber', '');
@@ -50,6 +51,13 @@
 //-------------------------------- Pre Series Table and Counter  --------------------------------------------
 
         preOverViewCheckList: () => {
+            /*
+            let result =  preSeriesMachine.find({},{sort: {preMachineId: 1}}).fetch();
+            console.log(result);
+            return result
+
+             */
+
                    Meteor.call('preSeriesOverView', (error, result) => {
                        if (error) {
                        } else {
@@ -64,7 +72,10 @@
                        }
                    });
                    }, 60000);
-            return Session.get('preOverView');
+            let result = Session.get('preOverView');
+            console.log(result);
+            return result;
+
         }
 
 

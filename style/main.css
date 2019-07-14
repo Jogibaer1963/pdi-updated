@@ -1510,8 +1510,8 @@ table.addCheck {
   top: -2.5em; }
 
 .mainLayout {
-  position: absolute;
-  left: 40em; }
+  left: 40em;
+  position: absolute; }
 
 .insideNavBar {
   margin-top: 25px; }
@@ -1562,7 +1562,6 @@ table.addCheck {
 .inActiveButton-1 {
   background: repeating-linear-gradient(45deg, #e6e6e6, #bc171b 10px, #e6e6e6 10px, #bc171b 20px);
   background-color: #252525;
-  opacity: .5;
-  pointer-events: none; }
+  opacity: .5; }
 
 /*# sourceMappingURL=main.css.map */

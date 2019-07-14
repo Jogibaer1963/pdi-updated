@@ -3,7 +3,7 @@ Meteor.subscribe('preOverView');
 Template.preInspection.helpers({
 
    preCheckList: () => {
-        return preSeriesMachine.find({}, {sort: {date: -1}}).fetch();
+        return preSeriesMachine.find({}, {sort: {preMachineId: 1}}).fetch();
    },
 
     countPreCheck: () => {
