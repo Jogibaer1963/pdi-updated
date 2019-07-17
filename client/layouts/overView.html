@@ -25,6 +25,7 @@
       <thead>
          <tr>
            <th class="pdiMachineField"><strong>Machine</strong></th>
+           <th class="pdiShipDate"><strong>COA Ship Date</strong></th>
            <th class="pdiShipDate"><strong>Shipp Date</strong></th>
            <th class="pdiPDIField"><strong>PDI</strong></th>
            <th class="pdiRepField"><strong>Rep</strong></th>
@@ -36,6 +37,7 @@
           {{#each machineOverView}}
              <tr class="">
                <td class="pdiMachineField">{{machineId}}</td>
+               <td class="pdiShipDate" style="width: 50px">{{coaDate}}</td>
                <td class="pdiShipDate" style="width: 50px">{{date}}</td>
                <td class="pdiPDIField {{getStatusColor pdiStatus}}" style="background-color:{{getStatusColor pdiStatus}}; color:{{getStatusColor pdiStatus}}" >{{pdiStatus}}</td>
                <td class="pdiRepField {{getStatusColor repairStatus}}" style="background-color:{{getStatusColor repairStatus}}; color:{{getStatusColor repairStatus}}" >{{repairStatus}}</td>
@@ -72,6 +74,7 @@
             <thead>
             <tr>
                 <th class="pdiMachineField"><strong>Machine</strong></th>
+                <th class="pdiShipDate"><strong>COA Ship Date</strong></th>
                 <th class="headerShipDate"><strong>Shipp Date</strong></th>
                 <th class="pdiPDIField"><strong>Pre Check</strong></th>
                 <th class="pdiConfig"><strong>Check points</strong></th>
@@ -83,6 +86,7 @@
             {{#each preOverViewCheckList}}
                 <tr class="openPreInspect {{selectedClass}}">
                     <td class="pdiMachineField">{{machineNumber}}</td>
+                    <td class="pdiShipDate" style="width: 50px">{{coaDate}}</td>
                     <td class="headerShipDate" style="width: 50px">{{date}}</td>
                     <td class="pdiPDIField {{getStatusColor pdiStatusId}}"
                         style="background-color:{{getStatusColor pdiStatusId}};

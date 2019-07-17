@@ -21,6 +21,14 @@
                   {{> repairLayout}}
                   {{> overView}}
               {{/if}}
+              {{#if isInRole 'salesPerson'}}
+                  {{> topNav}}
+                  {{> coa}}
+                  <br>
+                  <br>
+                  <br>
+                  {{> overView}}
+              {{/if}}
               {{#if isInRole 'washBay'}}
                   {{> topNav}}
                   {{> washLayout}}

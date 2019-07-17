@@ -1,0 +1,30 @@
+<template name="coa">
+    {{#if currentUser}}
+        {{> coaDate}}
+    {{else}}
+        {{> login}}
+    {{/if}}
+</template>
+
+<template name="coaDate">
+    <div id="logo">
+        <img src="claas_logo.png" />
+    </div>
+    <div class="coa-machine-date">
+        <h1>Add requested shipping date</h1>
+        <br><br>
+        <form class="inputEditMachine">
+            <div class="shippingInputs">
+                <label for="MachineId" class="input" >Machine-Id</label>
+                <br>
+                <input type="text" class="inputComment" id="MachineId" name="newMachine" placeholder="Machine Id" required>
+            </div>
+            <div class="shippingInputs">
+                <label for="shippingDate" class="input">Shipping-Date</label>
+                <br>
+                <input type="Date" class="inputComment" id="shippingDate" name="newDate" required>
+                <button class="btn btn-success" type="submit">Submit machine</button>
+            </div>
+        </form>
+    </div>
+</template>

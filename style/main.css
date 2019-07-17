@@ -286,18 +286,18 @@ table.headerTable {
   top: 300px; }
 
 .overView {
+  left: 200px;
   position: relative;
-  top: 80px;
-  left: 200px; }
+  top: 80px; }
 
 .openStatus {
+  margin-left: 25px;
   position: relative;
-  top: 80px;
-  margin-left: 25px; }
+  top: 80px; }
 
 .headerTablePosition {
+  left: 37em;
   position: absolute;
-  left: 30em;
   top: 21em; }
 
 table.overViewTable {
@@ -1508,6 +1508,10 @@ table.addCheck {
   left: 40em;
   position: relative;
   top: -2.5em; }
+
+.coa-machine-date {
+  left: 40em;
+  position: absolute; }
 
 .mainLayout {
   left: 40em;

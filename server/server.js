@@ -146,15 +146,18 @@ if(Meteor.isServer){
         Meteor.publish("preSeriesAddChecks", function() {
             return preSeriesAddChecks.find();
         });
-
-
-
     });
 
 
 
 
     Meteor.methods({
+
+        'coaDate': (machineId, coaDate) => {
+            MachineReady.upsert({machineId: machineId}, {$set: {coaDate: coaDate}});
+            console.log(machineId);
+            preSeriesMachine.upsert({preMachineId: machineId}, {$set: {coaDate: coaDate}});
+    },
 
        'preSeriesOverView': () => {
            const resultArray = [];
@@ -169,6 +172,7 @@ if(Meteor.isServer){
                    let checkPointCount = resultStep1[i].checkItems.length;
                    let machineNumber = resultStep1[i].preMachineId;
                    let date = resultStep1[i].date;
+                   let coaDate = resultStep1[i].coaDate;
                    let pdiStatusId = resultStep1[i].pdiStatus;
                    let checkItemIssue = 0;
                    for (let k = 1; k <= checkPointCount; k++) {
@@ -183,6 +187,7 @@ if(Meteor.isServer){
                        _id: _id,
                        machineNumber: machineNumber,
                        date: date,
+                       coaDate: coaDate,
                        pdiStatusId: pdiStatusId,
                        newIssueCount: newIssuesLength,
                        checkPointCount: checkPointCount,

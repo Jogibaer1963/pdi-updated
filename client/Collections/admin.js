@@ -37,11 +37,12 @@ Template.adminViewUser.events({
 Template.adminNewUser.events({
     'submit .adminRegisterNewUser': function (event) {
         event.preventDefault();
+        let roleConst = "";
         const userConst = event.target.registerUser.value;
         const passwordConst = event.target.registerPassword.value;
         const role = event.target.userRole.value;
         if (role === 'Admin') {
-            roleConst = 'admin'
+           roleConst = 'admin'
         } else if (role === 'Logistics') {
             roleConst = 'shipping'
         } else if (role === 'Quality PDI') {
@@ -52,6 +53,8 @@ Template.adminNewUser.events({
             roleConst = 'washBay'
         } else if (role === 'Loading') {
             roleConst = 'outBound'
+        } else if (role === 'COA') {
+            roleConst = 'salesPerson'
         }  else if (role === 'Operation Supervisor') {
             roleConst = 'Ops_admin'
         }   else if (role === 'Team Lead') {
