@@ -8,7 +8,7 @@ if(Meteor.isServer){
     Meteor.startup( function() {
 
         Meteor.publish("overView", () => {
-            return MachineReady.find({machineId: {$gt: 'C7700000'},
+            return MachineReady.find({machineId: {$gt: 'C6800000'},
                                                $or: [{shipStatus: 0}, {shipStatus: 1}]});
 
         });
