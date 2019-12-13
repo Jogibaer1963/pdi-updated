@@ -18,7 +18,7 @@
     "less": "^2.7.3",
     "meteor-node-stubs": "^0.3.3",
     "mongodb": "^3.1.6",
-    "npm": "^6.4.0",
+    "npm": "^6.13.4",
     "qm-fs-readtxtfile": "^0.1.1",
     "read-file": "^0.2.0",
     "read-text-file": "^1.1.0",
