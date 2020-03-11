@@ -4,10 +4,6 @@ Meteor.subscribe("variants_C77");
 Meteor.subscribe("variants_C89");
 Meteor.subscribe("variants_C88");
 Meteor.subscribe("variants_C87");
-Meteor.subscribe("variants_C68");
-
-
-if(Meteor.isClient) {
 
 
     Template.variantsViewer.helpers({
@@ -45,11 +41,6 @@ if(Meteor.isClient) {
                    let variant_C89_length = variants_C89.find().count();
                    Session.set('variant-C89-count', variant_C89_length);
                    return variant_C89;
-               case 7:
-                   let variant_C68 = variants_C68.find({}, {sort: {variant: 1}});
-                   let variant_C68_length = variants_C68.find().count();
-                   Session.set('variant-C68-count', variant_C68_length);
-                   return variant_C68;
            }
         },
 
@@ -76,44 +67,41 @@ if(Meteor.isClient) {
             reader.readAsText(file);
         },
 
-        'click .c77': () => {
-            event.preventDefault();
+        'click .c77': (e) => {
+            e.preventDefault();
             Session.set('variantType', 1);
         },
 
-        'click .c78': () => {
-            event.preventDefault();
+        'click .c78': (e) => {
+            e.preventDefault();
             Session.set('variantType', 2);
         },
 
-        'click .c79': () => {
-            event.preventDefault();
+        'click .c79': (e) => {
+            e.preventDefault();
             Session.set('variantType', 3);
         },
 
-        'click .c87': () => {
-            event.preventDefault();
+        'click .c87': (e) => {
+            e.preventDefault();
             Session.set('variantType', 4);
         },
 
-        'click .c88': () => {
-            event.preventDefault();
+        'click .c88': (e) => {
+            e.preventDefault();
             Session.set('variantType', 5);
         },
 
-        'click .c89': () => {
-            event.preventDefault();
+        'click .c89': (e) => {
+            e.preventDefault();
             Session.set('variantType', 6);
         },
 
-        'click .c68': () => {
-            event.preventDefault();
-            Session.set('variantType', 7);
-        },
 
-        'click .submitViewer': () => {
-          event.preventDefault();
-          var variantChosen = Session.get('variantType');
+        'click .submitViewer': (e) => {
+          e.preventDefault();
+          let variantCount = '';
+          let variantChosen = Session.get('variantType');
           if (variantChosen === 1) {
               variantCount = Session.get('variant-C77-count')
           } else if (variantChosen === 2) {
@@ -126,8 +114,6 @@ if(Meteor.isClient) {
               variantCount = Session.get('variant-C88-count')
           } else if (variantChosen === 6) {
               variantCount = Session.get('variant-C89-count')
-          } else if (variantChosen === 7) {
-              variantCount = Session.get('variant-C68-count')
           }
           const variantVisible = [];
           $('input[name=visible]:checked').each(function() {
@@ -140,7 +126,7 @@ if(Meteor.isClient) {
           }
         },
 
-
+            /*
             'change .loadVariantPic': function(event) {
                 event.preventDefault();
                 console.log('inside');
@@ -153,10 +139,11 @@ if(Meteor.isClient) {
                 }
             }
 
+             */
+
 
     });
 
 
 
 
-}

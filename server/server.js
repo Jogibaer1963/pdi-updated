@@ -163,7 +163,7 @@ if(Meteor.isServer){
            const resultArray = [];
            let resultStep1 = preSeriesMachine.find({}, {sort: {preMachineId: 1}}).fetch();
            if (resultStep1.length === 0) {
-               console.log("leer");
+             //  console.log("leer");
            } else {
                let arrayLength = resultStep1.length;
                for (let i = 0; i <= (arrayLength - 1); i++) {

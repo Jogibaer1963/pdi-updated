@@ -65,6 +65,15 @@ if(Meteor.isClient) {
             }
         },
 
+        machineToRepair: () => {
+            let newIssuesFound = [];
+          const machineToRepair = Session.get('machineToRepair');
+          if (machineToRepair) {
+              newIssuesFound = MachineReady.findOne({_id: machineToRepair}).newIssues;
+          }
+          return newIssuesFound;
+        },
+
     });
 
     Template.repairMachine.events({
@@ -81,16 +90,16 @@ if(Meteor.isClient) {
 
         },
 
-        'submit .repairFinnish': function (event) {
-            event.preventDefault();
+        'submit .repairFinnish': function (e) {
+            e.preventDefault();
             const machineRepaired = Session.get('selectedMachineId');
-            const workingHour = event.target.workingHours.value;
+            const workingHour = e.target.workingHours.value;
             Meteor.call('machineRep', machineRepaired, workingHour);
         },
 
 
-        'click .toggleRepairUpcoming': function () {
-            event.preventDefault();
+        'click .toggleRepairUpcoming': function (e) {
+            e.preventDefault();
             let choice = Session.get('toggleRepair');
             if(choice === 0) {
                 Session.set('toggleRepair', 1)
@@ -99,24 +108,24 @@ if(Meteor.isClient) {
             }
         },
 
-        'click .addToList': function () {
-            event.preventDefault();
+        'click .addToList': function (e) {
+            e.preventDefault();
             const KitStatus = 1;
             const machineId = Session.get('selectedMachineId');
             Meteor.call('listPrinted', machineId, KitStatus);
             Session.set('selectedMachineId', '');
         },
 
-        'click .removeFromList': function () {
-            event.preventDefault();
+        'click .removeFromList': function (e) {
+            e.preventDefault();
             const KitStatus = 0;
             const machineId = Session.get('selectedMachineId');
             Meteor.call('listRemoved', machineId, KitStatus);
         },
 
-        'submit .messageToWashBay': function () {
-            event.preventDefault();
-            const washMessage = event.target.message.value;
+        'submit .messageToWashBay': function (e) {
+            e.preventDefault();
+            const washMessage = e.target.message.value;
             if(Session.get('selectedMachineId') === 'undefined') {
                 Session.set('errorMachine', 'Choose Machine first');
             } else {
@@ -124,13 +133,19 @@ if(Meteor.isClient) {
                 const machineTestId = MachineReady.findOne({_id: machine_id}).machineId;
                 Meteor.call('messageToWashBay', machine_id, machineTestId, washMessage);
             }
-            event.target.message.value = '';
+            e.target.message.value = '';
         },
 
-        'click .addIssueToList': () => {
-            event.preventDefault();
+        'click .addIssueToList': (e) => {
+            e.preventDefault();
             const selectedMachineId = Session.get('addIssueToMachine');
             Meteor.call('issueNoticed', selectedMachineId);
+        },
+
+        'click .repairList': (e) => {
+            e.preventDefault();
+            const machineToRepair = Session.get('selectedMachineId');
+            Session.set('machineToRepair', machineToRepair);
         }
 
 

@@ -49,7 +49,7 @@
         },
 
 //-------------------------------- Pre Series Table and Counter  --------------------------------------------
-
+    /*
         preOverViewCheckList: () => {
                    Meteor.call('preSeriesOverView', (error, result) => {
                        if (error) {
@@ -67,6 +67,8 @@
                    }, 60000);
             return Session.get('preOverView');
         }
+
+     */
     });
 
 

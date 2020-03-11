@@ -67,7 +67,7 @@
         <button type="submit" class="btn btn-danger removeFromList" >Remove Kit List</button>
     </div>
     <div>
-      <table class="blueTable repairTable" cellpadding="10">
+      <table class="blueTable repairTable">
         <thead>
            <tr>
               <th class="pdiMachineField"><strong>Machine</strong></th>
@@ -99,6 +99,27 @@
            {{/each}}
          </tbody>
        </table>
+        <div class="repair-print-list">
+          <button class="btn btn-warning repairList">Repair List</button>
+        </div>
     </div>
+    <table class="blueTable repair-print-out">
+        <thead>
+            <tr>
+                <th class="repairComment">Repair Item / Comment</th>
+                <th class="pictureWidth">Picture</th>
+            </tr>
+        </thead>
+        <tbody class="">
+            {{#each machineToRepair}}
+                <tr >
+                    <td class="error-description">{{errorDescription}}</td>
+                    <td><a target="blank" href="noPicture.JPG">
+                        <img src="noPicture.JPG" alt="noPicture.JPG">
+                    </a></td>
+                </tr>
+            {{/each}}
+        </tbody>
+    </table>
 </template>
 

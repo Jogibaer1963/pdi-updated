@@ -12,7 +12,6 @@ Session.set('toggleShipList', 0);
         shippList: function () {
             // Order of shipping date
             let shipToggleList = Session.get('toggleShipList');
-            console.log(shipToggleList);
             switch(shipToggleList) {
                 case 1:
                     return MachineReady.find({shipStatus: 0},
@@ -45,31 +44,31 @@ Session.set('toggleShipList', 0);
     });
 
     Template.inputMachine.events({
-        "submit .inputNewMachine": function(event) {
-            event.preventDefault();
+        "submit .inputNewMachine": function(e) {
+            e.preventDefault();
             const createUnixTime = Date.now();
             const startDate = moment.tz(createUnixTime, "America/Chicago").format().slice(0, 19);
             const createDate = startDate.slice(0,10);
             const createTime = startDate.slice(-8);
-            const newMachineInput = event.target.newMachine.value;
-            const newShippingDate = event.target.newDate.value;
-            const newShippingDestination = event.target.newDestination.value;
-            const newShippingTransporter = event.target.newTransporter.value;
+            const newMachineInput = e.target.newMachine.value;
+            const newShippingDate = e.target.newDate.value;
+            const newShippingDestination = e.target.newDestination.value;
+            const newShippingTransporter = e.target.newTransporter.value;
             const newShippingKit= [];
             $('input[name = newKit]:checked').each(function() {
                 newShippingKit.push($(this).val());
             });
-            const newShippingTireTrack = event.target.newTireTrack.value;
-            const newShippingReturns = event.target.newReturn.value;
-            const newShippingComment = event.target.newComment.value;
+            const newShippingTireTrack = e.target.newTireTrack.value;
+            const newShippingReturns = e.target.newReturn.value;
+            const newShippingComment = e.target.newComment.value;
             Meteor.call('addToShipList', newMachineInput, newShippingDate,
                 createUnixTime, createDate, createTime, newShippingDestination,
                 newShippingTransporter, newShippingKit, newShippingTireTrack,
                 newShippingReturns, newShippingComment );
-            event.target.newMachine.value="";
-            event.target.newDate.value="";
-            event.target.newDestination.value="";
-            event.target.newTransporter.value="";
+            e.target.newMachine.value="";
+            e.target.newDate.value="";
+            e.target.newDestination.value="";
+            e.target.newTransporter.value="";
             document.getElementById('noKit').checked= false;
             document.getElementById('newKit1').checked= false;
             document.getElementById('newKit2').checked= false;
@@ -80,14 +79,14 @@ Session.set('toggleShipList', 0);
             document.getElementById('newKit7').checked= false;
             document.getElementById('newKit8').checked= false;
             document.getElementById('newKit9').checked= false;
-            event.target.newTireTrack.value="";
-            event.target.newReturn.value = "";
-            event.target.newComment.value="";
+            e.target.newTireTrack.value="";
+            e.target.newReturn.value = "";
+            e.target.newComment.value="";
         },
 
-        'submit .find_Machine': function() {
-            event.preventDefault();
-            const selectedMachine = event.target.inputSearch.value;
+        'submit .find_Machine': function(e) {
+            e.preventDefault();
+            const selectedMachine = e.target.inputSearch.value;
             const idFinder = MachineReady.find({machineId: selectedMachine}, {fields: {_id: 1}}).fetch();
             const idString = JSON.stringify(idFinder);
             const idExtract = idString.slice(9, 26);
@@ -97,8 +96,8 @@ Session.set('toggleShipList', 0);
             }
         },
 
-        'click .deleteMachine': () => {
-            event.preventDefault();
+        'click .deleteMachine': (e) => {
+            e.preventDefault();
             const deleteMachine = Session.get('selectedMachine');
             Meteor.call('removeFromShipList', deleteMachine);
         },
@@ -108,23 +107,23 @@ Session.set('toggleShipList', 0);
             Session.set('selectedMachine', newMachine);
         },
 
-        'submit .truckDate': function() {
-            event.preventDefault();
+        'submit .truckDate': function(e) {
+            e.preventDefault();
             const confirmedShipDate = event.target.inputDate.value;
             const truckStatus = 1;
             const machineId = Session.get('selectedMachine');
             Meteor.call('truckOrdered', machineId, truckStatus, confirmedShipDate);
         },
 
-        'click .removeTruck': function() {
-            event.preventDefault();
+        'click .removeTruck': function(e) {
+            e.preventDefault();
             const truckStatus = 0;
             const machineId = Session.get('selectedMachine');
             Meteor.call('truckRemoved', machineId, truckStatus);
         },
 
-        'click .toggleShippedAll': () => {
-            event.preventDefault();
+        'click .toggleShippedAll': (e) => {
+            e.preventDefault();
             let choice = Session.get('toggleShipList');
             if(choice === 0) {
                 Session.set('toggleShipList', 1)
