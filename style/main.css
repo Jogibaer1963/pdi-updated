@@ -1270,7 +1270,7 @@ table.repair-print-out {
 .error-description {
   width: 35.2em; }
 
-img {
+img.repair-pre-view {
   border: 1px solid #ddd;
   /* Gray border */
   border-radius: 4px;
