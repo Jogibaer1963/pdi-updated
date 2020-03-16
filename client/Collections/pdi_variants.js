@@ -52,6 +52,13 @@ Meteor.subscribe("variants_C87");
     Template.variantsViewer.events({
 
         'change .loadVariant': (e) => {
+            // upload from SAP:
+            // Mark all Variants
+            // Print
+            // List
+            // Send to
+            // Local file
+            // Text with Tab !!
             e.preventDefault();
             const file = e.target.files[0];
             if (!file) {
@@ -62,6 +69,7 @@ Meteor.subscribe("variants_C87");
             reader.onload = function(e) {
                 const contents = e.target.result;
                 document.getElementById('variant').value = '';
+                console.log('Content ', contents);
                 Meteor.call('readVariant', contents);
             };
             reader.readAsText(file);

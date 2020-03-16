@@ -466,7 +466,9 @@ if(Meteor.isServer){
             let k = 0;
             let contentString = JSON.stringify(contents);
             let dateVariant = contentString.substr(1, 10);
-            let typeVariant = contentString.substr(54, 3);
+            let typeVariant = contentString.substr(53, 3);
+            console.log(contentString);
+            console.log(typeVariant);
                    if (typeVariant === 'C77') {
                 variants_C77.remove({});
             } else if (typeVariant === 'C78') {
@@ -1073,16 +1075,12 @@ if(Meteor.isServer){
         },
 
         'configNokButton': (machineId, idFailure, idIdentifier) => {
-            MachineReady.update({_id: machineId, "machineConfig._id": idIdentifier}, {$set: {"machineConfig.$.machineConfigStatus": 2}});
+            MachineReady.update({_id: machineId, "machineConfig._id": idIdentifier},
+                {$set: {"machineConfig.$.machineConfigStatus": 2}});
             let uniqueId = Random.id();
             let addNewFailure = 'Check config ' + idFailure;
             MachineReady.upsert({_id: machineId}, {$push: {newIssues: {_id: uniqueId, checkStatus: 2, errorDescription: addNewFailure}}});
         },
-
-        'configInfoButton': (machineId, idFailure) => {
-            MachineReady.find({_id: machineId, "machineConfig._id": idFailure}, {$set: {"machineConfig.$.machineConfigStatus": 1}});
-        },
-
 
         // pdi Checklist buttons
 

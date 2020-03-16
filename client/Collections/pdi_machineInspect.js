@@ -50,7 +50,7 @@ Meteor.subscribe('oms');
             try {
                 Session.set('selectedPdiMachineNr', localStorage.getItem('pdiMachineNr'));
                 const machineId = Session.get('selectedPdiMachineNr');
-              return MachineReady.findOne({machineId: machineId}).machineConfig;
+                return MachineReady.findOne({machineId: machineId}).machineConfig;
             } catch (e) {
             }
         },
@@ -244,6 +244,16 @@ Meteor.subscribe('oms');
             try {
                 return Session.get('batteries').mtuG004Volt;
             } catch (e) {}
+        },
+
+        configImage: () => {
+            let choice = Session.get('imageOnOff');
+            if (choice === 1) {
+                return Session.get('imagePathId')
+            } else if (choice === 0) {
+                return '';
+            }
+
         }
 
     });
@@ -252,6 +262,8 @@ Meteor.subscribe('oms');
     Session.set('selectedComponent', '');
     Session.set('componentChosen', 0);
     Session.set('selectedValue', '');
+    Session.set('imagePathId', '');
+    Session.set('imageOnOff', 0);
 
     Template.pdiToDoList.events({
 
@@ -309,9 +321,16 @@ Meteor.subscribe('oms');
             event.preventDefault();
             Session.set('selectedPdiMachineId', localStorage.getItem('pdiMachineId'));
             const selectedPdiMachineId = Session.get('selectedPdiMachineId');
-            let idIdentifier = event.currentTarget.name;
+            let imagePathId = event.currentTarget.name;
+            Session.set('imagePathId', imagePathId);
             if(selectedPdiMachineId) {
-                Meteor.call('configInfoButton', selectedPdiMachineId, idIdentifier);
+             let choice = Session.get('imageOnOff');
+                if (choice === 0) {
+                    Session.set('imageOnOff', 1);
+                } else if (choice === 1) {
+                    Session.set('imageOnOff', 0);
+                }
+
             } else {
                 console.log("Lost Machine Number")
             }
