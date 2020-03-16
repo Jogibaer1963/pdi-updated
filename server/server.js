@@ -155,7 +155,7 @@ if(Meteor.isServer){
 
         'coaDate': (machineId, coaDate) => {
             MachineReady.upsert({machineId: machineId}, {$set: {coaDate: coaDate}});
-            console.log(machineId);
+          //  console.log(machineId);
             preSeriesMachine.upsert({preMachineId: machineId}, {$set: {coaDate: coaDate}});
     },
 
@@ -467,8 +467,8 @@ if(Meteor.isServer){
             let contentString = JSON.stringify(contents);
             let dateVariant = contentString.substr(1, 10);
             let typeVariant = contentString.substr(53, 3);
-            console.log(contentString);
-            console.log(typeVariant);
+           // console.log(contentString);
+           // console.log(typeVariant);
                    if (typeVariant === 'C77') {
                 variants_C77.remove({});
             } else if (typeVariant === 'C78') {
@@ -733,7 +733,7 @@ if(Meteor.isServer){
         },
 
         'mcoSearch': function(newMcoSearch, mcoReCording, matStatus, mcoSearchString) {
-            console.log(newMcoSearch, mcoReCording, matStatus, mcoSearchString);
+           // console.log(newMcoSearch, mcoReCording, matStatus, mcoSearchString);
 
 
           //  const result = mcoReview.find({mcoTeam: newMcoSearch}).fetch();
