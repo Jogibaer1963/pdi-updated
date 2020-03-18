@@ -106,17 +106,19 @@
     <table class="blueTable repair-print-out">
         <thead>
             <tr>
-                <th class="repairComment">Repair Item / Comment</th>
+                <th class="repair-comment">Repair Item / Comment</th>
                 <th class="pictureWidth">Picture</th>
+                <th class="pictureWidth">Repair Confirmed</th>
             </tr>
         </thead>
         <tbody class="repair-pre-view">
             {{#each machineToRepair}}
                 <tr >
                     <td class="error-description">{{errorDescription}}</td>
-                    <td><a target="blank" href="noPicture.JPG">
-                        <img src="noPicture.JPG" alt="noPicture.JPG">
+                    <td><a target="blank" href={{pictureLocation}}>
+                        <img class="image-box" src={{pictureLocation}} alt="noPicture.JPG">
                     </a></td>
+                    <td class="pdi-rep-conf  {{getStatusColor repairStatus}}" style="background-color:{{getStatusColor repairStatus}}; color:{{getStatusColor repairStatus}}" >{{repairStatus}}</td>
                 </tr>
             {{/each}}
         </tbody>
