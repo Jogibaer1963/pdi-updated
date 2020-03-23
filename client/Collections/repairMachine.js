@@ -57,23 +57,44 @@ if(Meteor.isClient) {
             }
         },
 
+        'selectedConfirm': function () {
+          const selectedConfirm = this._id;
+          const confirmRepair = Session.get('confirmRepair');
+          if (selectedConfirm === confirmRepair) {
+              return "selected";
+          }
+        },
+
         washMachine: () => {
-            const machine_id = Session.get('selectedMachineId');
-            if(machine_id) {
-                const machineTestId = MachineReady.findOne({_id: machine_id}).machineId;
-                Session.set('washMachine', machineTestId);
-                return Session.get('washMachine');
-            }
+            try {
+                const machine_id = Session.get('selectedMachineId');
+                if(machine_id) {
+                    const machineTestId = MachineReady.findOne({_id: machine_id}).machineId;
+                    Session.set('washMachine', machineTestId);
+                    return Session.get('washMachine');
+                }
+            } catch {}
         },
 
         machineToRepair: () => {
-            let newIssuesFound = [];
+            try {
+          let repairInfos = Session.get('repairInfos');
+          let newIssuesFound = [];
           const machineToRepair = Session.get('machineToRepair');
           if (machineToRepair) {
               newIssuesFound = MachineReady.findOne({_id: machineToRepair}).newIssues;
           }
+          newIssuesFound.forEach((element) => {
+              element.pictureLocation = repairInfos + element.pictureLocation;
+          });
           return newIssuesFound;
+            } catch { }
         },
+
+        repairUser: () => {
+            return Meteor.user().username;
+        }
+
 
     });
 
@@ -147,6 +168,21 @@ if(Meteor.isClient) {
             e.preventDefault();
             const machineToRepair = Session.get('selectedMachineId');
             Session.set('machineToRepair', machineToRepair);
+        },
+
+        'click .repairConfirm': function (e) {
+            e.preventDefault();
+            const confirmRepair = this._id;
+            Session.set('confirmRepair', confirmRepair);
+        },
+
+        'submit .repairConfirmText': function (e) {
+            e.preventDefault();
+            const repairUser = Meteor.user().username;
+            const repairComment = e.target.message.value;
+            let repairId = Session.get('confirmRepair');
+            let machineId = Session.get('selectedMachineId');
+            Meteor.call('confirmRepair', repairId, repairUser, repairComment, machineId);
         }
 
 

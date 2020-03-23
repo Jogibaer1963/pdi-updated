@@ -39,10 +39,6 @@ if(Meteor.isServer){
             return washBayText.find();
         });
 
-       Meteor.publish("repairOrderPrint", function(){
-          return repairOrderPrint.find();
-        });
-
         Meteor.publish("siList", function(){
             return siList.find();
         });
@@ -99,10 +95,6 @@ if(Meteor.isServer){
             return variants_C87.find();
         });
 
-        Meteor.publish("variants_C68", function() {
-            return variants_C68.find();
-        });
-
         Meteor.publish("toDoMessage", function() {
             return toDoMessage.find();
         });
@@ -121,10 +113,6 @@ if(Meteor.isServer){
 
         Meteor.publish("dropDownHistoricMachines", function() {
             return dropDownHistoricMachines.find();
-        });
-
-        Meteor.publish("machineReadyToGo_2018", function() {
-            return machineReadyToGo_2018.find();
         });
 
         Meteor.publish("specialPdiItems", function() {
@@ -1059,13 +1047,6 @@ if(Meteor.isServer){
         },
 
         //----------------------------------------  Check points -------------------------------------
-/*
-        'removeCheckPoint': function(selectedPdiMachineId, selectedCheckPoint) {
-            pdiCheckList.update({_id: selectedPdiMachineId},
-                {$pull: {checkList: {_id: selectedCheckPoint}}});
-        },
-
- */
 
         //pdi Config Buttons
 
@@ -1123,7 +1104,11 @@ if(Meteor.isServer){
             let uniqueId = Random.id();
             MachineReady.upsert({machineId: machineId}, {$push: {newIssues: {_id: uniqueId,
                                                                 checkStatus: true,
-                                                                errorDescription: newIssue}}
+                                                                errorDescription: newIssue,
+                                                                pictureLocation: "",
+                                                                repairStatus: (0),
+                                                                repairTech: "",
+                                                                repairComment: ""}}
             });
             addIssues.insert({machineId: machineId, newIssues: newIssue, addStatus: 1});
         },
@@ -1166,32 +1151,7 @@ if(Meteor.isServer){
             }
         },
 
-        /*
-        'sendEmail': function (to, from, subject, loggedUser) {
-            setTimeout(function () { }, 1000);
-            const orderFind = orderParts.find({_id: loggedUser}).fetch();
-                if (orderFind.length === 0  ) {
-                    } else {
-                        SSR.compileTemplate('htmlEmail', Assets.getText('html-email.html'));
-                        Template.htmlEmail.helpers({
-                        orderNr: function () {
-                            setTimeout(function () {
-                            }, 1000);
-                        return orderFind;
-                        }
-                        });
-                    this.unblock();
-                        Email.send({
-                            to: to,
-                            from: from,
-                            subject: subject,
-                            html: SSR.render('htmlEmail', {machineNr: ''})
-                        });
-                    }
-            orderParts.remove({_id: loggedUser});
-        },
 
-         */
    // -------------------------------------------------- Wash List -------------------------------------------
         'stopWashing': function(selectedCheckPoint) {
             MachineReady.update({_id:selectedCheckPoint}, {$set: {washStatus: 0}});
@@ -1204,7 +1164,6 @@ if(Meteor.isServer){
                         washDuration: washDuration,
                         waitWashTime: waitWashTime}});
         },
-
 
         'updateWashList': function(selectedCheckPoint, dateStart) {
             MachineReady.update({_id:selectedCheckPoint}, {$set: {washStatus: 2, startWashDate: dateStart}});
@@ -1247,6 +1206,14 @@ if(Meteor.isServer){
 
         'machineIsGone': function(selectedCheckPoint) {
             MachineReady.update({_id:selectedCheckPoint}, {$set: {shipStatus: 1}});
+        },
+
+        'confirmRepair': (repairId, repairUser, repairComment, machineId) => {
+            console.log(repairId, repairComment, repairUser, machineId);
+            MachineReady.update({_id: machineId, 'newIssues._id': repairId},
+                                        {$set: {'newIssues.$.repairStatus': 1,
+                                                         'newIssues.$.repairTech': repairUser,
+                                                         'newIssues.$.repairComment': repairComment  }})
         },
 
         // ------------------------------------  Machine ------------------------------------

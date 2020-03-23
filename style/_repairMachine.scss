@@ -112,9 +112,9 @@ tbody.newIssueTableHeight {
 }
 
 .repair-print-list {
-  left: 80em;
+  left: 60em;
   position: absolute;
-  top: 20em;
+  top: 50em;
 }
 
 table.repair-print-out {
@@ -153,5 +153,22 @@ img:hover {
 }
 
 .pdi-rep-conf {
-  width: 7.2em;
+  width: 6em;
+}
+
+.repair-confirm-input {
+  left: 60em;
+  position: absolute;
+  top: 55em;
+}
+
+.confirm-text-area {
+  width: 560px;
+  height: 245px;
+}
+
+.repair-user {
+  left: 70em;
+  position: absolute;
+  top: 50em;
 }
