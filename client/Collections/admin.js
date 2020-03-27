@@ -61,6 +61,8 @@ Template.adminNewUser.events({
             roleConst = 'teamLead'
         }else if (role === 'Commission') {
             roleConst = 'commission'
+        }else if (role === 'Pdi Repair Crew') {
+            roleConst = 'pdiRepCrew'
         }
         event.target.registerUser.value = '';
         event.target.registerPassword.value = '';

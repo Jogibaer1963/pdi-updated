@@ -414,6 +414,15 @@ Meteor.subscribe('oms');
             Session.set('issueComp', '');
         },
 
+        'submit .add-image-to-repair': function (e) {
+            e.preventDefault();
+            let chosenFailure = Session.get('openFailure');
+            if (chosenFailure) {
+                console.log('inside', chosenFailure)
+            }
+
+        },
+
         'submit .addressToWashBay': (event) => {
             event.preventDefault();
             Session.set('selectedPdiMachineId', localStorage.getItem('pdiMachineId'));

@@ -925,6 +925,11 @@ table.newIssuesTable {
   position: relative;
   width: 32em; }
 
+.add-image-to-repair {
+  left: 38em;
+  position: absolute;
+  top: 230em; }
+
 .repairPointStyle {
   height: 2em; }
 
@@ -1265,7 +1270,7 @@ table.repair-print-out {
   width: 45em; }
 
 .pictureWidth {
-  width: 5.8em; }
+  width: 5.4em; }
 
 .error-description {
   width: 45.4em; }
@@ -1303,6 +1308,11 @@ img:hover {
   left: 70em;
   position: absolute;
   top: 50em; }
+
+.repair-machine {
+  left: 20em;
+  position: absolute;
+  top: 45em; }
 
 .outBoundNav {
   position: absolute;

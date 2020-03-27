@@ -1,9 +1,6 @@
 Meteor.subscribe('addIssues');
 
-if(Meteor.isClient) {
-
     Template.repairMachine.helpers({
-
 
         issueAdded: () => {
           return addIssues.find();
@@ -41,7 +38,7 @@ if(Meteor.isClient) {
         },
 
         'selectedClass2': function () {
-            Session.set('machineToRepair', '');
+           // Session.set('machineToRepair', '');
             const selectedRepair = this._id;
             const selectedMachineId = Session.get('selectedMachineId');
             if (selectedMachineId === selectedRepair) {
@@ -77,7 +74,6 @@ if(Meteor.isClient) {
         },
 
         machineToRepair: () => {
-            try {
           let repairInfos = Session.get('repairInfos');
           let newIssuesFound = [];
           const machineToRepair = Session.get('machineToRepair');
@@ -88,11 +84,16 @@ if(Meteor.isClient) {
               element.pictureLocation = repairInfos + element.pictureLocation;
           });
           return newIssuesFound;
-            } catch { }
+
         },
 
         repairUser: () => {
             return Meteor.user().username;
+        },
+
+        machineRepairList: () => {
+            let machine = Session.get('machineToRepair');
+           return MachineReady.findOne({_id: machine}).machineId;
         }
 
 
@@ -185,9 +186,6 @@ if(Meteor.isClient) {
             Meteor.call('confirmRepair', repairId, repairUser, repairComment, machineId);
         }
 
-
-
-
     });
 
-}
+

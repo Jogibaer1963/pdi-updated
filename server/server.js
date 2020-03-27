@@ -1085,7 +1085,15 @@ if(Meteor.isServer){
         'addNewFailure': (selectedPdiMachineId, addNewFailure) => {
             let uniqueId = Random.id();
             MachineReady.upsert({_id: selectedPdiMachineId},
-                {$push: {newIssues: {_id: uniqueId, checkStatus: true, errorDescription: addNewFailure}}});
+                {$push: {newIssues: {_id: uniqueId,
+                                               checkStatus: true,
+                                               errorDescription: addNewFailure,
+                                               pictureLocation: "",
+                                               repairStatus: (0),
+                                               repairTech: "",
+                                               repairComment: "",
+                                               repairDateTime: "",
+                                               repairDuration: ""}}});
         },
 
         'removeFailure': (selectedPdiMachineId, openFailure) => {
@@ -1108,7 +1116,9 @@ if(Meteor.isServer){
                                                                 pictureLocation: "",
                                                                 repairStatus: (0),
                                                                 repairTech: "",
-                                                                repairComment: ""}}
+                                                                repairComment: "",
+                                                                repairDateTime: "",
+                                                                repairDuration: ""}}
             });
             addIssues.insert({machineId: machineId, newIssues: newIssue, addStatus: 1});
         },
@@ -1209,7 +1219,6 @@ if(Meteor.isServer){
         },
 
         'confirmRepair': (repairId, repairUser, repairComment, machineId) => {
-            console.log(repairId, repairComment, repairUser, machineId);
             MachineReady.update({_id: machineId, 'newIssues._id': repairId},
                                         {$set: {'newIssues.$.repairStatus': 1,
                                                          'newIssues.$.repairTech': repairUser,

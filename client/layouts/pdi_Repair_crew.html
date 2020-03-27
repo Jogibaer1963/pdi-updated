@@ -1,0 +1,104 @@
+<template name="pdiRepairCrew">
+    <body>
+    {{#if currentUser}}
+        {{> topNav}}
+        {{> pdiCrewHome}}
+    {{else}}
+        {{> login}}
+    {{/if}}
+    </body>
+
+</template>
+
+<template name="pdiCrewHome">
+    <h3>Pdi Repair Crew</h3>
+
+    <div id="logo">
+        <img src="claas_logo.png" />
+    </div>
+    <div class="repairLoad">
+        <h1>Work Load Repair</h1>
+    </div>
+    <div class="washBayText">
+        <div class="washHeader">
+            <h4>{{washMachine}}</h4>
+        </div>
+        <form class="messageToWashBay">
+            <input type="text" id="textMessage" name="message" placeholder="Message to WashBay" required>
+            <br><br>
+            <button class="btn btn-success washBayMessage" type="submit">Submit Message to Wash Bay</button>
+        </form>
+    </div>
+
+    <div>
+        <table class="blueTable repair-table">
+            <thead>
+            <tr>
+                <th class="pdiMachineField"><strong>Machine</strong></th>
+                <th class="pdiShipDate"><strong>Ship Date</strong></th>
+                <th class="pdiTruckOnOrder"><strong>Truck ordered</strong></th>
+                <th class="pdiTruckDate"><strong>Confirmed Ship Date</strong></th>
+                <th class="pdi-rep-comment"><strong>Comments {{choice}}</strong></th>
+
+                <th class="pdiRepField"><strong>Rep</strong></th>
+                <th class="pdiWashField"><strong>Wash</strong></th>
+                <th class="pdiLocation"><strong>Location</strong></th>
+            </tr>
+            </thead>
+            <tbody class="tableHeight">
+            {{#each pdiShippList}}
+                <tr class="openInspections {{selectedClass2}}">
+                    <td class="pdiMachineField ">{{machineId}}{{newHeadId}}</td>
+                    <td class="pdiShipDate">{{date}}</td>
+                    <td class="pdiTruckOnOrder {{getStatusTruck truckStatus}}" style="background-color:{{getStatusTruck truckStatus}}; color:{{getStatusTruck truckStatus}}" >{{truckStatus}}</td>
+                    <td class="pdiTruckDate truckDateCorrection">{{confirmedShipDate}}</td>
+                    <td class="pdi-rep-comment-field">{{shippingComment}}</td>
+                    <td class="pdiRepField  {{getStatusColor repairStatus}}" style="background-color:{{getStatusColor repairStatus}}; color:{{getStatusColor repairStatus}}" >{{repairStatus}}</td>
+                    <td class="pdiWashField  {{getStatusColor washStatus}}" style="background-color:{{getStatusColor washStatus}}; color:{{getStatusColor washStatus}}" >{{washStatus}}</td>
+                    <td class="pdiLocation">{{locationId}}</td>
+                </tr>
+            {{/each}}
+            </tbody>
+        </table>
+        <div class="repair-print-list">
+            <button class="btn btn-warning repairList">Repair List</button>
+        </div>
+        <div class="repair-user">
+            <h3>Repair Tech: {{repairUser}}</h3>
+        </div>
+        <div class="repair-confirm-input">
+            <form class="repairConfirmText">
+                <label for="repairComment"> </label>
+                <textarea name="message" id="repairComment" cols="30" rows="10" class="confirm-text-area"> </textarea>
+                <br><br>
+                <button type="submit" class="btn btn-success">Confirm Repair</button>
+            </form>
+        </div>
+    </div>
+    <div class="repair-machine">
+        <h3>Repair list for : {{machineRepairList}}</h3>
+    </div>
+    <table class="blueTable repair-print-out">
+        <thead>
+        <tr>
+            <th class="repair-comment">Repair Item / Comment</th>
+            <th class="pictureWidth">Picture</th>
+            <th class="confirmBoxWidth">PDI Repair Confirmed</th>
+        </tr>
+        </thead>
+        <tbody class="repair-pre-view">
+        {{#each machineToRepair}}
+            <tr class="repairConfirm  {{selectedConfirm}}">
+                <td class="error-description">{{errorDescription}}
+                    <br>
+                    Repair Comment: {{repairComment}}</td>
+                <td><a target="blank" href={{pictureLocation}}>
+                    <img class="image-box" src={{pictureLocation}} alt="noPicture.JPG">
+                </a></td>
+                <td class="pdi-rep-conf  {{getStatusColor repairStatus}}" style="background-color:{{getStatusColor repairStatus}}; color:{{getStatusColor repairStatus}}" >{{repairStatus}}</td>
+            </tr>
+        {{/each}}
+        </tbody>
+    </table>
+
+</template>

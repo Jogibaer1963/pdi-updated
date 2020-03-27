@@ -39,6 +39,9 @@
                   {{> outBound}}
                   {{> overView}}
               {{/if}}
+              {{#if isInRole 'pdiRepCrew'}}
+                  {{> pdiRepairCrew}}
+              {{/if}}
        {{else}}
             {{> login}}
        {{/if}}
@@ -71,12 +74,15 @@
             <a>|</a>
            <a class="btn" href="/repairView">Repair</a>
             <a>|</a>
+            <a class="btn" href="/pdiRepairCrew">PDI Repair Crew</a>
+            <a>|</a>
            <a class="btn" href="/washList">Wash Bay</a>
             <a>|</a>
            <a class="btn" href="/readyShipList">Final Status</a>
             <a>|</a>
            <a class="btn" href="/ecnOverView">ECN Tracking</a>
             <a>|</a>
+
            <a class="btn btn-danger" href="/admin">Admin</a>
          </nav>
        </div>
