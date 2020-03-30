@@ -1,5 +1,5 @@
 Meteor.subscribe('dropDownHistoricMachines');
-Meteor.subscribe("machineReadyToGo_2018");
+Meteor.subscribe("machineReadyToGo_2019");
 Meteor.subscribe("preSeriesMachine");
 Session.set('selectedPdiMachine', '');
 Session.set('selectedPreMachine', '');
@@ -8,22 +8,21 @@ Session.set('selectedPreMachine', '');
 
         showList: function() {
             let collectionName = Session.get('collectionName');
-            if (collectionName === '2018') {
-                Session.set('year', '2018');
-                return  machineReadyToGo_2018.find({machineId: {$gt:'C4700000'}},
-                                                   {sort: {date: -1}});
-            } else if (collectionName === '2019') {
+            if (collectionName === '2019') {
                 Session.set('year', '2019');
-                return  MachineReady.find({machineId: {$gt:'C4700000'}},
+                return  MachineReady.find({machineId: {$gt:'C4700000'},
+                                                            dateOfCreation: {$gt: "2018-09-01",
+                                                                             $lte: "2019-08-30"}},
+                                                    {sort: {date: -1}});
+            } else if (collectionName === '2020') {
+                Session.set('year', '2020');
+                return  MachineReady.find({machineId: {$gt:'C4700000'},
+                                                   dateOfCreation: {$gt: "2019-09-01"}},
                                           {sort: {date: -1}});
             } else if (collectionName === 'C8x-pre-Series' ) {
                 Session.set('year', 'Pre Series');
                 return preSeriesMachine.find({}, {sort: {preMachineId: 1}}).fetch();
             }
-        },
-
-        year: () => {
-          return Session.get('year');
         },
 
         'selectedClass': function(){
@@ -78,9 +77,9 @@ Session.set('selectedPreMachine', '');
             });
         },
 
-        'submit .searchMe': () => {
-            event.preventDefault();
-            let machineId = event.target.searchMachine.value;
+        'submit .searchMe': (e) => {
+            e.preventDefault();
+            let machineId = e.target.searchMachine.value;
             let id = MachineReady.findOne({machineId: machineId})._id;
             Session.set('selectedPdiMachine', id);
         },
@@ -100,20 +99,18 @@ Session.set('selectedPreMachine', '');
     Template.pdiInspectList.helpers({
 
         listContent: function() {
+            let repairInfos = Session.get('repairInfos');
             const pdiMachine = Session.get('selectedPdiMachine');
-            const pdiYear = Session.get('year');
-            switch(pdiYear) {
-                case '2018':
-                    return  machineReadyToGo_2018.find({_id: pdiMachine});
-                break;
-                case '2019':
-                    return  MachineReady.find({_id: pdiMachine});
-                break;
-                case 'Pre Series':
-                    return preSeriesMachine.find({_id: pdiMachine},
-                        {sort: {preMachineId: 1}});
-            }
-
+            let newIssuesFound = [];
+            try {
+                if (pdiMachine) {
+                    newIssuesFound = MachineReady.findOne({_id: pdiMachine}).newIssues;
+                }
+                newIssuesFound.forEach((element) => {
+                    element.pictureLocation = repairInfos + element.pictureLocation;
+                });
+                return newIssuesFound;
+            } catch {}
         },
 
         year: () => {

@@ -1,4 +1,4 @@
-Meteor.subscribe("usersProfil");
+Meteor.subscribe("usersProfile");
 
 Accounts.ui.config({
     passwordSignupFields: "USERNAME_ONLY"
@@ -7,11 +7,11 @@ Accounts.ui.config({
 Template.adminViewUser.helpers({
 
     userResult: function () {
-        return usersProfil.find();
+        return usersProfile.find();
     },
 
     usersTotal: function () {
-        let totalUsers = usersProfil.find().fetch();
+        let totalUsers = usersProfile.find().fetch();
         return totalUsers.length;
     }
 });

@@ -1,6 +1,4 @@
 
-
-
 .searchButton {
   top: 10em;
   left: 10em;
@@ -88,4 +86,18 @@ table.pdiRepairList {
 
 .containerText {
   font-weight: bolder;
+}
+
+table.printTableWidth {
+  width: 500px;
+}
+
+.printTable {
+  left: 40em;
+  position: absolute;
+  top: 20em;
+}
+
+.print-error-description {
+  width: 29em;
 }

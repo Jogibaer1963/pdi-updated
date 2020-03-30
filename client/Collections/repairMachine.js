@@ -77,6 +77,7 @@ Meteor.subscribe('addIssues');
           let repairInfos = Session.get('repairInfos');
           let newIssuesFound = [];
           const machineToRepair = Session.get('machineToRepair');
+          console.log(machineToRepair);
           if (machineToRepair) {
               newIssuesFound = MachineReady.findOne({_id: machineToRepair}).newIssues;
           }

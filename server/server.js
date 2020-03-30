@@ -67,8 +67,8 @@ if(Meteor.isServer){
             return fuelAverage.find();
         });
 
-        Meteor.publish("usersProfil", function() {
-            return usersProfil.find();
+        Meteor.publish("usersProfile", function() {
+            return usersProfile.find();
         });
 
         Meteor.publish("variants_C79", function() {
@@ -620,17 +620,17 @@ if(Meteor.isServer){
 //------------------------------------------------------------ Admin User Control ------------------------------------------------------
        'userManualLogout': function (logOutUser) {
             for (let i = 0; i < logOutUser.length; i++) {
-                const userName = usersProfil.findOne({_id: logOutUser[i]}).username;
+                const userName = usersProfile.findOne({_id: logOutUser[i]}).username;
                Meteor.users.update({username: userName}, {$set: {'services.resume.loginTokens': []}});
-               usersProfil.upsert({username: userName}, {$set: {loginStatus: 0}});
+               usersProfile.upsert({username: userName}, {$set: {loginStatus: 0}});
             }
         },
 
         'userManualDelete': function (deleteUser) {
             for (let i = 0; i < deleteUser.length; i++) {
-                const userName = usersProfil.findOne({_id: deleteUser[i]}).username;
+                const userName = usersProfile.findOne({_id: deleteUser[i]}).username;
                 Meteor.users.remove({username: userName});
-                usersProfil.remove({username: userName});
+                usersProfile.remove({username: userName});
             }
         },
 
@@ -639,7 +639,7 @@ if(Meteor.isServer){
             setTimeout(function () {
             }, 1000);
           Meteor.users.upsert({username:userConst}, {$addToSet: {roles: role}});
-          usersProfil.insert({username: userConst, role: role, createdAt: createdAt,
+          usersProfile.insert({username: userConst, role: role, createdAt: createdAt,
               createdBy: loggedUser, loginStatus: 0});
         },
 //-----------------------------------------------------------  SI Control -------------------------------------------------------
@@ -695,14 +695,14 @@ if(Meteor.isServer){
         'successfullLogin': function (userVar, dateLogin) {
           let clientIp = this.connection.clientAddress;
              successfullLogin.insert({userId: userVar, dateLogin: dateLogin, clientIp: clientIp});
-             usersProfil.update({username: userVar}, {$set: {loginStatus: 1,
+             usersProfile.update({username: userVar}, {$set: {loginStatus: 1,
                                                                                 lastLogin: dateLogin,
                                                                                  clientIp: clientIp}});
         },
 
         'successfullLogout': function(logoutId, logoutDate) {
             successfullLogout.insert({logoutId: logoutId, dateLogout: logoutDate});
-            usersProfil.update({username: logoutId}, {$set: {loginStatus: 0}});
+            usersProfile.update({username: logoutId}, {$set: {loginStatus: 0}});
         },
 
         /* ----------------------------------- MCO input and search ---------------------------------------------  */
