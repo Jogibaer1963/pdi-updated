@@ -1088,7 +1088,7 @@ if(Meteor.isServer){
                 {$push: {newIssues: {_id: uniqueId,
                                                checkStatus: true,
                                                errorDescription: addNewFailure,
-                                               pictureLocation: "",
+                                               pictureLocation: uniqueId + '.JPG',
                                                repairStatus: (0),
                                                repairTech: "",
                                                repairComment: "",
