@@ -144,12 +144,23 @@
     <div class="pdiInputFields">
         <form class="addNewIssue">
             <div class="issueField">
-                <input type="text" class="addIssueText inputIssueSize {{inActive_Input}}" name="addIssue" placeholder="Add issue" value={{issueComponent}} required>
+                <input type="text" class="addIssueText inputIssueSize {{inActive_Input}}"
+                       name="addIssue"
+                       placeholder="Add issue"
+                       value={{issueComponent}} required>
                 <br><br>
                 <button type="submit" class="btn btn-success addIssueText">Submit New Issue</button>
             </div>
         </form>
     </div>
+    <div style="left: 3em; position: absolute">
+        <form>
+            <label for="img">Select image:</label>
+            <input type="file" class="btn btn-default btn-info" id="img" name="img" accept="image/*">
+            <input type="submit" class="btn btn-default btn-success submit-button-image">
+        </form>
+    </div>
+    <br><br><br>
     <div class="pdiDivider">
         <h1>_____________________</h1>
     </div>

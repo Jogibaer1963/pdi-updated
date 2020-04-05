@@ -386,10 +386,47 @@ Template.joinPdiMachine.events({
             console.log("Lost Machine Number")
         }
         FlowRouter.go('/inspectionStart');
+    },
 
+    'change input': function(ev) {
+        const openFailure = Session.get('openFailure');
+        if(openFailure) {
+            _.each(ev.target.files, function(file) {
+                Meteor.saveFile(file, file.name);
+            });
+        } else {
+            console.log('choose issue first')
+        }
     }
 
 });
+
+Meteor.saveFile = function(blob, name, path, typeFile, callback) {
+    const openFailure = Session.get('openFailure');
+    console.log(openFailure);
+    let fileReader = new FileReader(),
+        method, encoding = 'binary', type = typeFile || 'binary';
+    switch (type) {
+        case 'text':
+            // TODO Is this needed? If we're uploading content from file, yes, but if it's from an input/textarea I think not...
+            method = 'readAsText';
+            encoding = 'utf8';
+            break;
+        case 'binary':
+            method = 'readAsBinaryString';
+            encoding = 'binary';
+            break;
+        default:
+            method = 'readAsBinaryString';
+            encoding = 'binary';
+            break;
+    }
+    fileReader.onload = function(file) {
+        Meteor.call('saveFile', file.target.result, name, path, encoding, openFailure, callback);
+    };
+    fileReader[method](blob);
+    Session.set('openFailure', '');
+};
 
 Handlebars.registerHelper('inActive_Input', () => {
     let inActiveState = Session.get('componentChosen');
