@@ -469,20 +469,91 @@ Meteor.subscribe('oms');
             }
             FlowRouter.go('/inspectionStart');
         },
-/*
-        window.addEventListener('load', function() {
-            document.querySelector('input[type="file"]').addEventListener('change', function() {
-                if (this.files && this.files[0]) {
-                    var img = document.querySelector('img');  // $('img')[0]
-                    img.src = URL.createObjectURL(this.files[0]); // set src to blob url
-                    img.onload = imageIsLoaded;
-                }
-            });
-        })
 
- */
+        'change input': function(ev) {
+            const openFailure = Session.get('openFailure');
+            if(openFailure) {
+                _.each(ev.target.files, function(file) {
+                    Meteor.saveFile(file, file.name);
+                });
+            } else {
+                console.log('choose issue first')
+            }
+        }
 
     });
+
+Meteor.saveFile = function(blob, name, path, typeFile, callback) {
+    const openFailure = Session.get('openFailure');
+    console.log(openFailure);
+    let fileReader = new FileReader(),
+        method, encoding = 'binary', type = typeFile || 'binary';
+    switch (type) {
+        case 'text':
+            // TODO Is this needed? If we're uploading content from file, yes, but if it's from an input/textarea I think not...
+            method = 'readAsText';
+            encoding = 'utf8';
+            break;
+        case 'binary':
+            method = 'readAsBinaryString';
+            encoding = 'binary';
+            break;
+        default:
+            method = 'readAsBinaryString';
+            encoding = 'binary';
+            break;
+    }
+    fileReader.onload = function(file) {
+        Meteor.call('saveFile', file.target.result, name, path, encoding, openFailure, callback);
+    };
+    fileReader[method](blob);
+    Session.set('openFailure', '');
+};
+
+ /*
+
+const Images = new FilesCollection({collectionName: 'Images'});
+
+
+Template.uploadForm.helpers({
+    currentUpload() {
+        return Template.instance().currentUpload.get();
+    }
+});
+
+Template.uploadForm.onCreated(function () {
+    this.currentUpload = new ReactiveVar(false);
+});
+
+
+Template.uploadForm.events({
+    'change #fileInput'(e, template) {
+        if (e.currentTarget.files && e.currentTarget.files[0]) {
+            // We upload only one file, in case
+            // multiple files were selected
+            const upload = Images.insert({
+                file: e.currentTarget.files[0],
+                streams: 'dynamic',
+                chunkSize: 'dynamic'
+            }, false);
+
+            upload.on('start', function () {
+                template.currentUpload.set(this);
+            });
+
+            upload.on('end', function (error, fileObj) {
+                if (error) {
+                    alert('Error during upload: ' + error);
+                } else {
+                    alert('File "' + fileObj.name + '" successfully uploaded');
+                }
+                template.currentUpload.set(false);
+            });
+
+            upload.start();
+        }
+    }
+});
 
 
 Handlebars.registerHelper('inActive_Input', () => {
@@ -491,4 +562,6 @@ Handlebars.registerHelper('inActive_Input', () => {
         return 'in-active-button';
     }
 });
+
+  */
 

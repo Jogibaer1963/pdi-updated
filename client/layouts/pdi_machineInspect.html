@@ -182,8 +182,15 @@
             <button type="submit" class="btn btn-success addIssueText">Submit New Issue</button>
         </div>
       </form>
-
     </div>
+    <div class="add-image-to-repair">
+        <form>
+            <label for="img">Select image:</label>
+            <input type="file" class="btn btn-default btn-info" id="img" name="img" accept="image/*">
+            <input type="submit" class="btn btn-default btn-success submit-button-image">
+        </form>
+    </div>
+    <br><br><br>
     <div class="pdiDivider">
         <h1>_____________________</h1>
     </div>
@@ -212,14 +219,7 @@
             </tbody>
         </table>
     </div>
-    <div>
-        <form class="add-image-to-repair">
-            <label for="img">Select image:</label>
-            <input type="file" id="img" name="img" accept="image/*">
-            <br>
-            <input type="submit">
-        </form>
-    </div>
+
     <br><br>
     <div class="issueField">
         <button type="button" class="btn btn-danger deleteRepair">Delete selected repair</button>
@@ -261,5 +261,7 @@
        </form>
     </div>
 </template>
+
+
 
 

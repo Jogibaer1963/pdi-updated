@@ -72,8 +72,8 @@
 
         // Button Cancel PDI until pdi is not finished
 
-        'click .cancelPdiProcess': function () {
-            event.preventDefault();
+        'click .cancelPdiProcess': function (e) {
+            e.preventDefault();
             const pdiMachineId = Session.get('selectedPdiMachine');
             localStorage.removeItem('pdiMachineId');
             localStorage.removeItem('pdiMachineNr');
@@ -86,21 +86,21 @@
             Session.set('selectedMainOm', '');
         },
 
-        'click .machineSkipPdi': function () {
-            event.preventDefault();
+        'click .machineSkipPdi': function (e) {
+            e.preventDefault();
             const pdiMachineId = Session.get('selectedPdiMachine');
             Meteor.call('skipPdi', pdiMachineId);
         },
 
-        'click .resumePdi': function () {
-            event.preventDefault();
+        'click .resumePdi': function (e) {
+            e.preventDefault();
             const pdiMachineId = Session.get('selectedPdiMachine');
             localStorage.setItem('joinMachine', pdiMachineId);
             FlowRouter.go('joinMachine');
         },
 
-        'click .addIssueButton': () => {
-          event.preventDefault();
+        'click .addIssueButton': (e) => {
+          e.preventDefault();
           FlowRouter.go('addIssueToPdi');
         },
 

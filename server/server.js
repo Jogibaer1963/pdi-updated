@@ -1333,6 +1333,21 @@ if(Meteor.isServer){
         'removeFromShipList': function(selectedMachine) {
             MachineReady.remove(selectedMachine);
         },
+
+        saveFile: function(blob, name, path, encoding, failureId) {
+            path = '/files/repair-items/';
+            encoding = encoding || 'binary';
+            name = failureId + '.JPG';
+            let fs = Npm.require('fs');
+         //   console.log(path, name, encoding, failureId);
+            fs.writeFile(path + name, blob, encoding, function(err) {
+                if (err) {
+                    throw (new Meteor.Error(500, 'Failed to save file.', err));
+                } else {
+                  //  console.log('The file ' + name + ' (' + encoding + ') was saved to ' + path);
+                }
+            });
+        }
     });
 
 
