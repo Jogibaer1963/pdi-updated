@@ -490,7 +490,7 @@ Meteor.saveFile = function(blob, name, path, typeFile, callback) {
         method, encoding = 'binary', type = typeFile || 'binary';
     switch (type) {
         case 'text':
-            // TODO Is this needed? If we're uploading content from file, yes, but if it's from an input/textarea I think not...
+            // Is this needed? If we're uploading content from file, yes, but if it's from an input/textarea I think not...
             method = 'readAsText';
             encoding = 'utf8';
             break;

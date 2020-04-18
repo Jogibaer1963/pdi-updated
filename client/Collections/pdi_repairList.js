@@ -104,40 +104,15 @@ Session.set('selectedPreMachine', '');
             let newIssuesFound = [];
             try {
                 if (pdiMachine) {
-                    newIssuesFound = MachineReady.findOne({_id: pdiMachine}).newIssues;
+                    newIssuesFound = MachineReady.findOne({_id: pdiMachine}).newIssues;+
+                        console.log(newIssuesFound);
                 }
                 newIssuesFound.forEach((element) => {
                     element.pictureLocation = repairInfos + element.pictureLocation;
                 });
+
                 return newIssuesFound;
             } catch {}
-        },
-
-        year: () => {
-            return Session.get('year');
-        },
-
-        listOutput: () => {
-            const selectedPreMachineId = Session.get('selectedPdiMachine');
-            let checkResult = {} ;
-            try {
-                const result = preSeriesMachine.findOne({_id: selectedPreMachineId},
-                    {fields: {checkItems: 1}}).checkItems;
-                const resultArray = result.filter((fail) => {
-                    return fail.failureStatus === 2;
-                });
-                let path1 = Session.get('ipAndPort');
-                return returnArray = resultArray.map(resultExtract => {
-                    let nods = "?a=" + Math.random();
-                        checkResult = {id : resultExtract._id,
-                        failureStatus: resultExtract.failureStatus,
-                        imagePath : path1 + resultExtract.imagePath + nods,
-                        errorDescription: resultExtract.errorDescription};
-                    return checkResult;
-                });
-            }
-            catch (e) {
-            }
         },
 
     });

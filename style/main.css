@@ -313,6 +313,11 @@ table.preOverViewTable {
   top: 6em;
   width: 21em; }
 
+.sort-button {
+  left: 27em;
+  position: absolute;
+  top: 21em; }
+
 .locationTable {
   position: relative;
   top: 13em;
@@ -804,6 +809,11 @@ table.pdiTable {
   left: 50em;
   position: relative;
   top: 5em; }
+
+.submit-pic {
+  left: 20em;
+  position: absolute;
+  top: 20em; }
 
 .noVariant {
   background: repeating-linear-gradient(45deg, #e8bf7e, #f4a4ae 10px, #f85558 10px); }

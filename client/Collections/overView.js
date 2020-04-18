@@ -38,7 +38,8 @@
 //------------------------------  Machine Table -----------------------------------------------------------
 
        machineOverView: function() {
-        return MachineReady.find({$or: [{shipStatus: 0}]}, {sort: {date: -1}});
+        let choice = Session.get('toggleSort');
+        return MachineReady.find({$or: [{shipStatus: 0}]}, {sort: {date: choice}});
         },
 
 //------------------------------- Header Table --------------------------------------------------------------
@@ -48,27 +49,23 @@
               {shipStatus: 2}]}, {sort: {date: 1}});
         },
 
-//-------------------------------- Pre Series Table and Counter  --------------------------------------------
-    /*
-        preOverViewCheckList: () => {
-                   Meteor.call('preSeriesOverView', (error, result) => {
-                       if (error) {
-                       } else {
-                           Session.set('preOverView', result);
-                       }
-                   });
-                   setInterval(() => {
-                   Meteor.call('preSeriesOverView', (error, result) => {
-                       if (error) {
-                       } else {
-                           Session.set('preOverView', result);
-                       }
-                   });
-                   }, 60000);
-            return Session.get('preOverView');
+    });
+
+    Session.set('toggleSort', -1)
+
+    Template.overView.events({
+
+        'click .sortButton': function (e) {
+            e.preventDefault();
+            let choice = Session.get('toggleSort');
+            if(choice === -1) {
+                Session.set('toggleSort', 1)
+            } else {
+                Session.set('toggleSort', -1);
+            }
         }
 
-     */
+
     });
 
 

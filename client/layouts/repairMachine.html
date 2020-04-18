@@ -26,7 +26,7 @@
        <h1>Work Load Repair</h1>
           <form class="repairFinnish">
              <button type="submit" class="btn btn-default btn-success repairButton">Repair Complete</button>
-             <label for="workingHours"></label>
+             <label for="workingHours"> </label>
              <input type="text" class="workingHours" id="workingHours" name="workingHours" placeholder="Machine Hours" required>
           </form>
     </div>
@@ -130,7 +130,7 @@
                 <tr class="repairConfirm  {{selectedConfirm}}">
                     <td class="error-description">{{errorDescription}}</td>
                     <td><a target="blank" href={{pictureLocation}}>
-                        <img class="image-box" src={{pictureLocation}} alt="noPicture.JPG">
+                        <img class="image-box" src={{pictureLocation}} srcset="this.src='noPicture.JPG'" alt="No Picture">
                     </a></td>
                     <td class="pdi-rep-conf  {{getStatusColor repairStatus}}" style="background-color:{{getStatusColor repairStatus}}; color:{{getStatusColor repairStatus}}" >{{repairStatus}}</td>
                 </tr>

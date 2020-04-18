@@ -93,7 +93,7 @@
                     <br>
                     Repair Comment: {{repairComment}}</td>
                 <td><a target="blank" href={{pictureLocation}}>
-                    <img class="image-box" src={{pictureLocation}} alt="noPicture.JPG">
+                    <img class="image-box" src={{pictureLocation}} onerror="this.src='noPicture.JPG'" alt="noPicture.JPG">
                 </a></td>
                 <td class="pdi-rep-conf  {{getStatusColor repairStatus}}" style="background-color:{{getStatusColor repairStatus}}; color:{{getStatusColor repairStatus}}" >{{repairStatus}}</td>
             </tr>

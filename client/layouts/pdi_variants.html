@@ -49,7 +49,6 @@
             <th class="pdiVariantDescription"><strong>Description</strong></th>
             <th class="pdiShipDate"><strong>Last Update</strong></th>
             <th class="pdiShipDate"><strong>Visibility</strong></th>
-            <th class="pdiShipDate"><strong>Add Pic</strong></th>
         </tr>
         </thead>
         <tbody>
@@ -69,23 +68,16 @@
                         <input class="rTableStyle" type="checkbox" name="visible" id="visible"  value="{{_id}}">
                     </label>
                 </td>
-                <td class="variantVisible pdiShipDate">
-                    <label>
-                        <input class="rTableStyle" type="checkbox" name="pic_path" id="pic_path"  value="{{_id}}">
-                    </label>
-                </td>
             </tr>
         {{/each}}
         </tbody>
     </table>
 </div>
-    <div>
+    <div  class="submit-pic">
         <form class="submitViewer">
             <button class="btn btn-default btn-success updateVariantViewer" >Update visible Variant</button>
         </form>
-        <form class="submitPic">
-           <button class="btn btn-default btn-info addPicToVariant">Add Pic to Variant</button>
+            <h3>Choose Image and Upload</h3>
             <input class="loadVariantPic" type="file" id="variantPic" name="variantPic[]">
-        </form>
     </div>
 </template>

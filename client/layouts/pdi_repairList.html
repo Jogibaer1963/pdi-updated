@@ -76,7 +76,9 @@
                             <br>
                             Repair Comment: {{repairComment}}</td>
                         <td><a target="blank" href={{pictureLocation}}>
-                            <img class="image-box" src={{pictureLocation}} alt="noPicture.JPG">
+                            <img class="image-box" src={{pictureLocation}}
+                                 srcset="this.src='noPicture.JPG'"
+                                 alt="No Picture">
                         </a></td>
                     </tr>
                 {{/each}}
