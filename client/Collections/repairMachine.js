@@ -74,18 +74,18 @@ Meteor.subscribe('addIssues');
         },
 
         machineToRepair: () => {
-          let repairInfos = Session.get('repairInfos');
-          let newIssuesFound = [];
-          const machineToRepair = Session.get('machineToRepair');
-          console.log(machineToRepair);
-          if (machineToRepair) {
-              newIssuesFound = MachineReady.findOne({_id: machineToRepair}).newIssues;
-          }
-          newIssuesFound.forEach((element) => {
-              element.pictureLocation = repairInfos + element.pictureLocation;
-          });
-          return newIssuesFound;
-
+           try {
+              let repairInfos = Session.get('repairInfos');
+              let newIssuesFound = [];
+              const machineToRepair = Session.get('selectedMachineId');
+              if (machineToRepair) {
+                  newIssuesFound = MachineReady.findOne({_id: machineToRepair}).newIssues;
+              }
+              newIssuesFound.forEach((element) => {
+                  element.pictureLocation = repairInfos + element.pictureLocation;
+              });
+              return newIssuesFound;
+           } catch {}
         },
 
         repairUser: () => {
@@ -93,8 +93,10 @@ Meteor.subscribe('addIssues');
         },
 
         machineRepairList: () => {
-            let machine = Session.get('machineToRepair');
+            try {
+           let machine = Session.get('machineToRepair');
            return MachineReady.findOne({_id: machine}).machineId;
+            } catch {}
         }
 
 
@@ -164,12 +166,6 @@ Meteor.subscribe('addIssues');
             e.preventDefault();
             const selectedMachineId = Session.get('addIssueToMachine');
             Meteor.call('issueNoticed', selectedMachineId);
-        },
-
-        'click .repairList': (e) => {
-            e.preventDefault();
-            const machineToRepair = Session.get('selectedMachineId');
-            Session.set('machineToRepair', machineToRepair);
         },
 
         'click .repairConfirm': function (e) {

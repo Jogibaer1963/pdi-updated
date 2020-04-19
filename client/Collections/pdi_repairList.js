@@ -104,8 +104,7 @@ Session.set('selectedPreMachine', '');
             let newIssuesFound = [];
             try {
                 if (pdiMachine) {
-                    newIssuesFound = MachineReady.findOne({_id: pdiMachine}).newIssues;+
-                        console.log(newIssuesFound);
+                    newIssuesFound = MachineReady.findOne({_id: pdiMachine}).newIssues;
                 }
                 newIssuesFound.forEach((element) => {
                     element.pictureLocation = repairInfos + element.pictureLocation;

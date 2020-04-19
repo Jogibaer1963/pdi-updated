@@ -46,7 +46,7 @@ Template.pdiCrewHome.helpers({
         try {
         let repairInfos = Session.get('repairInfos');
         let newIssuesFound = [];
-        const machineToRepair = Session.get('machineToRepair');
+        const machineToRepair = Session.get('selectedMachineId');
         if (machineToRepair) {
             newIssuesFound = MachineReady.findOne({_id: machineToRepair}).newIssues;
         }
@@ -63,7 +63,7 @@ Template.pdiCrewHome.helpers({
 
     machineRepairList: () => {
         try {
-        let machine = Session.get('machineToRepair');
+        let machine = Session.get('selectedMachineId');
         return MachineReady.findOne({_id: machine}).machineId;
         } catch {}
     }
@@ -89,12 +89,6 @@ Template.pdiCrewHome.events({
             Meteor.call('messageToWashBay', machine_id, machineTestId, washMessage);
         }
         e.target.message.value = '';
-    },
-
-    'click .repairList': (e) => {
-        e.preventDefault();
-        const machineToRepair = Session.get('selectedMachineId');
-        Session.set('machineToRepair', machineToRepair);
     },
 
     'click .repairConfirm': function (e) {

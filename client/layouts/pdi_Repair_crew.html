@@ -12,7 +12,6 @@
 
 <template name="pdiCrewHome">
     <h3>Pdi Repair Crew</h3>
-
     <div id="logo">
         <img src="claas_logo.png" />
     </div>
@@ -29,7 +28,6 @@
             <button class="btn btn-success washBayMessage" type="submit">Submit Message to Wash Bay</button>
         </form>
     </div>
-
     <div>
         <table class="blueTable repair-table">
             <thead>
@@ -61,12 +59,7 @@
             </tbody>
         </table>
         <div class="repair-print-list">
-            <button class="btn btn-warning repairList">Repair List</button>
-        </div>
-        <div class="repair-user">
             <h3>Repair Tech: {{repairUser}}</h3>
-        </div>
-        <div class="repair-confirm-input">
             <form class="repairConfirmText">
                 <label for="repairComment"> </label>
                 <textarea name="message" id="repairComment" cols="30" rows="10" class="confirm-text-area"> </textarea>
@@ -78,27 +71,31 @@
     <div class="repair-machine">
         <h3>Repair list for : {{machineRepairList}}</h3>
     </div>
-    <table class="blueTable repair-print-out">
-        <thead>
-        <tr>
-            <th class="repair-comment">Repair Item / Comment</th>
-            <th class="pictureWidth">Picture</th>
-            <th class="confirmBoxWidth">PDI Repair Confirmed</th>
-        </tr>
-        </thead>
-        <tbody class="repair-pre-view">
-        {{#each machineToRepair}}
-            <tr class="repairConfirm  {{selectedConfirm}}">
-                <td class="error-description">{{errorDescription}}
-                    <br>
-                    Repair Comment: {{repairComment}}</td>
-                <td><a target="blank" href={{pictureLocation}}>
-                    <img class="image-box" src={{pictureLocation}} onerror="this.src='noPicture.JPG'" alt="noPicture.JPG">
-                </a></td>
-                <td class="pdi-rep-conf  {{getStatusColor repairStatus}}" style="background-color:{{getStatusColor repairStatus}}; color:{{getStatusColor repairStatus}}" >{{repairStatus}}</td>
-            </tr>
-        {{/each}}
-        </tbody>
-    </table>
+    <div class="repair-box">
+        <table>
+            <tbody>
+            {{#each  machineToRepair}}
+                <table class="">
+                    <tr>
+                        <td><a target="blank" href={{pictureLocation}}>
+                            <img class="image-box" src={{pictureLocation}}
+                                 onerror="this.src='noPicture.JPG'"
+                                 alt="No Picture">
+                        </a></td>
+                    </tr>
+                </table>
+                <table class="">
+                    <tr class="repairConfirm  {{selectedConfirm}}">
+                        <td class="print-error-description">{{errorDescription}}
+                            <br>
+                            Repair Comment: {{repairComment}}</td>
+                        <td class="pdi-rep-conf  {{getStatusColor repairStatus}}" style="background-color:{{getStatusColor repairStatus}}; color:{{getStatusColor repairStatus}}" >{{repairStatus}}</td>
+                    </tr>
+                </table>
+                <br><br>
+            {{/each}}
+            </tbody>
+        </table>
+    </div>
 
 </template>

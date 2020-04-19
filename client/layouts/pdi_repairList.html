@@ -67,22 +67,29 @@
 </template>
 
 <template name="pdiInspectList">
-    <div class="printTable">
-        <table class="printTableWidth">
+    <div class="view-box">
+        <table>
             <tbody>
                 {{#each listContent}}
-                    <tr>
+                    <table class="">
+                        <tr>
+                            <td><a target="blank" href={{pictureLocation}}>
+                                <img class="image-box" src={{pictureLocation}}
+                                     onerror="this.src='noPicture.JPG'"
+                                     alt="No Picture">
+                            </a></td>
+                        </tr>
+                     </table>
+                    <table class="">
+                        <tr>
                         <td class="print-error-description">{{errorDescription}}
                             <br>
                             Repair Comment: {{repairComment}}</td>
-                        <td><a target="blank" href={{pictureLocation}}>
-                            <img class="image-box" src={{pictureLocation}}
-                                 srcset="this.src='noPicture.JPG'"
-                                 alt="No Picture">
-                        </a></td>
-                    </tr>
+                        </tr>
+                    </table>
+                    <br><br>
                 {{/each}}
-             </tbody>
-         </table>
+            </tbody>
+        </table>
     </div>
 </template>
