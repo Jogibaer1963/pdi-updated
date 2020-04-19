@@ -818,6 +818,24 @@ table.pdiTable {
 .noVariant {
   background: repeating-linear-gradient(45deg, #e8bf7e, #f4a4ae 10px, #f85558 10px); }
 
+.confirmBoxWidth {
+  width: 6.5em; }
+
+table.repair-table {
+  position: absolute;
+  margin-left: 35px;
+  top: 20em;
+  width: 850px; }
+
+.pdi-rep-comment {
+  width: 45em; }
+
+.pdi-rep-comment-field {
+  width: 55em; }
+
+.team-button {
+  width: 9em; }
+
 .pdiToDo {
   margin-left: 3em; }
 

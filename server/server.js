@@ -393,24 +393,13 @@ if(Meteor.isServer){
         preSeriesMachine.update({_id: id}, {$set: {pdiStatus: 1}});
     },
 
-    //-------------------------------------- Specify Team for each image --------------
+    //-------------------------------------- Specify Team for each failure --------------
 
-     'teamSpecifier': (team, idCheck) => {
-           images.update({_id: idCheck},  {$set: {team: team}});
+     'teamSpecifier': (machineId, team, idCheck) => {
+         MachineReady.update({_id: machineId, 'newIssues._id': idCheck},
+             {$set: {'newIssues.$.responsible': team
+                      }})
      },
-
-     //------------------------------------- Activate / Deactivate images -------------------
-
-     'activeInactive': (activeInactive, idCheck) => {
-            images.update({_id: idCheck},  {$set: {activeStatus: activeInactive}});
-        },
-
-   //------------------------------------------------- Add Special Tasks for PDI ------------------------
-
-        'addSpecialPdiItem': (addItem) => {
-            const addPdiItem = "repair - " + addItem;
-            specialPdiItems.insert({specialItem: addPdiItem});
-        },
 
   //-------------------------------------------------- Historic PDI's ------------------------------------
 
@@ -419,7 +408,7 @@ if(Meteor.isServer){
         },
 
  //----------------------------------------------------- Components -----------------------------------------------------------------------
-
+/*
         'moveMachines': (newMoveMe) => {
             newMoveMe.forEach((result) => {
                 const machineToMove = MachineReady.findOne({_id: result});
@@ -428,6 +417,8 @@ if(Meteor.isServer){
             })
 
         },
+
+ */
 
         'moveHeads': (newMoveMe) => {
             newMoveMe.forEach((result) => {

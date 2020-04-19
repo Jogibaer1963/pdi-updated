@@ -91,18 +91,18 @@ Template.checkListOverView.events({
         Meteor.call('teamSpecifier', team, idCheck);
     },
 
-    'click .submitButtonActive': (e) => {
+    'click .submitButtonSupplier': (e) => {
         e.preventDefault();
-        let active = 1;
+        let supplier = 6;
         let idCheck = e.currentTarget.id;
-        Meteor.call('activeInactive', active, idCheck);
+        Meteor.call('activeInactive', supplier, idCheck);
     },
 
-    'click .submitButtonInactive': (e) => {
+    'click .submitButtonUnknown': (e) => {
         e.preventDefault();
-        let inactive = 0;
+        let unknown = 0;
         let idCheck = e.currentTarget.id;
-        Meteor.call('activeInactive', inactive, idCheck);
+        Meteor.call('activeInactive', unknown, idCheck);
     },
 
     'click .comp': function () {

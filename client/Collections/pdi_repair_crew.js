@@ -104,7 +104,62 @@ Template.pdiCrewHome.events({
         let repairId = Session.get('confirmRepair');
         let machineId = Session.get('selectedMachineId');
         Meteor.call('confirmRepair', repairId, repairUser, repairComment, machineId);
-    }
+    },
+
+    'click .submitButton1': (e) => {
+        e.preventDefault();
+        let team = 'Team 1';
+        let idCheck = e.currentTarget.id;
+        let machineId = Session.get('selectedMachineId');
+        Meteor.call('teamSpecifier', machineId, team, idCheck);
+    },
+
+    'click .submitButton2': (e) => {
+        e.preventDefault();
+        let team = 'Team 2';
+        let idCheck = e.currentTarget.id;
+        let machineId = Session.get('selectedMachineId');
+        Meteor.call('teamSpecifier', machineId, team, idCheck);
+    },
+
+    'click .submitButton3': (e) => {
+        e.preventDefault();
+        let team = 'Team 3';
+        let idCheck = e.currentTarget.id;
+        let machineId = Session.get('selectedMachineId');
+        Meteor.call('teamSpecifier', machineId, team, idCheck);
+    },
+    'click .submitButton4': (e) => {
+        e.preventDefault();
+        let team = 'Team 4';
+        let idCheck = e.currentTarget.id;
+        let machineId = Session.get('selectedMachineId');
+        Meteor.call('teamSpecifier', machineId, team, idCheck);
+    },
+    'click .submitButton5': (e) => {
+        e.preventDefault();
+        let team = 'Team 5';
+        let idCheck = e.currentTarget.id;
+        let machineId = Session.get('selectedMachineId');
+        Meteor.call('teamSpecifier', machineId, team, idCheck);
+    },
+
+    'click .submitButtonSupplier': (e) => {
+        e.preventDefault();
+        let supplier = 'Supplier';
+        let idCheck = e.currentTarget.id;
+        let machineId = Session.get('selectedMachineId');
+        Meteor.call('teamSpecifier', machineId, supplier, idCheck);
+    },
+
+    'click .submitButtonUnknown': (e) => {
+        e.preventDefault();
+        let unknown = 'Unknown';
+        let idCheck = e.currentTarget.id;
+        let machineId = Session.get('selectedMachineId');
+        Meteor.call('teamSpecifier', machineId, unknown, idCheck);
+    },
+
 
 });
 
