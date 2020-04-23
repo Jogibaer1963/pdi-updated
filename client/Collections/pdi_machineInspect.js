@@ -183,13 +183,28 @@ Meteor.subscribe('oms');
                 if (machineId) {
                     newIssuesFound = MachineReady.findOne({_id: machineId}).newIssues;
                 }
-                console.log(newIssuesFound);
                 newIssuesFound.forEach((element) => {
                     element.pictureLocation = repairInfos + element.pictureLocation;
                 });
-                console.log(newIssuesFound);
                 return newIssuesFound;
             } catch {}
+        },
+
+        'click .openFailure': function (e) {
+            e.preventDefault();
+            const confirmRepair = this._id;
+            console.log(confirmRepair);
+            Session.set('confirmRepair', confirmRepair);
+        },
+
+        'submit .pdiRepairConfirmText': function (e) {
+            e.preventDefault();
+            const repairUser = Meteor.user().username;
+            const repairComment = e.target.message.value;
+            let repairId = Session.get('confirmRepair');
+            let machineId = Session.get('selectedMachineId');
+            console.log(repairId, repairUser, repairComment, machineId)
+            Meteor.call('confirmRepair', repairId, repairUser, repairComment, machineId);
         },
 
         battSaved: function() {
@@ -485,7 +500,14 @@ Meteor.subscribe('oms');
             Meteor.call('teamSpecifier', machineId, unknown, idCheck);
         },
 
-
+        'submit .pdiRepairConfirmText': function (e) {
+            e.preventDefault();
+            const repairUser = Meteor.user().username;
+            const repairComment = e.target.message.value;
+            let repairId = Session.get('openFailure');
+            let machineId = Session.get('selectedPdiMachineId');
+            Meteor.call('confirmRepair', repairId, repairUser, repairComment, machineId);
+        },
 
 
         'submit .addressToWashBay': (event) => {

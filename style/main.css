@@ -975,6 +975,13 @@ table.newIssuesTable {
 .deleteRepair {
   width: 30em; }
 
+.pdi-repair {
+  margin-left: 2em; }
+
+.confirm-pdi-repair {
+  position: relative;
+  left: 26em; }
+
 .batteries {
   left: 3em;
   position: relative; }
