@@ -401,8 +401,13 @@ Template.joinPdiMachine.events({
 
 });
 
+
+
 Meteor.saveFile = function(blob, name, path, typeFile, callback) {
     const openFailure = Session.get('openFailure');
+    const selectedPdiMachineId = Session.get('selectedPdiMachineId');
+    console.log(openFailure);
+    if (openFailure) {
     console.log(openFailure);
     let fileReader = new FileReader(),
         method, encoding = 'binary', type = typeFile || 'binary';
@@ -422,10 +427,11 @@ Meteor.saveFile = function(blob, name, path, typeFile, callback) {
             break;
     }
     fileReader.onload = function(file) {
-        Meteor.call('saveFile', file.target.result, name, path, encoding, openFailure, callback);
+        Meteor.call('saveFile', file.target.result, name, path, encoding, openFailure, selectedPdiMachineId, callback);
     };
     fileReader[method](blob);
     Session.set('openFailure', '');
+    }
 };
 
 Handlebars.registerHelper('inActive_Input', () => {

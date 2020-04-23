@@ -177,10 +177,19 @@ Meteor.subscribe('oms');
         newIssue: function() {
             try {
                 Session.set('selectedPdiMachineNr', localStorage.getItem('pdiMachineNr'));
-                const machineId = Session.get('selectedPdiMachineNr');
-                return MachineReady.findOne({machineId: machineId}).newIssues;
-            } catch (e) {
+                let repairInfos = Session.get('repairInfos');
+                let newIssuesFound = [];
+                const machineId = Session.get('selectedPdiMachineId');
+                if (machineId) {
+                    newIssuesFound = MachineReady.findOne({_id: machineId}).newIssues;
                 }
+                console.log(newIssuesFound);
+                newIssuesFound.forEach((element) => {
+                    element.pictureLocation = repairInfos + element.pictureLocation;
+                });
+                console.log(newIssuesFound);
+                return newIssuesFound;
+            } catch {}
         },
 
         battSaved: function() {
@@ -420,8 +429,64 @@ Meteor.subscribe('oms');
             if (chosenFailure) {
                 console.log('inside', chosenFailure)
             }
-
         },
+
+        'click .submitButton1': (e) => {
+            e.preventDefault();
+            let team = 'Team 1';
+            let idCheck = e.currentTarget.id;
+            let machineId = Session.get('selectedPdiMachineId');
+            Meteor.call('teamSpecifier', machineId, team, idCheck);
+        },
+
+        'click .submitButton2': (e) => {
+            e.preventDefault();
+            let team = 'Team 2';
+            let idCheck = e.currentTarget.id;
+            let machineId = Session.get('selectedPdiMachineId');
+            Meteor.call('teamSpecifier', machineId, team, idCheck);
+        },
+
+        'click .submitButton3': (e) => {
+            e.preventDefault();
+            let team = 'Team 3';
+            let idCheck = e.currentTarget.id;
+            let machineId = Session.get('selectedPdiMachineId');
+            Meteor.call('teamSpecifier', machineId, team, idCheck);
+        },
+        'click .submitButton4': (e) => {
+            e.preventDefault();
+            let team = 'Team 4';
+            let idCheck = e.currentTarget.id;
+            let machineId = Session.get('selectedPdiMachineId');
+            Meteor.call('teamSpecifier', machineId, team, idCheck);
+        },
+        'click .submitButton5': (e) => {
+            e.preventDefault();
+            let team = 'Team 5';
+            let idCheck = e.currentTarget.id;
+            let machineId = Session.get('selectedPdiMachineId');
+            Meteor.call('teamSpecifier', machineId, team, idCheck);
+        },
+
+        'click .submitButtonSupplier': (e) => {
+            e.preventDefault();
+            let supplier = 'Supplier';
+            let idCheck = e.currentTarget.id;
+            let machineId = Session.get('selectedPdiMachineId');
+            Meteor.call('teamSpecifier', machineId, supplier, idCheck);
+        },
+
+        'click .submitButtonUnknown': (e) => {
+            e.preventDefault();
+            let unknown = 'Unknown';
+            let idCheck = e.currentTarget.id;
+            let machineId = Session.get('selectedPdiMachineId');
+            Meteor.call('teamSpecifier', machineId, unknown, idCheck);
+        },
+
+
+
 
         'submit .addressToWashBay': (event) => {
             event.preventDefault();
@@ -477,7 +542,7 @@ Meteor.subscribe('oms');
                     Meteor.saveFile(file, file.name);
                 });
             } else {
-                console.log('choose issue first')
+
             }
         }
 
@@ -485,7 +550,7 @@ Meteor.subscribe('oms');
 
 Meteor.saveFile = function(blob, name, path, typeFile, callback) {
     const openFailure = Session.get('openFailure');
-    console.log(openFailure);
+    const selectedPdiMachineId = Session.get('selectedPdiMachineId');
     let fileReader = new FileReader(),
         method, encoding = 'binary', type = typeFile || 'binary';
     switch (type) {
@@ -504,11 +569,13 @@ Meteor.saveFile = function(blob, name, path, typeFile, callback) {
             break;
     }
     fileReader.onload = function(file) {
-        Meteor.call('saveFile', file.target.result, name, path, encoding, openFailure, callback);
+        Meteor.call('saveFile', file.target.result, name, path, encoding, openFailure, selectedPdiMachineId, callback);
     };
     fileReader[method](blob);
     Session.set('openFailure', '');
 };
+
+
 
 Handlebars.registerHelper('inActive_Input', () => {
     let inActiveState = Session.get('componentChosen');

@@ -951,12 +951,18 @@ table.repair-table {
 table.newIssuesTable {
   left: 2em;
   position: relative;
-  width: 32em; }
+  width: 32em;
+  display: block;
+  overflow: auto;
+  height: 500px; }
 
 .add-image-to-repair {
   left: 3em;
   position: absolute;
   top: 213em; }
+
+.pdiNewIssue {
+  width: 371px; }
 
 .submit-button-image {
   left: 26em;
@@ -1355,8 +1361,8 @@ img:hover {
   top: 55em; }
 
 .confirm-text-area {
-  width: 560px;
-  height: 245px; }
+  width: 500px;
+  height: 45px; }
 
 .repair-user {
   left: 70em;

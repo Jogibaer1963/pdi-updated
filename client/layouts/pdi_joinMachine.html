@@ -157,7 +157,6 @@
         <form>
             <label for="img">Select image:</label>
             <input type="file" class="btn btn-default btn-info" id="img" name="img" accept="image/*">
-            <input type="submit" class="btn btn-default btn-success submit-button-image">
         </form>
     </div>
     <br><br><br>
@@ -182,7 +181,8 @@
             <tbody>
             {{#each newIssue}}
                 <tr class="openFailure {{selectedFailure}}">
-                    <td class="pdiComments ">{{errorDescription}}</td>
+                    <td class="pdiNewIssue">{{errorDescription}}</td>
+                    <td class="">{{pictureUploaded}}</td>
                 </tr>
             {{/each}}
             </tbody>
