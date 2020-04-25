@@ -13,7 +13,8 @@
     <div class="pdiToDo">
         {{#with joinMachineNow}}
             <h2>Machine to Inspect: {{machine}}</h2>
-            <h2>Performed by: {{userLoggedIn}}</h2>
+            <h2>Performed by: {{pdiFirst}}</h2>
+            <h2>Co Auditor: {{coAuditor}}</h2>
         {{/with}}
 
         <br><br>
@@ -153,7 +154,7 @@
             </div>
         </form>
     </div>
-    <div style="left: 3em; position: absolute">
+    <div class="add-image-to-repair">
         <form>
             <label for="img">Select image:</label>
             <input type="file" class="btn btn-default btn-info" id="img" name="img" accept="image/*">
@@ -177,20 +178,107 @@
     </div>
     <div>
         <h3 class="configHeader">New Issues Found</h3>
-        <table class="blueTable newIssuesTable " cellpadding="10">
-            <tbody>
+        <table class="blueTable newIssuesTable ">
             {{#each newIssue}}
-                <tr class="openFailure {{selectedFailure}}">
-                    <td class="pdiNewIssue">{{errorDescription}}</td>
-                    <td class="">{{pictureUploaded}}</td>
-                </tr>
+                <table>
+                    <tr>
+                        <td><a target="blank" href={{pictureLocation}}>
+                            <img class="" src={{pictureLocation}}
+                                 alt="No Picture">
+                        </a></td>
+                        <td>
+                            <div class="team-button">
+                                <button type="submit" class="btn
+                                                     btn-success
+                                                     btn-default
+                                                     submitButtonInside
+                                                     submitButton1
+                                                     btn-xs"
+                                        id={{_id}}>Team 1</button>
+                                <button type="submit" class="btn
+                                                     btn-success
+                                                     submitButtonInside
+                                                     submitButton2
+                                                     btn-xs"
+                                        id={{_id}}>Team 2</button>
+                                <button type="submit" class="btn
+                                                     btn-success
+                                                     btn-default
+                                                     submitButtonInside
+                                                     submitButton3
+                                                     btn-xs"
+                                        id={{_id}}>Team 3</button>
+                                <button type="submit" class="btn
+                                                     btn-success
+                                                     btn-default
+                                                     submitButtonInside
+                                                     submitButton4
+                                                     btn-xs"
+                                        id={{_id}}>Team 4</button>
+                                <button type="submit" class="btn
+                                                     btn-success
+                                                     btn-default
+                                                     submitButtonInside
+                                                     submitButton5
+                                                     btn-xs"
+                                        id={{_id}}>Team 5</button>
+                                <button type="submit" class="btn
+                                                     btn-success
+                                                     btn-default
+                                                     submitButtonInside
+                                                     submitButtonRepair
+                                                     btn-xs"
+                                        id={{_id}}>Repair</button>
+                                <button type="submit" class="btn
+                                                     btn-success
+                                                     btn-default
+                                                     submitButtonInside
+                                                     submitButtonTestBay
+                                                     btn-xs"
+                                        id={{_id}}>Test Bay</button>
+                                <button type="submit" class="btn
+                                                     btn-info
+                                                     btn-default
+                                                     submitButtonInside
+                                                     submitButtonSupplier
+                                                     btn-xs"
+                                        id={{_id}}>Supplier</button>
+                                <button type="submit" class="btn
+                                                     btn-info
+                                                     btn-default
+                                                     submitButtonInside
+                                                     submitButtonUnknown
+                                                     btn-xs"
+                                        id={{_id}}>Unknown</button>
+                                <h3 style="font-weight: bolder">{{responsible}}</h3>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+                <table class="">
+                    <tr class="openFailure {{selectedFailure}}">
+                        <td class="print-error-description">{{errorDescription}}
+                            <br>
+                            Repair Comment: {{repairComment}}</td>
+                        <td class="pdi-rep-conf  {{getStatusColor repairStatus}}" style="background-color:{{getStatusColor repairStatus}}; color:{{getStatusColor repairStatus}}" >{{repairStatus}}</td>
+                    </tr>
+                </table>
+                <br><br>
             {{/each}}
-            </tbody>
         </table>
     </div>
     <br><br>
     <div class="issueField">
         <button type="button" class="btn btn-danger deleteRepair">Delete selected repair</button>
+    </div>
+    <br><br>
+    <div class="pdi-repair">
+        <form class="pdiRepairConfirmText">
+            <label for="repairComment"> </label>
+            <textarea name="message" id="repairComment" cols="20" rows="3" class="confirm-text-area"> </textarea>
+            <br><br>
+            <button type="submit" class="btn btn-success confirm-pdi-repair">Confirm Repair</button>
+        </form>
     </div>
     <div class="pdiDivider">
         <h1>_____________________</h1>

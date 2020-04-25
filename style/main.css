@@ -957,9 +957,14 @@ table.newIssuesTable {
   height: 500px; }
 
 .add-image-to-repair {
-  left: 3em;
+  left: 37em;
   position: absolute;
   top: 213em; }
+
+.pdi-repair {
+  position: absolute;
+  left: 34em;
+  top: 220em; }
 
 .pdiNewIssue {
   width: 371px; }
@@ -979,8 +984,7 @@ table.newIssuesTable {
   margin-left: 2em; }
 
 .confirm-pdi-repair {
-  position: relative;
-  left: 26em; }
+  position: relative; }
 
 .batteries {
   left: 3em;

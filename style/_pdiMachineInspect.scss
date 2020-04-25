@@ -151,9 +151,15 @@ table.newIssuesTable {
 }
 
 .add-image-to-repair {
-  left: 3em;
+  left: 37em;
   position: absolute;
   top: 213em;
+}
+
+.pdi-repair {
+  position: absolute;
+  left: 34em;
+  top: 220em;
 }
 
 .pdiNewIssue {
@@ -180,7 +186,6 @@ table.newIssuesTable {
 
 .confirm-pdi-repair {
   position: relative;
-  left: 26em;
 }
 
 .batteries {

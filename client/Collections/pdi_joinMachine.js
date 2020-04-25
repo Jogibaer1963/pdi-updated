@@ -6,9 +6,12 @@ Template.joinPdiMachine.helpers({
             Session.set('currentLoggedInUser', user);
             Session.set('selectedPdiMachineId', localStorage.getItem('joinMachine'));
             const selectedPdiMachineId = Session.get('selectedPdiMachineId');
-            const machineId = MachineReady.findOne({_id: selectedPdiMachineId}).machineId;
+            const pdiMachine = MachineReady.findOne({_id: selectedPdiMachineId});
+            let machineId = pdiMachine.machineId;
+            let pdiPerformer = pdiMachine.pdiPerformer
             Session.set('selectedPdiMachineNr', machineId);
-            return {machine: machineId, userLoggedIn: user};
+            Meteor.call('coAuditor', machineId, user);
+            return {machine: machineId, coAuditor: user, pdiFirst: pdiPerformer};
         } catch (e) {}
     },
 
@@ -202,9 +205,18 @@ Template.joinPdiMachine.helpers({
 
     newIssue: function() {
         try {
-            const machineId = Session.get('selectedPdiMachineNr');
-          return MachineReady.findOne({machineId: machineId}).newIssues;
-        }  catch (e) {}
+            Session.set('selectedPdiMachineNr', localStorage.getItem('pdiMachineNr'));
+            let repairInfos = Session.get('repairInfos');
+            let newIssuesFound = [];
+            const machineId = Session.get('selectedPdiMachineId');
+            if (machineId) {
+                newIssuesFound = MachineReady.findOne({_id: machineId}).newIssues;
+            }
+            newIssuesFound.forEach((element) => {
+                element.pictureLocation = repairInfos + element.pictureLocation;
+            });
+            return newIssuesFound;
+        } catch {}
     },
 
     'selectedFailure': function(){
@@ -363,6 +375,85 @@ Template.joinPdiMachine.events({
         Session.set('componentChosen', 0);
     },
 
+    'click .submitButton1': (e) => {
+        e.preventDefault();
+        let team = 'Team 1';
+        let idCheck = e.currentTarget.id;
+        let machineId = Session.get('selectedPdiMachineId');
+        Meteor.call('teamSpecifier', machineId, team, idCheck);
+    },
+
+    'click .submitButton2': (e) => {
+        e.preventDefault();
+        let team = 'Team 2';
+        let idCheck = e.currentTarget.id;
+        let machineId = Session.get('selectedPdiMachineId');
+        Meteor.call('teamSpecifier', machineId, team, idCheck);
+    },
+
+    'click .submitButton3': (e) => {
+        e.preventDefault();
+        let team = 'Team 3';
+        let idCheck = e.currentTarget.id;
+        let machineId = Session.get('selectedPdiMachineId');
+        Meteor.call('teamSpecifier', machineId, team, idCheck);
+    },
+    'click .submitButton4': (e) => {
+        e.preventDefault();
+        let team = 'Team 4';
+        let idCheck = e.currentTarget.id;
+        let machineId = Session.get('selectedPdiMachineId');
+        Meteor.call('teamSpecifier', machineId, team, idCheck);
+    },
+    'click .submitButton5': (e) => {
+        e.preventDefault();
+        let team = 'Team 5';
+        let idCheck = e.currentTarget.id;
+        let machineId = Session.get('selectedPdiMachineId');
+        Meteor.call('teamSpecifier', machineId, team, idCheck);
+    },
+
+    'click .submitButtonRepair': (e) => {
+        e.preventDefault();
+        let team = 'Repair';
+        let idCheck = e.currentTarget.id;
+        let machineId = Session.get('selectedPdiMachineId');
+        Meteor.call('teamSpecifier', machineId, team, idCheck);
+    },
+
+    'click .submitButtonTestBay': (e) => {
+        e.preventDefault();
+        let team = 'Test Bay';
+        let idCheck = e.currentTarget.id;
+        let machineId = Session.get('selectedPdiMachineId');
+        Meteor.call('teamSpecifier', machineId, team, idCheck);
+    },
+
+    'click .submitButtonSupplier': (e) => {
+        e.preventDefault();
+        let supplier = 'Supplier';
+        let idCheck = e.currentTarget.id;
+        let machineId = Session.get('selectedPdiMachineId');
+        Meteor.call('teamSpecifier', machineId, supplier, idCheck);
+    },
+
+    'click .submitButtonUnknown': (e) => {
+        e.preventDefault();
+        let unknown = 'Unknown';
+        let idCheck = e.currentTarget.id;
+        let machineId = Session.get('selectedPdiMachineId');
+        Meteor.call('teamSpecifier', machineId, unknown, idCheck);
+    },
+
+    'submit .pdiRepairConfirmText': function (e) {
+        e.preventDefault();
+        const repairUser = Meteor.user().username;
+        const repairComment = e.target.message.value;
+        let repairId = Session.get('openFailure');
+        let machineId = Session.get('selectedPdiMachineId');
+        Meteor.call('confirmRepair', repairId, repairUser, repairComment, machineId);
+    },
+
     'submit .addressToWashBay': (event) => {
         event.preventDefault();
         const selectedPdiMachineNr = Session.get('selectedPdiMachineNr');
@@ -403,36 +494,7 @@ Template.joinPdiMachine.events({
 
 
 
-Meteor.saveFile = function(blob, name, path, typeFile, callback) {
-    const openFailure = Session.get('openFailure');
-    const selectedPdiMachineId = Session.get('selectedPdiMachineId');
-    console.log(openFailure);
-    if (openFailure) {
-    console.log(openFailure);
-    let fileReader = new FileReader(),
-        method, encoding = 'binary', type = typeFile || 'binary';
-    switch (type) {
-        case 'text':
-            // TODO Is this needed? If we're uploading content from file, yes, but if it's from an input/textarea I think not...
-            method = 'readAsText';
-            encoding = 'utf8';
-            break;
-        case 'binary':
-            method = 'readAsBinaryString';
-            encoding = 'binary';
-            break;
-        default:
-            method = 'readAsBinaryString';
-            encoding = 'binary';
-            break;
-    }
-    fileReader.onload = function(file) {
-        Meteor.call('saveFile', file.target.result, name, path, encoding, openFailure, selectedPdiMachineId, callback);
-    };
-    fileReader[method](blob);
-    Session.set('openFailure', '');
-    }
-};
+
 
 Handlebars.registerHelper('inActive_Input', () => {
     let inActiveState = Session.get('componentChosen');

@@ -999,7 +999,12 @@ if(Meteor.isServer){
             }
         },
 
-        'fuelAfterPdi': function (selectedPdiMachine, selectedPdiMachineNr, fuelAfter) {
+        'coAuditor': function(machineId, user) {
+          MachineReady.update({machineId: machineId}, {$set: {coAuditor: user}});
+        },
+
+
+        'fuelAfterPdi': function(selectedPdiMachine, selectedPdiMachineNr, fuelAfter) {
             MachineReady.update({_id: selectedPdiMachine}, {$set: {fuelAfter: fuelAfter, pdiStatus: 1}});
             let result = siList.find({machineNr: selectedPdiMachineNr}).fetch();
             if(result) {

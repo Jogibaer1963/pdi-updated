@@ -10,7 +10,11 @@ Meteor.subscribe('oms');
             Session.set('selectedPdiMachineId', localStorage.getItem('pdiMachineId'));
             Session.set('selectedPdiMachineNr', localStorage.getItem('pdiMachineNr'));
             const selectedPdiMachineNr = Session.get('selectedPdiMachineNr');
-            return {machine: selectedPdiMachineNr, userLoggedIn: user};
+            try {
+                let coAuditor = MachineReady.findOne({machineId: selectedPdiMachineNr}).coAuditor
+                return {machine: selectedPdiMachineNr, userLoggedIn: user, coAuditor: coAuditor};
+            } catch {}
+
         },
 
 
@@ -484,6 +488,22 @@ Meteor.subscribe('oms');
             Meteor.call('teamSpecifier', machineId, team, idCheck);
         },
 
+        'click .submitButtonRepair': (e) => {
+            e.preventDefault();
+            let team = 'Repair';
+            let idCheck = e.currentTarget.id;
+            let machineId = Session.get('selectedPdiMachineId');
+            Meteor.call('teamSpecifier', machineId, team, idCheck);
+        },
+
+        'click .submitButtonTestBay': (e) => {
+            e.preventDefault();
+            let team = 'Test Bay';
+            let idCheck = e.currentTarget.id;
+            let machineId = Session.get('selectedPdiMachineId');
+            Meteor.call('teamSpecifier', machineId, team, idCheck);
+        },
+
         'click .submitButtonSupplier': (e) => {
             e.preventDefault();
             let supplier = 'Supplier';
@@ -570,41 +590,7 @@ Meteor.subscribe('oms');
 
     });
 
-Meteor.saveFile = function(blob, name, path, typeFile, callback) {
-    const openFailure = Session.get('openFailure');
-    const selectedPdiMachineId = Session.get('selectedPdiMachineId');
-    let fileReader = new FileReader(),
-        method, encoding = 'binary', type = typeFile || 'binary';
-    switch (type) {
-        case 'text':
-            // Is this needed? If we're uploading content from file, yes, but if it's from an input/textarea I think not...
-            method = 'readAsText';
-            encoding = 'utf8';
-            break;
-        case 'binary':
-            method = 'readAsBinaryString';
-            encoding = 'binary';
-            break;
-        default:
-            method = 'readAsBinaryString';
-            encoding = 'binary';
-            break;
-    }
-    fileReader.onload = function(file) {
-        Meteor.call('saveFile', file.target.result, name, path, encoding, openFailure, selectedPdiMachineId, callback);
-    };
-    fileReader[method](blob);
-    Session.set('openFailure', '');
-};
 
-
-
-Handlebars.registerHelper('inActive_Input', () => {
-    let inActiveState = Session.get('componentChosen');
-    if(inActiveState === 0) {
-        return 'in-active-button';
-    }
-});
 
 
 
