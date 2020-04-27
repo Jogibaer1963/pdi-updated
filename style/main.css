@@ -692,13 +692,13 @@ table.tableChecklist {
   max-width: 100px;
   min-width: 100px; }
 
-.rangeStart {
-  max-width: 100px;
-  min-width: 100px; }
+.rangeField {
+  max-width: 136px;
+  min-width: 136px; }
 
-.rangeEnd {
-  max-width: 100px;
-  min-width: 100px; }
+.range {
+  max-width: 136px;
+  min-width: 136px; }
 
 table {
   width: 411px;

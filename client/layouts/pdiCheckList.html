@@ -80,10 +80,13 @@
                 </div>
 
             <div class="inputMargin">
-                <button class="insertNew" type="submit" >Submit check point</button>
-                <button class="activateCheck">Re-activate check point</button>
-                <button class=" colorCheckButtonDeactivate deActiveCheck">Deactivate check point</button>
-                <button class="switchCheckPointTable">Switch active / inactive list </button>
+                <button class="btn btn-default btn-info insertNew" type="submit" >Submit check point</button>
+                <button class="btn btn-default btn-info activateCheck">Re-activate check point</button>
+                <button class="btn btn-default btn-info  colorCheckButtonDeactivate deActiveCheck">Deactivate check point</button>
+                <button class="btn btn-default btn-info switchCheckPointTable">Switch active / inactive list </button>
+                <button class="btn btn-default btn-info onlyC8Checks">Show only C8x check points</button>
+                <button class="btn btn-default btn-info onlyC7Checks">Show only C7x check points</button>
+                <button class="btn btn-default btn-info allChecks">Show all check points</button>
             </div>
         </form>
     <table class="blueTable tableChecklist"  cellpadding="10">
@@ -92,9 +95,9 @@
             <th class="position">Position</th>
             <th class="failure">{{activeHeader}}</th>
             <th class="type">Type</th>
-            <th class="rangeStart">Range end C77</th>
-            <th class="rangeEnd">Range end C78</th>
-            <th class="rangeEnd">Range end C79</th>
+            <th class="rangeField">Range start (only 1 Type)</th>
+            <th class="rangeField">Range end (only 1 Type)</th>
+            <th class="rangeEnd">Image</th>
         </tr>
         </thead>
         <tbody>
@@ -103,9 +106,14 @@
             <td class="position">{{errorPos}}</td>
             <td class="failureRow">{{errorDescription}}</td>
             <td class="type">{{machineType}}</td>
+            <td class="range">{{rangeStart}}</td>
+            <td class="range">{{rangeEnd}}</td>
+            <td class="type">{{imageAvailable}}</td>
+           <!--
             <td class="rangeStart">{{machineRangeEndC77}}</td>
             <td class="rangeEnd">{{machineRangeEndC78}}</td>
             <td class="rangeEnd">{{machineRangeEndC79}}</td>
+            -->
         </tr>
     {{/each}}
         </tbody>

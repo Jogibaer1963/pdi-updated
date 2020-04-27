@@ -123,18 +123,15 @@ table.tableChecklist {
   min-width: $typeTable;
 }
 
-.rangeStart {
-  max-width: $rangeStartEndTable;
-  min-width: $rangeStartEndTable;
+.rangeField {
+  max-width: 136px;
+  min-width: 136px;
 }
 
-.rangeEnd {
-  max-width: $rangeStartEndTable;
-  min-width: $rangeStartEndTable;
+.range {
+ max-width: 136px;
+  min-width: 136px;
 }
-
-
-
 
 table {
   width: 411px;

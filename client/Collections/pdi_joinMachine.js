@@ -170,6 +170,7 @@ Template.joinPdiMachine.helpers({
 
     machineConfig: function() {
         try {
+            Session.set('selectedPdiMachineNr', localStorage.getItem('pdiMachineNr'));
             const machineId = Session.get('selectedPdiMachineNr');
            return MachineReady.findOne({machineId: machineId}).machineConfig;
         }  catch (e) {}
@@ -177,6 +178,7 @@ Template.joinPdiMachine.helpers({
 
     checkList: function() {
         try {
+            Session.set('selectedPdiMachineNr', localStorage.getItem('pdiMachineNr'));
             const machineId = Session.get('selectedPdiMachineNr');
            return MachineReady.findOne({machineId: machineId}).checkList;
         }  catch (e) {}

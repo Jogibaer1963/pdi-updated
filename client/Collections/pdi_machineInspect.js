@@ -17,6 +17,14 @@ Meteor.subscribe('oms');
 
         },
 
+        machineConfig: function() {
+            try {
+                Session.set('selectedPdiMachineNr', localStorage.getItem('pdiMachineNr'));
+                const machineId = Session.get('selectedPdiMachineNr');
+                return MachineReady.findOne({machineId: machineId}).machineConfig;
+            } catch (e) {
+            }
+        },
 
         checkList: function() {
             try {
@@ -26,7 +34,7 @@ Meteor.subscribe('oms');
             } catch (e) {
             }
         },
-
+/*
         preCheck: () => {
             const machine_Nr = Session.get('selectedPdiMachineNr');
             let checkResult = {} ;
@@ -50,15 +58,7 @@ Meteor.subscribe('oms');
             }
         },
 
-        machineConfig: function() {
-            try {
-                Session.set('selectedPdiMachineNr', localStorage.getItem('pdiMachineNr'));
-                const machineId = Session.get('selectedPdiMachineNr');
-                return MachineReady.findOne({machineId: machineId}).machineConfig;
-            } catch (e) {
-            }
-        },
-
+ */
         'selectedFailure': function(){
            const failure = this._id;
            const selectedFailure = Session.get('openFailure');
@@ -68,7 +68,6 @@ Meteor.subscribe('oms');
         },
 
        // drop down profi cam
-
 
         'selectedProfiCam': function () {
             let partNumbers = this._id;

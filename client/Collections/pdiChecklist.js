@@ -1,6 +1,87 @@
 Meteor.subscribe("variants_C77");
 Meteor.subscribe("checkpoints");
 
+Session.set('combineType', 'all');
+
+// combine Type 1 = C8, 2 = C7, 3 = all
+
+Template.inputNewCheckPoint.helpers({
+
+    checkList: function () {
+        Session.set('selectedCheckPoint', '');
+        let combineType = Session.get('combineType');
+        let toggle = Session.get("toggleActiveInactive");
+        if(toggle === 0) {
+            Session.set("activeHeader", 1);
+            return checkPoints.find({status: 1}, {sort: {errorPos: 1}}).fetch();
+        } else {
+            Session.set("activeHeader", 0);
+            return checkPoints.find({status: 0}, {sort: {errorPos: 1}});
+        }
+    },
+
+    // switch table header from active to inactive and return
+    activeHeader: ()=> {
+        let header = Session.get("activeHeader");
+        if (header === 1) {
+            return ("Active Failure")
+        } else {
+            return ("Inactive Failure");
+        }
+    },
+
+    // edit description of a checkpoint
+    errorEdit: () => {
+        let checkPointToActivateEdit = Session.get('selectedCheckPoint');
+        let result = checkPoints.findOne({_id:checkPointToActivateEdit});
+        if(result) {
+            return result.errorDescription;
+        }
+    },
+
+    rangeC77: () => {
+        let checkPointToActivateEdit = Session.get('selectedCheckPoint');
+        let result = checkPoints.findOne({_id:checkPointToActivateEdit});
+        if(result) {
+            return result.machineRangeEndC77;
+        }
+    },
+
+    rangeC78: () => {
+        let checkPointToActivateEdit = Session.get('selectedCheckPoint');
+        let result = checkPoints.findOne({_id:checkPointToActivateEdit});
+        if(result) {
+            return result.machineRangeEndC78;
+        }
+    },
+
+    rangeC79: () => {
+        let checkPointToActivateEdit = Session.get('selectedCheckPoint');
+        let result = checkPoints.findOne({_id:checkPointToActivateEdit});
+        if(result) {
+            return result.machineRangeEndC79;
+        }
+    },
+
+    position: () => {
+        let checkPointToActivateEdit = Session.get('selectedCheckPoint');
+        let result = checkPoints.findOne({_id:checkPointToActivateEdit});
+        if(result) {
+            return result.errorPos;
+        }
+    },
+
+    'selectedClass': function () {
+        const checkPoint = this._id;
+        const selectedCheckPoint = Session.get('selectedCheckPoint');
+        if (selectedCheckPoint === checkPoint) {
+            Session.set("statusEdit", 1);
+            return "selected"
+        }
+    }
+
+});
+
 
     Session.set("toggleActiveInactive", 0);
     Session.set("statusEdit", 0);
@@ -48,24 +129,24 @@ Meteor.subscribe("checkpoints");
 
 
         // get the _id of the selected checkpoint
-        'click .showCheckList': function () {
-            event.preventDefault();
+        'click .showCheckList': function (e) {
+            e.preventDefault();
             const checkPoint = this._id;
             Session.set('selectedCheckPoint', checkPoint);
 
         },
 
         // activate selected checkpoint
-        'click .activateCheck': () => {
-            event.preventDefault();
+        'click .activateCheck': (e) => {
+            e.preventDefault();
             let checkPointToActivateEdit = Session.get("selectedCheckPoint");
             let status = 1;
             Meteor.call("reActiveCheck", checkPointToActivateEdit, status);
         },
 
         // deactivate the selected checkpoint
-        'click .deActiveCheck': function () {
-            event.preventDefault();
+        'click .deActiveCheck': function (e) {
+            e.preventDefault();
             const deactivateCheck = Session.get('selectedCheckPoint');
             const status = 0;
             Meteor.call('deactivateCheckPoint', deactivateCheck, status);
@@ -75,8 +156,8 @@ Meteor.subscribe("checkpoints");
 
         // switch active and inactive checklists
         // initial value = 0 => Active Checklist
-        'click .switchCheckPointTable': () => {
-            event.preventDefault();
+        'click .switchCheckPointTable': (e) => {
+            e.preventDefault();
             let toggle = Session.get("toggleActiveInactive");
             if(toggle === 0) {
                 Session.set("toggleActiveInactive", 1);
@@ -85,110 +166,26 @@ Meteor.subscribe("checkpoints");
             }
         },
 
-        'click .omUnload': function() {
-            event.preventDefault();
-            Session.set('selectedUnloadOm', '');
-            const omUnload = this._id;
-            const selectedUnloadOm = ommUnload.findOne({_id: omUnload}).omUnload;
-            Session.set('selectedUnloadOm', selectedUnloadOm);
+        // combine Type 1 = C8, 2 = C7, 3 = all
+
+
+        'click .onlyC8Checks': (e) => {
+            e.preventDefault();
+            Session.set('combineType', 1)
         },
+
+        'click .onlyC7Checks': (e) => {
+            e.preventDefault();
+            Session.set('combineType', 2)
+        },
+
+        'click .allChecks': (e) => {
+            e.preventDefault();
+            Session.set('combineType', 3)
+        }
 
 
 
     });
-
-
-    Template.inputNewCheckPoint.helpers({
-
-        checkList: function () {
-            event.preventDefault();
-            Session.set('selectedCheckPoint', '');
-            let toggle = Session.get("toggleActiveInactive");
-            if(toggle === 0) {
-                Session.set("activeHeader", 1);
-                let result = checkPoints.find({status: 1}, {sort: {errorPos: 1}}).fetch();
-                return result;
-            } else {
-                Session.set("activeHeader", 0);
-                return checkPoints.find({status: 0}, {sort: {errorPos: 1}});
-            }
-        },
-
-        // switch table header from active to inactive and return
-        activeHeader: ()=> {
-            let header = Session.get("activeHeader");
-                 if (header === 1) {
-                     return ("Active Failure")
-                 } else {
-                    return ("Inactive Failure");
-                     }
-            },
-
-        // edit description of a checkpoint
-        errorEdit: () => {
-            let checkPointToActivateEdit = Session.get('selectedCheckPoint');
-            let result = checkPoints.findOne({_id:checkPointToActivateEdit});
-            if(result) {
-                return result.errorDescription;
-            }
-        },
-
-        rangeC77: () => {
-            let checkPointToActivateEdit = Session.get('selectedCheckPoint');
-            let result = checkPoints.findOne({_id:checkPointToActivateEdit});
-            if(result) {
-                return result.machineRangeEndC77;
-            }
-        },
-
-        rangeC78: () => {
-            let checkPointToActivateEdit = Session.get('selectedCheckPoint');
-            let result = checkPoints.findOne({_id:checkPointToActivateEdit});
-            if(result) {
-                return result.machineRangeEndC78;
-            }
-        },
-
-        rangeC79: () => {
-            let checkPointToActivateEdit = Session.get('selectedCheckPoint');
-            let result = checkPoints.findOne({_id:checkPointToActivateEdit});
-            if(result) {
-                return result.machineRangeEndC79;
-            }
-        },
-
-       position: () => {
-            let checkPointToActivateEdit = Session.get('selectedCheckPoint');
-            let result = checkPoints.findOne({_id:checkPointToActivateEdit});
-            if(result) {
-                return result.errorPos;
-            }
-        },
-
-
-        'selectedClass': function () {
-            const checkPoint = this._id;
-            const selectedCheckPoint = Session.get('selectedCheckPoint');
-            if (selectedCheckPoint === checkPoint) {
-                Session.set("statusEdit", 1);
-              return "selected"
-            }
-        },
-
-        // Dropdown List
-        //------------------------------------------------------------//
-        ommUnload: function () {
-           return variants_C77.find({});
-        },
-
-        selectedUnloadOm: function() {
-            event.preventDefault();
-            return Session.get('selectedUnloadOm');
-        },
-        //--------------------------------------------------------------//
-
-
-    });
-
 
 
