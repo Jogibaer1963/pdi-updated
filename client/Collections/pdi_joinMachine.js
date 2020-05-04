@@ -15,69 +15,7 @@ Template.joinPdiMachine.helpers({
         } catch (e) {}
     },
 
-    battSaved: function() {
-        try {
-            Session.set('batteries', '');
-            const machineId = Session.get('selectedPdiMachineNr');
-            if(machineId) {
-                const result = MachineReady.findOne({machineId: machineId}).batteries;
-                Session.set('batteries', result);
-                if (result) {
-                    return "Battery successfull saved";
-                } else {
-                    return "Error, Battery not saved";
-                }
-            }
-        } catch (e) {}
-    },
 
-    battC13CCA: () => {
-        try {
-            return Session.get('batteries').battC13CCA;
-        } catch (e) {}
-    },
-
-    battC13Volt: () => {
-        try {
-            return Session.get('batteries').battC13Volt;
-        } catch (e) {}
-    },
-
-    mtuG001CCA: () => {
-        try {
-            return Session.get('batteries').mtuG001CCA;
-        } catch (e) {}
-    },
-
-    mtuG001Volt: () => {
-        try {
-            return Session.get('batteries').mtuG001Volt;
-        } catch (e) {}
-    },
-
-    mtuG005CCA: () => {
-        try {
-            return Session.get('batteries').mtuG005CCA;
-        } catch (e) {}
-    },
-
-    mtuG005Volt: () => {
-        try {
-            return Session.get('batteries').mtuG005Volt;
-        } catch (e) {}
-    },
-
-    mtuG004CCA: () => {
-        try {
-            return Session.get('batteries').mtuG004CCA;
-        } catch (e) {}
-    },
-
-    mtuG004Volt: () => {
-        try {
-            return Session.get('batteries').mtuG004Volt;
-        } catch (e) {}
-    },
 
     // drop down profi cam
 
@@ -97,8 +35,9 @@ Template.joinPdiMachine.helpers({
 
     ommSaved: function() {
         try {
+            Session.set('selectedPdiMachineNr', localStorage.getItem('pdiMachineNr'));
             const machineId = Session.get('selectedPdiMachineNr');
-         const result2 = MachineReady.findOne({machineId: machineId}).omms;
+            const result2 = MachineReady.findOne({machineId: machineId}).omms;
             Session.set('omms', result2);
             if(result2) {
                 return "OMM's successfull saved";
@@ -227,7 +166,71 @@ Template.joinPdiMachine.helpers({
         if (failure === selectedFailure) {
             return "selected";
         }
-    }
+    },
+
+    battSaved: function() {
+        try {
+            Session.set('batteries', '');
+            const machineId = Session.get('selectedPdiMachineNr');
+            if(machineId) {
+                const result = MachineReady.findOne({machineId: machineId}).batteries;
+                Session.set('batteries', result);
+                if (result) {
+                    return "Battery successfull saved";
+                } else {
+                    return "Error, Battery not saved";
+                }
+            }
+        } catch (e) {}
+    },
+
+    battC13CCA: () => {
+        try {
+            return Session.get('batteries').battC13CCA;
+        } catch (e) {}
+    },
+
+    battC13Volt: () => {
+        try {
+            return Session.get('batteries').battC13Volt;
+        } catch (e) {}
+    },
+
+    mtuG001CCA: () => {
+        try {
+            return Session.get('batteries').mtuG001CCA;
+        } catch (e) {}
+    },
+
+    mtuG001Volt: () => {
+        try {
+            return Session.get('batteries').mtuG001Volt;
+        } catch (e) {}
+    },
+
+    mtuG005CCA: () => {
+        try {
+            return Session.get('batteries').mtuG005CCA;
+        } catch (e) {}
+    },
+
+    mtuG005Volt: () => {
+        try {
+            return Session.get('batteries').mtuG005Volt;
+        } catch (e) {}
+    },
+
+    mtuG004CCA: () => {
+        try {
+            return Session.get('batteries').mtuG004CCA;
+        } catch (e) {}
+    },
+
+    mtuG004Volt: () => {
+        try {
+            return Session.get('batteries').mtuG004Volt;
+        } catch (e) {}
+    },
 
 });
 
