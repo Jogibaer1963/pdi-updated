@@ -48,7 +48,7 @@ Template.pdiCrewHome.helpers({
         let newIssuesFound = [];
         const machineToRepair = Session.get('selectedMachineId');
         if (machineToRepair) {
-            newIssuesFound = MachineReady.findOne({_id: machineToRepair}).newIssues;
+          newIssuesFound = MachineReady.findOne({_id: machineToRepair}).newIssues;
         }
         newIssuesFound.forEach((element) => {
             element.pictureLocation = repairInfos + element.pictureLocation;

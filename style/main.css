@@ -790,14 +790,16 @@ table.pdiTable {
   position: relative;
   top: -20em; }
 
-.variantVisible {
+.variant-visibility {
+  width: 15em;
   text-align: center; }
 
-.updateVariantViewer {
-  left: 50em;
-  position: relative;
-  top: 2em;
-  width: 12em; }
+.variant-visible {
+  text-align: center;
+  min-width: 90px; }
+
+.variant-hidden {
+  text-align: center; }
 
 .addPicToVariant {
   left: 50em;
@@ -805,13 +807,8 @@ table.pdiTable {
   top: 4em;
   width: 12em; }
 
-.loadVariantPic {
-  left: 50em;
-  position: relative;
-  top: 5em; }
-
 .submit-pic {
-  left: 20em;
+  left: 55em;
   position: absolute;
   top: 20em; }
 

@@ -5,9 +5,13 @@ Template.joinPdiMachine.helpers({
             const user = Meteor.user().username;
             Session.set('currentLoggedInUser', user);
             Session.set('selectedPdiMachineId', localStorage.getItem('joinMachine'));
+            Session.set('selectedPdiMachineNr', localStorage.getItem('pdiMachineNr'));
             const selectedPdiMachineId = Session.get('selectedPdiMachineId');
             const pdiMachine = MachineReady.findOne({_id: selectedPdiMachineId});
+            Session.set('pdiMachine', pdiMachine);
             let machineId = pdiMachine.machineId;
+            let omms = pdiMachine.omms;
+            Session.set('omms', omms);
             let pdiPerformer = pdiMachine.pdiPerformer
             Session.set('selectedPdiMachineNr', machineId);
             Meteor.call('coAuditor', machineId, user);
@@ -35,16 +39,17 @@ Template.joinPdiMachine.helpers({
 
     ommSaved: function() {
         try {
-            Session.set('selectedPdiMachineNr', localStorage.getItem('pdiMachineNr'));
-            const machineId = Session.get('selectedPdiMachineNr');
-            const result2 = MachineReady.findOne({machineId: machineId}).omms;
-            Session.set('omms', result2);
-            if(result2) {
-                return "OMM's successfull saved";
+            const result = Session.get('pdiMachine');
+            let omms = result.omms;
+            Session.set('omms', omms);
+            if(omms) {
+                return "OMM's successfully saved";
             } else {
                 return "Error, OMM not saved";
             }
-        } catch (e) {}
+        } catch (e) {
+            console.log('error ', e)
+        }
     },
 
     fuelStart: () => {
@@ -109,17 +114,15 @@ Template.joinPdiMachine.helpers({
 
     machineConfig: function() {
         try {
-            Session.set('selectedPdiMachineNr', localStorage.getItem('pdiMachineNr'));
-            const machineId = Session.get('selectedPdiMachineNr');
-           return MachineReady.findOne({machineId: machineId}).machineConfig;
+           const result = Session.get('pdiMachine');
+           return result.machineConfig;
         }  catch (e) {}
     },
 
     checkList: function() {
         try {
-            Session.set('selectedPdiMachineNr', localStorage.getItem('pdiMachineNr'));
-            const machineId = Session.get('selectedPdiMachineNr');
-           return MachineReady.findOne({machineId: machineId}).checkList;
+            const result = Session.get('pdiMachine');
+            return result.checkList;
         }  catch (e) {}
     },
 
@@ -170,18 +173,16 @@ Template.joinPdiMachine.helpers({
 
     battSaved: function() {
         try {
-            Session.set('batteries', '');
-            const machineId = Session.get('selectedPdiMachineNr');
-            if(machineId) {
-                const result = MachineReady.findOne({machineId: machineId}).batteries;
-                Session.set('batteries', result);
-                if (result) {
-                    return "Battery successfull saved";
-                } else {
-                    return "Error, Battery not saved";
-                }
+            const result = Session.get('pdiMachine');
+            let batteries = result.batteries;
+            Session.set('batteries', batteries);
+            if (batteries) {
+                return "Battery successfully saved";
+            } else {
+                return "Error, Battery not saved";
             }
-        } catch (e) {}
+            } catch (e) {
+              }
     },
 
     battC13CCA: () => {

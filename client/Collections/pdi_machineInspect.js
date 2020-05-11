@@ -65,7 +65,7 @@ Meteor.subscribe('oms');
                 const result = MachineReady.findOne({machineId: machineId}).omms;
                 Session.set('omms', result);
                 if(result) {
-                    return "OMM's successfull saved";
+                    return "OMM's successfully saved";
                 } else {
                     return "Error, OMM not saved";
                 }
@@ -75,6 +75,7 @@ Meteor.subscribe('oms');
 
         fuelStart: () => {
             try {
+
                 return Session.get('omms').fuelStart;
             } catch (e) {}
         },

@@ -12,44 +12,77 @@ Meteor.subscribe("variants_C87");
            let type = Session.get('variantType');
            switch(type) {
                case 1:
-                   let variant_C77 = variants_C77.find({}, {sort: {variant: 1}});
-                   let variant_C77_length = variants_C77.find().count();
-                   Session.set('variant-C77-count', variant_C77_length);
+                   let variant_C77 = [];
+                   variant_C77 = variants_C77.find({}, {sort: {variant: 1}}).fetch();
+                   variant_C77.forEach((element) => {
+                       element.imagePath = Session.get('configInfos') + element.imagePath
+                   });
                    return variant_C77;
                case 2:
-                  let variant_C78 = variants_C78.find({}, {sort: {variant: 1}});
-                   let variant_C78_length = variants_C78.find().count();
-                   Session.set('variant-C78-count', variant_C78_length);
+                   let variant_C78 = [];
+                   variant_C78 = variants_C78.find({}, {sort: {variant: 1}}).fetch();
+                   variant_C78.forEach((element) => {
+                       element.imagePath = Session.get('configInfos') + element.imagePath
+                   });
                    return variant_C78;
                case 3:
-                   let variant_C79 = variants_C79.find({}, {sort: {variant: 1}});
-                   let variant_C79_length = variants_C79.find().count();
-                   Session.set('variant-C79-count', variant_C79_length);
+                   let variant_C79 = [];
+                   variant_C79 = variants_C79.find({}, {sort: {variant: 1}}).fetch();
+                   variant_C79.forEach((element) => {
+                       element.imagePath = Session.get('configInfos') + element.imagePath
+                   });
                    return variant_C79;
                case 4:
-                   let variant_C87 = variants_C87.find({}, {sort: {variant: 1}});
-                   let variant_C87_length = variants_C87.find().count();
-                   Session.set('variant-C87-count', variant_C87_length);
+                   let variant_C87 = [];
+                   variant_C87 = variants_C87.find({}, {sort: {variant: 1}}).fetch();
+                //   let variant_C87_length = variants_C87.find().count();
+                //   Session.set('variant-C87-count', variant_C87_length);
+                   variant_C87.forEach((element) => {
+                       element.imagePath = Session.get('configInfos') + element.imagePath
+                   });
                    return variant_C87;
                case 5:
-                  let variant_C88 = variants_C88.find({}, {sort: {variant: 1}});
-                   let variant_C88_length = variants_C88.find().count();
-                   Session.set('variant-C88-count', variant_C88_length);
+                   let variant_C88 = [];
+                   variant_C88 = variants_C88.find({}, {sort: {variant: 1}}).fetch();
+                  // let variant_C88_length = variants_C88.find().count();
+                  // Session.set('variant-C88-count', variant_C88_length);
+                   variant_C88.forEach((element) => {
+                       element.imagePath = Session.get('configInfos') + element.imagePath
+                   });
                    return variant_C88;
                case 6:
-                   let variant_C89 = variants_C89.find({}, {sort: {variant: 1}});
-                   let variant_C89_length = variants_C89.find().count();
-                   Session.set('variant-C89-count', variant_C89_length);
+                   let variant_C89 = [];
+                   variant_C89 = variants_C89.find({}, {sort: {variant: 1}}).fetch();
+                 //  let variant_C89_length = variants_C89.find().count();
+                 //  Session.set('variant-C89-count', variant_C89_length);
+                   variant_C89.forEach((element) => {
+                      element.imagePath = Session.get('configInfos') + element.imagePath
+                   });
+
                    return variant_C89;
            }
         },
 
+        'selectedClass': function () {
+            const selected = this._id;
+            const selectedVariant = Session.get('selectedVariant');
+            if (selected === selectedVariant) {
+                return "selected";
+            }
+        },
 
 
     });
 
 
+
     Template.variantsViewer.events({
+
+        'click .openInspections': function (e) {
+            e.preventDefault();
+            const selectedVariant = this._id;
+            Session.set('selectedVariant', selectedVariant);
+        },
 
         'change .loadVariant': (e) => {
             // upload from SAP:
@@ -105,70 +138,30 @@ Meteor.subscribe("variants_C87");
             Session.set('variantType', 6);
         },
 
-
-        'click .submitViewer': (e) => {
-          e.preventDefault();
-          let variantCount = '';
-          let variantChosen = Session.get('variantType');
-          if (variantChosen === 1) {
-              variantCount = Session.get('variant-C77-count')
-          } else if (variantChosen === 2) {
-              variantCount = Session.get('variant-C78-count')
-          } else if (variantChosen === 3) {
-              variantCount = Session.get('variant-C79-count')
-          } else if (variantChosen === 4) {
-              variantCount = Session.get('variant-C87-count')
-          } else if (variantChosen === 5) {
-              variantCount = Session.get('variant-C88-count')
-          } else if (variantChosen === 6) {
-              variantCount = Session.get('variant-C89-count')
-          }
-          const variantVisible = [];
-          $('input[name=visible]:checked').each(function() {
-              variantVisible.push($(this).val());
-          });
-          Meteor.call('visibleVariants', variantChosen, variantVisible);
-      //    var variantCount = Session.get('variant-C77-count');
-          for (let i = 0; i <= variantCount - 1; i++) {
-              visible[i].checked= false;
-          }
-        },
-
-
-            'click .submitPic': function(event) {
-                event.preventDefault();
-                console.log('inside');
-                const variantImage = [];
-                $('input[name=visible]:checked').each(function() {
-                    variantImage.push($(this).val());
-                });
-                console.log(variantImage);
-
-                /*
-                let files = event.target.file;
-                console.log(files);
-                for (let i = 0, ln = files.length; i < ln; i++) {
-                    Images.insert(files[i], function (err, fileObj) {
-                        // Inserted new doc with ID fileObj._id, and kicked off the data upload using HTTP
-                    });
-                }
-
-                 */
-            },
-
-        'change .loadVariantPic': (e) => {
+        'click .variant-visible': function(e) {
             e.preventDefault();
-            const file = e.target.files[0];
-            console.log(files);
-            for (let i = 0, ln = files.length; i < ln; i++) {
-                Images.insert(files[i], function (err, fileObj) {
-                    // Inserted new doc with ID fileObj._id, and kicked off the data upload using HTTP
+            let newStatus = '';
+            if(this.status === 0) {
+                newStatus = 1;
+            } else {
+                newStatus = 0;
+            }
+            let variantType = Session.get('variantType');
+            Meteor.call('toggleVariant',variantType ,this._id ,newStatus)
+        },
+/*
+        'change input': function(ev) {
+            const selectedVariant = Session.get('selectedVariant');
+            if(selectedVariant) {
+                _.each(ev.target.files, function(file) {
+                    Meteor.saveVariant(file, file.name);
                 });
+            } else {
+
             }
         }
 
-
-
+ */
 
     });
 

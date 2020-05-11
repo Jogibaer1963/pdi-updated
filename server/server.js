@@ -553,32 +553,24 @@ if(Meteor.isServer){
                 {$set: {config: configArray, configStatus: 1}});
         },
 
-        'visibleVariants': function(variantChosen, variantVisible ) {
+
+        'toggleVariant': function(variantType, id, toggle) {
             let variantToChange = '';
-            if (variantChosen === 1) {
-                    variantToChange = 'variants_' + 'C77';
-                } else if (variantChosen === 2) {
-                    variantToChange = 'variants_' + 'C78';
-                } else if (variantChosen === 3) {
-                    variantToChange = 'variants_' + 'C79';
-                } else if (variantChosen === 4) {
-                    variantToChange = 'variants_' + 'C87';
-                } else if (variantChosen === 5) {
-                    variantToChange = 'variants_' + 'C88';
-                } else if (variantChosen === 6) {
-                    variantToChange = 'variants_' + 'C89';
-                }
-            variantVisible.forEach((id) => {
-             let statusVariant =  Mongo.Collection.get(variantToChange).findOne({_id: id}, {fields: {status: 1}}).status;
-                if (statusVariant === 0) {
-                     Mongo.Collection.get(variantToChange).update({_id: id}, {$set: {status: 1}});
-                } else if (statusVariant === 1) {
-                      Mongo.Collection.get(variantToChange).update({_id: id}, {$set: {status: 0}});
-                }
-            })
+            if (variantType === 1) {
+              variantToChange = 'variants_' + 'C77';
+            } else if (variantType === 2) {
+              variantToChange = 'variants_' + 'C78';
+            } else if (variantType === 3) {
+              variantToChange = 'variants_' + 'C79';
+            } else if (variantType === 4) {
+              variantToChange = 'variants_' + 'C87';
+            } else if (variantType === 5) {
+              variantToChange = 'variants_' + 'C88';
+            } else if (variantType === 6) {
+              variantToChange = 'variants_' + 'C89';
+            }
+            Mongo.Collection.get(variantToChange).update({_id: id}, {$set: {status: toggle}});
         },
-
-
 
 
 //----------------------------------------------------------- Fuel control ------------------------------------------------------------------
@@ -1353,8 +1345,33 @@ if(Meteor.isServer){
                 {$set: {'newIssues.$.pictureLocation': name,
                         'newIssues.$.pictureUploaded': 'Image Up'
                         }})
-        }
+        },
+/*
+        saveVariant: function(blob, name, path, encoding, failureId, selectedPdiMachineId) {
+            path = '/files/repair-items/';
+            encoding = encoding || 'binary';
+            name = failureId + '.JPG';
+            let fs = Npm.require('fs');
+            fs.writeFile(path + name, blob, encoding, function(err) {
+                if (err) {
+                    throw (new Meteor.Error(500, 'Failed to save file.', err));
+                } else {
+                    // console.log('The file ' + name + ' (' + encoding + ') was saved to ' + path);
+                }
+            });
+            console.log(name);
+            MachineReady.update({_id: selectedPdiMachineId, 'newIssues._id': failureId},
+                {$set: {'newIssues.$.pictureLocation': name,
+                        'newIssues.$.pictureUploaded': 'Image Up'
+                    }})
+        },
+
+ */
+
+
     });
+
+
 
 
  }

@@ -48,7 +48,8 @@
             <th class="userLastLogin"><strong>Variant</strong></th>
             <th class="pdiVariantDescription"><strong>Description</strong></th>
             <th class="pdiShipDate"><strong>Last Update</strong></th>
-            <th class="pdiShipDate"><strong>Visibility</strong></th>
+            <th class="pdiShipDate"><strong>Info</strong></th>
+            <th class="variant-visibility"><strong>Visibility</strong></th>
         </tr>
         </thead>
         <tbody>
@@ -63,10 +64,13 @@
                 <td class="pdiShipDate {{variantVisible status}}"
                     style="background-color:{{variantVisible status}};
                             color:{{variantVisible status}}"><strong>{{dateLoaded}}</strong></td>
-                <td class="variantVisible pdiShipDate">
-                    <label>
-                        <input class="rTableStyle" type="checkbox" name="visible" id="visible"  value="{{_id}}">
-                    </label>
+                <td class="pdiShipDate"><a target="blank" href={{imagePath}}>
+                    <img class="" src={{imagePath}}
+                         onerror="this.src='noPicture.JPG'"
+                         alt="No Picture">
+                </a></td>
+                <td class="variant-visible">
+                    <button class="btn btn-default btn-info btn-sm">visible / hide</button>
                 </td>
             </tr>
         {{/each}}
@@ -74,10 +78,10 @@
     </table>
 </div>
     <div  class="submit-pic">
-        <form class="submitViewer">
-            <button class="btn btn-default btn-success updateVariantViewer" >Update visible Variant</button>
+        <h3>Upload image for Variant Info</h3>
+        <form>
+            <label for="img">Select image:</label>
+            <input class="btn btn-default btn-info" id="img" name="img" accept="image/*" type="file">
         </form>
-            <h3>Choose Image and Upload</h3>
-            <input class="loadVariantPic" type="file" id="variantPic" name="variantPic[]">
     </div>
 </template>
