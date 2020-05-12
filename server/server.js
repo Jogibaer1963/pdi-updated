@@ -115,8 +115,8 @@ if(Meteor.isServer){
             return dropDownHistoricMachines.find();
         });
 
-        Meteor.publish("specialPdiItems", function() {
-            return specialPdiItems.find();
+        Meteor.publish("specialItems", function() {
+            return specialItems.find();
         });
 
         Meteor.publish("images", function() {
@@ -140,6 +140,7 @@ if(Meteor.isServer){
 
 
     Meteor.methods({
+
 
         'coaDate': (machineId, coaDate) => {
             MachineReady.upsert({machineId: machineId}, {$set: {coaDate: coaDate}});
@@ -998,6 +999,7 @@ if(Meteor.isServer){
 
         'fuelAfterPdi': function(selectedPdiMachine, selectedPdiMachineNr, fuelAfter) {
             MachineReady.update({_id: selectedPdiMachine}, {$set: {fuelAfter: fuelAfter, pdiStatus: 1}});
+            specialItems.update({_id: "MKpYD4zoQDZ7rbS8g"}, {$inc: {pdiFinished: 1, pdiLeft: -1}})
             let result = siList.find({machineNr: selectedPdiMachineNr}).fetch();
             if(result) {
                 for(let i=0; i<result.length; i++) {
@@ -1006,6 +1008,13 @@ if(Meteor.isServer){
                     siList.remove({_id: removeId});
                 }
             }
+        },
+
+        'setGoal': function(goal) {
+            let setGoal = parseInt(goal);
+            specialItems.update({_id: "MKpYD4zoQDZ7rbS8g"}, {$set: {pdiWeekGoal: setGoal,
+                                                                                    pdiFinished: 0,
+                                                                                     pdiLeft: setGoal}})
         },
 
         //---------------------------------------------  other PDI operations ------------------------------------------------------

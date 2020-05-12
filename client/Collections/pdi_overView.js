@@ -1,5 +1,6 @@
 
     Meteor.subscribe("fuelAverage");
+    Meteor.subscribe("specialItems")
     Session.set('status', 0);
 
 
@@ -24,9 +25,15 @@
         },
 
         countPdi: function() {
-            return MachineReady.find({$or:[{pdiStatus: 0},{pdiStatus: 2}]}, {sort: {date: 1}}) .count();
+            return MachineReady.find({$or:[{pdiStatus: 0},{pdiStatus: 2}]}, {sort: {date: 1}}).count();
         },
 
+        countPdiDone: () => {
+            let result = specialItems.find({}).fetch();
+            return result[0];
+        },
+
+/*
         countConsumption: function () {
             const average = fuelAverage.findOne({});
             if(average === undefined) {
@@ -37,6 +44,13 @@
                 return number = (sum / average.consumption.length).toFixed(2);
             }
         }
+
+ */
+
+
+
+
+
         });
 
     Template.inspection.events({
@@ -134,6 +148,14 @@
     });
 
 
+Template.goal.events({
 
+   'submit .weeklyGoal': function(e) {
+       e.preventDefault();
+       let goal = e.target.setNewGoal.value;
+       Meteor.call('setGoal', goal);
+   }
+
+});
 
 

@@ -724,13 +724,18 @@ tbody.pdiCheckList {
   font-weight: bold;
   font-size: 16px; }
 
+.setWeeklyGoal {
+  position: absolute;
+  left: 25em;
+  top: 11em; }
+
 #logo {
   position: absolute;
   top: 25px; }
 
 .overviewHeader {
   position: absolute;
-  top: 150px;
+  top: 120px;
   font-size: 25px;
   margin-left: 25px; }
 
