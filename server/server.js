@@ -1361,28 +1361,6 @@ if(Meteor.isServer){
                         'newIssues.$.pictureUploaded': 'Image Up'
                         }})
         },
-/*
-        saveVariant: function(blob, name, path, encoding, failureId, selectedPdiMachineId) {
-            path = '/files/repair-items/';
-            encoding = encoding || 'binary';
-            name = failureId + '.JPG';
-            let fs = Npm.require('fs');
-            fs.writeFile(path + name, blob, encoding, function(err) {
-                if (err) {
-                    throw (new Meteor.Error(500, 'Failed to save file.', err));
-                } else {
-                    // console.log('The file ' + name + ' (' + encoding + ') was saved to ' + path);
-                }
-            });
-            console.log(name);
-            MachineReady.update({_id: selectedPdiMachineId, 'newIssues._id': failureId},
-                {$set: {'newIssues.$.pictureLocation': name,
-                        'newIssues.$.pictureUploaded': 'Image Up'
-                    }})
-        },
-
- */
-
 
     });
 
