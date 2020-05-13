@@ -13,7 +13,7 @@ table.upComingTable {
 table.repairTable {
   position: absolute;
   margin-left: 35px;
-  top: 20em;
+  top: 22em;
   width: 960px;
 }
 
@@ -25,7 +25,7 @@ table.issueTable {
   position: absolute;
   top: 13em;
   left: 49.3em;
-  width: 533px;
+  width: 400px;
 }
 
 tbody.newIssueTableHeight {
@@ -34,14 +34,24 @@ tbody.newIssueTableHeight {
 
 .addIssueToList {
   position: absolute;
-  top: 15em;
-  left: 90em;
+  top: 13em;
+  left: 80em;
+}
+
+.add-pdi-comment {
+  max-width: 300px;
+}
+
+.reActivateRepair {
+  position: absolute;
+  top: 19em;
+  left: 52em;
 }
 
 .issueHeader {
   position: absolute;
   top: 11em;
-  left: 60em;
+  left: 50em;
 }
 
 .machineHours {
@@ -103,8 +113,8 @@ tbody.newIssueTableHeight {
 
 .kitListButton {
   position: absolute;
-  top: 20em;
-  left: 88em;
+  top: 22em;
+  left: 82em;
 }
 
 .btn-warning {

@@ -999,7 +999,7 @@ if(Meteor.isServer){
 
         'fuelAfterPdi': function(selectedPdiMachine, selectedPdiMachineNr, fuelAfter) {
             MachineReady.update({_id: selectedPdiMachine}, {$set: {fuelAfter: fuelAfter, pdiStatus: 1}});
-            specialItems.update({_id: "MKpYD4zoQDZ7rbS8g"}, {$inc: {pdiFinished: 1, pdiLeft: -1}})
+            specialItems.update({}, {$inc: {pdiFinished: 1, pdiLeft: -1}})
             let result = siList.find({machineNr: selectedPdiMachineNr}).fetch();
             if(result) {
                 for(let i=0; i<result.length; i++) {
@@ -1012,7 +1012,7 @@ if(Meteor.isServer){
 
         'setGoal': function(goal) {
             let setGoal = parseInt(goal);
-            specialItems.update({_id: "MKpYD4zoQDZ7rbS8g"}, {$set: {pdiWeekGoal: setGoal,
+            specialItems.update({}, {$set: {pdiWeekGoal: setGoal,
                                                                                     pdiFinished: 0,
                                                                                      pdiLeft: setGoal}})
         },
@@ -1204,6 +1204,12 @@ if(Meteor.isServer){
         },
 
     // ------------------------------------------- Repair ------------------------------------------------
+
+        'reActivate': (machineNumber) => {
+            MachineReady.update({machineId: machineNumber}, {$set: {repairStatus: 0}});
+        },
+
+
 
         'removeFromSiList': function (siItem) {
            siList.remove({_id: siItem});

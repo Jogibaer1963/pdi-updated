@@ -47,12 +47,12 @@
         <div class="issueHeader">
             <h4><strong>Issues added subsequent to PDI</strong></h4>
         </div>
-        <table class="blueTable issueTable" cellpadding="10">
+        <table class="blueTable issueTable">
             <tbody class="newIssueTableHeight">
             {{#each issueAdded}}
                 <tr class="addIssueToPdi {{selectedClass3}}">
-                    <td class="pdiMachineField ">{{machineId}}</td>
-                    <td class="pdiComments">{{newIssues}}</td>
+                    <td class="">{{machineId}}</td>
+                    <td class="add-pdi-comment">{{newIssues}}</td>
                 </tr>
             {{/each}}
             </tbody>
@@ -60,6 +60,13 @@
         <button type="submit" class="btn btn-info addIssueToList">Change received</button>
     </div>
 
+    <div class="reActivateRepair">
+        <form class="">
+            <label for="reActivate">Re-activate Repair</label>
+            <input type="text" name="reActivate" id="reActivate" placeholder="Machine Number">
+            <button class="btn btn-default btn-info">Submit</button>
+        </form>
+    </div>
 
     <div class="kitListButton">
         <button type="submit" class="btn btn-success addToList">Kit List printed</button>

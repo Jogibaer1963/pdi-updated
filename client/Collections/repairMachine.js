@@ -116,6 +116,16 @@ Meteor.subscribe('addIssues');
 
         },
 
+        'submit .reActivateRepair': function(e) {
+          e.preventDefault();
+          const machineNumber = e.target.reActivate.value;
+          if(machineNumber) {
+              Meteor.call('reActivate', machineNumber);
+          } else {
+
+          }
+        },
+
         'submit .repairFinnish': function (e) {
             e.preventDefault();
             const machineRepaired = Session.get('selectedMachineId');
