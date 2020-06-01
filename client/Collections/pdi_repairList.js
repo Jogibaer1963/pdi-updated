@@ -98,6 +98,25 @@ Session.set('selectedPreMachine', '');
 
     Template.pdiInspectList.helpers({
 
+        ommAndBatt: function () {
+            let returnArray = [];
+            let pdiMachine = Session.get('selectedPdiMachine');
+            let year = Session.get('year');
+            try {
+                if (year === 'Pre Series') {
+                    return preSeriesMachine.find({_id: pdiMachine});
+                } else {
+                    let result = MachineReady.find({_id: pdiMachine}).fetch();
+                    let omms = result[0].omms;
+                    let batteries = result[0].batteries;
+                    let newResult = Object.assign(omms, batteries);
+                    returnArray.push(newResult);
+                }
+            } catch {}
+            console.log(returnArray);
+            return returnArray;
+        },
+
         listContent: function() {
             let repairInfos = Session.get('repairInfos');
             const pdiMachine = Session.get('selectedPdiMachine');

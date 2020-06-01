@@ -1,10 +1,29 @@
 <template name="analyzing">
+    {{> analyzingNav}}
+    <div>
+        {{> firstAnalyzing}}
+    </div>
     <head>
         <meta charset="UTF-8">
         <title>Analyze</title>
     </head>
     <body>
-    <h1>Access Denied !!</h1>
+    <h1>Soon available</h1>
     </body>
+</template>
+
+<template name="firstAnalyzing">
+
+<table>
+    <tbody>
+    {{#each allIssues}}
+        <tr class="">
+            <td class="pdiMachineField">{{_id}}</td>
+            <td class="">{{errorDescription}}</td>
+        </tr>
+    {{/each}}
+    </tbody>
+    </table>
+
 
 </template>

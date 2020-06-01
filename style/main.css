@@ -961,12 +961,12 @@ table.newIssuesTable {
 .add-image-to-repair {
   left: 37em;
   position: absolute;
-  top: 213em; }
+  top: 183em; }
 
 .pdi-repair {
   position: absolute;
-  left: 34em;
-  top: 220em; }
+  left: 34.5em;
+  top: 190em; }
 
 .pdiNewIssue {
   width: 371px; }
@@ -1131,6 +1131,14 @@ table.printTableWidth {
   position: absolute;
   left: 40em;
   top: 20em; }
+
+table.issue-list {
+  width: 530px;
+  height: 60px; }
+
+.image-box-thumb {
+  width: 100px;
+  height: 100px; }
 
 .itemHeadLiner {
   position: relative;

@@ -141,6 +141,33 @@ if(Meteor.isServer){
 
     Meteor.methods({
 
+        'removeMachines': () => {
+          let result = MachineReady.find({}).fetch();
+          result.forEach((element) => {
+                  console.log(element._id, element.machineId);
+          })
+        },
+
+
+        'machines': () => {
+         let result = MachineReady.find().fetch();
+         const issueArray = [];
+         let machine = '';
+         result.forEach((element) => {
+             if (element.machineId > "C8800022" && element.machineId < "C8800058") {
+                 if (element.omms) {
+                     machine = {machine: element.machineId,
+                     pdi: element.pdiStatus,
+                     shipped: element.shipStatus};
+                     let newObject = Object.assign(machine, element.omms);
+                     issueArray.push(newObject);
+                    }
+             }
+         })
+       return(issueArray);
+        },
+
+
 
         'coaDate': (machineId, coaDate) => {
             MachineReady.upsert({machineId: machineId}, {$set: {coaDate: coaDate}});
@@ -927,7 +954,7 @@ if(Meteor.isServer){
                 let uniqueId= Random.id();
                    variantMachine[i] = variantMarker;
                    let match = variantMD.indexOf(variantMachine[i]);
-                   if (match >= 1) {
+                   if (match >= 0) {
                        configStyle[match] = {
                            _id: uniqueId,
                            'config': variantMD[match],
@@ -1335,7 +1362,6 @@ if(Meteor.isServer){
                     kit: newShippingKit,
                     machineReturn: newShippingReturns,
                     shippingComment: newShippingComment}
-
                 });
         },
 
@@ -1357,15 +1383,12 @@ if(Meteor.isServer){
             });
             console.log(name);
             MachineReady.update({_id: selectedPdiMachineId, 'newIssues._id': failureId},
-                {$set: {'newIssues.$.pictureLocation': name,
-                        'newIssues.$.pictureUploaded': 'Image Up'
-                        }})
+                                            {$set: {'newIssues.$.pictureLocation': name,
+                                                    'newIssues.$.pictureUploaded': 'Image Up'
+                                                    }})
         },
 
     });
-
-
-
 
  }
 

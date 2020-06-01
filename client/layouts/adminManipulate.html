@@ -1,0 +1,32 @@
+<template name="manipulateData">
+    {{#if currentUser}}
+          {{> topAdminNav2}}
+            {{> dataBrowser}}
+        {{else}}
+            {{> login}}
+    {{/if }}
+</template>
+
+<template name="topAdminNav2">
+    <div id="logo">
+        <img src="claas_logo.png" />
+    </div>
+    <div class="topNav">
+        <nav>
+            <a class="btn"  href="/adminNewUser">New User</a>
+            <a>|</a>
+            <a class="btn"  href="/adminFiscalYear">Change Fiscal Year</a>
+            <a>|</a>
+            <a  class="btn" href="/overViewUser">Over View</a>
+            <a>|</a>
+            <a  class="btn" href="http://10.40.1.47:3100/admin">Commission</a>
+        </nav>
+    </div>
+</template>
+
+<template name="dataBrowser">
+<h2>Coming soon</h2>
+
+
+
+</template>

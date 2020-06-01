@@ -1,27 +1,35 @@
 <template name="admin">
 {{#if currentUser}}
+        {{> topAdminNav}}
         {{> adminViewUser}}
 {{else}}
     {{> login}}
 {{/if}}
 </template>
 
-<template name="adminViewUser">
+<template name="topAdminNav">
     <div id="logo">
         <img src="claas_logo.png" />
     </div>
     <div class="topNav">
         <nav>
+            <a  class="btn" href="/overViewUser">Over View</a>
+            <a>|</a>
             <a class="btn"  href="/adminNewUser">New User</a>
             <a>|</a>
             <a class="btn"  href="/adminFiscalYear">Change Fiscal Year</a>
             <a>|</a>
-            <a class="btn" href="/manipulateDatabase" disabled>Manipulate Database</a>
-            <a>|</a>
-            <a  class="btn" href="/overViewUser">Over View</a>
+            <a class="btn"  href="/manipulateData">Update Database</a>
             <a>|</a>
             <a  class="btn" href="http://10.40.1.47:3100/admin">Commission</a>
         </nav>
+    </div>
+</template>
+
+<template name="adminViewUser">
+    <div>
+        <button type="button" class="btn btn-default btn-danger dataRemove"
+                style="position: absolute; left: 40em; top: 5em" disabled>Data</button>
     </div>
     <div class="totalUsers">
         <h2>Users Total: {{usersTotal}}</h2>

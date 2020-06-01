@@ -379,6 +379,8 @@ Template.joinPdiMachine.events({
         }
         event.target.addIssue.value = '';
         Session.set('componentChosen', 0);
+        Session.set('selectedComponent', '');
+        Session.set('issueComp', '');
     },
 
     'click .submitButton1': (e) => {
