@@ -102,8 +102,9 @@
 
         'click .machineSkipPdi': function (e) {
             e.preventDefault();
+            const user = Meteor.user().username;
             const pdiMachineId = Session.get('selectedPdiMachine');
-            Meteor.call('skipPdi', pdiMachineId);
+            Meteor.call('skipPdi', pdiMachineId, user);
         },
 
         'click .resumePdi': function (e) {

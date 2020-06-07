@@ -98,15 +98,37 @@ Session.set('selectedPreMachine', '');
 
     Template.pdiInspectList.helpers({
 
+        pdiDate: function() {
+            let minutesNew = '';
+            try {
+            let pdiMachine = Session.get('result');
+            let current_datetime = pdiMachine[0].startPdiDate;
+            let current_minutes = current_datetime.getMinutes();
+            if (current_minutes < 10) {
+                minutesNew = '0' + current_minutes;
+            } else {
+                 minutesNew = current_minutes;
+            }
+             return current_datetime.getFullYear() + "-" +
+                             (current_datetime.getMonth() + 1) + "-" +
+                             current_datetime.getDate() + " " +
+                             current_datetime.getHours() + ":" +
+                             minutesNew;
+            } catch {}
+        },
+
         ommAndBatt: function () {
             let returnArray = [];
             let pdiMachine = Session.get('selectedPdiMachine');
             let year = Session.get('year');
             try {
                 if (year === 'Pre Series') {
-                    return preSeriesMachine.find({_id: pdiMachine});
+                    let result = preSeriesMachine.find({_id: pdiMachine});
+                    Session.set('result', result);
+                    return result;
                 } else {
                     let result = MachineReady.find({_id: pdiMachine}).fetch();
+                    Session.set('result', result);
                     let omms = result[0].omms;
                     let batteries = result[0].batteries;
                     let newResult = Object.assign(omms, batteries);
@@ -117,13 +139,15 @@ Session.set('selectedPreMachine', '');
             return returnArray;
         },
 
+
+
         listContent: function() {
             let repairInfos = Session.get('repairInfos');
-            const pdiMachine = Session.get('selectedPdiMachine');
+            const pdiMachine = Session.get('result');
             let newIssuesFound = [];
             try {
                 if (pdiMachine) {
-                    newIssuesFound = MachineReady.findOne({_id: pdiMachine}).newIssues;
+                    newIssuesFound = pdiMachine[0].newIssues;
                 }
                 newIssuesFound.forEach((element) => {
                     element.pictureLocation = repairInfos + element.pictureLocation;

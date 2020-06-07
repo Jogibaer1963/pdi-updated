@@ -8,22 +8,45 @@
         <title>Analyze</title>
     </head>
     <body>
-    <h1>Soon available</h1>
+    <div>
+        <br>
+        <div id="logo">
+            <img src="claas_logo.png" />
+        </div>
+    </div>
+    <br>
     </body>
 </template>
 
 <template name="firstAnalyzing">
-
-<table>
-    <tbody>
-    {{#each allIssues}}
-        <tr class="">
-            <td class="pdiMachineField">{{_id}}</td>
-            <td class="">{{errorDescription}}</td>
-        </tr>
-    {{/each}}
-    </tbody>
+   <div class="analyze-overview">
+       <h3>C8x Machines inspection completed : {{issuesCount.machineCount}}</h3>
+       <h3>Issues Found : {{issuesCount.issuesTotal}} </h3>
+   </div>
+    <div class="refresh-button">
+        <button type="button" class="btn btn-danger refreshButton">Refresh</button>
+    </div>
+    <div class="search-text">
+        <form class="searchText">
+            <label for="searchText">Search for :</label>
+            <input type="text" id="searchText" name="searchText">
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+<div class="analyze-table">
+    <table class="result-table">
+        <tbody>
+        {{#each stringSearch}}
+            <tr class="rTableRow {{selectedClass}}">
+                <td class="error-machine" >{{machineNr}}</td>
+                <td class="error-field" >{{errorDescription}}</td>
+            </tr>
+        {{/each}}
+        </tbody>
     </table>
-
+</div>
+    <div class="count-result">
+    <h4>{{countResult}} entries found.</h4>
+    </div>
 
 </template>

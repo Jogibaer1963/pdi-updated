@@ -148,24 +148,73 @@ if(Meteor.isServer){
           })
         },
 
+        'refresh': () => {
+            let i = 1;
+            let newObj = '';
+          let errorDescription = '';
+          let result = MachineReady.find().fetch();
+          result.forEach((element) => {
+              if (element.machineId > "C8800022" &&
+                  element.machineId < "C8899999" &&
+                  element.pdiStatus === 1 ||
+                  element.machineId > "C8900047" &&
+                  element.machineId < "C8999999" &&
+                  element.pdiStatus === 1) {
+                  let machineId = element.machineId;
+                  let checklist = element.checkList;
+                 // console.log(i, machineId);
+                  i++;
+                      checklist.forEach((element2) => {
+                          if (element2.checkStatus === 2) {
+                              errorDescription = element2.errorDescription
+                              let uniqueId = Random.id();
+                               newObj = {
+                                  "_id": uniqueId,
+                                  "checkStatus": true,
+                                  "errorDescription": errorDescription,
+                                  "pictureLocation": "noPicture.JPG",
+                                  "pictureUploaded": "No Image",
+                                  "repairStatus": (0),
+                                  "repairTech": "",
+                                  "repairComment": "",
+                                  "repairDateTime": "",
+                                  "repairDuration": "",
+                                  "responsible": ""
+                              }
+                              MachineReady.update({machineId: machineId}, {$push: {newIssues: newObj}});
+                          }
+
+                      })
+              }
+          })
+        },
 
         'machines': () => {
          let result = MachineReady.find().fetch();
          const issueArray = [];
-         let machine = '';
-         result.forEach((element) => {
-             if (element.machineId > "C8800022" && element.machineId < "C8800058") {
-                 if (element.omms) {
-                     machine = {machine: element.machineId,
-                     pdi: element.pdiStatus,
-                     shipped: element.shipStatus};
-                     let newObject = Object.assign(machine, element.omms);
-                     issueArray.push(newObject);
-                    }
-             }
-         })
-       return(issueArray);
+          if (result) {
+             result.forEach((element) => {
+                 if (element.machineId > "C8800022" &&
+                     element.machineId < "C8899999" &&
+                     element.pdiStatus === 1 ||
+                     element.machineId > "C8900047" &&
+                     element.machineId < "C8999999" &&
+                     element.pdiStatus === 1) {
+                     let newElement = {
+                         machineId : element.machineId,
+                         pdiPerformer : element.pdiPerformer,
+                         pdiOm : element.omms,
+                         pdiBatteries : element.batteries,
+                         newIssues : element.newIssues
+                     }
+                     issueArray.push(newElement);
+                 }
+             });
+           return(issueArray);
+          }
         },
+
+
 
 
 
@@ -1054,21 +1103,30 @@ if(Meteor.isServer){
             MachineReady.update({_id:selectedCheckPoint}, {$set: {repairStatus: 0}});
         },
 
-        'skipPdi': function(pdiMachineId) {
-            MachineReady.update({_id: pdiMachineId}, {$set: {pdiStatus: 1}});
+        'skipPdi': function(pdiMachineId, user) {
+            MachineReady.update({_id: pdiMachineId}, {$set: {pdiStatus: 1,
+                                                                            checkList: [],
+                                                                            machineConfig: [],
+                                                                            pdiPerformer: user,
+                                                                            startPdiDate: '',
+                                                                            fuelStart: '',
+                                                                            newIssues: [],
+                                                                            batteries: "",
+                                                                            omms: ""
+                                                                        }});
         },
 
         'cancelPdi': function(pdiMachineId) {
             MachineReady.update({_id: pdiMachineId}, {$set: {pdiStatus: 0,
-                                                             checkList: [],
-                                                             machineConfig: [],
-                                                             pdiPerformer: '',
-                                                             startPdiDate: '',
-                                                             fuelStart: '',
-                                                             newIssues: [],
-                                                             batteries: "",
-                                                             omms: ""
-                                                     }});
+                                                                             checkList: [],
+                                                                             machineConfig: [],
+                                                                             pdiPerformer: '',
+                                                                             startPdiDate: '',
+                                                                             fuelStart: '',
+                                                                             newIssues: [],
+                                                                             batteries: "",
+                                                                             omms: ""
+                                                                     }});
 
         },
 
@@ -1086,7 +1144,18 @@ if(Meteor.isServer){
                 {$set: {"machineConfig.$.machineConfigStatus": 2}});
             let uniqueId = Random.id();
             let addNewFailure = 'Check config ' + idFailure;
-            MachineReady.upsert({_id: machineId}, {$push: {newIssues: {_id: uniqueId, checkStatus: 2, errorDescription: addNewFailure}}});
+            MachineReady.upsert({_id: machineId}, {$push: {newIssues: {_id: uniqueId,
+                                                                                            checkStatus: true,
+                                                                                            errorDescription: addNewFailure,
+                                                                                            pictureLocation : "noPicture.JPG",
+                                                                                            pictureUploaded : "No Image",
+                                                                                            repairStatus : (0),
+                                                                                            repairTech : "",
+                                                                                            repairComment : "",
+                                                                                            repairDateTime : "",
+                                                                                            repairDuration : "",
+                                                                                            responsible : ""
+                                                                                                            }}});
         },
 
         // pdi Checklist buttons
@@ -1096,9 +1165,24 @@ if(Meteor.isServer){
                 {$set: {"checkList.$.checkStatus": 1, "checkList.$.failStatus": false}})
         },
 
-        'nokButton': (machineId, idFailure) => {
+        'nokButton': (machineId, idFailure, errorDescription) => {
+            console.log()
             MachineReady.update({_id: machineId, "checkList._id": idFailure},
-                {$set: {"checkList.$.checkStatus": 2, "checkList.$.failStatus": true}})
+                {$set: {"checkList.$.checkStatus": 2, "checkList.$.failStatus": true}});
+            let uniqueId = Random.id();
+            let addNewFailure = 'From Checklist - ' + errorDescription;
+            MachineReady.upsert({_id: machineId}, {$push: {newIssues: {_id: uniqueId,
+                                                                                        checkStatus: true,
+                                                                                        errorDescription: addNewFailure,
+                                                                                        pictureLocation : "noPicture.JPG",
+                                                                                        pictureUploaded : "No Image",
+                                                                                        repairStatus : (0),
+                                                                                        repairTech : "",
+                                                                                        repairComment : "",
+                                                                                        repairDateTime : "",
+                                                                                        repairDuration : "",
+                                                                                        responsible : ""
+                                                                                                         }}});
         },
 
         'naButton': (machineId, idFailure) => {

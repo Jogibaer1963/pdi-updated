@@ -16,13 +16,13 @@ Template.ecnPage.helpers({
 
 Template.ecnPage.events({
 
-    'submit .addNewEcn': function() {
-        event.preventDefault();
-        const newEcn = event.target.newEcn.value;
-        const ecnEffectivity = event.target.ecnEffectivity.value;
-        const machineRecording = event.target.machineRecording.checked;
-        const materialStatus = event.target.materialStatus.checked;
-        const mcoNotes = event.target.mcoNotes.value;
+    'submit .addNewEcn': function(e) {
+        e.preventDefault();
+        const newEcn = e.target.newEcn.value;
+        const ecnEffectivity = e.target.ecnEffectivity.value;
+        const machineRecording = e.target.machineRecording.checked;
+        const materialStatus = e.target.materialStatus.checked;
+        const mcoNotes = e.target.mcoNotes.value;
         const newMcoTeam= [];
         $('input[name = mco]:checked').each(function() {
             newMcoTeam.push($(this).val());

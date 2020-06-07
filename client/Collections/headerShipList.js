@@ -70,23 +70,24 @@ Template.inputHead.events({
             document.getElementById('newKit9').checked= false;
             document.getElementById('newKit10').checked= false;
             document.getElementById('newKit11').checked= false;
+            document.getElementById('newKit12').checked= false;
             event.target.newComment.value="";
         },
 
-        'click .newShippingHead': function() {
-            event.preventDefault();
+        'click .newShippingHead': function(e) {
+           e.preventDefault();
             const shippingHead = this._id;
             Session.set('selectedHead', shippingHead );
         },
 
-        'click .deleteHeader': function() {
-            event.preventDefault();
+        'click .deleteHeader': function(e) {
+            e.preventDefault();
             const selectedHead = Session.get('selectedHead');
             Meteor.call('removeHeadFromShipList', selectedHead)
         },
 
-        'click .buttonToggle': function () {
-            event.preventDefault();
+        'click .buttonToggle': function (e) {
+           e.preventDefault();
             let z = Session.get('z');
             if(z === 0) {
                 Session.set('z', 1);
@@ -103,16 +104,16 @@ Template.inputHead.events({
             }
         },
 
-        'submit .headerTruckDate': function() {
-            event.preventDefault();
+        'submit .headerTruckDate': function(e) {
+            e.preventDefault();
             const confirmedShipDate = event.target.inputDate.value;
             const truckStatus = 1;
             const machineId = Session.get('selectedHead');
             Meteor.call('headTruckOrdered', machineId, truckStatus, confirmedShipDate);
         },
 
-        'click .removeTruck': function() {
-            event.preventDefault();
+        'click .removeTruck': function(e) {
+            e.preventDefault();
             const truckStatus = 0;
             const machineId = Session.get('selectedHead');
             Meteor.call('headTruckRemoved', machineId, truckStatus);
@@ -123,8 +124,9 @@ Template.inputHead.events({
     Template.headerTrailer.helpers({
 
             availiableTrailer: function() {
-            event.preventDefault();
+            try {
             return headerTrailer.find({status: '1'});
+            } catch {}
             },
 
         'selectedClass': function() {
@@ -136,7 +138,6 @@ Template.inputHead.events({
         },
 
         trailerGone: function() {
-            event.preventDefault();
             return headerTrailer.find({status: '0'});
         },
 
@@ -150,29 +151,29 @@ Template.inputHead.events({
     });
 
     Template.headerTrailer.events({
-       'submit .newTrailerInput': function() {
-           event.preventDefault();
+       'submit .newTrailerInput': function(e) {
+           e.preventDefault();
            const headTransporter = event.target.newTransporter.value;
            const trailerId = event.target.trailerId.value;
            Meteor.call('insertHeadTrailer', headTransporter, trailerId);
-           event.target.newTransporter.value = '';
-           event.target.trailerId.value = '';
+           e.target.newTransporter.value = '';
+           e.target.trailerId.value = '';
            },
 
-        'click .trailerOnLotTable': function() {
-            event.preventDefault();
+        'click .trailerOnLotTable': function(e) {
+            e.preventDefault();
             const selectedTrailer = this._id;
             Session.set('selectedTrailer', selectedTrailer );
         },
 
-        'click .moveTrailer': function() {
-            event.preventDefault();
+        'click .moveTrailer': function(e) {
+            e.preventDefault();
             const shippingTrailer = this._id;
             Session.set('selectedTrailer', shippingTrailer);
         },
 
-        'click .trailerMove': function() {
-            event.preventDefault();
+        'click .trailerMove': function(e) {
+            e.preventDefault();
             const trailerId = Session.get('selectedTrailer');
             const status = headerTrailer.findOne({_id: trailerId}).status;
             if(status === '1') {
@@ -184,8 +185,8 @@ Template.inputHead.events({
             Session.set('selectedTrailer', '');
         },
 
-        'click .trailerDelete': function() {
-            event.preventDefault();
+        'click .trailerDelete': function(e) {
+            e.preventDefault();
             const trailerId = Session.get('selectedTrailer');
             Meteor.call('deleteTrailer', trailerId);
         }

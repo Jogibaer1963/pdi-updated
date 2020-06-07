@@ -320,8 +320,9 @@ Template.joinPdiMachine.events({
         event.preventDefault();
         const selectedPdiMachineId = Session.get('selectedPdiMachineId');
         let idFailure = event.currentTarget.id;
+        let errorDescription = event.currentTarget.name;
         if(selectedPdiMachineId) {
-            Meteor.call('nokButton', selectedPdiMachineId, idFailure);
+            Meteor.call('nokButton', selectedPdiMachineId, idFailure, errorDescription);
         } else {
             console.log("Lost Machine Number")
         }

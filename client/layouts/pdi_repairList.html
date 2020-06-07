@@ -70,35 +70,39 @@
 
     <div class="view-box">
         <div>
-            {{#each ommAndBatt}}
-                <div class="">
-                    <h3>PDI-Performer: {{user}}</h3>
+            <div class="pdi-date">
+                <h3>Pdi Date :  {{pdiDate}}</h3>
+            </div>
+                {{#each ommAndBatt}}
+                    <div class="">
+                        <h3>PDI-Performer: {{user}}</h3>
+                        <br>
+                        <h3>Operator Maintenance Manual</h3>
+                        <h4>Omm Main : {{ommMain}}</h4>
+                        <h4>Omm Supplemental : {{ommSupp}}</h4>
+                        <h4>Omm Unload : {{ommUnload}}</h4>
+                        <h4>Omm Cebis : {{ommCebis}}</h4>
+                        <h4>Omm Cebis Touch : {{ommCebisTouch}}</h4>
+                        <h4>Omm Terra Track : {{ommTerra}}</h4>
+                        <h4>Omm Dual : {{ommDuals}}</h4>
+                        <h4>Omm Profi Cam : {{ommProfiCam}}</h4>
+                        <h4>---------------------------------------------------------------------------</h4>
+                    </div>
                     <br>
-                    <h3>Operator Maintenance Manual</h3>
-                    <h4>Omm Main : {{ommMain}}</h4>
-                    <h4>Omm Supplemental : {{ommSupp}}</h4>
-                    <h4>Omm Unload : {{ommUnload}}</h4>
-                    <h4>Omm Cebis : {{ommCebis}}</h4>
-                    <h4>Omm Cebis Touch : {{ommCebisTouch}}</h4>
-                    <h4>Omm Terra Track : {{ommTerra}}</h4>
-                    <h4>Omm Dual : {{ommDuals}}</h4>
-                    <h4>Omm Profi Cam : {{ommProfiCam}}</h4>
-                    <h4>---------------------------------------------------------------------------</h4>
-                </div>
-                <br>
-                <div class="">
-                    <h3>Battery result</h3>
-                    <br>
-                    <h4>C13 {{battC13CCA}} Amp      {{battC13Volt}} Volt</h4>
-                    <h4>------------------------------------------------</h4>
-                    <h4>G001: {{mtuG001CCA}} Amp    {{mtuG001Volt}} Volt</h4>
-                    <h4>------------------------------------------------</h4>
-                    <h4>G005: {{mtuG005CCA}} Amp    {{mtuG005Volt}} Volt</h4>
-                    <h4>------------------------------------------------</h4>
-                    <h4>G004: {{mtuG004CCA}} Amp    {{mtuG004Volt}} Volt</h4>
-                </div>
-            {{/each}}
+                    <div class="">
+                        <h3>Battery result</h3>
+                        <br>
+                        <h4>C13 {{battC13CCA}} Amp      {{battC13Volt}} Volt</h4>
+                        <h4>------------------------------------------------</h4>
+                        <h4>G001: {{mtuG001CCA}} Amp    {{mtuG001Volt}} Volt</h4>
+                        <h4>------------------------------------------------</h4>
+                        <h4>G005: {{mtuG005CCA}} Amp    {{mtuG005Volt}} Volt</h4>
+                        <h4>------------------------------------------------</h4>
+                        <h4>G004: {{mtuG004CCA}} Amp    {{mtuG004Volt}} Volt</h4>
+                    </div>
+                {{/each}}
         </div>
+
         <table class="issue-list">
             <tbody>
                 {{#each listContent}}

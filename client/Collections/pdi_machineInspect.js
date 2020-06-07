@@ -358,8 +358,9 @@ Meteor.subscribe('oms');
             Session.set('selectedPdiMachineId', localStorage.getItem('pdiMachineId'));
             const selectedPdiMachineId = Session.get('selectedPdiMachineId');
             let idFailure = event.currentTarget.id;
+            let errorDescription = event.currentTarget.name;
             if(selectedPdiMachineId) {
-                Meteor.call('nokButton', selectedPdiMachineId, idFailure);
+                Meteor.call('nokButton', selectedPdiMachineId, idFailure, errorDescription);
             } else {
                 console.log("Lost Machine Number")
             }

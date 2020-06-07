@@ -96,6 +96,14 @@ if(Meteor.isClient) {
                   Session.set('kit_11', undefined);
               }
 
+          const l = myString.indexOf('B07_0051', 0);
+          if(l >= 0){
+              const kit_12 = 'B07_0051';
+              Session.set('kit_12', kit_12);
+          } else {
+              Session.set('kit_12', undefined);
+          }
+
           return newHeadYear.findOne({_id: selectedHead});
       },
 
@@ -172,6 +180,13 @@ if(Meteor.isClient) {
        'newKit11': function() {
            const kit_11 = Session.get('kit_11');
            if(kit_11 === '003_0230') {
+               return 'checked';
+           }
+       },
+
+       'newKit12': function() {
+           const kit_12 = Session.get('kit_12');
+           if(kit_12 === 'B07_0051') {
                return 'checked';
            }
        }

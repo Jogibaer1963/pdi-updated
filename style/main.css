@@ -961,12 +961,12 @@ table.newIssuesTable {
 .add-image-to-repair {
   left: 37em;
   position: absolute;
-  top: 183em; }
+  top: 210em; }
 
 .pdi-repair {
   position: absolute;
   left: 34.5em;
-  top: 190em; }
+  top: 216em; }
 
 .pdiNewIssue {
   width: 371px; }
@@ -1668,6 +1668,47 @@ table.addCheck {
 .coa-machine-date {
   left: 40em;
   position: absolute; }
+
+.analyze-overview {
+  position: absolute;
+  left: 2em;
+  top: 10em; }
+
+.refresh-button {
+  position: absolute;
+  left: 60em;
+  top: 10em; }
+
+.search-text {
+  position: absolute;
+  left: 5em;
+  top: 20em; }
+
+.analyze-table {
+  position: absolute;
+  left: 3em;
+  top: 25em; }
+
+.result-table {
+  width: 50em; }
+
+.error-head {
+  text-align: center; }
+
+.error-machine {
+  width: 10em;
+  text-align: center; }
+
+.error-field {
+  width: 30em; }
+
+td.error-machine {
+  height: 30px; }
+
+.count-result {
+  position: absolute;
+  left: 44em;
+  top: 20em; }
 
 .mainLayout {
   left: 40em;
