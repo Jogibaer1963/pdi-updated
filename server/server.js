@@ -1199,18 +1199,18 @@ if(Meteor.isServer){
         'addNewFailure': (selectedPdiMachineId, addNewFailure) => {
             let uniqueId = Random.id();
             MachineReady.upsert({_id: selectedPdiMachineId},
-                {$push: {newIssues: {_id: uniqueId,
-                                               checkStatus: true,
-                                               errorDescription: addNewFailure,
-                                               pictureLocation: 'noPicture.JPG',
-                                               pictureUploaded: 'No Image',
-                                               repairStatus: (0),
-                                               repairTech: "",
-                                               repairComment: "",
-                                               repairDateTime: "",
-                                               repairDuration: "",
-                                               responsible: ""
-                                         }}});
+                                        {$push: {newIssues: {_id: uniqueId,
+                                                                       checkStatus: true,
+                                                                       errorDescription: addNewFailure,
+                                                                       pictureLocation: 'noPicture.JPG',
+                                                                       pictureUploaded: 'No Image',
+                                                                       repairStatus: (0),
+                                                                       repairTech: "",
+                                                                       repairComment: "",
+                                                                       repairDateTime: "",
+                                                                       repairDuration: "",
+                                                                       responsible: ""
+                                                                 }}});
         },
 
         'removeFailure': (selectedPdiMachineId, openFailure) => {
