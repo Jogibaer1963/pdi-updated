@@ -319,8 +319,9 @@ Template.joinPdiMachine.events({
     'click .buttonNOK': (event) => {
         event.preventDefault();
         const selectedPdiMachineId = Session.get('selectedPdiMachineId');
-        let idFailure = event.currentTarget.id;
-        let errorDescription = event.currentTarget.name;
+        let idFailure = event.target.id;
+        let errorDescription = event.target.name;
+        console.log('error ', errorDescription);
         if(selectedPdiMachineId) {
             Meteor.call('nokButton', selectedPdiMachineId, idFailure, errorDescription);
         } else {

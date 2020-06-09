@@ -154,7 +154,11 @@ if(Meteor.isServer){
           let errorDescription = '';
           let result = MachineReady.find().fetch();
           result.forEach((element) => {
-              if (element.machineId > "C8800022" &&
+
+              if (element.machineId > "C8700000" &&
+                  element.machineId < "C8799999" &&
+                  element.pdiStatus === 1 ||
+                  element.machineId > "C8800022" &&
                   element.machineId < "C8899999" &&
                   element.pdiStatus === 1 ||
                   element.machineId > "C8900047" &&

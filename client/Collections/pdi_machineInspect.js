@@ -358,7 +358,7 @@ Meteor.subscribe('oms');
             Session.set('selectedPdiMachineId', localStorage.getItem('pdiMachineId'));
             const selectedPdiMachineId = Session.get('selectedPdiMachineId');
             let idFailure = event.currentTarget.id;
-            let errorDescription = event.currentTarget.name;
+            let errorDescription = event.target.name;
             if(selectedPdiMachineId) {
                 Meteor.call('nokButton', selectedPdiMachineId, idFailure, errorDescription);
             } else {
