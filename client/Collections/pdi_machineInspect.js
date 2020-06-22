@@ -323,10 +323,12 @@ Meteor.subscribe('oms');
 
         'click .configButtonInfo': (event) => {
             event.preventDefault();
+            let configInfos = Session.get('configInfos');
             Session.set('selectedPdiMachineId', localStorage.getItem('pdiMachineId'));
             const selectedPdiMachineId = Session.get('selectedPdiMachineId');
             let imagePathId = event.currentTarget.name;
-            Session.set('imagePathId', imagePathId);
+            let imagePath = configInfos + imagePathId;
+            Session.set('imagePathId', imagePath);
             if(selectedPdiMachineId) {
              let choice = Session.get('imageOnOff');
                 if (choice === 0) {
@@ -423,7 +425,7 @@ Meteor.subscribe('oms');
             e.preventDefault();
             let chosenFailure = Session.get('openFailure');
             if (chosenFailure) {
-                console.log('inside', chosenFailure)
+               // console.log('inside', chosenFailure)
             }
         },
 
@@ -557,6 +559,7 @@ Meteor.subscribe('oms');
         'change input': function(ev) {
             const openFailure = Session.get('openFailure');
             if(openFailure) {
+                console.log(openFailure);
                 _.each(ev.target.files, function(file) {
                     Meteor.saveFile(file, file.name);
                 });

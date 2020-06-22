@@ -71,30 +71,6 @@ if(Meteor.isServer){
             return usersProfile.find();
         });
 
-        Meteor.publish("variants_C79", function() {
-            return variants_C79.find();
-        });
-
-        Meteor.publish("variants_C78", function() {
-            return variants_C78.find();
-        });
-
-        Meteor.publish("variants_C77", function() {
-            return variants_C77.find();
-        });
-
-        Meteor.publish("variants_C89", function() {
-            return variants_C89.find();
-        });
-
-        Meteor.publish("variants_C88", function() {
-            return variants_C88.find();
-        });
-
-        Meteor.publish("variants_C87", function() {
-            return variants_C87.find();
-        });
-
         Meteor.publish("toDoMessage", function() {
             return toDoMessage.find();
         });
@@ -133,6 +109,10 @@ if(Meteor.isServer){
 
         Meteor.publish("preSeriesAddChecks", function() {
             return preSeriesAddChecks.find();
+        });
+
+        Meteor.publish("variants", function() {
+            return variants.find();
         });
     });
 
@@ -218,238 +198,10 @@ if(Meteor.isServer){
           }
         },
 
-
-
-
-
         'coaDate': (machineId, coaDate) => {
             MachineReady.upsert({machineId: machineId}, {$set: {coaDate: coaDate}});
           //  console.log(machineId);
             preSeriesMachine.upsert({preMachineId: machineId}, {$set: {coaDate: coaDate}});
-    },
-
-       'preSeriesOverView': () => {
-           const resultArray = [];
-           let resultStep1 = preSeriesMachine.find({}, {sort: {preMachineId: 1}}).fetch();
-           if (resultStep1.length === 0) {
-             //  console.log("leer");
-           } else {
-               let arrayLength = resultStep1.length;
-               for (let i = 0; i <= (arrayLength - 1); i++) {
-                   let _id = resultStep1[i]._id;
-                   let newIssuesLength = resultStep1[i].newIssues.length;
-                   let checkPointCount = resultStep1[i].checkItems.length;
-                   let machineNumber = resultStep1[i].preMachineId;
-                   let date = resultStep1[i].date;
-                   let coaDate = resultStep1[i].coaDate;
-                   let pdiStatusId = resultStep1[i].pdiStatus;
-                   let checkItemIssue = 0;
-                   for (let k = 1; k <= checkPointCount; k++) {
-                       try {
-                           if (resultStep1[i].checkItems[k].failureStatus === 2) {
-                               checkItemIssue++;
-                           }
-                       } catch (e) {
-                       }
-                   }
-                   let result = ({
-                       _id: _id,
-                       machineNumber: machineNumber,
-                       date: date,
-                       coaDate: coaDate,
-                       pdiStatusId: pdiStatusId,
-                       newIssueCount: newIssuesLength,
-                       checkPointCount: checkPointCount,
-                       checkItemIssue: checkItemIssue
-                   });
-                   resultArray.push(result);
-               }
-           }
-           return resultArray;
-       },
-
-    'preSeriesAddCheck': (addNewFailure) => {
-        preSeriesAddChecks.insert({errorDescription: addNewFailure});
-    },
-
-    //-----------------------------------------Called 1 time to generate the Checklist Data base --------------
-    'generateDataBase': () => {
-        for ( let i = 1; i <= 337; i++) {
-            let uniqueId= Random.id();
-            images.insert({
-                _id: uniqueId,
-                imagePath: "Slide"+ i + ".JPG",
-                activeStatus: 1,
-                failureStatus: 0,
-                timeOfFix: "",
-                checkedBy: "",
-                cantRepair: 0,
-                errorDescription: ""
-            });
-        }
-    },
-
-    //----------------------------------------------- Load checklist for preview or edit ------------------
-
-    'preSeriesCheckUp': () => {
-      const result = images.find().fetch();
-      console.log(result);
-    },
-
-    //----------------------------------------------- Load Pre series Machine numbers  --------------------
-
-    'enterPreMachine': (preMachine, shipDate) => {
-        preSeriesMachine.insert({preMachineId: preMachine,
-                                      date: shipDate,
-                                      pdiStatus: 0,
-                                      configStatus: 0,
-                                      user: '',
-                                      dateStart: '',
-                                      checkItems: [],
-                                      machineConfig: [],
-                                      newIssues: [],
-                                      counter: []});
-
-    },
-
-    'readPreConfig': function(machineId, configArray) {
-        preSeriesMachine.update({preMachineId: machineId},
-            {$set: {config: configArray, configStatus: 1}});
-    },
-
-    //------------------------------------------  Prepare checklist for specific Machine --------------
-
-    'prepareCheckList': (user, selectedPreMachine, dateStart) => {
-
-        let type = '';
-        let variantPreMachine = [];
-        let variantPreMD = [];
-        let variantPreItem = [];
-        let variantPrePath = [];
-        let machinePreConfiguration = [];
-        let preConfigStyle = [];
-
-        if(selectedPreMachine) {
-              let result = preSeriesMachine.findOne({_id: selectedPreMachine},
-                                                   {fields: {preMachineId: 1}}).preMachineId;
-                 type = result.slice(0,3);
-                }
-
-        // Load Type Variant
-
-        let newVariant = 'variants_' + type;
-        let variantsList = Mongo.Collection.get(newVariant).find({},
-            {fields: {status: 1, variant: 1, variantDescription: 1, image: 1}},
-            {sort: {variant: 1}}).fetch();
-
-        variantsList.forEach((variantValue, k) => {
-            if (variantValue.status === 1) {
-                     variantPreMD[k] = variantValue.variant;
-                     variantPreItem[k] = variantValue.variantDescription;
-                     variantPrePath[k] = variantValue.imagePath;
-            }
-        });
-
-        // Load Machine Configuration and select config items
-
-        let combineVariant = preSeriesMachine.find({_id: selectedPreMachine},
-                                                        {fields: {config: 1}},
-                                                        {sort: {variant: 1}}).fetch();
-        let k = (combineVariant[0]).config;
-
-        k.forEach((variantMarker, i) => {
-            let uniqueId= Random.id();
-                variantPreMachine[i] = variantMarker;
-            let match = variantPreMD.indexOf(variantPreMachine[i]);
-            if (match >= 1) {
-                preConfigStyle[match] = {
-                            _id: uniqueId,
-                            'config': variantPreMD[match],
-                            'configItem': variantPreItem[match],
-                            'imagePath': variantPrePath[match],
-                            machinePreConfigStatus: 0
-                };
-                machinePreConfiguration.push(preConfigStyle[match]);
-            }
-        });
-
-        let checkList = images.find ({activeStatus: {$gt: 0} }).fetch();
-        let result = checkList.length;
-        console.log(result);
-        // Add all lists to the database after checklist is loaded
-
-        if (checkList) {
-            preSeriesMachine.upsert({_id: selectedPreMachine},
-                                    {$set: {imageCount: result,
-                                                    machineConfig: machinePreConfiguration,
-                                                    checkItems: checkList,
-                                                    dateStart: dateStart,
-                                                    user: user,
-                                                    pdiStatus: 2,
-                                                    newIssues: [],
-
-                                                    counter: []
-                                                                }});
-        }
-    },
-
-
-              // Cancel Pre Check
-
-    'cancelPreCheck': (preMachine) => {
-        preSeriesMachine.update({_id: preMachine}, {$set: {checkItems: [],
-                                                                            machineConfig: [],
-                                                                            counter: [],
-                                                                            progressBar: 0,
-                                                                            user: '',
-                                                                            pdiStatus: 0,
-                                                                            newIssues: []}})
-    },
-
-
-        //  Config result
-
-    'configPreResult': (id, target, result) => {
-            preSeriesMachine.update({_id: id, 'machineConfig._id': target},
-                {$set: {'machineConfig.$.machinePreConfigStatus': result}});
-    },
-
-
-                //  Check point nok or Ok
-                //  target = image ID
-
-    'preCheckNok': (selectedPreMachineId, targetId, result, user) => {
-        preSeriesMachine.update({_id: selectedPreMachineId, 'checkItems._id': targetId},
-                               {$set: {'checkItems.$.failureStatus': result,
-                                                'checkItems.$.checkedBy': user}});
-        let checkResult = {
-                            id: targetId,
-                            result: result
-                          };
-        let checkCounter = preSeriesMachine.findOne({_id: selectedPreMachineId},
-                                                    {fields: {counter: 1, _id: 0}}).counter;
-
-        if(checkCounter) {
-
-            const foundCheck = checkCounter.find( checkId => checkId.id === targetId);
-
-            if (!foundCheck) {
-                preSeriesMachine.update({_id: selectedPreMachineId},
-                                        {$push: {counter: checkResult}});
-                let counter = preSeriesMachine.findOne({_id: selectedPreMachineId},
-                                                       {fields: {counter: 1,
-                                                               imageCount:1,
-                                                               _id: 0}});
-                let checkPoints = counter.imageCount;
-                let counterFound = counter.counter;
-                let progress =  ((100 / (checkPoints)) * counterFound.length).toFixed(2);
-                preSeriesMachine.update({_id: selectedPreMachineId},
-                    {$set: {progressBar: progress}})
-            } else {
-                preSeriesMachine.update({_id: selectedPreMachineId, 'counter.id': targetId},
-                                        {$set: {'counter.$.result': result}});
-            }
-        }
     },
 
     //---------------------------------------- evaluate ok, nok, add message to pic -----------------
@@ -458,20 +210,6 @@ if(Meteor.isServer){
         preSeriesMachine.update({_id: selectedPreMachineId, 'checkItems._id': target},
             {$set: {'checkItems.$.errorDescription': message}})
 
-    },
-
-    'addNewPreFailure': (id, addNewFailure) => {
-        let uniqueId = Random.id();
-        preSeriesMachine.upsert({_id: id},
-            {$push: {newIssues: {_id: uniqueId, checkStatus: true, errorDescription: addNewFailure}}});
-    },
-
-    'removePreFailure': (id, openFailure) => {
-        preSeriesMachine.update({_id: id}, {$pull: {newIssues : {_id: openFailure}}});
-    },
-
-    'preSeriesFinished': (id) => {
-        preSeriesMachine.update({_id: id}, {$set: {pdiStatus: 1}});
     },
 
     //-------------------------------------- Specify Team for each failure --------------
@@ -489,17 +227,6 @@ if(Meteor.isServer){
         },
 
  //----------------------------------------------------- Components -----------------------------------------------------------------------
-/*
-        'moveMachines': (newMoveMe) => {
-            newMoveMe.forEach((result) => {
-                const machineToMove = MachineReady.findOne({_id: result});
-                newFiscalYear.insert(machineToMove);
-                MachineReady.remove({_id: result});
-            })
-
-        },
-
- */
 
         'moveHeads': (newMoveMe) => {
             newMoveMe.forEach((result) => {
@@ -523,134 +250,61 @@ if(Meteor.isServer){
 
 //--------------------------------------------------------  Variants -----------------------------------------------------------------------
         'readVariant': function (contents) {
-            let k = 0;
+            let cbpat8Array = [];
+            let mainGroupVariant = '';
+            let newContentString = '';
+            let cbpat8Pos = 0;
             let contentString = JSON.stringify(contents);
-            let dateVariant = contentString.substr(1, 10);
-            let typeVariant = contentString.substr(53, 3);
-           // console.log(contentString);
-           // console.log(typeVariant);
-                   if (typeVariant === 'C77') {
-                variants_C77.remove({});
-            } else if (typeVariant === 'C78') {
-                variants_C78.remove({});
-            } else if (typeVariant === 'C79') {
-                variants_C79.remove({});
-            } else if (typeVariant === 'C87') {
-                variants_C87.remove({});
-            } else if (typeVariant === 'C88') {
-                variants_C88.remove({});
-            } else if (typeVariant === 'C89') {
-                variants_C89.remove({});
-            } else {
-                       console.log('Type ', typeVariant, ' not found');
-                   }
-            let re = /MD_[A-Z][0-9][0-9]/g;
-            let variant = re[Symbol.match](contents);
-            let uniqueArray = Array.from(new Set(variant));
-            let arrayCount = uniqueArray.length;
-            let pattern = "\\t\\t\\t\\t";
-            for (let i = 0; i < arrayCount; i++) {
-                let variantCatch_1a = uniqueArray[i];
-                let variantCatch_1b = variantCatch_1a + pattern;
-                let variantCatch_2a = uniqueArray[i + 1];
-                let variantCatch_2b = variantCatch_2a + pattern;
-                let variantPos_1 = contentString.indexOf(variantCatch_1b);
-                let variantPos_2 = contentString.indexOf(variantCatch_2b);
-                let newVariant = contentString.slice(variantPos_1, variantPos_2);
-                let newVariant_1 = newVariant.replace(/\\t/g, " ");
-                let textPosition = newVariant_1.indexOf("\\r\\n");
-                let newVariantText = newVariant_1.slice(textPosition + 4);
-                let newUniqueVariant = newVariantText.split("\\r\\n");
-                    newUniqueVariant.pop();
-                let count = newUniqueVariant.length;
-                for (k=0; k < count; k++) {
-                    let arrayElement = newUniqueVariant.shift();
-                    let stringArrayElement = JSON.stringify(arrayElement);
-                    let firstElement = stringArrayElement.slice(1, 8);
-                    let variantMatch = uniqueArray[i] + '_' + firstElement;
-                    let variantModule = variantMatch.replace(/\s/g, '');
-                    let variantDescription = stringArrayElement.slice(15);
-                    if (typeVariant === 'C77') {
-                        variants_C77.remove();
-                        variants_C77.insert({variant: variantModule,
-                            variantDescription: variantDescription,
-                            imagePath: "http://",
-                            status: 1,
-                            dateLoaded: dateVariant,
-                            type: typeVariant});
-                        } else if (typeVariant === 'C78') {
-                            variants_C78.remove();
-                            variants_C78.insert({variant: variantModule,
-                            variantDescription: variantDescription,
-                            imagePath: "http://",
-                            status: 1,
-                            dateLoaded: dateVariant,
-                            type: typeVariant});
-                        } else if (typeVariant === 'C79') {
-                        variants_C79.remove();
-                        variants_C79.insert({variant: variantModule,
-                            variantDescription: variantDescription,
-                            imagePath: "http://",
-                            status: 1,
-                            dateLoaded: dateVariant,
-                            type: typeVariant});
-                        } else if (typeVariant === 'C87') {
-                        variants_C87.remove();
-                        variants_C87.insert({variant: variantModule,
-                            variantDescription: variantDescription,
-                            imagePath: "http://",
-                            status: 1,
-                            dateLoaded: dateVariant,
-                            type: typeVariant});
-                        } else if (typeVariant === 'C88') {
-                        variants_C88.remove();
-                        variants_C88.insert({variant: variantModule,
-                            variantDescription: variantDescription,
-                            imagePath: "http://",
-                            status: 1,
-                            dateLoaded: dateVariant,
-                            type: typeVariant});
-                        } else if (typeVariant === 'C89') {
-                        variants_C89.remove();
-                        variants_C89.insert({variant: variantModule,
-                            variantDescription: variantDescription,
-                            imagePath: "http://",
-                            status: 1,
-                            dateLoaded: dateVariant,
-                            type: typeVariant});
-                        } else {
-                        console.log('Type ', typeVariant, ' not available');
+            let latestUpdate = new Date().toLocaleDateString();
+            let stringTypePos = contentString.search("Type C");
+            // looking for C8x
+            let combineType = contentString.slice(stringTypePos + 5, 1250);
+            // find positions of all cbpat8, store group in array
+            let cbpat8Count = (contentString.match(/cbpat8/g) || []).length;
+            newContentString = contentString;
+            for (let i = 0; i <= cbpat8Count - 1; i++) {
+                cbpat8Pos = newContentString.search("cbpat8");
+                cbpat8Array.push(cbpat8Pos);
+                newContentString = newContentString.slice(cbpat8Pos + 8);
+            }
+            let j = 0;
+            cbpat8Array.forEach((element) => {
+               let groupVariantString = contentString.substring(j, j + element);
+                let cbpat3Count = (groupVariantString.match(/cbpat3/g) || []).length;
+                if (cbpat3Count !== 0) {
+                     mainGroupVariant = groupVariantString.substring(0, 6);
+                    for (let k = 0; k <= cbpat3Count - 1; k ++) {
+                        let countCbpat3Start = groupVariantString.search("cbpat3");
+                        let groupVariant = groupVariantString.substring(countCbpat3Start + 22);
+                        let countCbpat3End = groupVariant.search("cell");
+                        let singleGroup = groupVariant.slice(0, countCbpat3End - 15);
+                        let singleVariant = singleGroup.substring(0, 4);
+                        let singleGroupVariant = mainGroupVariant + '_' + singleVariant;
+                        let textVariant = singleGroup.replace((singleVariant + '_'), '');
+                        let z = textVariant.search('          L ');
+                        if (z < 0) {
+                            variants.upsert({variant: singleGroupVariant, type: combineType},
+                                {
+                                variant: singleGroupVariant,
+                                variantDescription: textVariant,
+                                imagePath: "noInfo.JPG",
+                                status: 1,
+                                dateLoaded: latestUpdate,
+                                type: combineType
+                            });
+                        }
+                        groupVariantString = groupVariant.replace(singleGroup, '');
                     }
                 }
-            }
-        },
-
-        'readVariantPic': function (contents) {
-
-        },
-
-        'readConfig': function(machineId, configArray) {
-            MachineReady.update({machineId: machineId},
-                {$set: {config: configArray, configStatus: 1}});
+                j = 8 + j + element;
+            })
         },
 
 
-        'toggleVariant': function(variantType, id, toggle) {
-            let variantToChange = '';
-            if (variantType === 1) {
-              variantToChange = 'variants_' + 'C77';
-            } else if (variantType === 2) {
-              variantToChange = 'variants_' + 'C78';
-            } else if (variantType === 3) {
-              variantToChange = 'variants_' + 'C79';
-            } else if (variantType === 4) {
-              variantToChange = 'variants_' + 'C87';
-            } else if (variantType === 5) {
-              variantToChange = 'variants_' + 'C88';
-            } else if (variantType === 6) {
-              variantToChange = 'variants_' + 'C89';
-            }
-            Mongo.Collection.get(variantToChange).update({_id: id}, {$set: {status: toggle}});
+
+
+    'toggleVariant': function(variantType, id, toggle) {
+            variants.update({_id: id}, {$set: {status: toggle}});
         },
 
 
@@ -786,13 +440,8 @@ if(Meteor.isServer){
 
         'mcoSearch': function(newMcoSearch, mcoReCording, matStatus, mcoSearchString) {
            // console.log(newMcoSearch, mcoReCording, matStatus, mcoSearchString);
-
-
           //  const result = mcoReview.find({mcoTeam: newMcoSearch}).fetch();
-
-
         },
-
 
         /* -----------------------------------------------  Re work  ------------------------------------------------ */
 
@@ -817,14 +466,12 @@ if(Meteor.isServer){
          //   const collection = MachineReady.find({machineId: machineNr}, {fields: {
          //                                                                          'checkListIssues.errorDescription': 1,
           //                                                                          _id: 0}}).fetch();
-
         },
 
         'editRepair': function(editId) {
           return MachineReady.find({_id: editId},
                                    {fields: {newIssues: 1,
                                             checkListIssues: 1 }}).fetch();
-
         },
 
         'download_3': function (siId) {
@@ -943,8 +590,6 @@ if(Meteor.isServer){
             let  configStyle = [];
             let  checkType = [];
 
-
-
             MachineReady.update({_id: selectedPdiMachineId}, {$set: {pdiStatus: 2,
                                                                      startPdiDate: dateStart,
                                                                      pdiPerformer: pdiUser}});
@@ -971,7 +616,7 @@ if(Meteor.isServer){
                  checkType = checkPoints.find({machineRangeEndC79: {$gt: pdiMachineNr}, status: 1},
                                                  {fields: {errorDescription: 1, errorPos: 1}}).fetch();
             } else {
-                console.log('nicht definierter Maschinen Typ (server.js zeile 625)', typeOfMachine);
+               // console.log('nicht definierter Maschinen Typ (server.js zeile 625)', typeOfMachine);
             }
             let checkList = checkPoints.find({status: 1, machineType: {$in: [machineType.toString()]}},
                                                                {fields: {errorDescription: 1,
@@ -985,11 +630,13 @@ if(Meteor.isServer){
             // Load Type Variant
 
             let type = pdiMachineNr.slice(0,3);
-            let newVariant = 'variants_' + type;
-            let variantsList = Mongo.Collection.get(newVariant).find({},
-                                    {fields: {status: 1, variant: 1, variantDescription: 1, image: 1}},
-                                    {sort: {variant: 1}}).fetch();
-            variantsList.forEach((variantValue, k) => {
+            let result = variants.find({type: type},  {fields: {status: 1,
+                                                                        variant: 1,
+                                                                        variantDescription: 1,
+                                                                        imagePath: 1}},
+                                                                        {sort: {variant: 1}}).fetch();
+
+            result.forEach((variantValue, k) => {
                 if (variantValue.status === 1) {
                   variantMD[k] = variantValue.variant;
                   variantItem[k] = variantValue.variantDescription;
@@ -1045,14 +692,6 @@ if(Meteor.isServer){
                         });
                     }
                 }
-
-            // add special pdi items
-/*
-            const specialItems = specialPdiItems.find().fetch();
-                MachineReady.update({_id: selectedPdiMachineId},
-                    {$set: {specialPdiItems: specialItems}});
-
- */
 
             // add Single Machines Item
 
@@ -1279,7 +918,6 @@ if(Meteor.isServer){
             }
         },
 
-
    // -------------------------------------------------- Wash List -------------------------------------------
         'stopWashing': function(selectedCheckPoint) {
             MachineReady.update({_id:selectedCheckPoint}, {$set: {washStatus: 0}});
@@ -1466,17 +1104,34 @@ if(Meteor.isServer){
                 if (err) {
                     throw (new Meteor.Error(500, 'Failed to save file.', err));
                 } else {
-                  // console.log('The file ' + name + ' (' + encoding + ') was saved to ' + path);
+                //  console.log('The file ' + name + ' (' + encoding + ') was saved to ' + path);
                 }
             });
-            console.log(name);
             MachineReady.update({_id: selectedPdiMachineId, 'newIssues._id': failureId},
                                             {$set: {'newIssues.$.pictureLocation': name,
                                                     'newIssues.$.pictureUploaded': 'Image Up'
                                                     }})
         },
 
+        saveConfigFile: function(blob, name, path, encoding, selectedVariantId) {
+            path = '/files/config-items/';
+            encoding = encoding || 'binary';
+            name = selectedVariantId + '.JPG';
+            let fs = Npm.require('fs');
+            fs.writeFile(path + name, blob, encoding, function(err) {
+                if (err) {
+                    throw (new Meteor.Error(500, 'Failed to save file.', err));
+                } else {
+                   // console.log('The file ' + name + ' (' + encoding + ') was saved to ' + path);
+                }
+            });
+            variants.update({_id: selectedVariantId},
+                {$set: {imagePath: name}})
+        },
+
+
     });
+
 
  }
 

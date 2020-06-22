@@ -34,7 +34,7 @@
     </div>
         <div class="historicButtonPos">
             {{#dropdownTrigger  name="mainComponents"}}
-                <button class="loginSubmit omInputButton">PDI 2019 / 2020 / C87 Pre</button>
+                <button class="loginSubmit omInputButton">PDI 2019 / 2020 </button>
             {{/dropdownTrigger}}
             {{#dropdown name="mainComponents" align="left" top="25" left="0"}}
                 <tbody class="rTable">
@@ -101,19 +101,19 @@
                         <h4>G004: {{mtuG004CCA}} Amp    {{mtuG004Volt}} Volt</h4>
                     </div>
                 {{/each}}
+            <br><br>
         </div>
-
         <table class="issue-list">
             <tbody>
                 {{#each listContent}}
                         <tr>
                         <td class="print-error-description"> <h4>{{errorDescription}}</h4>
-                          Repair Comment: {{repairComment}}</td>
+                          Repair Comment: {{repairComment}}
+                          <h4>Responsible : {{responsible}}</h4></td>
                             <td><a target="blank" href={{pictureLocation}}>
                                 <img class="image-box-thumb" src={{pictureLocation}}
                                      alt="No Picture">
                             </a></td>
-                            <td class=""> <h4>{{responsible}}</h4></td>
                         </tr>
                     <br><br>
                 {{/each}}

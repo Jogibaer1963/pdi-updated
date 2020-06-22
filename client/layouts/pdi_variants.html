@@ -42,13 +42,13 @@
     <button class="btn btn-default c89">Variants C89</button>
 </div>
 <div class="variantTable">
-    <table class="pdiTable blueTable tablePdiOverview" cellpadding="10">
+    <table class="pdiTable blueTable tablePdiOverview">
         <thead>
         <tr>
             <th class="userLastLogin"><strong>Variant</strong></th>
             <th class="pdiVariantDescription"><strong>Description</strong></th>
             <th class="pdiShipDate"><strong>Last Update</strong></th>
-            <th class="pdiShipDate"><strong>Info</strong></th>
+            <th class="variant-info-thumb"><strong>Info</strong></th>
             <th class="variant-visibility"><strong>Visibility</strong></th>
         </tr>
         </thead>
@@ -64,9 +64,10 @@
                 <td class="pdiShipDate {{variantVisible status}}"
                     style="background-color:{{variantVisible status}};
                             color:{{variantVisible status}}"><strong>{{dateLoaded}}</strong></td>
-                <td class="pdiShipDate"><a target="blank" href={{imagePath}}>
-                    <img class="" src={{imagePath}}
-                         onerror="this.src='noPicture.JPG'"
+                <td class="pdiShipDate">
+                    <a target="blank" href={{imagePath}}>
+                    <img  src={{imagePath}}
+                            onerror="this.src='noPicture.JPG'"
                          alt="No Picture">
                 </a></td>
                 <td class="variant-visible">
@@ -80,8 +81,8 @@
     <div  class="submit-pic">
         <h3>Upload image for Variant Info</h3>
         <form>
-            <label for="img">Select image:</label>
-            <input class="btn btn-default btn-info" id="img" name="img" accept="image/*" type="file">
+            <label for="img2">Select image:</label>
+            <input type="file" class="btn btn-default btn-info" id="img2" name="img2" accept="image/*">
         </form>
     </div>
 </template>

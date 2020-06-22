@@ -233,6 +233,16 @@ Template.joinPdiMachine.helpers({
         } catch (e) {}
     },
 
+    configImage: () => {
+        let choice = Session.get('imageOnOff');
+        if (choice === 1) {
+            return Session.get('imagePathId')
+        } else if (choice === 0) {
+            return '';
+        }
+
+    }
+
 });
 
 Session.set('selectedComponent', '');
@@ -303,6 +313,29 @@ Template.joinPdiMachine.events({
             console.log("Lost Machine Number")
         }
     },
+
+    'click .configButtonInfo': (event) => {
+        event.preventDefault();
+        let configInfos = Session.get('configInfos');
+        const selectedPdiMachineId = Session.get('selectedPdiMachineId');
+        let imagePathId = event.currentTarget.name;
+        console.log(imagePathId);
+        let imagePath = configInfos + imagePathId;
+        Session.set('imagePathId', imagePath);
+        if(selectedPdiMachineId) {
+            let choice = Session.get('imageOnOff');
+            if (choice === 0) {
+                Session.set('imageOnOff', 1);
+            } else if (choice === 1) {
+                Session.set('imageOnOff', 0);
+            }
+
+        } else {
+            console.log("Lost Machine Number")
+        }
+
+    },
+
 
 
     'click .buttonOK': (event) => {

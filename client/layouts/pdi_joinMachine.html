@@ -93,12 +93,15 @@
 
                         <button class="btn btn-danger configButtonNOK" id={{configItem}} name={{_id}}>NOK</button>
 
-                        <button class="btn btn-info buttonNA buttonNotWorking" id={{_id}}>info</button>
+                        <button class="btn btn-info buttonNA configButtonInfo" name={{imagePath}}>info</button>
                     </td>
                 </tr>
             {{/each}}
             </tbody>
         </table>
+    </div>
+    <div>
+        <img src={{configImage}} class="config-image" alt="" />
     </div>
     <br><br>
     <div class="checkListTable">

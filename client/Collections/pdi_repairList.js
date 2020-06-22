@@ -135,11 +135,9 @@ Session.set('selectedPreMachine', '');
                     returnArray.push(newResult);
                 }
             } catch {}
-            console.log(returnArray);
+            //console.log(returnArray);
             return returnArray;
         },
-
-
 
         listContent: function() {
             let repairInfos = Session.get('repairInfos');
@@ -152,7 +150,6 @@ Session.set('selectedPreMachine', '');
                 newIssuesFound.forEach((element) => {
                     element.pictureLocation = repairInfos + element.pictureLocation;
                 });
-
                 return newIssuesFound;
             } catch {}
         },

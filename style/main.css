@@ -795,8 +795,14 @@ table.pdiTable {
   position: relative;
   top: -20em; }
 
+.variant-info-thumb {
+  width: 90px; }
+
+.image-thumb {
+  width: 50px; }
+
 .variant-visibility {
-  width: 15em;
+  width: 100px;
   text-align: center; }
 
 .variant-visible {
@@ -867,6 +873,9 @@ table.repair-table {
   margin-left: 260px;
   position: absolute;
   width: 130px; }
+
+.config-image {
+  width: 100em; }
 
 .resize {
   height: auto;
@@ -962,6 +971,10 @@ table.newIssuesTable {
   left: 37em;
   position: absolute;
   top: 210em; }
+
+img {
+  max-height: 100%;
+  max-width: 100%; }
 
 .pdi-repair {
   position: absolute;
@@ -1551,36 +1564,6 @@ tbody.mainCompTbody {
   top: 25em;
   left: 15em; }
 
-.ecnOverView {
-  position: absolute;
-  top: 5em;
-  left: 2em; }
-
-.mcoTable {
-  position: absolute;
-  top: 30em;
-  left: 2em; }
-
-.checkBoxList {
-  position: absolute;
-  top: 0.5em;
-  left: 20em; }
-
-.searchBoxes {
-  position: absolute;
-  top: 5.5em;
-  left: 60em; }
-
-.goButton {
-  position: absolute;
-  top: 20em;
-  left: 60em; }
-
-.mcoReCording {
-  position: absolute;
-  top: 9.5em;
-  left: 70em; }
-
 .listContainer {
   border-style: solid;
   height: 33em;
@@ -1664,6 +1647,36 @@ table.addCheck {
   left: 40em;
   position: relative;
   top: -2.5em; }
+
+.ecnOverView {
+  position: absolute;
+  top: 5em;
+  left: 2em; }
+
+.mcoTable {
+  position: absolute;
+  top: 30em;
+  left: 2em; }
+
+.checkBoxList {
+  position: absolute;
+  top: 0.5em;
+  left: 20em; }
+
+.searchBoxes {
+  position: absolute;
+  top: 5.5em;
+  left: 60em; }
+
+.goButton {
+  position: absolute;
+  top: 20em;
+  left: 60em; }
+
+.mcoReCording {
+  position: absolute;
+  top: 9.5em;
+  left: 70em; }
 
 .coa-machine-date {
   left: 40em;

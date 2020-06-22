@@ -34,6 +34,10 @@
   width: 130px;
 }
 
+.config-image {
+  width: 100em;
+}
+
 .resize {
   height: auto;
   width: 400px;
@@ -154,6 +158,11 @@ table.newIssuesTable {
   left: 37em;
   position: absolute;
   top: 210em;
+}
+
+img {
+  max-height: 100%;
+  max-width: 100%;
 }
 
 .pdi-repair {
