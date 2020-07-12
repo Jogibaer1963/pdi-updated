@@ -3,6 +3,8 @@ import {Random} from 'meteor/random';
 import { Meteor } from 'meteor/meteor';
 
 
+
+
 if(Meteor.isServer){
 
     Meteor.startup( function() {
@@ -121,81 +123,28 @@ if(Meteor.isServer){
 
     Meteor.methods({
 
-        'removeMachines': () => {
-          let result = MachineReady.find({}).fetch();
-          result.forEach((element) => {
-                  console.log(element._id, element.machineId);
-          })
-        },
-
-        'refresh': () => {
-            let i = 1;
-            let newObj = '';
-          let errorDescription = '';
-          let result = MachineReady.find().fetch();
-          result.forEach((element) => {
-
-              if (element.machineId > "C8700000" &&
-                  element.machineId < "C8799999" &&
-                  element.pdiStatus === 1 ||
-                  element.machineId > "C8800022" &&
-                  element.machineId < "C8899999" &&
-                  element.pdiStatus === 1 ||
-                  element.machineId > "C8900047" &&
-                  element.machineId < "C8999999" &&
-                  element.pdiStatus === 1) {
-                  let machineId = element.machineId;
-                  let checklist = element.checkList;
-                 // console.log(i, machineId);
-                  i++;
-                      checklist.forEach((element2) => {
-                          if (element2.checkStatus === 2) {
-                              errorDescription = element2.errorDescription
-                              let uniqueId = Random.id();
-                               newObj = {
-                                  "_id": uniqueId,
-                                  "checkStatus": true,
-                                  "errorDescription": errorDescription,
-                                  "pictureLocation": "noPicture.JPG",
-                                  "pictureUploaded": "No Image",
-                                  "repairStatus": (0),
-                                  "repairTech": "",
-                                  "repairComment": "",
-                                  "repairDateTime": "",
-                                  "repairDuration": "",
-                                  "responsible": ""
-                              }
-                              MachineReady.update({machineId: machineId}, {$push: {newIssues: newObj}});
-                          }
-
-                      })
-              }
-          })
+        'readConfig': function(machineId, configArray) {
+            MachineReady.update({machineId: machineId},
+                {$set: {config: configArray, configStatus: 1}});
         },
 
         'machines': () => {
-         let result = MachineReady.find().fetch();
-         const issueArray = [];
-          if (result) {
-             result.forEach((element) => {
-                 if (element.machineId > "C8800022" &&
-                     element.machineId < "C8899999" &&
-                     element.pdiStatus === 1 ||
-                     element.machineId > "C8900047" &&
-                     element.machineId < "C8999999" &&
-                     element.pdiStatus === 1) {
-                     let newElement = {
-                         machineId : element.machineId,
-                         pdiPerformer : element.pdiPerformer,
-                         pdiOm : element.omms,
-                         pdiBatteries : element.batteries,
-                         newIssues : element.newIssues
-                     }
-                     issueArray.push(newElement);
-                 }
-             });
-           return(issueArray);
-          }
+       //     let issueCounter = [];
+            const issueArray = [];
+            let issueCondensed = [];
+            readMachine(issueArray);
+            /*
+            issueArray.forEach((element) => {
+               issueCounter.push(element.newIssues);
+            })
+
+           issueCounter.forEach((element) => {
+             // console.log(element)
+           })
+
+            */
+
+         return (issueArray);
         },
 
         'coaDate': (machineId, coaDate) => {
@@ -252,7 +201,6 @@ if(Meteor.isServer){
         'readVariant': function (contents) {
             let cbpat8Array = [];
             let mainGroupVariant = '';
-            let newContentString = '';
             let cbpat8Pos = 0;
             let contentString = JSON.stringify(contents);
             let latestUpdate = new Date().toLocaleDateString();
@@ -261,7 +209,7 @@ if(Meteor.isServer){
             let combineType = contentString.slice(stringTypePos + 5, 1250);
             // find positions of all cbpat8, store group in array
             let cbpat8Count = (contentString.match(/cbpat8/g) || []).length;
-            newContentString = contentString;
+            let newContentString = contentString;
             for (let i = 0; i <= cbpat8Count - 1; i++) {
                 cbpat8Pos = newContentString.search("cbpat8");
                 cbpat8Array.push(cbpat8Pos);
@@ -300,13 +248,9 @@ if(Meteor.isServer){
             })
         },
 
-
-
-
     'toggleVariant': function(variantType, id, toggle) {
             variants.update({_id: id}, {$set: {status: toggle}});
         },
-
 
 //----------------------------------------------------------- Fuel control ------------------------------------------------------------------
         'fuelConsumption': function () {
@@ -580,14 +524,16 @@ if(Meteor.isServer){
 
 
         'generatePdiList': function(selectedPdiMachineId, pdiMachineNr, dateStart, pdiUser, machineType) {
-
+/*
             let variantMachine = [];
 
             let  variantMD = [];
             let  variantItem = [];
             let  variantPath = [];
+
+ */
             let  machineConfiguration = [];
-            let  configStyle = [];
+            let  configStyle = {};
             let  checkType = [];
 
             MachineReady.update({_id: selectedPdiMachineId}, {$set: {pdiStatus: 2,
@@ -630,41 +576,36 @@ if(Meteor.isServer){
             // Load Type Variant
 
             let type = pdiMachineNr.slice(0,3);
-            let result = variants.find({type: type},  {fields: {status: 1,
+            let variantResult = variants.find({type: type},  {fields: {status: 1,
                                                                         variant: 1,
                                                                         variantDescription: 1,
                                                                         imagePath: 1}},
                                                                         {sort: {variant: 1}}).fetch();
-
-            result.forEach((variantValue, k) => {
-                if (variantValue.status === 1) {
-                  variantMD[k] = variantValue.variant;
-                  variantItem[k] = variantValue.variantDescription;
-                  variantPath[k] = variantValue.imagePath;
-                }
-            });
 
             // Load Machine Configuration and select config items
 
             let combineVariant = MachineReady.find({_id: selectedPdiMachineId},
                                                     {fields: {config: 1}},
                                                     {sort: {variant: 1}}).fetch();
-            let k = (combineVariant[0]).config;
-                k.forEach((variantMarker, i) => {
-                let uniqueId= Random.id();
-                   variantMachine[i] = variantMarker;
-                   let match = variantMD.indexOf(variantMachine[i]);
-                   if (match >= 0) {
-                       configStyle[match] = {
-                           _id: uniqueId,
-                           'config': variantMD[match],
-                           'configItem': variantItem[match],
-                           'imagePath': variantPath[match],
-                           machineConfigStatus: 0
-                       };
-                       machineConfiguration.push(configStyle[match]);
-                   }
-            });
+
+
+            combineVariant[0].config.forEach((element) => {
+
+                variantResult.forEach((element2) => {
+                    if (element === element2.variant) {
+                        let uniqueId= Random.id();
+                      configStyle = {
+                          _id: uniqueId,
+                          config: element2.variant,
+                          configItem: element2.variantDescription,
+                          imagePath: element2.imagePath,
+                          machineConfigStatus: 0
+                      }
+                        machineConfiguration.push(configStyle);
+                    }
+
+                })
+            })
             MachineReady.update({_id: selectedPdiMachineId}, {$set: {machineConfig: machineConfiguration}});
 
             // SI added to repair list
@@ -1131,9 +1072,36 @@ if(Meteor.isServer){
 
 
     });
+}
+
+    function readMachine(issueArray) {
+    let result = MachineReady.find().fetch();
+    if (result) {
+        result.forEach((element) => {
+            if (element.machineId > "C8700012" &&
+                element.machineId < "C8799999" &&
+                element.pdiStatus === 1 ||
+                element.machineId > "C8800022" &&
+                element.machineId < "C8899999" &&
+                element.pdiStatus === 1 ||
+                element.machineId > "C8900047" &&
+                element.machineId < "C8999999" &&
+                element.pdiStatus === 1) {
+                let newElement = {
+                    machineId : element.machineId,
+                    pdiPerformer : element.pdiPerformer,
+                    pdiOm : element.omms,
+                    pdiBatteries : element.batteries,
+                    newIssues : element.newIssues
+                }
+                issueArray.push(newElement);
+            }
+        });
+        return issueArray;
+    }}
 
 
- }
+
 
 
 

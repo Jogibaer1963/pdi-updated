@@ -33,10 +33,6 @@ Template.adminViewUser.events({
         document.getElementById('logOut').checked=false;
     },
 
-    'click .dataRemove': (e) => {
-      e.preventDefault();
-      Meteor.call('removeMachines');
-    },
 });
 
 Template.adminNewUser.events({

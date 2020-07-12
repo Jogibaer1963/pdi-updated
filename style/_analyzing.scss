@@ -1,5 +1,5 @@
 
-.analyze-overview {
+.btn-over-view {
   position: absolute;
   left: 2em;
   top: 10em;
@@ -7,8 +7,52 @@
 
 .refresh-button {
   position: absolute;
-  left: 60em;
+  top: -3em;
+}
+
+.btn-key-word {
+  position: absolute;
+  left: 9.5em;
   top: 10em;
+}
+
+.btn-response-team {
+  position: absolute;
+  left: 22em;
+  top: 10em;
+}
+
+.btn-component-search {
+  position: absolute;
+  left: 38em;
+  top: 10em;
+}
+
+.btn-response-supplier {
+  position: absolute;
+  left: 51em;
+  top: 10em;
+}
+
+.btn-edit-responsibility {
+  position: absolute;
+  left: 62.5em;
+  top: 10em;
+}
+
+.btn-advance-search {
+  position: absolute;
+  left: 74em;
+  top: 10em;
+}
+
+.analyze-overview {
+  position: absolute;
+  left: 2em;
+  top: 18em;
+  border-collapse: separate;
+  border-style: solid;
+  border-spacing: 20px;
 }
 
 .search-text {
@@ -48,4 +92,13 @@ td.error-machine {
   position: absolute;
   left: 44em;
   top: 20em;
+}
+
+// Template Nr: 6  analyzingResponsibility
+
+.analyze-header {
+  left: 6.8em;
+  position: relative;
+  top: 8em;
+  width: 20em;
 }

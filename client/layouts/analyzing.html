@@ -1,8 +1,5 @@
 <template name="analyzing">
     {{> analyzingNav}}
-    <div>
-        {{> firstAnalyzing}}
-    </div>
     <head>
         <meta charset="UTF-8">
         <title>Analyze</title>
@@ -16,16 +13,47 @@
     </div>
     <br>
     </body>
+    <div class="nav navbar-btn">
+        <button class="btn btn-default btn-info btn-over-view">Home</button>
+        <button class="btn btn-default btn-success btn-key-word">Search with keyword</button>
+        <button class="btn btn-default btn-success btn-response-team" disabled>Responsible Team / Supplier</button>
+        <button class="btn btn-default btn-success btn-component-search" disabled>Issues by Component</button>
+        <button class="btn btn-default btn-success btn-response-supplier" disabled>Issues by Supplier</button>
+        <button class="btn btn-default btn-success btn-edit-responsibility" disabled>Edit Responsibility</button>
+        <button class="btn btn-default btn-success btn-advance-search" disabled>Advance Search</button>
+    </div>
+    {{#if overViewAnalyzing }}  <!-- Home -->
+        {{> analyzingOverView}}
+
+    {{else if searchWithKeyWord}}  <!-- Search with Keyword -->
+        {{> analyzingWithKeyWords}}
+
+    {{else if responseTeam}}  <!-- Responsible Team -->
+        {{> analyzingResponseTeam}}
+
+    {{else if tissueByComponent}}  <!-- Issue by Component -->
+        {{> analyzingComponent}}
+
+    {{else if issueBySupplier}}  <!-- Issue by supplier -->
+        {{> analyzingSupplier}}
+
+    {{else if editResponsibility}}  <!-- Edit Responsibility -->
+        {{> analyzingResponsibility}}
+
+    {{else if advanceSearch}}  <!-- Advance Search -->
+        {{> analyzingAdvanceSearch}}
+
+    {{/if}}
 </template>
 
-<template name="firstAnalyzing">
-   <div class="analyze-overview">
-       <h3>C8x Machines inspection completed : {{issuesCount.machineCount}}</h3>
-       <h3>Issues Found : {{issuesCount.issuesTotal}} </h3>
-   </div>
-    <div class="refresh-button">
-        <button type="button" class="btn btn-danger refreshButton">Refresh</button>
+<template name="analyzingOverView">
+    <div class="analyze-overview refresh-button">
+        <h3>&nbsp;C8x Machines inspection completed : {{issuesCount.machineCount}}&nbsp;</h3>
+        <h3>&nbsp;Issues Found : {{issuesCount.issuesTotal}} </h3>
     </div>
+</template>
+
+<template name="analyzingWithKeyWords">
     <div class="search-text">
         <form class="searchText">
             <label for="searchText">Search for :</label>
@@ -48,5 +76,113 @@
     <div class="count-result">
     <h4>{{countResult}} entries found.</h4>
     </div>
+</template>
+
+<template name="analyzingResponseTeam">
+<h4>huhuuu</h4>
+</template>
+
+<template name="analyzingComponent">
+
+</template>
+
+<template name="analyzingSupplier">
+
+</template>
+
+<template name="analyzingResponsibility">
+    <div class="analyze-header">
+        <table class="blueTable newIssuesTable ">
+            {{#each newIssue}}
+                <table>
+                    <tr>
+                        <td><a target="blank" href={{pictureLocation}}>
+                            <img class="" src={{pictureLocation}}
+                                 alt="No Picture">
+                        </a></td>
+                        <td>
+                            <div class="team-button">
+                                <button type="submit" class="btn
+                                                     btn-success
+                                                     btn-default
+                                                     submitButtonInside
+                                                     submitButton1
+                                                     btn-xs"
+                                        id={{_id}}>Team 1</button>
+                                <button type="submit" class="btn
+                                                     btn-success
+                                                     submitButtonInside
+                                                     submitButton2
+                                                     btn-xs"
+                                        id={{_id}}>Team 2</button>
+                                <button type="submit" class="btn
+                                                     btn-success
+                                                     btn-default
+                                                     submitButtonInside
+                                                     submitButton3
+                                                     btn-xs"
+                                        id={{_id}}>Team 3</button>
+                                <button type="submit" class="btn
+                                                     btn-success
+                                                     btn-default
+                                                     submitButtonInside
+                                                     submitButton4
+                                                     btn-xs"
+                                        id={{_id}}>Team 4</button>
+                                <button type="submit" class="btn
+                                                     btn-success
+                                                     btn-default
+                                                     submitButtonInside
+                                                     submitButton5
+                                                     btn-xs"
+                                        id={{_id}}>Team 5</button>
+                                <button type="submit" class="btn
+                                                     btn-success
+                                                     btn-default
+                                                     submitButtonInside
+                                                     submitButtonRepair
+                                                     btn-xs"
+                                        id={{_id}}>Repair</button>
+                                <button type="submit" class="btn
+                                                     btn-success
+                                                     btn-default
+                                                     submitButtonInside
+                                                     submitButtonTestBay
+                                                     btn-xs"
+                                        id={{_id}}>Test Bay</button>
+                                <button type="submit" class="btn
+                                                     btn-info
+                                                     btn-default
+                                                     submitButtonInside
+                                                     submitButtonSupplier
+                                                     btn-xs"
+                                        id={{_id}}>Supplier</button>
+                                <button type="submit" class="btn
+                                                     btn-info
+                                                     btn-default
+                                                     submitButtonInside
+                                                     submitButtonUnknown
+                                                     btn-xs"
+                                        id={{_id}}>Unknown</button>
+                                <h3 style="font-weight: bolder">{{responsible}}</h3>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+                <table class="">
+                    <tr class="openFailure {{selectedFailure}}">
+                        <td class="print-error-description">{{errorDescription}}
+                            <br>
+                            Repair Comment: {{repairComment}}</td>
+                        <td class="pdi-rep-conf  {{getStatusColor repairStatus}}" style="background-color:{{getStatusColor repairStatus}}; color:{{getStatusColor repairStatus}}" >{{repairStatus}}</td>
+                    </tr>
+                </table>
+                <br><br>
+            {{/each}}
+        </table>
+    </div>
+</template>
+
+<template name="analyzingAdvanceSearch">
 
 </template>
