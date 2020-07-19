@@ -10,6 +10,8 @@
   top: -3em;
 }
 
+
+
 .btn-key-word {
   position: absolute;
   left: 9.5em;
@@ -98,7 +100,20 @@ td.error-machine {
 
 .analyze-header {
   left: 6.8em;
-  position: relative;
-  top: 8em;
-  width: 20em;
+  position: absolute;
+  top: 16em;
+  width: 22em;
+}
+
+.analyze-header-complete {
+  left: 50em;
+  position: absolute;
+  top: 16em;
+  width: 22em;
+}
+
+.refresh-button-edit-response {
+  position: absolute;
+  top: 16em;
+  left: 45em;
 }

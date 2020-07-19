@@ -109,7 +109,7 @@ Session.set('toggleShipList', 0);
 
         'submit .truckDate': function(e) {
             e.preventDefault();
-            const confirmedShipDate = event.target.inputDate.value;
+            const confirmedShipDate = e.target.inputDate.value;
             const truckStatus = 1;
             const machineId = Session.get('selectedMachine');
             Meteor.call('truckOrdered', machineId, truckStatus, confirmedShipDate);

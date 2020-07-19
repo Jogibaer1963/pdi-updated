@@ -129,22 +129,10 @@ if(Meteor.isServer){
         },
 
         'machines': () => {
-       //     let issueCounter = [];
             const issueArray = [];
-            let issueCondensed = [];
-            readMachine(issueArray);
-            /*
-            issueArray.forEach((element) => {
-               issueCounter.push(element.newIssues);
-            })
-
-           issueCounter.forEach((element) => {
-             // console.log(element)
-           })
-
-            */
-
-         return (issueArray);
+            const completeIssueArray = [];
+            readMachine(issueArray, completeIssueArray);
+            return [issueArray, completeIssueArray];
         },
 
         'coaDate': (machineId, coaDate) => {
@@ -167,6 +155,8 @@ if(Meteor.isServer){
          MachineReady.update({_id: machineId, 'newIssues._id': idCheck},
              {$set: {'newIssues.$.responsible': team
                       }})
+
+
      },
 
   //-------------------------------------------------- Historic PDI's ------------------------------------
@@ -1074,7 +1064,8 @@ if(Meteor.isServer){
     });
 }
 
-    function readMachine(issueArray) {
+    function readMachine(issueArray, completeIssueArray) {
+    let updatedIssueArray = [];
     let result = MachineReady.find().fetch();
     if (result) {
         result.forEach((element) => {
@@ -1087,17 +1078,40 @@ if(Meteor.isServer){
                 element.machineId > "C8900047" &&
                 element.machineId < "C8999999" &&
                 element.pdiStatus === 1) {
+                    element.newIssues.forEach((element2) => {
+                        let newIssueElement = {
+                            _id : element2._id,
+                            machineId : element._id,
+                            machineNr : element.machineId,
+                            pdiPerformer : element.pdiPerformer,
+                            checkStatus : element2.checkStatus,
+                            errorDescription : element2.errorDescription,
+                            pictureLocation : element2.pictureLocation,
+                            pictureUploaded : element2.pictureUploaded,
+                            repairStatus : element2.repairStatus,
+                            repairTech : element2.repairTech,
+                            repairComment : element2.repairComment,
+                            repairDateTime : element2.repairDateTime,
+                            repairDuration : element2.repairDuration,
+                            issueResponsible : element2.responsible
+                        }
+                        updatedIssueArray.push(newIssueElement);
+                        completeIssueArray.push(newIssueElement);
+                    })
                 let newElement = {
-                    machineId : element.machineId,
+                    machineId : element._id,
+                    machineNr : element.machineId,
                     pdiPerformer : element.pdiPerformer,
                     pdiOm : element.omms,
                     pdiBatteries : element.batteries,
-                    newIssues : element.newIssues
+                    newIssues : updatedIssueArray
                 }
+               // console.log(newElement)
                 issueArray.push(newElement);
+                updatedIssueArray = [];
             }
         });
-        return issueArray;
+        return [issueArray, completeIssueArray];
     }}
 
 

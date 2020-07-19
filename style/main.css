@@ -965,7 +965,7 @@ table.newIssuesTable {
   width: 32em;
   display: block;
   overflow: auto;
-  height: 500px; }
+  height: 520px; }
 
 .add-image-to-repair {
   left: 37em;
@@ -1762,9 +1762,20 @@ td.error-machine {
 
 .analyze-header {
   left: 6.8em;
-  position: relative;
-  top: 8em;
-  width: 20em; }
+  position: absolute;
+  top: 16em;
+  width: 22em; }
+
+.analyze-header-complete {
+  left: 50em;
+  position: absolute;
+  top: 16em;
+  width: 22em; }
+
+.refresh-button-edit-response {
+  position: absolute;
+  top: 16em;
+  left: 45em; }
 
 .mainLayout {
   left: 40em;

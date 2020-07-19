@@ -16,15 +16,10 @@
 
     Template.searchMe.helpers({
         machineSearchShow: function() {
-            event.preventDefault();
             const findMachine = Session.get('findMachine');
             if(findMachine === undefined) {
             } else {
-            let result = MachineReady.find({machineId: findMachine}).fetch();
-            if (result.length === 0) {
-                return MachineReady_2016.find({machineId: findMachine}).fetch();
-                }
-              return result;
+            return MachineReady.find({machineId: findMachine}).fetch();
             }
         }
 
