@@ -116,6 +116,10 @@ if(Meteor.isServer){
         Meteor.publish("variants", function() {
             return variants.find();
         });
+
+        Meteor.publish("analyzingDatabase", function() {
+            return analyzingDatabase.find();
+        });
     });
 
 
@@ -129,10 +133,10 @@ if(Meteor.isServer){
         },
 
         'machines': () => {
-            const issueArray = [];
+        //    const issueArray = [];
             const completeIssueArray = [];
-            readMachine(issueArray, completeIssueArray);
-            return [issueArray, completeIssueArray];
+            readMachine( completeIssueArray);
+            return [completeIssueArray];
         },
 
         'coaDate': (machineId, coaDate) => {
@@ -155,8 +159,7 @@ if(Meteor.isServer){
          MachineReady.update({_id: machineId, 'newIssues._id': idCheck},
              {$set: {'newIssues.$.responsible': team
                       }})
-
-
+         analyzingDatabase.update({_id: idCheck}, {$set: {issueResponsible: team}})
      },
 
   //-------------------------------------------------- Historic PDI's ------------------------------------
@@ -1064,10 +1067,13 @@ if(Meteor.isServer){
     });
 }
 
-    function readMachine(issueArray, completeIssueArray) {
-    let updatedIssueArray = [];
+    function readMachine(completeIssueArray) {
+   // let updatedIssueArray = [];
+        let location = '';
+        let repairInfo = 'http://192.168.0.108:3300/repair-items/';
     let result = MachineReady.find().fetch();
     if (result) {
+        analyzingDatabase.remove({});
         result.forEach((element) => {
             if (element.machineId > "C8700012" &&
                 element.machineId < "C8799999" &&
@@ -1079,6 +1085,12 @@ if(Meteor.isServer){
                 element.machineId < "C8999999" &&
                 element.pdiStatus === 1) {
                     element.newIssues.forEach((element2) => {
+                      //  console.log(element2.pictureLocation);
+                        if (element2.pictureLocation === 'undefined' || element2.pictureLocation === '') {
+                            location = repairInfo + 'noPicture.JPG';
+                        } else {
+                            location = repairInfo + element2.pictureLocation;
+                        }
                         let newIssueElement = {
                             _id : element2._id,
                             machineId : element._id,
@@ -1086,7 +1098,7 @@ if(Meteor.isServer){
                             pdiPerformer : element.pdiPerformer,
                             checkStatus : element2.checkStatus,
                             errorDescription : element2.errorDescription,
-                            pictureLocation : element2.pictureLocation,
+                            pictureLocation : location,
                             pictureUploaded : element2.pictureUploaded,
                             repairStatus : element2.repairStatus,
                             repairTech : element2.repairTech,
@@ -1095,23 +1107,25 @@ if(Meteor.isServer){
                             repairDuration : element2.repairDuration,
                             issueResponsible : element2.responsible
                         }
-                        updatedIssueArray.push(newIssueElement);
+                      //  updatedIssueArray.push(newIssueElement);
                         completeIssueArray.push(newIssueElement);
+                        analyzingDatabase.insert({_id : element2._id,
+                            machineId : element._id,
+                            machineNr : element.machineId,
+                            pdiPerformer : element.pdiPerformer,
+                            checkStatus : element2.checkStatus,
+                            errorDescription : element2.errorDescription,
+                            pictureLocation : location,
+                            pictureUploaded : element2.pictureUploaded,
+                            repairStatus : element2.repairStatus,
+                            repairTech : element2.repairTech,
+                            repairComment : element2.repairComment,
+                            repairDateTime : element2.repairDateTime,
+                            repairDuration : element2.repairDuration,
+                            issueResponsible : element2.responsible});
                     })
-                let newElement = {
-                    machineId : element._id,
-                    machineNr : element.machineId,
-                    pdiPerformer : element.pdiPerformer,
-                    pdiOm : element.omms,
-                    pdiBatteries : element.batteries,
-                    newIssues : updatedIssueArray
-                }
-               // console.log(newElement)
-                issueArray.push(newElement);
-                updatedIssueArray = [];
             }
         });
-        return [issueArray, completeIssueArray];
     }}
 
 

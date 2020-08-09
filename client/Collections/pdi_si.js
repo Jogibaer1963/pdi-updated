@@ -12,17 +12,17 @@ Meteor.subscribe('specialPdiItems');
             Session.set('selectedItem', checkPoint);
         },
         
-        'submit .siItems': function() {
-            event.preventDefault();
-            const machine = event.target.siMachine.value;
-            const siItemText = event.target.siItemText.value;
+        'submit .siItems': function(e) {
+            e.preventDefault();
+            const machine = e.target.siMachine.value;
+            const siItemText = e.target.siItemText.value;
             Meteor.call('siList', machine, siItemText);
-            event.target.siMachine.value="";
-            event.target.siItemText.value="";
+            e.target.siMachine.value="";
+            e.target.siItemText.value="";
         },
 
-        'submit .removeSiItem': function () {
-            event.preventDefault();
+        'submit .removeSiItem': function (e) {
+            e.preventDefault();
             const siItem = Session.get('selectedItem');
             Meteor.call('removeFromSiList', siItem);
 
@@ -31,8 +31,8 @@ Meteor.subscribe('specialPdiItems');
 
     Template.siTable.helpers({
 
-        siList: function() {
-            event.preventDefault();
+        siList: function(e) {
+            e.preventDefault();
             return siList.find();
         },
 
@@ -52,9 +52,9 @@ Meteor.subscribe('specialPdiItems');
 
     Template.upload.events({
 
-        'submit .siMdList': function () {
-            event.preventDefault();
-            const siMdList = event.target.siMdList.value;
+        'submit .siMdList': function (e) {
+            e.preventDefault();
+            const siMdList = e.target.siMdList.value;
             Session.set('siList', siMdList);
             let exist = siTable.findOne({siNumber: siMdList});
             if (!exist) {
@@ -62,7 +62,7 @@ Meteor.subscribe('specialPdiItems');
             } else {
                Bert.alert('!! SI already exists !!', 'danger', 'fixed-top');
             }
-            event.target.siMdList.value = '';
+            e.target.siMdList.value = '';
         },
 
         'change [name="uploadCSV"]' (event, template) {
@@ -83,8 +83,8 @@ Meteor.subscribe('specialPdiItems');
             });
         },
 
-        'click .removeSI': function () {
-          event.preventDefault();
+        'click .removeSI': function (e) {
+          e.preventDefault();
           const siRemove = Session.get('selectedItem');
           Meteor.call('removeSi', siRemove);
         }

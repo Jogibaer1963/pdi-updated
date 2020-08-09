@@ -70,8 +70,8 @@
 
        'submit .datePicker': function (e) {
            e.preventDefault();
-           let startDate = event.target.dateStart.value;
-           let endDate = event.target.dateEnd.value;
+           let startDate = e.target.dateStart.value;
+           let endDate = e.target.dateEnd.value;
            Meteor.call('analyzeRepair', function (err,  ) {
 
            });

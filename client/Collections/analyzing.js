@@ -1,3 +1,4 @@
+Meteor.subscribe('analyzingDatabase');
 
 Session.set('overViewAnalyzing', true);
 Session.set('searchWithKeyWord', false);
@@ -17,7 +18,7 @@ Template.analyzing.onDestroyed(() => {
     Session.set('advanceSearch', false);
 })
 
-
+//  *****************************  Header  and   Buttons  ********************************************
 
 Template.analyzing.helpers ({
     // activating Templates
@@ -133,31 +134,17 @@ Template.analyzing.events ({
 
 });
 
+// *****************************************  Analyzing Overview Page 1 ****************************************
+
 Template.analyzingOverView.helpers({
 
     issuesCount: function () {
-        let countResult = {};
-        let issuesTotal = 0;
+        let analyzeStart = [];
         try {
-            Meteor.call('machines', function (err, response) {
-                if (response) {
-                    Session.set('machineIssue', response[0])
-                    Session.set('completeIssue', response[1])
-                }
-            })
-
-            let machineResult = Session.get('machineIssue');
-            let machineCount = machineResult.length;
-            machineResult.forEach((element) => {
-                let countMe = element.newIssues;
-                issuesTotal = issuesTotal + countMe.length;
-            })
-            countResult = {
-                machineCount: machineCount,
-                issuesTotal: issuesTotal
-            }
+           analyzeStart = analyzingDatabase.find({}).fetch();
+           Session.set('analyzeStart', analyzeStart);
         } catch {}
-        return countResult;
+        return analyzeStart.length;
     },
 
 });
@@ -171,6 +158,7 @@ Template.analyzingOverView.events({
 Template.analyzingWithKeyWords.helpers({
 
     stringSearch: () => {
+        let repairInfos = Session.get('repairInfos');
         try {
             let resultArray = [];
             let searchResult = {};
@@ -184,7 +172,8 @@ Template.analyzingWithKeyWords.helpers({
                         // console.log(element.machineId, element2.errorDescription)
                         searchResult = {
                             machineNr : element.machineId,
-                            errorDescription : element2.errorDescription
+                            errorDescription : element2.errorDescription,
+                            pictureLocation : repairInfos + element2.pictureLocation
                         }
                         resultArray.push(searchResult);
                     }
@@ -210,37 +199,284 @@ Template.analyzingWithKeyWords.events({
     }
 
 })
+// **************************************  Responsible Team  *********************************************
+
+Template.analyzingResponseTeam.helpers({
+
+    team1Chosen: () => {
+      return Session.get('team1Chosen');
+    },
+
+    team2Chosen: () => {
+        return Session.get('team2Chosen');
+    },
+
+    team3Chosen: () => {
+        return Session.get('team3Chosen');
+    },
+
+    team4Chosen: () => {
+        return Session.get('team4Chosen');
+    },
+
+    team5Chosen: () => {
+        return Session.get('team5Chosen');
+    },
+
+    teamTestBayChosen: () => {
+        return Session.get('teamTestBayChosen');
+    },
+
+    unknownChosen: () => {
+        return Session.get('unknown');
+    },
+
+    team1Amount: () => {
+        let team1Summary = [];
+        try {
+            let result = analyzingDatabase.find().fetch();
+            Session.set('teamResponsibilities', result);
+            result.forEach((element) => {
+                if (element.issueResponsible === "Team 1") {
+                    team1Summary.push(element);
+                }
+            })
+            Session.set('team1Summary', team1Summary)
+            return team1Summary.length;
+        } catch { }
+        return Session.get('team1Amount');
+    },
+
+    team1: () => {
+      return Session.get('team1Summary')
+    },
+
+    team2Amount: () => {
+        let team2Summary = [];
+        try {
+            let result = Session.get('teamResponsibilities');
+            result.forEach((element) => {
+                if (element.issueResponsible === "Team 2") {
+                    team2Summary.push(element);
+                }
+            })
+            Session.set('team2Summary', team2Summary)
+            return team2Summary.length;
+        } catch { }
+
+    },
+
+    team2: () => {
+        return Session.get('team2Summary');
+    },
+
+    team3Amount: () => {
+        let team3Summary = [];
+        try {
+            let result = Session.get('teamResponsibilities');
+            result.forEach((element) => {
+                if (element.issueResponsible === "Team 3") {
+                    team3Summary.push(element);
+                }
+            })
+            Session.set('team3Summary', team3Summary)
+            return team3Summary.length;
+        } catch { }
+    },
+
+    team3: () => {
+        return Session.get('team3Summary');
+    },
+
+    team4Amount: () => {
+        let team4Summary = [];
+        try {
+            let result = Session.get('teamResponsibilities');
+            result.forEach((element) => {
+                if (element.issueResponsible === "Team 4") {
+                    team4Summary.push(element);
+                }
+            })
+            Session.set('team4Summary', team4Summary)
+            return team4Summary.length;
+        } catch { }
+    },
+
+    team4: () => {
+        return Session.get('team4Summary');
+    },
+
+    team5Amount: () => {
+        let team5Summary = [];
+        try {
+            let result = Session.get('teamResponsibilities');
+            result.forEach((element) => {
+                if (element.issueResponsible === "Team 5") {
+                    team5Summary.push(element);
+                }
+            })
+            Session.set('team5Summary', team5Summary)
+            return team5Summary.length;
+        } catch { }
+    },
+
+    team5: () => {
+        return Session.get('team5Summary');
+    },
+
+    teamTestBayAmount: () => {
+        let team6Summary = [];
+        try {
+            let result = Session.get('teamResponsibilities');
+            result.forEach((element) => {
+                if (element.issueResponsible === "Test Bay") {
+                    team6Summary.push(element);
+                }
+            })
+            Session.set('team6Summary', team6Summary)
+            return team6Summary.length;
+        } catch { }
+    },
+
+    teamTestBay: () => {
+        return Session.get('team6Summary');
+    },
+
+    unknownAmount: () => {
+        let team7Summary = [];
+        try {
+            let result = Session.get('teamResponsibilities');
+            result.forEach((element) => {
+                if (element.issueResponsible === "Unknown") {
+                    team7Summary.push(element);
+                }
+            })
+            Session.set('team7Summary', team7Summary)
+            return team7Summary.length;
+        } catch { }
+    },
+
+    unknown: () => {
+        return Session.get('team7Summary');
+    },
+
+
+
+});
+
+ Session.set('team1Chosen', false);
+ Session.set('team2Chosen', false);
+ Session.set('team3Chosen', false);
+ Session.set('team4Chosen', false);
+ Session.set('team5Chosen', false);
+ Session.set('teamTestBayChosen', false);
+ Session.set('unknown', false);
+
+Template.analyzingResponseTeam.events({
+
+    'click .btn-team1-details': () => {
+        Session.set('team1Chosen', true)
+        Session.set('team2Chosen', false);
+        Session.set('team3Chosen', false);
+        Session.set('team4Chosen', false);
+        Session.set('team5Chosen', false);
+        Session.set('teamTestBayChosen', false);
+        Session.set('unknown', false);
+    },
+
+    'click .btn-team2-details': () => {
+        Session.set('team1Chosen', false)
+        Session.set('team2Chosen', true);
+        Session.set('team3Chosen', false);
+        Session.set('team4Chosen', false);
+        Session.set('team5Chosen', false);
+        Session.set('teamTestBayChosen', false);
+        Session.set('unknown', false);
+    },
+
+    'click .btn-team3-details': () => {
+        Session.set('team1Chosen', false)
+        Session.set('team2Chosen', false);
+        Session.set('team3Chosen', true);
+        Session.set('team4Chosen', false);
+        Session.set('team5Chosen', false);
+        Session.set('teamTestBayChosen', false);
+        Session.set('unknown', false);
+    },
+
+    'click .btn-team4-details': () => {
+        Session.set('team1Chosen', false)
+        Session.set('team2Chosen', false);
+        Session.set('team3Chosen', false);
+        Session.set('team4Chosen', true);
+        Session.set('team5Chosen', false);
+        Session.set('teamTestBayChosen', false);
+        Session.set('unknown', false);
+    },
+
+    'click .btn-team5-details': () => {
+        Session.set('team1Chosen', false)
+        Session.set('team2Chosen', false);
+        Session.set('team3Chosen', false);
+        Session.set('team4Chosen', false);
+        Session.set('team5Chosen', true);
+        Session.set('teamTestBayChosen', false);
+        Session.set('unknown', false);
+    },
+
+    'click .btn-teamTestBay-details': () => {
+        Session.set('team1Chosen', false)
+        Session.set('team2Chosen', false);
+        Session.set('team3Chosen', false);
+        Session.set('team4Chosen', false);
+        Session.set('team5Chosen', false);
+        Session.set('teamTestBayChosen', true);
+        Session.set('unknown', false);
+    },
+
+    'click .btn-unknown-details': () => {
+        Session.set('team1Chosen', false)
+        Session.set('team2Chosen', false);
+        Session.set('team3Chosen', false);
+        Session.set('team4Chosen', false);
+        Session.set('team5Chosen', false);
+        Session.set('teamTestBayChosen', false);
+        Session.set('unknown', true);
+    },
+
+
+
+
+
+});
+
+// **************************************   Responsibility Analyzing Tool *********************************
 
 Template.analyzingResponsibility.helpers({
-    openIssue: function() {
-      let repairInfos = Session.get('repairInfos');
-      let completeIssue = Session.get('completeIssue');
-      completeIssue.forEach((element) => {
-            element.pictureLocation = repairInfos + element.pictureLocation;
-       });
-      let openResponsible = [];
-      completeIssue.forEach((element) => {
-          if (element.issueResponsible === '') {
-              openResponsible.push(element);
-          }
-      });
+    openIssue: function () {
+        let openResponsible = [];
+        let rawDataSet = analyzingDatabase.find({}).fetch();
+        rawDataSet.forEach((element) => {
+            if (element.issueResponsible === '') {
+                openResponsible.push(element)
+            }
+        })
+        console.log('open',openResponsible);
         return openResponsible;
     },
 
-    closeIssue:  function() {
-        let repairInfos = Session.get('repairInfos');
-        let completeIssue = Session.get('completeIssue');
-        completeIssue.forEach((element) => {
-            element.pictureLocation = repairInfos + element.pictureLocation;
-        });
+    closeIssue: function () {
         let closedResponsible = [];
-        completeIssue.forEach((element) => {
+        let rawDataSet = analyzingDatabase.find({}).fetch();
+        rawDataSet.forEach((element) => {
             if (element.issueResponsible !== '') {
                 closedResponsible.push(element)
             }
         })
-        return closedResponsible;
+        console.log('closed', closedResponsible);
+        return closedResponsible
     },
+
 });
 
 Template.analyzingResponsibility.events({
@@ -317,7 +553,7 @@ Template.analyzingResponsibility.events({
     },
 
     'click .refreshButton' : () => {
-        console.log('reload')
+        Meteor.call('machines');
         location.reload();
     }
 

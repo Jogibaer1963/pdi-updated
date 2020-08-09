@@ -1699,7 +1699,8 @@ table.addCheck {
 .btn-response-team {
   position: absolute;
   left: 22em;
-  top: 10em; }
+  top: 10em;
+  width: 14.5em; }
 
 .btn-component-search {
   position: absolute;
@@ -1776,6 +1777,51 @@ td.error-machine {
   position: absolute;
   top: 16em;
   left: 45em; }
+
+.response-team {
+  position: absolute;
+  top: 15em;
+  left: 5em; }
+
+.team-table {
+  position: absolute;
+  top: 15em;
+  left: 35em; }
+
+.btn-team1-details {
+  position: absolute;
+  top: -.1em;
+  left: 20em; }
+
+.btn-team2-details {
+  position: absolute;
+  top: 4em;
+  left: 20em; }
+
+.btn-team3-details {
+  position: absolute;
+  top: 8.5em;
+  left: 20em; }
+
+.btn-team4-details {
+  position: absolute;
+  top: 12.7em;
+  left: 20em; }
+
+.btn-team5-details {
+  position: absolute;
+  top: 17em;
+  left: 20em; }
+
+.btn-teamTestBay-details {
+  position: absolute;
+  top: 21.5em;
+  left: 20em; }
+
+.btn-unknown-details {
+  position: absolute;
+  top: 25.5em;
+  left: 20em; }
 
 .mainLayout {
   left: 40em;
