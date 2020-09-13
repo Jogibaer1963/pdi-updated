@@ -1,4 +1,5 @@
 Meteor.subscribe('analyzingDatabase');
+Meteor.subscribe('fuelAverage');
 
 Session.set('overViewAnalyzing', true);
 Session.set('searchWithKeyWord', false);
@@ -146,6 +147,15 @@ Template.analyzingOverView.helpers({
         } catch {}
         return analyzeStart.length;
     },
+
+    machineCount: function () {
+        let machineFinished = [];
+        try {
+          let  machineResult = fuelAverage.find({}).fetch();
+          machineFinished =   machineResult[0].machineArray.length
+        } catch {}
+        return machineFinished;
+    }
 
 });
 

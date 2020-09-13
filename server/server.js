@@ -1068,9 +1068,10 @@ if(Meteor.isServer){
 }
 
     function readMachine(completeIssueArray) {
-   // let updatedIssueArray = [];
-        let location = '';
-        let repairInfo = 'http://192.168.0.108:3300/repair-items/';
+    let totalMachineArray = [];
+    let location = '';
+ //   let repairInfo = 'http://192.168.0.108:3300/repair-items/';
+    let repairInfo = 'http://10.40.1.47:3200/repair-items/';
     let result = MachineReady.find().fetch();
     if (result) {
         analyzingDatabase.remove({});
@@ -1084,12 +1085,21 @@ if(Meteor.isServer){
                 element.machineId > "C8900047" &&
                 element.machineId < "C8999999" &&
                 element.pdiStatus === 1) {
+                let pdiResult = {
+                    machineId: element.machineId,
+                    issuesPer: element.newIssues.length
+                }
+                totalMachineArray.push(pdiResult);
+                fuelAverage.upsert({_id: "CQ2gvjKGXTyGYAwjS"}, {machineArray: totalMachineArray})
                     element.newIssues.forEach((element2) => {
-                      //  console.log(element2.pictureLocation);
-                        if (element2.pictureLocation === 'undefined' || element2.pictureLocation === '') {
+                        if (element2.pictureLocation === undefined || element2.pictureLocation === '') {
                             location = repairInfo + 'noPicture.JPG';
                         } else {
                             location = repairInfo + element2.pictureLocation;
+                        }
+                        if (element2.responsible === undefined) {
+                            console.log('machine ', element.machineId);
+                            element2.responsible = '';
                         }
                         let newIssueElement = {
                             _id : element2._id,
@@ -1107,7 +1117,6 @@ if(Meteor.isServer){
                             repairDuration : element2.repairDuration,
                             issueResponsible : element2.responsible
                         }
-                      //  updatedIssueArray.push(newIssueElement);
                         completeIssueArray.push(newIssueElement);
                         analyzingDatabase.insert({_id : element2._id,
                             machineId : element._id,
@@ -1126,6 +1135,7 @@ if(Meteor.isServer){
                     })
             }
         });
+
     }}
 
 
