@@ -1070,8 +1070,8 @@ if(Meteor.isServer){
     function readMachine(completeIssueArray) {
     let totalMachineArray = [];
     let location = '';
- //   let repairInfo = 'http://192.168.0.108:3300/repair-items/';
-    let repairInfo = 'http://10.40.1.47:3200/repair-items/';
+    let repairInfo = 'http://192.168.0.108:3300/repair-items/';
+   // let repairInfo = 'http://10.40.1.47:3200/repair-items/';
     let result = MachineReady.find().fetch();
     if (result) {
         analyzingDatabase.remove({});

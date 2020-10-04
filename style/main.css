@@ -352,7 +352,7 @@ table.locationTable {
 
 .machineReturn {
   position: absolute;
-  left: 70em; }
+  left: 71em; }
 
 .firstKit {
   float: left; }
@@ -458,6 +458,9 @@ table.returnMachines {
   position: absolute;
   top: 27.7em;
   left: 120em; }
+
+table tbody.editBody, table thead {
+  display: revert; }
 
 .switchToCombine {
   position: absolute;
@@ -1818,9 +1821,14 @@ td.error-machine {
   top: 21.5em;
   left: 20em; }
 
-.btn-unknown-details {
+.btn-teamSupplier-details {
   position: absolute;
   top: 25.5em;
+  left: 20em; }
+
+.btn-unknown-details {
+  position: absolute;
+  top: 30.5em;
   left: 20em; }
 
 .mainLayout {

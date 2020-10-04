@@ -96,6 +96,30 @@ if(Meteor.isClient) {
                 Session.set('kit_9', undefined);
             }
 
+            const i = myString.indexOf('N04_0624', 0);
+            if(i >= 0){
+                const kit_10 = 'N04_0624';
+                Session.set('kit_10', kit_10);
+            } else {
+                Session.set('kit_10', undefined);
+            }
+
+            const j = myString.indexOf('N04_0595', 0);
+            if(j >= 0){
+                const kit_11 = 'N04_0595';
+                Session.set('kit_11', kit_11);
+            } else {
+                Session.set('kit_11', undefined);
+            }
+
+            const k = myString.indexOf('N06_0125', 0);
+            if(k >= 0){
+                const kit_12 = 'N06_0125';
+                Session.set('kit_12', kit_12);
+            } else {
+                Session.set('kit_12', undefined);
+            }
+
             return MachineReady.findOne({_id: selectedMachine});
         },
 
@@ -165,6 +189,27 @@ if(Meteor.isClient) {
         'newKit9': function() {
             const kit_9 = Session.get('kit_9');
             if(kit_9 === 'G03_0120') {
+                return 'checked';
+            }
+        },
+
+        'newKit10': function() {
+            const kit_10 = Session.get('kit_10');
+            if(kit_10 === 'N04_0624') {
+                return 'checked';
+            }
+        },
+
+        'newKit11': function() {
+            const kit_11 = Session.get('kit_11');
+            if(kit_11 === 'N04_0595') {
+                return 'checked';
+            }
+        },
+
+        'newKit12': function() {
+            const kit_12 = Session.get('kit_12');
+            if(kit_12 === 'N06_0125') {
                 return 'checked';
             }
         },

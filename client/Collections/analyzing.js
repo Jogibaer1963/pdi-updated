@@ -237,6 +237,10 @@ Template.analyzingResponseTeam.helpers({
         return Session.get('teamTestBayChosen');
     },
 
+    team7Chosen: () => {
+        return Session.get('team7Chosen');
+    },
+
     unknownChosen: () => {
         return Session.get('unknown');
     },
@@ -352,12 +356,12 @@ Template.analyzingResponseTeam.helpers({
         return Session.get('team6Summary');
     },
 
-    unknownAmount: () => {
+    teamSupplierAmount: () => {
         let team7Summary = [];
         try {
             let result = Session.get('teamResponsibilities');
             result.forEach((element) => {
-                if (element.issueResponsible === "Unknown") {
+                if (element.issueResponsible === "Supplier") {
                     team7Summary.push(element);
                 }
             })
@@ -366,8 +370,28 @@ Template.analyzingResponseTeam.helpers({
         } catch { }
     },
 
-    unknown: () => {
+    team7: () => {
         return Session.get('team7Summary');
+    },
+
+
+
+    unknownAmount: () => {
+        let team8Summary = [];
+        try {
+            let result = Session.get('teamResponsibilities');
+            result.forEach((element) => {
+                if (element.issueResponsible === "Unknown") {
+                    team8Summary.push(element);
+                }
+            })
+            Session.set('team8Summary', team8Summary)
+            return team8Summary.length;
+        } catch { }
+    },
+
+    unknown: () => {
+        return Session.get('team8Summary');
     },
 
 
@@ -380,6 +404,7 @@ Template.analyzingResponseTeam.helpers({
  Session.set('team4Chosen', false);
  Session.set('team5Chosen', false);
  Session.set('teamTestBayChosen', false);
+Session.set('teamSupplierChosen', false);
  Session.set('unknown', false);
 
 Template.analyzingResponseTeam.events({
@@ -391,6 +416,7 @@ Template.analyzingResponseTeam.events({
         Session.set('team4Chosen', false);
         Session.set('team5Chosen', false);
         Session.set('teamTestBayChosen', false);
+        Session.set('teamSupplierChosen', false);
         Session.set('unknown', false);
     },
 
@@ -401,6 +427,7 @@ Template.analyzingResponseTeam.events({
         Session.set('team4Chosen', false);
         Session.set('team5Chosen', false);
         Session.set('teamTestBayChosen', false);
+        Session.set('teamSupplierChosen', false);
         Session.set('unknown', false);
     },
 
@@ -411,6 +438,7 @@ Template.analyzingResponseTeam.events({
         Session.set('team4Chosen', false);
         Session.set('team5Chosen', false);
         Session.set('teamTestBayChosen', false);
+        Session.set('teamSupplierChosen', false);
         Session.set('unknown', false);
     },
 
@@ -421,6 +449,7 @@ Template.analyzingResponseTeam.events({
         Session.set('team4Chosen', true);
         Session.set('team5Chosen', false);
         Session.set('teamTestBayChosen', false);
+        Session.set('teamSupplierChosen', false);
         Session.set('unknown', false);
     },
 
@@ -431,6 +460,7 @@ Template.analyzingResponseTeam.events({
         Session.set('team4Chosen', false);
         Session.set('team5Chosen', true);
         Session.set('teamTestBayChosen', false);
+        Session.set('teamSupplierChosen', false);
         Session.set('unknown', false);
     },
 
@@ -441,6 +471,18 @@ Template.analyzingResponseTeam.events({
         Session.set('team4Chosen', false);
         Session.set('team5Chosen', false);
         Session.set('teamTestBayChosen', true);
+        Session.set('teamSupplierChosen', false);
+        Session.set('unknown', false);
+    },
+
+    'click .btn-teamSupplier-details': () => {
+        Session.set('team1Chosen', false)
+        Session.set('team2Chosen', false);
+        Session.set('team3Chosen', false);
+        Session.set('team4Chosen', false);
+        Session.set('team5Chosen', false);
+        Session.set('teamTestBayChosen', false);
+        Session.set('team7Chosen', true);
         Session.set('unknown', false);
     },
 
@@ -451,6 +493,7 @@ Template.analyzingResponseTeam.events({
         Session.set('team4Chosen', false);
         Session.set('team5Chosen', false);
         Session.set('teamTestBayChosen', false);
+        Session.set('teamSupplierChosen', false);
         Session.set('unknown', true);
     },
 
@@ -471,7 +514,6 @@ Template.analyzingResponsibility.helpers({
                 openResponsible.push(element)
             }
         })
-        console.log('open',openResponsible);
         return openResponsible;
     },
 
@@ -483,7 +525,6 @@ Template.analyzingResponsibility.helpers({
                 closedResponsible.push(element)
             }
         })
-        console.log('closed', closedResponsible);
         return closedResponsible
     },
 

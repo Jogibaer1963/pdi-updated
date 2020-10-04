@@ -24,7 +24,7 @@
 
 .machineReturn {
   position: absolute;
-  left: 70em;
+  left: 71em;
 }
 
 .firstKit {
@@ -157,5 +157,10 @@ table.returnMachines {
   position: absolute;
   top: 27.7em;
   left: 120em;
+}
+
+table tbody.editBody, table thead {
+  display: revert;
+
 }
 
