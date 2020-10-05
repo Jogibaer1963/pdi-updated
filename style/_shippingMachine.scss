@@ -159,7 +159,7 @@ table.returnMachines {
   left: 120em;
 }
 
-table tbody.editBody, table thead {
+table.editTable tbody.editBody, thead.editTableHead {
   display: revert;
 
 }

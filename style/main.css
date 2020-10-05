@@ -459,7 +459,7 @@ table.returnMachines {
   top: 27.7em;
   left: 120em; }
 
-table tbody.editBody, table thead {
+table.editTable tbody.editBody, thead.editTableHead {
   display: revert; }
 
 .switchToCombine {
