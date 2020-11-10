@@ -914,11 +914,15 @@ if(Meteor.isServer){
             MachineReady.update({_id:selectedCheckPoint}, {$set: {shipStatus: 1}});
         },
 
-        'confirmRepair': (repairId, repairUser, repairComment, machineId) => {
+        'confirmRepair': (repairId, repairUser, repairComment, time, machineId) => {
+            let industrialMinutes = time * 1.66;
             MachineReady.update({_id: machineId, 'newIssues._id': repairId},
                                         {$set: {'newIssues.$.repairStatus': 1,
                                                          'newIssues.$.repairTech': repairUser,
-                                                         'newIssues.$.repairComment': repairComment  }})
+                                                         'newIssues.$.repairComment': repairComment,
+                                                         'newIssues.$.repairTime': time,
+                                                         'newIssues.$.industrialTime': industrialMinutes
+                                            }})
         },
 
         // ------------------------------------  Machine ------------------------------------

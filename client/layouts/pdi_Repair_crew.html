@@ -58,18 +58,7 @@
             {{/each}}
             </tbody>
         </table>
-        <div class="repair-print-list">
-            <h3>Repair Tech: {{repairUser}}</h3>
-            <form class="repairConfirmText">
-                <label for="repairComment"> </label>
-                <textarea name="message" id="repairComment" cols="30" rows="10" class="confirm-text-area"> </textarea>
-                <br><br>
-                <button type="submit" class="btn btn-success">Confirm Repair</button>
-            </form>
-        </div>
-    </div>
-    <div class="repair-machine">
-        <h3>Repair list for : {{machineRepairList}}</h3>
+
     </div>
     <div class="repair-box">
         <table>
@@ -79,6 +68,7 @@
                     <tr>
                         <td><a target="blank" href={{pictureLocation}}>
                             <img class="image-box" src={{pictureLocation}}
+                                 onerror="this.src='noPicture.JPG'"
                                  alt="No Picture">
                         </a></td>
                         <td>
@@ -140,7 +130,10 @@
                     <tr class="repairConfirm  {{selectedConfirm}}">
                         <td class="print-error-description">{{errorDescription}}
                             <br>
-                            Repair Comment: {{repairComment}}</td>
+                            Repair Comment: {{repairComment}}
+                            <br>
+                            Repair Time: {{repairTime}} min
+                        </td>
                         <td class="pdi-rep-conf  {{getStatusColor repairStatus}}" style="background-color:{{getStatusColor repairStatus}}; color:{{getStatusColor repairStatus}}" >{{repairStatus}}</td>
                     </tr>
                 </table>
@@ -149,5 +142,20 @@
             </tbody>
         </table>
     </div>
+
+        <div class="repair-print-list">
+            <h3>Repair Tech: {{repairUser}}</h3>
+            <form class="repairConfirmText">
+                <label for="repairComment"> </label>
+                <textarea name="message" id="repairComment" cols="30" rows="10" class="confirm-text-area"> </textarea>
+                <br>
+                <h4>Repair Time minutes</h4>
+                <label for="repairTime"> </label>
+                <input type="number" name="time" id="repairTime" class="confirm-time-area">
+                <br><br>
+                <button type="submit" class="btn btn-success">Confirm Repair</button>
+            </form>
+        </div>
+
 
 </template>

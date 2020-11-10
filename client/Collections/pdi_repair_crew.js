@@ -101,9 +101,10 @@ Template.pdiCrewHome.events({
         e.preventDefault();
         const repairUser = Meteor.user().username;
         const repairComment = e.target.message.value;
+        const repairTime = e.target.time.value;
         let repairId = Session.get('confirmRepair');
         let machineId = Session.get('selectedMachineId');
-        Meteor.call('confirmRepair', repairId, repairUser, repairComment, machineId);
+        Meteor.call('confirmRepair', repairId, repairUser, repairComment, repairTime, machineId);
     },
 
     'click .submitButton1': (e) => {
