@@ -126,6 +126,27 @@ if(Meteor.isServer){
 
 
     Meteor.methods({
+/*
+        'changeUnixTime': function() {
+            console.log('in loop');
+          let result = newHeadYear.find().fetch();
+          console.log(result)
+          result.forEach((element) => {
+             let changeDate = new Date(element.date).getTime() / 1000
+             newHeadYear.update({_id: element._id}, {$set: {unixShipDate: changeDate}})
+              console.log(changeDate);
+          })
+        },
+
+ */
+
+
+
+        'fiscalYear': () => {
+            let changeDate = new Date("2020-09-31").getTime() / 1000
+          return MachineReady.find({unixShipDate : {$gt: changeDate}}).fetch();
+        },
+
 
         'readConfig': function(machineId, configArray) {
             MachineReady.update({machineId: machineId},
@@ -743,7 +764,7 @@ if(Meteor.isServer){
         },
 
         'nokButton': (machineId, idFailure, errorDescription) => {
-            console.log()
+           // console.log()
             MachineReady.update({_id: machineId, "checkList._id": idFailure},
                 {$set: {"checkList.$.checkStatus": 2, "checkList.$.failStatus": true}});
             let uniqueId = Random.id();
@@ -1074,9 +1095,10 @@ if(Meteor.isServer){
     function readMachine(completeIssueArray) {
     let totalMachineArray = [];
     let location = '';
+    let changeDate = new Date("2020-09-31").getTime() / 1000;
     let repairInfo = 'http://192.168.0.108:3300/repair-items/';
    // let repairInfo = 'http://10.40.1.47:3200/repair-items/';
-    let result = MachineReady.find().fetch();
+    let result = MachineReady.find({$and: [{unixShipDate : {$gt: changeDate}}, {shipStatus: 1}]}).fetch();
     if (result) {
         analyzingDatabase.remove({});
         result.forEach((element) => {
@@ -1102,7 +1124,7 @@ if(Meteor.isServer){
                             location = repairInfo + element2.pictureLocation;
                         }
                         if (element2.responsible === undefined) {
-                            console.log('machine ', element.machineId);
+                          //  console.log('machine ', element.machineId);
                             element2.responsible = '';
                         }
                         let newIssueElement = {

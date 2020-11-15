@@ -15,17 +15,20 @@ Session.set('toggleShipList', 0);
             switch(shipToggleList) {
                 case 1:
                     return MachineReady.find({shipStatus: 0},
-                                              {sort: {date: -1}});
+                                              {sort: {date: -1}}
+                                              );
                 case 0:
-                    return MachineReady.find({shipStatus: 1},
-                                                  {sort: {date: -1}});
+                    let changeDate = new Date("2020-09-31").getTime() / 1000
+                   return MachineReady.find({$and: [{unixShipDate : {$gt: changeDate}}, {shipStatus: 1}]},
+                        {sort: {date: -1}}).fetch();
             }
-
         },
-
+/*
         returnList: function () {
              return MachineReady.find({machineReturn: "Yes"}, {sort: {date: -1}});
         },
+
+ */
 
         'selected': function() {
             const shippingMachine = this._id;
@@ -46,7 +49,8 @@ Session.set('toggleShipList', 0);
     Template.inputMachine.events({
         "submit .inputNewMachine": function(e) {
             e.preventDefault();
-            const createUnixTime = Date.now();
+            const createUnixTime = ((Date.now())/1000).toFixed(0);
+            console.log(createUnixTime);
             const startDate = moment.tz(createUnixTime, "America/Chicago").format().slice(0, 19);
             const createDate = startDate.slice(0,10);
             const createTime = startDate.slice(-8);
@@ -109,6 +113,13 @@ Session.set('toggleShipList', 0);
             const newMachine = this._id;
             Session.set('selectedMachine', newMachine);
         },
+/*
+        'click .changeUnixTime': (e) => {
+            e.preventDefault();
+            Meteor.call('changeUnixTime');
+        },
+
+ */
 
         'submit .truckDate': function(e) {
             e.preventDefault();
