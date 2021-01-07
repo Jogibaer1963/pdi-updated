@@ -1098,7 +1098,7 @@ if(Meteor.isServer){
     let changeDate = new Date("2020-09-31").getTime() / 1000;
     let repairInfo = 'http://192.168.0.108:3300/repair-items/';
    // let repairInfo = 'http://10.40.1.47:3200/repair-items/';
-    let result = MachineReady.find({$and: [{unixShipDate : {$gt: changeDate}}, {shipStatus: 1}]}).fetch();
+    let result = MachineReady.find({$and: [{unixShipDate : {$lt: changeDate}}, {shipStatus: 1}]}).fetch();
     if (result) {
         analyzingDatabase.remove({});
         result.forEach((element) => {
