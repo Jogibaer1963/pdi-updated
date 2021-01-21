@@ -131,6 +131,7 @@ Template.analyzing.events ({
         Session.set('issueBySupplier', false);
         Session.set('editResponsibility', false);
         Session.set('advanceSearch', true);
+        Meteor.call('dataClean');
     }
 
 });
@@ -237,8 +238,8 @@ Template.analyzingResponseTeam.helpers({
         return Session.get('teamTestBayChosen');
     },
 
-    team7Chosen: () => {
-        return Session.get('team7Chosen');
+    teamSupplierChosen: () => {
+        return Session.get('teamSupplierChosen');
     },
 
     unknownChosen: () => {
@@ -404,7 +405,7 @@ Template.analyzingResponseTeam.helpers({
  Session.set('team4Chosen', false);
  Session.set('team5Chosen', false);
  Session.set('teamTestBayChosen', false);
-Session.set('teamSupplierChosen', false);
+ Session.set('teamSupplierChosen', false);
  Session.set('unknown', false);
 
 Template.analyzingResponseTeam.events({
@@ -482,7 +483,7 @@ Template.analyzingResponseTeam.events({
         Session.set('team4Chosen', false);
         Session.set('team5Chosen', false);
         Session.set('teamTestBayChosen', false);
-        Session.set('team7Chosen', true);
+        Session.set('teamSupplierChosen', true);
         Session.set('unknown', false);
     },
 

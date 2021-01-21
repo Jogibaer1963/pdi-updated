@@ -757,7 +757,7 @@
         </div>
     {{/if}}
 
-    {{#if team7Chosen}}
+    {{#if teamSupplierChosen}}
         <div class="team-table">
             <table class="blueTable newIssuesTable ">
                 {{#each team7}}
@@ -972,9 +972,6 @@
             </table>
         </div>
     {{/if}}
-
-
-
 </template>
 
 <!-----------------------------------  Issues by Components  ---------------------------->
@@ -1089,7 +1086,8 @@
                     <tr class="openFailure {{selectedFailure}}">
                         <td class="print-error-description">{{errorDescription}}
                             <br>
-                            Repair Comment: {{repairComment}}</td>
+                            Repair Comment: {{repairComment}}
+                            Repair Time: {{industrialTime}}</td>
                         <td class="pdi-rep-conf  {{getStatusColor repairStatus}}" style="background-color:{{getStatusColor repairStatus}}; color:{{getStatusColor repairStatus}}" >{{repairStatus}}</td>
                     </tr>
                 </table>

@@ -126,20 +126,23 @@ if(Meteor.isServer){
 
 
     Meteor.methods({
+
 /*
-        'changeUnixTime': function() {
-            console.log('in loop');
-          let result = newHeadYear.find().fetch();
-          console.log(result)
-          result.forEach((element) => {
-             let changeDate = new Date(element.date).getTime() / 1000
-             newHeadYear.update({_id: element._id}, {$set: {unixShipDate: changeDate}})
-              console.log(changeDate);
-          })
+        'dataClean': () => {
+            console.log('einstieg');
+            let k = MachineReady.find().fetch();
+            k.forEach((element) => {
+                let identifier = element._id;
+                MachineReady.update({_id: identifier},
+                    {$set: {specialPdiItems: [],
+                              checkList: [],
+                              repairStatus: 0,
+                               shipStatus: 0,
+                               washStatus: 0 }})
+                })
         },
 
  */
-
 
 
         'fiscalYear': () => {
@@ -1095,10 +1098,12 @@ if(Meteor.isServer){
     function readMachine(completeIssueArray) {
     let totalMachineArray = [];
     let location = '';
-    let changeDate = new Date("2020-09-31").getTime() / 1000;
-    let repairInfo = 'http://192.168.0.108:3300/repair-items/';
+    let changeDate = new Date("2021-01-20").getTime() / 1000;
+    //console.log(changeDate);
+    let repairInfo = 'http://192.168.0.120:3300/repair-items/';
    // let repairInfo = 'http://10.40.1.47:3200/repair-items/';
-    let result = MachineReady.find({$and: [{unixShipDate : {$lt: changeDate}}, {shipStatus: 1}]}).fetch();
+    let result = MachineReady.find({$and: [{repairStatus: 1}]}).fetch();
+ // console.log(result);
     if (result) {
         analyzingDatabase.remove({});
         result.forEach((element) => {
