@@ -102,11 +102,35 @@ Template.singleSupplierResult.helpers({
             }
         })
         return singleResult;
+    },
+
+    supplierTable: () => {
+        let finalResult = [];
+        let uniqueResult = [];
+        let result = analyzingDatabase.find().fetch();
+        result.forEach((element) => {
+            if (element.extern === true) {
+                finalResult.push(element.issueResponsible);
+            }
+        })
+        let unique = finalResult.filter((v, i, a) => a.indexOf(v) === i)
+        unique.forEach((element) => {
+            let suppResult = {
+                supplier: element
+            }
+            uniqueResult.push(suppResult);
+        })
+        return uniqueResult
     }
 
 });
 
 Template.singleSupplierResult.events({
 
+    'click .selectedSupplier': function (e) {
+        e.preventDefault()
+        let selectedSupplier = this.supplier;
+        Session.set('selectedSupplierResult', selectedSupplier);
+    }
 
 });

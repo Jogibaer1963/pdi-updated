@@ -148,6 +148,21 @@
             {{/each}}
         </table>
     </div>
-
+    <div  class="suppliers-Result-View">
+        <table class="blueTable supplierResultTable">
+            <thead>
+            <tr>
+                <th>Supplier</th>
+            </tr>
+            </thead>
+            <tbody>
+            {{#each supplierTable}}
+                <tr class="selectedSupplier {{selectedSupplier}}">
+                    <td>{{supplier}}</td>
+                </tr>
+            {{/each}}
+            </tbody>
+        </table>
+    </div>
 
 </template>
