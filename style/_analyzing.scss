@@ -174,4 +174,83 @@ td.error-machine {
   left: 20em;
 }
 
+// supplier Table
 
+.assigned-supplier {
+  position: absolute;
+  top: 15em;
+  left: 20em;
+}
+
+.supplier-assign {
+  position: absolute;
+  left: 32em;
+  top: 20em;
+
+}
+
+.supplier-head-buttons {
+  position: absolute;
+  left: 5em;
+  top: 15em;
+}
+
+.supplier-head-liner {
+  position: absolute;
+  left: 5em;
+  top: 25em;
+}
+
+.supplier-table {
+  position: absolute;
+  left: 4em;
+  top: 30em;
+}
+
+.img-supplier-table {
+  border: 1px solid #ddd; /* Gray border */
+  border-radius: 4px;  /* Rounded border */
+  padding: 5px; /* Some padding */
+  width: 100px; /* Set a small width */
+}
+
+//  suppliers List View
+
+.button-back {
+  position: absolute;
+  left: 5em;
+  top: 10em;
+}
+
+.remove-Supplier-Button {
+  position: absolute;
+  left: 20em;
+  top: 20em;
+}
+
+.inputNewSupplier {
+  position: absolute;
+  top: 15em;
+  left: 5em;
+}
+
+.supplierTable {
+  position: absolute;
+  top: 20em;
+  left: 5em;
+}
+
+.suppliers-Table-View {
+  width: auto;
+  border-spacing: 5px;
+}
+
+.suppliers-Result-View {
+  position: absolute;
+  top: 20em;
+  left: 100em;
+}
+
+table.supplierResultTable {
+  width: 90px;
+}

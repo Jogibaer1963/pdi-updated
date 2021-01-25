@@ -207,7 +207,8 @@
                             <tr class="openFailure {{selectedFailure}}">
                                 <td class="print-error-description">{{errorDescription}}
                                     <br>
-                                    Repair Comment: {{repairComment}}</td>
+                                    Repair Comment: {{repairComment}}
+                                    Repair Time   : {{repairTime}}</td>
                                 <td class="pdi-rep-conf  {{getStatusColor repairStatus}}" style="background-color:{{getStatusColor repairStatus}}; color:{{getStatusColor repairStatus}}" >{{repairStatus}}</td>
                             </tr>
                         </table>
@@ -747,7 +748,8 @@
                         <tr class="openFailure {{selectedFailure}}">
                             <td class="print-error-description">{{errorDescription}}
                                 <br>
-                                Repair Comment: {{repairComment}}</td>
+                                Repair Comment: {{repairComment}}
+                                Repair Time    : {{repairTime}}</td>
                             <td class="pdi-rep-conf  {{getStatusColor repairStatus}}" style="background-color:{{getStatusColor repairStatus}}; color:{{getStatusColor repairStatus}}" >{{repairStatus}}</td>
                         </tr>
                     </table>
@@ -983,7 +985,58 @@
 <!----------------------------------- Issues by Supplier  -------------------------------->
 
 <template name="analyzingSupplier">
-
+    <div class="supplier-head-buttons">
+        <button class="btn btn-info supplierListButton">Adding Suppliers to List</button>
+    </div>
+    <div class="assigned-supplier">
+        <button class="btn btn-info supplierResultList">Show Supplier List</button>
+    </div>
+    <div class="supplier-assign">
+        <h3>Assigning Suppliers</h3>
+    </div>
+    <div class="supplier-head-liner">
+        <h4>For {{timeCount.supplierCount}} Supplier related issues were {{timeCount.timeRepTotal}} min used for Repair Time</h4>
+    </div>
+<div class="supplier-table">
+    <table class="blueTable">
+        <tr>
+            <th>Machine</th>
+            <th>Pdi Tech</th>
+            <th>Error Description</th>
+            <th>Issuer</th>
+            <th>Repair Time</th>
+            <th>Image</th>
+            <th>Supplier</th>
+        </tr>
+        {{#each supplierIssue}}
+                <tr class="selectedIssue {{selectedRow}}">
+                    <td>{{machineNr}}</td>
+                    <td>{{pdiPerformer}}</td>
+                    <td>{{errorDescription}}</td>
+                    <td>{{issueResponsible}}</td>
+                    <td>{{repairTime}} min</td>
+                    <td><a target="blank" href={{pictureLocation}}>
+                            <img class="img-supplier-table" src={{pictureLocation}}
+                                 alt="No Picture">
+                        </a></td>
+                    <td><label for="supplierButton">
+                        {{#dropdownTrigger  name="supplierList"}}
+                            <button class="loginSubmit omInputButton">Suppliers</button>
+                        {{/dropdownTrigger}}
+                        {{#dropdown name="supplierList" align="left" top="-100" left="-200"}}
+                            <tbody class="rTable">
+                            {{#each supplierList}}
+                                <tr class="supplier {{selectedSupplier}}">
+                                    <td class="dropDown">{{supplier}}</td>
+                                </tr>
+                            {{/each}}
+                            </tbody>
+                        {{/dropdown}}
+                    </label></td>
+                </tr>
+        {{/each}}
+    </table>
+</div>
 </template>
 
 <!-----------------------------------  Edit Responsibilities  ----------------------------->
@@ -1195,7 +1248,9 @@
                     <tr class="openFailure {{selectedFailure}}">
                         <td class="print-error-description">{{errorDescription}}
                             <br>
-                            Repair Comment: {{repairComment}}</td>
+                            Repair Comment: {{repairComment}}
+                            <br>
+                            Repair Time: {{repairTime}} min</td>
                         <td class="pdi-rep-conf  {{getStatusColor repairStatus}}" style="background-color:{{getStatusColor repairStatus}}; color:{{getStatusColor repairStatus}}" >{{repairStatus}}</td>
                     </tr>
                 </table>

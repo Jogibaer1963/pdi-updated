@@ -1,5 +1,6 @@
 Meteor.subscribe('analyzingDatabase');
 Meteor.subscribe('fuelAverage');
+Meteor.subscribe('suppliersList');
 
 Session.set('overViewAnalyzing', true);
 Session.set('searchWithKeyWord', false);
@@ -210,6 +211,8 @@ Template.analyzingWithKeyWords.events({
     }
 
 })
+
+
 // **************************************  Responsible Team  *********************************************
 
 Template.analyzingResponseTeam.helpers({
@@ -607,6 +610,114 @@ Template.analyzingResponsibility.events({
     'click .refreshButton' : () => {
         Meteor.call('machines');
         location.reload();
+    }
+
+});
+
+
+// **************************************   Analyzing Component ***********************************
+
+Template.analyzingComponent.helpers({
+
+
+})
+
+Template.analyzingComponent.events({
+
+
+})
+
+// **************************************** Analyzing Supplier ******************************************
+
+
+Template.analyzingSupplier.helpers({
+
+    timeCount: () => {
+        let timeRepTotal = 0;
+        let supplierCount = 0;
+        let returnResult = [];
+        let result = Session.get('analyzeStart');
+      result.forEach((element) => {
+          if (element.repairTime) {
+          let timeRep = parseInt(element.repairTime);
+          timeRepTotal  = timeRepTotal + timeRep;
+          supplierCount ++;
+          }
+
+      })
+        returnResult = {
+          supplierCount : supplierCount,
+          timeRepTotal : timeRepTotal
+        }
+        return returnResult;
+    },
+
+    supplierIssue: function () {
+        let supplierArray = [];
+        let result = analyzingDatabase.find().fetch();
+        result.forEach((element) => {
+            if (element.issueResponsible === 'Supplier') {
+                supplierArray.push(element);
+            }
+        })
+        return supplierArray;
+
+    },
+
+    //  ********** drop down menu suppliers  ****************************
+
+    'selectedSupplier': function () {
+        let component = this._id;
+        let selected = Session.get('selectedSupplier');
+        if (component === selected) {
+            Session.set('supplierChosen', 1);
+            return 'selected'
+        }
+    },
+
+    supplierList: function () {
+        return SuppliersList.find({}).fetch();
+    }
+
+
+    //  *************************************************************************
+
+});
+
+Template.analyzingSupplier.events({
+
+    'click .selectedIssue': function(e) {
+        e.preventDefault();
+        const selectedRow = this._id;
+        const machineNr = this.machineNr;
+        Session.set('selectedSupplierMachine', machineNr);
+        Session.set('selectedRow', selectedRow); // issue Id
+    },
+
+    'click .supplier': function () {
+        const selectedSupplier = this.supplier;
+        Session.set('selectedSupplier', selectedSupplier); // Supplier Id
+        let machineNr = Session.get('selectedSupplierMachine');
+        let issueId = Session.get('selectedRow');
+        if (issueId !== 'undefined' && selectedSupplier !== 'undefined') {
+            Meteor.call('addSupplierToRepair', machineNr, issueId, selectedSupplier)
+        }
+    },
+
+    'click .supplierListButton': (e) => {
+        e.preventDefault();
+        FlowRouter.go('suppliersListView');
+    },
+
+    'click .supplierResultList': (e) => {
+        e.preventDefault()
+        FlowRouter.go('supplierResultList')
+    },
+
+    'click .dropDown': function(e) {
+        e.preventDefault();
+        const selectedId = this._id;
+        Meteor.call('addSupplierToRepair', selectedId);
     }
 
 });

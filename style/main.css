@@ -1361,7 +1361,7 @@ tbody.newIssueTableHeight {
   height: 50px; }
 
 .repair-print-list {
-  left: 40em;
+  left: 45em;
   position: absolute;
   top: 50em; }
 
@@ -1393,8 +1393,12 @@ img.repair-pre-view {
 img:hover {
   box-shadow: 0 0 2px 1px rgba(0, 140, 186, 0.5); }
 
+.repair-table-view {
+  width: 500px;
+  height: 515px; }
+
 .image-box {
-  width: 30em;
+  width: 32em;
   height: 30em; }
 
 .pdi-rep-conf {
@@ -1839,6 +1843,73 @@ td.error-machine {
   position: absolute;
   top: 30.5em;
   left: 20em; }
+
+.assigned-supplier {
+  position: absolute;
+  top: 15em;
+  left: 20em; }
+
+.supplier-assign {
+  position: absolute;
+  left: 32em;
+  top: 20em; }
+
+.supplier-head-buttons {
+  position: absolute;
+  left: 5em;
+  top: 15em; }
+
+.supplier-head-liner {
+  position: absolute;
+  left: 5em;
+  top: 25em; }
+
+.supplier-table {
+  position: absolute;
+  left: 4em;
+  top: 30em; }
+
+.img-supplier-table {
+  border: 1px solid #ddd;
+  /* Gray border */
+  border-radius: 4px;
+  /* Rounded border */
+  padding: 5px;
+  /* Some padding */
+  width: 100px;
+  /* Set a small width */ }
+
+.button-back {
+  position: absolute;
+  left: 5em;
+  top: 10em; }
+
+.remove-Supplier-Button {
+  position: absolute;
+  left: 20em;
+  top: 20em; }
+
+.inputNewSupplier {
+  position: absolute;
+  top: 15em;
+  left: 5em; }
+
+.supplierTable {
+  position: absolute;
+  top: 20em;
+  left: 5em; }
+
+.suppliers-Table-View {
+  width: auto;
+  border-spacing: 5px; }
+
+.suppliers-Result-View {
+  position: absolute;
+  top: 20em;
+  left: 100em; }
+
+table.supplierResultTable {
+  width: 90px; }
 
 .mainLayout {
   left: 40em;

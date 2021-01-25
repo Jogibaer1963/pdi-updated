@@ -120,6 +120,10 @@ if(Meteor.isServer){
         Meteor.publish("analyzingDatabase", function() {
             return analyzingDatabase.find();
         });
+
+        Meteor.publish("SuppliersList", function() {
+            return SuppliersList.find();
+        });
     });
 
 
@@ -143,7 +147,32 @@ if(Meteor.isServer){
         },
 
  */
+        //  ********************   Supplier List ****************
 
+        'newSupplierAdd': (newSupplier) => {
+          SuppliersList.insert({supplier: newSupplier})
+        },
+
+        'removeSupplier': (removeId) => {
+            SuppliersList.remove({_id: removeId})
+        },
+
+        'addSupplierToRepair': (machineNr, issueId, selectedSupplier) => {
+            if (issueId && selectedSupplier) {
+            analyzingDatabase.update({_id: issueId},
+                                    {$set: {issueResponsible: selectedSupplier,
+                                                     extern: true,
+                                                     newEntry: true}});
+
+            MachineReady.update({machineId: machineNr, 'newIssues._id': issueId},
+                                {$set: {'newIssues.$.responsible': selectedSupplier,
+                                                 'newIssues.$.extern': true,
+                                                 'newIssues.$.newEntry': true}
+                                })
+            }
+        },
+
+        //  *******************************************************
 
         'fiscalYear': () => {
             let changeDate = new Date("2020-09-31").getTime() / 1000
@@ -181,9 +210,10 @@ if(Meteor.isServer){
 
      'teamSpecifier': (machineId, team, idCheck) => {
          MachineReady.update({_id: machineId, 'newIssues._id': idCheck},
-             {$set: {'newIssues.$.responsible': team
+             {$set: {'newIssues.$.responsible': team,
                       }})
-         analyzingDatabase.update({_id: idCheck}, {$set: {issueResponsible: team}})
+         analyzingDatabase.update({_id: idCheck}, {$set: {issueResponsible: team,
+                                                                           newEntry: true}})
      },
 
   //-------------------------------------------------- Historic PDI's ------------------------------------
@@ -1145,11 +1175,15 @@ if(Meteor.isServer){
                             repairTech : element2.repairTech,
                             repairComment : element2.repairComment,
                             repairDateTime : element2.repairDateTime,
-                            repairDuration : element2.repairDuration,
-                            issueResponsible : element2.responsible
+                            repairTime : element2.repairTime,
+                            industrialTime : element2.industrialTime,
+                            issueResponsible : element2.responsible,
+                            extern : element2.extern,
+                            newEntry: element2.newEntry
                         }
                         completeIssueArray.push(newIssueElement);
-                        analyzingDatabase.insert({_id : element2._id,
+                        analyzingDatabase.insert({
+                            _id : element2._id,
                             machineId : element._id,
                             machineNr : element.machineId,
                             pdiPerformer : element.pdiPerformer,
@@ -1161,8 +1195,12 @@ if(Meteor.isServer){
                             repairTech : element2.repairTech,
                             repairComment : element2.repairComment,
                             repairDateTime : element2.repairDateTime,
-                            repairDuration : element2.repairDuration,
-                            issueResponsible : element2.responsible});
+                            repairTime : element2.repairTime,
+                            industrialTime : element2.industrialTime,
+                            issueResponsible : element2.responsible,
+                            extern : element2.extern,
+                            newEntry: element2.newEntry
+                            });
                     })
             }
         });
