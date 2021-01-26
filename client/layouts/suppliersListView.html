@@ -124,7 +124,8 @@
         <button class="btn btn-info buttonReturn">Back</button>
     </div>
     <div class="supplierTable">
-        <table class="blueTable">
+        <table class=" blueTable ">
+            <thead>
             <tr>
                 <th>Machine</th>
                 <th>Pdi Tech</th>
@@ -133,8 +134,10 @@
                 <th>Repair Time</th>
                 <th>Image</th>
             </tr>
+            </thead>
+            <tbody>
             {{#each  singleSupplierResult}}
-                <tr class="selectedSupplier {{selectedSupplier}}">
+                <tr class="">
                     <td>{{machineNr}}</td>
                     <td>{{pdiPerformer}}</td>
                     <td>{{errorDescription}}</td>
@@ -146,6 +149,7 @@
                     </a></td>
                 </tr>
             {{/each}}
+            </tbody>
         </table>
     </div>
     <div  class="suppliers-Result-View">
@@ -163,6 +167,11 @@
             {{/each}}
             </tbody>
         </table>
+    </div>
+    <div>
+        <div class="annual-machine-result">
+            <div  id="chart_5">{{annualMachineRepairResult}}</div>
+        </div>
     </div>
 
 </template>

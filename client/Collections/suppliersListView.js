@@ -1,4 +1,5 @@
 Meteor.subscribe('SuppliersList');
+const Highcharts = require('highcharts');
 
 Session.set('selectedSupplierResult', '');
 
@@ -107,11 +108,31 @@ Template.singleSupplierResult.helpers({
     supplierTable: () => {
         let finalResult = [];
         let uniqueResult = [];
+        let machineRepairTime = [];
+        let machineRepair = [];
+        let totalRepairPer = [];
+        let counterResult = [];
         let result = analyzingDatabase.find().fetch();
         result.forEach((element) => {
             if (element.extern === true) {
                 finalResult.push(element.issueResponsible);
-            }
+                machineRepairTime.push(element.machineNr)
+                let machineTime = {
+                    machine: element.machineNr,
+                    repairTime: element.repairTime
+                }
+                machineRepair.push(machineTime)
+                }
+        })
+        let uniqueMachines = machineRepairTime.filter((x, i, a) => a.indexOf(x) === i);
+        uniqueMachines.forEach((element) => {
+            machineRepair.forEach((element2) => {
+                if (element === element2.machine) {
+                   totalRepairPer.push(parseInt(element2.repairTime));
+                }
+            })
+            counterResult.push((totalRepairPer.reduce((a,b) => a + b, 0)))
+            totalRepairPer = [];
         })
         let unique = finalResult.filter((v, i, a) => a.indexOf(v) === i)
         unique.forEach((element) => {
@@ -120,8 +141,73 @@ Template.singleSupplierResult.helpers({
             }
             uniqueResult.push(suppResult);
         })
+        Session.set('annualMachines', uniqueMachines);
+        Session.set('annualRepTime', counterResult)
         return uniqueResult
-    }
+    },
+
+
+    annualMachineRepairResult: function () {
+        // Use Meteor.defer() to create chart after DOM is ready:
+        // Gather data:
+      let annualRepairTime = Session.get('annualRepTime');
+      let annualMachines = Session.get('annualMachines');
+        let titleText = 'PDI Repair Time per Machine';
+        Meteor.defer(function() {
+            // Create standard Highcharts chart with options:
+            Highcharts.chart('chart_5', {
+                title: {
+                    text: titleText
+                },
+                tooltip: {
+                    shared: true
+                },
+                chart: {
+                    style: {
+                        fontFamily: '\'Unica One\', sans-serif'
+                    },
+                    plotBorderColor: '#606063',
+                    height: 500,
+                    width: 900,
+                    zoomType: 'xy'
+                },
+                yAxis: {
+                    categories: [],
+                    title: {enabled: true,
+                        text: 'Picking Time in min',
+                        style: {
+                            fontWeight: 'normal'
+                        }
+                    }
+                },
+                xAxis: {
+                    categories: annualMachines,
+                    title: {
+                        enabled: true,
+                        text: 'Machines',
+                        style: {
+                            fontWeight: 'normal'
+                        }
+                    }
+                },
+                series: [
+                    {
+                        name: 'Repair Time per Machine',
+                        type: 'column',
+                        data: annualRepairTime
+                    },
+                    {
+                        name: 'Machines',
+                        type: 'spline',
+                        data: annualMachines
+                    }
+                ]
+            });
+        });
+    },
+
+    /* ------------------------------------------  Analysis by Month  ------------------ */
+
 
 });
 
@@ -132,5 +218,7 @@ Template.singleSupplierResult.events({
         let selectedSupplier = this.supplier;
         Session.set('selectedSupplierResult', selectedSupplier);
     }
+
+
 
 });

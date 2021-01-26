@@ -1911,6 +1911,11 @@ td.error-machine {
 table.supplierResultTable {
   width: 90px; }
 
+.annual-machine-result {
+  position: absolute;
+  left: 5em;
+  top: 60em; }
+
 .mainLayout {
   left: 40em;
   position: absolute; }
