@@ -124,6 +124,10 @@ if(Meteor.isServer){
         Meteor.publish("SuppliersList", function() {
             return SuppliersList.find();
         });
+
+        Meteor.publish("machineCommTable", function() {
+            return machineCommTable.find();
+        });
     });
 
 

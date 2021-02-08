@@ -1,6 +1,7 @@
 
     Meteor.subscribe("fuelAverage");
     Meteor.subscribe("specialItems")
+    Meteor.subscribe('machineCommTable')
     Session.set('status', 0);
 
 
@@ -8,10 +9,21 @@
 
          shipList: function () {
            Session.set('selectedPdiMachine', '');
+           let commMachine = '';
          // Order of shipping date
-             return MachineReady.find({$or:[{pdiStatus: 0},{pdiStatus: 2}]}, {sort: {date: 1}},
+             let result = MachineReady.find({$or:[{pdiStatus: 0},{pdiStatus: 2}]}, {sort: {date: 1}},
               {fields: {machineId: 1, date: 1, shippingComment: 1, pdiStatus: 1,
-                    washStatus: 1, configStatus: 1}});
+                    washStatus: 1, configStatus: 1}}).fetch();
+             try {
+             result.forEach((element) => {
+                 commMachine = machineCommTable.find({machineId: element.machineId},
+                                                         {fields: {'timeLine.bay19Planned': 1}}).fetch();
+                 let endOfLine = commMachine[0].timeLine;
+                 Object.assign(element, endOfLine)
+             })
+             } catch {
+             }
+             return result;
          },
         
         'selectedClass': function(){
@@ -129,7 +141,7 @@
                 return;
             }
             let reader = new FileReader();
-                reader.onload = function(e) {
+            reader.onload = function(e) {
                 const contents = e.target.result;
                 let configLength = contents.length;
                 const machineId = contents.slice(5, 13);
@@ -138,12 +150,12 @@
                 let trimConfig = config.replace(/\s+/g, '').trim();
                 const newConfig = (trimConfig.length) / 12;
                 for (let j = 0; j < newConfig; j++) {
-                        singleConfig[j] = (trimConfig.substr(i, k).trim()).replace(';', '_');
-                        i = i + 12;
+                    singleConfig[j] = (trimConfig.substr(i, k).trim()).replace(';', '_');
+                    i = i + 12;
                 }
-                    singleConfig.sort();
-                    Meteor.call('readConfig', machineId, singleConfig);
-                };
+                singleConfig.sort();
+                Meteor.call('readConfig', machineId, singleConfig);
+            };
             reader.readAsText(file);
         },
     });
