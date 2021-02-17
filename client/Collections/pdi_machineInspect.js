@@ -177,16 +177,6 @@ Meteor.subscribe('oms');
             Session.set('confirmRepair', confirmRepair);
         },
 
-        'submit .pdiRepairConfirmText': function (e) {
-            e.preventDefault();
-            const repairUser = Meteor.user().username;
-            const repairComment = e.target.message.value;
-            let repairId = Session.get('confirmRepair');
-            let machineId = Session.get('selectedMachineId');
-            console.log(repairId, repairUser, repairComment, machineId)
-            Meteor.call('confirmRepair', repairId, repairUser, repairComment, machineId);
-        },
-
         battSaved: function() {
             try {
                 Session.set('batteries', '');
@@ -405,27 +395,30 @@ Meteor.subscribe('oms');
             }
         },
 
-        'submit .addNewIssue': (event) => {
-            event.preventDefault();
+        'submit .addNewIssue': function(e) {
+            e.preventDefault();
             Session.set('selectedPdiMachineId', localStorage.getItem('pdiMachineId'));
             const selectedPdiMachineId = Session.get('selectedPdiMachineId');
-            let addNewFailure = event.target.addIssue.value;
+            let addNewFailure = e.target.addIssue.value;
             if(selectedPdiMachineId) {
                 Meteor.call('addNewFailure', selectedPdiMachineId, addNewFailure);
             } else {
                 console.log("Lost Machine Number")
             }
-            event.target.addIssue.value = '';
+            e.target.addIssue.value = '';
             Session.set('componentChosen', 0);
             Session.set('selectedComponent', '');
             Session.set('issueComp', '');
         },
 
-        'submit .add-image-to-repair': function (e) {
-            e.preventDefault();
-            let chosenFailure = Session.get('openFailure');
-            if (chosenFailure) {
-               // console.log('inside', chosenFailure)
+        'change input': function(ev) {
+            const openFailure = Session.get('openFailure');
+            if(openFailure) {
+                _.each(ev.target.files, function(file) {
+                    console.log('inside')
+                    Meteor.saveFile(file, file.name);
+                });
+            } else {
             }
         },
 
@@ -507,6 +500,8 @@ Meteor.subscribe('oms');
             let repairId = Session.get('openFailure');
             let machineId = Session.get('selectedPdiMachineId');
             Meteor.call('confirmRepair', repairId, repairUser, repairComment, repairTime, machineId);
+            e.target.message.value = '';
+            e.target.repTime.value = '';
         },
 
 
@@ -557,17 +552,7 @@ Meteor.subscribe('oms');
             FlowRouter.go('/inspectionStart');
         },
 
-        'change input': function(ev) {
-            const openFailure = Session.get('openFailure');
-            if(openFailure) {
-                console.log(openFailure);
-                _.each(ev.target.files, function(file) {
-                    Meteor.saveFile(file, file.name);
-                });
-            } else {
 
-            }
-        }
 
     });
 

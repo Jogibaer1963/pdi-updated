@@ -95,8 +95,31 @@ Meteor.subscribe('addIssues');
         },
 
         machineRepairList: () => {
-           let machine = Session.get('selectedMachineId');
-            return MachineReady.findOne({_id: machine}).machineId;
+            try {
+                let machine = Session.get('selectedMachineId');
+                return MachineReady.findOne({_id: machine}).machineId;
+            } catch {}
+        },
+
+        mainComponent: function () {
+            return mainComponents.find({}).fetch();
+        },
+
+        'selectedComponent': function () {
+            let component = this._id;
+            let selected = Session.get('selectedComponent');
+            if (component === selected) {
+                Session.set('componentChosen', 1);
+                return 'selected'
+            }
+        },
+
+        issueComponent: () => {
+            try {
+                return Session.get('issueComp');
+            } catch (e) {
+
+            }
         },
 
         issueResponsible: () => {
@@ -192,7 +215,44 @@ Meteor.subscribe('addIssues');
             let repairId = Session.get('confirmRepair');
             let machineId = Session.get('selectedMachineId');
             Meteor.call('confirmRepair', repairId, repairUser, repairComment, repairTime, machineId);
+            e.target.message.value = '';
+            e.target.time.value = '';
         },
+
+        'click .comp': function () {
+            const selected = this._id;
+            let textMainComp = this.component;
+            Session.set('selectedComponent', selected);
+            Session.set('issueComp', textMainComp + ' - ');
+        },
+
+        'submit .addNewIssue': function(e) {
+            e.preventDefault();
+            let machineId = Session.get('selectedMachineId');
+            let addNewFailure = e.target.addIssue.value;
+            if(machineId ) {
+                Meteor.call('addNewFailure', machineId , addNewFailure);
+            } else {
+                console.log("Lost Machine Number")
+            }
+            e.target.addIssue.value = '';
+            Session.set('componentChosen', 0);
+            Session.set('selectedComponent', '');
+            Session.set('issueComp', '');
+        },
+
+        'change input': function(ev) {
+            const openFailure = Session.get('confirmRepair');
+            // switch sessions to proper id, call function file in handlebarsRegister.js
+            Session.set('openFailure', openFailure)
+            if(openFailure) {
+                _.each(ev.target.files, function(file) {
+                    Meteor.saveFile(file, file.name);
+                });
+            } else {
+            }
+        },
+
 
         //---------------------------------  Buttons for specifying the issuer  -------------------------
 
@@ -201,7 +261,7 @@ Meteor.subscribe('addIssues');
             let team = 'Team 1';
             let issueId = e.target.id;
             let machineId = Session.get('selectedMachineId');
-            console.log('button 1', 'Team: ', team, 'Issue Id: ', issueId, 'Machine Id: ', machineId);
+         //   console.log('button 1', 'Team: ', team, 'Issue Id: ', issueId, 'Machine Id: ', machineId);
             Meteor.call('teamSpecifier', machineId, team, issueId);
         },
 

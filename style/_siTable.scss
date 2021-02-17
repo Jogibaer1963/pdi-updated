@@ -10,17 +10,67 @@
   left: 2em;
 }
 
+.add-to-pdi {
+  position: absolute;
+  left: 5em;
+  top: 10em;
+}
+
+table.pdi-item-table {
+  position: absolute;
+  top: 18em;
+  left: 4.5em;
+  width: 32.2em;
+}
+
+tbody.pdi-items-height {
+  height: 200px;
+}
+
+.pdi-item-table {
+  width: 520px;
+}
+
+.remove-pdi-Item {
+  position: absolute;
+  left: 38em;
+  top: 22em;
+}
+
 .siSingle {
   position: relative;
-  top: 5em;
-  left: 3em;
+  top: 34em;
+  left: 4em;
+}
+
+.submit-Si {
+  position: absolute;
+  left: 34em;
+}
+
+.siItemMachine {
+  position: absolute;
+  left: -0.25em;
+  width: 75px;
+}
+
+.siItem {
+  position: absolute;
+  left: 6em;
+  width: 380px;
 }
 
 table.siSingleTable {
   position: relative;
-  top: 6em;
-  left: 2em;
-  width: 390px;
+  top: 36em;
+  left: 3em;
+  width: 34em;
+}
+
+.remove-Si-Item {
+  position: absolute;
+  left: 34em;
+  top: 11.5em;
 }
 
 table.siType {
@@ -88,10 +138,7 @@ table.siInactive {
   left: 28em;
 }
 
-.siItemMachine {
-  float: left;
-  margin-left: 3em;
-}
+
 
 .siSubmit {
   position: absolute;

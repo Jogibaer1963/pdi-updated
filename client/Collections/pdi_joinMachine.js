@@ -496,6 +496,8 @@ Template.joinPdiMachine.events({
         let repairId = Session.get('openFailure');
         let machineId = Session.get('selectedPdiMachineId');
         Meteor.call('confirmRepair', repairId, repairUser, repairComment, repairTime, machineId);
+        e.target.message.value = '';
+        e.target.repTime.value = '';
     },
 
     'submit .addressToWashBay': (event) => {

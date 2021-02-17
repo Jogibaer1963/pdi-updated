@@ -155,9 +155,9 @@ table.newIssuesTable {
 }
 
 .add-image-to-repair {
-  left: 37em;
+  left: 43em;
   position: absolute;
-  top: 210em;
+  top: 215em;
 }
 
 img {
@@ -168,11 +168,16 @@ img {
 .pdi-repair {
   position: absolute;
   left: 34.5em;
-  top: 216em;
+  top: 221em;
 }
 
 .pdiNewIssue {
   width: 371px;
+}
+
+.pdi-repair-button {
+  position: absolute;
+  left: 6em;
 }
 
 .submit-button-image {

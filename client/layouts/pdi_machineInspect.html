@@ -256,7 +256,10 @@
                       <tr class="openFailure {{selectedFailure}}">
                           <td class="print-error-description">{{errorDescription}}
                               <br>
-                              Repair Comment: {{repairComment}}</td>
+                              Repair Comment: {{repairComment}}
+                              <br>
+                              Repair Time: {{repairTime}}
+                          </td>
                           <td class="pdi-rep-conf  {{getStatusColor repairStatus}}" style="background-color:{{getStatusColor repairStatus}}; color:{{getStatusColor repairStatus}}" >{{repairStatus}}</td>
                       </tr>
                   </table>
@@ -270,14 +273,17 @@
     </div>
     <br><br>
     <div class="pdi-repair">
-    <form class="pdiRepairConfirmText">
-        <label for="repairComment"> </label>
-        <textarea name="message" id="repairComment" cols="20" rows="3" class="confirm-text-area"> </textarea>
-        <label for="repairTime">Repair Time</label>
-        <input type="number" name="repTime" id="repairTime">
-        <br><br>
-        <button type="submit" class="btn btn-success confirm-pdi-repair">Confirm Repair</button>
-    </form>
+        <form class="pdiRepairConfirmText">
+            <label for="repairComment">Comment  &nbsp; &nbsp; </label>
+            <textarea name="message" id="repairComment" cols="20" rows="3" class="confirm-text-area"> </textarea>
+            <br>
+            <label for="repairTime">Repair Time</label>
+            <input type="number" name="repTime" id="repairTime">
+            <br><br>
+            <div class="pdi-repair-button">
+                <button type="submit" class="btn btn-success confirm-pdi-repair">Confirm Repair</button>
+            </div>
+        </form>
     </div>
     <div class="pdiDivider">
         <h1>_____________________</h1>

@@ -1,47 +1,80 @@
 <template name="si">
     {{#if currentUser}}
           {{> topNav}}
-        {{> siTable}}
+          {{> addingToPdi}}
+          {{> siTable}}
           {{> upload}}
-        {{> siInActive}}
+          {{> siInActive}}
     {{else}}
         {{> login}}
     {{/if}}
+    <div id="logo">
+        <img src="claas_logo.png" />
+    </div>
 </template>
 
+<template name="addingToPdi">
+    <div class="add-to-pdi">
+        <h3>Add items to PDI</h3>
+        <form class="add-item-to-pdi">
+            <label for="pdi-item"></label>
+            <input type="text"
+                   class="pdi-item"
+                   id="pdi-item"
+                   name="pdiItem"
+                   placeholder="pdi-item"
+                   style="width: 450px;">
+            <button type="submit" class="btn btn-success">Submit</button>
+        </form>
+    </div>
+    <div>
+        <table class="blueTable pdi-item-table">
+            <thead >
+            <tr>
+                <th class="pdi-item-table">Pdi Repair Description</th>
+            </tr>
+            </thead>
+            <tbody class="pdi-items-height">
+            {{#each itemToPdi}}
+                <tr class="selectedPdiItem {{selected}}">
+                    <td class="pdi-item-table">{{pdiItem}}</td>
+                </tr>
+                {{/each}}
+            </tbody>
+        </table>
+    </div>
+    <div class="remove-selected-pdi-item">
+        <button class="btn btn-danger remove-pdi-Item">Remove selected</button>
+    </div>
+</template>
 
 <template name="siTable">
-        <div id="logo">
-            <img src="claas_logo.png" />
-        </div>
     <div class="siSingle">
          <h1 class="posSingle">Single Machines</h1>
-       <form class="siItems">
-          <label for="siItem" class="mLocationId" ></label>
-          <input type="text" class="siItemMachine" id="siItem" name="siMachine" placeholder="Machine" required>
-          <label for="siItem" class="" ></label>
-          <input type="text" class="siItem" id="siItem" name="siItemText" placeholder="Description" required>
-          <button type="submit" class="reserveId">Submit</button>
-       </form>
-        <br><br>
-       <form class="removeSiItem">
-          <button type="submit" class="removeSiItem">Remove SI Item</button>
-       </form>
-          <br>
+           <form class="siItems">
+              <label for="siItem" class="mLocationId" ></label>
+              <input type="text" class="siItemMachine" id="siItem" name="siMachine" placeholder="Machine" required>
+              <label for="siItem" class="" ></label>
+              <input type="text" class="siItem" id="siItem" name="siItemText" placeholder="Description" required>
+              <button type="submit" class="btn btn-success submit-Si">Submit</button>
+           </form>
+           <form class="removeSiItem">
+              <button type="submit" class="btn btn-danger remove-Si-Item">Remove selected</button>
+           </form>
     </div>
     <div>
        <table class="blueTable siSingleTable">
             <thead>
                 <tr class="rTableRow ">
                     <th class="pdiMachineField"><strong>Machine</strong></th>
-                    <th class="pdiComments"><strong>SI Description</strong></th>
+                    <th class="pdi-item-table"><strong>SI Description</strong></th>
                 </tr>
             </thead>
             <tbody>
                 {{#each siList}}
                    <tr class="rTableRow selectedSiItem {{selectedLineItem}}">
                        <td class="pdiMachineField">{{machineNr}}</td>
-                       <td class="pdiComments">{{errorDescription}}</td>
+                       <td class="pdi-item-table">{{errorDescription}}</td>
                    </tr>
                 {{/each}}
             </tbody>

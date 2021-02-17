@@ -29,22 +29,23 @@ Template.addingIssue.events({
         Session.set('selectedPdiIssue', pdiIssue);
     },
 
-    'submit .pdiMachine': () => {
-        event.preventDefault();
-        let machine = event.target.machineId.value;
+    'submit .pdiMachine': (e) => {
+        e.preventDefault();
+        let machine = e.target.machineId.value;
         Session.set('issuePdiMachine', machine);
+        e.target.machineId.value = '';
     },
 
-    'submit .inputNewIssue': () => {
-        event.preventDefault();
-        let newIssue = event.target.newIssue.value;
+    'submit .inputNewIssue': (e) => {
+        e.preventDefault();
+        let newIssue = e.target.newIssue.value;
         let machineId = Session.get('issuePdiMachine');
         Meteor.call('newPdiIssue', machineId, newIssue);
-        event.target.newIssue.value = '';
+        e.target.newIssue.value = '';
     },
 
-    'click .removeIssue': () => {
-        event.preventDefault();
+    'click .removeIssue': (e) => {
+        e.preventDefault();
         let machineId = Session.get('issuePdiMachine');
         let pdiIssue = Session.get('selectedPdiIssue');
         Meteor.call('removePdiIssue', machineId, pdiIssue);

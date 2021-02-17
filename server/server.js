@@ -135,22 +135,6 @@ if(Meteor.isServer){
 
     Meteor.methods({
 
-/*
-        'dataClean': () => {
-            console.log('einstieg');
-            let k = MachineReady.find().fetch();
-            k.forEach((element) => {
-                let identifier = element._id;
-                MachineReady.update({_id: identifier},
-                    {$set: {specialPdiItems: [],
-                              checkList: [],
-                              repairStatus: 0,
-                               shipStatus: 0,
-                               washStatus: 0 }})
-                })
-        },
-
- */
         //  ********************   Supplier List ****************
 
         'newSupplierAdd': (newSupplier) => {
@@ -177,6 +161,7 @@ if(Meteor.isServer){
         },
 
         //  *******************************************************
+        // ToDo : change fiscal year automatically
 
         'fiscalYear': () => {
             let changeDate = new Date("2020-09-31").getTime() / 1000
@@ -657,7 +642,9 @@ if(Meteor.isServer){
 
                 })
             })
-            MachineReady.update({_id: selectedPdiMachineId}, {$set: {machineConfig: machineConfiguration}});
+            MachineReady.update({_id: selectedPdiMachineId}, {$set: {
+                                                 machineConfig: machineConfiguration
+                                                     }});
 
             // SI added to repair list
 
@@ -678,8 +665,16 @@ if(Meteor.isServer){
                             $push: {
                                 newIssues: {
                                     _id: uniqueIdSi,
-                                    checkStatus: true,
-                                    errorDescription: siIssue
+                                    "checkStatus": true,
+                                    "errorDescription" : siIssue,
+                                    "pictureLocation" : "noPicture.JPG",
+                                    "pictureUpload" : "No Image",
+                                    "repairStatus" : (0),
+                                    "repairTech" : "",
+                                    "repairComment" : "",
+                                    "repairDateTime" : "",
+                                    "repairDuration" : "",
+                                    "responsible" : ""
                              }}
                         });
                     }
@@ -696,11 +691,44 @@ if(Meteor.isServer){
                     $push: {
                         newIssues: {
                             _id: uniqueIdSi,
-                            checkStatus: true,
-                            errorDescription: siIssue
+                            "checkStatus": true,
+                            "errorDescription" : siIssue,
+                            "pictureLocation" : "noPicture.JPG",
+                            "pictureUpload" : "No Image",
+                            "repairStatus" : (0),
+                            "repairTech" : "",
+                            "repairComment" : "",
+                            "repairDateTime" : "",
+                            "repairDuration" : "",
+                            "responsible" : ""
                         }}
                 });
             }
+
+            // add additional pdi items to repair
+
+            let pdiItemList = specialItems.findOne({_id: "addToPdi"}, {fields: {pdiItems: 1}}).pdiItems;
+            console.log(pdiItemList);
+            pdiItemList.forEach((element) => {
+                let pdiDescription = "- Added Items -" + element.pdiItem
+                MachineReady.update({_id: selectedPdiMachineId}, {
+                    $push: {
+                        newIssues: {
+                            "_id": element._id,
+                            "checkStatus": true,
+                            "errorDescription" : pdiDescription,
+                            "pictureLocation" : "noPicture.JPG",
+                            "pictureUpload" : "No Image",
+                            "repairStatus" : (0),
+                            "repairTech" : "",
+                            "repairComment" : "",
+                            "repairDateTime" : "",
+                            "repairDuration" : "",
+                            "responsible" : ""
+                        }
+                    }
+                })
+            })
         },
 
         'coAuditor': function(machineId, user) {
@@ -729,6 +757,18 @@ if(Meteor.isServer){
         },
 
         //---------------------------------------------  other PDI operations ------------------------------------------------------
+        // Meteor call from pdi_si.js addingToPdi.events 'submit .add-item-to-pdi'
+        'pdiItem': (pdiItem) => {
+            let uniqueId = Random.id();
+                specialItems.upsert({_id: 'addToPdi'}, {$push: {pdiItems: {_id: uniqueId,
+                                                                                        pdiItem: pdiItem}
+                                                                                   }});
+        },
+
+        'removePdiItem': (pdiId) => {
+            specialItems.update({_id: "addToPdi"}, {$pull: {"pdiItems": {_id:  pdiId}}});
+        },
+
 
         'stopPdi': function(selectedCheckPoint) {
             MachineReady.update({_id:selectedCheckPoint}, {$set: {pdiStatus: 0}});
@@ -828,6 +868,7 @@ if(Meteor.isServer){
         // Add additional Failure to checklist
 
         'addNewFailure': (selectedPdiMachineId, addNewFailure) => {
+          //  console.log(selectedPdiMachineId, addNewFailure)
             let uniqueId = Random.id();
             MachineReady.upsert({_id: selectedPdiMachineId},
                                         {$push: {newIssues: {_id: uniqueId,
@@ -859,15 +900,17 @@ if(Meteor.isServer){
         'newPdiIssue': (machineId, newIssue) => {
             let uniqueId = Random.id();
             MachineReady.upsert({machineId: machineId}, {$push: {newIssues: {_id: uniqueId,
-                                                                checkStatus: true,
-                                                                errorDescription: newIssue,
-                                                                pictureLocation: "",
-                                                                pictureUploaded: 'No Image',
-                                                                repairStatus: (0),
-                                                                repairTech: "",
-                                                                repairComment: "",
-                                                                repairDateTime: "",
-                                                                repairDuration: ""}}
+                                                                "checkStatus" : true,
+                                                                "errorDescription" : newIssue,
+                                                                "pictureLocation" : "noPicture.JPG",
+                                                                "pictureUpload" : "No Image",
+                                                                "repairStatus" : (0),
+                                                                "repairTech" : "",
+                                                                "repairComment" : "",
+                                                                "repairDateTime" : "",
+                                                                "repairDuration" : "",
+                                                                "responsible" : ""
+                                                              }}
             });
             addIssues.insert({machineId: machineId, newIssues: newIssue, addStatus: 1});
         },
@@ -1091,8 +1134,9 @@ if(Meteor.isServer){
             MachineReady.remove(selectedMachine);
         },
 
-        saveFile: function(blob, name, path, encoding, failureId, selectedPdiMachineId) {
-            path = '/files/repair-items/';
+        saveFile: function(blob, name, encoding, failureId, selectedPdiMachineId) {
+          //  console.log(name, encoding, failureId, selectedPdiMachineId)
+            let path = '/files/repair-items/';
             encoding = encoding || 'binary';
             name = failureId + '.JPG';
             let fs = Npm.require('fs');
@@ -1100,7 +1144,7 @@ if(Meteor.isServer){
                 if (err) {
                     throw (new Meteor.Error(500, 'Failed to save file.', err));
                 } else {
-                //  console.log('The file ' + name + ' (' + encoding + ') was saved to ' + path);
+                // console.log('The file ' + name + ' (' + encoding + ') was saved to ' + path);
                 }
             });
             MachineReady.update({_id: selectedPdiMachineId, 'newIssues._id': failureId},

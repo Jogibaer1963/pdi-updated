@@ -6,8 +6,53 @@ Meteor.subscribe("siTable");
 Meteor.subscribe('specialPdiItems');
 
 
+Template.addingToPdi.helpers({
+
+    itemToPdi: () => {
+        try {
+              return specialItems.findOne({_id: "addToPdi"}).pdiItems;
+        } catch {
+        }
+    },
+
+    'selected': function () {
+        const selected = this._id;
+        const selectedItem = Session.get('selected-Pdi-Item');
+        if (selected === selectedItem) {
+            return "selected"
+        }
+     }
+
+});
+
+Template.addingToPdi.events({
+
+   'submit .add-item-to-pdi': function (e) {
+       e.preventDefault();
+       const pdiItem = e.target.pdiItem.value;
+       console.log(pdiItem);
+       Meteor.call('pdiItem', pdiItem);
+       e.target.pdiItem.value = '';
+   },
+
+    'click .selectedPdiItem': function(e) {
+      e.preventDefault();
+      const pdiItem = this._id;
+      Session.set('selected-Pdi-Item', pdiItem);
+    },
+
+    'click .remove-pdi-Item': (e) => {
+       e.preventDefault();
+       const pdiId = Session.get('selected-Pdi-Item')
+        Meteor.call('removePdiItem', pdiId)
+    }
+
+});
+
+
     Template.siTable.events({
-        'click .selectedSiItem': function () {
+        'click .selectedSiItem': function (e) {
+            e.preventDefault()
             const checkPoint = this._id;
             Session.set('selectedItem', checkPoint);
         },
@@ -31,8 +76,7 @@ Meteor.subscribe('specialPdiItems');
 
     Template.siTable.helpers({
 
-        siList: function(e) {
-            e.preventDefault();
+        siList: function() {
             return siList.find();
         },
 
@@ -104,12 +148,14 @@ Template.upload.helpers({
 
 Template.uploadList.events({
 
-    'click .selectedSiItem': function () {
+    'click .selectedSiItem': function (e) {
+        e.preventDefault()
         const checkMe = this._id;
         Session.set('selectedItem', checkMe);
     },
 
-    'click .selectedSi': function () {
+    'click .selectedSi': function (e) {
+        e.preventDefault()
         const SiPoint = this._id;
         Session.set('selectedSiLine', SiPoint);
     }
@@ -202,8 +248,8 @@ Template.siInActive.helpers({
 
 Template.siInActive.events({
 
-    'click .selectedInactiveSi': function () {
-        event.preventDefault();
+    'click .selectedInactiveSi': function (e) {
+        e.preventDefault();
         const checkMe = this._id;
         Session.set('selectedItem', checkMe);
     },

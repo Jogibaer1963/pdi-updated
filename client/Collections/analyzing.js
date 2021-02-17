@@ -694,9 +694,9 @@ Template.analyzingSupplier.events({
         Session.set('selectedRow', selectedRow); // issue Id
     },
 
-    'click .supplier': function () {
-        const selectedSupplier = this.supplier;
-        Session.set('selectedSupplier', selectedSupplier); // Supplier Id
+    'change  #category-select': function (event) {
+        event.preventDefault();
+        const selectedSupplier = $(event.currentTarget).val();
         let machineNr = Session.get('selectedSupplierMachine');
         let issueId = Session.get('selectedRow');
         if (issueId !== 'undefined' && selectedSupplier !== 'undefined') {
