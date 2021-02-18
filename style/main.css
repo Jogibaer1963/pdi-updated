@@ -1966,6 +1966,11 @@ table.supplierResultTable {
   left: 80em;
   top: 60em; }
 
+.fuel-consumption-chart {
+  position: absolute;
+  left: 4em;
+  top: 15em; }
+
 .mainLayout {
   left: 40em;
   position: absolute; }
