@@ -111,938 +111,360 @@
 
         {{#if team1Chosen}}
             <div class="team-table">
-                <table class="blueTable newIssuesTable table-height">
-                    {{#each team1}}
-                        <table>
-                            <tr>
-                                <td>Machine Nr : {{machineNr}}</td>
-                                <td>PDI Tech : {{pdiPerformer}}</td>
-                            </tr>
-                        </table>
-                        <table>
-                            <tr>
-                                <td><a target="blank" href={{pictureLocation}}>
-                                    <img class="" src={{pictureLocation}}
-                                         alt="No Picture">
-                                </a></td>
-                                <td>
-                                    <div class="team-button">
-                                        <button type="submit" class="btn
-                                                             btn-success
-                                                             btn-default
-                                                             submitButtonInside
-                                                             submitButton1
-                                                             btn-xs"
-                                                name={{machineId}}
-                                                id={{_id}}>Team 1</button>
-                                        <button type="submit" class="btn
-                                                             btn-success
-                                                             submitButtonInside
-                                                             submitButton2
-                                                             btn-xs"
-                                                name={{machineId}}
-                                                id={{_id}}>Team 2</button>
-                                        <button type="submit" class="btn
-                                                             btn-success
-                                                             btn-default
-                                                             submitButtonInside
-                                                             submitButton3
-                                                             btn-xs"
-                                                name={{machineId}}
-                                                id={{_id}}>Team 3</button>
-                                        <button type="submit" class="btn
-                                                             btn-success
-                                                             btn-default
-                                                             submitButtonInside
-                                                             submitButton4
-                                                             btn-xs"
-                                                name={{machineId}}
-                                                id={{_id}}>Team 4</button>
-                                        <button type="submit" class="btn
-                                                             btn-success
-                                                             btn-default
-                                                             submitButtonInside
-                                                             submitButton5
-                                                             btn-xs"
-                                                name={{machineId}}
-                                                id={{_id}}>Team 5</button>
-                                        <button type="submit" class="btn
-                                                             btn-success
-                                                             btn-default
-                                                             submitButtonInside
-                                                             submitButtonRepair
-                                                             btn-xs"
-                                                name={{machineId}}
-                                                id={{_id}}>Repair</button>
-                                        <button type="submit" class="btn
-                                                             btn-success
-                                                             btn-default
-                                                             submitButtonInside
-                                                             submitButtonRepair
-                                                             btn-xs"
-                                                name={{machineId}}
-                                                id={{_id}}>Utility Repair</button>
-                                        <button type="submit" class="btn
-                                                             btn-success
-                                                             btn-default
-                                                             submitButtonInside
-                                                             submitButtonTestBay
-                                                             btn-xs"
-                                                name={{machineId}}
-                                                id={{_id}}>Test Bay</button>
-                                        <button type="submit" class="btn
-                                                             btn-info
-                                                             btn-default
-                                                             submitButtonInside
-                                                             submitButtonSupplier
-                                                             btn-xs"
-                                                name={{machineId}}
-                                                id={{_id}}>Supplier</button>
-                                        <button type="submit" class="btn
-                                                             btn-info
-                                                             btn-default
-                                                             submitButtonInside
-                                                             submitButtonUnknown
-                                                             btn-xs"
-                                                name={{machineId}}
-                                                id={{_id}}>Unknown</button>
-                                        <h5 style="font-weight: bolder">Causer: {{issueResponsible}}</h5>
-                                    </div>
-                                </td>
-                            </tr>
-                        </table>
-                        <table class="">
-                            <tr class="openFailure {{selectedFailure}}">
-                                <td class="print-error-description">{{errorDescription}}
-                                    <br>
-                                    Repair Comment: {{repairComment}}
-                                    Repair Time   : {{repairTime}}</td>
-                                <td class="pdi-rep-conf  {{getStatusColor repairStatus}}" style="background-color:{{getStatusColor repairStatus}}; color:{{getStatusColor repairStatus}}" >{{repairStatus}}</td>
-                            </tr>
-                        </table>
-                        <br><br>
-                    {{/each}}
+                <table class="blueTable table-height">
+                    <thead>
+                        <tr>
+                            <th>Machine</th>
+                            <th>PDI Tech</th>
+                            <th>Description</th>
+                            <th>image</th>
+                            <th>Repair Tech</th>
+                            <th>Repair Comment</th>
+                            <th>Repair Status</th>
+                            <th>Issuer</th>
+                            <th>change issuer</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {{#each team1}}
+                                <tr>
+                                    <td>{{machineNr}}</td>
+                                    <td>{{pdiTech}}</td>
+                                    <td>{{errorDescription}}</td>
+                                    <td><a target="blank" href={{pictureLocation}}>
+                                        <img style="width: 50px" src={{pictureLocation}}
+                                             alt="No Picture">
+                                    </a></td>
+                                   <td>{{repairTech}}</td>
+                                    <td>{{repairComment}}</td>
+                                    <td>{{repairDuration}}</td>
+                                    <td class="pdi-rep-conf  {{getStatusColor repairStatus}}" style="background-color:{{getStatusColor repairStatus}}; color:{{getStatusColor repairStatus}}" >{{repairStatus}}</td>
+                                    <td>{{responsible}}</td>
+                                    <td>
+                                        <label for="category-select"></label><select id="category-select">
+                                        <option disabled="disabled" selected="selected">Please Select</option>
+                                        {{#each supplierList}}
+                                            <option value="{{this.supplier}}">{{this.supplier}}</option>
+                                        {{/each}}
+                                    </select>
+                                    </td>
+                                </tr>
+                        {{/each}}
+                     </tbody>
                 </table>
             </div>
         {{/if}}
-
         {{#if team2Chosen}}
             <div class="team-table">
-                <table class="blueTable newIssuesTable table-height">
+                <table class="blueTable table-height">
+                    <thead>
+                    <tr>
+                        <th>Machine</th>
+                        <th>PDI Tech</th>
+                        <th>Description</th>
+                        <th>image</th>
+                        <th>Repair Tech</th>
+                        <th>Repair Comment</th>
+                        <th>Repair Status</th>
+                        <th>Issuer</th>
+                    </tr>
+                    </thead>
+                    <tbody>
                     {{#each team2}}
-                        <table>
-                            <tr>
-                                <td>Machine Nr : {{machineNr}}</td>
-                                <td>PDI Tech : {{pdiPerformer}}</td>
-                            </tr>
-                        </table>
-                        <table>
-                            <tr>
-                                <td><a target="blank" href={{pictureLocation}}>
-                                    <img class="" src={{pictureLocation}}
-                                         alt="No Picture">
-                                </a></td>
-                                <td>
-                                    <div class="team-button">
-                                        <button type="submit" class="btn
-                                                             btn-success
-                                                             btn-default
-                                                             submitButtonInside
-                                                             submitButton1
-                                                             btn-xs"
-                                                name={{machineId}}
-                                                id={{_id}}>Team 1</button>
-                                        <button type="submit" class="btn
-                                                             btn-success
-                                                             submitButtonInside
-                                                             submitButton2
-                                                             btn-xs"
-                                                name={{machineId}}
-                                                id={{_id}}>Team 2</button>
-                                        <button type="submit" class="btn
-                                                             btn-success
-                                                             btn-default
-                                                             submitButtonInside
-                                                             submitButton3
-                                                             btn-xs"
-                                                name={{machineId}}
-                                                id={{_id}}>Team 3</button>
-                                        <button type="submit" class="btn
-                                                             btn-success
-                                                             btn-default
-                                                             submitButtonInside
-                                                             submitButton4
-                                                             btn-xs"
-                                                name={{machineId}}
-                                                id={{_id}}>Team 4</button>
-                                        <button type="submit" class="btn
-                                                             btn-success
-                                                             btn-default
-                                                             submitButtonInside
-                                                             submitButton5
-                                                             btn-xs"
-                                                name={{machineId}}
-                                                id={{_id}}>Team 5</button>
-                                        <button type="submit" class="btn
-                                                             btn-success
-                                                             btn-default
-                                                             submitButtonInside
-                                                             submitButtonRepair
-                                                             btn-xs"
-                                                name={{machineId}}
-                                                id={{_id}}>Repair</button>
-                                        <button type="submit" class="btn
-                                                             btn-success
-                                                             btn-default
-                                                             submitButtonInside
-                                                             submitButtonRepair
-                                                             btn-xs"
-                                                name={{machineId}}
-                                                id={{_id}}>Utility Repair</button>
-                                        <button type="submit" class="btn
-                                                             btn-success
-                                                             btn-default
-                                                             submitButtonInside
-                                                             submitButtonTestBay
-                                                             btn-xs"
-                                                name={{machineId}}
-                                                id={{_id}}>Test Bay</button>
-                                        <button type="submit" class="btn
-                                                             btn-info
-                                                             btn-default
-                                                             submitButtonInside
-                                                             submitButtonSupplier
-                                                             btn-xs"
-                                                name={{machineId}}
-                                                id={{_id}}>Supplier</button>
-                                        <button type="submit" class="btn
-                                                             btn-info
-                                                             btn-default
-                                                             submitButtonInside
-                                                             submitButtonUnknown
-                                                             btn-xs"
-                                                name={{machineId}}
-                                                id={{_id}}>Unknown</button>
-                                        <h5 style="font-weight: bolder">Causer: {{issueResponsible}}</h5>
-                                    </div>
-                                </td>
-                            </tr>
-                        </table>
-                        <table class="">
-                            <tr class="openFailure {{selectedFailure}}">
-                                <td class="print-error-description">{{errorDescription}}
-                                    <br>
-                                    Repair Comment: {{repairComment}}</td>
-                                <td class="pdi-rep-conf  {{getStatusColor repairStatus}}" style="background-color:{{getStatusColor repairStatus}}; color:{{getStatusColor repairStatus}}" >{{repairStatus}}</td>
-                            </tr>
-                        </table>
-                        <br><br>
+                        <tr>
+                            <td>{{machineNr}}</td>
+                            <td>{{pdiTech}}</td>
+                            <td>{{errorDescription}}</td>
+                            <td><a target="blank" href={{pictureLocation}}>
+                                <img style="width: 50px" src={{pictureLocation}}
+                                     alt="No Picture">
+                            </a></td>
+                            <td>{{repairTech}}</td>
+                            <td>{{repairComment}}</td>
+                            <td>{{repairDuration}}</td>
+                            <td class="pdi-rep-conf  {{getStatusColor repairStatus}}" style="background-color:{{getStatusColor repairStatus}}; color:{{getStatusColor repairStatus}}" >{{repairStatus}}</td>
+                            <td>{{responsible}}</td>
+                            <td>
+                                <label for="category-select"></label><select id="category-select">
+                                <option disabled="disabled" selected="selected">Please Select</option>
+                                {{#each supplierList}}
+                                    <option value="{{this.supplier}}">{{this.supplier}}</option>
+                                {{/each}}
+                            </select>
+                            </td>
+                        </tr>
                     {{/each}}
+                    </tbody>
                 </table>
             </div>
        {{/if}}
 
     {{#if team3Chosen}}
         <div class="team-table">
-            <table class="blueTable newIssuesTable table-height">
+            <table class="blueTable table-height">
+                <thead>
+                <tr>
+                    <th>Machine</th>
+                    <th>PDI Tech</th>
+                    <th>Description</th>
+                    <th>image</th>
+                    <th>Repair Tech</th>
+                    <th>Repair Comment</th>
+                    <th>Repair Status</th>
+                    <th>Issuer</th>
+                </tr>
+                </thead>
+                <tbody>
                 {{#each team3}}
-                    <table>
-                        <tr>
-                            <td>Machine Nr : {{machineNr}}</td>
-                            <td>PDI Tech : {{pdiPerformer}}</td>
-                        </tr>
-                    </table>
-                    <table>
-                        <tr>
-                            <td><a target="blank" href={{pictureLocation}}>
-                                <img class="" src={{pictureLocation}}
-                                     alt="No Picture">
-                            </a></td>
-                            <td>
-                                <div class="team-button">
-                                    <button type="submit" class="btn
-                                                             btn-success
-                                                             btn-default
-                                                             submitButtonInside
-                                                             submitButton1
-                                                             btn-xs"
-                                            name={{machineId}}
-                                            id={{_id}}>Team 1</button>
-                                    <button type="submit" class="btn
-                                                             btn-success
-                                                             submitButtonInside
-                                                             submitButton2
-                                                             btn-xs"
-                                            name={{machineId}}
-                                            id={{_id}}>Team 2</button>
-                                    <button type="submit" class="btn
-                                                             btn-success
-                                                             btn-default
-                                                             submitButtonInside
-                                                             submitButton3
-                                                             btn-xs"
-                                            name={{machineId}}
-                                            id={{_id}}>Team 3</button>
-                                    <button type="submit" class="btn
-                                                             btn-success
-                                                             btn-default
-                                                             submitButtonInside
-                                                             submitButton4
-                                                             btn-xs"
-                                            name={{machineId}}
-                                            id={{_id}}>Team 4</button>
-                                    <button type="submit" class="btn
-                                                             btn-success
-                                                             btn-default
-                                                             submitButtonInside
-                                                             submitButton5
-                                                             btn-xs"
-                                            name={{machineId}}
-                                            id={{_id}}>Team 5</button>
-                                    <button type="submit" class="btn
-                                                             btn-success
-                                                             btn-default
-                                                             submitButtonInside
-                                                             submitButtonRepair
-                                                             btn-xs"
-                                            name={{machineId}}
-                                            id={{_id}}>Repair</button>
-                                    <button type="submit" class="btn
-                                                             btn-success
-                                                             btn-default
-                                                             submitButtonInside
-                                                             submitButtonRepair
-                                                             btn-xs"
-                                            name={{machineId}}
-                                            id={{_id}}>Utility Repair</button>
-                                    <button type="submit" class="btn
-                                                             btn-success
-                                                             btn-default
-                                                             submitButtonInside
-                                                             submitButtonTestBay
-                                                             btn-xs"
-                                            name={{machineId}}
-                                            id={{_id}}>Test Bay</button>
-                                    <button type="submit" class="btn
-                                                             btn-info
-                                                             btn-default
-                                                             submitButtonInside
-                                                             submitButtonSupplier
-                                                             btn-xs"
-                                            name={{machineId}}
-                                            id={{_id}}>Supplier</button>
-                                    <button type="submit" class="btn
-                                                             btn-info
-                                                             btn-default
-                                                             submitButtonInside
-                                                             submitButtonUnknown
-                                                             btn-xs"
-                                            name={{machineId}}
-                                            id={{_id}}>Unknown</button>
-                                    <h5 style="font-weight: bolder">Causer: {{issueResponsible}}</h5>
-                                </div>
-                            </td>
-                        </tr>
-                    </table>
-                    <table class="">
-                        <tr class="openFailure {{selectedFailure}}">
-                            <td class="print-error-description">{{errorDescription}}
-                                <br>
-                                Repair Comment: {{repairComment}}</td>
-                            <td class="pdi-rep-conf  {{getStatusColor repairStatus}}" style="background-color:{{getStatusColor repairStatus}}; color:{{getStatusColor repairStatus}}" >{{repairStatus}}</td>
-                        </tr>
-                    </table>
-                    <br><br>
+                    <tr>
+                        <td>{{machineNr}}</td>
+                        <td>{{pdiTech}}</td>
+                        <td>{{errorDescription}}</td>
+                        <td><a target="blank" href={{pictureLocation}}>
+                            <img style="width: 50px" src={{pictureLocation}}
+                                 alt="No Picture">
+                        </a></td>
+                        <td>{{repairTech}}</td>
+                        <td>{{repairComment}}</td>
+                        <td>{{repairDuration}}</td>
+                        <td class="pdi-rep-conf  {{getStatusColor repairStatus}}" style="background-color:{{getStatusColor repairStatus}}; color:{{getStatusColor repairStatus}}" >{{repairStatus}}</td>
+                        <td>{{responsible}}</td>
+                        <td>
+                            <label for="category-select"></label><select id="category-select">
+                            <option disabled="disabled" selected="selected">Please Select</option>
+                            {{#each supplierList}}
+                                <option value="{{this.supplier}}">{{this.supplier}}</option>
+                            {{/each}}
+                        </select>
+                        </td>
+                    </tr>
                 {{/each}}
+                </tbody>
             </table>
         </div>
     {{/if}}
 
     {{#if team4Chosen}}
         <div class="team-table">
-            <table class="blueTable newIssuesTable table-height">
+            <table class="blueTable table-height">
+                <thead>
+                <tr>
+                    <th>Machine</th>
+                    <th>PDI Tech</th>
+                    <th>Description</th>
+                    <th>image</th>
+                    <th>Repair Tech</th>
+                    <th>Repair Comment</th>
+                    <th>Repair Status</th>
+                    <th>Issuer</th>
+                </tr>
+                </thead>
+                <tbody>
                 {{#each team4}}
-                    <table>
-                        <tr>
-                            <td>Machine Nr : {{machineNr}}</td>
-                            <td>PDI Tech : {{pdiPerformer}}</td>
-                        </tr>
-                    </table>
-                    <table>
-                        <tr>
-                            <td><a target="blank" href={{pictureLocation}}>
-                                <img class="" src={{pictureLocation}}
-                                     alt="No Picture">
-                            </a></td>
-                            <td>
-                                <div class="team-button">
-                                    <button type="submit" class="btn
-                                                             btn-success
-                                                             btn-default
-                                                             submitButtonInside
-                                                             submitButton1
-                                                             btn-xs"
-                                            name={{machineId}}
-                                            id={{_id}}>Team 1</button>
-                                    <button type="submit" class="btn
-                                                             btn-success
-                                                             submitButtonInside
-                                                             submitButton2
-                                                             btn-xs"
-                                            name={{machineId}}
-                                            id={{_id}}>Team 2</button>
-                                    <button type="submit" class="btn
-                                                             btn-success
-                                                             btn-default
-                                                             submitButtonInside
-                                                             submitButton3
-                                                             btn-xs"
-                                            name={{machineId}}
-                                            id={{_id}}>Team 3</button>
-                                    <button type="submit" class="btn
-                                                             btn-success
-                                                             btn-default
-                                                             submitButtonInside
-                                                             submitButton4
-                                                             btn-xs"
-                                            name={{machineId}}
-                                            id={{_id}}>Team 4</button>
-                                    <button type="submit" class="btn
-                                                             btn-success
-                                                             btn-default
-                                                             submitButtonInside
-                                                             submitButton5
-                                                             btn-xs"
-                                            name={{machineId}}
-                                            id={{_id}}>Team 5</button>
-                                    <button type="submit" class="btn
-                                                             btn-success
-                                                             btn-default
-                                                             submitButtonInside
-                                                             submitButtonRepair
-                                                             btn-xs"
-                                            name={{machineId}}
-                                            id={{_id}}>Repair</button>
-                                    <button type="submit" class="btn
-                                                             btn-success
-                                                             btn-default
-                                                             submitButtonInside
-                                                             submitButtonRepair
-                                                             btn-xs"
-                                            name={{machineId}}
-                                            id={{_id}}>Utility Repair</button>
-                                    <button type="submit" class="btn
-                                                             btn-success
-                                                             btn-default
-                                                             submitButtonInside
-                                                             submitButtonTestBay
-                                                             btn-xs"
-                                            name={{machineId}}
-                                            id={{_id}}>Test Bay</button>
-                                    <button type="submit" class="btn
-                                                             btn-info
-                                                             btn-default
-                                                             submitButtonInside
-                                                             submitButtonSupplier
-                                                             btn-xs"
-                                            name={{machineId}}
-                                            id={{_id}}>Supplier</button>
-                                    <button type="submit" class="btn
-                                                             btn-info
-                                                             btn-default
-                                                             submitButtonInside
-                                                             submitButtonUnknown
-                                                             btn-xs"
-                                            name={{machineId}}
-                                            id={{_id}}>Unknown</button>
-                                    <h5 style="font-weight: bolder">Causer: {{issueResponsible}}</h5>
-                                </div>
-                            </td>
-                        </tr>
-                    </table>
-                    <table class="">
-                        <tr class="openFailure {{selectedFailure}}">
-                            <td class="print-error-description">{{errorDescription}}
-                                <br>
-                                Repair Comment: {{repairComment}}</td>
-                            <td class="pdi-rep-conf  {{getStatusColor repairStatus}}" style="background-color:{{getStatusColor repairStatus}}; color:{{getStatusColor repairStatus}}" >{{repairStatus}}</td>
-                        </tr>
-                    </table>
-                    <br><br>
+                    <tr>
+                        <td>{{machineNr}}</td>
+                        <td>{{pdiTech}}</td>
+                        <td>{{errorDescription}}</td>
+                        <td><a target="blank" href={{pictureLocation}}>
+                            <img style="width: 50px" src={{pictureLocation}}
+                                 alt="No Picture">
+                        </a></td>
+                        <td>{{repairTech}}</td>
+                        <td>{{repairComment}}</td>
+                        <td>{{repairDuration}}</td>
+                        <td class="pdi-rep-conf  {{getStatusColor repairStatus}}" style="background-color:{{getStatusColor repairStatus}}; color:{{getStatusColor repairStatus}}" >{{repairStatus}}</td>
+                        <td>{{responsible}}</td>
+                        <td>
+                            <label for="category-select"></label><select id="category-select">
+                            <option disabled="disabled" selected="selected">Please Select</option>
+                            {{#each supplierList}}
+                                <option value="{{this.supplier}}">{{this.supplier}}</option>
+                            {{/each}}
+                        </select>
+                        </td>
+                    </tr>
                 {{/each}}
+                </tbody>
             </table>
         </div>
     {{/if}}
 
     {{#if team5Chosen}}
         <div class="team-table">
-            <table class="blueTable newIssuesTable table-height">
+            <table class="blueTable table-height">
+                <thead>
+                <tr>
+                    <th>Machine</th>
+                    <th>PDI Tech</th>
+                    <th>Description</th>
+                    <th>image</th>
+                    <th>Repair Tech</th>
+                    <th>Repair Comment</th>
+                    <th>Repair Status</th>
+                    <th>Issuer</th>
+                </tr>
+                </thead>
+                <tbody>
                 {{#each team5}}
-                    <table>
-                        <tr>
-                            <td>Machine Nr : {{machineNr}}</td>
-                            <td>PDI Tech : {{pdiPerformer}}</td>
-                        </tr>
-                    </table>
-                    <table>
-                        <tr>
-                            <td><a target="blank" href={{pictureLocation}}>
-                                <img class="" src={{pictureLocation}}
-                                     alt="No Picture">
-                            </a></td>
-                            <td>
-                                <div class="team-button">
-                                    <button type="submit" class="btn
-                                                             btn-success
-                                                             btn-default
-                                                             submitButtonInside
-                                                             submitButton1
-                                                             btn-xs"
-                                            name={{machineId}}
-                                            id={{_id}}>Team 1</button>
-                                    <button type="submit" class="btn
-                                                             btn-success
-                                                             submitButtonInside
-                                                             submitButton2
-                                                             btn-xs"
-                                            name={{machineId}}
-                                            id={{_id}}>Team 2</button>
-                                    <button type="submit" class="btn
-                                                             btn-success
-                                                             btn-default
-                                                             submitButtonInside
-                                                             submitButton3
-                                                             btn-xs"
-                                            name={{machineId}}
-                                            id={{_id}}>Team 3</button>
-                                    <button type="submit" class="btn
-                                                             btn-success
-                                                             btn-default
-                                                             submitButtonInside
-                                                             submitButton4
-                                                             btn-xs"
-                                            name={{machineId}}
-                                            id={{_id}}>Team 4</button>
-                                    <button type="submit" class="btn
-                                                             btn-success
-                                                             btn-default
-                                                             submitButtonInside
-                                                             submitButton5
-                                                             btn-xs"
-                                            name={{machineId}}
-                                            id={{_id}}>Team 5</button>
-                                    <button type="submit" class="btn
-                                                             btn-success
-                                                             btn-default
-                                                             submitButtonInside
-                                                             submitButtonRepair
-                                                             btn-xs"
-                                            name={{machineId}}
-                                            id={{_id}}>Repair</button>
-                                    <button type="submit" class="btn
-                                                             btn-success
-                                                             btn-default
-                                                             submitButtonInside
-                                                             submitButtonRepair
-                                                             btn-xs"
-                                            name={{machineId}}
-                                            id={{_id}}>Utility Repair</button>
-                                    <button type="submit" class="btn
-                                                             btn-success
-                                                             btn-default
-                                                             submitButtonInside
-                                                             submitButtonTestBay
-                                                             btn-xs"
-                                            name={{machineId}}
-                                            id={{_id}}>Test Bay</button>
-                                    <button type="submit" class="btn
-                                                             btn-info
-                                                             btn-default
-                                                             submitButtonInside
-                                                             submitButtonSupplier
-                                                             btn-xs"
-                                            name={{machineId}}
-                                            id={{_id}}>Supplier</button>
-                                    <button type="submit" class="btn
-                                                             btn-info
-                                                             btn-default
-                                                             submitButtonInside
-                                                             submitButtonUnknown
-                                                             btn-xs"
-                                            name={{machineId}}
-                                            id={{_id}}>Unknown</button>
-                                    <h5 style="font-weight: bolder">Causer: {{issueResponsible}}</h5>
-                                </div>
-                            </td>
-                        </tr>
-                    </table>
-                    <table class="">
-                        <tr class="openFailure {{selectedFailure}}">
-                            <td class="print-error-description">{{errorDescription}}
-                                <br>
-                                Repair Comment: {{repairComment}}</td>
-                            <td class="pdi-rep-conf  {{getStatusColor repairStatus}}" style="background-color:{{getStatusColor repairStatus}}; color:{{getStatusColor repairStatus}}" >{{repairStatus}}</td>
-                        </tr>
-                    </table>
-                    <br><br>
+                    <tr>
+                        <td>{{machineNr}}</td>
+                        <td>{{pdiTech}}</td>
+                        <td>{{errorDescription}}</td>
+                        <td><a target="blank" href={{pictureLocation}}>
+                            <img style="width: 50px" src={{pictureLocation}}
+                                 alt="No Picture">
+                        </a></td>
+                        <td>{{repairTech}}</td>
+                        <td>{{repairComment}}</td>
+                        <td>{{repairDuration}}</td>
+                        <td class="pdi-rep-conf  {{getStatusColor repairStatus}}" style="background-color:{{getStatusColor repairStatus}}; color:{{getStatusColor repairStatus}}" >{{repairStatus}}</td>
+                        <td>{{responsible}}</td>
+                        <td>
+                            <label for="category-select"></label><select id="category-select">
+                            <option disabled="disabled" selected="selected">Please Select</option>
+                            {{#each supplierList}}
+                                <option value="{{this.supplier}}">{{this.supplier}}</option>
+                            {{/each}}
+                        </select>
+                        </td>
+                    </tr>
                 {{/each}}
+                </tbody>
             </table>
         </div>
     {{/if}}
 
     {{#if teamTestBayChosen}}
         <div class="team-table">
-            <table class="blueTable newIssuesTable table-height">
-                {{#each teamTestBay}}
-                    <table>
-                        <tr>
-                            <td>Machine Nr : {{machineNr}}</td>
-                            <td>PDI Tech : {{pdiPerformer}}</td>
-                        </tr>
-                    </table>
-                    <table>
-                        <tr>
-                            <td><a target="blank" href={{pictureLocation}}>
-                                <img class="" src={{pictureLocation}}
-                                     alt="No Picture">
-                            </a></td>
-                            <td>
-                                <div class="team-button">
-                                    <button type="submit" class="btn
-                                                             btn-success
-                                                             btn-default
-                                                             submitButtonInside
-                                                             submitButton1
-                                                             btn-xs"
-                                            name={{machineId}}
-                                            id={{_id}}>Team 1</button>
-                                    <button type="submit" class="btn
-                                                             btn-success
-                                                             submitButtonInside
-                                                             submitButton2
-                                                             btn-xs"
-                                            name={{machineId}}
-                                            id={{_id}}>Team 2</button>
-                                    <button type="submit" class="btn
-                                                             btn-success
-                                                             btn-default
-                                                             submitButtonInside
-                                                             submitButton3
-                                                             btn-xs"
-                                            name={{machineId}}
-                                            id={{_id}}>Team 3</button>
-                                    <button type="submit" class="btn
-                                                             btn-success
-                                                             btn-default
-                                                             submitButtonInside
-                                                             submitButton4
-                                                             btn-xs"
-                                            name={{machineId}}
-                                            id={{_id}}>Team 4</button>
-                                    <button type="submit" class="btn
-                                                             btn-success
-                                                             btn-default
-                                                             submitButtonInside
-                                                             submitButton5
-                                                             btn-xs"
-                                            name={{machineId}}
-                                            id={{_id}}>Team 5</button>
-                                    <button type="submit" class="btn
-                                                             btn-success
-                                                             btn-default
-                                                             submitButtonInside
-                                                             submitButtonRepair
-                                                             btn-xs"
-                                            name={{machineId}}
-                                            id={{_id}}>Repair</button>
-                                    <button type="submit" class="btn
-                                                             btn-success
-                                                             btn-default
-                                                             submitButtonInside
-                                                             submitButtonRepair
-                                                             btn-xs"
-                                            name={{machineId}}
-                                            id={{_id}}>Utility Repair</button>
-                                    <button type="submit" class="btn
-                                                             btn-success
-                                                             btn-default
-                                                             submitButtonInside
-                                                             submitButtonTestBay
-                                                             btn-xs"
-                                            name={{machineId}}
-                                            id={{_id}}>Test Bay</button>
-                                    <button type="submit" class="btn
-                                                             btn-info
-                                                             btn-default
-                                                             submitButtonInside
-                                                             submitButtonSupplier
-                                                             btn-xs"
-                                            name={{machineId}}
-                                            id={{_id}}>Supplier</button>
-                                    <button type="submit" class="btn
-                                                             btn-info
-                                                             btn-default
-                                                             submitButtonInside
-                                                             submitButtonUnknown
-                                                             btn-xs"
-                                            name={{machineId}}
-                                            id={{_id}}>Unknown</button>
-                                    <h5 style="font-weight: bolder">Causer: {{issueResponsible}}</h5>
-                                </div>
-                            </td>
-                        </tr>
-                    </table>
-                    <table class="">
-                        <tr class="openFailure {{selectedFailure}}">
-                            <td class="print-error-description">{{errorDescription}}
-                                <br>
-                                Repair Comment: {{repairComment}}
-                                Repair Time    : {{repairTime}}</td>
-                            <td class="pdi-rep-conf  {{getStatusColor repairStatus}}" style="background-color:{{getStatusColor repairStatus}}; color:{{getStatusColor repairStatus}}" >{{repairStatus}}</td>
-                        </tr>
-                    </table>
-                    <br><br>
+            <table class="blueTable table-height">
+                <thead>
+                <tr>
+                    <th>Machine</th>
+                    <th>PDI Tech</th>
+                    <th>Description</th>
+                    <th>image</th>
+                    <th>Repair Tech</th>
+                    <th>Repair Comment</th>
+                    <th>Repair Status</th>
+                    <th>Issuer</th>
+                </tr>
+                </thead>
+                <tbody>
+                {{#each team6}}
+                    <tr>
+                        <td>{{machineNr}}</td>
+                        <td>{{pdiTech}}</td>
+                        <td>{{errorDescription}}</td>
+                        <td><a target="blank" href={{pictureLocation}}>
+                            <img style="width: 50px" src={{pictureLocation}}
+                                 alt="No Picture">
+                        </a></td>
+                        <td>{{repairTech}}</td>
+                        <td>{{repairComment}}</td>
+                        <td>{{repairDuration}}</td>
+                        <td class="pdi-rep-conf  {{getStatusColor repairStatus}}" style="background-color:{{getStatusColor repairStatus}}; color:{{getStatusColor repairStatus}}" >{{repairStatus}}</td>
+                        <td>{{responsible}}</td>
+                        <td>
+                            <label for="category-select"></label><select id="category-select">
+                            <option disabled="disabled" selected="selected">Please Select</option>
+                            {{#each supplierList}}
+                                <option value="{{this.supplier}}">{{this.supplier}}</option>
+                            {{/each}}
+                        </select>
+                        </td>
+                    </tr>
                 {{/each}}
+                </tbody>
             </table>
         </div>
     {{/if}}
 
     {{#if teamSupplierChosen}}
         <div class="team-table">
-            <table class="blueTable newIssuesTable table-height">
+            <table class="blueTable table-height">
+                <thead>
+                <tr>
+                    <th>Machine</th>
+                    <th>PDI Tech</th>
+                    <th>Description</th>
+                    <th>image</th>
+                    <th>Repair Tech</th>
+                    <th>Repair Comment</th>
+                    <th>Repair Status</th>
+                    <th>Issuer</th>
+                </tr>
+                </thead>
+                <tbody>
                 {{#each team7}}
-                    <table>
-                        <tr>
-                            <td>Machine Nr : {{machineNr}}</td>
-                            <td>PDI Tech : {{pdiPerformer}}</td>
-                        </tr>
-                    </table>
-                    <table>
-                        <tr>
-                            <td><a target="blank" href={{pictureLocation}}>
-                                <img class="" src={{pictureLocation}}
-                                     alt="No Picture">
-                            </a></td>
-                            <td>
-                                <div class="team-button">
-                                    <button type="submit" class="btn
-                                                             btn-success
-                                                             btn-default
-                                                             submitButtonInside
-                                                             submitButton1
-                                                             btn-xs"
-                                            name={{machineId}}
-                                            id={{_id}}>Team 1</button>
-                                    <button type="submit" class="btn
-                                                             btn-success
-                                                             submitButtonInside
-                                                             submitButton2
-                                                             btn-xs"
-                                            name={{machineId}}
-                                            id={{_id}}>Team 2</button>
-                                    <button type="submit" class="btn
-                                                             btn-success
-                                                             btn-default
-                                                             submitButtonInside
-                                                             submitButton3
-                                                             btn-xs"
-                                            name={{machineId}}
-                                            id={{_id}}>Team 3</button>
-                                    <button type="submit" class="btn
-                                                             btn-success
-                                                             btn-default
-                                                             submitButtonInside
-                                                             submitButton4
-                                                             btn-xs"
-                                            name={{machineId}}
-                                            id={{_id}}>Team 4</button>
-                                    <button type="submit" class="btn
-                                                             btn-success
-                                                             btn-default
-                                                             submitButtonInside
-                                                             submitButton5
-                                                             btn-xs"
-                                            name={{machineId}}
-                                            id={{_id}}>Team 5</button>
-                                    <button type="submit" class="btn
-                                                             btn-success
-                                                             btn-default
-                                                             submitButtonInside
-                                                             submitButtonRepair
-                                                             btn-xs"
-                                            name={{machineId}}
-                                            id={{_id}}>Repair</button>
-                                    <button type="submit" class="btn
-                                                             btn-success
-                                                             btn-default
-                                                             submitButtonInside
-                                                             submitButtonRepair
-                                                             btn-xs"
-                                            name={{machineId}}
-                                            id={{_id}}>Utility Repair</button>
-                                    <button type="submit" class="btn
-                                                             btn-success
-                                                             btn-default
-                                                             submitButtonInside
-                                                             submitButtonTestBay
-                                                             btn-xs"
-                                            name={{machineId}}
-                                            id={{_id}}>Test Bay</button>
-                                    <button type="submit" class="btn
-                                                             btn-info
-                                                             btn-default
-                                                             submitButtonInside
-                                                             submitButtonSupplier
-                                                             btn-xs"
-                                            name={{machineId}}
-                                            id={{_id}}>Supplier</button>
-                                    <button type="submit" class="btn
-                                                             btn-info
-                                                             btn-default
-                                                             submitButtonInside
-                                                             submitButtonUnknown
-                                                             btn-xs"
-                                            name={{machineId}}
-                                            id={{_id}}>Unknown</button>
-                                    <h5 style="font-weight: bolder">Causer: {{issueResponsible}}</h5>
-                                </div>
-                            </td>
-                        </tr>
-                    </table>
-                    <table class="">
-                        <tr class="openFailure {{selectedFailure}}">
-                            <td class="print-error-description">{{errorDescription}}
-                                <br>
-                                Repair Comment: {{repairComment}}</td>
-                            <td class="pdi-rep-conf  {{getStatusColor repairStatus}}" style="background-color:{{getStatusColor repairStatus}}; color:{{getStatusColor repairStatus}}" >{{repairStatus}}</td>
-                        </tr>
-                    </table>
-                    <br><br>
+                    <tr>
+                        <td>{{machineNr}}</td>
+                        <td>{{pdiTech}}</td>
+                        <td>{{errorDescription}}</td>
+                        <td><a target="blank" href={{pictureLocation}}>
+                            <img style="width: 50px" src={{pictureLocation}}
+                                 alt="No Picture">
+                        </a></td>
+                        <td>{{repairTech}}</td>
+                        <td>{{repairComment}}</td>
+                        <td>{{repairDuration}}</td>
+                        <td class="pdi-rep-conf  {{getStatusColor repairStatus}}" style="background-color:{{getStatusColor repairStatus}}; color:{{getStatusColor repairStatus}}" >{{repairStatus}}</td>
+                        <td>{{responsible}}</td>
+                        <td>
+                            <label for="category-select"></label><select id="category-select">
+                            <option disabled="disabled" selected="selected">Please Select</option>
+                            {{#each supplierList}}
+                                <option value="{{this.supplier}}">{{this.supplier}}</option>
+                            {{/each}}
+                        </select>
+                        </td>
+                    </tr>
                 {{/each}}
+                </tbody>
             </table>
         </div>
     {{/if}}
 
     {{#if unknownChosen}}
         <div class="team-table">
-            <table class="blueTable newIssuesTable ">
-                {{#each unknown}}
-                    <table>
-                        <tr>
-                            <td>Machine Nr : {{machineNr}}</td>
-                            <td>PDI Tech : {{pdiPerformer}}</td>
-                        </tr>
-                    </table>
-                    <table>
-                        <tr>
-                            <td><a target="blank" href={{pictureLocation}}>
-                                <img class="" src={{pictureLocation}}
-                                     alt="No Picture">
-                            </a></td>
-                            <td>
-                                <div class="team-button">
-                                    <button type="submit" class="btn
-                                                             btn-success
-                                                             btn-default
-                                                             submitButtonInside
-                                                             submitButton1
-                                                             btn-xs"
-                                            name={{machineId}}
-                                            id={{_id}}>Team 1</button>
-                                    <button type="submit" class="btn
-                                                             btn-success
-                                                             submitButtonInside
-                                                             submitButton2
-                                                             btn-xs"
-                                            name={{machineId}}
-                                            id={{_id}}>Team 2</button>
-                                    <button type="submit" class="btn
-                                                             btn-success
-                                                             btn-default
-                                                             submitButtonInside
-                                                             submitButton3
-                                                             btn-xs"
-                                            name={{machineId}}
-                                            id={{_id}}>Team 3</button>
-                                    <button type="submit" class="btn
-                                                             btn-success
-                                                             btn-default
-                                                             submitButtonInside
-                                                             submitButton4
-                                                             btn-xs"
-                                            name={{machineId}}
-                                            id={{_id}}>Team 4</button>
-                                    <button type="submit" class="btn
-                                                             btn-success
-                                                             btn-default
-                                                             submitButtonInside
-                                                             submitButton5
-                                                             btn-xs"
-                                            name={{machineId}}
-                                            id={{_id}}>Team 5</button>
-                                    <button type="submit" class="btn
-                                                             btn-success
-                                                             btn-default
-                                                             submitButtonInside
-                                                             submitButtonRepair
-                                                             btn-xs"
-                                            name={{machineId}}
-                                            id={{_id}}>Repair</button>
-                                    <button type="submit" class="btn
-                                                             btn-success
-                                                             btn-default
-                                                             submitButtonInside
-                                                             submitButtonRepair
-                                                             btn-xs"
-                                            name={{machineId}}
-                                            id={{_id}}>Utility Repair</button>
-                                    <button type="submit" class="btn
-                                                             btn-success
-                                                             btn-default
-                                                             submitButtonInside
-                                                             submitButtonTestBay
-                                                             btn-xs"
-                                            name={{machineId}}
-                                            id={{_id}}>Test Bay</button>
-                                    <button type="submit" class="btn
-                                                             btn-info
-                                                             btn-default
-                                                             submitButtonInside
-                                                             submitButtonSupplier
-                                                             btn-xs"
-                                            name={{machineId}}
-                                            id={{_id}}>Supplier</button>
-                                    <button type="submit" class="btn
-                                                             btn-info
-                                                             btn-default
-                                                             submitButtonInside
-                                                             submitButtonUnknown
-                                                             btn-xs"
-                                            name={{machineId}}
-                                            id={{_id}}>Unknown</button>
-                                    <button type="submit" class="btn
-                                                             btn-info
-                                                             btn-default
-                                                             submitButtonInside
-                                                             submitButtonUnknown
-                                                             btn-xs"
-                                            name={{machineId}}
-                                            id={{_id}}>N/A</button>
-                                    <h5 style="font-weight: bolder">Causer: {{issueResponsible}}</h5>
-                                </div>
-                            </td>
-                        </tr>
-                    </table>
-                    <table class="">
-                        <tr class="openFailure {{selectedFailure}}">
-                            <td class="print-error-description">{{errorDescription}}
-                                <br>
-                                Repair Comment: {{repairComment}}</td>
-                            <td class="pdi-rep-conf  {{getStatusColor repairStatus}}" style="background-color:{{getStatusColor repairStatus}}; color:{{getStatusColor repairStatus}}" >{{repairStatus}}</td>
-                        </tr>
-                    </table>
-                    <br><br>
+            <table class="blueTable table-height">
+                <thead>
+                <tr>
+                    <th>Machine</th>
+                    <th>PDI Tech</th>
+                    <th>Description</th>
+                    <th>image</th>
+                    <th>Repair Tech</th>
+                    <th>Repair Comment</th>
+                    <th>Repair Status</th>
+                    <th>Issuer</th>
+                </tr>
+                </thead>
+                <tbody>
+                {{#each team8}}
+                    <tr>
+                        <td>{{machineNr}}</td>
+                        <td>{{pdiTech}}</td>
+                        <td>{{errorDescription}}</td>
+                        <td><a target="blank" href={{pictureLocation}}>
+                            <img style="width: 50px" src={{pictureLocation}}
+                                 alt="No Picture">
+                        </a></td>
+                        <td>{{repairTech}}</td>
+                        <td>{{repairComment}}</td>
+                        <td>{{repairDuration}}</td>
+                        <td class="pdi-rep-conf  {{getStatusColor repairStatus}}" style="background-color:{{getStatusColor repairStatus}}; color:{{getStatusColor repairStatus}}" >{{repairStatus}}</td>
+                        <td>{{responsible}}</td>
+                        <td>
+                            <label for="category-select"></label><select id="category-select">
+                            <option disabled="disabled" selected="selected">Please Select</option>
+                            {{#each supplierList}}
+                                <option value="{{this.supplier}}">{{this.supplier}}</option>
+                            {{/each}}
+                        </select>
+                        </td>
+                    </tr>
                 {{/each}}
+                </tbody>
             </table>
         </div>
     {{/if}}
@@ -1087,7 +509,7 @@
                     <td>{{pdiPerformer}}</td>
                     <td>{{errorDescription}}</td>
                     <td>{{issueResponsible}}</td>
-                    <td>{{repairTime}} min</td>
+                    <td>{{repairTime}}</td>
                     <td class="pdiRepField {{getStatusColor repairStatus}}" style="background-color:{{getStatusColor repairStatus}}; color:{{getStatusColor repairStatus}}">{{repairStatus}}</td>
                     <td><a target="blank" href={{pictureLocation}}>
                             <img class="img-supplier-table" src={{pictureLocation}}

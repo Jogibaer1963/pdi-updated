@@ -50,7 +50,7 @@ Session.set('toggleShipList', 0);
         "submit .inputNewMachine": function(e) {
             e.preventDefault();
             const createUnixTime = ((Date.now())/1000).toFixed(0);
-            console.log(createUnixTime);
+           // console.log(createUnixTime);
             const startDate = moment.tz(createUnixTime, "America/Chicago").format().slice(0, 19);
             const createDate = startDate.slice(0,10);
             const createTime = startDate.slice(-8);

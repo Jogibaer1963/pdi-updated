@@ -88,6 +88,78 @@ Template.analyzing.events ({
         Session.set('issueBySupplier', false);
         Session.set('editResponsibility', false);
         Session.set('advanceSearch', false);
+        let result = MachineReady.find({}, {fields: {newIssues: 1,
+                machineId: 1,
+                omms: 1}}).fetch();
+        let returnedTarget = {};
+        let returnResultTeam1 = []; // Team 1
+        let returnResultTeam2 = []; // Team 2
+        let returnResultTeam3 = []; // Team 3
+        let returnResultTeam4 = []; // Team 4 Engines
+        let returnResultTeam5 = []; // Team Final
+        let returnResultTeam6 = []; // Test Bay
+        let returnResultTeam7 = []; // Supplier
+        let returnResultTeam8 = []; // Unknown
+        result.forEach((element) => {
+            if (element.newIssues) {
+                let source = {
+                    machineId: element._id,
+                    machineNr: element.machineId,
+                    pdiTech: element.omms.user
+                }
+                element.newIssues.forEach((element2) => {
+                    if (element2.responsible === "Team 1") {
+                        returnedTarget = Object.assign(element2, source)
+                        returnResultTeam1.push(returnedTarget);
+                    }
+                    if (element2.responsible === "Team 2") {
+                        returnedTarget = Object.assign(element2, source)
+                        returnResultTeam2.push(returnedTarget);
+                    }
+                    if (element2.responsible === "Team 3") {
+                        returnedTarget = Object.assign(element2, source)
+                        returnResultTeam3.push(returnedTarget);
+                    }
+                    if (element2.responsible === "Team 4") {
+                        returnedTarget = Object.assign(element2, source)
+                        returnResultTeam4.push(returnedTarget);
+                    }
+                    if (element2.responsible === "Team 5") {
+                        returnedTarget = Object.assign(element2, source)
+                        returnResultTeam5.push(returnedTarget);
+                    }
+                    if (element2.responsible === "Test Bay") {
+                        returnedTarget = Object.assign(element2, source)
+                        returnResultTeam6.push(returnedTarget);
+                    }
+                    if (element2.responsible === "Supplier") {
+                        returnedTarget = Object.assign(element2, source)
+                        returnResultTeam7.push(returnedTarget);
+                    }
+                    if (element2.responsible === "Unknown") {
+                        returnedTarget = Object.assign(element2, source)
+                        returnResultTeam8.push(returnedTarget);
+                    }
+                })
+            }
+        })
+        Session.set('team1Amount', returnResultTeam1.length);
+        Session.set('team1Result', returnResultTeam1);
+        Session.set('team2Amount', returnResultTeam2.length);
+        Session.set('team2Result', returnResultTeam2);
+        Session.set('team3Amount', returnResultTeam3.length);
+        Session.set('team3Result', returnResultTeam3);
+        Session.set('team4Amount', returnResultTeam4.length);
+        Session.set('team4Result', returnResultTeam4);
+        Session.set('team5Amount', returnResultTeam5.length);
+        Session.set('team5Result', returnResultTeam5);
+        Session.set('team6Amount', returnResultTeam6.length);
+        Session.set('team6Result', returnResultTeam6);
+        Session.set('team7Amount', returnResultTeam7.length);
+        Session.set('team7Result', returnResultTeam7);
+        Session.set('team8Amount', returnResultTeam8.length);
+        Session.set('team8Result', returnResultTeam8);
+
     },
 
     'click .btn-component-search': (e) => {
@@ -249,156 +321,71 @@ Template.analyzingResponseTeam.helpers({
         return Session.get('unknown');
     },
 
+     //   *******************   team tables  ***********************
+
     team1Amount: () => {
-        let team1Summary = [];
-        try {
-            let result = analyzingDatabase.find().fetch();
-            Session.set('teamResponsibilities', result);
-            result.forEach((element) => {
-                if (element.issueResponsible === "Team 1") {
-                    team1Summary.push(element);
-                }
-            })
-            Session.set('team1Summary', team1Summary)
-            return team1Summary.length;
-        } catch { }
         return Session.get('team1Amount');
     },
 
     team1: () => {
-      return Session.get('team1Summary')
+        return Session.get('team1Result');
     },
 
     team2Amount: () => {
-        let team2Summary = [];
-        try {
-            let result = Session.get('teamResponsibilities');
-            result.forEach((element) => {
-                if (element.issueResponsible === "Team 2") {
-                    team2Summary.push(element);
-                }
-            })
-            Session.set('team2Summary', team2Summary)
-            return team2Summary.length;
-        } catch { }
-
+        return Session.get('team2Amount');
     },
 
     team2: () => {
-        return Session.get('team2Summary');
+        return Session.get('team2Result');
     },
 
     team3Amount: () => {
-        let team3Summary = [];
-        try {
-            let result = Session.get('teamResponsibilities');
-            result.forEach((element) => {
-                if (element.issueResponsible === "Team 3") {
-                    team3Summary.push(element);
-                }
-            })
-            Session.set('team3Summary', team3Summary)
-            return team3Summary.length;
-        } catch { }
+        return Session.get('team3Amount');
     },
 
     team3: () => {
-        return Session.get('team3Summary');
+        return Session.get('team3Result');
     },
 
     team4Amount: () => {
-        let team4Summary = [];
-        try {
-            let result = Session.get('teamResponsibilities');
-            result.forEach((element) => {
-                if (element.issueResponsible === "Team 4") {
-                    team4Summary.push(element);
-                }
-            })
-            Session.set('team4Summary', team4Summary)
-            return team4Summary.length;
-        } catch { }
+        return Session.get('team4Amount');
     },
 
     team4: () => {
-        return Session.get('team4Summary');
+        return Session.get('team4Result');
     },
 
     team5Amount: () => {
-        let team5Summary = [];
-        try {
-            let result = Session.get('teamResponsibilities');
-            result.forEach((element) => {
-                if (element.issueResponsible === "Team 5") {
-                    team5Summary.push(element);
-                }
-            })
-            Session.set('team5Summary', team5Summary)
-            return team5Summary.length;
-        } catch { }
+        return Session.get('team5Amount');
     },
 
     team5: () => {
-        return Session.get('team5Summary');
+        return Session.get('team5Result');
     },
 
     teamTestBayAmount: () => {
-        let team6Summary = [];
-        try {
-            let result = Session.get('teamResponsibilities');
-            result.forEach((element) => {
-                if (element.issueResponsible === "Test Bay") {
-                    team6Summary.push(element);
-                }
-            })
-            Session.set('team6Summary', team6Summary)
-            return team6Summary.length;
-        } catch { }
+        return Session.get('team6Amount');
     },
 
-    teamTestBay: () => {
-        return Session.get('team6Summary');
+    team6: () => {
+        return Session.get('team6Result');
     },
 
     teamSupplierAmount: () => {
-        let team7Summary = [];
-        try {
-            let result = Session.get('teamResponsibilities');
-            result.forEach((element) => {
-                if (element.issueResponsible === "Supplier") {
-                    team7Summary.push(element);
-                }
-            })
-            Session.set('team7Summary', team7Summary)
-            return team7Summary.length;
-        } catch { }
+        return Session.get('team7Amount');
     },
 
     team7: () => {
-        return Session.get('team7Summary');
+        return Session.get('team7Result');
     },
-
-
 
     unknownAmount: () => {
-        let team8Summary = [];
-        try {
-            let result = Session.get('teamResponsibilities');
-            result.forEach((element) => {
-                if (element.issueResponsible === "Unknown") {
-                    team8Summary.push(element);
-                }
-            })
-            Session.set('team8Summary', team8Summary)
-            return team8Summary.length;
-        } catch { }
+        return Session.get('team8Amount');
     },
 
-    unknown: () => {
-        return Session.get('team8Summary');
+    team8: () => {
+        return Session.get('team8Result');
     },
-
-
 
 });
 
@@ -510,6 +497,7 @@ Template.analyzingResponseTeam.events({
 // **************************************   Responsibility Analyzing Tool *********************************
 
 Template.analyzingResponsibility.helpers({
+
     openIssue: function () {
         let openResponsible = [];
         let rawDataSet = analyzingDatabase.find({}).fetch();

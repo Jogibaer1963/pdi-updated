@@ -4,7 +4,29 @@
     <option name="serverConfigurations">
       <list>
         <ServerConfiguration>
-          <option name="connectOnIdeStartup" value="true" />
+          <option name="serverUrls">
+            <list>
+              <option value="localhost:27017" />
+            </list>
+          </option>
+          <option name="sshTunnelingConfiguration">
+            <SshTunnelingConfiguration />
+          </option>
+        </ServerConfiguration>
+        <ServerConfiguration>
+          <option name="label" value="Production" />
+          <option name="serverUrls">
+            <list>
+              <option value="localhost:27017" />
+            </list>
+          </option>
+          <option name="sshTunnelingConfiguration">
+            <SshTunnelingConfiguration />
+          </option>
+          <option name="userDatabase" value="production" />
+        </ServerConfiguration>
+        <ServerConfiguration>
+          <option name="label" value="unknown" />
           <option name="serverUrls">
             <list>
               <option value="localhost:27017" />
@@ -16,6 +38,6 @@
         </ServerConfiguration>
       </list>
     </option>
-    <option name="shellPath" value="C:\Program Files\MongoDB\Server\3.6\bin\mongod.exe" />
+    <option name="shellPath" value="C:\Program Files\MongoDB\Server\4.4\bin\mongod.exe" />
   </component>
 </project>

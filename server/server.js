@@ -135,6 +135,24 @@ if(Meteor.isServer){
 
     Meteor.methods({
 
+   // ************* Remove last year shipped machines from database  **************************
+
+            'removeMachines': () => {
+                let result = MachineReady.find().fetch();
+                result.forEach((element) => {
+                    if (element.machineId >= 'C7900001' &&
+                        element.machineId <= 'C7900999' &&
+                        element.shipStatus === 1
+                    ) {
+                        console.log(element.machineId, element._id);
+                        MachineReady.remove({_id: element._id})
+                    }
+                })
+        },
+
+
+
+
         //  ********************   Supplier List ****************
 
         'newSupplierAdd': (newSupplier) => {
@@ -1097,6 +1115,7 @@ if(Meteor.isServer){
         'addToShipList': function(newMachineInput, newShippingDate, createUnixTime, createDate, createTime,
             newShippingDestination, newShippingTransporter, newShippingKit, newShippingTireTrack,
                           newShippingReturns, newShippingComment ) {
+            try {
             MachineReady.insert({
                 machineId: newMachineInput,
                 dateOfCreation: createDate,
@@ -1114,6 +1133,10 @@ if(Meteor.isServer){
                 machineReturn: newShippingReturns,
                 shippingComment: newShippingComment
             });
+            } catch(err) {
+                console.log(err.message)
+            }
+                console.log('kein eror ?')
         },
 
         'editShipInfo': function(selectedMachine, newMachine, newShippingDate, newShippingDestination, newShippingTransporter,
