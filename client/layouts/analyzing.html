@@ -21,6 +21,7 @@
         <button class="btn btn-default btn-success btn-response-supplier" >Issues by Supplier</button>
         <button class="btn btn-default btn-success btn-edit-responsibility" >Edit Responsibility</button>
         <button class="btn btn-default btn-success btn-advance-search" >Advance Search</button>
+        <button class="btn btn-default btn-success btn-options" >Options</button>
     </div>
     {{#if overViewAnalyzing }}  <!-- Home -->
         {{> analyzingOverView}}
@@ -42,6 +43,9 @@
 
     {{else if advanceSearch}}  <!-- Advance Search -->
         {{> analyzingAdvanceSearch}}
+
+    {{else if options}}  <!-- Advance Search -->
+        {{> analyzingOptions}}
 
     {{/if}}
 </template>
@@ -770,4 +774,13 @@
 
 <template name="analyzingAdvanceSearch">
 
+</template>
+
+<template name="analyzingOptions">
+    <div class="options-header">
+        <h3>Adding Teams</h3>
+    </div>
+    <div class="options-header-2">
+        <h3>Adding Suppliers</h3>
+    </div>
 </template>

@@ -1,7 +1,7 @@
 
 .btn-over-view {
-  position: absolute;
   left: 2em;
+  position: absolute;
   top: 10em;
 }
 
@@ -11,60 +11,68 @@
 }
 
 .btn-key-word {
-  position: absolute;
   left: 9.5em;
+  position: absolute;
   top: 10em;
 }
 
 .btn-response-team {
-  position: absolute;
   left: 22em;
+  position: absolute;
   top: 10em;
   width: 14.5em;
 }
 
 .btn-component-search {
-  position: absolute;
   left: 38em;
+  position: absolute;
   top: 10em;
 }
 
 .btn-response-supplier {
-  position: absolute;
   left: 51em;
+  position: absolute;
   top: 10em;
 }
 
 .btn-edit-responsibility {
-  position: absolute;
   left: 62.5em;
+  position: absolute;
   top: 10em;
 }
 
 .btn-advance-search {
-  position: absolute;
   left: 74em;
+  position: absolute;
   top: 10em;
 }
 
-.analyze-overview {
+.btn-options {
+  left: 85em;
   position: absolute;
-  left: 2em;
-  top: 18em;
+  top: 10em;
+}
+
+
+.analyze-overview {
   border-collapse: separate;
-  border-style: solid;
   border-spacing: 20px;
+  border-style: solid;
+  left: 2em;
+  position: absolute;
+  top: 18em;
+
 }
 
 .search-text {
-  position: absolute;
   left: 5em;
+  position: absolute;
   top: 20em;
 }
 
 .analyze-table {
-  position: absolute;
   left: 3em;
+  position: absolute;
   top: 25em;
 }
 
@@ -77,8 +85,8 @@
 }
 
 .error-machine {
-  width: 10em;
   text-align: center;
+  width: 10em;
 }
 
 .error-field {
@@ -90,8 +98,8 @@ td.error-machine {
 }
 
 .count-result {
-  position: absolute;
   left: 44em;
+  position: absolute;
   top: 20em;
 }
 
@@ -112,143 +120,148 @@ td.error-machine {
 }
 
 .refresh-button-edit-response {
+  left: 45em;
   position: absolute;
   top: 16em;
-  left: 45em;
 }
 
 // Responsible Team
 
 .response-team {
+  left: 5em;
   position: absolute;
   top: 15em;
-  left: 5em;
 }
 
 .team-table {
+  left: 35em;
   position: absolute;
   top: 15em;
-  left: 35em;
 }
 
 .btn-team1-details {
+  left: 20em;
   position: absolute;
   top: -.1em;
-  left: 20em;
 }
+
 .btn-team2-details {
+  left: 20em;
   position: absolute;
   top: 4em;
-  left: 20em;
 }
+
 .btn-team3-details {
+  left: 20em;
   position: absolute;
   top: 8.5em;
-  left: 20em;
 }
+
 .btn-team4-details {
+  left: 20em;
   position: absolute;
   top: 12.7em;
-  left: 20em;
 }
+
 .btn-team5-details {
+  left: 20em;
   position: absolute;
   top: 17em;
-  left: 20em;
 }
+
 .btn-teamTestBay-details {
+  left: 20em;
   position: absolute;
   top: 21.5em;
-  left: 20em;
 }
 
 .btn-teamSupplier-details {
+  left: 20em;
   position: absolute;
   top: 25.5em;
-  left: 20em;
 }
 
 .btn-unknown-details {
+  left: 20em;
   position: absolute;
   top: 30.5em;
-  left: 20em;
 }
 
 // supplier Table
 
 .assigned-supplier {
+  left: 20em;
   position: absolute;
   top: 15em;
-  left: 20em;
 }
 
 .supplier-assign {
-  position: absolute;
   left: 32em;
+  position: absolute;
   top: 20em;
 
 }
 
 .supplier-head-buttons {
-  position: absolute;
   left: 5em;
+  position: absolute;
   top: 15em;
 }
 
 .supplier-head-liner {
-  position: absolute;
   left: 5em;
+  position: absolute;
   top: 25em;
 }
 
 .supplier-table {
-  position: absolute;
   left: 4em;
+  position: absolute;
   top: 30em;
 }
 
 .img-supplier-table {
-  border: 1px solid #ddd; /* Gray border */
-  border-radius: 4px;  /* Rounded border */
-  padding: 5px; /* Some padding */
-  width: 100px; /* Set a small width */
+  border: 1px solid #ddd; // Gray border
+  border-radius: 4px;  // Rounded border
+  padding: 5px; // Some padding
+  width: 100px; // Set a small width
 }
 
 //  suppliers List View
 
 .button-back {
-  position: absolute;
   left: 5em;
+  position: absolute;
   top: 10em;
 }
 
 .remove-Supplier-Button {
-  position: absolute;
   left: 20em;
+  position: absolute;
   top: 20em;
 }
 
 .inputNewSupplier {
+  left: 5em;
   position: absolute;
   top: 15em;
-  left: 5em;
 }
 
 .supplierTable {
+  left: 5em;
   position: absolute;
   top: 20em;
-  left: 5em;
 }
 
 .suppliers-Table-View {
-  width: auto;
   border-spacing: 5px;
+  width: auto;
 }
 
 .suppliers-Result-View {
+  left: 100em;
   position: absolute;
   top: 20em;
-  left: 100em;
 }
 
 table.supplierResultTable {
@@ -256,13 +269,25 @@ table.supplierResultTable {
 }
 
 .annual-machine-result {
-  position: absolute;
   left: 5em;
+  position: absolute;
   top: 60em;
 }
 
 .annual-supplier-result {
-  position: absolute;
   left: 80em;
+  position: absolute;
   top: 60em;
+}
+
+.options-header {
+  left: 5em;
+  position: absolute;
+  top: 15em;
+}
+
+.options-header-2 {
+  left: 30em;
+  position: absolute;
+  top: 15em;
 }

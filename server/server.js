@@ -125,6 +125,10 @@ if(Meteor.isServer){
             return SuppliersList.find();
         });
 
+        Meteor.publish("TeamList", function() {
+            return TeamList.find();
+        });
+
         Meteor.publish("machineCommTable", function() {
             return machineCommTable.find();
         });

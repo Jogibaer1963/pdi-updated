@@ -3,21 +3,6 @@ const Highcharts = require('highcharts');
 
 Template.fuelConsumption.helpers({
 
-
-    /*
-        countConsumption: function () {
-            const average = fuelAverage.findOne({});
-            if(average === undefined) {
-            } else {
-                const sum = average.consumption.reduce(function (acc, val) {
-                    return acc + val
-                }, 0);
-                return number = (sum / average.consumption.length).toFixed(2);
-            }
-        }
-
- */
-
     fuelConsumption: function () {
         let machineArray = [];
         let fuelStartArray = [];
@@ -44,7 +29,7 @@ Template.fuelConsumption.helpers({
         let average = (fuelPdiConsumption.reduce((a,b) => a + b , 0) / fuelPdiConsumption.length).toFixed(1);
      //   let annualCarts = cartsCounter.reduce((a,b) => a + b, 0);
         let annualCategories = machineArray.length;
-
+        let chartWidth = annualCategories * 50;
         let titleText = annualCategories + " Machines " + " consumed on average " + average + " Gallons of Fuel per Pdi";
         // Use Meteor.defer() to create chart after DOM is ready:
         Meteor.defer(function() {
@@ -66,7 +51,7 @@ Template.fuelConsumption.helpers({
                     },
                     plotBorderColor: '#606063',
                     height: 800,
-                    width: 4000,
+                    width: chartWidth,
                     zoomType: 'xy'
                 },
 

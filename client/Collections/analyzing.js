@@ -53,6 +53,10 @@ Template.analyzing.helpers ({
         return Session.get('advanceSearch');
     },
 
+    options: () => {
+        return Session.get('options');
+    },
+
 });
 
 Template.analyzing.events ({
@@ -66,6 +70,7 @@ Template.analyzing.events ({
         Session.set('issueBySupplier', false);
         Session.set('editResponsibility', false);
         Session.set('advanceSearch', false);
+        Session.set('options', false);
     },
 
      'click .btn-key-word': (e) => {
@@ -77,6 +82,7 @@ Template.analyzing.events ({
          Session.set('issueBySupplier', false);
          Session.set('editResponsibility', false);
          Session.set('advanceSearch', false);
+         Session.set('options', false);
      },
 
     'click .btn-response-team': (e) => {
@@ -88,6 +94,7 @@ Template.analyzing.events ({
         Session.set('issueBySupplier', false);
         Session.set('editResponsibility', false);
         Session.set('advanceSearch', false);
+        Session.set('options', false);
         let result = MachineReady.find({}, {fields: {newIssues: 1,
                 machineId: 1,
                 omms: 1}}).fetch();
@@ -143,6 +150,10 @@ Template.analyzing.events ({
                 })
             }
         })
+        let totalLength = returnResultTeam1.length + returnResultTeam2.length + returnResultTeam3.length +
+            returnResultTeam4.length + returnResultTeam5.length + returnResultTeam6.length + returnResultTeam7.length +
+            returnResultTeam8.length;
+        Session.set('totalLength', totalLength);
         Session.set('team1Amount', returnResultTeam1.length);
         Session.set('team1Result', returnResultTeam1);
         Session.set('team2Amount', returnResultTeam2.length);
@@ -171,6 +182,7 @@ Template.analyzing.events ({
         Session.set('issueBySupplier', false);
         Session.set('editResponsibility', false);
         Session.set('advanceSearch', false);
+        Session.set('options', false);
     },
 
     'click .btn-response-supplier': (e) => {
@@ -182,6 +194,7 @@ Template.analyzing.events ({
         Session.set('issueBySupplier', true);
         Session.set('editResponsibility', false);
         Session.set('advanceSearch', false);
+        Session.set('options', false);
     },
 
     'click .btn-edit-responsibility': (e) => {
@@ -193,6 +206,7 @@ Template.analyzing.events ({
         Session.set('issueBySupplier', false);
         Session.set('editResponsibility', true);
         Session.set('advanceSearch', false);
+        Session.set('options', false);
     },
 
     'click .btn-advance-search': (e) => {
@@ -204,8 +218,21 @@ Template.analyzing.events ({
         Session.set('issueBySupplier', false);
         Session.set('editResponsibility', false);
         Session.set('advanceSearch', true);
-        Meteor.call('dataClean');
+        Session.set('options', false);
+    },
+
+    'click .btn-options': (e) => {
+        e.preventDefault();
+        Session.set('overViewAnalyzing', false);
+        Session.set('searchWithKeyWord', false);
+        Session.set('responseTeam', false);
+        Session.set('issueByComponent', false);
+        Session.set('issueBySupplier', false);
+        Session.set('editResponsibility', false);
+        Session.set('advanceSearch', false);
+        Session.set('options', true);
     }
+
 
 });
 

@@ -211,12 +211,20 @@ Meteor.subscribe('addIssues');
             e.preventDefault();
             const repairUser = Meteor.user().username;
             const repairComment = e.target.message.value;
-            const repairTime = e.target.time.value;
+            let repairTimeHour = parseInt(e.target.timeHour.value);
+            let repairTimeMin = parseInt(e.target.timeMin.value);
+            if (!repairTimeMin) {
+                repairTimeMin = 0;
+            }
+            if (repairTimeHour) {
+                repairTimeMin = repairTimeHour * 60 + repairTimeMin
+            }
             let repairId = Session.get('confirmRepair');
             let machineId = Session.get('selectedMachineId');
-            Meteor.call('confirmRepair', repairId, repairUser, repairComment, repairTime, machineId);
+            Meteor.call('confirmRepair', repairId, repairUser, repairComment, repairTimeMin, machineId);
             e.target.message.value = '';
-            e.target.time.value = '';
+            e.target.timeHour.value = '';
+            e.target.timeMin.value = '';
         },
 
         'click .comp': function () {
