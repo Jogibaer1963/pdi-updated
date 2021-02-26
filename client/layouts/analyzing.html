@@ -147,8 +147,8 @@
                                     <td>
                                         <label for="category-select"></label><select id="category-select">
                                         <option disabled="disabled" selected="selected">Please Select</option>
-                                        {{#each supplierList}}
-                                            <option value="{{this.supplier}}">{{this.supplier}}</option>
+                                        {{#each teamList}}
+                                            <option value="{{this.team}}">{{this.team}}</option>
                                         {{/each}}
                                     </select>
                                     </td>
@@ -776,11 +776,66 @@
 
 </template>
 
+<!-- ------------------------------  Options Table -------------------------------------------->
+
 <template name="analyzingOptions">
     <div class="options-header">
         <h3>Adding Teams</h3>
+        <div class="input-new-supplier">
+            <form class="newTeam">
+                <label for="inputTeam">New Team</label>
+                <input type="text" id="inputTeam" name="inputTeam">
+                <button class="btn btn-success btn-add-supplier">Submit</button>
+            </form>
+        </div>
+        <div class="supplierTable">
+            <table class="suppliers-Table-View">
+                <thead>
+                <tr>
+                    <td>Teams</td>
+                </tr>
+                </thead>
+                <tbody>
+                {{#each teamList}}
+                    <tr class="selectedTeam {{selectedTeam}}">
+                        <td>{{team}}</td>
+                    </tr>
+                {{/each}}
+                </tbody>
+            </table>
+        </div>
+        <div class="remove-Supplier-Button">
+            <button class="btn btn-danger teamRemoveButton">Remove Team</button>
+        </div>
     </div>
     <div class="options-header-2">
         <h3>Adding Suppliers</h3>
+        <div class="input-new-supplier">
+            <form class="newSupplier">
+                <label for="inputSupplier">New Supplier</label>
+                <input type="text" id="inputSupplier" name="inputSupplier">
+                <button class="btn btn-success btn-add-supplier">Submit</button>
+            </form>
+        </div>
+        <div class="supplierTable">
+            <table class="suppliers-Table-View">
+                <thead>
+                <tr>
+                    <td>Supplier</td>
+                </tr>
+                </thead>
+                <tbody>
+                {{#each suppliersList}}
+                    <tr class="selectedSupplier {{selectedSupplier}}">
+                        <td>{{supplier}}</td>
+                    </tr>
+                {{/each}}
+                </tbody>
+            </table>
+        </div>
+        <div class="remove-Supplier-Button">
+            <button class="btn btn-danger supplierRemoveButton">Remove Supplier</button>
+        </div>
     </div>
 </template>
+

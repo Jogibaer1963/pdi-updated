@@ -132,6 +132,7 @@ if(Meteor.isServer){
         Meteor.publish("machineCommTable", function() {
             return machineCommTable.find();
         });
+
     });
 
 
@@ -154,7 +155,15 @@ if(Meteor.isServer){
                 })
         },
 
+        //  ********************  Team List   ********************
 
+        'newTeamAdd': (newSupplier) => {
+            TeamList.insert({team: newSupplier})
+        },
+
+        'removeTeam': (removeId) => {
+            TeamList.remove({_id: removeId})
+        },
 
 
         //  ********************   Supplier List ****************

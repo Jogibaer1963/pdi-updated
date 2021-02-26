@@ -516,9 +516,10 @@ Template.joinPdiMachine.events({
     'submit .afterPdiFuel': (event) => {
         event.preventDefault();
         const selectedPdiMachineId = Session.get('selectedPdiMachineId');
+        const selectedPdiMachineNr = Session.get('selectedPdiMachineNr');
         let fuelAfter = event.target.afterFuel.value;
         if(selectedPdiMachineId) {
-            Meteor.call('fuelAfterPdi', selectedPdiMachineId, fuelAfter);
+            Meteor.call('fuelAfterPdi', selectedPdiMachineId, selectedPdiMachineNr, fuelAfter);
         } else {
             console.log("Lost Machine Number")
         }

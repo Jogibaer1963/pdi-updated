@@ -1,6 +1,7 @@
 Meteor.subscribe('analyzingDatabase');
 Meteor.subscribe('fuelAverage');
-Meteor.subscribe('suppliersList');
+Meteor.subscribe('SuppliersList');
+Meteor.subscribe('TeamList');
 
 Session.set('overViewAnalyzing', true);
 Session.set('searchWithKeyWord', false);
@@ -315,6 +316,10 @@ Template.analyzingWithKeyWords.events({
 // **************************************  Responsible Team  *********************************************
 
 Template.analyzingResponseTeam.helpers({
+
+    teamList: () => {
+        return TeamList.find();
+    },
 
     team1Chosen: () => {
       return Session.get('team1Chosen');
@@ -729,11 +734,83 @@ Template.analyzingSupplier.events({
         FlowRouter.go('supplierResultList')
     },
 
-    'click .dropDown': function(e) {
-        e.preventDefault();
-        const selectedId = this._id;
-        Meteor.call('addSupplierToRepair', selectedId);
-    }
+
 
 });
 
+Template.analyzingOptions.helpers({
+
+    suppliersList: () => {
+        return SuppliersList.find();
+    },
+
+    teamList: () => {
+        return TeamList.find();
+    },
+
+    'selectedSupplier': function(){
+        let selectSupp = this._id;
+        let selectedSupp = Session.get('selectedSupp')
+        if (selectedSupp === selectSupp) {
+            return 'selected';
+        }
+    },
+
+    'selectedTeam': function(){
+        let selectTeam = this._id;
+        let selectedTeam = Session.get('selectedTeam')
+        if (selectedTeam === selectTeam) {
+            return 'selected';
+        }
+    },
+
+});
+
+Template.analyzingOptions.events({
+    'click .selectedSupplier': function(e){
+        e.preventDefault();
+        const selected = this._id;
+        console.log('selected', selected);
+        Session.set('selectedSupp', selected);
+    },
+
+    'submit .newSupplier':(e) => {
+        e.preventDefault();
+        let newSupplier = e.target.inputSupplier.value;
+        Meteor.call('newSupplierAdd', newSupplier);
+        e.target.inputSupplier.value = '';
+    },
+
+    'click .buttonReturn': (e) => {
+        e.preventDefault();
+        FlowRouter.go('analyzing');
+    },
+
+    'click .supplierRemoveButton': (e) => {
+        e.preventDefault();
+        let removeId = Session.get('selectedSupp');
+        Meteor.call('removeSupplier', removeId);
+    },
+
+    'click .selectedTeam': function(e){
+        e.preventDefault();
+        const selected = this._id;
+        console.log('selected', selected);
+        Session.set('selectedTeam', selected);
+    },
+
+    'submit .newTeam':(e) => {
+        e.preventDefault();
+        let newTeam = e.target.inputTeam.value;
+        Meteor.call('newTeamAdd', newTeam);
+        e.target.inputSupplier.value = '';
+    },
+
+    'click .teamRemoveButton': (e) => {
+        e.preventDefault();
+        let removeId = Session.get('selectedTeam');
+        Meteor.call('removeTeam', removeId);
+    },
+
+
+})
