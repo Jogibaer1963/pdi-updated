@@ -191,6 +191,14 @@ if(Meteor.isServer){
             }
         },
 
+        // *********************************   analyzing -> analyzingResponseTeam  *********************
+
+        'choseTeam': (team, failureId, machineId) => {
+                MachineReady.update({_id: machineId, 'newIssues._id': failureId},
+                                    {$set: {'newIssues.$.responsible': team}})
+
+        },
+
         //  *******************************************************
         // ToDo : change fiscal year automatically
 
@@ -407,8 +415,10 @@ if(Meteor.isServer){
         },
 
 //------------------------------------------------------------------------------------------------------------------------------------------
-        'machineRep': function(machineRepaired, workingHour) {
-          MachineReady.update({_id: machineRepaired}, {$set: {machineHours: workingHour, repairStatus: 1}});
+        'machineRep': function(machineRepaired, workingHour, fuel) {
+          MachineReady.update({_id: machineRepaired}, {$set: {machineHours: workingHour,
+                                                                              repairStatus: 1,
+                                                                              fuelEnd: fuel}});
         },
 
         'changeStatus': function (siNumber, selectedMachineId, setStatus) {
@@ -737,29 +747,30 @@ if(Meteor.isServer){
             }
 
             // add additional pdi items to repair
-
-            let pdiItemList = specialItems.findOne({_id: "addToPdi"}, {fields: {pdiItems: 1}}).pdiItems;
-            console.log(pdiItemList);
-            pdiItemList.forEach((element) => {
-                let pdiDescription = "- Added Items -" + element.pdiItem
-                MachineReady.update({_id: selectedPdiMachineId}, {
-                    $push: {
-                        newIssues: {
-                            "_id": element._id,
-                            "checkStatus": true,
-                            "errorDescription" : pdiDescription,
-                            "pictureLocation" : "noPicture.JPG",
-                            "pictureUpload" : "No Image",
-                            "repairStatus" : (0),
-                            "repairTech" : "",
-                            "repairComment" : "",
-                            "repairDateTime" : "",
-                            "repairDuration" : "",
-                            "responsible" : ""
+            try {
+                let pdiItemList = specialItems.findOne({_id: "addToPdi"},
+                                                       {fields: {pdiItems: 1}}).pdiItems;
+                pdiItemList.forEach((element) => {
+                    let pdiDescription = "- Added Items -" + element.pdiItem
+                    MachineReady.update({_id: selectedPdiMachineId}, {
+                        $push: {
+                            newIssues: {
+                                "_id": element._id,
+                                "checkStatus": true,
+                                "errorDescription" : pdiDescription,
+                                "pictureLocation" : "noPicture.JPG",
+                                "pictureUpload" : "No Image",
+                                "repairStatus" : (0),
+                                "repairTech" : "",
+                                "repairComment" : "",
+                                "repairDateTime" : "",
+                                "repairDuration" : "",
+                                "responsible" : ""
+                            }
                         }
-                    }
+                    })
                 })
-            })
+            } catch(e) {}
         },
 
         'coAuditor': function(machineId, user) {

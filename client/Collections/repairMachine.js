@@ -55,10 +55,9 @@ Meteor.subscribe('addIssues');
             }
         },
 
-        'selectedConfirm': function () {
+        'failureRow': function () {
           const selectedConfirm = this._id;
           const confirmRepair = Session.get('confirmRepair');
-
           if (selectedConfirm === confirmRepair) {
               return "selected";
           }
@@ -74,7 +73,7 @@ Meteor.subscribe('addIssues');
                 }
             } catch {}
         },
-
+/*
         machineToRepair: () => {
            try {
               let repairInfos = Session.get('repairInfos');
@@ -90,6 +89,8 @@ Meteor.subscribe('addIssues');
            } catch {}
         },
 
+ */
+
         repairUser: () => {
             return Meteor.user().username;
         },
@@ -100,6 +101,12 @@ Meteor.subscribe('addIssues');
                 return MachineReady.findOne({_id: machine}).machineId;
             } catch {}
         },
+
+        pdiTech: () => {
+            return Session.get('pdiTech')
+        },
+
+        // **************   Drop down Component list for new issue  ************************
 
         mainComponent: function () {
             return mainComponents.find({}).fetch();
@@ -122,9 +129,48 @@ Meteor.subscribe('addIssues');
             }
         },
 
-        issueResponsible: () => {
 
-        }
+        //   ******************** Repair Table  helpers ************************************
+
+        teamList: () => {
+            return TeamList.find().fetch();
+        },
+
+        machineToRepair: () => {
+            try {
+                const machineId = Session.get('selectedMachineId');
+                let imageIp = Session.get('repairInfos')
+                let returnedTarget = {};
+                let returnResultTeam = []; // Team 1
+                if (machineId) {
+                    let result = MachineReady.findOne({_id: machineId}, {
+                        fields: {
+                            newIssues: 1,
+                            machineId: 1,
+                            omms: 1
+                        }
+                    });
+                    Session.set('pdiTech', result.omms.user);
+                    let machineNr = result.machineId;
+                    let newIssues = result.newIssues;
+                    let source = {
+                        machineId: result._id,
+                        machineNr: machineNr,
+                    }
+                    newIssues.forEach((element) => {
+                        element.pictureLocation = imageIp + element.pictureLocation;
+                        returnedTarget = Object.assign(element, source)
+                        returnResultTeam.push(returnedTarget);
+                    })
+                }
+                return returnResultTeam
+            } catch (e) {
+            }
+        },
+
+
+
+
     });
 
     Template.repairMachine.events({
@@ -154,7 +200,8 @@ Meteor.subscribe('addIssues');
             e.preventDefault();
             const machineRepaired = Session.get('selectedMachineId');
             const workingHour = e.target.workingHours.value;
-            Meteor.call('machineRep', machineRepaired, workingHour);
+            let fuel = '';
+            Meteor.call('machineRep', machineRepaired, workingHour, fuel);
         },
 
         'click .toggleRepairUpcoming': function (e) {
@@ -201,9 +248,10 @@ Meteor.subscribe('addIssues');
             Meteor.call('issueNoticed', selectedMachineId);
         },
 
-        'click .repairConfirm': function (e) {
+        'click .failureRow': function (e) {
             e.preventDefault();
             const confirmRepair = this._id;
+            console.log(confirmRepair)
             Session.set('confirmRepair', confirmRepair);
         },
 
@@ -261,79 +309,6 @@ Meteor.subscribe('addIssues');
             }
         },
 
-
-        //---------------------------------  Buttons for specifying the issuer  -------------------------
-
-        'click .submitButton1': (e) => {
-            e.preventDefault();
-            let team = 'Team 1';
-            let issueId = e.target.id;
-            let machineId = Session.get('selectedMachineId');
-         //   console.log('button 1', 'Team: ', team, 'Issue Id: ', issueId, 'Machine Id: ', machineId);
-            Meteor.call('teamSpecifier', machineId, team, issueId);
-        },
-
-        'click .submitButton2': (e) => {
-            e.preventDefault();
-            let team = 'Team 2';
-            let issueId = e.target.id;
-            let machineId = Session.get('selectedMachineId');
-            Meteor.call('teamSpecifier', machineId, team, issueId);
-        },
-
-        'click .submitButton3': (e) => {
-            e.preventDefault();
-            let team = 'Team 3';
-            let issueId = e.target.id;
-            let machineId = Session.get('selectedMachineId');
-            Meteor.call('teamSpecifier', machineId, team, issueId);
-        },
-        'click .submitButton4': (e) => {
-            e.preventDefault();
-            let team = 'Team 4';
-            let issueId = e.target.id;
-            let machineId = Session.get('selectedMachineId');
-            Meteor.call('teamSpecifier', machineId, team, issueId);
-        },
-        'click .submitButton5': (e) => {
-            e.preventDefault();
-            let team = 'Team 5';
-            let issueId = e.target.id;
-            let machineId = Session.get('selectedMachineId');
-            Meteor.call('teamSpecifier', machineId, team, issueId);
-        },
-
-        'click .submitButtonRepair': (e) => {
-            e.preventDefault();
-            let team = 'Repair';
-            let issueId = e.target.id;
-            let machineId = Session.get('selectedMachineId');
-            Meteor.call('teamSpecifier', machineId, team, issueId);
-        },
-
-        'click .submitButtonTestBay': (e) => {
-            e.preventDefault();
-            let team = 'Test Bay';
-            let issueId = e.target.id;
-            let machineId = Session.get('selectedMachineId');
-            Meteor.call('teamSpecifier', machineId, team, issueId);
-        },
-
-        'click .submitButtonSupplier': (e) => {
-            e.preventDefault();
-            let team = 'Supplier';
-            let issueId = e.target.id;
-            let machineId = Session.get('selectedMachineId');
-            Meteor.call('teamSpecifier', machineId, team, issueId);
-        },
-
-        'click .submitButtonUnknown': (e) => {
-            e.preventDefault();
-            let team = 'Unknown';
-            let issueId = e.target.id;
-            let machineId = Session.get('selectedMachineId');
-            Meteor.call('teamSpecifier', machineId, team, issueId);
-        }
 
     });
 

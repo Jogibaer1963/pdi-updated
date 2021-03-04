@@ -89,31 +89,40 @@
 <template name="analyzingResponseTeam">
     <div class="response-team">
         <h4>Team 1  :  {{team1Amount}} issues identified</h4>
-        <button class="btn btn-default btn-success btn-team1-details">Show Details</button>
+        <button type="button" name="Team 1" class="btn btn-default btn-success btn-team1-details team-chooser">Show Details</button>
         <br>
         <h4>Team 2  :  {{team2Amount}} issues identified</h4>
-        <button class="btn btn-default btn-success btn-team2-details">Show Details</button>
+        <button type="button" name="Team 2"  class="btn btn-default btn-success btn-team2-details team-chooser">Show Details</button>
         <br>
         <h4>team 3  :  {{team3Amount}} issues identified</h4>
-        <button class="btn btn-default btn-success btn-team3-details">Show Details</button>
+        <button type="button" name="Team 3"  class="btn btn-default btn-success btn-team3-details team-chooser">Show Details</button>
         <br>
         <h4>Team 4  :  {{team4Amount}} issues identified</h4>
-        <button class="btn btn-default btn-success btn-team4-details">Show Details</button>
+        <button type="button" name="Team 4"  class="btn btn-default btn-success btn-team4-details team-chooser">Show Details</button>
         <br>
         <h4>Team 5  :  {{team5Amount}} issues identified</h4>
-        <button class="btn btn-default btn-success btn-team5-details">Show Details</button>
+        <button type="button" name="Team 5"  class="btn btn-default btn-success btn-team5-details team-chooser">Show Details</button>
         <br>
         <h4>Test Bay  :  {{teamTestBayAmount}} issues identified</h4>
-        <button class="btn btn-default btn-success btn-teamTestBay-details">Show Details</button>
+        <button type="button" name="Test Bay"  class="btn btn-default btn-success btn-teamTestBay-details team-chooser">Show Details</button>
         <br>
         <h4>Supplier  :  {{teamSupplierAmount}} issues identified</h4>
-        <button class="btn btn-default btn-success btn-teamSupplier-details">Show Details</button>
+        <button type="button" name="Supplier"  class="btn btn-default btn-success btn-teamSupplier-details team-chooser">Show Details</button>
+        <br>
+        <h4>CTD :  {{ctdAmount}} issues identified</h4>
+        <button type="button" name="CTD"  class="btn btn-default btn-success btn-unknown-details team-chooser">Show Details</button>
+        <br>
+        <h4>R&D  :  {{rAndD_Amount}} issues identified</h4>
+        <button type="button" name="R&D"  class="btn btn-default btn-success btn-unknown-details team-chooser">Show Details</button>
         <br>
         <h4>Unknown  :  {{unknownAmount}} issues identified</h4>
-        <button class="btn btn-default btn-success btn-unknown-details">Show Details</button>
+        <button type="button" name="Unknown"  class="btn btn-default btn-success btn-unknown-details team-chooser">Show Details</button>
+        <br>
+        <h4>Not Applicable  :  {{notApplicableAmount}} issues identified</h4>
+        <button type="button" name="N/A"  class="btn btn-default btn-success btn-unknown-details team-chooser">Show Details</button>
     </div>
 
-        {{#if team1Chosen}}
+        {{#if teamTables}}
             <div class="team-table">
                 <table class="blueTable table-height">
                     <thead>
@@ -130,348 +139,38 @@
                         </tr>
                     </thead>
                     <tbody>
-                        {{#each team1}}
-                                <tr>
-                                    <td>{{machineNr}}</td>
-                                    <td>{{pdiTech}}</td>
-                                    <td>{{errorDescription}}</td>
-                                    <td><a target="blank" href={{pictureLocation}}>
-                                        <img style="width: 50px" src={{pictureLocation}}
-                                             alt="No Picture">
-                                    </a></td>
-                                   <td>{{repairTech}}</td>
-                                    <td>{{repairComment}}</td>
-                                    <td>{{repairDuration}}</td>
-                                    <td class="pdi-rep-conf  {{getStatusColor repairStatus}}" style="background-color:{{getStatusColor repairStatus}}; color:{{getStatusColor repairStatus}}" >{{repairStatus}}</td>
-                                    <td>{{responsible}}</td>
-                                    <td>
-                                        <label for="category-select"></label><select id="category-select">
-                                        <option disabled="disabled" selected="selected">Please Select</option>
-                                        {{#each teamList}}
-                                            <option value="{{this.team}}">{{this.team}}</option>
-                                        {{/each}}
-                                    </select>
-                                    </td>
-                                </tr>
+                        {{#each team}}
+                            <tr class="machineRow {{selectedRow}}">
+                                <td>{{machineNr}}</td>
+                                <td>{{pdiTech}}</td>
+                                <td>{{errorDescription}}</td>
+                                <td><a href={{pictureLocation}}>
+                                    <img style="width: 50px; height: 50px;" class="image-box"
+                                         src={{pictureLocation}}
+
+                                         onerror="this.src='noPicture.JPG'"
+                                         alt="No Picture">
+                                </a></td>
+                               <td>{{repairTech}}</td>
+                                <td>{{repairComment}}</td>
+                                <td>{{repairDuration}}</td>
+                                <td class="pdi-rep-conf  {{getStatusColor repairStatus}}" style="background-color:{{getStatusColor repairStatus}}; color:{{getStatusColor repairStatus}}" >{{repairStatus}}</td>
+                                <td>{{responsible}}</td>
+                                <td>
+                                    <label for="category-select"></label>
+                                        <select name="team-select" id="category-select">
+                                            <option value="">Select Team</option>
+                                                {{#each teamList}}
+                                                    <option value="{{this.team}}">{{this.team}}</option>
+                                                {{/each}}
+                                        </select>
+                                </td>
+                            </tr>
                         {{/each}}
                      </tbody>
                 </table>
             </div>
         {{/if}}
-        {{#if team2Chosen}}
-            <div class="team-table">
-                <table class="blueTable table-height">
-                    <thead>
-                    <tr>
-                        <th>Machine</th>
-                        <th>PDI Tech</th>
-                        <th>Description</th>
-                        <th>image</th>
-                        <th>Repair Tech</th>
-                        <th>Repair Comment</th>
-                        <th>Repair Status</th>
-                        <th>Issuer</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    {{#each team2}}
-                        <tr>
-                            <td>{{machineNr}}</td>
-                            <td>{{pdiTech}}</td>
-                            <td>{{errorDescription}}</td>
-                            <td><a target="blank" href={{pictureLocation}}>
-                                <img style="width: 50px" src={{pictureLocation}}
-                                     alt="No Picture">
-                            </a></td>
-                            <td>{{repairTech}}</td>
-                            <td>{{repairComment}}</td>
-                            <td>{{repairDuration}}</td>
-                            <td class="pdi-rep-conf  {{getStatusColor repairStatus}}" style="background-color:{{getStatusColor repairStatus}}; color:{{getStatusColor repairStatus}}" >{{repairStatus}}</td>
-                            <td>{{responsible}}</td>
-                            <td>
-                                <label for="category-select"></label><select id="category-select">
-                                <option disabled="disabled" selected="selected">Please Select</option>
-                                {{#each supplierList}}
-                                    <option value="{{this.supplier}}">{{this.supplier}}</option>
-                                {{/each}}
-                            </select>
-                            </td>
-                        </tr>
-                    {{/each}}
-                    </tbody>
-                </table>
-            </div>
-       {{/if}}
-
-    {{#if team3Chosen}}
-        <div class="team-table">
-            <table class="blueTable table-height">
-                <thead>
-                <tr>
-                    <th>Machine</th>
-                    <th>PDI Tech</th>
-                    <th>Description</th>
-                    <th>image</th>
-                    <th>Repair Tech</th>
-                    <th>Repair Comment</th>
-                    <th>Repair Status</th>
-                    <th>Issuer</th>
-                </tr>
-                </thead>
-                <tbody>
-                {{#each team3}}
-                    <tr>
-                        <td>{{machineNr}}</td>
-                        <td>{{pdiTech}}</td>
-                        <td>{{errorDescription}}</td>
-                        <td><a target="blank" href={{pictureLocation}}>
-                            <img style="width: 50px" src={{pictureLocation}}
-                                 alt="No Picture">
-                        </a></td>
-                        <td>{{repairTech}}</td>
-                        <td>{{repairComment}}</td>
-                        <td>{{repairDuration}}</td>
-                        <td class="pdi-rep-conf  {{getStatusColor repairStatus}}" style="background-color:{{getStatusColor repairStatus}}; color:{{getStatusColor repairStatus}}" >{{repairStatus}}</td>
-                        <td>{{responsible}}</td>
-                        <td>
-                            <label for="category-select"></label><select id="category-select">
-                            <option disabled="disabled" selected="selected">Please Select</option>
-                            {{#each supplierList}}
-                                <option value="{{this.supplier}}">{{this.supplier}}</option>
-                            {{/each}}
-                        </select>
-                        </td>
-                    </tr>
-                {{/each}}
-                </tbody>
-            </table>
-        </div>
-    {{/if}}
-
-    {{#if team4Chosen}}
-        <div class="team-table">
-            <table class="blueTable table-height">
-                <thead>
-                <tr>
-                    <th>Machine</th>
-                    <th>PDI Tech</th>
-                    <th>Description</th>
-                    <th>image</th>
-                    <th>Repair Tech</th>
-                    <th>Repair Comment</th>
-                    <th>Repair Status</th>
-                    <th>Issuer</th>
-                </tr>
-                </thead>
-                <tbody>
-                {{#each team4}}
-                    <tr>
-                        <td>{{machineNr}}</td>
-                        <td>{{pdiTech}}</td>
-                        <td>{{errorDescription}}</td>
-                        <td><a target="blank" href={{pictureLocation}}>
-                            <img style="width: 50px" src={{pictureLocation}}
-                                 alt="No Picture">
-                        </a></td>
-                        <td>{{repairTech}}</td>
-                        <td>{{repairComment}}</td>
-                        <td>{{repairDuration}}</td>
-                        <td class="pdi-rep-conf  {{getStatusColor repairStatus}}" style="background-color:{{getStatusColor repairStatus}}; color:{{getStatusColor repairStatus}}" >{{repairStatus}}</td>
-                        <td>{{responsible}}</td>
-                        <td>
-                            <label for="category-select"></label><select id="category-select">
-                            <option disabled="disabled" selected="selected">Please Select</option>
-                            {{#each supplierList}}
-                                <option value="{{this.supplier}}">{{this.supplier}}</option>
-                            {{/each}}
-                        </select>
-                        </td>
-                    </tr>
-                {{/each}}
-                </tbody>
-            </table>
-        </div>
-    {{/if}}
-
-    {{#if team5Chosen}}
-        <div class="team-table">
-            <table class="blueTable table-height">
-                <thead>
-                <tr>
-                    <th>Machine</th>
-                    <th>PDI Tech</th>
-                    <th>Description</th>
-                    <th>image</th>
-                    <th>Repair Tech</th>
-                    <th>Repair Comment</th>
-                    <th>Repair Status</th>
-                    <th>Issuer</th>
-                </tr>
-                </thead>
-                <tbody>
-                {{#each team5}}
-                    <tr>
-                        <td>{{machineNr}}</td>
-                        <td>{{pdiTech}}</td>
-                        <td>{{errorDescription}}</td>
-                        <td><a target="blank" href={{pictureLocation}}>
-                            <img style="width: 50px" src={{pictureLocation}}
-                                 alt="No Picture">
-                        </a></td>
-                        <td>{{repairTech}}</td>
-                        <td>{{repairComment}}</td>
-                        <td>{{repairDuration}}</td>
-                        <td class="pdi-rep-conf  {{getStatusColor repairStatus}}" style="background-color:{{getStatusColor repairStatus}}; color:{{getStatusColor repairStatus}}" >{{repairStatus}}</td>
-                        <td>{{responsible}}</td>
-                        <td>
-                            <label for="category-select"></label><select id="category-select">
-                            <option disabled="disabled" selected="selected">Please Select</option>
-                            {{#each supplierList}}
-                                <option value="{{this.supplier}}">{{this.supplier}}</option>
-                            {{/each}}
-                        </select>
-                        </td>
-                    </tr>
-                {{/each}}
-                </tbody>
-            </table>
-        </div>
-    {{/if}}
-
-    {{#if teamTestBayChosen}}
-        <div class="team-table">
-            <table class="blueTable table-height">
-                <thead>
-                <tr>
-                    <th>Machine</th>
-                    <th>PDI Tech</th>
-                    <th>Description</th>
-                    <th>image</th>
-                    <th>Repair Tech</th>
-                    <th>Repair Comment</th>
-                    <th>Repair Status</th>
-                    <th>Issuer</th>
-                </tr>
-                </thead>
-                <tbody>
-                {{#each team6}}
-                    <tr>
-                        <td>{{machineNr}}</td>
-                        <td>{{pdiTech}}</td>
-                        <td>{{errorDescription}}</td>
-                        <td><a target="blank" href={{pictureLocation}}>
-                            <img style="width: 50px" src={{pictureLocation}}
-                                 alt="No Picture">
-                        </a></td>
-                        <td>{{repairTech}}</td>
-                        <td>{{repairComment}}</td>
-                        <td>{{repairDuration}}</td>
-                        <td class="pdi-rep-conf  {{getStatusColor repairStatus}}" style="background-color:{{getStatusColor repairStatus}}; color:{{getStatusColor repairStatus}}" >{{repairStatus}}</td>
-                        <td>{{responsible}}</td>
-                        <td>
-                            <label for="category-select"></label><select id="category-select">
-                            <option disabled="disabled" selected="selected">Please Select</option>
-                            {{#each supplierList}}
-                                <option value="{{this.supplier}}">{{this.supplier}}</option>
-                            {{/each}}
-                        </select>
-                        </td>
-                    </tr>
-                {{/each}}
-                </tbody>
-            </table>
-        </div>
-    {{/if}}
-
-    {{#if teamSupplierChosen}}
-        <div class="team-table">
-            <table class="blueTable table-height">
-                <thead>
-                <tr>
-                    <th>Machine</th>
-                    <th>PDI Tech</th>
-                    <th>Description</th>
-                    <th>image</th>
-                    <th>Repair Tech</th>
-                    <th>Repair Comment</th>
-                    <th>Repair Status</th>
-                    <th>Issuer</th>
-                </tr>
-                </thead>
-                <tbody>
-                {{#each team7}}
-                    <tr>
-                        <td>{{machineNr}}</td>
-                        <td>{{pdiTech}}</td>
-                        <td>{{errorDescription}}</td>
-                        <td><a target="blank" href={{pictureLocation}}>
-                            <img style="width: 50px" src={{pictureLocation}}
-                                 alt="No Picture">
-                        </a></td>
-                        <td>{{repairTech}}</td>
-                        <td>{{repairComment}}</td>
-                        <td>{{repairDuration}}</td>
-                        <td class="pdi-rep-conf  {{getStatusColor repairStatus}}" style="background-color:{{getStatusColor repairStatus}}; color:{{getStatusColor repairStatus}}" >{{repairStatus}}</td>
-                        <td>{{responsible}}</td>
-                        <td>
-                            <label for="category-select"></label><select id="category-select">
-                            <option disabled="disabled" selected="selected">Please Select</option>
-                            {{#each supplierList}}
-                                <option value="{{this.supplier}}">{{this.supplier}}</option>
-                            {{/each}}
-                        </select>
-                        </td>
-                    </tr>
-                {{/each}}
-                </tbody>
-            </table>
-        </div>
-    {{/if}}
-
-    {{#if unknownChosen}}
-        <div class="team-table">
-            <table class="blueTable table-height">
-                <thead>
-                <tr>
-                    <th>Machine</th>
-                    <th>PDI Tech</th>
-                    <th>Description</th>
-                    <th>image</th>
-                    <th>Repair Tech</th>
-                    <th>Repair Comment</th>
-                    <th>Repair Status</th>
-                    <th>Issuer</th>
-                </tr>
-                </thead>
-                <tbody>
-                {{#each team8}}
-                    <tr>
-                        <td>{{machineNr}}</td>
-                        <td>{{pdiTech}}</td>
-                        <td>{{errorDescription}}</td>
-                        <td><a target="blank" href={{pictureLocation}}>
-                            <img style="width: 50px" src={{pictureLocation}}
-                                 alt="No Picture">
-                        </a></td>
-                        <td>{{repairTech}}</td>
-                        <td>{{repairComment}}</td>
-                        <td>{{repairDuration}}</td>
-                        <td class="pdi-rep-conf  {{getStatusColor repairStatus}}" style="background-color:{{getStatusColor repairStatus}}; color:{{getStatusColor repairStatus}}" >{{repairStatus}}</td>
-                        <td>{{responsible}}</td>
-                        <td>
-                            <label for="category-select"></label><select id="category-select">
-                            <option disabled="disabled" selected="selected">Please Select</option>
-                            {{#each supplierList}}
-                                <option value="{{this.supplier}}">{{this.supplier}}</option>
-                            {{/each}}
-                        </select>
-                        </td>
-                    </tr>
-                {{/each}}
-                </tbody>
-            </table>
-        </div>
-    {{/if}}
 </template>
 
 <!-----------------------------------  Issues by Components  ---------------------------->
@@ -516,9 +215,10 @@
                     <td>{{repairTime}}</td>
                     <td class="pdiRepField {{getStatusColor repairStatus}}" style="background-color:{{getStatusColor repairStatus}}; color:{{getStatusColor repairStatus}}">{{repairStatus}}</td>
                     <td><a target="blank" href={{pictureLocation}}>
-                            <img class="img-supplier-table" src={{pictureLocation}}
-                                 alt="No Picture">
-                        </a></td>
+                        <img class="image-box" src={{pictureLocation}}
+                             onerror="this.src='noPicture.JPG'"
+                             alt="No Picture">
+                    </a></td>
                     <td>
                         <label for="category-select"></label><select id="category-select">
                             <option disabled="disabled" selected="selected">Please Select</option>
@@ -533,7 +233,7 @@
 </div>
 </template>
 
-<!-----------------------------------  Edit Responsibilities  ----------------------------->
+<!-- ---------------------------------  Edit Responsibilities  ----------------------------->
 
 <template name="analyzingResponsibility">
     <div class="analyze-header">

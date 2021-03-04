@@ -1,9 +1,16 @@
 .confirmBoxWidth {
-  width: 6.5em; }
+  width: 6.5em;
+}
+
+.pdi-repair-finnish {
+  left: 65em;
+  position: absolute;
+  top: 16em;
+}
 
 table.repair-table {
-  position: absolute;
   margin-left: 35px;
+  position: absolute;
   top: 20em;
   width: 850px; }
 
@@ -11,8 +18,32 @@ table.repair-table {
   width: 45em; }
 
 .pdi-rep-comment-field {
-  width: 55em; }
+  width: 300px;
+}
+
+.pdi-time {
+  width: 50px;
+}
+
+.pdi-rep-status {
+  width: 70px;
+}
 
 .team-button {
   width: 9em;
 }
+
+.pdi-image {
+  width: 70px;
+ }
+
+.pdi-rep-tech {
+  width: 70px;
+}
+
+.pdi-add-to-repair {
+  left: 90em;
+  position: absolute;
+  top: 68em;
+}
+

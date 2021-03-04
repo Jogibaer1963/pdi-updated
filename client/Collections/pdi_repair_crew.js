@@ -22,15 +22,6 @@ Template.pdiCrewHome.helpers({
         }
     },
 
-
-    'selectedConfirm': function () {
-        const selectedConfirm = this._id;
-        const confirmRepair = Session.get('confirmRepair');
-        if (selectedConfirm === confirmRepair) {
-            return "selected";
-        }
-    },
-
     washMachine: () => {
         try {
             const machine_id = Session.get('selectedMachineId');
@@ -42,36 +33,110 @@ Template.pdiCrewHome.helpers({
         } catch {}
     },
 
-    machineToRepair: () => {
-        try {
-        let repairInfos = Session.get('repairInfos');
-        let newIssuesFound = [];
-        const machineToRepair = Session.get('selectedMachineId');
-        if (machineToRepair) {
-          newIssuesFound = MachineReady.findOne({_id: machineToRepair}).newIssues;
-        }
-        newIssuesFound.forEach((element) => {
-            element.pictureLocation = repairInfos + element.pictureLocation;
-        });
-        return newIssuesFound;
-        } catch {}
-    },
-
     repairUser: () => {
         return Meteor.user().username;
     },
 
-    machineRepairList: () => {
+    // ******************    repair Box  **************
+
+    machineToRepair: () => {
         try {
-        let machine = Session.get('selectedMachineId');
-        return MachineReady.findOne({_id: machine}).machineId;
-        } catch {}
+        const machineId = Session.get('selectedMachineId');
+        let imageIp = Session.get('repairInfos')
+        let returnedTarget = {};
+        let returnResultTeam = []; // Team 1
+        if (machineId) {
+            let result = MachineReady.findOne({_id: machineId}, {
+                fields: {
+                    newIssues: 1,
+                    machineId: 1,
+                    omms: 1
+                }
+            });
+            Session.set('pdiTech', result.omms.user);
+            let machineNr = result.machineId;
+            let newIssues = result.newIssues;
+            let source = {
+                machineId: result._id,
+                machineNr: machineNr,
+            }
+            newIssues.forEach((element) => {
+                element.pictureLocation = imageIp + element.pictureLocation;
+                returnedTarget = Object.assign(element, source)
+                returnResultTeam.push(returnedTarget);
+            })
+        }
+        Session.set('repairResult', returnResultTeam);
+        return returnResultTeam
+        } catch (e) {
+        }
+    },
+
+    teamList: () => {
+        return TeamList.find().fetch();
+    },
+
+    'failureRow': function () {
+        let result = this._id;
+        const selectedRow = Session.get('failureId');
+        if (result === selectedRow) {
+            return "selected";
+        }
+    },
+
+    //  ******************  end Repair Box  ********************
+
+    //  ******************  Adding new issue with image  ***************
+
+    mainComponent: function () {
+        return mainComponents.find({}).fetch();
+    },
+
+    'selectedComponent': function () {
+        let component = this._id;
+        let selected = Session.get('selectedComponent');
+        if (component === selected) {
+            Session.set('componentChosen', 1);
+            return 'selected'
+        }
+    },
+
+    issueComponent: () => {
+        try {
+            return Session.get('issueComp');
+        } catch (e) {
+
+        }
     }
+
+    //  ************************** end adding issue  ***********************
+
 
 
 });
 
 Template.pdiCrewHome.events({
+
+    'submit .repair-finnish': function (e) {
+      e.preventDefault();
+      let summary = 0;
+      let hours = e.target.workingHours.value;
+      let fuel = e.target.fuel.value;
+      let machineId = Session.get('selectedMachineId');
+      let result = Session.get('repairResult')
+      let summaryRepairs = result.length;
+      result.forEach((element) => {
+          summary = summary + element.repairStatus;
+      })
+        if (summaryRepairs - summary !== 0) {
+            window.alert("Still unclosed Repairs for this Machine. Closing not possible !!")
+        } else {
+            Meteor.call('machineRep', machineId, hours, fuel)
+            e.target.workingHours.value = '';
+            e.target.fuel.value = '';
+            Session.set('selectedMachineId', '')
+        }
+    },
 
     'click .openInspections': function () {
         const openRepair = this._id;
@@ -91,75 +156,82 @@ Template.pdiCrewHome.events({
         e.target.message.value = '';
     },
 
-    'click .repairConfirm': function (e) {
+    'click .failureRow': function (e) {
         e.preventDefault();
-        const confirmRepair = this._id;
-        Session.set('confirmRepair', confirmRepair);
+      const machineRow = this._id;
+      Session.set('failureId', machineRow);
     },
 
     'submit .repairConfirmText': function (e) {
         e.preventDefault();
+        let repairTime = '';
         const repairUser = Meteor.user().username;
         const repairComment = e.target.message.value;
-        const repairTime = e.target.time.value;
-        let repairId = Session.get('confirmRepair');
+        let repairTimeHours = e.target.timeHour.value;
+        let repairTimeMin = e.target.timeMin.value;
+        if (repairTimeHours === '') {
+            repairTimeHours = 0;
+        }
+        if (repairTimeMin === '') {
+            repairTimeMin = 0
+        }
+            repairTime = parseInt(repairTimeHours) * 60 + parseInt(repairTimeMin);
+        let failureId = Session.get('failureId');
         let machineId = Session.get('selectedMachineId');
-        Meteor.call('confirmRepair', repairId, repairUser, repairComment, repairTime, machineId);
+        Meteor.call('confirmRepair', failureId, repairUser, repairComment, repairTime, machineId);
+        e.target.message.value = '';
+        e.target.timeHour.value = '';
+        e.target.timeMin.value = '';
+        Session.set('failureId', '');
     },
 
-    'click .submitButton1': (e) => {
-        e.preventDefault();
-        let team = 'Team 1';
-        let idCheck = e.currentTarget.id;
-        let machineId = Session.get('selectedMachineId');
-        Meteor.call('teamSpecifier', machineId, team, idCheck);
+    'change  #category-select': function (event) {
+        event.preventDefault();
+        const selectedTeam = $(event.currentTarget).val();
+        let machineNr = Session.get('selectedMachineId');
+        let issueId = Session.get('failureId');
+        if (issueId !== 'undefined' && selectedTeam !== 'undefined') {
+            Meteor.call('choseTeam', selectedTeam, issueId, machineNr)
+        }
+        Session.set('failureId', '');
     },
 
-    'click .submitButton2': (e) => {
-        e.preventDefault();
-        let team = 'Team 2';
-        let idCheck = e.currentTarget.id;
-        let machineId = Session.get('selectedMachineId');
-        Meteor.call('teamSpecifier', machineId, team, idCheck);
+
+
+    'click .comp': function () {
+        const selected = this._id;
+        let textMainComp = this.component;
+        Session.set('selectedComponent', selected);
+        Session.set('issueComp', textMainComp + ' - ');
     },
 
-    'click .submitButton3': (e) => {
+    'submit .addNewIssue': function(e) {
         e.preventDefault();
-        let team = 'Team 3';
-        let idCheck = e.currentTarget.id;
         let machineId = Session.get('selectedMachineId');
-        Meteor.call('teamSpecifier', machineId, team, idCheck);
-    },
-    'click .submitButton4': (e) => {
-        e.preventDefault();
-        let team = 'Team 4';
-        let idCheck = e.currentTarget.id;
-        let machineId = Session.get('selectedMachineId');
-        Meteor.call('teamSpecifier', machineId, team, idCheck);
-    },
-    'click .submitButton5': (e) => {
-        e.preventDefault();
-        let team = 'Team 5';
-        let idCheck = e.currentTarget.id;
-        let machineId = Session.get('selectedMachineId');
-        Meteor.call('teamSpecifier', machineId, team, idCheck);
+        let addNewFailure = e.target.addIssue.value;
+        if(machineId ) {
+            Meteor.call('addNewFailure', machineId , addNewFailure);
+        } else {
+            console.log("Lost Machine Number")
+        }
+        e.target.addIssue.value = '';
+        Session.set('componentChosen', 0);
+        Session.set('selectedComponent', '');
+        Session.set('issueComp', '');
     },
 
-    'click .submitButtonSupplier': (e) => {
-        e.preventDefault();
-        let supplier = 'Supplier';
-        let idCheck = e.currentTarget.id;
-        let machineId = Session.get('selectedMachineId');
-        Meteor.call('teamSpecifier', machineId, supplier, idCheck);
+    'change input': function(ev) {
+        const openFailure = Session.get('failureId');
+        // switch sessions to proper id, call function file in handlebarsRegister.js
+        Session.set('openFailure', openFailure)
+        if(openFailure) {
+            _.each(ev.target.files, function(file) {
+                Meteor.saveFile(file, file.name);
+            });
+        } else {
+        }
     },
 
-    'click .submitButtonUnknown': (e) => {
-        e.preventDefault();
-        let unknown = 'Unknown';
-        let idCheck = e.currentTarget.id;
-        let machineId = Session.get('selectedMachineId');
-        Meteor.call('teamSpecifier', machineId, unknown, idCheck);
-    },
 
 
 });

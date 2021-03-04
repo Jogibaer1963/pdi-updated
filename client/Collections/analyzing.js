@@ -3,6 +3,8 @@ Meteor.subscribe('fuelAverage');
 Meteor.subscribe('SuppliersList');
 Meteor.subscribe('TeamList');
 
+Session.set('teamChosen', false)
+Session.set('teamResult', false)
 Session.set('overViewAnalyzing', true);
 Session.set('searchWithKeyWord', false);
 Session.set('responseTeam', false);
@@ -12,6 +14,8 @@ Session.set('editResponsibility', false);
 Session.set('advanceSearch', false);
 
 Template.analyzing.onDestroyed(() => {
+    Session.set('teamChosen', false)
+    Session.set('teamResult', false)
     Session.set('overViewAnalyzing', true);
     Session.set('searchWithKeyWord', false);
     Session.set('responseTeam', false);
@@ -88,6 +92,8 @@ Template.analyzing.events ({
 
     'click .btn-response-team': (e) => {
         e.preventDefault();
+        Session.set('teamChosen', false)
+        Session.set('teamResult', false)
         Session.set('overViewAnalyzing', false);
         Session.set('searchWithKeyWord', false);
         Session.set('responseTeam', true);
@@ -105,9 +111,12 @@ Template.analyzing.events ({
         let returnResultTeam3 = []; // Team 3
         let returnResultTeam4 = []; // Team 4 Engines
         let returnResultTeam5 = []; // Team Final
-        let returnResultTeam6 = []; // Test Bay
-        let returnResultTeam7 = []; // Supplier
-        let returnResultTeam8 = []; // Unknown
+        let teamTestBayAmount = []; // Test Bay
+        let teamSupplierAmount = []; // Supplier
+        let ctdAmount = [];
+        let rAndD_Amount = [];
+        let unknownAmount = []; // Unknown
+        let notApplicableAmount = [];
         result.forEach((element) => {
             if (element.newIssues) {
                 let source = {
@@ -138,39 +147,46 @@ Template.analyzing.events ({
                     }
                     if (element2.responsible === "Test Bay") {
                         returnedTarget = Object.assign(element2, source)
-                        returnResultTeam6.push(returnedTarget);
+                        teamTestBayAmount.push(returnedTarget);
                     }
                     if (element2.responsible === "Supplier") {
                         returnedTarget = Object.assign(element2, source)
-                        returnResultTeam7.push(returnedTarget);
+                        teamSupplierAmount.push(returnedTarget);
+                    }
+                    if (element2.responsible === "CTD") {
+                        returnedTarget = Object.assign(element2, source)
+                        ctdAmount.push(returnedTarget);
+                    }
+                    if (element2.responsible === "R&D") {
+                        returnedTarget = Object.assign(element2, source)
+                        rAndD_Amount.push(returnedTarget);
                     }
                     if (element2.responsible === "Unknown") {
                         returnedTarget = Object.assign(element2, source)
-                        returnResultTeam8.push(returnedTarget);
+                        unknownAmount.push(returnedTarget);
+                    }
+                    if (element2.responsible === "N/A") {
+                        returnedTarget = Object.assign(element2, source)
+                        notApplicableAmount.push(returnedTarget);
                     }
                 })
             }
         })
         let totalLength = returnResultTeam1.length + returnResultTeam2.length + returnResultTeam3.length +
-            returnResultTeam4.length + returnResultTeam5.length + returnResultTeam6.length + returnResultTeam7.length +
-            returnResultTeam8.length;
+            returnResultTeam4.length + returnResultTeam5.length + teamTestBayAmount.length + teamSupplierAmount.length +
+            rAndD_Amount.length + unknownAmount.length + notApplicableAmount.length;
         Session.set('totalLength', totalLength);
         Session.set('team1Amount', returnResultTeam1.length);
-        Session.set('team1Result', returnResultTeam1);
         Session.set('team2Amount', returnResultTeam2.length);
-        Session.set('team2Result', returnResultTeam2);
         Session.set('team3Amount', returnResultTeam3.length);
-        Session.set('team3Result', returnResultTeam3);
         Session.set('team4Amount', returnResultTeam4.length);
-        Session.set('team4Result', returnResultTeam4);
         Session.set('team5Amount', returnResultTeam5.length);
-        Session.set('team5Result', returnResultTeam5);
-        Session.set('team6Amount', returnResultTeam6.length);
-        Session.set('team6Result', returnResultTeam6);
-        Session.set('team7Amount', returnResultTeam7.length);
-        Session.set('team7Result', returnResultTeam7);
-        Session.set('team8Amount', returnResultTeam8.length);
-        Session.set('team8Result', returnResultTeam8);
+        Session.set('teamTestBayAmount', teamTestBayAmount.length);
+        Session.set('teamSupplierAmount', teamSupplierAmount.length);
+        Session.set('ctdAmount', ctdAmount.length);
+        Session.set('rAndD_Amount', rAndD_Amount.length);
+        Session.set('unknownAmount', unknownAmount.length);
+        Session.set('notApplicableAmount', notApplicableAmount.length);
 
     },
 
@@ -317,41 +333,48 @@ Template.analyzingWithKeyWords.events({
 
 Template.analyzingResponseTeam.helpers({
 
+    teamTables: () => {
+        let imageIp = Session.get('repairInfos')
+        let returnedTarget = {};
+        let returnResultTeam = []; // Team 1
+        let team = Session.get('teamChosen')
+        if (team) {
+            let result = MachineReady.find({}, {
+                fields: {
+                    newIssues: 1,
+                    machineId: 1,
+                    omms: 1
+                }
+            }).fetch();
+            result.forEach((element) => {
+                if (element.newIssues) {
+                    let source = {
+                        machineId: element._id,
+                        machineNr: element.machineId,
+                        pdiTech: element.omms.user
+                    }
+                    element.newIssues.forEach((element2) => {
+                        if (element2.responsible === team) {
+                            element2.pictureLocation = imageIp + element2.pictureLocation;
+                            returnedTarget = Object.assign(element2, source)
+                            returnResultTeam.push(returnedTarget);
+                        }
+                    })
+                }
+            })
+        }
+        Session.set('teamResult', returnResultTeam)
+        return returnResultTeam
+    },
+
+    team: () => {
+        return Session.get('teamResult');
+    },
+
     teamList: () => {
-        return TeamList.find();
+        return TeamList.find().fetch();
     },
 
-    team1Chosen: () => {
-      return Session.get('team1Chosen');
-    },
-
-    team2Chosen: () => {
-        return Session.get('team2Chosen');
-    },
-
-    team3Chosen: () => {
-        return Session.get('team3Chosen');
-    },
-
-    team4Chosen: () => {
-        return Session.get('team4Chosen');
-    },
-
-    team5Chosen: () => {
-        return Session.get('team5Chosen');
-    },
-
-    teamTestBayChosen: () => {
-        return Session.get('teamTestBayChosen');
-    },
-
-    teamSupplierChosen: () => {
-        return Session.get('teamSupplierChosen');
-    },
-
-    unknownChosen: () => {
-        return Session.get('unknown');
-    },
 
      //   *******************   team tables  ***********************
 
@@ -359,170 +382,99 @@ Template.analyzingResponseTeam.helpers({
         return Session.get('team1Amount');
     },
 
-    team1: () => {
-        return Session.get('team1Result');
-    },
-
     team2Amount: () => {
         return Session.get('team2Amount');
-    },
-
-    team2: () => {
-        return Session.get('team2Result');
     },
 
     team3Amount: () => {
         return Session.get('team3Amount');
     },
 
-    team3: () => {
-        return Session.get('team3Result');
-    },
-
     team4Amount: () => {
         return Session.get('team4Amount');
-    },
-
-    team4: () => {
-        return Session.get('team4Result');
     },
 
     team5Amount: () => {
         return Session.get('team5Amount');
     },
 
-    team5: () => {
-        return Session.get('team5Result');
-    },
-
     teamTestBayAmount: () => {
-        return Session.get('team6Amount');
-    },
-
-    team6: () => {
-        return Session.get('team6Result');
+        return Session.get('teamTestBayAmount');
     },
 
     teamSupplierAmount: () => {
-        return Session.get('team7Amount');
+        return Session.get('teamSupplierAmount');
     },
 
-    team7: () => {
-        return Session.get('team7Result');
+    ctdAmount: () => {
+        return Session.get('ctdAmount');
+    },
+
+    rAndD_Amount: () => {
+        return Session.get('rAndD_Amount');
     },
 
     unknownAmount: () => {
-        return Session.get('team8Amount');
+        return Session.get('unknownAmount');
     },
 
-    team8: () => {
-        return Session.get('team8Result');
+    notApplicableAmount: () => {
+        return Session.get('notApplicableAmount');
+    },
+
+
+
+    'selectedRow': function(){
+        let selectedMachine = this._id;
+        let selected = Session.get('selectedFailure')
+        if (selectedMachine === selected) {
+            return 'selected'
+        }
     },
 
 });
 
- Session.set('team1Chosen', false);
- Session.set('team2Chosen', false);
- Session.set('team3Chosen', false);
- Session.set('team4Chosen', false);
- Session.set('team5Chosen', false);
- Session.set('teamTestBayChosen', false);
- Session.set('teamSupplierChosen', false);
- Session.set('unknown', false);
 
 Template.analyzingResponseTeam.events({
 
-    'click .btn-team1-details': () => {
-        Session.set('team1Chosen', true)
-        Session.set('team2Chosen', false);
-        Session.set('team3Chosen', false);
-        Session.set('team4Chosen', false);
-        Session.set('team5Chosen', false);
-        Session.set('teamTestBayChosen', false);
-        Session.set('teamSupplierChosen', false);
-        Session.set('unknown', false);
+    'click .machineRow': function(e){
+        e.preventDefault();
+        try {
+            const failureId = this._id;
+            const machineId = this.machineId;
+            const select = e.target;
+            const selectedOption = select.options[select.selectedIndex];
+            const teamChosen = selectedOption.value
+            Session.set('selectedFailure', failureId);
+            if (teamChosen) {
+               Meteor.call('choseTeam',teamChosen, failureId, machineId)
+            }
+        } catch(err) {}
     },
 
-    'click .btn-team2-details': () => {
-        Session.set('team1Chosen', false)
-        Session.set('team2Chosen', true);
-        Session.set('team3Chosen', false);
-        Session.set('team4Chosen', false);
-        Session.set('team5Chosen', false);
-        Session.set('teamTestBayChosen', false);
-        Session.set('teamSupplierChosen', false);
-        Session.set('unknown', false);
-    },
-
-    'click .btn-team3-details': () => {
-        Session.set('team1Chosen', false)
-        Session.set('team2Chosen', false);
-        Session.set('team3Chosen', true);
-        Session.set('team4Chosen', false);
-        Session.set('team5Chosen', false);
-        Session.set('teamTestBayChosen', false);
-        Session.set('teamSupplierChosen', false);
-        Session.set('unknown', false);
-    },
-
-    'click .btn-team4-details': () => {
-        Session.set('team1Chosen', false)
-        Session.set('team2Chosen', false);
-        Session.set('team3Chosen', false);
-        Session.set('team4Chosen', true);
-        Session.set('team5Chosen', false);
-        Session.set('teamTestBayChosen', false);
-        Session.set('teamSupplierChosen', false);
-        Session.set('unknown', false);
-    },
-
-    'click .btn-team5-details': () => {
-        Session.set('team1Chosen', false)
-        Session.set('team2Chosen', false);
-        Session.set('team3Chosen', false);
-        Session.set('team4Chosen', false);
-        Session.set('team5Chosen', true);
-        Session.set('teamTestBayChosen', false);
-        Session.set('teamSupplierChosen', false);
-        Session.set('unknown', false);
-    },
-
-    'click .btn-teamTestBay-details': () => {
-        Session.set('team1Chosen', false)
-        Session.set('team2Chosen', false);
-        Session.set('team3Chosen', false);
-        Session.set('team4Chosen', false);
-        Session.set('team5Chosen', false);
-        Session.set('teamTestBayChosen', true);
-        Session.set('teamSupplierChosen', false);
-        Session.set('unknown', false);
-    },
-
-    'click .btn-teamSupplier-details': () => {
-        Session.set('team1Chosen', false)
-        Session.set('team2Chosen', false);
-        Session.set('team3Chosen', false);
-        Session.set('team4Chosen', false);
-        Session.set('team5Chosen', false);
-        Session.set('teamTestBayChosen', false);
-        Session.set('teamSupplierChosen', true);
-        Session.set('unknown', false);
-    },
-
-    'click .btn-unknown-details': () => {
-        Session.set('team1Chosen', false)
-        Session.set('team2Chosen', false);
-        Session.set('team3Chosen', false);
-        Session.set('team4Chosen', false);
-        Session.set('team5Chosen', false);
-        Session.set('teamTestBayChosen', false);
-        Session.set('teamSupplierChosen', false);
-        Session.set('unknown', true);
-    },
-
-
-
-
+    'click .team-chooser': function (e) {
+          e.preventDefault();
+          let teamChosen = e.target.name;
+          if (teamChosen === 'Team 1') {
+              Session.set('teamChosen', teamChosen)
+          } else if (teamChosen === 'Team 2') {
+              Session.set('teamChosen', teamChosen)
+          } else if (teamChosen === 'Team 2') {
+              Session.set('teamChosen', teamChosen)
+          } else if (teamChosen === 'Team 3') {
+              Session.set('teamChosen', teamChosen)
+          } else if (teamChosen === 'Team 4') {
+              Session.set('teamChosen', teamChosen)
+          } else if (teamChosen === 'Team 5') {
+              Session.set('teamChosen', teamChosen)
+          } else if (teamChosen === 'Test Bay') {
+              Session.set('teamChosen', teamChosen)
+          } else if (teamChosen === 'Supplier') {
+              Session.set('teamChosen', teamChosen)
+          }else if (teamChosen === 'Unknown') {
+              Session.set('teamChosen', teamChosen)
+          }
+    }
 
 });
 
