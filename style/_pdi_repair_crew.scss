@@ -14,11 +14,25 @@ table.repair-table {
   top: 20em;
   width: 850px; }
 
+.repair-header {
+  left: 4em;
+  position: absolute;
+  top: 47em;
+}
+
+table.display-error {
+  width: 950px;
+}
+
+.pdi-comment {
+  width: 200px;
+}
+
 .pdi-rep-comment {
   width: 45em; }
 
 .pdi-rep-comment-field {
-  width: 300px;
+  width: 200px;
 }
 
 .pdi-time {
@@ -27,6 +41,10 @@ table.repair-table {
 
 .pdi-rep-status {
   width: 70px;
+}
+
+.pdi-issuer {
+  width: 73px;
 }
 
 .team-button {
@@ -41,9 +59,9 @@ table.repair-table {
   width: 70px;
 }
 
-.pdi-add-to-repair {
-  left: 90em;
+.utility-repair {
+  left: 75em;
   position: absolute;
-  top: 68em;
+  top: 50em;
 }
 

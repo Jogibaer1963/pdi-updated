@@ -62,6 +62,8 @@ Template.analyzing.helpers ({
         return Session.get('options');
     },
 
+
+
 });
 
 Template.analyzing.events ({
@@ -102,9 +104,10 @@ Template.analyzing.events ({
         Session.set('editResponsibility', false);
         Session.set('advanceSearch', false);
         Session.set('options', false);
-        let result = MachineReady.find({}, {fields: {newIssues: 1,
+        let result = MachineReady.find({pdiStatus: 1}, {fields: {newIssues: 1,
                 machineId: 1,
                 omms: 1}}).fetch();
+       // console.log(result)
         let returnedTarget = {};
         let returnResultTeam1 = []; // Team 1
         let returnResultTeam2 = []; // Team 2
@@ -117,61 +120,66 @@ Template.analyzing.events ({
         let rAndD_Amount = [];
         let unknownAmount = []; // Unknown
         let notApplicableAmount = [];
-        result.forEach((element) => {
-            if (element.newIssues) {
-                let source = {
-                    machineId: element._id,
-                    machineNr: element.machineId,
-                    pdiTech: element.omms.user
+        try {
+            result.forEach((element) => {
+                if (element.newIssues) {
+                    let source = {
+                        machineId: element._id,
+                        machineNr: element.machineId,
+                        pdiTech: element.omms.user
+                    }
+                    element.newIssues.forEach((element2) => {
+                        if (element2.responsible === "Team 1") {
+                            returnedTarget = Object.assign(element2, source)
+                            returnResultTeam1.push(returnedTarget);
+                        }
+                        if (element2.responsible === "Team 2") {
+                            returnedTarget = Object.assign(element2, source)
+                            returnResultTeam2.push(returnedTarget);
+                        }
+                        if (element2.responsible === "Team 3") {
+                            returnedTarget = Object.assign(element2, source)
+                            returnResultTeam3.push(returnedTarget);
+                        }
+                        if (element2.responsible === "Team 4") {
+                            returnedTarget = Object.assign(element2, source)
+                            returnResultTeam4.push(returnedTarget);
+                        }
+                        if (element2.responsible === "Team 5") {
+                            returnedTarget = Object.assign(element2, source)
+                            returnResultTeam5.push(returnedTarget);
+                        }
+                        if (element2.responsible === "Test Bay") {
+                            returnedTarget = Object.assign(element2, source)
+                            teamTestBayAmount.push(returnedTarget);
+                        }
+                        if (element2.responsible === "Supplier") {
+                            returnedTarget = Object.assign(element2, source)
+                            teamSupplierAmount.push(returnedTarget);
+                        }
+                        if (element2.responsible === "CTD") {
+                            returnedTarget = Object.assign(element2, source)
+                            ctdAmount.push(returnedTarget);
+                        }
+                        if (element2.responsible === "R&D") {
+                            returnedTarget = Object.assign(element2, source)
+                            rAndD_Amount.push(returnedTarget);
+                        }
+                        if (element2.responsible === "Unknown") {
+                            returnedTarget = Object.assign(element2, source)
+                            unknownAmount.push(returnedTarget);
+                        }
+                        if (element2.responsible === "N/A") {
+                            returnedTarget = Object.assign(element2, source)
+                            notApplicableAmount.push(returnedTarget);
+                        }
+                    })
                 }
-                element.newIssues.forEach((element2) => {
-                    if (element2.responsible === "Team 1") {
-                        returnedTarget = Object.assign(element2, source)
-                        returnResultTeam1.push(returnedTarget);
-                    }
-                    if (element2.responsible === "Team 2") {
-                        returnedTarget = Object.assign(element2, source)
-                        returnResultTeam2.push(returnedTarget);
-                    }
-                    if (element2.responsible === "Team 3") {
-                        returnedTarget = Object.assign(element2, source)
-                        returnResultTeam3.push(returnedTarget);
-                    }
-                    if (element2.responsible === "Team 4") {
-                        returnedTarget = Object.assign(element2, source)
-                        returnResultTeam4.push(returnedTarget);
-                    }
-                    if (element2.responsible === "Team 5") {
-                        returnedTarget = Object.assign(element2, source)
-                        returnResultTeam5.push(returnedTarget);
-                    }
-                    if (element2.responsible === "Test Bay") {
-                        returnedTarget = Object.assign(element2, source)
-                        teamTestBayAmount.push(returnedTarget);
-                    }
-                    if (element2.responsible === "Supplier") {
-                        returnedTarget = Object.assign(element2, source)
-                        teamSupplierAmount.push(returnedTarget);
-                    }
-                    if (element2.responsible === "CTD") {
-                        returnedTarget = Object.assign(element2, source)
-                        ctdAmount.push(returnedTarget);
-                    }
-                    if (element2.responsible === "R&D") {
-                        returnedTarget = Object.assign(element2, source)
-                        rAndD_Amount.push(returnedTarget);
-                    }
-                    if (element2.responsible === "Unknown") {
-                        returnedTarget = Object.assign(element2, source)
-                        unknownAmount.push(returnedTarget);
-                    }
-                    if (element2.responsible === "N/A") {
-                        returnedTarget = Object.assign(element2, source)
-                        notApplicableAmount.push(returnedTarget);
-                    }
-                })
-            }
-        })
+            })
+        } catch (e) {
+
+        }
+        returnResultTeam1.sort(function(a, b) {return a.machineId - b.machineId})
         let totalLength = returnResultTeam1.length + returnResultTeam2.length + returnResultTeam3.length +
             returnResultTeam4.length + returnResultTeam5.length + teamTestBayAmount.length + teamSupplierAmount.length +
             rAndD_Amount.length + unknownAmount.length + notApplicableAmount.length;
@@ -339,7 +347,7 @@ Template.analyzingResponseTeam.helpers({
         let returnResultTeam = []; // Team 1
         let team = Session.get('teamChosen')
         if (team) {
-            let result = MachineReady.find({}, {
+            let result = MachineReady.find({pdiStatus: 1}, {
                 fields: {
                     newIssues: 1,
                     machineId: 1,
@@ -363,6 +371,10 @@ Template.analyzingResponseTeam.helpers({
                 }
             })
         }
+        returnResultTeam.sort( (a, b) => {
+            if (a.machineNr < b.machineNr) return -1
+            return a.machineNr > b.machineNr ? 1 : 0
+        })
         Session.set('teamResult', returnResultTeam)
         return returnResultTeam
     },
@@ -508,81 +520,7 @@ Template.analyzingResponsibility.helpers({
 
 Template.analyzingResponsibility.events({
 
-    'click .submitButton1': (e) => {
-        e.preventDefault();
-        let team = 'Team 1';
-        let issueId = e.target.id;
-        let machineId = e.target.name;
-        Meteor.call('teamSpecifier', machineId, team, issueId);
-        Session.set('issueCauser', issueId);
-    },
 
-    'click .submitButton2': (e) => {
-        e.preventDefault();
-        let team = 'Team 2';
-        let issueId = e.target.id;
-        let machineId = e.target.name;
-        Meteor.call('teamSpecifier', machineId, team, issueId);
-    },
-
-    'click .submitButton3': (e) => {
-        e.preventDefault();
-        let team = 'Team 3';
-        let issueId = e.target.id;
-        let machineId = e.target.name;
-        Meteor.call('teamSpecifier', machineId, team, issueId);
-    },
-    'click .submitButton4': (e) => {
-        e.preventDefault();
-        let team = 'Team 4';
-        let issueId = e.target.id;
-        let machineId = e.target.name;
-        Meteor.call('teamSpecifier', machineId, team, issueId);
-    },
-    'click .submitButton5': (e) => {
-        e.preventDefault();
-        let team = 'Team 5';
-        let issueId = e.target.id;
-        let machineId = e.target.name;
-        Meteor.call('teamSpecifier', machineId, team, issueId);
-    },
-
-    'click .submitButtonRepair': (e) => {
-        e.preventDefault();
-        let team = 'Repair';
-        let issueId = e.target.id;
-        let machineId = e.target.name;
-        Meteor.call('teamSpecifier', machineId, team, issueId);
-    },
-
-    'click .submitButtonTestBay': (e) => {
-        e.preventDefault();
-        let team = 'Test Bay';
-        let issueId = e.target.id;
-        let machineId = e.target.name;
-        Meteor.call('teamSpecifier', machineId, team, issueId);
-    },
-
-    'click .submitButtonSupplier': (e) => {
-        e.preventDefault();
-        let team = 'Supplier';
-        let issueId = e.target.id;
-        let machineId = e.target.name;
-        Meteor.call('teamSpecifier', machineId, team, issueId);
-    },
-
-    'click .submitButtonUnknown': (e) => {
-        e.preventDefault();
-        let team = 'Unknown';
-        let issueId = e.target.id;
-        let machineId = e.target.name;
-        Meteor.call('teamSpecifier', machineId, team, issueId);
-    },
-
-    'click .refreshButton' : () => {
-        Meteor.call('machines');
-        location.reload();
-    }
 
 });
 

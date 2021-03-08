@@ -17,6 +17,10 @@ Meteor.subscribe('oms');
 
         },
 
+        teamList: () => {
+            return TeamList.find().fetch();
+        },
+
         machineConfig: function() {
             try {
                 Session.set('selectedPdiMachineNr', localStorage.getItem('pdiMachineNr'));
@@ -115,21 +119,9 @@ Meteor.subscribe('oms');
             } catch (e) {}
         },
 
-        ommCebisTouch: () => {
-            try {
-                return Session.get('omms').ommCebisTouch;
-            } catch (e) {}
-        },
-
         ommTerra: () => {
             try {
                 return Session.get('omms').ommTerra;
-            } catch (e) {}
-        },
-
-        ommDuals: () => {
-            try {
-                return Session.get('omms').ommDuals;
             } catch (e) {}
         },
 
@@ -277,13 +269,11 @@ Meteor.subscribe('oms');
             const ommMain = event.target.omMain.value;
             const ommSupp = event.target.omSupp.value;
             const ommUnload = event.target.omUnload.value;
-             const ommProfiCam = event.target.omProfiCam.value;
+            const ommProfiCam = event.target.omProfiCam.value;
             const ommCebis = event.target.omCebis.value;
-             const ommTouch = event.target.omTouch.value;
             const ommTerra = event.target.omTerra.value;
-             const ommDual = event.target.dualTire.value;
             Meteor.call('pdiMachineOmm', pdiMachineId, loggedInUser, fuelMe, ommMain, ommSupp,
-                ommUnload,ommProfiCam, ommCebis, ommTouch, ommTerra, ommDual);
+                ommUnload,ommProfiCam, ommCebis, ommTerra);
         },
 
         'click .configButtonOK': (event) => {
@@ -422,75 +412,24 @@ Meteor.subscribe('oms');
             }
         },
 
-        'click .submitButton1': (e) => {
+        'click .machineInspect': function (e) {
             e.preventDefault();
-            let team = 'Team 1';
-            let idCheck = e.currentTarget.id;
-            let machineId = Session.get('selectedPdiMachineId');
-            Meteor.call('teamSpecifier', machineId, team, idCheck);
+            let failureId = this._id;
+            Session.set('newIssueId', failureId);
         },
 
-        'click .submitButton2': (e) => {
+
+        'change  #category-select': function (e) {
             e.preventDefault();
-            let team = 'Team 2';
-            let idCheck = e.currentTarget.id;
+            const selectedTeam = $(e.currentTarget).val();
+            let issueId = Session.get('newIssueId');
             let machineId = Session.get('selectedPdiMachineId');
-            Meteor.call('teamSpecifier', machineId, team, idCheck);
+            if (issueId !== 'undefined' && selectedTeam !== 'undefined') {
+                Meteor.call('choseTeam', selectedTeam, issueId, machineId)
+            }
+            Session.set('failureId', '');
         },
 
-        'click .submitButton3': (e) => {
-            e.preventDefault();
-            let team = 'Team 3';
-            let idCheck = e.currentTarget.id;
-            let machineId = Session.get('selectedPdiMachineId');
-            Meteor.call('teamSpecifier', machineId, team, idCheck);
-        },
-        'click .submitButton4': (e) => {
-            e.preventDefault();
-            let team = 'Team 4';
-            let idCheck = e.currentTarget.id;
-            let machineId = Session.get('selectedPdiMachineId');
-            Meteor.call('teamSpecifier', machineId, team, idCheck);
-        },
-        'click .submitButton5': (e) => {
-            e.preventDefault();
-            let team = 'Team 5';
-            let idCheck = e.currentTarget.id;
-            let machineId = Session.get('selectedPdiMachineId');
-            Meteor.call('teamSpecifier', machineId, team, idCheck);
-        },
-
-        'click .submitButtonRepair': (e) => {
-            e.preventDefault();
-            let team = 'Repair';
-            let idCheck = e.currentTarget.id;
-            let machineId = Session.get('selectedPdiMachineId');
-            Meteor.call('teamSpecifier', machineId, team, idCheck);
-        },
-
-        'click .submitButtonTestBay': (e) => {
-            e.preventDefault();
-            let team = 'Test Bay';
-            let idCheck = e.currentTarget.id;
-            let machineId = Session.get('selectedPdiMachineId');
-            Meteor.call('teamSpecifier', machineId, team, idCheck);
-        },
-
-        'click .submitButtonSupplier': (e) => {
-            e.preventDefault();
-            let supplier = 'Supplier';
-            let idCheck = e.currentTarget.id;
-            let machineId = Session.get('selectedPdiMachineId');
-            Meteor.call('teamSpecifier', machineId, supplier, idCheck);
-        },
-
-        'click .submitButtonUnknown': (e) => {
-            e.preventDefault();
-            let unknown = 'Unknown';
-            let idCheck = e.currentTarget.id;
-            let machineId = Session.get('selectedPdiMachineId');
-            Meteor.call('teamSpecifier', machineId, unknown, idCheck);
-        },
 
         'submit .pdiRepairConfirmText': function (e) {
             e.preventDefault();
@@ -499,14 +438,15 @@ Meteor.subscribe('oms');
             const repairTime = e.target.repTime.value;
             let repairId = Session.get('openFailure');
             let machineId = Session.get('selectedPdiMachineId');
+            console.log(repairId, repairUser, repairComment, repairTime, machineId)
             Meteor.call('confirmRepair', repairId, repairUser, repairComment, repairTime, machineId);
             e.target.message.value = '';
             e.target.repTime.value = '';
         },
 
 
-        'submit .addressToWashBay': (event) => {
-            event.preventDefault();
+        'submit .addressToWashBay': function(e) {
+            e.preventDefault();
             Session.set('selectedPdiMachineId', localStorage.getItem('pdiMachineId'));
             Session.set('selectedPdiMachineNr', localStorage.getItem('pdiMachineNr'));
             const selectedPdiMachineNr = Session.get('selectedPdiMachineNr');
@@ -517,22 +457,22 @@ Meteor.subscribe('oms');
             } else {
                 console.log("Lost Machine Number")
             }
-            event.target.addWashBay.value = '';
+            e.target.addWashBay.value = '';
         },
 
-        'submit .batts': (event) => {
-            event.preventDefault();
+        'submit .batts': function(e)  {
+            e.preventDefault();
             Session.set('selectedPdiMachine', localStorage.getItem('selectedPdi'));
             const loggedInUser = Session.get('currentLoggedInUser');
             const pdiMachineId = Session.get('selectedPdiMachineId');
-            const battC13CCA = event.target.batteryC13CCA.value;
-            const battC13Volt = event.target.batteryC13Volt.value;
-            const mtuG001CCA = event.target.mtuG001CCA.value;
-            const mtuG001Volt = event.target.mtuG001Volt.value;
-            const mtuG005CCA = event.target.mtuG005CCA.value;
-            const mtuG005Volt = event.target.mtuG005Volt.value;
-            const mtuG004CCA = event.target.mtuG004CCA.value;
-            const mtuG004Volt = event.target.mtuG004Volt.value;
+            const battC13CCA = e.target.batteryC13CCA.value;
+            const battC13Volt = e.target.batteryC13Volt.value;
+            const mtuG001CCA = e.target.mtuG001CCA.value;
+            const mtuG001Volt = e.target.mtuG001Volt.value;
+            const mtuG005CCA = e.target.mtuG005CCA.value;
+            const mtuG005Volt = e.target.mtuG005Volt.value;
+            const mtuG004CCA = e.target.mtuG004CCA.value;
+            const mtuG004Volt = e.target.mtuG004Volt.value;
             Meteor.call('pdiMachineBattery', pdiMachineId, loggedInUser, battC13CCA, battC13Volt,
                 mtuG001CCA, mtuG001Volt, mtuG005CCA, mtuG005Volt, mtuG004CCA, mtuG004Volt);
         },
@@ -545,12 +485,19 @@ Meteor.subscribe('oms');
             const selectedPdiMachineNr = Session.get('selectedPdiMachineNr');
             let fuelAfter = event.target.afterFuel.value;
             if(selectedPdiMachineId) {
-                Meteor.call('fuelAfterPdi', selectedPdiMachineId, selectedPdiMachineNr, fuelAfter);
+               let result =  MachineReady.findOne({_id: selectedPdiMachineId}, {fields: {newIssues: 1}});
+                result.newIssues.forEach((element) => {
+                    if (element.responsible === '') {
+                        window.alert('One or more Issues were not assigned to a Team')
+                    } else {
+                        Meteor.call('fuelAfterPdi', selectedPdiMachineId, selectedPdiMachineNr, fuelAfter);
+                        FlowRouter.go('/inspectionStart');
+                    }
+                })
             } else {
-                console.log("Lost Machine Number")
+           //     console.log("Lost Machine Number")
             }
-            FlowRouter.go('/inspectionStart');
-        },
+        }
 
 
 

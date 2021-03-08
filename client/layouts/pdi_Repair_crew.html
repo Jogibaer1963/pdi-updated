@@ -73,22 +73,25 @@
             {{/each}}
             </tbody>
         </table>
+    </div>
 
+    <div class="repair-header">
+        <h4>List for Machine : {{machineNr}} PDI-Tech : {{user}}</h4>
     </div>
 
     <div class="repair-box">   <!--  **********************  Repair Table  ************************  -->
         <div class="">
-            <table class="blueTable table-height">
+            <table class="blueTable table-height display-error">
                 <thead>
                 <tr>
                     <th>Machine</th>
-                    <th class="pdiComments">Description</th>
+                    <th class="pdi-comment">Description</th>
                     <th class="pdi-image">image</th>
                     <th class="pdi-rep-tech">Rep by</th>
                     <th class="pdi-rep-comment-field">Repair Comment</th>
                     <th class="pdi-time">Rep time</th>
                     <th class="pdi-rep-status">Rep Status</th>
-                    <th>Issuer</th>
+                    <th class="pdi-issuer">Issuer</th>
                     <th>change issuer</th>
                 </tr>
                 </thead>
@@ -96,7 +99,7 @@
                 {{#each machineToRepair}}
                     <tr class="failureRow {{failureRow}}">
                         <td>{{machineNr}}</td>
-                        <td class="pdiComments">{{errorDescription}}</td>
+                        <td class="pdi-comment">{{errorDescription}}</td>
                         <td class="pdi-image"><a href={{pictureLocation}}>
                             <img style="width: 50px; height: 50px;" class="image-box"
                                  src={{pictureLocation}}
@@ -124,7 +127,7 @@
         </div>
     </div>
 
-        <div class="repair-print-list">
+        <div class="utility-repair">
             <h3>Repair Tech: {{repairUser}}</h3>
             <form class="repairConfirmText">
                 <label for="repairComment"> </label>
@@ -137,11 +140,8 @@
                 <br><br>
                 <button type="submit" class="btn btn-success">Confirm Repair</button>
             </form>
-        </div>
-
-    <div class="pdi-add-to-repair" >
-        <h3>Add new Issue to Repair List</h3>
         <div class="mainComponentsPos">
+        <h3>Add new Issue to Repair List</h3>
             {{#dropdownTrigger  name="mainComponents"}}
                 <button class="loginSubmit omInputButton">Main Components</button>
             {{/dropdownTrigger}}
@@ -155,6 +155,7 @@
                 </tbody>
             {{/dropdown}}
         </div>
+        <br>
         <form class="addNewIssue">
             <div class="issueField">
                 <input type="text" class="addIssueText inputIssueSize  {{inActive_Input}}"
@@ -165,12 +166,10 @@
                 <button type="submit" class="btn btn-success addIssueText ">Submit New Issue</button>
             </div>
         </form>
-        <div class="add-image-after-pdi">
             <form>
                 <label for="img">Select image:</label>
                 <input type="file" class="btn btn-default btn-info" id="img" name="img" accept="image/*">
             </form>
-        </div>
     </div>
 
 

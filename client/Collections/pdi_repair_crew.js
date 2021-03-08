@@ -53,9 +53,11 @@ Template.pdiCrewHome.helpers({
                     omms: 1
                 }
             });
-            Session.set('pdiTech', result.omms.user);
+
             let machineNr = result.machineId;
             let newIssues = result.newIssues;
+            Session.set('pdiTech', result.omms.user);
+            Session.set('repairMachine', machineNr);
             let source = {
                 machineId: result._id,
                 machineNr: machineNr,
@@ -82,6 +84,14 @@ Template.pdiCrewHome.helpers({
         if (result === selectedRow) {
             return "selected";
         }
+    },
+
+    user: () => {
+        return Session.get('pdiTech');
+    },
+
+    machineNr: () => {
+        return Session.get('repairMachine');
     },
 
     //  ******************  end Repair Box  ********************

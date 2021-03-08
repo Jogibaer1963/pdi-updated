@@ -659,17 +659,15 @@ if(Meteor.isServer){
                                                                         imagePath: 1}},
                                                                         {sort: {variant: 1}}).fetch();
 
-            // Load Machine Configuration and select config items
+            // Load Machine Configuration and select config items only status 1
 
             let combineVariant = MachineReady.find({_id: selectedPdiMachineId},
                                                     {fields: {config: 1}},
                                                     {sort: {variant: 1}}).fetch();
-
-
             combineVariant[0].config.forEach((element) => {
 
                 variantResult.forEach((element2) => {
-                    if (element === element2.variant) {
+                    if (element === element2.variant && element2.status === 1) {
                         let uniqueId= Random.id();
                       configStyle = {
                           _id: uniqueId,
@@ -977,9 +975,9 @@ if(Meteor.isServer){
         },
 
         'pdiMachineOmm': function(selectedPdiMachineId, loggedInUser, fuelMe, ommMain, ommSupp,
-                                  ommUnload,ommProfiCam, ommCebis, ommCebisTouch, ommTerra, ommDuals) {
+                                  ommUnload,ommProfiCam, ommCebis, ommTerra) {
             MachineReady.update({_id: selectedPdiMachineId}, {$set: {omms: {user: loggedInUser, fuelStart: fuelMe,
-                    ommMain, ommSupp, ommUnload,ommProfiCam, ommCebis, ommCebisTouch, ommTerra, ommDuals, ommStatus: 1}}});
+                    ommMain, ommSupp, ommUnload, ommProfiCam, ommCebis,  ommTerra, ommStatus: 1}}});
         },
 
         'machineUser': function (machineId, userLoggedIn, arrayOrder) {
@@ -1160,7 +1158,7 @@ if(Meteor.isServer){
             } catch(err) {
                 console.log(err.message)
             }
-                console.log('kein eror ?')
+               // console.log('kein eror ?')
         },
 
         'editShipInfo': function(selectedMachine, newMachine, newShippingDate, newShippingDestination, newShippingTransporter,
