@@ -651,7 +651,6 @@ if(Meteor.isServer){
             MachineReady.update({_id: selectedPdiMachineId}, {$set: {checkList: sortK}});
 
             // Load Type Variant
-
             let type = pdiMachineNr.slice(0,3);
             let variantResult = variants.find({type: type},  {fields: {status: 1,
                                                                         variant: 1,
@@ -750,10 +749,11 @@ if(Meteor.isServer){
                                                        {fields: {pdiItems: 1}}).pdiItems;
                 pdiItemList.forEach((element) => {
                     let pdiDescription = "- Added Items -" + element.pdiItem
+                    let uniqueIdSi = Random.id();
                     MachineReady.update({_id: selectedPdiMachineId}, {
                         $push: {
                             newIssues: {
-                                "_id": element._id,
+                                "_id": uniqueIdSi,
                                 "checkStatus": true,
                                 "errorDescription" : pdiDescription,
                                 "pictureLocation" : "noPicture.JPG",

@@ -484,18 +484,22 @@ Meteor.subscribe('oms');
             const selectedPdiMachineId = Session.get('selectedPdiMachineId');
             const selectedPdiMachineNr = Session.get('selectedPdiMachineNr');
             let fuelAfter = event.target.afterFuel.value;
+            let k = 0;
             if(selectedPdiMachineId) {
                let result =  MachineReady.findOne({_id: selectedPdiMachineId}, {fields: {newIssues: 1}});
                 result.newIssues.forEach((element) => {
                     if (element.responsible === '') {
-                        window.alert('One or more Issues were not assigned to a Team')
-                    } else {
-                        Meteor.call('fuelAfterPdi', selectedPdiMachineId, selectedPdiMachineNr, fuelAfter);
-                        FlowRouter.go('/inspectionStart');
+                       k = k + 1;
                     }
                 })
             } else {
            //     console.log("Lost Machine Number")
+            }
+            if (k === 0) {
+                Meteor.call('fuelAfterPdi', selectedPdiMachineId, selectedPdiMachineNr, fuelAfter);
+                FlowRouter.go('/inspectionStart');
+            } else {
+                window.alert('One or more Issues were not assigned to a Team')
             }
         }
 

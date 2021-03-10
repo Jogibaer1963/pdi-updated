@@ -2,27 +2,28 @@
     Meteor.subscribe("fuelAverage");
     Meteor.subscribe("specialItems")
     Meteor.subscribe('machineCommTable')
+    Meteor.subscribe('MachineReady')
     Session.set('status', 0);
 
 
     Template.inspection.helpers({
 
          shipList: function () {
-           Session.set('selectedPdiMachine', '');
-           let commMachine = '';
-         // Order of shipping date
+             Session.set('selectedPdiMachine', '');
+             let commMachine = '';
+             // Order of shipping date
              let result = MachineReady.find({$or:[{pdiStatus: 0},{pdiStatus: 2}]}, {sort: {date: 1}},
-              {fields: {machineId: 1, date: 1, shippingComment: 1, pdiStatus: 1,
-                    washStatus: 1, configStatus: 1}}).fetch();
-             try {
-             result.forEach((element) => {
-                 commMachine = machineCommTable.find({machineId: element.machineId},
-                                                         {fields: {'timeLine.bay19Planned': 1}}).fetch();
-                 let endOfLine = commMachine[0].timeLine;
-                 Object.assign(element, endOfLine)
-             })
-             } catch {
-             }
+                 {fields: {machineId: 1, date: 1, shippingComment: 1, pdiStatus: 1,
+                         washStatus: 1, configStatus: 1}}).fetch();
+                 result.forEach((element) => {
+                     commMachine = machineCommTable.find({machineId: element.machineId},
+                         {fields: {'timeLine.bay19Planned': 1}}).fetch();
+                     try {
+                         let endOfLine = commMachine[0].timeLine;
+                         Object.assign(element, endOfLine)
+                     } catch (e) {
+                     }
+                 })
              return result;
          },
         
@@ -43,25 +44,7 @@
         countPdiDone: () => {
             let result = specialItems.find({}).fetch();
             return result[0];
-        },
-
-/*
-        countConsumption: function () {
-            const average = fuelAverage.findOne({});
-            if(average === undefined) {
-            } else {
-                const sum = average.consumption.reduce(function (acc, val) {
-                    return acc + val
-                }, 0);
-                return number = (sum / average.consumption.length).toFixed(2);
-            }
         }
-
- */
-
-
-
-
 
         });
 
@@ -71,11 +54,9 @@
             const openInspect = this._id;
             // localStorage.setItem('selectedPdi', openInspect);
             Session.set('selectedPdiMachine', openInspect);
-
-            const machineId = MachineReady.findOne({_id: openInspect}).machineId;
-
+            const machineNr = MachineReady.findOne({_id: openInspect}).machineId;
             // localStorage.setItem('pdiMachine', machineId);
-            Session.set('pdiMachineNumber', machineId);
+            Session.set('pdiMachineNumber', machineNr);
             //   Session.setPersistent('currentLoggedInUser', user);
         },
 
@@ -90,6 +71,7 @@
             const range = [];
             range.push(firstRange);
             const dateStart = new Date();
+            console.log('machine Id: ', selectedPdiMachineId, 'machine Nr: ', selectedPdiMachineNr)
             Meteor.call('generatePdiList', selectedPdiMachineId, selectedPdiMachineNr, dateStart,
                 user, range);
             Session.set('inActiveState', 1);
