@@ -110,52 +110,52 @@
         <button type="button" name="Supplier"  class="btn btn-default btn-success btn-teamSupplier-details team-chooser">Show Details</button>
         <br>
         <h4>CTD :  {{ctdAmount}} issues identified</h4>
-        <button type="button" name="CTD"  class="btn btn-default btn-success btn-unknown-details team-chooser">Show Details</button>
+        <button type="button" name="CTD"  class="btn btn-default btn-success btn-ctd-details team-chooser">Show Details</button>
         <br>
         <h4>R&D  :  {{rAndD_Amount}} issues identified</h4>
-        <button type="button" name="R&D"  class="btn btn-default btn-success btn-unknown-details team-chooser">Show Details</button>
+        <button type="button" name="R&D"  class="btn btn-default btn-success btn-development-details team-chooser">Show Details</button>
         <br>
         <h4>Unknown  :  {{unknownAmount}} issues identified</h4>
         <button type="button" name="Unknown"  class="btn btn-default btn-success btn-unknown-details team-chooser">Show Details</button>
         <br>
         <h4>Not Applicable  :  {{notApplicableAmount}} issues identified</h4>
-        <button type="button" name="N/A"  class="btn btn-default btn-success btn-unknown-details team-chooser">Show Details</button>
+        <button type="button" name="N/A"  class="btn btn-default btn-success btn-not-applicable-details team-chooser">Show Details</button>
     </div>
 
         {{#if teamTables}}
             <div class="team-table">
-                <table class="blueTable table-height">
+                <table class="blueTable analyze-team-table table-height">
                     <thead>
                         <tr>
-                            <th>Machine</th>
-                            <th>PDI Tech</th>
-                            <th>Description</th>
-                            <th>image</th>
-                            <th>Repair Tech</th>
-                            <th>Repair Comment</th>
-                            <th>Repair Status</th>
-                            <th>Issuer</th>
+                            <th class="pdiMachineField">Machine</th>
+                            <th class="pdi-rep-tech">PDI Tech</th>
+                            <th class="pdi-comment">Description</th>
+                            <th class="pdi-image">image</th>
+                            <th class="pdi-rep-tech">Repair Tech</th>
+                            <th class="pdi-comment">Repair Comment</th>
+                            <td class="pdi-issuer">Rep Time</td>
+                            <th class="pdi-rep-status">Repair Status</th>
+                            <th class="pdi-issuer">Issuer</th>
                             <th>change issuer</th>
                         </tr>
                     </thead>
                     <tbody>
                         {{#each team}}
                             <tr class="machineRow {{selectedRow}}">
-                                <td>{{machineNr}}</td>
-                                <td>{{pdiTech}}</td>
-                                <td>{{errorDescription}}</td>
+                                <td class="pdiMachineField">{{machineNr}}</td>
+                                <td class="pdi-rep-tech">{{pdiTech}}</td>
+                                <td class="pdi-rep-comment-field">{{errorDescription}}</td>
                                 <td><a href={{pictureLocation}}>
                                     <img style="width: 50px; height: 50px;" class="image-box"
                                          src={{pictureLocation}}
-
                                          onerror="this.src='noPicture.JPG'"
                                          alt="No Picture">
                                 </a></td>
-                               <td>{{repairTech}}</td>
-                                <td>{{repairComment}}</td>
-                                <td>{{repairDuration}}</td>
-                                <td class="pdi-rep-conf  {{getStatusColor repairStatus}}" style="background-color:{{getStatusColor repairStatus}}; color:{{getStatusColor repairStatus}}" >{{repairStatus}}</td>
-                                <td>{{responsible}}</td>
+                               <td class="pdi-rep-tech">{{repairTech}}</td>
+                                <td class="pdi-rep-comment-field">{{repairComment}}</td>
+                                <td class="pdi-issuer">{{repairTime}}</td>
+                                <td class="pdi-rep-status  {{getStatusColor repairStatus}}" style="background-color:{{getStatusColor repairStatus}}; color:{{getStatusColor repairStatus}}" >{{repairStatus}}</td>
+                                <td class="pdi-issuer">{{responsible}}</td>
                                 <td>
                                     <label for="category-select"></label>
                                         <select name="team-select" id="category-select">
@@ -176,7 +176,15 @@
 <!-----------------------------------  Issues by Components  ---------------------------->
 
 <template name="analyzingComponent">
-
+    <div class="supplier-head-buttons">
+        <button class="btn btn-info">Adding Suppliers to List</button>
+    </div>
+    <div class="assigned-supplier">
+        <button class="btn btn-info">Show Supplier List</button>
+    </div>
+    <div class="">
+        <h3>Assigning Suppliers</h3>
+    </div>
 </template>
 
 <!----------------------------------- Issues by Supplier  -------------------------------->
@@ -197,9 +205,9 @@
 <div class="supplier-table">
     <table class="blueTable">
         <tr>
-            <th>Machine</th>
+            <th class="pdiMachineField">Machine</th>
             <th>Pdi Tech</th>
-            <th>Error Description</th>
+            <th class="pdiRepField">Error Description</th>
             <th>Issuer</th>
             <th>Repair Time</th>
             <th>Repair Status</th>

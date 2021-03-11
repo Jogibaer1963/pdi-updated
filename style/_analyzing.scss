@@ -127,6 +127,10 @@ td.error-machine {
 
 // Responsible Team
 
+table.analyze-team-table {
+  width: 1040px;
+}
+
 .response-team {
   left: 5em;
   position: absolute;
@@ -140,51 +144,69 @@ td.error-machine {
 }
 
 .btn-team1-details {
-  left: 20em;
+  left: 22em;
   position: absolute;
   top: -.1em;
 }
 
 .btn-team2-details {
-  left: 20em;
+  left: 22em;
   position: absolute;
   top: 4em;
 }
 
 .btn-team3-details {
-  left: 20em;
+  left: 22em;
   position: absolute;
   top: 8.5em;
 }
 
 .btn-team4-details {
-  left: 20em;
+  left: 22em;
   position: absolute;
   top: 12.7em;
 }
 
 .btn-team5-details {
-  left: 20em;
+  left: 22em;
   position: absolute;
   top: 17em;
 }
 
 .btn-teamTestBay-details {
-  left: 20em;
+  left: 22em;
   position: absolute;
   top: 21.5em;
 }
 
 .btn-teamSupplier-details {
-  left: 20em;
+  left: 22em;
   position: absolute;
   top: 25.5em;
 }
 
-.btn-unknown-details {
-  left: 20em;
+.btn-ctd-details {
+  left: 22em;
   position: absolute;
   top: 30.5em;
+}
+
+.btn-development-details {
+  left: 22em;
+  position: absolute;
+  top: 34.5em;
+}
+
+.btn-unknown-details {
+  left: 22em;
+  position: absolute;
+  top: 38.5em;
+}
+
+.btn-not-applicable-details {
+  left: 22em;
+  position: absolute;
+  top: 42.5em;
 }
 
 // supplier Table

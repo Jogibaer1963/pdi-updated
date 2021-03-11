@@ -467,25 +467,7 @@ Template.analyzingResponseTeam.events({
     'click .team-chooser': function (e) {
           e.preventDefault();
           let teamChosen = e.target.name;
-          if (teamChosen === 'Team 1') {
-              Session.set('teamChosen', teamChosen)
-          } else if (teamChosen === 'Team 2') {
-              Session.set('teamChosen', teamChosen)
-          } else if (teamChosen === 'Team 2') {
-              Session.set('teamChosen', teamChosen)
-          } else if (teamChosen === 'Team 3') {
-              Session.set('teamChosen', teamChosen)
-          } else if (teamChosen === 'Team 4') {
-              Session.set('teamChosen', teamChosen)
-          } else if (teamChosen === 'Team 5') {
-              Session.set('teamChosen', teamChosen)
-          } else if (teamChosen === 'Test Bay') {
-              Session.set('teamChosen', teamChosen)
-          } else if (teamChosen === 'Supplier') {
-              Session.set('teamChosen', teamChosen)
-          }else if (teamChosen === 'Unknown') {
-              Session.set('teamChosen', teamChosen)
-          }
+          Session.set('teamChosen', teamChosen)
     }
 
 });
@@ -494,27 +476,7 @@ Template.analyzingResponseTeam.events({
 
 Template.analyzingResponsibility.helpers({
 
-    openIssue: function () {
-        let openResponsible = [];
-        let rawDataSet = analyzingDatabase.find({}).fetch();
-        rawDataSet.forEach((element) => {
-            if (element.issueResponsible === '') {
-                openResponsible.push(element)
-            }
-        })
-        return openResponsible;
-    },
 
-    closeIssue: function () {
-        let closedResponsible = [];
-        let rawDataSet = analyzingDatabase.find({}).fetch();
-        rawDataSet.forEach((element) => {
-            if (element.issueResponsible !== '') {
-                closedResponsible.push(element)
-            }
-        })
-        return closedResponsible
-    },
 
 });
 

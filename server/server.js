@@ -117,10 +117,6 @@ if(Meteor.isServer){
             return variants.find();
         });
 
-        Meteor.publish("analyzingDatabase", function() {
-            return analyzingDatabase.find();
-        });
-
         Meteor.publish("SuppliersList", function() {
             return SuppliersList.find();
         });
@@ -178,11 +174,6 @@ if(Meteor.isServer){
 
         'addSupplierToRepair': (machineNr, issueId, selectedSupplier) => {
             if (issueId && selectedSupplier) {
-            analyzingDatabase.update({_id: issueId},
-                                    {$set: {issueResponsible: selectedSupplier,
-                                                     extern: true,
-                                                     newEntry: true}});
-
             MachineReady.update({machineId: machineNr, 'newIssues._id': issueId},
                                 {$set: {'newIssues.$.responsible': selectedSupplier,
                                                  'newIssues.$.extern': true,
@@ -212,13 +203,15 @@ if(Meteor.isServer){
             MachineReady.update({machineId: machineId},
                 {$set: {config: configArray, configStatus: 1}});
         },
-
+/*
         'machines': () => {
         //    const issueArray = [];
             const completeIssueArray = [];
             readMachine( completeIssueArray);
             return [completeIssueArray];
         },
+
+ */
 
         'coaDate': (machineId, coaDate) => {
             MachineReady.upsert({machineId: machineId}, {$set: {coaDate: coaDate}});
@@ -240,8 +233,6 @@ if(Meteor.isServer){
          MachineReady.update({_id: machineId, 'newIssues._id': idCheck},
              {$set: {'newIssues.$.responsible': team,
                       }})
-         analyzingDatabase.update({_id: idCheck}, {$set: {issueResponsible: team,
-                                                                           newEntry: true}})
      },
 
   //-------------------------------------------------- Historic PDI's ------------------------------------
@@ -1218,6 +1209,7 @@ if(Meteor.isServer){
     });
 }
 
+/*
     function readMachine(completeIssueArray) {
     let totalMachineArray = [];
     let location = '';
@@ -1298,7 +1290,11 @@ if(Meteor.isServer){
             }
         });
 
+
+
     }}
+
+ */
 
 
 
