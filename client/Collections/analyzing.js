@@ -1,5 +1,3 @@
-Meteor.subscribe('analyzingDatabase');
-Meteor.subscribe('fuelAverage');
 Meteor.subscribe('SuppliersList');
 Meteor.subscribe('TeamList');
 
@@ -107,7 +105,6 @@ Template.analyzing.events ({
         let result = MachineReady.find({pdiStatus: 1}, {fields: {newIssues: 1,
                 machineId: 1,
                 omms: 1}}).fetch();
-       // console.log(result)
         let returnedTarget = {};
         let returnResultTeam1 = []; // Team 1
         let returnResultTeam2 = []; // Team 2
@@ -120,6 +117,7 @@ Template.analyzing.events ({
         let rAndD_Amount = [];
         let unknownAmount = []; // Unknown
         let notApplicableAmount = [];
+        let undefinedIssuer = [];
         try {
             result.forEach((element) => {
                 if (element.newIssues) {
@@ -173,6 +171,10 @@ Template.analyzing.events ({
                             returnedTarget = Object.assign(element2, source)
                             notApplicableAmount.push(returnedTarget);
                         }
+                        if (element2.responsible === undefined) {
+                            returnedTarget = Object.assign(element2, source)
+                            undefinedIssuer.push(returnedTarget);
+                        }
                     })
                 }
             })
@@ -182,7 +184,7 @@ Template.analyzing.events ({
         returnResultTeam1.sort(function(a, b) {return a.machineId - b.machineId})
         let totalLength = returnResultTeam1.length + returnResultTeam2.length + returnResultTeam3.length +
             returnResultTeam4.length + returnResultTeam5.length + teamTestBayAmount.length + teamSupplierAmount.length +
-            rAndD_Amount.length + unknownAmount.length + notApplicableAmount.length;
+            rAndD_Amount.length + unknownAmount.length + notApplicableAmount.length + undefinedIssuer.length;
         Session.set('totalLength', totalLength);
         Session.set('team1Amount', returnResultTeam1.length);
         Session.set('team2Amount', returnResultTeam2.length);
@@ -195,6 +197,7 @@ Template.analyzing.events ({
         Session.set('rAndD_Amount', rAndD_Amount.length);
         Session.set('unknownAmount', unknownAmount.length);
         Session.set('notApplicableAmount', notApplicableAmount.length);
+        Session.set('undefinedIssuer', undefinedIssuer.length);
 
     },
 
@@ -265,24 +268,19 @@ Template.analyzing.events ({
 
 Template.analyzingOverView.helpers({
 
-    issuesCount: function () {
-        let analyzeStart = [];
-        try {
-           analyzeStart = analyzingDatabase.find({}).fetch();
-           Session.set('analyzeStart', analyzeStart);
-        } catch {}
-        return analyzeStart.length;
-    },
-
     machineCount: function () {
-        let machineFinished = [];
-        try {
-          let  machineResult = fuelAverage.find({}).fetch();
-          machineFinished =   machineResult[0].machineArray.length
-        } catch {}
-        return machineFinished;
+        let completedMachines = [];
+        let issuesFound = 0;
+        let result = MachineReady.find({pdiStatus: 1}, {fields: {newIssues: 1,
+                machineId: 1
+               }}).fetch();
+        result.forEach((element) => {
+            completedMachines.push(element.machineId);
+            issuesFound = issuesFound + element.newIssues.length;
+        });
+        let machines = completedMachines.length;
+        return {machines, issuesFound};
     }
-
 });
 
 Template.analyzingOverView.events({
@@ -434,6 +432,10 @@ Template.analyzingResponseTeam.helpers({
         return Session.get('notApplicableAmount');
     },
 
+    undefinedIssuer: () => {
+        return Session.get('undefinedIssuer');
+    },
+
 
 
     'selectedRow': function(){
@@ -526,14 +528,31 @@ Template.analyzingSupplier.helpers({
 
     supplierIssue: function () {
         let supplierArray = [];
-        let result = analyzingDatabase.find().fetch();
+        let supplierIssues = {};
+        let result = MachineReady.find({pdiStatus: 1}, {
+            fields: {machineNr: 1, newIssues: 1, machineId: 1, omms: 1
+            }}).fetch();
+        console.log(result[0].omms.user);
         result.forEach((element) => {
-            if (element.issueResponsible === 'Supplier') {
-                supplierArray.push(element);
-            }
+            let pdiPerformer = element.omms.user;
+            let machineNr = element.machineId;
+            let issueArray = element.newIssues;
+            issueArray.forEach((element2) => {
+                if (element2.responsible === "Supplier") {
+                       supplierIssues = {
+                        machineNr: machineNr,
+                        pdiPerformer:  pdiPerformer,
+                        errorDescription: element2.errorDescription,
+                        responsible: element2.responsible,
+                        repairStatus: element2.repairStatus,
+                        image: element2.pictureLocation,
+                        repairTime: element2.repairTime
+                    }
+                    supplierArray.push(supplierIssues)
+                }
+            })
         })
         return supplierArray;
-
     },
 
     //  ********** drop down menu suppliers  ****************************

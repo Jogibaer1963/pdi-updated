@@ -52,8 +52,8 @@
 
 <template name="analyzingOverView">
     <div class="analyze-overview refresh-button">
-        <h3>&nbsp;C8x Machines inspection completed : {{machineCount}}</h3>
-        <h3>&nbsp;Issues Found : {{issuesCount}} </h3>
+        <h3>&nbsp;C8x Machines inspection completed : {{machineCount.machines}}</h3>
+        <h3>&nbsp;Issues Found : {{machineCount.issuesFound}} </h3>
     </div>
 </template>
 
@@ -120,6 +120,9 @@
         <br>
         <h4>Not Applicable  :  {{notApplicableAmount}} issues identified</h4>
         <button type="button" name="N/A"  class="btn btn-default btn-success btn-not-applicable-details team-chooser">Show Details</button>
+        <br>
+        <h4>Undefined Issuer  :  {{undefinedIssuer}} issues identified</h4>
+        <button type="button" name="N/A"  class="btn btn-default btn-success btn-undefined-issuer-details team-chooser">Show Details</button>
     </div>
 
         {{#if teamTables}}
@@ -219,7 +222,7 @@
                     <td>{{machineNr}}</td>
                     <td>{{pdiPerformer}}</td>
                     <td>{{errorDescription}}</td>
-                    <td>{{issueResponsible}}</td>
+                    <td>{{responsible}}</td>
                     <td>{{repairTime}}</td>
                     <td class="pdiRepField {{getStatusColor repairStatus}}" style="background-color:{{getStatusColor repairStatus}}; color:{{getStatusColor repairStatus}}">{{repairStatus}}</td>
                     <td><a target="blank" href={{pictureLocation}}>
