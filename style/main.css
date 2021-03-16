@@ -1953,6 +1953,11 @@ table.analyze-team-table {
   position: absolute;
   top: 46.5em; }
 
+.team-repair-time-graph {
+  left: 35em;
+  position: absolute;
+  top: 55em; }
+
 .pdi-comment-time-table {
   width: 314px; }
 

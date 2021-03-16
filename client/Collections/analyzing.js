@@ -374,6 +374,37 @@ Template.analyzingResponseTeam.helpers({
             if (a.machineNr < b.machineNr) return -1
             return a.machineNr > b.machineNr ? 1 : 0
         })
+
+        let machineArray = [];
+        let repairArray = [];
+        let machineRepairArray = [];
+        let machineNr = '';
+        let repairTime = 0;
+        returnResultTeam.forEach((element) =>  {
+            machineNr = element.machineNr;
+            if (element.repairTime === undefined || element.repairTime === "") {
+                repairTime = 0;
+            } else {
+                repairTime = parseInt(element.repairTime);
+            }
+            let machineRepair = {
+                name: machineNr,
+                value: repairTime
+            }
+            machineRepairArray.push(machineRepair)
+        })
+        // summary repair time to each single machine number. Name 'name' in object must match
+        // 'name' in function !!
+        const res = Array.from(machineRepairArray.reduce(
+            (m, {name, value}) => m.set(name, (m.get(name) || 0) + value), new Map
+        ), ([name, value]) => ({name, value}));
+        // build Arrays for Graph
+        res.forEach((element) => {
+            machineArray.push(element.name);
+            repairArray.push(element.value);
+        })
+        Session.set('machineTeamArray', machineArray);
+        Session.set('repairTeamArray', repairArray);
         Session.set('teamResult', returnResultTeam)
         return returnResultTeam
     },
@@ -385,6 +416,61 @@ Template.analyzingResponseTeam.helpers({
     teamList: () => {
         return TeamList.find().fetch();
     },
+     teamRepairTime: () => {
+             // Gather data:
+             let team = Session.get('teamChosen');
+             let machine = Session.get('machineTeamArray');
+             let repairTime = Session.get('repairTeamArray');
+             let sumRepTime = repairTime.reduce((a, b) => a + b, 0);
+             // Use Meteor.defer() to create chart after DOM is ready:
+             let titleText =  'For ' + team + ' were ' + sumRepTime + ' min total on Repair Time counted';
+             Meteor.defer(function() {
+                 // Create standard Highcharts chart with options:
+                 Highcharts.chart('chart_2', {
+                     title: {
+                         text: titleText
+                     },
+                     tooltip: {
+                         shared: true
+                     },
+                     chart: {
+                         style: {
+                             fontFamily: '\'Unica One\', sans-serif'
+                         },
+                         plotBorderColor: '#606063',
+                         height: 500,
+                         width: 900,
+                         zoomType: 'xy'
+                     },
+                     yAxis: {
+                         categories: [],
+                         title: {enabled: true,
+                             text: 'Repair Time in minutes',
+                             style: {
+                                 fontWeight: 'normal'
+                             }
+                         }
+                     },
+                     xAxis: {
+                         categories: machine,
+                         title: {
+                             enabled: true,
+                             text: 'Machine',
+                             style: {
+                                 fontWeight: 'normal'
+                             }
+                         }
+                     },
+                     series: [
+                         {
+                             name: 'Repair Time',
+                             type: 'column',
+                             data: repairTime
+                         }
+                     ]
+                 });
+             });
+     },
 
 
      //   *******************   team tables  ***********************
@@ -527,7 +613,6 @@ Template.analyzingComponent.helpers({
         let machineArray = [];
         let repairArray = [];
         let machineRepairArray = [];
-        let summaryRepair = 0;
         let machineNr = '';
         let repairTime = 0;
         machineRepairTime.forEach((element) =>  {
