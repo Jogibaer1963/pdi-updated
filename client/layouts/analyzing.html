@@ -87,6 +87,7 @@
 <!----------------------------------    Responsible Team  ------------------------------>
 
 <template name="analyzingResponseTeam">
+
     <div class="response-team">
         <h4>Team 1  :  {{team1Amount}} issues identified</h4>
         <button type="button" name="Team 1" class="btn btn-default btn-success btn-team1-details team-chooser">Show Details</button>
@@ -131,6 +132,7 @@
                     <thead>
                         <tr>
                             <th class="pdiMachineField">Machine</th>
+                            <th class="date-bay-19">Bay 19</th>
                             <th class="pdi-rep-tech">PDI Tech</th>
                             <th class="pdi-comment">Description</th>
                             <th class="pdi-image">image</th>
@@ -146,6 +148,7 @@
                         {{#each team}}
                             <tr class="machineRow {{selectedRow}}">
                                 <td class="pdiMachineField">{{machineNr}}</td>
+                                <td class="dateBay19">{{endOfLine}}</td>
                                 <td class="pdi-rep-tech">{{pdiTech}}</td>
                                 <td class="pdi-rep-comment-field">{{errorDescription}}</td>
                                 <td><a href={{pictureLocation}}>

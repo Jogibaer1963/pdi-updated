@@ -1881,7 +1881,7 @@ td.error-machine {
   top: 16em; }
 
 table.analyze-team-table {
-  width: 1040px; }
+  width: 1130px; }
 
 .response-team {
   left: 5em;
@@ -1952,6 +1952,9 @@ table.analyze-team-table {
   left: 22em;
   position: absolute;
   top: 46.5em; }
+
+.date-bay-19 {
+  width: 84px; }
 
 .team-repair-time-graph {
   left: 35em;

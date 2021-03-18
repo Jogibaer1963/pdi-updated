@@ -42,6 +42,9 @@
               {{#if isInRole 'pdiRepCrew'}}
                   {{> pdiRepairCrew}}
               {{/if}}
+              {{#if isInRole 'teamLead'}}
+                  {{> analyzingResponseTeam}}
+               {{/if}}
        {{else}}
             {{> login}}
        {{/if}}

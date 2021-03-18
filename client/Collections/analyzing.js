@@ -103,103 +103,7 @@ Template.analyzing.events ({
         Session.set('editResponsibility', false);
         Session.set('advanceSearch', false);
         Session.set('options', false);
-        let result = MachineReady.find({pdiStatus: 1}, {fields: {newIssues: 1,
-                machineId: 1,
-                omms: 1}}).fetch();
-        let returnedTarget = {};
-        let returnResultTeam1 = []; // Team 1
-        let returnResultTeam2 = []; // Team 2
-        let returnResultTeam3 = []; // Team 3
-        let returnResultTeam4 = []; // Team 4 Engines
-        let returnResultTeam5 = []; // Team Final
-        let teamTestBayAmount = []; // Test Bay
-        let teamSupplierAmount = []; // Supplier
-        let ctdAmount = [];
-        let rAndD_Amount = [];
-        let unknownAmount = []; // Unknown
-        let notApplicableAmount = [];
-        let undefinedIssuer = [];
-        try {
-            result.forEach((element) => {
-                if (element.newIssues) {
-                    let source = {
-                        machineId: element._id,
-                        machineNr: element.machineId,
-                        pdiTech: element.omms.user
-                    }
-                    element.newIssues.forEach((element2) => {
-                        if (element2.responsible === "Team 1") {
-                            returnedTarget = Object.assign(element2, source)
-                            returnResultTeam1.push(returnedTarget);
-                        }
-                        if (element2.responsible === "Team 2") {
-                            returnedTarget = Object.assign(element2, source)
-                            returnResultTeam2.push(returnedTarget);
-                        }
-                        if (element2.responsible === "Team 3") {
-                            returnedTarget = Object.assign(element2, source)
-                            returnResultTeam3.push(returnedTarget);
-                        }
-                        if (element2.responsible === "Team 4") {
-                            returnedTarget = Object.assign(element2, source)
-                            returnResultTeam4.push(returnedTarget);
-                        }
-                        if (element2.responsible === "Team 5") {
-                            returnedTarget = Object.assign(element2, source)
-                            returnResultTeam5.push(returnedTarget);
-                        }
-                        if (element2.responsible === "Test Bay") {
-                            returnedTarget = Object.assign(element2, source)
-                            teamTestBayAmount.push(returnedTarget);
-                        }
-                        if (element2.responsible === "Supplier") {
-                            returnedTarget = Object.assign(element2, source)
-                            teamSupplierAmount.push(returnedTarget);
-                        }
-                        if (element2.responsible === "CTD") {
-                            returnedTarget = Object.assign(element2, source)
-                            ctdAmount.push(returnedTarget);
-                        }
-                        if (element2.responsible === "R&D") {
-                            returnedTarget = Object.assign(element2, source)
-                            rAndD_Amount.push(returnedTarget);
-                        }
-                        if (element2.responsible === "Unknown") {
-                            returnedTarget = Object.assign(element2, source)
-                            unknownAmount.push(returnedTarget);
-                        }
-                        if (element2.responsible === "N/A") {
-                            returnedTarget = Object.assign(element2, source)
-                            notApplicableAmount.push(returnedTarget);
-                        }
-                        if (element2.responsible === undefined) {
-                            returnedTarget = Object.assign(element2, source)
-                            undefinedIssuer.push(returnedTarget);
-                        }
-                    })
-                }
-            })
-        } catch (e) {
-
-        }
-        returnResultTeam1.sort(function(a, b) {return a.machineId - b.machineId})
-        let totalLength = returnResultTeam1.length + returnResultTeam2.length + returnResultTeam3.length +
-            returnResultTeam4.length + returnResultTeam5.length + teamTestBayAmount.length + teamSupplierAmount.length +
-            rAndD_Amount.length + unknownAmount.length + notApplicableAmount.length + undefinedIssuer.length;
-        Session.set('totalLength', totalLength);
-        Session.set('team1Amount', returnResultTeam1.length);
-        Session.set('team2Amount', returnResultTeam2.length);
-        Session.set('team3Amount', returnResultTeam3.length);
-        Session.set('team4Amount', returnResultTeam4.length);
-        Session.set('team5Amount', returnResultTeam5.length);
-        Session.set('teamTestBayAmount', teamTestBayAmount.length);
-        Session.set('teamSupplierAmount', teamSupplierAmount.length);
-        Session.set('ctdAmount', ctdAmount.length);
-        Session.set('rAndD_Amount', rAndD_Amount.length);
-        Session.set('unknownAmount', unknownAmount.length);
-        Session.set('notApplicableAmount', notApplicableAmount.length);
-        Session.set('undefinedIssuer', undefinedIssuer.length);
-
+        prepareTeamResult();
     },
 
     'click .btn-component-search': (e) => {
@@ -341,6 +245,7 @@ Template.analyzingWithKeyWords.events({
 Template.analyzingResponseTeam.helpers({
 
     teamTables: () => {
+        prepareTeamResult();  // load all Results for all Teams when template is called
         let imageIp = Session.get('repairInfos')
         let returnedTarget = {};
         let returnResultTeam = []; // Team 1
@@ -353,12 +258,28 @@ Template.analyzingResponseTeam.helpers({
                     omms: 1
                 }
             }).fetch();
+            let endOfLine = '';
             result.forEach((element) => {
+                let commResult = machineCommTable.findOne({machineId: element.machineId},
+                    {fields: {'timeLine.bay19Planned': 1}});
+                try {
+                         endOfLine = {
+                            endOfLine: commResult.timeLine.bay19Planned
+                        };
+                    }    catch (e) {
+                               }
+                if (endOfLine === "") {
+                    endOfLine = {
+                        endOfLine: '2020-10-01'  // last fiscal year machines * old database *
+                    };
+                }
+                Object.assign(element, endOfLine)
                 if (element.newIssues) {
                     let source = {
                         machineId: element._id,
                         machineNr: element.machineId,
-                        pdiTech: element.omms.user
+                        pdiTech: element.omms.user,
+                        endOfLine: element.endOfLine
                     }
                     element.newIssues.forEach((element2) => {
                         if (element2.responsible === team) {
@@ -371,8 +292,8 @@ Template.analyzingResponseTeam.helpers({
             })
         }
         returnResultTeam.sort( (a, b) => {
-            if (a.machineNr < b.machineNr) return -1
-            return a.machineNr > b.machineNr ? 1 : 0
+            if (a.endOfLine < b.endOfLine) return -1
+            return a.endOfLine > b.endOfLine ? 1 : 0
         })
 
         let machineArray = [];
@@ -889,4 +810,110 @@ Template.analyzingOptions.events({
     },
 
 
-})
+});
+
+
+function prepareTeamResult() {
+    let result = MachineReady.find({pdiStatus: 1}, {
+        fields: {
+            newIssues: 1,
+            machineId: 1,
+            omms: 1
+        }
+    }).fetch();
+    let returnedTarget = {};
+    let returnResultTeam1 = []; // Team 1
+    let returnResultTeam2 = []; // Team 2
+    let returnResultTeam3 = []; // Team 3
+    let returnResultTeam4 = []; // Team 4 Engines
+    let returnResultTeam5 = []; // Team Final
+    let teamTestBayAmount = []; // Test Bay
+    let teamSupplierAmount = []; // Supplier
+    let ctdAmount = [];
+    let rAndD_Amount = [];
+    let unknownAmount = []; // Unknown
+    let notApplicableAmount = [];
+    let undefinedIssuer = [];
+    try {
+        result.forEach((element) => {
+            if (element.newIssues) {
+                let source = {
+                    machineId: element._id,
+                    machineNr: element.machineId,
+                    pdiTech: element.omms.user
+                }
+                element.newIssues.forEach((element2) => {
+                    if (element2.responsible === "Team 1") {
+                        returnedTarget = Object.assign(element2, source)
+                        returnResultTeam1.push(returnedTarget);
+                    }
+                    if (element2.responsible === "Team 2") {
+                        returnedTarget = Object.assign(element2, source)
+                        returnResultTeam2.push(returnedTarget);
+                    }
+                    if (element2.responsible === "Team 3") {
+                        returnedTarget = Object.assign(element2, source)
+                        returnResultTeam3.push(returnedTarget);
+                    }
+                    if (element2.responsible === "Team 4") {
+                        returnedTarget = Object.assign(element2, source)
+                        returnResultTeam4.push(returnedTarget);
+                    }
+                    if (element2.responsible === "Team 5") {
+                        returnedTarget = Object.assign(element2, source)
+                        returnResultTeam5.push(returnedTarget);
+                    }
+                    if (element2.responsible === "Test Bay") {
+                        returnedTarget = Object.assign(element2, source)
+                        teamTestBayAmount.push(returnedTarget);
+                    }
+                    if (element2.responsible === "Supplier") {
+                        returnedTarget = Object.assign(element2, source)
+                        teamSupplierAmount.push(returnedTarget);
+                    }
+                    if (element2.responsible === "CTD") {
+                        returnedTarget = Object.assign(element2, source)
+                        ctdAmount.push(returnedTarget);
+                    }
+                    if (element2.responsible === "R&D") {
+                        returnedTarget = Object.assign(element2, source)
+                        rAndD_Amount.push(returnedTarget);
+                    }
+                    if (element2.responsible === "Unknown") {
+                        returnedTarget = Object.assign(element2, source)
+                        unknownAmount.push(returnedTarget);
+                    }
+                    if (element2.responsible === "N/A") {
+                        returnedTarget = Object.assign(element2, source)
+                        notApplicableAmount.push(returnedTarget);
+                    }
+                    if (element2.responsible === undefined) {
+                        returnedTarget = Object.assign(element2, source)
+                        undefinedIssuer.push(returnedTarget);
+                    }
+                })
+            }
+        })
+    } catch (e) {
+
+    }
+    returnResultTeam1.sort(function (a, b) {
+        return a.machineId - b.machineId
+    })
+    let totalLength = returnResultTeam1.length + returnResultTeam2.length + returnResultTeam3.length +
+        returnResultTeam4.length + returnResultTeam5.length + teamTestBayAmount.length + teamSupplierAmount.length +
+        rAndD_Amount.length + unknownAmount.length + notApplicableAmount.length + undefinedIssuer.length;
+    Session.set('totalLength', totalLength);
+    Session.set('team1Amount', returnResultTeam1.length);
+    Session.set('team2Amount', returnResultTeam2.length);
+    Session.set('team3Amount', returnResultTeam3.length);
+    Session.set('team4Amount', returnResultTeam4.length);
+    Session.set('team5Amount', returnResultTeam5.length);
+    Session.set('teamTestBayAmount', teamTestBayAmount.length);
+    Session.set('teamSupplierAmount', teamSupplierAmount.length);
+    Session.set('ctdAmount', ctdAmount.length);
+    Session.set('rAndD_Amount', rAndD_Amount.length);
+    Session.set('unknownAmount', unknownAmount.length);
+    Session.set('notApplicableAmount', notApplicableAmount.length);
+    Session.set('undefinedIssuer', undefinedIssuer.length);
+}
