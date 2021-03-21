@@ -256,24 +256,24 @@
         <thead>
             <tr>
                 <th class="pdiMachineField">Machine</th>
-                <th>Pdi Tech</th>
-                <th class="pdiRepField">Error Description</th>
-                <th>Issuer</th>
-                <th>Repair Time</th>
-                <th>Repair Status</th>
-                <th>Image</th>
-                <th>Supplier</th>
+                <th class="pdi-rep-tech">Pdi Tech</th>
+                <th class="pdi-comment-time-table">Error Description</th>
+                <th class="pdi-issuer">Issuer</th>
+                <th class="pdi-image">Repair Time</th>
+                <th class="pdi-rep-status">Repair Status</th>
+                <th class="pdi-image">Image</th>
+                <th class="assign-supplier">Change / Assign Supplier</th>
             </tr>
         </thead>
         <tbody>
             {{#each supplierIssue}}
                     <tr class="selectedIssue {{selectedSupplierRow}}">
-                        <td>{{machineNr}}</td>
-                        <td>{{pdiPerformer}}</td>
-                        <td>{{errorDescription}}</td>
-                        <td>{{responsible}}</td>
-                        <td>{{repairTime}}</td>
-                        <td class="pdiRepField {{getStatusColor repairStatus}}" style="background-color:{{getStatusColor repairStatus}}; color:{{getStatusColor repairStatus}}">{{repairStatus}}</td>
+                        <td class="pdiMachineField">{{machineNr}}</td>
+                        <td class="pdi-rep-tech">{{pdiPerformer}}</td>
+                        <td class="pdi-comment-time-table">{{errorDescription}}</td>
+                        <td class="pdi-issuer">{{responsible}}</td>
+                        <td class="pdi-image">{{repairTime}}</td>
+                        <td class="pdi-rep-status {{getStatusColor repairStatus}}" style="background-color:{{getStatusColor repairStatus}}; color:{{getStatusColor repairStatus}}">{{repairStatus}}</td>
                         <td class="thumbnail thumbnail-box">
                             <img src={{pictureLocation}}
                                  onerror="this.src='noPicture.JPG'"

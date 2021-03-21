@@ -2020,6 +2020,9 @@ table.analyze-team-table {
   position: absolute;
   top: 30em; }
 
+.assign-supplier {
+  width: 135px; }
+
 .img-supplier-table {
   border: 1px solid #ddd;
   border-radius: 4px;
