@@ -194,33 +194,39 @@ Template.analyzingOverView.events({
 
 });
 
+//  ************************  Search with Key words  ****************************
+
 Template.analyzingWithKeyWords.helpers({
 
     stringSearch: () => {
         let repairInfos = Session.get('repairInfos');
+        let resultArray = [];
+        let searchResult = {};
+        let searchString = (Session.get('searchString')).toUpperCase();
         try {
-            let resultArray = [];
-            let searchResult = {};
-            let searchString = Session.get('searchString');
-            let result = Session.get('result');
+            let result = MachineReady.find({},
+                                            {fields: {machineId: 1,
+                                                              newIssues: 1
+                                                                         }}).fetch();
             result.forEach((element) => {
                 let stringFind = element.newIssues;
                 stringFind.forEach((element2) => {
-                    let stringAnalyze = element2.errorDescription
+                    let stringAnalyze = element2.errorDescription.toUpperCase();
                     if (stringAnalyze.includes(searchString) === true) {
-                        // console.log(element.machineId, element2.errorDescription)
                         searchResult = {
                             machineNr : element.machineId,
                             errorDescription : element2.errorDescription,
                             pictureLocation : repairInfos + element2.pictureLocation
                         }
                         resultArray.push(searchResult);
+                       // console.log('first ', resultArray)
                     }
                 })
             })
-            Session.set('resultCount', resultArray.length);
-            return resultArray;
-        } catch {}
+        } catch(e) {}
+      //  console.log('second ', resultArray)
+        Session.set('resultCount', resultArray.length);
+        return resultArray;
     },
 
     countResult: () => {
@@ -278,7 +284,7 @@ Template.analyzingResponseTeam.helpers({
                         endOfLine: '2020-09-30'  // last fiscal year machines * old database *
                     };
                 }
-                console.log(element.machineId, endOfLine)
+               // console.log(element.machineId, endOfLine)
                 Object.assign(element, endOfLine)
                 if (element.newIssues) {
                   //  console.log(element.machineId, element.endOfLine)
@@ -470,7 +476,16 @@ Template.analyzingResponseTeam.helpers({
 
 
 Template.analyzingResponseTeam.events({
+ //  ************  select Team Buttons  ****************
 
+    'click .team-chooser': function (e) {
+        e.preventDefault();
+        let teamChosen = e.target.name;
+        Session.set('teamChosen', teamChosen)
+    },
+
+
+//  ***********   Select new Team in Table  ***********
     'click .machineRow': function(e){
         e.preventDefault();
         try {
@@ -485,12 +500,6 @@ Template.analyzingResponseTeam.events({
             }
         } catch(err) {}
     },
-
-    'click .team-chooser': function (e) {
-          e.preventDefault();
-          let teamChosen = e.target.name;
-          Session.set('teamChosen', teamChosen)
-    }
 
 });
 
@@ -649,47 +658,52 @@ Template.analyzingSupplier.helpers({
         let supplierCount = 0;
         let returnResult = [];
         let result = Session.get('analyzeStart');
-      result.forEach((element) => {
-          if (element.repairTime) {
-          let timeRep = parseInt(element.repairTime);
-          timeRepTotal  = timeRepTotal + timeRep;
-          supplierCount ++;
-          }
-
-      })
-        returnResult = {
-          supplierCount : supplierCount,
-          timeRepTotal : timeRepTotal
-        }
+        try {
+          result.forEach((element) => {
+              if (element.repairTime) {
+              let timeRep = parseInt(element.repairTime);
+              timeRepTotal  = timeRepTotal + timeRep;
+              supplierCount ++;
+              }
+          })
+            returnResult = {
+              supplierCount : supplierCount,
+              timeRepTotal : timeRepTotal
+            }
+        } catch(e) {}
         return returnResult;
     },
 
     supplierIssue: function () {
+        let repairInfos = Session.get('repairInfos');
         let supplierArray = [];
         let supplierIssues = {};
         let result = MachineReady.find({pdiStatus: 1}, {
             fields: {machineNr: 1, newIssues: 1, machineId: 1, omms: 1
             }}).fetch();
-        console.log(result[0].omms.user);
-        result.forEach((element) => {
-            let pdiPerformer = element.omms.user;
-            let machineNr = element.machineId;
-            let issueArray = element.newIssues;
-            issueArray.forEach((element2) => {
-                if (element2.responsible === "Supplier") {
-                       supplierIssues = {
-                        machineNr: machineNr,
-                        pdiPerformer:  pdiPerformer,
-                        errorDescription: element2.errorDescription,
-                        responsible: element2.responsible,
-                        repairStatus: element2.repairStatus,
-                        image: element2.pictureLocation,
-                        repairTime: element2.repairTime
+        try {
+            result.forEach((element) => {
+                let pdiPerformer = element.omms.user;
+                let machineNr = element.machineId;
+                let issueArray = element.newIssues;
+                issueArray.forEach((element2) => {
+                    if (element2.responsible === "Supplier") {
+                           supplierIssues = {
+                            _id: element2._id,
+                            machineNr: machineNr,
+                            pdiPerformer:  pdiPerformer,
+                            errorDescription: element2.errorDescription,
+                            responsible: element2.responsible,
+                            repairStatus: element2.repairStatus,
+                            pictureLocation : repairInfos + element2.pictureLocation,
+                            repairTime: element2.repairTime
+                        }
+                        supplierArray.push(supplierIssues)
                     }
-                    supplierArray.push(supplierIssues)
-                }
+                })
             })
-        })
+        } catch(e) {}
+        console.log(supplierArray)
         return supplierArray;
     },
 
@@ -704,9 +718,19 @@ Template.analyzingSupplier.helpers({
         }
     },
 
+    'selectedSupplierRow': function(){
+        let selectedIssue = this._id;
+        let selected = Session.get('selectedFailure')
+        if (selectedIssue === selected) {
+            return 'selected'
+        }
+    },
+
     supplierList: function () {
         return SuppliersList.find({}).fetch();
-    }
+    },
+
+
 
 
     //  *************************************************************************
@@ -715,19 +739,25 @@ Template.analyzingSupplier.helpers({
 
 Template.analyzingSupplier.events({
 
-    'click .selectedIssue': function(e) {
+    // */*********************  select Row with failure  ***********
+
+    'click .selectedIssue': function(e){
         e.preventDefault();
-        const selectedRow = this._id;
-        const machineNr = this.machineNr;
-        Session.set('selectedSupplierMachine', machineNr);
-        Session.set('selectedRow', selectedRow); // issue Id
+        try {
+            const failureId = this._id;
+            const machineNr = this.machineNr;
+            Session.set('selectedFailure', failureId);
+            Session.set('selectedSupplierMachine', machineNr);
+        } catch(err) {}
     },
+
+   // ************  select supplier from drop down, get selected row and write to database
 
     'change  #category-select': function (event) {
         event.preventDefault();
         const selectedSupplier = $(event.currentTarget).val();
         let machineNr = Session.get('selectedSupplierMachine');
-        let issueId = Session.get('selectedRow');
+        let issueId = Session.get('selectedFailure');
         if (issueId !== 'undefined' && selectedSupplier !== 'undefined') {
             Meteor.call('addSupplierToRepair', machineNr, issueId, selectedSupplier)
         }
@@ -746,6 +776,8 @@ Template.analyzingSupplier.events({
 
 
 });
+
+//  ************************************   Options  ***********************************
 
 Template.analyzingOptions.helpers({
 
@@ -779,7 +811,7 @@ Template.analyzingOptions.events({
     'click .selectedSupplier': function(e){
         e.preventDefault();
         const selected = this._id;
-        console.log('selected', selected);
+       // console.log('selected', selected);
         Session.set('selectedSupp', selected);
     },
 
@@ -804,7 +836,7 @@ Template.analyzingOptions.events({
     'click .selectedTeam': function(e){
         e.preventDefault();
         const selected = this._id;
-        console.log('selected', selected);
+      //  console.log('selected', selected);
         Session.set('selectedTeam', selected);
     },
 

@@ -74,6 +74,12 @@
             <tr class="rTableRow {{selectedClass}}">
                 <td class="error-machine" >{{machineNr}}</td>
                 <td class="error-field" >{{errorDescription}}</td>
+                <td class="thumbnail-pdi-crew thumbnail-box">
+                    <img src={{pictureLocation}}
+                         onerror="this.src='noPicture.JPG'"
+                         alt="No Picture"
+                    />
+                </td>
             </tr>
         {{/each}}
         </tbody>
@@ -246,40 +252,46 @@
         <h4>For {{timeCount.supplierCount}} Supplier related issues were {{timeCount.timeRepTotal}} min used for Repair Time</h4>
     </div>
 <div class="supplier-table">
-    <table class="blueTable">
-        <tr>
-            <th class="pdiMachineField">Machine</th>
-            <th>Pdi Tech</th>
-            <th class="pdiRepField">Error Description</th>
-            <th>Issuer</th>
-            <th>Repair Time</th>
-            <th>Repair Status</th>
-            <th>Image</th>
-            <th>Supplier</th>
-        </tr>
-        {{#each supplierIssue}}
-                <tr class="selectedIssue {{selectedRow}}">
-                    <td>{{machineNr}}</td>
-                    <td>{{pdiPerformer}}</td>
-                    <td>{{errorDescription}}</td>
-                    <td>{{responsible}}</td>
-                    <td>{{repairTime}}</td>
-                    <td class="pdiRepField {{getStatusColor repairStatus}}" style="background-color:{{getStatusColor repairStatus}}; color:{{getStatusColor repairStatus}}">{{repairStatus}}</td>
-                    <td><a target="blank" href={{pictureLocation}}>
-                        <img class="image-box" src={{pictureLocation}}
-                             onerror="this.src='noPicture.JPG'"
-                             alt="No Picture">
-                    </a></td>
-                    <td>
-                        <label for="category-select"></label><select id="category-select">
-                            <option disabled="disabled" selected="selected">Please Select</option>
-                            {{#each supplierList}}
-                                <option value="{{this.supplier}}">{{this.supplier}}</option>
-                            {{/each}}
-                        </select>
-                    </td>
-                </tr>
-        {{/each}}
+    <table class="blueTable table-height">
+        <thead>
+            <tr>
+                <th class="pdiMachineField">Machine</th>
+                <th>Pdi Tech</th>
+                <th class="pdiRepField">Error Description</th>
+                <th>Issuer</th>
+                <th>Repair Time</th>
+                <th>Repair Status</th>
+                <th>Image</th>
+                <th>Supplier</th>
+            </tr>
+        </thead>
+        <tbody>
+            {{#each supplierIssue}}
+                    <tr class="selectedIssue {{selectedSupplierRow}}">
+                        <td>{{machineNr}}</td>
+                        <td>{{pdiPerformer}}</td>
+                        <td>{{errorDescription}}</td>
+                        <td>{{responsible}}</td>
+                        <td>{{repairTime}}</td>
+                        <td class="pdiRepField {{getStatusColor repairStatus}}" style="background-color:{{getStatusColor repairStatus}}; color:{{getStatusColor repairStatus}}">{{repairStatus}}</td>
+                        <td class="thumbnail thumbnail-box">
+                            <img src={{pictureLocation}}
+                                 onerror="this.src='noPicture.JPG'"
+                                 alt="No Picture"
+                            />
+                        </td>
+                        <td>
+                            <label for="category-select"></label>
+                                <select name="team-select" id="category-select">
+                                    <option value="">Select Supplier</option>
+                                    {{#each supplierList}}
+                                        <option value="{{this.supplier}}">{{this.supplier}}</option>
+                                    {{/each}}
+                                </select>
+                        </td>
+                    </tr>
+            {{/each}}
+        </tbody>
     </table>
 </div>
 </template>
