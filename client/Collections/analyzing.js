@@ -249,6 +249,7 @@ Template.analyzingResponseTeam.helpers({
         let imageIp = Session.get('repairInfos')
         let returnedTarget = {};
         let returnResultTeam = []; // Team 1
+        let returnGraphTeam = []; // reverse sort for Graphic
         let team = Session.get('teamChosen')
         if (team) {
             let result = MachineReady.find({pdiStatus: 1}, {
@@ -260,21 +261,27 @@ Template.analyzingResponseTeam.helpers({
             }).fetch();
             let endOfLine = '';
             result.forEach((element) => {
+               // console.log(element)
                 let commResult = machineCommTable.findOne({machineId: element.machineId},
                     {fields: {'timeLine.bay19Planned': 1}});
+
                 try {
                          endOfLine = {
                             endOfLine: commResult.timeLine.bay19Planned
                         };
+
                     }    catch (e) {
                                }
-                if (endOfLine === "") {
+
+                if (element.machineId <= "C8900301" || element.machineId <= "C88000") {
                     endOfLine = {
-                        endOfLine: '2020-10-01'  // last fiscal year machines * old database *
+                        endOfLine: '2020-09-30'  // last fiscal year machines * old database *
                     };
                 }
+                console.log(element.machineId, endOfLine)
                 Object.assign(element, endOfLine)
                 if (element.newIssues) {
+                  //  console.log(element.machineId, element.endOfLine)
                     let source = {
                         machineId: element._id,
                         machineNr: element.machineId,
@@ -292,6 +299,11 @@ Template.analyzingResponseTeam.helpers({
             })
         }
         returnResultTeam.sort( (a, b) => {
+            if (a.endOfLine > b.endOfLine) return -1
+            return a.endOfLine < b.endOfLine ? 1 : 0
+        });
+
+        returnGraphTeam = returnResultTeam.sort( (a, b) => {
             if (a.endOfLine < b.endOfLine) return -1
             return a.endOfLine > b.endOfLine ? 1 : 0
         })
@@ -301,7 +313,7 @@ Template.analyzingResponseTeam.helpers({
         let machineRepairArray = [];
         let machineNr = '';
         let repairTime = 0;
-        returnResultTeam.forEach((element) =>  {
+        returnGraphTeam.forEach((element) =>  {
             machineNr = element.machineNr;
             if (element.repairTime === undefined || element.repairTime === "") {
                 repairTime = 0;

@@ -848,6 +848,13 @@ table.repair-table {
   position: absolute;
   top: 47em; }
 
+.thumbnail-pdi-crew:hover img {
+  left: 37em;
+  position: absolute;
+  top: -300px;
+  transform: scale(2);
+  z-index: 1; }
+
 table.display-error {
   width: 950px; }
 
@@ -873,7 +880,7 @@ table.display-error {
   width: 9em; }
 
 .pdi-image {
-  width: 70px; }
+  width: 73px; }
 
 .pdi-rep-tech {
   width: 70px; }
@@ -1007,7 +1014,7 @@ table.newIssuesTable {
   height: 505px; }
 
 .add-image-to-repair {
-  left: 43em;
+  left: 57em;
   position: absolute;
   top: 195em; }
 
@@ -1438,9 +1445,12 @@ tbody.newIssueTableHeight {
   height: 50px; }
 
 .repair-print-list {
-  left: 90em;
+  left: 83em;
   position: absolute;
   top: 50em; }
+
+table.table-width {
+  width: 1100px; }
 
 table.repair-print-out {
   left: 1em;
@@ -1955,6 +1965,17 @@ table.analyze-team-table {
 
 .date-bay-19 {
   width: 84px; }
+
+.thumbnail-box {
+  height: 50px;
+  width: auto; }
+
+.thumbnail:hover img {
+  left: 50em;
+  position: absolute;
+  top: 100px;
+  transform: scale(2);
+  z-index: 1; }
 
 .team-repair-time-graph {
   left: 35em;

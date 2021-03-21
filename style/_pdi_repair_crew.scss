@@ -20,6 +20,14 @@ table.repair-table {
   top: 47em;
 }
 
+.thumbnail-pdi-crew:hover img {
+  left: 37em;
+  position: absolute;
+  top: -300px;
+  transform: scale(2);
+  z-index: 1;
+}
+
 table.display-error {
   width: 950px;
 }
@@ -52,7 +60,7 @@ table.display-error {
 }
 
 .pdi-image {
-  width: 70px;
+  width: 73px;
  }
 
 .pdi-rep-tech {

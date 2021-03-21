@@ -86,7 +86,7 @@
                 <tr>
                     <th>Machine</th>
                     <th class="pdi-comment">Description</th>
-                    <th class="pdi-image">image</th>
+                    <th class="">image</th>
                     <th class="pdi-rep-tech">Rep by</th>
                     <th class="pdi-rep-comment-field">Repair Comment</th>
                     <th class="pdi-time">Rep time</th>
@@ -100,12 +100,12 @@
                     <tr class="failureRow {{failureRow}}">
                         <td>{{machineNr}}</td>
                         <td class="pdi-comment">{{errorDescription}}</td>
-                        <td class="pdi-image"><a href={{pictureLocation}}>
-                            <img style="width: 50px; height: 50px;" class="image-box"
-                                 src={{pictureLocation}}
+                        <td class="thumbnail-pdi-crew thumbnail-box">
+                            <img src={{pictureLocation}}
                                  onerror="this.src='noPicture.JPG'"
-                                 alt="No Picture">
-                        </a></td>
+                                 alt="No Picture"
+                            />
+                       </td>
                         <td class="pdi-rep-tech">{{repairTech}}</td>
                         <td class="pdi-rep-comment-field">{{repairComment}}</td>
                         <td class="pdi-time">{{repairTime}}</td>
@@ -131,12 +131,12 @@
             <h3>Repair Tech: {{repairUser}}</h3>
             <form class="repairConfirmText">
                 <label for="repairComment"> </label>
-                <textarea name="message" id="repairComment" cols="30" rows="10" class="confirm-text-area"> </textarea>
+                <textarea name="message" id="repairComment" cols="30" rows="10" class="confirm-text-area" required> </textarea>
                 <br>
                 <h4>hours&nbsp;&nbsp;&nbsp; minutes</h4>
                 <label for="repairTime"> </label>
-                <input type="number" name="timeHour" id="repairTime" class="confirm-time-area">
-                <input type="number" name="timeMin" id="repairTime" class="confirm-time-area">
+                <input type="number" name="timeHour" id="repairTime" class="confirm-time-area" required>
+                <input type="number" name="timeMin" id="repairTime" class="confirm-time-area" required>
                 <br><br>
                 <button type="submit" class="btn btn-success">Confirm Repair</button>
             </form>

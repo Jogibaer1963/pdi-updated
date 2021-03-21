@@ -219,11 +219,29 @@ table.analyze-team-table {
   width: 84px;
 }
 
+.thumbnail-box {
+  height: 50px;
+  width: auto;
+}
+
+// ************* hover over image  *************************
+
+.thumbnail:hover img {
+  left: 50em;
+  position: absolute;
+  top: 100px;
+  transform: scale(2);
+  z-index: 1;
+}
+
+//  *********************************************************
+
 .team-repair-time-graph {
   left: 35em;
   position: absolute;
   top: 55em;
 }
+
 
 // Repair time per Machine
 
