@@ -286,12 +286,13 @@ Template.analyzingResponseTeam.helpers({
                 }
                // console.log(element.machineId, endOfLine)
                 Object.assign(element, endOfLine)
+                let user = element.omms.user;
                 if (element.newIssues) {
                   //  console.log(element.machineId, element.endOfLine)
                     let source = {
                         machineId: element._id,
                         machineNr: element.machineId,
-                        pdiTech: element.omms.user,
+                        pdiTech: user,
                         endOfLine: element.endOfLine
                     }
                     element.newIssues.forEach((element2) => {

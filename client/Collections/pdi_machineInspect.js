@@ -486,10 +486,17 @@ Meteor.subscribe('oms');
             let fuelAfter = event.target.afterFuel.value;
             let k = 0;
             if(selectedPdiMachineId) {
-               let result =  MachineReady.findOne({_id: selectedPdiMachineId}, {fields: {newIssues: 1}});
+               let result =  MachineReady.findOne({_id: selectedPdiMachineId},
+                                                        {fields: {newIssues: 1, omms: 1}});
+               try {
+               if (result.omms.user === '') {
+                  k = 1;
+               }
+               } catch(e) {
+               }
                 result.newIssues.forEach((element) => {
                     if (element.responsible === '') {
-                       k = k + 1;
+                       k = 1;
                     }
                 })
             } else {
@@ -498,8 +505,8 @@ Meteor.subscribe('oms');
             if (k === 0) {
                 Meteor.call('fuelAfterPdi', selectedPdiMachineId, selectedPdiMachineNr, fuelAfter);
                 FlowRouter.go('/inspectionStart');
-            } else {
-                window.alert('One or more Issues were not assigned to a Team')
+            } else if (k === 1) {
+                window.alert('One or more Issues were not assigned to a Team or Omms are not saved')
             }
         }
 
