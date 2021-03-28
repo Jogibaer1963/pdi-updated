@@ -135,6 +135,27 @@ if(Meteor.isServer){
 
 
     Meteor.methods({
+/*
+        'newIdForIssues': () => {
+          let result = MachineReady.find({}, {fields: {newIssues: 1}}).fetch();
+          result.forEach((element) => {
+                  if (element.newIssues !== undefined) {
+                          element.newIssues.forEach((element2) => {
+                        //  console.log(element2._id, element2.errorDescription)
+                          let newId = Random.id();
+                          MachineReady.update({_id: element._id, 'newIssues._id': element2._id},
+                              {$set: {'newIssues.$._id': newId}})
+                        //  console.log(element2._id, element2.errorDescription)
+                         })
+                  }
+                })
+
+            console.log('done')
+        },
+
+ */
+
+
 
    // ************* Remove last year shipped machines from database  **************************
 
@@ -592,14 +613,7 @@ if(Meteor.isServer){
 
 
         'generatePdiList': function(selectedPdiMachineId, pdiMachineNr, dateStart, pdiUser, machineType) {
-/*
-            let variantMachine = [];
 
-            let  variantMD = [];
-            let  variantItem = [];
-            let  variantPath = [];
-
- */
             let  machineConfiguration = [];
             let  configStyle = {};
             let  checkType = [];
@@ -719,7 +733,7 @@ if(Meteor.isServer){
                 MachineReady.update({_id: selectedPdiMachineId}, {
                     $push: {
                         newIssues: {
-                            _id: uniqueIdSi,
+                            "_id": uniqueIdSi,
                             "checkStatus": true,
                             "errorDescription" : siIssue,
                             "pictureLocation" : "noPicture.JPG",

@@ -1968,13 +1968,16 @@ table.analyze-team-table {
 
 .thumbnail-box {
   height: 50px;
-  width: auto; }
+  width: 73px; }
+
+.team-select {
+  width: 116px; }
 
 .thumbnail:hover img {
   left: 50em;
   position: absolute;
   top: 100px;
-  transform: scale(2);
+  transform: scale(1.8);
   z-index: 1; }
 
 .team-repair-time-graph {
@@ -1994,6 +1997,11 @@ table.analyze-team-table {
   left: 5em;
   position: absolute;
   top: 55em; }
+
+.look-up-machine {
+  left: 100em;
+  position: absolute;
+  top: 6em; }
 
 .assigned-supplier {
   left: 20em;

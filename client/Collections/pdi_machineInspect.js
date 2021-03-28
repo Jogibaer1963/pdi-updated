@@ -489,7 +489,7 @@ Meteor.subscribe('oms');
                let result =  MachineReady.findOne({_id: selectedPdiMachineId},
                                                         {fields: {newIssues: 1, omms: 1}});
                try {
-               if (result.omms.user === '') {
+               if (result.omms === undefined) {
                   k = 1;
                }
                } catch(e) {

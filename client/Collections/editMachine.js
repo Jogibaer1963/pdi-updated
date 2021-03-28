@@ -241,16 +241,16 @@ if(Meteor.isClient) {
             FlowRouter.go ('shippingMachines');
         },
 
-        'submit .truckEditDate': function() {
-            event.preventDefault();
-            const confirmedShipDate = event.target.inputDate.value;
+        'submit .truckEditDate': function(e) {
+            e.preventDefault();
+            const confirmedShipDate = e.target.inputDate.value;
             const truckStatus = 1;
             const machineId = Session.get('editSelectedMachine');
             Meteor.call('truckOrdered', machineId, truckStatus, confirmedShipDate);
         },
 
-        'click .removeEditTruck': function() {
-            event.preventDefault();
+        'click .removeEditTruck': function(e) {
+            e.preventDefault();
             const truckStatus = 0;
             const machineId = Session.get('editSelectedMachine');
             Meteor.call('truckRemoved', machineId, truckStatus);

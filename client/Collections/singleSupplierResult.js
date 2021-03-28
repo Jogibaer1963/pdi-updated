@@ -4,18 +4,44 @@ const Highcharts = require('highcharts');
 
 Template.singleSupplierResult.helpers({
 
+    supplierTable: () => {
+        return SuppliersList.find().fetch();
+    },
+
     singleSupplierResult: () => {
+        let repairInfos = Session.get('repairInfos');
         let singleSupplier = Session.get('selectedSupplierResult')
+        let supplierList = {};
         let singleResult = [];
-        let result = analyzingDatabase.find().fetch();
+        let result = MachineReady.find({pdiStatus : 1},
+            {fields: {newIssues: 1,
+                              machineId: 1,
+                              repairStatus: 1,
+                              omms: 1
+                              }}).fetch();
+       // console.log('first ', result)
         result.forEach((element) => {
-            if (element.extern === true && element.issueResponsible === singleSupplier) {
-                singleResult.push(element);
-            }
+       //     console.log('Machine ', element.machineId)
+            element.newIssues.forEach((element2) => {
+                if (element2.extern === true && element2.responsible === singleSupplier) {
+                    supplierList = {
+                        issueId : element2._id,
+                        machineNr : element.machineId,
+                        pdiTech : element.omms.user,
+                        repairStatus: element.repairStatus,
+                        errorDescription : element2.errorDescription,
+                        pictureLocation : repairInfos + element2.pictureLocation,
+                        repairTech : element2.repairTech,
+                        repairTime : element2.repairTime
+                    }
+                    singleResult.push(supplierList);
+                }
+
+            })
         })
         return singleResult;
     },
-
+/*
     supplierTable: () => {
         let finalResult = [];
         let uniqueResult = [];
@@ -56,6 +82,8 @@ Template.singleSupplierResult.helpers({
         Session.set('annualRepTime', counterResult)
         return uniqueResult
     },
+
+ */
 
 
     annualMachineRepairResult: function () {
@@ -117,9 +145,11 @@ Template.singleSupplierResult.helpers({
         });
     },
 
+
+
     /* ------------------------------------------ Annual Supplier result  ------------------ */
 
-
+/*
     annualSupplierRepairResult: function () {
         // Use Meteor.defer() to create chart after DOM is ready:
         // Gather data:
@@ -222,8 +252,12 @@ Template.singleSupplierResult.helpers({
         });
     },
 
+ */
+
 
 });
+
+
 
 Template.singleSupplierResult.events({
 
@@ -231,6 +265,11 @@ Template.singleSupplierResult.events({
         e.preventDefault()
         let selectedSupplier = this.supplier;
         Session.set('selectedSupplierResult', selectedSupplier);
+    },
+    
+    'click .buttonReturn': (e) => {
+        e.preventDefault();
+        FlowRouter.go('supplierResultList')
     }
 
 

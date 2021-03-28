@@ -12,6 +12,11 @@ Session.set('issueBySupplier', false);
 Session.set('editResponsibility', false);
 Session.set('advanceSearch', false);
 
+// **********  Session for 1 specific Machine in Template Repair Time per Machine ****************
+Session.set('specificMachine', false)
+Session.set('machineResultNr', false);
+Session.set('userResult', false);
+//  ************************************************************************************************
 Template.analyzing.onDestroyed(() => {
     Session.set('teamChosen', false)
     Session.set('teamResult', false)
@@ -224,6 +229,10 @@ Template.analyzingWithKeyWords.helpers({
                 })
             })
         } catch(e) {}
+       resultArray.sort( (a, b) => {
+            if (a.machineNr > b.machineNr) return -1
+            return a.machineNr < b.machineNr ? 1 : 0
+        });
       //  console.log('second ', resultArray)
         Session.set('resultCount', resultArray.length);
         return resultArray;
@@ -284,16 +293,15 @@ Template.analyzingResponseTeam.helpers({
                         endOfLine: '2020-09-30'  // last fiscal year machines * old database *
                     };
                 }
-               // console.log(element.machineId, endOfLine)
                 Object.assign(element, endOfLine)
+                //console.log(element.machineId)
                 let user = element.omms.user;
                 if (element.newIssues) {
-                  //  console.log(element.machineId, element.endOfLine)
                     let source = {
+                        endOfLine: element.endOfLine,
                         machineId: element._id,
                         machineNr: element.machineId,
-                        pdiTech: user,
-                        endOfLine: element.endOfLine
+                        pdiTech: user
                     }
                     element.newIssues.forEach((element2) => {
                         if (element2.responsible === team) {
@@ -305,22 +313,15 @@ Template.analyzingResponseTeam.helpers({
                 }
             })
         }
-        returnResultTeam.sort( (a, b) => {
-            if (a.endOfLine > b.endOfLine) return -1
-            return a.endOfLine < b.endOfLine ? 1 : 0
-        });
-
-        returnGraphTeam = returnResultTeam.sort( (a, b) => {
-            if (a.endOfLine < b.endOfLine) return -1
-            return a.endOfLine > b.endOfLine ? 1 : 0
-        })
-
+      returnResultTeam.sort(function(a, b) {
+          return a.endOfLine > b.endOfLine ? 1: -1
+      }).reverse();
         let machineArray = [];
         let repairArray = [];
         let machineRepairArray = [];
         let machineNr = '';
         let repairTime = 0;
-        returnGraphTeam.forEach((element) =>  {
+        returnResultTeam.forEach((element) =>  {
             machineNr = element.machineNr;
             if (element.repairTime === undefined || element.repairTime === "") {
                 repairTime = 0;
@@ -356,6 +357,7 @@ Template.analyzingResponseTeam.helpers({
     teamList: () => {
         return TeamList.find().fetch();
     },
+
      teamRepairTime: () => {
              // Gather data:
              let team = Session.get('teamChosen');
@@ -524,6 +526,7 @@ Template.analyzingResponsibility.events({
 Template.analyzingComponent.helpers({
 
     repairSummary: () => {
+      let repairInfo = Session.get('repairInfos');
       let machineRepairTime = [];
       let result = MachineReady.find({repairStatus: 1}, {
           fields: {newIssues: 1, machineId: 1, omms: 1}}).fetch();
@@ -536,7 +539,7 @@ Template.analyzingComponent.helpers({
                   machineNr: machineNr,
                   pdiTech: user,
                   errorDescription: element2.errorDescription,
-                  pictureLocation: element2.pictureLocation,
+                  pictureLocation: repairInfo +  element2.pictureLocation,
                   repairTech: element2.repairTech,
                   repairComment: element2.repairComment,
                   repairTime: element2.repairTime,
@@ -641,11 +644,58 @@ Template.analyzingComponent.helpers({
         });
     },
 
+    machineResult: () => {
+        let machine = Session.get('specificMachine');
+        let repairInfo = Session.get('repairInfos');
+        let machineResult = [];
+        let machineNr = '';
+        let user = '';
+        let result = MachineReady.findOne({machineId: machine},
+            {fields: {machineId: 1,
+                    newIssues: 1,
+                    omms: 1
+                }});
+        if (result.omms === undefined) {
+            window.alert("Machine not PDI'd yet")
+        } else {
+            Session.set('machineResultNr', result.machineId);
+            Session.set('userResult', result.omms.user);
+            console.log(result.machineId, result.omms.user)
+            result.newIssues.forEach(function(element) {
+                let issueObject = {
+                    description: element.errorDescription,
+                    pictureLocation: repairInfo + element.pictureLocation,
+                    repairTech: element.repairTech,
+                    repairComment: element.repairComment,
+                    repairTime: element.repairTime,
+                    responsible: element.responsible,
+                    repairStatus: element.repairStatus,
+                }
+                machineResult.push(issueObject);
+            })
+        }
+        return machineResult
+    },
+
+    user: () => {
+        return Session.get('userResult');
+    },
+
+    resultMachineId: () => {
+         return Session.get('machineResultNr')
+    }
+
 
 })
 
 Template.analyzingComponent.events({
 
+    'submit .look-up': function(e) {
+        e.preventDefault();
+        let machine = e.target.lookUp.value;
+        Session.set('specificMachine', machine);
+        e.target.lookUp.value = '';
+    }
 
 })
 
@@ -704,8 +754,12 @@ Template.analyzingSupplier.helpers({
                 })
             })
         } catch(e) {}
-        console.log(supplierArray)
+        //console.log(supplierArray)
         return supplierArray;
+    },
+
+    teamList: () => {
+        return TeamList.find().fetch();
     },
 
     //  ********** drop down menu suppliers  ****************************
@@ -845,7 +899,7 @@ Template.analyzingOptions.events({
         e.preventDefault();
         let newTeam = e.target.inputTeam.value;
         Meteor.call('newTeamAdd', newTeam);
-        e.target.inputSupplier.value = '';
+        e.target.inputTeam.value = '';
     },
 
     'click .teamRemoveButton': (e) => {

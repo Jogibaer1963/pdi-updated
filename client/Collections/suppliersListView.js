@@ -46,36 +46,49 @@ Template.suppliersListView.events({
     }
 });
 
+
+
 Template.supplierResultList.helpers({
 
+
+
+
     suppliersResultList: () => {
+      let repairInfos = Session.get('repairInfos');
+      let supplierList = {}
       let finalResult = [];
-      let result = analyzingDatabase.find().fetch();
+      let   result = MachineReady.find({pdiStatus: 1},
+                {fields: {newIssues: 1,
+                        machineId: 1,
+                        repairStatus: 1,
+                        omms: 1
+                    }}).fetch();
        result.forEach((element) => {
-           if (element.extern === true) {
-               finalResult.push(element);
+           if (element.newIssues) {
+                element.newIssues.forEach((element2) => {
+                    if (element2.extern === true) {
+                        supplierList = {
+                            issueId : element2._id,
+                            machineId : element.machineId,
+                            pdiTech : element.omms.user,
+                            repairStatus: element.repairStatus,
+                            errorDescription : element2.errorDescription,
+                            pictureLocation : repairInfos + element2.pictureLocation,
+                            repairTech : element2.repairTech,
+                            repairTime : element2.repairTime
+                        }
+                        finalResult.push(supplierList);
+                    }
+
+                })
            }
        })
+     //   console.log('Final ', finalResult)
         return finalResult;
     },
 
     supplierTable: () => {
-        let finalResult = [];
-        let uniqueResult = [];
-        let result = analyzingDatabase.find().fetch();
-        result.forEach((element) => {
-            if (element.extern === true) {
-                finalResult.push(element.issueResponsible);
-            }
-        })
-        let unique = finalResult.filter((v, i, a) => a.indexOf(v) === i)
-        unique.forEach((element) => {
-            let suppResult = {
-                supplier: element
-            }
-            uniqueResult.push(suppResult);
-        })
-        return uniqueResult
+       return SuppliersList.find().fetch();
     }
 
 
@@ -88,6 +101,11 @@ Template.supplierResultList.events({
         let selectedSupplier = this.supplier;
         Session.set('selectedSupplierResult', selectedSupplier);
         FlowRouter.go('singleSupplierResult')
+    },
+
+    'click .buttonReturn': (e) => {
+        e.preventDefault();
+        FlowRouter.go('analyzing');
     }
 
 });

@@ -64,27 +64,54 @@
     </div>
     <div class="supplierTable">
         <table class="blueTable">
+            <thead>
                 <tr>
-                    <th>Machine</th>
-                    <th>Pdi Tech</th>
-                    <th>Error Description</th>
-                    <th>Issuer</th>
-                    <th>Repair Time</th>
-                    <th>Image</th>
+                    <th class="pdiMachineField">Machine</th>
+                    <th class="pdi-rep-tech">Pdi Tech</th>
+                    <th class="pdi-comment-time-table">Error Description</th>
+                    <th class="pdi-image">Repair Time</th>
+                    <th class="pdi-rep-status">Repair Status</th>
+                    <th class="pdi-image">Image</th>
+                    <th class="assign-supplier">Change / Assign Supplier</th>
+                    <th class="assign-supplier">Change / Assign Team</th>
                 </tr>
-            {{#each suppliersResultList}}
-                <tr class="selectedSupplier {{selectedSupplier}}">
-                    <td>{{machineNr}}</td>
-                    <td>{{pdiPerformer}}</td>
-                    <td>{{errorDescription}}</td>
-                    <td>{{issueResponsible}}</td>
-                    <td>{{repairTime}} min</td>
-                    <td><a target="blank" href={{pictureLocation}}>
-                        <img class="img-supplier-table" src={{pictureLocation}}
-                             alt="No Picture">
-                    </a></td>
-                </tr>
-            {{/each}}
+            </thead>
+            <tbody>
+                {{#each suppliersResultList}}
+                    <tr class="selectedIssue {{selectedSupplierRow}}">
+                        <td class="pdiMachineField">{{machineNr}}</td>
+                        <td class="pdi-rep-tech">{{pdiTech}}</td>
+                        <td class="pdi-comment-time-table">{{errorDescription}}</td>
+                        <td class="pdi-image">{{repairTime}}</td>
+                        <td class="pdi-rep-status {{getStatusColor repairStatus}}"
+                            style="background-color:{{getStatusColor repairStatus}}; color:{{getStatusColor repairStatus}}">{{repairStatus}}</td>
+                        <td class="thumbnail thumbnail-box pdi-image">
+                            <img src={{pictureLocation}}
+                                 onerror="this.src='noPicture.JPG'"
+                                 alt="No Picture"
+                            />
+                        </td>
+                        <td>
+                            <label for="category-select"></label>
+                            <select name="team-select" id="category-select" >
+                                <option value="">Select Supplier</option>
+                                {{#each supplierList}}
+                                    <option value="{{this.supplier}}">{{this.supplier}}</option>
+                                {{/each}}
+                            </select>
+                        </td>
+                        <td>
+                            <label for="category-select"></label>
+                            <select name="team-select" id="category-select" class="team-select">
+                                <option value="">Select Team</option>
+                                {{#each teamList}}
+                                    <option value="{{this.team}}">{{this.team}}</option>
+                                {{/each}}
+                            </select>
+                        </td>
+                    </tr>
+                {{/each}}
+            </tbody>
         </table>
     </div>
     <div  class="suppliers-Result-View">
