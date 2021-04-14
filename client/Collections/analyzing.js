@@ -294,23 +294,26 @@ Template.analyzingResponseTeam.helpers({
                     };
                 }
                 Object.assign(element, endOfLine)
-                //console.log(element.machineId)
-                let user = element.omms.user;
-                if (element.newIssues) {
-                    let source = {
-                        endOfLine: element.endOfLine,
-                        machineId: element._id,
-                        machineNr: element.machineId,
-                        pdiTech: user
-                    }
-                    element.newIssues.forEach((element2) => {
-                        if (element2.responsible === team) {
-                            element2.pictureLocation = imageIp + element2.pictureLocation;
-                            returnedTarget = Object.assign(element2, source)
-                            returnResultTeam.push(returnedTarget);
+                try {
+                    let user = element.omms.user;
+                    if (element.newIssues) {
+                        let source = {
+                            endOfLine: element.endOfLine,
+                            machineId: element._id,
+                            machineNr: element.machineId,
+                            pdiTech: user
                         }
-                    })
-                }
+                        element.newIssues.forEach((element2) => {
+                            if (element2.responsible === team) {
+                                element2.pictureLocation = imageIp + element2.pictureLocation;
+                                returnedTarget = Object.assign(element2, source)
+                                returnResultTeam.push(returnedTarget);
+                                }
+                            })
+                       }
+                } catch(e) {
+                    console.log(element.machineId, e)
+                   }
             })
         }
       returnResultTeam.sort(function(a, b) {
