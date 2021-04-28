@@ -126,14 +126,14 @@
 }
 
 .addList {
+  left: 12em;
   position: relative;
   top: -3.8em;
-  left: 12em;
 }
 
 .removeList {
-  position: relative;
   left: 3.4em;
+  position: relative;
 }
 
 table.returnMachines {
@@ -141,26 +141,30 @@ table.returnMachines {
 }
 
 .returnButton {
+  left: 1.6em;
   position: absolute;
   top: -5em;
-  left: 1.6em;
 }
 
 .returnersHead {
   font-weight: bold;
+  left: 3em;
   position: absolute;
   top: -2em;
-  left: 3em;
 }
 
 .machineReturnTable {
+  left: 120em;
   position: absolute;
   top: 27.7em;
-  left: 120em;
 }
 
 table.editTable tbody.editBody, thead.editTableHead {
   display: revert;
-
 }
 
+.shipped-machines {
+  left: 10em;
+  position: absolute;
+  top: 25em;
+}

@@ -432,35 +432,40 @@ table.locationTable {
   font-weight: bold; }
 
 .addList {
+  left: 12em;
   position: relative;
-  top: -3.8em;
-  left: 12em; }
+  top: -3.8em; }
 
 .removeList {
-  position: relative;
-  left: 3.4em; }
+  left: 3.4em;
+  position: relative; }
 
 table.returnMachines {
   width: 190px; }
 
 .returnButton {
+  left: 1.6em;
   position: absolute;
-  top: -5em;
-  left: 1.6em; }
+  top: -5em; }
 
 .returnersHead {
   font-weight: bold;
+  left: 3em;
   position: absolute;
-  top: -2em;
-  left: 3em; }
+  top: -2em; }
 
 .machineReturnTable {
+  left: 120em;
   position: absolute;
-  top: 27.7em;
-  left: 120em; }
+  top: 27.7em; }
 
 table.editTable tbody.editBody, thead.editTableHead {
   display: revert; }
+
+.shipped-machines {
+  left: 10em;
+  position: absolute;
+  top: 25em; }
 
 .switchToCombine {
   position: absolute;
@@ -889,6 +894,11 @@ table.display-error {
   left: 75em;
   position: absolute;
   top: 50em; }
+
+.pdi-open-repair {
+  left: 2em;
+  position: absolute;
+  top: 1em; }
 
 .pdiToDo {
   margin-left: 3em; }

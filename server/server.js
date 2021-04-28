@@ -1136,12 +1136,13 @@ if(Meteor.isServer){
 
         // -----------------------------------------------------------------------------------
 
-        // shipping Machines
 
+        // shipping Machines
 
         'addToShipList': function(newMachineInput, newShippingDate, createUnixTime, createDate, createTime,
             newShippingDestination, newShippingTransporter, newShippingKit, newShippingTireTrack,
                           newShippingReturns, newShippingComment ) {
+            console.log()
             try {
             MachineReady.insert({
                 machineId: newMachineInput,
@@ -1165,6 +1166,8 @@ if(Meteor.isServer){
             }
                // console.log('kein eror ?')
         },
+
+
 
         'editShipInfo': function(selectedMachine, newMachine, newShippingDate, newShippingDestination, newShippingTransporter,
               newShippingTireTrack, newShippingKit, newShippingReturns, newShippingComment) {

@@ -18,17 +18,18 @@ Session.set('toggleShipList', 0);
                                               {sort: {date: -1}}
                                               );
                 case 0:
-                    let changeDate = new Date("2020-09-31").getTime() / 1000
-                   return MachineReady.find({$and: [{unixShipDate : {$gt: changeDate}}, {shipStatus: 1}]},
+                  //  let changeDate = new Date("2020-09-31").getTime() / 1000
+                    let fiscalYear = '2020-09-31';
+                    let result = MachineReady.find({$and: [{date : {$gt: fiscalYear}}, {shipStatus: 1}]},
                         {sort: {date: -1}}).fetch();
+                    Session.set('shippedMachines', result.length)
+                    return result
             }
         },
-/*
-        returnList: function () {
-             return MachineReady.find({machineReturn: "Yes"}, {sort: {date: -1}});
-        },
 
- */
+        shippedMachines: () => {
+          return Session.get('shippedMachines');
+        },
 
         'selected': function() {
             const shippingMachine = this._id;
@@ -50,10 +51,8 @@ Session.set('toggleShipList', 0);
         "submit .inputNewMachine": function(e) {
             e.preventDefault();
             const createUnixTime = ((Date.now())/1000).toFixed(0);
-           // console.log(createUnixTime);
-            const startDate = moment.tz(createUnixTime, "America/Chicago").format().slice(0, 19);
-            const createDate = startDate.slice(0,10);
-            const createTime = startDate.slice(-8);
+            let createDate = moment().format('YYYY-MM-DD');
+            let createTime = moment().format('HH:mm:ss');
             const newMachineInput = e.target.newMachine.value;
             const newShippingDate = e.target.newDate.value;
             const newShippingDestination = e.target.newDestination.value;
@@ -89,6 +88,8 @@ Session.set('toggleShipList', 0);
             e.target.newTireTrack.value="";
             e.target.newReturn.value = "";
             e.target.newComment.value="";
+
+
         },
 
         'submit .find_Machine': function(e) {
