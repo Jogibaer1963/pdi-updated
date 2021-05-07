@@ -3,13 +3,23 @@ Template.pdiCrewHome.helpers({
 
     pdiShippList: function () {
         // Order of shipping date  let k = Session.get('toggleRepair');
-            let k =   MachineReady.find({
+        let toggleView = Session.get('toggleView');
+        if (toggleView === 0) {
+            return MachineReady.find({
                 $and: [
                     {pdiStatus: 1},
                     {$or: [{repairStatus: 0}, {repairStatus: 2}]}
                 ]
             }, {sort: {date: 1}}).fetch();
-            return k;
+        } else if (toggleView === 1) {
+            return MachineReady.find({
+                $and: [
+                    {pdiStatus: 1},
+                    {$or: [{repairStatus: 1}]}
+                ]
+            }, {sort: {date: 1}}).fetch();
+        }
+
     },
 
 
@@ -125,7 +135,18 @@ Template.pdiCrewHome.helpers({
 
 });
 
+Session.set('toggleView', 0);
+
 Template.pdiCrewHome.events({
+
+    'click .toggle-repair-view': (e) => {
+      e.preventDefault();
+      if (Session.get('toggleView') === 0) {
+            Session.set('toggleView', 1)
+      } else if (Session.get('toggleView') === 1) {
+          Session.set('toggleView', 0)
+      }
+    },
 
     'submit .repair-finnish': function (e) {
       e.preventDefault();

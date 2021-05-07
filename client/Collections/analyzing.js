@@ -279,15 +279,12 @@ Template.analyzingResponseTeam.helpers({
                // console.log(element)
                 let commResult = machineCommTable.findOne({machineId: element.machineId},
                     {fields: {'timeLine.bay19Planned': 1}});
-
                 try {
                          endOfLine = {
                             endOfLine: commResult.timeLine.bay19Planned
                         };
-
                     }    catch (e) {
                                }
-
                 if (element.machineId <= "C8900301" || element.machineId <= "C88000") {
                     endOfLine = {
                         endOfLine: '2020-09-30'  // last fiscal year machines * old database *
@@ -997,7 +994,6 @@ function prepareTeamResult() {
             }
         })
     } catch (e) {
-
     }
     returnResultTeam1.sort(function (a, b) {
         return a.machineId - b.machineId
