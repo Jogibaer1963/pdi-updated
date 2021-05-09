@@ -98,40 +98,40 @@
 
     <div class="response-team">
         <h4>Team 1  :  {{team1Amount}} issues identified</h4>
-        <button type="button" name="Team 1" class="btn btn-default btn-success btn-team1-details team-chooser">Show Details</button>
+        <button type="button" name="0" class="btn btn-default btn-success btn-team1-details team-chooser">Show Details</button>
         <br>
         <h4>Team 2  :  {{team2Amount}} issues identified</h4>
-        <button type="button" name="Team 2"  class="btn btn-default btn-success btn-team2-details team-chooser">Show Details</button>
+        <button type="button" name="1"  class="btn btn-default btn-success btn-team2-details team-chooser">Show Details</button>
         <br>
         <h4>team 3  :  {{team3Amount}} issues identified</h4>
-        <button type="button" name="Team 3"  class="btn btn-default btn-success btn-team3-details team-chooser">Show Details</button>
+        <button type="button" name="2"  class="btn btn-default btn-success btn-team3-details team-chooser">Show Details</button>
         <br>
         <h4>Team 4  :  {{team4Amount}} issues identified</h4>
-        <button type="button" name="Team 4"  class="btn btn-default btn-success btn-team4-details team-chooser">Show Details</button>
+        <button type="button" name="3"  class="btn btn-default btn-success btn-team4-details team-chooser">Show Details</button>
         <br>
         <h4>Team 5  :  {{team5Amount}} issues identified</h4>
-        <button type="button" name="Team 5"  class="btn btn-default btn-success btn-team5-details team-chooser">Show Details</button>
+        <button type="button" name="4"  class="btn btn-default btn-success btn-team5-details team-chooser">Show Details</button>
         <br>
         <h4>Test Bay  :  {{teamTestBayAmount}} issues identified</h4>
-        <button type="button" name="Test Bay"  class="btn btn-default btn-success btn-teamTestBay-details team-chooser">Show Details</button>
+        <button type="button" name="5"  class="btn btn-default btn-success btn-teamTestBay-details team-chooser">Show Details</button>
         <br>
         <h4>Supplier  :  {{teamSupplierAmount}} issues identified</h4>
-        <button type="button" name="Supplier"  class="btn btn-default btn-success btn-teamSupplier-details team-chooser">Show Details</button>
+        <button type="button" name="6"  class="btn btn-default btn-success btn-teamSupplier-details team-chooser">Show Details</button>
         <br>
         <h4>CTD :  {{ctdAmount}} issues identified</h4>
-        <button type="button" name="CTD"  class="btn btn-default btn-success btn-ctd-details team-chooser">Show Details</button>
+        <button type="button" name="7"  class="btn btn-default btn-success btn-ctd-details team-chooser">Show Details</button>
         <br>
         <h4>R&D  :  {{rAndD_Amount}} issues identified</h4>
-        <button type="button" name="R&D"  class="btn btn-default btn-success btn-development-details team-chooser">Show Details</button>
+        <button type="button" name="8"  class="btn btn-default btn-success btn-development-details team-chooser">Show Details</button>
         <br>
         <h4>Unknown  :  {{unknownAmount}} issues identified</h4>
-        <button type="button" name="Unknown"  class="btn btn-default btn-success btn-unknown-details team-chooser">Show Details</button>
+        <button type="button" name="9"  class="btn btn-default btn-success btn-unknown-details team-chooser">Show Details</button>
         <br>
         <h4>Not Applicable  :  {{notApplicableAmount}} issues identified</h4>
-        <button type="button" name="N/A"  class="btn btn-default btn-success btn-not-applicable-details team-chooser">Show Details</button>
+        <button type="button" name="10"  class="btn btn-default btn-success btn-not-applicable-details team-chooser">Show Details</button>
         <br>
         <h4>Undefined Issuer  :  {{undefinedIssuer}} issues identified</h4>
-        <button type="button" name="N/A"  class="btn btn-default btn-success btn-undefined-issuer-details team-chooser">Show Details</button>
+        <button type="button" name="11"  class="btn btn-default btn-success btn-undefined-issuer-details team-chooser">Show Details</button>
     </div>
 
         {{#if teamTables}}
@@ -156,13 +156,12 @@
                         {{#each team}}
                             <tr class="machineRow {{selectedRow}}">
                                 <td class="pdiMachineField">{{machineNr}}</td>
-                                <td class="date-bay-19">{{endOfLine}}</td>
+                                <td class="date-bay-19">{{bay19Planned}}</td>
                                 <td class="pdi-rep-tech">{{pdiTech}}</td>
                                 <td class="pdi-rep-comment-field">{{errorDescription}}</td>
                                 <td class="thumbnail thumbnail-box">
                                     <img src={{pictureLocation}}
-                                         onerror="this.src='noPicture.JPG'"
-                                         alt="No Picture"
+
                                     />
                                 </td>
                                <td class="pdi-rep-tech">{{repairTech}}</td>

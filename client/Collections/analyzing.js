@@ -260,80 +260,31 @@ Template.analyzingWithKeyWords.events({
 Template.analyzingResponseTeam.helpers({
 
     teamTables: () => {
-        prepareTeamResult();  // load all Results for all Teams when template is called
-        let imageIp = Session.get('repairInfos')
-        let returnedTarget = {};
-        let returnResultTeam = []; // Team 1
-        let returnGraphTeam = []; // reverse sort for Graphic
-        let team = Session.get('teamChosen')
-        if (team) {
-            let result = MachineReady.find({pdiStatus: 1}, {
-                fields: {
-                    newIssues: 1,
-                    machineId: 1,
-                    omms: 1
-                }
-            }).fetch();
-            let endOfLine = '';
-            result.forEach((element) => {
-               // console.log(element)
-                let commResult = machineCommTable.findOne({machineId: element.machineId},
-                    {fields: {'timeLine.bay19Planned': 1}});
-                try {
-                         endOfLine = {
-                            endOfLine: commResult.timeLine.bay19Planned
-                        };
-                    }    catch (e) {
-                               }
-                if (element.machineId <= "C8900301" || element.machineId <= "C88000") {
-                    endOfLine = {
-                        endOfLine: '2020-09-30'  // last fiscal year machines * old database *
-                    };
-                }
-                Object.assign(element, endOfLine)
-                try {
-                    let user = element.omms.user;
-                    if (element.newIssues) {
-                        let source = {
-                            endOfLine: element.endOfLine,
-                            machineId: element._id,
-                            machineNr: element.machineId,
-                            pdiTech: user
-                        }
-                        element.newIssues.forEach((element2) => {
-                            if (element2.responsible === team) {
-                                element2.pictureLocation = imageIp + element2.pictureLocation;
-                                returnedTarget = Object.assign(element2, source)
-                                returnResultTeam.push(returnedTarget);
-                                }
-                            })
-                       }
-                } catch(e) {
-                    console.log(element.machineId, e)
-                   }
-            })
-        }
-      returnResultTeam.sort(function(a, b) {
-          return a.endOfLine > b.endOfLine ? 1: -1
-      }).reverse();
+        let teamResult =  prepareTeamResult();  // load all Results for all Teams when template is called
+        let team = parseInt(Session.get('teamChosen'));
         let machineArray = [];
         let repairArray = [];
         let machineRepairArray = [];
         let machineNr = '';
         let repairTime = 0;
-        returnResultTeam.forEach((element) =>  {
-            machineNr = element.machineNr;
-            if (element.repairTime === undefined || element.repairTime === "") {
-                repairTime = 0;
-            } else {
-                repairTime = parseInt(element.repairTime);
-            }
-            let machineRepair = {
-                name: machineNr,
-                value: repairTime
-            }
-            machineRepairArray.push(machineRepair)
-        })
+        try {
+            teamResult[team].sort(function(a, b) {
+              return a.bay19Planned > b.bay19Planned ? 1: -1
+                 }).reverse();
+            teamResult[team].forEach((element) =>  {
+                machineNr = element.machineNr;
+                if (element.repairTime === undefined || element.repairTime === "") {
+                    repairTime = 0;
+                } else {
+                    repairTime = parseInt(element.repairTime);
+                }
+                let machineRepair = {
+                    name: machineNr,
+                    value: repairTime
+                }
+                machineRepairArray.push(machineRepair)
+            })
+        } catch(err) {}
         // summary repair time to each single machine number. Name 'name' in object must match
         // 'name' in function !!
         const res = Array.from(machineRepairArray.reduce(
@@ -346,8 +297,8 @@ Template.analyzingResponseTeam.helpers({
         })
         Session.set('machineTeamArray', machineArray);
         Session.set('repairTeamArray', repairArray);
-        Session.set('teamResult', returnResultTeam)
-        return returnResultTeam
+        Session.set('teamResult', teamResult[team])
+        return teamResult[team]
     },
 
     team: () => {
@@ -913,13 +864,7 @@ Template.analyzingOptions.events({
 
 
 function prepareTeamResult() {
-    let result = MachineReady.find({pdiStatus: 1}, {
-        fields: {
-            newIssues: 1,
-            machineId: 1,
-            omms: 1
-        }
-    }).fetch();
+    let machineTimeLine = '';
     let returnedTarget = {};
     let returnResultTeam1 = []; // Team 1
     let returnResultTeam2 = []; // Team 2
@@ -933,15 +878,25 @@ function prepareTeamResult() {
     let unknownAmount = []; // Unknown
     let notApplicableAmount = [];
     let undefinedIssuer = [];
-    try {
-        result.forEach((element) => {
+    let imageIp = Session.get('repairInfos')
+    let result = MachineReady.find({pdiStatus: 1}, {
+        fields: {newIssues: 1, machineId: 1, pdiPerformer: 1, coAuditor: 1}}).fetch();
+    result.forEach((element) => {
+        let machineId = element.machineId;
+        let machineBay19 = machineCommTable.findOne({machineId: machineId}, {fields: {timeLine: 1}})
+        machineTimeLine = machineBay19.timeLine.bay19Planned;
+        try {
             if (element.newIssues) {
-                let source = {
-                    machineId: element._id,
-                    machineNr: element.machineId,
-                    pdiTech: element.omms.user
-                }
                 element.newIssues.forEach((element2) => {
+                    let pictureLocation = imageIp + element2.pictureLocation
+                    let source = {
+                        machineId: element._id,
+                        machineNr: element.machineId,
+                        pdiTech: element.pdiPerformer,
+                        coAuditor: element.coAuditor,
+                        bay19Planned: machineTimeLine,
+                        pictureLocation: pictureLocation
+                    }
                     if (element2.responsible === "Team 1") {
                         returnedTarget = Object.assign(element2, source)
                         returnResultTeam1.push(returnedTarget);
@@ -992,11 +947,8 @@ function prepareTeamResult() {
                     }
                 })
             }
-        })
-    } catch (e) {
-    }
-    returnResultTeam1.sort(function (a, b) {
-        return a.machineId - b.machineId
+        } catch (e) {
+            }
     })
     let totalLength = returnResultTeam1.length + returnResultTeam2.length + returnResultTeam3.length +
         returnResultTeam4.length + returnResultTeam5.length + teamTestBayAmount.length + teamSupplierAmount.length +
@@ -1014,4 +966,9 @@ function prepareTeamResult() {
     Session.set('unknownAmount', unknownAmount.length);
     Session.set('notApplicableAmount', notApplicableAmount.length);
     Session.set('undefinedIssuer', undefinedIssuer.length);
+    return [returnResultTeam1, returnResultTeam2,
+            returnResultTeam3, returnResultTeam4,
+            returnResultTeam5, teamTestBayAmount,
+            teamSupplierAmount, ctdAmount, rAndD_Amount,
+            unknownAmount, notApplicableAmount, undefinedIssuer]
 }
