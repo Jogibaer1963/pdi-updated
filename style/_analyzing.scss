@@ -47,6 +47,12 @@
   top: 10em;
 }
 
+.btn-pdi {
+  left: 74em;
+  position: absolute;
+  top: 10em;
+}
+
 .btn-options {
   left: 85em;
   position: absolute;
@@ -236,6 +242,29 @@ table.analyze-team-table {
   top: 100px;
   transform: scale(1.8);
   z-index: 1;
+}
+
+// **************************   Pdi Informal **********************
+
+.pdi-search-position {
+  left: 5em;
+  position: absolute;
+  top: 20em;
+}
+
+.pdi-performer,
+.pdi-summary {
+  font-size: 20px;
+  font-weight: bold;
+  height: 30px;
+  text-align: center;
+  width: 100px;
+}
+
+.pdi-result-graph {
+  left: 30em;
+  position: absolute;
+  top: 30em;
 }
 
 //  *********************************************************

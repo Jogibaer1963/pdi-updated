@@ -226,12 +226,20 @@ if(Meteor.isServer){
         },
 /*
         'machines': () => {
-        //    const issueArray = [];
-            const completeIssueArray = [];
-            readMachine( completeIssueArray);
-            return [completeIssueArray];
-        },
+                let result = MachineReady.find({}).fetch();
+                result.forEach(function(element) {
+                    let date = element.startPdiDate
+                    if (date !== undefined) {
+                       let machine = element.machineId;
+                       let unixPdiDate = date.getTime().toFixed(0);
+                       let unixPdiDateInt = parseInt(unixPdiDate, 10);
+                       console.log(machine, unixPdiDate)
+                       MachineReady.update({machineId: machine},
+                           {$set: {unixPdiDate: unixPdiDateInt}})
+                    }
 
+                })
+        },
  */
 
         'coaDate': (machineId, coaDate) => {
@@ -782,7 +790,10 @@ if(Meteor.isServer){
 
 
         'fuelAfterPdi': function(selectedPdiMachine, selectedPdiMachineNr, fuelAfter) {
-            MachineReady.update({_id: selectedPdiMachine}, {$set: {fuelAfter: fuelAfter, pdiStatus: 1}});
+            let date = Date.now();
+            MachineReady.update({_id: selectedPdiMachine}, {$set: {fuelAfter: fuelAfter,
+                    pdiStatus: 1,
+                     unixPdiDate: date}});
             specialItems.update({}, {$inc: {pdiFinished: 1, pdiLeft: -1}})
             let result = siList.find({machineNr: selectedPdiMachineNr}).fetch();
             if(result) {

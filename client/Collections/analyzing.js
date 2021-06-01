@@ -11,6 +11,7 @@ Session.set('issueByComponent', false);
 Session.set('issueBySupplier', false);
 Session.set('editResponsibility', false);
 Session.set('advanceSearch', false);
+Session.set('pdi', false);
 
 // **********  Session for 1 specific Machine in Template Repair Time per Machine ****************
 Session.set('specificMachine', false)
@@ -27,6 +28,7 @@ Template.analyzing.onDestroyed(() => {
     Session.set('issueBySupplier', false);
     Session.set('editResponsibility', false);
     Session.set('advanceSearch', false);
+    Session.set('pdi', false);
 })
 
 //  *****************************  Header  and   Buttons  ********************************************
@@ -62,6 +64,10 @@ Template.analyzing.helpers ({
         return Session.get('advanceSearch');
     },
 
+    pdi: () => {
+        return Session.get('pdi')
+    },
+
     options: () => {
         return Session.get('options');
     },
@@ -81,6 +87,7 @@ Template.analyzing.events ({
         Session.set('issueBySupplier', false);
         Session.set('editResponsibility', false);
         Session.set('advanceSearch', false);
+        Session.set('pdi', false);
         Session.set('options', false);
     },
 
@@ -93,6 +100,7 @@ Template.analyzing.events ({
          Session.set('issueBySupplier', false);
          Session.set('editResponsibility', false);
          Session.set('advanceSearch', false);
+         Session.set('pdi', false);
          Session.set('options', false);
      },
 
@@ -107,6 +115,7 @@ Template.analyzing.events ({
         Session.set('issueBySupplier', false);
         Session.set('editResponsibility', false);
         Session.set('advanceSearch', false);
+        Session.set('pdi', false);
         Session.set('options', false);
         prepareTeamResult();
     },
@@ -120,6 +129,7 @@ Template.analyzing.events ({
         Session.set('issueBySupplier', false);
         Session.set('editResponsibility', false);
         Session.set('advanceSearch', false);
+        Session.set('pdi', false);
         Session.set('options', false);
     },
 
@@ -132,6 +142,7 @@ Template.analyzing.events ({
         Session.set('issueBySupplier', true);
         Session.set('editResponsibility', false);
         Session.set('advanceSearch', false);
+        Session.set('pdi', false);
         Session.set('options', false);
     },
 
@@ -144,6 +155,7 @@ Template.analyzing.events ({
         Session.set('issueBySupplier', false);
         Session.set('editResponsibility', true);
         Session.set('advanceSearch', false);
+        Session.set('pdi', false);
         Session.set('options', false);
     },
 
@@ -156,6 +168,19 @@ Template.analyzing.events ({
         Session.set('issueBySupplier', false);
         Session.set('editResponsibility', false);
         Session.set('advanceSearch', true);
+        Session.set('pdi', false);
+        Session.set('options', false);
+    },
+
+    'click .btn-pdi': (e) => {
+        e.preventDefault();
+        Session.set('overViewAnalyzing', false);
+        Session.set('searchWithKeyWord', false);
+        Session.set('responseTeam', false);
+        Session.set('issueByComponent', false);
+        Session.set('issueBySupplier', false);
+        Session.set('editResponsibility', false);
+        Session.set('pdi', true);
         Session.set('options', false);
     },
 
@@ -168,6 +193,7 @@ Template.analyzing.events ({
         Session.set('issueBySupplier', false);
         Session.set('editResponsibility', false);
         Session.set('advanceSearch', false);
+        Session.set('pdi', false);
         Session.set('options', true);
     }
 
@@ -695,6 +721,8 @@ Template.analyzingSupplier.helpers({
                             machineNr: machineNr,
                             pdiPerformer:  pdiPerformer,
                             errorDescription: element2.errorDescription,
+                            repairTech: element2.repairTech,
+                            repairComment: element2.repairComment,
                             responsible: element2.responsible,
                             repairStatus: element2.repairStatus,
                             pictureLocation : repairInfos + element2.pictureLocation,
@@ -779,9 +807,139 @@ Template.analyzingSupplier.events({
         FlowRouter.go('supplierResultList')
     },
 
-
-
 });
+
+//  ************************************  PDI Informal  *******************************
+
+Template.pdiSearch.helpers({
+
+    findPdiPerformer: () => {
+        let endResult = [];
+        let singleResultArray = [];
+        let result, pdiPerformer, graph, coAuditorTrue;
+        result = MachineReady.find({$and: [{pdiStatus: 1},
+                {unixPdiDate: {$gt: 1598936400000}}]}).fetch(); // unix date is 1.09.2020
+        result.forEach((element) => {
+            if (element.coAuditor !== undefined) {
+                pdiPerformer = element.coAuditor;
+                coAuditorTrue = 1
+               } else {
+                pdiPerformer = element.pdiPerformer;
+                coAuditorTrue = 0
+               }
+            graph = {
+                pdiPerformer : pdiPerformer,
+                machineNr : element.machineId,
+                issuesFound : element.newIssues.length,
+                coAuditor : coAuditorTrue
+               }
+            endResult.push(graph)
+        })
+        endResult.sort((a,b) => (a.pdiPerformer > b.pdiPerformer) ? 1 :
+                                                ((b.pdiPerformer > a.pdiPerformer) ? -1 : 0))
+        Session.set('graphPdiEndResult', endResult);
+        let lookup = endResult.reduce((a, e) => {
+            a[e.pdiPerformer] = ++a[e.pdiPerformer] || 0;
+            return a;
+        }, {});
+        let list = Object.keys(lookup);
+        let listValue = Object.values(lookup)
+        for (let i = 0; i <= list.length - 1; i++) {
+            let objKeyValue = {
+                pdiPerformer : list[i],
+                pdiSummary : listValue[i]
+            }
+            singleResultArray.push(objKeyValue)
+        }
+      return singleResultArray
+    },
+
+    pdiPerformerResult: function () {
+        // Gather data:
+        let pdiMachines = [];
+        let pdiIssuesFound = [];
+        let pdiResult = Session.get('graphPdiEndResult');
+        let returnedPdiPerformer = Session.get('nameReturned');
+        pdiResult.forEach((element) => {
+            if (element.pdiPerformer === returnedPdiPerformer) {
+              pdiMachines.push(element.machineNr)
+              pdiIssuesFound.push(element.issuesFound)
+            }
+        })
+
+        // Use Meteor.defer() to create chart after DOM is ready:
+        let titleText = ' PDI Result';
+        Meteor.defer(function() {
+            // Create standard Highcharts chart with options:
+            Highcharts.chart('chart_6', {
+                title: {
+                    text: titleText
+                },
+                tooltip: {
+                    shared: true
+                },
+                chart: {
+                    style: {
+                        fontFamily: '\'Unica One\', sans-serif'
+                    },
+                    plotBorderColor: '#606063',
+                    height: 500,
+                    width: 900,
+                    zoomType: 'xy'
+                },
+                yAxis: {
+                    categories: [],
+                    title: {enabled: true,
+                        text: 'Issues Found',
+                        style: {
+                            fontWeight: 'normal'
+                        }
+                    }
+                },
+                xAxis: {
+                    categories: pdiMachines,
+                    title: {
+                        enabled: true,
+                        text: 'Machine',
+                        style: {
+                            fontWeight: 'normal'
+                        }
+                    }
+                },
+                series: [
+                    {
+                        name: 'Issues Found',
+                        type: 'column',
+                        data: pdiIssuesFound
+                    }
+                ]
+            });
+        });
+    },
+
+    'selectedPdiName': function() {
+        let name = this.pdiPerformer;
+        let nameReturned = Session.get('nameReturned')
+        if (name === nameReturned) {
+            return 'selected';
+        }
+    }
+
+})
+
+Template.pdiSearch.events({
+
+    'click .date-button': () => {
+        Meteor.call('machines');
+    },
+
+    'click .selectedPdiName': function(e) {
+        e.preventDefault();
+       let pdiName = this.pdiPerformer;
+       Session.set('nameReturned', pdiName)
+    }
+
+})
 
 //  ************************************   Options  ***********************************
 
@@ -814,6 +972,7 @@ Template.analyzingOptions.helpers({
 });
 
 Template.analyzingOptions.events({
+
     'click .selectedSupplier': function(e){
         e.preventDefault();
         const selected = this._id;

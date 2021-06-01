@@ -16,13 +16,14 @@
     <div class="nav navbar-btn">
         <button class="btn btn-default btn-info btn-over-view">Home</button>
         <button class="btn btn-default btn-success btn-key-word">Search with keyword</button>
-        <button class="btn btn-default btn-success btn-response-team" >Issues by Team</button>
-        <button class="btn btn-default btn-success btn-component-search" >Repair Time by Machine</button>
-        <button class="btn btn-default btn-success btn-response-supplier" >Issues by Supplier</button>
+        <button class="btn btn-default btn-success btn-response-team">Issues by Team</button>
+        <button class="btn btn-default btn-success btn-component-search">Repair Time by Machine</button>
+        <button class="btn btn-default btn-success btn-response-supplier">Issues by Supplier</button>
         <!--
         <button class="btn btn-default btn-success btn-edit-responsibility" >Edit Responsibility</button>
         <button class="btn btn-default btn-success btn-advance-search" >Advance Search</button>
         -->
+        <button class="btn btn-default btn-info btn-pdi" >PDI performed</button>
         <button class="btn btn-default btn-success btn-options" >Options</button>
     </div>
     {{#if overViewAnalyzing }}  <!-- Home -->
@@ -45,6 +46,9 @@
 
     {{else if advanceSearch}}  <!-- Advance Search -->
         {{> analyzingAdvanceSearch}}
+
+    {{else if pdi}}  <!-- PDI informal -->
+        {{> pdiSearch}}
 
     {{else if options}}  <!-- Advance Search -->
         {{> analyzingOptions}}
@@ -306,6 +310,8 @@
                 <th class="pdiMachineField">Machine</th>
                 <th class="pdi-rep-tech">Pdi Tech</th>
                 <th class="pdi-comment-time-table">Error Description</th>
+                <th class="pdi-rep-tech">Rep Tech</th>
+                <th class="pdi-comment-time-table">Repair Description</th>
                 <th class="pdi-issuer">Issuer</th>
                 <th class="pdi-image">Repair Time</th>
                 <th class="pdi-rep-status">Repair Status</th>
@@ -320,6 +326,8 @@
                         <td class="pdiMachineField">{{machineNr}}</td>
                         <td class="pdi-rep-tech">{{pdiPerformer}}</td>
                         <td class="pdi-comment-time-table">{{errorDescription}}</td>
+                        <td class="pdi-rep-tech">{{repairTech}}</td>
+                        <td class="pdi-comment-time-table">{{repairComment}}</td>
                         <td class="pdi-issuer">{{responsible}}</td>
                         <td class="pdi-image">{{repairTime}}</td>
                         <td class="pdi-rep-status {{getStatusColor repairStatus}}"
@@ -364,6 +372,30 @@
 <!-----------------------------  Advance Search  ----------------------------------------->
 
 <template name="analyzingAdvanceSearch">
+
+</template>
+
+
+
+<!-- ------------------------------  PDI informal --------------------------------------------->
+
+<template name="pdiSearch">
+    <div class="pdi-search-position">
+       <h4>PDI performed</h4>
+        <div>
+              {{#each findPdiPerformer}}
+                <tr class="selectedPdiName {{selectedPdiName}}">
+                    <td class="pdi-performer">{{pdiPerformer}}</td>
+                    <td class="pdi-summary">{{pdiSummary}}</td>
+                </tr>
+              {{/each}}
+        </div>
+    </div>
+    <div>
+        <div class="pdi-result-graph">
+            <div  id="chart_6">{{pdiPerformerResult}}</div>
+        </div>
+    </div>
 
 </template>
 
