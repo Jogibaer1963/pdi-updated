@@ -1,23 +1,26 @@
 <template name="login">
-    <div id="logo">
+    <div class="logo">
         <img src="claas_logo.png" />
     </div>
-    <div class="loginImage">
+    <div class="login-image">
      <img src="Glenn_and_Danny_Mill_City_NV.JPG" width="1200" height="500"/>
+    </div>
+    <div class="loading-screen">
+        <h4 style="font-weight: bolder">{{loading}}</h4>
     </div>
        <form class="">
            <br><br><br>
-            <div class="userName">
+            <div class="user-name">
               <label for="loginUser" >User Name</label>
                 <br>
               <input type="text" name="loginUser" id="loginUser" placeholder="User Name">
             </div>
-            <div class="loginPasswd">
+            <div class="login-passwd">
               <label for="password" class="userLogin">Password</label>
                 <br>
               <input type="password" autocomplete="password" name="loginPassword" id="password" placeholder="Password">
             </div>
-          <div class="loginButton btn btn-default">
+          <div class="login-button btn btn-default">
             <input type="submit" value="Login">
         </div>
       </form>

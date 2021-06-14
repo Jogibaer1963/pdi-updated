@@ -334,6 +334,10 @@ table.analyze-team-table {
   top: 30em;
 }
 
+table.extended-table {
+  width: 1430px;
+}
+
 .assign-supplier {
   width: 135px;
 }
@@ -370,26 +374,34 @@ table.analyze-team-table {
   position: absolute;
 }
 
-.supplierTable {
+//  ***************************  Supplier Results  ************************************************
+
+.single-supplier-table {
   left: 5em;
   position: absolute;
   top: 20em;
 }
 
-.suppliers-Table-View {
+.suppliers-table-view {
   border-spacing: 5px;
   width: auto;
 }
 
-.suppliers-Result-View {
+.suppliers-name {
   left: 100em;
   position: absolute;
   top: 20em;
 }
 
-table.supplierResultTable {
+table.supplier-result-table {
   width: 90px;
 }
+
+.supplier-field {
+  width: 95px;
+}
+
+//  *************************  Suppliers Graphs  ********************************
 
 .annual-machine-result {
   left: 5em;

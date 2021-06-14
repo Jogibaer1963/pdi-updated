@@ -14,10 +14,13 @@
     <br>
     </body>
     <div class="button-back">
-        <button class="btn btn-info buttonReturn">Back</button>
+        <button class="btn btn-info buttonReturn">Back to Main</button>
     </div>
-    <div class="supplierTable">
-        <table class=" blueTable ">
+    <div class="submit-supplier-button">
+        <button type="submit" class="btn btn-success supplier-form-submit" >Submit Parts ordered / Group / Close</button>
+    </div>
+    <div class="single-supplier-table">
+        <table id="singleSupplierResult" class="blueTable single-supplier-extended">
             <thead>
             <tr>
                 <th class="pdiMachineField">Machine</th>
@@ -28,15 +31,20 @@
                 <th class="pdi-image">Image</th>
                 <th class="assign-supplier">Change / Assign Supplier</th>
                 <th class="assign-supplier">Change / Assign Team</th>
+                <th class="quality-comment">Comment / Notes</th>
+                <th class="quality-claim">Claim Nr</th>
+                <th class="checkbox-field">Parts</th>
+                <th class="checkbox-field">Group</th>
+                <th class="checkbox-field">Close</th>
             </tr>
             </thead>
             <tbody>
             {{#each  singleSupplierResult}}
-                <tr class="selectedIssue {{selectedSupplierRow}}">
-                    <td class="pdiMachineField">{{machineNr}}</td>
-                    <td class="pdi-rep-tech">{{pdiTech}}</td>
-                    <td class="pdi-comment-time-table">{{errorDescription}}</td>
-                    <td class="pdi-image">{{repairTime}}</td>
+                <tr class="">
+                    <td class="pdiMachineField selectedIssue {{selectedSupplierRow}}">{{machineNr}}</td>
+                    <td class="pdi-rep-tech selectedIssue {{selectedSupplierRow}}">{{pdiTech}}</td>
+                    <td class="pdi-comment-time-table selectedIssue {{selectedSupplierRow}}">{{errorDescription}}</td>
+                    <td class="pdi-image selectedIssue {{selectedSupplierRow}}">{{repairTime}}</td>
                     <td class="pdi-rep-status {{getStatusColor repairStatus}}"
                         style="background-color:{{getStatusColor repairStatus}}; color:{{getStatusColor repairStatus}}">{{repairStatus}}</td>
                     <td class="thumbnail thumbnail-box pdi-image">
@@ -63,16 +71,51 @@
                             {{/each}}
                         </select>
                     </td>
+                    <td class="quality-comment selectedIssue {{selectedSupplierRow}}">{{qualityComment}}</td>
+                    <td class="quality-claim selectedIssue {{selectedSupplierRow}}">{{claimNumber}}</td>
+                    <td class="parts-on-order checkbox-field">
+                        <label>
+                            <input type="checkbox" name="partsOrdered" id="partsOrdered" value="{{_id}} {{machineNr}}">
+                        </label>
+                    </td>
+                    <td class="group-issues checkbox-field">
+                        <label>
+                            <input type="checkbox" name="group" id="group" value="{{_id }} {{machineNr}}">
+                        </label>
+                    </td>
+                    <td class="group-issues-hiding checkbox-field"  style="background-color: darkred">
+                        <label>
+                            <input type="checkbox"
+                                   name="closeCase"
+                                   id="closeCase"
+                                   value="{{_id}} {{machineNr}}">
+                        </label>
+                    </td>
                 </tr>
             {{/each}}
             </tbody>
         </table>
     </div>
-    <div  class="suppliers-Result-View">
-        <table class="blueTable supplierResultTable">
+    <div class="quality-comment-input">
+        <form class="qualityComment">
+            <label for="messageField">Comment</label>
+            <p></p>
+            <textarea type="text" id="messageField" name="messageField"></textarea>
+            <p></p>
+            <p></p>
+            <label for="claimField">Claim Number</label>
+            <p></p>
+            <textarea type="text" id="claimField" name="claimField"></textarea>
+            <button type="submit" class="btn btn-success quality-comment-button">Submit Comment</button>
+        </form>
+    </div>
+
+
+    <div  class="single-suppliers-name">
+        <table class="blueTable supplier-result-table">
             <thead>
             <tr>
-                <th>Supplier</th>
+                <th class="supplier-field">Supplier</th>
             </tr>
             </thead>
             <tbody>
@@ -84,6 +127,9 @@
             </tbody>
         </table>
     </div>
+
+
+
     <div>
         <div class="annual-machine-result">
             <div  id="chart_5">{{annualMachineRepairResult}}</div>

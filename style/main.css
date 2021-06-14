@@ -35,26 +35,31 @@ table.tableWidth {
   left: 25em;
   top: 1em; }
 
-#logo {
+.logo {
   margin: 25px; }
 
-.loginImage {
-  margin-top: 100px; }
+.login-image {
+  margin-top: 50px; }
 
-.userName {
+.user-name {
+  left: 25px;
   position: absolute;
-  top: 150px;
-  left: 25px; }
+  top: 150px; }
 
-.loginPasswd {
+.login-passwd {
+  left: 25px;
   position: absolute;
-  top: 220px;
-  left: 25px; }
+  top: 220px; }
 
-.loginButton {
+.login-button {
+  left: 25px;
   position: absolute;
-  top: 290px;
-  left: 25px; }
+  top: 290px; }
+
+.loading-screen {
+  left: 20em;
+  position: absolute;
+  top: 3em; }
 
 thead {
   background-color: lightgrey; }
@@ -2065,6 +2070,9 @@ table.analyze-team-table {
   position: absolute;
   top: 30em; }
 
+table.extended-table {
+  width: 1430px; }
+
 .assign-supplier {
   width: 135px; }
 
@@ -2093,22 +2101,25 @@ table.analyze-team-table {
   left: 14em;
   position: absolute; }
 
-.supplierTable {
+.single-supplier-table {
   left: 5em;
   position: absolute;
   top: 20em; }
 
-.suppliers-Table-View {
+.suppliers-table-view {
   border-spacing: 5px;
   width: auto; }
 
-.suppliers-Result-View {
+.suppliers-name {
   left: 100em;
   position: absolute;
   top: 20em; }
 
-table.supplierResultTable {
+table.supplier-result-table {
   width: 90px; }
+
+.supplier-field {
+  width: 95px; }
 
 .annual-machine-result {
   left: 5em;
@@ -2133,6 +2144,77 @@ table.supplierResultTable {
 .fuel-consumption-chart {
   position: absolute;
   left: 4em;
+  top: 15em; }
+
+.submit-supplier-button {
+  left: 100em;
+  position: absolute;
+  top: 15em; }
+
+.single-supplier-table {
+  left: 5em;
+  position: absolute;
+  top: 20em; }
+
+table.single-supplier-extended {
+  width: 1580px; }
+
+.quality-comment {
+  width: 225px; }
+
+.quality-claim {
+  width: 191px; }
+
+.checkbox-field {
+  width: 61px; }
+
+td {
+  text-align: center;
+  vertical-align: middle; }
+
+.suppliers-table-view {
+  border-spacing: 5px;
+  width: auto; }
+
+.single-suppliers-name {
+  left: 150em;
+  position: absolute;
+  top: 20em; }
+
+table.supplier-result-table {
+  width: 90px; }
+
+.supplier-field {
+  width: 95px; }
+
+.quality-comment-input {
+  left: 120em;
+  position: absolute;
+  top: 25em; }
+
+.quality-comment-button {
+  left: -.1em;
+  position: absolute;
+  top: -3em; }
+
+.annual-machine-result {
+  left: 5em;
+  position: absolute;
+  top: 60em; }
+
+.annual-supplier-result {
+  left: 80em;
+  position: absolute;
+  top: 60em; }
+
+.options-header {
+  left: 5em;
+  position: absolute;
+  top: 15em; }
+
+.options-header-2 {
+  left: 30em;
+  position: absolute;
   top: 15em; }
 
 .mainLayout {

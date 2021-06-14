@@ -183,7 +183,7 @@ if(Meteor.isServer){
         },
 
 
-        //  ********************   Supplier List ****************
+        //  ********************   Supplier List & quality comments & claims ****************
 
         'newSupplierAdd': (newSupplier) => {
           SuppliersList.insert({supplier: newSupplier})
@@ -195,11 +195,43 @@ if(Meteor.isServer){
 
         'addSupplierToRepair': (machineNr, issueId, selectedSupplier) => {
             if (issueId && selectedSupplier) {
-            MachineReady.update({machineId: machineNr, 'newIssues._id': issueId},
+            MachineReady.update({machineId: machineNr, 'newIssues._id' : issueId},
                                 {$set: {'newIssues.$.responsible': selectedSupplier,
                                                  'newIssues.$.extern': true,
                                                  'newIssues.$.newEntry': true}
                                 })
+            }
+        },
+
+        'updateSupplierIssues': (machineNr, issueId, comment, claimNr) => {
+                MachineReady.update({machineId : machineNr, 'newIssues._id' : issueId},
+                                   {$set: {'newIssues.$.qualityComment' : comment,
+                                                    'newIssues.$.claimNumber' : claimNr}})
+        },
+
+        'updatePartsGroupClose':(partsOrdered, group, closeCase) => {
+                console.log(partsOrdered, group, closeCase)
+             if (partsOrdered.length !== 0) {
+                console.log('parts on order', partsOrdered)
+                 partsOrdered.forEach((element) => {
+                     let machineNr = element.slice(18, 28)
+                     let issueId = element.slice(0, 17)
+                     console.log('Machine Nr ', machineNr, 'issueId', issueId, partsOrdered)
+                     MachineReady.update({machineId : machineNr, 'newIssues._id' : issueId},
+                         {$set: {'newIssues.$.partsOnOrder': true}})
+                 })
+            }
+            if (group.length !== 0) {
+                console.log('group detected')
+            }
+            if (closeCase.length !== 0) {
+                closeCase.forEach((element) => {
+                    let machineNr = element.slice(18, 28)
+                    let issueId = element.slice(0, 17)
+                    console.log('close Case detected', issueId, machineNr)
+                    MachineReady.update({machineId : machineNr, 'newIssues._id' : issueId},
+                        {$set: {'newIssues.$.checkStatus': false}})
+                })
             }
         },
 
@@ -226,21 +258,22 @@ if(Meteor.isServer){
         },
 /*
         'machines': () => {
-                let result = MachineReady.find({}).fetch();
+                let result = MachineReady.find({pdiStatus: 1}).fetch();
                 result.forEach(function(element) {
                     let date = element.startPdiDate
                     if (date !== undefined) {
                        let machine = element.machineId;
+                        console.log(machine)
                        let unixPdiDate = date.getTime().toFixed(0);
                        let unixPdiDateInt = parseInt(unixPdiDate, 10);
-                       console.log(machine, unixPdiDate)
+
                        MachineReady.update({machineId: machine},
                            {$set: {unixPdiDate: unixPdiDateInt}})
                     }
 
                 })
         },
- */
+*/
 
         'coaDate': (machineId, coaDate) => {
             MachineReady.upsert({machineId: machineId}, {$set: {coaDate: coaDate}});
@@ -323,18 +356,23 @@ if(Meteor.isServer){
                         let singleGroup = groupVariant.slice(0, countCbpat3End - 15);
                         let singleVariant = singleGroup.substring(0, 4);
                         let singleGroupVariant = mainGroupVariant + '_' + singleVariant;
-                        let textVariant = singleGroup.replace((singleVariant + '_'), '');
+                        let textVariant = (singleGroup.replace((singleVariant + '_'), '')).slice(0, 49);
+                        let id = combineType + '_' + singleGroupVariant;
                         let z = textVariant.search('          L ');
                         if (z < 0) {
-                            variants.upsert({variant: singleGroupVariant, type: combineType},
-                                {
-                                variant: singleGroupVariant,
-                                variantDescription: textVariant,
-                                imagePath: "noInfo.JPG",
-                                status: 1,
-                                dateLoaded: latestUpdate,
-                                type: combineType
-                            });
+                            try {
+                                variants.upsert({_id: id},
+                                    {
+                                    variant : singleGroupVariant,
+                                    type: combineType,
+                                    variantDescription: textVariant,
+                                    imagePath: "noInfo.JPG",
+                                    status: 1,
+                                    dateLoaded: latestUpdate
+                                });
+                            } catch (e) {
+                                console.log(e)
+                            }
                         }
                         groupVariantString = groupVariant.replace(singleGroup, '');
                     }
@@ -446,21 +484,14 @@ if(Meteor.isServer){
                                      {$set: {"machineList.$.siStatus": setStatus}});
         },
 
-        'unsuccessLogin': function (userVar, passwordVar, dateLogin) {
-           let clientIp = this.connection.clientAddress;
-            unsuccessLogin.insert({userId: userVar, password: passwordVar, dateLogin: dateLogin, clientIp: clientIp});
-        },
-
-        'successfullLogin': function (userVar, dateLogin) {
+        'successLogin': function (userVar, dateLogin) {
           let clientIp = this.connection.clientAddress;
-             successfullLogin.insert({userId: userVar, dateLogin: dateLogin, clientIp: clientIp});
              usersProfile.update({username: userVar}, {$set: {loginStatus: 1,
                                                                                 lastLogin: dateLogin,
                                                                                  clientIp: clientIp}});
         },
 
-        'successfullLogout': function(logoutId, logoutDate) {
-            successfullLogout.insert({logoutId: logoutId, dateLogout: logoutDate});
+        'successLogout': function(logoutId, logoutDate) {
             usersProfile.update({username: logoutId}, {$set: {loginStatus: 0}});
         },
 
@@ -666,7 +697,6 @@ if(Meteor.isServer){
             // Load Type Variant
             let type = pdiMachineNr.slice(0,3);
             let variantResult = variants.find({type: type},  {fields: {status: 1,
-                                                                        variant: 1,
                                                                         variantDescription: 1,
                                                                         imagePath: 1}},
                                                                         {sort: {variant: 1}}).fetch();
@@ -679,11 +709,11 @@ if(Meteor.isServer){
             combineVariant[0].config.forEach((element) => {
 
                 variantResult.forEach((element2) => {
-                    if (element === element2.variant && element2.status === 1) {
+                    if (element === element2._id && element2.status === 1) {
                         let uniqueId= Random.id();
                       configStyle = {
                           _id: uniqueId,
-                          config: element2.variant,
+                          config: element2._id,
                           configItem: element2.variantDescription,
                           imagePath: element2.imagePath,
                           machineConfigStatus: 0

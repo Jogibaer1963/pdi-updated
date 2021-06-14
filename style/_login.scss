@@ -1,33 +1,39 @@
 
 // login
 
-$userTop: 150px;
-$loginTop: 220px;
-$loginLeft: 25px;
-$loginButton: 290px;
+$user-top: 150px;
+$login-top: 220px;
+$login-left: 25px;
+$login-button: 290px;
 
-#logo {
+.logo {
   margin: 25px;
 }
 
-.loginImage {
-  margin-top: 100px;
+.login-image {
+  margin-top: 50px;
 }
 
-.userName {
+.user-name {
+  left: $login-left;
   position: absolute;
-  top: $userTop;
-  left: $loginLeft;
+  top: $user-top;
 }
 
-.loginPasswd {
+.login-passwd {
+  left: $login-left;
   position: absolute;
-  top: $loginTop;
-  left: $loginLeft;
+  top: $login-top;
 }
 
-.loginButton {
+.login-button {
+  left: $login-left;
   position: absolute;
-  top: $loginButton;
-  left: $loginLeft;
+  top: $login-button;
+}
+
+.loading-screen {
+  left: 20em;
+  position: absolute;
+  top: 3em;
 }

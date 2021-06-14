@@ -8,6 +8,14 @@ Template.singleSupplierResult.helpers({
         return SuppliersList.find().fetch();
     },
 
+    'selectedSupplierRow': function(){
+        const selectedIssueRow = this._id;
+        const selectedIssueId = Session.get('selectedIssueId');
+        if (selectedIssueId === selectedIssueRow) {
+            return "selected"
+        }
+    },
+
     singleSupplierResult: () => {
         let repairInfos = Session.get('repairInfos');
         let singleSupplier = Session.get('selectedSupplierResult')
@@ -23,16 +31,21 @@ Template.singleSupplierResult.helpers({
         result.forEach((element) => {
        //     console.log('Machine ', element.machineId)
             element.newIssues.forEach((element2) => {
-                if (element2.extern === true && element2.responsible === singleSupplier) {
+                if (element2.extern === true &&
+                    element2.responsible === singleSupplier &&
+                    element2.checkStatus === true) {
                     supplierList = {
-                        issueId : element2._id,
+                        _id : element2._id,
                         machineNr : element.machineId,
                         pdiTech : element.omms.user,
                         repairStatus: element.repairStatus,
                         errorDescription : element2.errorDescription,
                         pictureLocation : repairInfos + element2.pictureLocation,
                         repairTech : element2.repairTech,
-                        repairTime : element2.repairTime
+                        repairTime : element2.repairTime,
+                        qualityComment : element2.qualityComment,
+                        claimNumber : element2.claimNumber,
+                        partsOnOrder : element2.partsOnOrder
                     }
                     singleResult.push(supplierList);
                 }
@@ -41,50 +54,6 @@ Template.singleSupplierResult.helpers({
         })
         return singleResult;
     },
-/*
-    supplierTable: () => {
-        let finalResult = [];
-        let uniqueResult = [];
-        let machineRepairTime = [];
-        let machineRepair = [];
-        let totalRepairPer = [];
-        let counterResult = [];
-        let result = analyzingDatabase.find().fetch();
-        result.forEach((element) => {
-            if (element.extern === true) {
-                finalResult.push(element.issueResponsible);
-                machineRepairTime.push(element.machineNr)
-                let machineTime = {
-                    machine: element.machineNr,
-                    repairTime: element.repairTime
-                }
-                machineRepair.push(machineTime)
-            }
-        })
-        let uniqueMachines = machineRepairTime.filter((x, i, a) => a.indexOf(x) === i);
-        uniqueMachines.forEach((element) => {
-            machineRepair.forEach((element2) => {
-                if (element === element2.machine) {
-                    totalRepairPer.push(parseInt(element2.repairTime));
-                }
-            })
-            counterResult.push((totalRepairPer.reduce((a,b) => a + b, 0)))
-            totalRepairPer = [];
-        })
-        let unique = finalResult.filter((v, i, a) => a.indexOf(v) === i)
-        unique.forEach((element) => {
-            let suppResult = {
-                supplier: element
-            }
-            uniqueResult.push(suppResult);
-        })
-        Session.set('annualMachines', uniqueMachines);
-        Session.set('annualRepTime', counterResult)
-        return uniqueResult
-    },
-
- */
-
 
     annualMachineRepairResult: function () {
         // Use Meteor.defer() to create chart after DOM is ready:
@@ -266,11 +235,53 @@ Template.singleSupplierResult.events({
         let selectedSupplier = this.supplier;
         Session.set('selectedSupplierResult', selectedSupplier);
     },
+
+    'click .selectedIssue': function(e) {
+       e.preventDefault();
+       let selectedIssueId = this._id;
+       let machineNr = this.machineNr;
+       Session.set('selectedIssueId', selectedIssueId)
+       Session.set('selectedMachineNr', machineNr)
+    } ,
     
     'click .buttonReturn': (e) => {
         e.preventDefault();
         FlowRouter.go('supplierResultList')
+    },
+
+    'submit .qualityComment': function (e) {
+       e.preventDefault();
+       let comment, claimNr, issueId,machineNr;
+        comment = document.getElementById('messageField').value;
+        claimNr = document.getElementById('claimField').value;
+        issueId = Session.get('selectedIssueId');
+        machineNr = Session.get('selectedMachineNr')
+        Meteor.call('updateSupplierIssues', machineNr, issueId, comment, claimNr)
+        document.getElementById('messageField').value = '';
+        document.getElementById('claimField').value = '';
+        Session.set('selectedIssueId', '');
+        Session.set('selectedMachineNr', '');
+    },
+
+
+    'click .submit-supplier-button': function (e) {
+        e.preventDefault();
+        let partsOrdered = [];
+        let closeCase = [];
+        let group = [];
+        $('input[name=partsOrdered]:checked').each(function () {
+            partsOrdered.push($(this).val());
+        });
+        $('input[name=group]:checked').each(function () {
+            group.push($(this).val());
+        });
+        $('input[name=closeCase]:checked').each(function () {
+            closeCase.push($(this).val());
+        });
+        Meteor.call('updatePartsGroupClose', partsOrdered, group, closeCase);
     }
+
+
 
 
 
