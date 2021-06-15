@@ -920,6 +920,7 @@ table.display-error {
   bottom: 0;
   float: left;
   font-weight: bold;
+  left: -1px;
   position: absolute;
   width: 130px; }
 
@@ -927,7 +928,7 @@ table.display-error {
   bottom: 0;
   float: left;
   font-weight: bold;
-  margin-left: 130px;
+  left: 130px;
   position: absolute;
   width: 130px; }
 
@@ -935,7 +936,7 @@ table.display-error {
   bottom: 0;
   float: left;
   font-weight: bold;
-  margin-left: 260px;
+  margin-left: 69px;
   position: absolute;
   width: 130px; }
 
@@ -950,6 +951,7 @@ table.display-error {
   bottom: 0;
   float: left;
   font-weight: bold;
+  left: -1px;
   position: absolute;
   width: 130px; }
 
@@ -957,7 +959,7 @@ table.display-error {
   bottom: 0;
   float: left;
   font-weight: bold;
-  margin-left: 130px;
+  left: 130px;
   position: absolute;
   width: 130px; }
 
@@ -965,7 +967,7 @@ table.display-error {
   bottom: 0;
   float: left;
   font-weight: bold;
-  margin-left: 260px;
+  margin-left: 69px;
   position: absolute;
   width: 130px; }
 
@@ -2144,6 +2146,16 @@ table.supplier-result-table {
 .fuel-consumption-chart {
   position: absolute;
   left: 4em;
+  top: 15em; }
+
+.button-toggle-supplier {
+  left: 45em;
+  position: absolute;
+  top: 15em; }
+
+.button-parts {
+  left: 60em;
+  position: absolute;
   top: 15em; }
 
 .submit-supplier-button {

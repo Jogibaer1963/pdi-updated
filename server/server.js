@@ -697,6 +697,7 @@ if(Meteor.isServer){
             // Load Type Variant
             let type = pdiMachineNr.slice(0,3);
             let variantResult = variants.find({type: type},  {fields: {status: 1,
+                                                                        variant: 1,
                                                                         variantDescription: 1,
                                                                         imagePath: 1}},
                                                                         {sort: {variant: 1}}).fetch();
@@ -709,11 +710,11 @@ if(Meteor.isServer){
             combineVariant[0].config.forEach((element) => {
 
                 variantResult.forEach((element2) => {
-                    if (element === element2._id && element2.status === 1) {
+                    if (element === element2.variant && element2.status === 1) {
                         let uniqueId= Random.id();
                       configStyle = {
                           _id: uniqueId,
-                          config: element2._id,
+                          config: element2.variant,
                           configItem: element2.variantDescription,
                           imagePath: element2.imagePath,
                           machineConfigStatus: 0

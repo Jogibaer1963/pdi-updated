@@ -804,7 +804,7 @@ Template.analyzingSupplier.events({
 
     'click .supplierResultList': (e) => {
         e.preventDefault()
-        FlowRouter.go('supplierResultList')
+        FlowRouter.go('singleSupplierResult')
     },
 
 });

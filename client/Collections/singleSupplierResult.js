@@ -1,6 +1,7 @@
 Meteor.subscribe('SuppliersList');
 const Highcharts = require('highcharts');
 
+Session.set('status', true)
 
 Template.singleSupplierResult.helpers({
 
@@ -21,38 +22,22 @@ Template.singleSupplierResult.helpers({
         let singleSupplier = Session.get('selectedSupplierResult')
         let supplierList = {};
         let singleResult = [];
+        let statusElement = Session.get('status');
         let result = MachineReady.find({pdiStatus : 1},
             {fields: {newIssues: 1,
                               machineId: 1,
                               repairStatus: 1,
                               omms: 1
                               }}).fetch();
-       // console.log('first ', result)
-        result.forEach((element) => {
-       //     console.log('Machine ', element.machineId)
-            element.newIssues.forEach((element2) => {
-                if (element2.extern === true &&
-                    element2.responsible === singleSupplier &&
-                    element2.checkStatus === true) {
-                    supplierList = {
-                        _id : element2._id,
-                        machineNr : element.machineId,
-                        pdiTech : element.omms.user,
-                        repairStatus: element.repairStatus,
-                        errorDescription : element2.errorDescription,
-                        pictureLocation : repairInfos + element2.pictureLocation,
-                        repairTech : element2.repairTech,
-                        repairTime : element2.repairTime,
-                        qualityComment : element2.qualityComment,
-                        claimNumber : element2.claimNumber,
-                        partsOnOrder : element2.partsOnOrder
-                    }
-                    singleResult.push(supplierList);
-                }
-
-            })
+        let returnResult =  supplierFunction(result, singleSupplier, repairInfos, statusElement, supplierList, singleResult)
+        returnResult.forEach((element) => {
+            if (element.repairTime === undefined) {
+                element.repairTime = 0;
+            }
         })
-        return singleResult;
+        // Sort by Repair Time
+        returnResult.sort((a, b) =>  b.repairTime - a.repairTime)
+        return returnResult
     },
 
     annualMachineRepairResult: function () {
@@ -226,6 +211,31 @@ Template.singleSupplierResult.helpers({
 
 });
 
+function supplierFunction(result, singleSupplier, repairInfos, statusElement, supplierList, singleResult) {
+    result.forEach((element) => {
+        element.newIssues.forEach((element2) => {
+            if (element2.extern === true &&
+                element2.responsible === singleSupplier &&
+                element2.checkStatus === statusElement) {
+                supplierList = {
+                    _id : element2._id,
+                    machineNr : element.machineId,
+                    pdiTech : element.omms.user,
+                    repairStatus: element.repairStatus,
+                    errorDescription : element2.errorDescription,
+                    pictureLocation : repairInfos + element2.pictureLocation,
+                    repairTech : element2.repairTech,
+                    repairTime : element2.repairTime,
+                    qualityComment : element2.qualityComment,
+                    claimNumber : element2.claimNumber,
+                    partsOnOrder : element2.partsOnOrder
+                }
+                singleResult.push(supplierList);
+            }
+        })
+    })
+    return singleResult;
+}
 
 
 Template.singleSupplierResult.events({
@@ -246,7 +256,21 @@ Template.singleSupplierResult.events({
     
     'click .buttonReturn': (e) => {
         e.preventDefault();
-        FlowRouter.go('supplierResultList')
+        FlowRouter.go('analyzing')
+    },
+
+    'click .buttonToggleSupplier': (e) => {
+        e.preventDefault();
+        if (Session.get('status') === true) {
+            Session.set('status', false)
+        } else if (Session.get('status') === false) {
+            Session.set('status', true)
+        }
+    },
+
+    'click .buttonParts': (e) => {
+        e.preventDefault();
+
     },
 
     'submit .qualityComment': function (e) {
@@ -279,6 +303,9 @@ Template.singleSupplierResult.events({
             closeCase.push($(this).val());
         });
         Meteor.call('updatePartsGroupClose', partsOrdered, group, closeCase);
+        document.getElementById('partsOrdered').checked=false;
+        document.getElementById('group').checked=false;
+        document.getElementById('closeCase').checked=false;
     }
 
 
