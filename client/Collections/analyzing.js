@@ -733,7 +733,11 @@ Template.analyzingSupplier.helpers({
                 })
             })
         } catch(e) {}
-        //console.log(supplierArray)
+     // sorting per longest repair time first
+        supplierArray.sort( (a, b) => {
+            if (a.repairTime > b.repairTime) return -1
+            return a.repairTime < b.repairTime ? 1 : 0
+        })
         return supplierArray;
     },
 
@@ -980,9 +984,10 @@ Template.analyzingOptions.events({
         Session.set('selectedSupp', selected);
     },
 
-    'submit .newSupplier':(e) => {
+    'submit .new-supplier':(e) => {
         e.preventDefault();
         let newSupplier = e.target.inputSupplier.value;
+        console.log('new supplier: ', newSupplier)
         Meteor.call('newSupplierAdd', newSupplier);
         e.target.inputSupplier.value = '';
     },

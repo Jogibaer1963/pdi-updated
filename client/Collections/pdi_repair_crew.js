@@ -63,7 +63,6 @@ Template.pdiCrewHome.helpers({
                     omms: 1
                 }
             });
-
             let machineNr = result.machineId;
             let newIssues = result.newIssues;
             Session.set('pdiTech', result.omms.user);

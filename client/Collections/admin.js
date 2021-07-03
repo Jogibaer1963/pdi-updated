@@ -24,12 +24,12 @@ Template.adminViewUser.events({
         $('input[name=logOut]:checked').each(function () {
             logOutUser.push($(this).val());
         });
-      //  Meteor.call('userManualLogout', logOutUser);
+        Meteor.call('userManualLogout', logOutUser);
         console.log(logOutUser)
         $('input[name=deleteMe]:checked').each(function () {
             deleteUser.push($(this).val());
         });
-      //  Meteor.call('userManualDelete', deleteUser);
+        Meteor.call('userManualDelete', deleteUser);
         document.getElementById('logOut').checked=false;
     },
 

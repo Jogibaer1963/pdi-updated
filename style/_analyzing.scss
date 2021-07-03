@@ -316,12 +316,6 @@ table.analyze-team-table {
 
 }
 
-.supplier-head-buttons {
-  left: 5em;
-  position: absolute;
-  top: 15em;
-}
-
 .supplier-head-liner {
   left: 5em;
   position: absolute;
@@ -357,22 +351,11 @@ table.extended-table {
   top: 10em;
 }
 
-.remove-Supplier-Button {
-  left: 20em;
-  position: absolute;
-  top: 20em;
-}
 
-.input-new-supplier {
-  left: 5em;
-  position: absolute;
-  top: 10em;
-}
 
-.btn-add-supplier {
-  left: 14em;
-  position: absolute;
-}
+
+
+
 
 //  ***************************  Supplier Results  ************************************************
 
@@ -401,8 +384,6 @@ table.supplier-result-table {
   width: 95px;
 }
 
-//  *************************  Suppliers Graphs  ********************************
-
 .annual-machine-result {
   left: 5em;
   position: absolute;
@@ -418,11 +399,61 @@ table.supplier-result-table {
 .options-header {
   left: 5em;
   position: absolute;
-  top: 15em;
+  top: 19em;
 }
 
-.options-header-2 {
-  left: 30em;
+.team-supplier-width {
+  width: 140px;
+}
+
+.team-supplier-table {
+  width: 125px;
+}
+
+.input-new-team {
+  left: 2em;
   position: absolute;
-  top: 15em;
+  top: 5em;
+}
+
+.remove-team-button {
+  left: 16em;
+  position: absolute;
+  top: 10em;
+}
+
+.add-team-table {
+  left: 1em;
+  position: absolute;
+  top: 10em;
+}
+
+.add-supplier-table {
+  left: 6em;
+  position: absolute;
+  top: 10em;
+}
+
+.btn-add-new {
+  left: 14em;
+  position: relative;
+  top: -2em;
+}
+
+.input-new-supplier {
+  left: 7em;
+  position: absolute;
+  top: 5em;
+}
+
+.btn-add-supplier {
+  left: 14em;
+  position: absolute;
+  top: 1.5em;
+}
+
+.remove-supplier-button {
+  left: 21em;
+  position: absolute;
+  top: 10em;
 }
