@@ -30,6 +30,15 @@ Meteor.subscribe('oms');
             }
         },
 
+        reConfigList: function() {
+            try {
+                Session.set('selectedPdiMachineNr', localStorage.getItem('pdiMachineNr'));
+                const machineId = Session.get('selectedPdiMachineNr');
+                return MachineReady.findOne({machineId: machineId}).reConfigArray;
+            } catch (e) {
+            }
+        },
+
         checkList: function() {
             try {
                 Session.set('selectedPdiMachineNr', localStorage.getItem('pdiMachineNr'));
@@ -405,7 +414,6 @@ Meteor.subscribe('oms');
             const openFailure = Session.get('openFailure');
             if(openFailure) {
                 _.each(ev.target.files, function(file) {
-                    console.log('inside')
                     Meteor.saveFile(file, file.name);
                 });
             } else {

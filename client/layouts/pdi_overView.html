@@ -39,17 +39,28 @@
         <br>
         PDI's done: {{countPdiDone.pdiFinished}}
     </div>
+
     <div class="pdiButton">
             <button class="btn btn-default machinePdi {{inActive_1}}">Perform PDI</button>
             <button class="btn btn-default cancelPdiProcess">Cancel PDI</button>
             <button class="btn btn-default machineSkipPdi" disabled="disabled">Skip PDI</button>
             <button class="btn btn-default resumePdi {{inActive_2}}">Join PDI</button>
             <button class="btn btn-default addIssueButton">Add Issue to PDI</button>
-        <form class="fileContainer">
-            <button class="btn btn-default">Load config</button>
-            <input class="loadConfig" type="file" id="files" name="files[]" >
-        </form>
     </div>
+     <div class="container-one">
+         <form class="file-container-origin">
+             <button class="btn btn-default btn-info">Load origin config</button>
+             <input class="loadConfig" type="file" id="files" name="files[]" >
+         </form>
+     </div>
+     <div class="container-two">
+         <form class="file-container-new">
+             <button class="btn btn-default btn-info">Load re-config</button>
+             <input class="loadReConfig" type="file" id="reConfig" name="files[]" >
+        </form>
+     </div>
+
+
     <table class="pdiTable blueTable tablePdiOverview" cellpadding="10">
          <thead>
             <tr>

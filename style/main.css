@@ -758,20 +758,37 @@ tbody.pdiCheckList {
   margin-left: 25px; }
 
 .pdiOverViewNav {
+  left: 559px;
   position: absolute;
-  top: 50px;
-  left: 559px; }
+  top: 50px; }
 
-.fileContainer {
-  overflow: hidden;
-  position: relative;
+.container-one {
   left: 40em;
-  top: -2.5em; }
+  overflow: hidden;
+  position: absolute;
+  top: 17.1em; }
 
-.fileContainer [type=file] {
+.container-two {
+  left: 60em;
+  overflow: hidden;
+  position: absolute;
+  top: 17.1em; }
+
+.file-container-origin [type=file] {
   cursor: inherit;
   display: block;
-  font-size: 999px;
+  filter: alpha(opacity=0);
+  min-height: 100%;
+  min-width: 100%;
+  opacity: 0;
+  position: absolute;
+  right: 0;
+  text-align: right;
+  top: 0; }
+
+.file-container-new [type=file] {
+  cursor: inherit;
+  display: block;
   filter: alpha(opacity=0);
   min-height: 100%;
   min-width: 100%;
@@ -992,6 +1009,11 @@ table.display-error {
 
 .configTable {
   margin-left: 3em; }
+
+.re-config-table {
+  left: 40em;
+  position: absolute;
+  top: 64em; }
 
 .checkListTable {
   margin-left: 3em; }

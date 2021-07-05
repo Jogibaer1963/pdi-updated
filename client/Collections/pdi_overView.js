@@ -71,7 +71,7 @@
             const range = [];
             range.push(firstRange);
             const dateStart = new Date();
-            console.log('machine Id: ', selectedPdiMachineId, 'machine Nr: ', selectedPdiMachineNr)
+           // console.log('machine Id: ', selectedPdiMachineId, 'machine Nr: ', selectedPdiMachineNr)
             Meteor.call('generatePdiList', selectedPdiMachineId, selectedPdiMachineNr, dateStart,
                 user, range);
             Session.set('inActiveState', 1);
@@ -140,6 +140,26 @@
             };
             reader.readAsText(file);
         },
+
+        'change .loadReConfig': (e) => {
+            e.preventDefault();
+            const file = e.target.files[0];
+            let fileCheck = file.name.split('.')[1].toLowerCase();
+            if (fileCheck === 'csv') {
+                let reader = new FileReader();
+                reader.readAsText(file);
+                reader.onload = function (e) {
+                    const contents = e.target.result;
+                    let contentArray = contents.split('\n');
+                    contentArray.shift();
+                    Meteor.call('readReConfig', contentArray);
+                }
+            } else {
+                alert('File is not a csv')
+                }
+            document.getElementById('reConfig').value = '';
+        }
+
     });
 
 

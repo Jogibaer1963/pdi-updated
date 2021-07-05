@@ -1047,9 +1047,9 @@ function prepareTeamResult() {
         fields: {newIssues: 1, machineId: 1, pdiPerformer: 1, coAuditor: 1}}).fetch();
     result.forEach((element) => {
         let machineId = element.machineId;
+        try {
         let machineBay19 = machineCommTable.findOne({machineId: machineId}, {fields: {timeLine: 1}})
         machineTimeLine = machineBay19.timeLine.bay19Planned;
-        try {
             if (element.newIssues) {
                 element.newIssues.forEach((element2) => {
                     let pictureLocation = imageIp + element2.pictureLocation
@@ -1111,8 +1111,7 @@ function prepareTeamResult() {
                     }
                 })
             }
-        } catch (e) {
-            }
+        } catch (e) {}
     })
     let totalLength = returnResultTeam1.length + returnResultTeam2.length + returnResultTeam3.length +
         returnResultTeam4.length + returnResultTeam5.length + teamTestBayAmount.length + teamSupplierAmount.length +

@@ -93,6 +93,27 @@
             </tbody>
          </table>
     </div>
+    <div class="re-config-table">
+        <h3 class="configHeader">Re-config Checklist </h3>
+        <table class="pdiCheckList">
+            <tbody>
+            {{#each reConfigList}}
+                <tr >
+                    <td class="pdiCell positionCheckPos {{getMachineConfigStatus machineConfigStatus}}"
+                        style="background-color:{{getMachineConfigStatus machineConfigStatus}}">
+                        <div>
+                          {{{identifier}}}  {{{config}}}
+                        </div>
+                        <div class="positionCheckText">
+                            {{{configItem}}}
+                        </div>
+                        <button class="btn btn-info buttonNA configButtonInfo" name={{imagePath}}>info</button>
+                    </td>
+                </tr>
+            {{/each}}
+            </tbody>
+        </table>
+    </div>
     <div>
         <img src={{configImage}} class="config-image" alt="" />
     </div>

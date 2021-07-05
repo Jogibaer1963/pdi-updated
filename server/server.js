@@ -256,6 +256,26 @@ if(Meteor.isServer){
             MachineReady.update({machineId: machineId},
                 {$set: {config: configArray, configStatus: 1}});
         },
+
+        'readReConfig': function(contentArray) {
+                console.log('starting')
+                let reConfigArray = [];
+                let reConfigObj = {};
+                contentArray.forEach((element) => {
+                    let result = element.split(',');
+                    try {
+                        let string = 'MD_' + result[2].split('/').join('_').slice(0, 8);
+                        reConfigObj = {
+                            identifier : result[1],
+                            config : string
+                        }
+                        MachineReady.update({machineId : result[0]},
+                            {$addToSet: {reConfigArray : reConfigObj}})
+                    } catch(e) {}
+                })
+            console.log('done')
+        },
+
 /*
         'machines': () => {
                 let result = MachineReady.find({pdiStatus: 1}).fetch();
@@ -653,9 +673,11 @@ if(Meteor.isServer){
 
         'generatePdiList': function(selectedPdiMachineId, pdiMachineNr, dateStart, pdiUser, machineType) {
 
-            let  machineConfiguration = [];
-            let  configStyle = {};
-            let  checkType = [];
+            let machineConfiguration = [];
+            let reConfiguration = [];
+            let configStyle = {};
+            let reConfigStyle = {};
+            let checkType = [];
 
             MachineReady.update({_id: selectedPdiMachineId}, {$set: {pdiStatus: 2,
                                                                      startPdiDate: dateStart,
@@ -705,10 +727,10 @@ if(Meteor.isServer){
             // Load Machine Configuration and select config items only status 1
 
             let combineVariant = MachineReady.find({_id: selectedPdiMachineId},
-                                                    {fields: {config: 1}},
+                                                    {fields: {config: 1, reConfigArray: 1}},
                                                     {sort: {variant: 1}}).fetch();
+            // Origin Configuration
             combineVariant[0].config.forEach((element) => {
-
                 variantResult.forEach((element2) => {
                     if (element === element2.variant && element2.status === 1) {
                         let uniqueId= Random.id();
@@ -721,12 +743,39 @@ if(Meteor.isServer){
                       }
                         machineConfiguration.push(configStyle);
                     }
-
                 })
             })
+            // Load re.configuration. Add variant is green (status 2) remove variant is red (status 1)
+            let machineConfigStatus = 0;
+            try {
+                 combineVariant[0].reConfigArray.forEach((element) => {
+                    if (element.identifier === '+') {
+                        machineConfigStatus = 1;
+                    } else if (element.identifier === '-') {
+                        machineConfigStatus = 2;
+                    }
+                    variantResult.forEach((element2) => {
+                        if (element.config === element2.variant && element2.status === 1) {
+                            let uniqueId= Random.id();
+                            reConfigStyle = {
+                                _id: uniqueId,
+                                identifier: element.identifier,
+                                config: element2.variant,
+                                configItem: element2.variantDescription,
+                                imagePath: element2.imagePath,
+                                machineConfigStatus: machineConfigStatus
+                            }
+                            reConfiguration.push(reConfigStyle);
+                        }
+                    })
+                })
+            } catch (error) {}
+
             MachineReady.update({_id: selectedPdiMachineId}, {$set: {
-                                                 machineConfig: machineConfiguration
+                                                machineConfig: machineConfiguration,
+                                                reConfigArray: reConfiguration
                                                      }});
+
 
             // SI added to repair list
 
@@ -1230,7 +1279,7 @@ if(Meteor.isServer){
 
         saveFile: function(blob, name, encoding, failureId, selectedPdiMachineId) {
           //  console.log(name, encoding, failureId, selectedPdiMachineId)
-            let path = '/files/repair-items/';
+            let path = '192.168.0.120:3000/files/repair-items/';
             encoding = encoding || 'binary';
             name = failureId + '.JPG';
             let fs = Npm.require('fs');
@@ -1238,7 +1287,7 @@ if(Meteor.isServer){
                 if (err) {
                     throw (new Meteor.Error(500, 'Failed to save file.', err));
                 } else {
-                // console.log('The file ' + name + ' (' + encoding + ') was saved to ' + path);
+                 console.log('The file ' + name + ' (' + encoding + ') was saved to ' + path);
                 }
             });
             MachineReady.update({_id: selectedPdiMachineId, 'newIssues._id': failureId},
@@ -1248,6 +1297,7 @@ if(Meteor.isServer){
         },
 
         saveConfigFile: function(blob, name, path, encoding, selectedVariantId) {
+            console.log(path, name, selectedVariantId)
             path = '/files/config-items/';
             encoding = encoding || 'binary';
             name = selectedVariantId + '.JPG';

@@ -146,24 +146,13 @@ Meteor.subscribe("variants");
             Meteor.call('toggleVariant',variantType ,this._id ,newStatus)
         },
 
-        'submit .submit-pic': function (e) {
-            e.preventDefault();
-            let selectedVariantId = Session.get('selectedVariantId');
-            if (selectedVariantId) {
-               //  console.log('inside', selectedVariantId)
-            }
-        },
-
         'change input': function(ev) {
             const selectedVariantId = Session.get('selectedVariantId');
-          //  console.log('id :', selectedVariantId);
             if(selectedVariantId) {
-
                 _.each(ev.target.files, function(file) {
                     Meteor.saveConfigFile(file, file.name);
                 });
             } else {
-
             }
         }
 

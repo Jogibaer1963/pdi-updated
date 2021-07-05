@@ -307,6 +307,7 @@ Meteor.subscribe('addIssues');
                 });
             } else {
             }
+            document.getElementById('img').value = '';
         },
 
 
