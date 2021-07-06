@@ -1279,7 +1279,7 @@ if(Meteor.isServer){
 
         saveFile: function(blob, name, encoding, failureId, selectedPdiMachineId) {
           //  console.log(name, encoding, failureId, selectedPdiMachineId)
-            let path = '192.168.0.120:3000/files/repair-items/';
+            let path = '/files/repair-items/';
             encoding = encoding || 'binary';
             name = failureId + '.JPG';
             let fs = Npm.require('fs');

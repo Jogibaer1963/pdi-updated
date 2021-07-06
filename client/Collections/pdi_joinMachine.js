@@ -107,6 +107,15 @@ Template.joinPdiMachine.helpers({
         }  catch (e) {}
     },
 
+    reConfigList: function() {
+        try {
+            Session.set('selectedPdiMachineNr', localStorage.getItem('pdiMachineNr'));
+            const machineId = Session.get('selectedPdiMachineNr');
+            return MachineReady.findOne({machineId: machineId}).reConfigArray;
+        } catch (e) {
+        }
+    },
+
     checkList: function() {
         try {
             const result = Session.get('pdiMachine');

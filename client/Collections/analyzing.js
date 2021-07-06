@@ -741,6 +741,18 @@ Template.analyzingSupplier.helpers({
         return supplierArray;
     },
 
+    'selectedSupplierRow': function(){
+        let selectedIssue = this._id;
+        let selected = Session.get('selectedFailure')
+        if (selectedIssue === selected) {
+            return 'selected'
+        }
+    },
+
+    supplierList: function () {
+        return SuppliersList.find({}).fetch();
+    },
+
     teamList: () => {
         return TeamList.find().fetch();
     },
@@ -755,20 +767,6 @@ Template.analyzingSupplier.helpers({
             return 'selected'
         }
     },
-
-    'selectedSupplierRow': function(){
-        let selectedIssue = this._id;
-        let selected = Session.get('selectedFailure')
-        if (selectedIssue === selected) {
-            return 'selected'
-        }
-    },
-
-    supplierList: function () {
-        return SuppliersList.find({}).fetch();
-    },
-
-
 
 
     //  *************************************************************************
@@ -787,6 +785,11 @@ Template.analyzingSupplier.events({
             Session.set('selectedFailure', failureId);
             Session.set('selectedSupplierMachine', machineNr);
         } catch(err) {}
+    },
+
+    'click .pdiMachineField': (e) => {
+        e.preventDefault();
+        Session.set('')
     },
 
    // ************  select supplier from drop down, get selected row and write to database
