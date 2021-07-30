@@ -239,7 +239,7 @@
         <div  id="chart_5">{{machinesOverRepairTime}}</div>
     </div>
 
-    <div class="look-up-machine">
+    <div class="look-up-machine-number">
         <div>
             <h3>Look up specific Machine</h3>
         </div>
@@ -248,12 +248,23 @@
                 <input type="text" id="lookUpMachine" class="" name="lookUp"/>
                 <button type="submit" class="btn btn-default btn-success" >Submit</button>
             </form>
-        <div>
+    </div>
+
+    <div class="insert-quality-comment">
+        <h3>Quality Comment / Parts on Order</h3>
+        <form class="quality-comment">
+            <label for="lookUpMachine"></label>
+            <input type="text" id="lookUpMachine" class="" name="quality" style="width: 500px"/>
+            <button type="submit" class="btn btn-default btn-success quality-button" >Submit</button>
+        </form>
+    </div>
+
+        <div class="pdi-tech">
             <h4>Pdi Tech : {{user}}</h4>
             <h4>Machine : {{resultMachineId}}</h4>
         </div>
         <br><br>
-        <div>
+        <div class="look-up-machine">
             <table class="blueTable">
                 <thead>
                 <tr>
@@ -263,6 +274,7 @@
                     <th class="pdi-image">Rep Time</th>
                     <th class="pdi-rep-status">Repair Status</th>
                     <th class="pdi-image">image</th>
+                    <th class="pdi-comment">Quality Comments</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -280,12 +292,13 @@
                                      alt="No Picture"
                                 />
                             </td>
+                            <td class="pdi-comment">{{qualityComment}}</td>
                         </tr>
                     {{/each}}
                 </tbody>
             </table>
         </div>
-    </div>
+
 </template>
 
 <!----------------------------------- Issues by Supplier  -------------------------------->

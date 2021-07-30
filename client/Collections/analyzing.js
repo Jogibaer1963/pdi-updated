@@ -672,7 +672,15 @@ Template.analyzingComponent.events({
         let machine = e.target.lookUp.value;
         Session.set('specificMachine', machine);
         e.target.lookUp.value = '';
-    }
+    },
+
+    'submit .quality-comment': function(e) {
+        e.preventDefault();
+        let qualityText = e.target.quality.value;
+        console.log(qualityText)
+        e.target.lookUp.value = '';
+    },
+
 
 })
 
@@ -845,19 +853,22 @@ Template.pdiSearch.helpers({
         endResult.sort((a,b) => (a.pdiPerformer > b.pdiPerformer) ? 1 :
                                                 ((b.pdiPerformer > a.pdiPerformer) ? -1 : 0))
         Session.set('graphPdiEndResult', endResult);
+       // console.log(endResult)
         let lookup = endResult.reduce((a, e) => {
-            a[e.pdiPerformer] = ++a[e.pdiPerformer] || 0;
+            a[e.pdiPerformer] = ++ a[e.pdiPerformer] || 0;
             return a;
         }, {});
         let list = Object.keys(lookup);
         let listValue = Object.values(lookup)
-        for (let i = 0; i <= list.length - 1; i++) {
+
+        for (let i = 0; i <= list.length -1; i++) {
             let objKeyValue = {
                 pdiPerformer : list[i],
-                pdiSummary : listValue[i]
+                pdiSummary : listValue[i] + 1
             }
             singleResultArray.push(objKeyValue)
         }
+        console.log(singleResultArray)
       return singleResultArray
     },
 

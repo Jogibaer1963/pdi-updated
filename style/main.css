@@ -2064,10 +2064,30 @@ table.analyze-team-table {
   position: absolute;
   top: 55em; }
 
+.look-up-machine-number {
+  left: 100em;
+  position: absolute;
+  top: 4em; }
+
+.pdi-tech {
+  left: 100em;
+  position: absolute;
+  top: 10em; }
+
+.insert-quality-comment {
+  left: 130em;
+  position: absolute;
+  top: 6em; }
+
 .look-up-machine {
   left: 100em;
   position: absolute;
-  top: 6em; }
+  top: 15em; }
+
+.quality-button {
+  left: 37em;
+  position: absolute;
+  top: 5em; }
 
 .assigned-supplier {
   left: 20em;
