@@ -129,6 +129,10 @@ if(Meteor.isServer){
             return machineCommTable.find();
         });
 
+        Meteor.publish("orderParts", function() {
+            return orderParts.find();
+        });
+
     });
 
 
@@ -201,6 +205,40 @@ if(Meteor.isServer){
                                                  'newIssues.$.newEntry': true}
                                 })
             }
+        },
+
+        'updateQualityComment': (machineNr, selectedLineId, qualityText, partsOrder, amountOrdered,
+                                 claimNumber, partNumber) => {
+           let partsStatus, amountOnOrder;
+           partsStatus = parseInt(partsOrder)
+           amountOnOrder = parseInt(amountOrdered);
+            MachineReady.update({machineId: machineNr, 'newIssues._id' : selectedLineId},
+                {$set: {'newIssues.$.qualityComment' : qualityText,
+                        'newIssues.$.partsOrder': partsStatus,
+                        'newIssues.$.claimNumber': claimNumber,
+                        'newIssues.$.partNumber': partNumber}});
+            if (partsStatus === 2) {
+                // open Order
+                orderParts.insert({machineId: machineNr, selectedLineId : selectedLineId,
+                    qualityText : qualityText, partsOrder: partsStatus,
+                    claimNumber: claimNumber, partNumber: partNumber})
+            } else if (partsStatus === 1) {
+                // part arrived
+                orderParts.update({selectedLineId : selectedLineId},
+                    {$set: {partsOrder: partsStatus}})
+            }
+           // checking if all parts are delivered for specific Machine
+            if (amountOnOrder >= 1 ) {
+                partsStatus = 2;
+                MachineReady.update({machineId: machineNr}, {$set: {partsOnOrder: partsStatus,
+                        amountOnOrder: amountOnOrder}})
+            } else if (amountOnOrder === 0) {
+                partsStatus = 1;
+                MachineReady.update({machineId: machineNr}, {$set: {partsOnOrder: partsStatus,
+                        amountOnOrder: amountOnOrder}})
+            }
+
+
         },
 
         'updateSupplierIssues': (machineNr, issueId, comment, claimNr) => {

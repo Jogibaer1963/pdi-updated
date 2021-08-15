@@ -215,8 +215,8 @@ table.tableAdminPos {
   min-width: 80px; }
 
 .pdiComments {
-  max-width: 350px;
-  min-width: 350px; }
+  max-width: 290px;
+  min-width: 290px; }
 
 .pdiKitField {
   max-width: 145px;
@@ -887,7 +887,7 @@ table.repair-table {
   z-index: 1; }
 
 table.display-error {
-  width: 950px; }
+  width: 995px; }
 
 .pdi-comment {
   width: 200px; }
@@ -2059,6 +2059,9 @@ table.analyze-team-table {
   position: absolute;
   top: 15em; }
 
+.error-comp {
+  width: 222px; }
+
 .repair-time-graph {
   left: 5em;
   position: absolute;
@@ -2074,10 +2077,36 @@ table.analyze-team-table {
   position: absolute;
   top: 10em; }
 
-.insert-quality-comment {
-  left: 130em;
+.parts-ordered {
+  left: 150em;
   position: absolute;
-  top: 6em; }
+  top: 12.5em; }
+
+.claim-number {
+  left: 20em;
+  position: relative;
+  top: 5px; }
+
+.part-number {
+  left: 20.6em;
+  position: relative;
+  top: 12px; }
+
+.order-radio-button {
+  left: 1px;
+  position: relative;
+  top: -4em; }
+
+table.parts-order-table {
+  width: 390px; }
+
+.order-number {
+  width: 120px; }
+
+.insert-quality-comment {
+  left: 150em;
+  position: absolute;
+  top: 1em; }
 
 .look-up-machine {
   left: 100em;
@@ -2088,6 +2117,11 @@ table.analyze-team-table {
   left: 37em;
   position: absolute;
   top: 5em; }
+
+.order-list {
+  left: 190em;
+  position: absolute;
+  top: 15em; }
 
 .assigned-supplier {
   left: 20em;

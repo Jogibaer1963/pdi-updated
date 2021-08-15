@@ -1,5 +1,7 @@
 Meteor.subscribe('SuppliersList');
 Meteor.subscribe('TeamList');
+Meteor.subscribe('orderParts');
+
 const Highcharts = require('highcharts');
 
 Session.set('teamChosen', false)
@@ -498,7 +500,7 @@ Template.analyzingResponsibility.events({
 });
 
 
-// **************************************   Analyzing Component ***********************************
+// **************************************   Repair Time by Machine and Quality comments Parts on order ***********************************
 
 Template.analyzingComponent.helpers({
 
@@ -508,8 +510,8 @@ Template.analyzingComponent.helpers({
       let result = MachineReady.find({repairStatus: 1}, {
           fields: {newIssues: 1, machineId: 1, omms: 1}}).fetch();
       result.forEach((element) => {
-          let user = element.omms.user;
           let machineNr = element.machineId;
+          let user = element.omms.user;
           let issues = element.newIssues;
           issues.forEach((element2) => {
               let issueObject = {
@@ -588,7 +590,7 @@ Template.analyzingComponent.helpers({
                     },
                     plotBorderColor: '#606063',
                     height: 500,
-                    width: 900,
+                    width: 2500,
                     zoomType: 'xy'
                 },
                 yAxis: {
@@ -625,32 +627,38 @@ Template.analyzingComponent.helpers({
         let machine = Session.get('specificMachine');
         let repairInfo = Session.get('repairInfos');
         let machineResult = [];
-        let machineNr = '';
-        let user = '';
-        let result = MachineReady.findOne({machineId: machine},
-            {fields: {machineId: 1,
-                    newIssues: 1,
-                    omms: 1
+        let result, machineNr, user, amountOnOrder;
+        result = MachineReady.findOne({machineId: machine},
+            {fields: {machineId: 1, newIssues: 1,  omms: 1, amountOnOrder: 1
                 }});
-        if (result.omms === undefined) {
-            window.alert("Machine not PDI'd yet")
-        } else {
-            Session.set('machineResultNr', result.machineId);
-            Session.set('userResult', result.omms.user);
-            console.log(result.machineId, result.omms.user)
-            result.newIssues.forEach(function(element) {
-                let issueObject = {
-                    description: element.errorDescription,
-                    pictureLocation: repairInfo + element.pictureLocation,
-                    repairTech: element.repairTech,
-                    repairComment: element.repairComment,
-                    repairTime: element.repairTime,
-                    responsible: element.responsible,
-                    repairStatus: element.repairStatus,
-                }
-                machineResult.push(issueObject);
-            })
-        }
+        try {
+            amountOnOrder = result.amountOnOrder;
+            if (amountOnOrder === undefined) {
+                amountOnOrder = 0;
+            }
+            if (result.omms === undefined) {
+                window.alert("Machine not PDI'd yet")
+                } else {
+                    Session.set('machineResultNr', result.machineId);
+                    Session.set('userResult', result.omms.user);
+                    Session.set('amountOnOrder', amountOnOrder);
+                    result.newIssues.forEach(function(element) {
+                        let issueObject = {
+                            _id: element._id,
+                            description: element.errorDescription,
+                            pictureLocation: repairInfo + element.pictureLocation,
+                            repairTech: element.repairTech,
+                            repairComment: element.repairComment,
+                            repairTime: element.repairTime,
+                            responsible: element.responsible,
+                            repairStatus: element.repairStatus,
+                            qualityComment: element.qualityComment,
+                            partsOrder: element.partsOrder
+                        }
+                        machineResult.push(issueObject);
+                    })
+            }
+        } catch (e) {}
         return machineResult
     },
 
@@ -660,6 +668,39 @@ Template.analyzingComponent.helpers({
 
     resultMachineId: () => {
          return Session.get('machineResultNr')
+    },
+
+    partsOrdered: () => {
+      return Session.get('amountOnOrder')
+    },
+
+
+    showQualityEntries: () => {
+        try {
+            let qualityComment, selectedMachine, _id, entries;
+            selectedMachine = Session.get('specificMachine');
+            _id = Session.get('selectedLine');
+            entries = MachineReady.findOne({machineId: selectedMachine}).newIssues;
+            entries.forEach((element) => {
+                if (element._id === _id) {
+                    qualityComment = element.qualityComment;
+                }
+            })
+            return qualityComment;
+        } catch (e) {}
+    },
+
+    orderResult: () => {
+        return orderParts.find().fetch();
+    },
+
+
+    'qualityResponse':function (e) {
+        let line = this._id;
+        let selectedLine = Session.get('selectedLine');
+        if (line === selectedLine) {
+            return 'selected';
+        }
     }
 
 
@@ -676,9 +717,47 @@ Template.analyzingComponent.events({
 
     'submit .quality-comment': function(e) {
         e.preventDefault();
-        let qualityText = e.target.quality.value;
-        console.log(qualityText)
-        e.target.lookUp.value = '';
+        let selectedMachine, selectedLine, qualityText, partsOnOrder, amountOnOrder, partsOnOrderInt,
+             claimNumber, partNumber;
+        selectedMachine = Session.get('specificMachine');
+        selectedLine = Session.get('selectedLine');
+        partsOnOrder = Session.get('partsOnOrder');
+        amountOnOrder = Session.get('amountOnOrder');
+        qualityText = e.target.quality.value;
+        claimNumber = e.target.claimNumber.value;
+        partNumber = e.target.partNumber.value;
+        console.log('claim part', claimNumber, partNumber)
+        let partsOrder= [];
+        $('input[name = partsAvailability]:checked').each(function() {
+            partsOrder.push($(this).val());
+        });
+        partsOnOrderInt = parseInt(partsOrder[0])
+        if (partsOnOrderInt === 2) {
+            amountOnOrder = amountOnOrder + 1;
+            Session.set('amountOnOrder', amountOnOrder)
+        } else if (partsOnOrderInt === 1) {
+            amountOnOrder = amountOnOrder -  1;
+            Session.set('amountOnOrder', amountOnOrder - 1)
+        }
+        if (selectedLine === '') {
+            alert('Mark Line prior Submitting')
+        } else {
+            console.log('Order final', amountOnOrder)
+            Meteor.call('updateQualityComment', selectedMachine,
+                selectedLine, qualityText, partsOrder[0], amountOnOrder, claimNumber, partNumber)
+        }
+        e.target.quality.value = '';
+        document.getElementById('partsOnOrder').checked= false;
+        document.getElementById('partsArrived').checked= false;
+        document.getElementById('claimNumber').value = '';
+        document.getElementById('partNumber').value = '';
+        Session.set('selectedLine', '');
+    },
+
+    'click .qualityResponse': function(e) {
+        e.preventDefault();
+        let selectedLine = this._id;
+        Session.set('selectedLine', selectedLine);
     },
 
 
@@ -973,6 +1052,7 @@ Template.analyzingOptions.helpers({
 
     'selectedSupplier': function(){
         let selectSupp = this._id;
+        console.log(selectSupp)
         let selectedSupp = Session.get('selectedSupp')
         if (selectedSupp === selectSupp) {
             return 'selected';
@@ -994,7 +1074,7 @@ Template.analyzingOptions.events({
     'click .selectedSupplier': function(e){
         e.preventDefault();
         const selected = this._id;
-       // console.log('selected', selected);
+        console.log('selected', selected);
         Session.set('selectedSupp', selected);
     },
 

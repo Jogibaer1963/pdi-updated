@@ -59,6 +59,7 @@
                 <th class="pdiWashField"><strong>Wash</strong></th>
                 <th class="pdiLocation"><strong>Location</strong></th>
                 <th class="pdiKitList"><strong>Kit List printed</strong></th>
+                <th class="pdiRepField"><strong>Parts on Order</strong></th>
             </tr>
             </thead>
             <tbody class="tableHeight">
@@ -74,6 +75,8 @@
                     <td class="pdiWashField  {{getStatusColor washStatus}}" style="background-color:{{getStatusColor washStatus}}; color:{{getStatusColor washStatus}}" >{{washStatus}}</td>
                     <td class="pdiLocation">{{locationId}}</td>
                     <td class="pdiKitList {{getStatusKit KitStatus}}" style="background-color:{{getStatusKit KitStatus}}; color:{{getStatusKit KitStatus}}" >{{KitStatus}}</td>
+                    <td class="pdi-rep-status  {{getStatusColor partsOnOrder}}"
+                        style="background-color:{{getStatusColor partsOnOrder}}; color:{{getStatusColor partsOnOrder}}">{{partsOnOrder}}</td>
                 </tr>
             {{/each}}
             </tbody>
@@ -90,11 +93,12 @@
                 <tr>
                     <th>Machine</th>
                     <th class="pdi-comment">Description</th>
-                    <th class="">image</th>
+                    <th class="thumbnail-box">image</th>
                     <th class="pdi-rep-tech">Rep by</th>
                     <th class="pdi-rep-comment-field">Repair Comment</th>
                     <th class="pdi-time">Rep time</th>
                     <th class="pdi-rep-status">Rep Status</th>
+                    <th class="pdiRepField"><strong>Parts on Order</strong></th>
                     <th class="pdi-issuer">Issuer</th>
                     <th>change issuer</th>
                 </tr>
@@ -114,6 +118,7 @@
                         <td class="pdi-rep-comment-field">{{repairComment}}</td>
                         <td class="pdi-time">{{repairTime}}</td>
                         <td class="pdi-rep-status  {{getStatusColor repairStatus}}" style="background-color:{{getStatusColor repairStatus}}; color:{{getStatusColor repairStatus}}" >{{repairStatus}}</td>
+                        <td class="pdi-time  {{getStatusColor partsOrder}}" style="background-color:{{getStatusColor partsOrder}}; color:{{getStatusColor partsOrder}}">{{partsOrder}}</td>
                         <td>{{responsible}}</td>
                         <td>
                             <label for="category-select"></label>
