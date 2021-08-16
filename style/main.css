@@ -2070,17 +2070,20 @@ table.analyze-team-table {
 .look-up-machine-number {
   left: 100em;
   position: absolute;
-  top: 4em; }
+  top: 4em;
+  width: 270px; }
 
 .pdi-tech {
   left: 100em;
   position: absolute;
-  top: 10em; }
+  top: 10em;
+  width: 270px; }
 
 .parts-ordered {
   left: 150em;
   position: absolute;
-  top: 12.5em; }
+  top: 12.5em;
+  width: 270px; }
 
 .claim-number {
   left: 20em;
@@ -2104,9 +2107,11 @@ table.parts-order-table {
   width: 120px; }
 
 .insert-quality-comment {
+  height: 80px;
   left: 150em;
   position: absolute;
-  top: 1em; }
+  top: -1em;
+  width: 370px; }
 
 .look-up-machine {
   left: 100em;

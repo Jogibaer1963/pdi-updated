@@ -302,18 +302,21 @@ table.analyze-team-table {
   left: 100em;
   position: absolute;
   top: 4em;
+  width: 270px;
 }
 
 .pdi-tech {
   left: 100em;
   position: absolute;
   top: 10em;
+  width: 270px;
 }
 
 .parts-ordered {
   left: 150em;
   position: absolute;
   top: 12.5em;
+  width: 270px;
 }
 
 .claim-number {
@@ -343,9 +346,11 @@ table.parts-order-table {
 }
 
 .insert-quality-comment {
+  height: 80px;
   left: 150em;
   position: absolute;
-  top: 1em;
+  top: -1em;
+  width: 370px;
 }
 
 .look-up-machine {
