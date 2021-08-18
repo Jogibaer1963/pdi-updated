@@ -196,49 +196,8 @@
 <!-----------------------------------  Repair Time by Machine / Machine search ---------------------------->
 
 <template name="analyzingComponent">
-    <div class="repair-time-table">
-        <table class="blueTable analyze-team-table table-height">
-            <thead>
-            <tr>
-                <th class="pdiMachineField">Machine</th>
-                <th class="pdi-rep-tech">PDI Tech</th>
-                <th class="pdi-comment-time-table">Description</th>
-                <th class="pdi-image">image</th>
-                <th class="pdi-rep-tech">Repair Tech</th>
-                <th class="error-comp">Repair Comment</th>
-                <th class="pdi-image">Rep Time</th>
-                <th class="pdi-rep-status">Repair Status</th>
-                <th class="pdi-issuer">Issuer</th>
-            </tr>
-            </thead>
-            <tbody>
-            {{#each repairSummary}}
-                <tr class="machineRow {{selectedRow}}">
-                    <td class="pdiMachineField">{{machineNr}}</td>
-                    <td class="pdi-rep-tech">{{pdiTech}}</td>
-                    <td class="pdi-comment-time-table">{{errorDescription}}</td>
-                    <td class="thumbnail thumbnail-box">
-                        <img src={{pictureLocation}}
-                             onerror="this.src='noPicture.JPG'"
-                             alt="No Picture"
-                        />
-                    </td>
-                    <td class="pdi-rep-tech">{{repairTech}}</td>
-                    <td class="pdi-comment">{{repairComment}}</td>
-                    <td class="pdi-issuer">{{repairTime}}</td>
-                    <td class="pdi-rep-status  {{getStatusColor repairStatus}}"
-                        style="background-color:{{getStatusColor repairStatus}}; color:{{getStatusColor repairStatus}}" >{{repairStatus}}</td>
-                    <td class="pdi-issuer">{{responsible}}</td>
-                </tr>
-            {{/each}}
-            </tbody>
-        </table>
-    </div>
 
-    <div class="repair-time-graph">
-        <div  id="chart_5">{{machinesOverRepairTime}}</div>
-    </div>
-
+<div class="table-package">
     <div class="look-up-machine-number">
         <div>
             <h3>Look up specific Machine</h3>
@@ -277,7 +236,6 @@
     <div class="parts-ordered">
         <h4>Parts waiting for arrival  : {{partsOrdered}}</h4>
     </div>
-        <br><br>
         <div class="look-up-machine">
             <table class="blueTable">
                 <thead>
@@ -316,6 +274,9 @@
             </table>
         </div>
     <div class="order-list">
+        <div class="order-header">
+            <h3>Open Orders / Claims</h3>
+        </div>
         <table class="blueTable parts-order-table">
             <thead>
             <tr>
@@ -338,7 +299,7 @@
             </tbody>
         </table>
     </div>
-
+</div>
 </template>
 
 <!----------------------------------- Issues by Supplier  -------------------------------->

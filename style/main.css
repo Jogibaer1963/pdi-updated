@@ -2051,6 +2051,11 @@ table.analyze-team-table {
   position: absolute;
   top: 55em; }
 
+.table-package {
+  left: 5em;
+  position: absolute;
+  top: 10em; }
+
 .pdi-comment-time-table {
   width: 314px; }
 
@@ -2068,21 +2073,17 @@ table.analyze-team-table {
   top: 55em; }
 
 .look-up-machine-number {
-  left: 100em;
-  position: absolute;
+  position: relative;
   top: 4em;
   width: 270px; }
 
 .pdi-tech {
-  left: 100em;
-  position: absolute;
-  top: 10em;
+  position: relative;
   width: 270px; }
 
 .parts-ordered {
-  left: 150em;
-  position: absolute;
-  top: 12.5em;
+  left: 50em;
+  position: relative;
   width: 270px; }
 
 .claim-number {
@@ -2108,25 +2109,28 @@ table.parts-order-table {
 
 .insert-quality-comment {
   height: 80px;
-  left: 150em;
-  position: absolute;
+  left: 50em;
+  position: relative;
   top: -1em;
   width: 370px; }
 
 .look-up-machine {
-  left: 100em;
-  position: absolute;
-  top: 15em; }
+  position: relative;
+  top: 2em; }
 
 .quality-button {
   left: 37em;
   position: absolute;
   top: 5em; }
 
+.order-header {
+  left: 6em;
+  position: relative; }
+
 .order-list {
-  left: 190em;
-  position: absolute;
-  top: 15em; }
+  left: 88em;
+  position: relative;
+  top: -41.6em; }
 
 .assigned-supplier {
   left: 20em;

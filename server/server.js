@@ -209,14 +209,20 @@ if(Meteor.isServer){
 
         'updateQualityComment': (machineNr, selectedLineId, qualityText, partsOrder, amountOrdered,
                                  claimNumber, partNumber) => {
-           let partsStatus, amountOnOrder;
-           partsStatus = parseInt(partsOrder)
-           amountOnOrder = parseInt(amountOrdered);
-            MachineReady.update({machineId: machineNr, 'newIssues._id' : selectedLineId},
-                {$set: {'newIssues.$.qualityComment' : qualityText,
-                        'newIssues.$.partsOrder': partsStatus,
-                        'newIssues.$.claimNumber': claimNumber,
-                        'newIssues.$.partNumber': partNumber}});
+            let partsStatus, amountOnOrder;
+            partsStatus = parseInt(partsOrder)
+            amountOnOrder = parseInt(amountOrdered);
+            if (partsStatus === 1) {
+                MachineReady.update({machineId: machineNr, 'newIssues._id' : selectedLineId},
+                    {$set: {'newIssues.$.qualityComment' : qualityText,
+                            'newIssues.$.partsOrder': partsStatus}});
+            } else if (partsStatus === 2) {
+                MachineReady.update({machineId: machineNr, 'newIssues._id' : selectedLineId},
+                    {$set: {'newIssues.$.qualityComment' : qualityText,
+                            'newIssues.$.partsOrder': partsStatus,
+                            'newIssues.$.claimNumber': claimNumber,
+                            'newIssues.$.partNumber': partNumber}});
+            }
             if (partsStatus === 2) {
                 // open Order
                 orderParts.insert({machineId: machineNr, selectedLineId : selectedLineId,
