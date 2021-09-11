@@ -9,7 +9,7 @@
     "audit": "0.0.6",
     "babel": "^6.23.0",
     "base64-image-upload": "^1.1.4",
-    "bcrypt": "^1.0.3",
+    "bcrypt": "^5.0.0",
     "buffer": "^5.2.0",
     "eslint": "^4.19.1",
     "gridfs-stream": "^1.1.1",
