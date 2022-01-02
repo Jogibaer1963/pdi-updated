@@ -9,16 +9,19 @@ if(Meteor.isClient) {
 
         showEditMachine: function() {
             const selectedMachine = Session.get('editSelectedMachine');
-            const kitSaved = MachineReady.find({_id: selectedMachine}, {fields: {"kit": 1, tireTrack: 1}}).fetch();
+            const kitSaved = MachineReady.find({_id: selectedMachine},
+                {fields: {"kit": 1, tireTrack: 1}}).fetch();
             const kitString = JSON.stringify(kitSaved);
+            console.log('kit ', kitSaved)
             const kitExtract = kitString.slice(8, -28);
             const myString = kitExtract.replace(/"/g, "");
             let tire = kitSaved.shift();
             Session.set('tire', tire.tireTrack);
+            console.log('my string ', myString)
 
-            const x = myString.indexOf('No_Kit  ', 0);
+            const x = myString.indexOf('No Kit', 0);
             if(x >= 0){
-                const kit_0 = 'No_Kit   ';
+                const kit_0 = 'No_Kit';
                 Session.set('kit_0', kit_0);
             } else {
                 Session.set('kit_0', undefined);
@@ -32,9 +35,9 @@ if(Meteor.isClient) {
                  Session.set('kit_1', undefined);
               }
 
-            const b = myString.indexOf('C03_0065', 0);
+            const b = myString.indexOf('C03_0183', 0);
             if(b >= 0){
-                const kit_2 = 'C03_0065';
+                const kit_2 = 'C03_0183';
                 Session.set('kit_2', kit_2);
             } else {
                 Session.set('kit_2', undefined);
@@ -56,28 +59,36 @@ if(Meteor.isClient) {
                 Session.set('kit_7', undefined);
             }
 
-            const d = myString.indexOf('B05_0120', 0);
+            const d = myString.indexOf('C03_0184', 0);
             if(d >= 0){
-                const kit_4 = 'B05_0120';
+                const kit_4 = 'C03_0184';
                 Session.set('kit_4', kit_4);
             } else {
                 Session.set('kit_4', undefined);
             }
 
-            const e = myString.indexOf('B05_0130', 0);
+            const e = myString.indexOf('C03_0185', 0);
             if(e >= 0){
-                const kit_5 = 'B05_0130';
+                const kit_5 = 'C03_0185';
                 Session.set('kit_5', kit_5);
             } else {
                 Session.set('kit_5', undefined);
             }
 
-            const f = myString.indexOf('D06_0030', 0);
+            const f = myString.indexOf('N04_0625', 0);
             if(f >= 0){
-                const kit_6 = 'D06_0030';
+                const kit_6 = 'N04_0625';
                 Session.set('kit_6', kit_6);
             } else {
                 Session.set('kit_6', undefined);
+            }
+
+            const ff = myString.indexOf('N04_0626', 0);
+            if(ff >= 0){
+                const kit_13 = 'N04_0626';
+                Session.set('kit_13', kit_13);
+            } else {
+                Session.set('kit_13', undefined);
             }
 
             const gg = myString.indexOf('G03_0112', 0);
@@ -125,7 +136,7 @@ if(Meteor.isClient) {
 
         'noKit': function() {
             const kit_0 = Session.get('kit_0');
-            if(kit_0 === 'No_Kit  ') {
+            if(kit_0 === 'No_Kit') {
                 return 'checked';
             }
         },
@@ -139,7 +150,7 @@ if(Meteor.isClient) {
 
         'newKit2': function() {
             const kit_2 = Session.get('kit_2');
-            if(kit_2 === 'C03_0065') {
+            if(kit_2 === 'C03_0183') {
                 return 'checked';
             }
         },
@@ -160,21 +171,28 @@ if(Meteor.isClient) {
 
         'newKit4': function() {
             const kit_4 = Session.get('kit_4');
-            if(kit_4 === 'B05_0120') {
+            if(kit_4 === 'C03_0184') {
                 return 'checked';
             }
         },
 
         'newKit5': function() {
             const kit_5 = Session.get('kit_5');
-            if(kit_5 === 'B05_0130') {
+            if(kit_5 === 'C03_0185') {
                 return 'checked';
            }
         },
 
         'newKit6': function() {
             const kit_6 = Session.get('kit_6');
-            if(kit_6 === 'D06_0030') {
+            if(kit_6 === 'N04_0625') {
+                return 'checked';
+            }
+        },
+
+        'newKit13': function() {
+            const kit_13 = Session.get('kit_13');
+            if(kit_13 === 'N04_0626') {
                 return 'checked';
             }
         },

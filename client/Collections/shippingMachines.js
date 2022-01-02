@@ -85,6 +85,7 @@ Session.set('toggleShipList', 0);
             document.getElementById('newKit10').checked= false;
             document.getElementById('newKit11').checked= false;
             document.getElementById('newKit12').checked= false;
+            document.getElementById('newKit13').checked= false;
             e.target.newTireTrack.value="";
             e.target.newReturn.value = "";
             e.target.newComment.value="";
