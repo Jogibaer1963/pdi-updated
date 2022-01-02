@@ -101,7 +101,9 @@
                 <td class="pdiWashField  {{getStatusColor washStatus}}" style="background-color:{{getStatusColor washStatus}}; color:{{getStatusColor washStatus}}" >{{washStatus}}</td>
                 <td class="pdiLocation">{{locationId}}</td>
                 <td class="pdiKitList {{getStatusKit KitStatus}}" style="background-color:{{getStatusKit KitStatus}}; color:{{getStatusKit KitStatus}}" >{{KitStatus}}</td>
-                 <td class="pdi-rep-status  {{getStatusColor partsOnOrder}}" style="background-color:{{getStatusColor partsOnOrder}}; color:{{getStatusColor partsOnOrder}}">{{partsOnOrder}}</td>
+                 <td class="pdi-rep-status  {{getStatusColor partsOnOrder}}"
+                     style="background-color:{{getStatusColor partsOnOrder}};
+                             color:{{getStatusColor partsOnOrder}}">{{partsOnOrder}}</td>
               </tr>
            {{/each}}
          </tbody>

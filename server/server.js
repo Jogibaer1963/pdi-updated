@@ -159,8 +159,6 @@ if(Meteor.isServer){
 
  */
 
-
-
    // ************* Remove last year shipped machines from database  **************************
 
             'removeMachines': () => {
@@ -170,7 +168,7 @@ if(Meteor.isServer){
                         element.machineId <= 'C7900999' &&
                         element.shipStatus === 1
                     ) {
-                        console.log(element.machineId, element._id);
+                    //    console.log(element.machineId, element._id);
                         MachineReady.remove({_id: element._id})
                     }
                 })
@@ -207,44 +205,35 @@ if(Meteor.isServer){
             }
         },
 
-        'updateQualityComment': (machineNr, selectedLineId, qualityText, partsOrder, amountOrdered,
-                                 claimNumber, partNumber) => {
-            let partsStatus, amountOnOrder;
-            partsStatus = parseInt(partsOrder)
-            amountOnOrder = parseInt(amountOrdered);
-            if (partsStatus === 1) {
+        'updateQualityComment': (machineNr, selectedLineId, qualityText, partsOrder,
+                                amountOnOrder, claimNumber, partNumber) => {
+         //   console.log('parts status ', partsOrder)
+            if (partsOrder === 1) {
+                // Parts received
                 MachineReady.update({machineId: machineNr, 'newIssues._id' : selectedLineId},
                     {$set: {'newIssues.$.qualityComment' : qualityText,
-                            'newIssues.$.partsOrder': partsStatus}});
-            } else if (partsStatus === 2) {
+                            'newIssues.$.partsOrder':  partsOrder}});
+             //   console.log('Id ', selectedLineId, 'partsOrder ', partsOrder, qualityText)
+                orderParts.update({_id : selectedLineId},
+                    {$set: {partsOrder: partsOrder}})
+            } else if (partsOrder === 2) {
+                // need Parts, parts on order
                 MachineReady.update({machineId: machineNr, 'newIssues._id' : selectedLineId},
                     {$set: {'newIssues.$.qualityComment' : qualityText,
-                            'newIssues.$.partsOrder': partsStatus,
+                            'newIssues.$.partsOrder': partsOrder,
+                            'newIssues.$.claimNumber': claimNumber,
+                            'newIssues.$.partNumber': partNumber,
+                            'amountOnOrder': amountOnOrder}});
+                orderParts.insert({_id: selectedLineId, machineId: machineNr,
+                    qualityText : qualityText, partsOrder: partsOrder,
+                    claimNumber: claimNumber, partNumber: partNumber})
+            } else if (partsOrder === 0) {
+                // no parts needed, just claim or comments
+                MachineReady.update({machineId: machineNr, 'newIssues._id' : selectedLineId},
+                    {$set: {'newIssues.$.qualityComment' : qualityText,
                             'newIssues.$.claimNumber': claimNumber,
                             'newIssues.$.partNumber': partNumber}});
             }
-            if (partsStatus === 2) {
-                // open Order
-                orderParts.insert({machineId: machineNr, selectedLineId : selectedLineId,
-                    qualityText : qualityText, partsOrder: partsStatus,
-                    claimNumber: claimNumber, partNumber: partNumber})
-            } else if (partsStatus === 1) {
-                // part arrived
-                orderParts.update({selectedLineId : selectedLineId},
-                    {$set: {partsOrder: partsStatus}})
-            }
-           // checking if all parts are delivered for specific Machine
-            if (amountOnOrder >= 1 ) {
-                partsStatus = 2;
-                MachineReady.update({machineId: machineNr}, {$set: {partsOnOrder: partsStatus,
-                        amountOnOrder: amountOnOrder}})
-            } else if (amountOnOrder === 0) {
-                partsStatus = 1;
-                MachineReady.update({machineId: machineNr}, {$set: {partsOnOrder: partsStatus,
-                        amountOnOrder: amountOnOrder}})
-            }
-
-
         },
 
         'updateSupplierIssues': (machineNr, issueId, comment, claimNr) => {
@@ -253,30 +242,10 @@ if(Meteor.isServer){
                                                     'newIssues.$.claimNumber' : claimNr}})
         },
 
-        'updatePartsGroupClose':(partsOrdered, group, closeCase) => {
-                console.log(partsOrdered, group, closeCase)
-             if (partsOrdered.length !== 0) {
-                console.log('parts on order', partsOrdered)
-                 partsOrdered.forEach((element) => {
-                     let machineNr = element.slice(18, 28)
-                     let issueId = element.slice(0, 17)
-                     console.log('Machine Nr ', machineNr, 'issueId', issueId, partsOrdered)
-                     MachineReady.update({machineId : machineNr, 'newIssues._id' : issueId},
-                         {$set: {'newIssues.$.partsOnOrder': true}})
-                 })
-            }
-            if (group.length !== 0) {
-                console.log('group detected')
-            }
-            if (closeCase.length !== 0) {
-                closeCase.forEach((element) => {
-                    let machineNr = element.slice(18, 28)
-                    let issueId = element.slice(0, 17)
-                    console.log('close Case detected', issueId, machineNr)
-                    MachineReady.update({machineId : machineNr, 'newIssues._id' : issueId},
-                        {$set: {'newIssues.$.checkStatus': false}})
-                })
-            }
+        'issueClosed':(caseId, machineNr) => {
+           //     console.log(caseId, machineNr)
+             MachineReady.update({machineId: machineNr, 'newIssues._id': caseId},
+                 {$set: {'newIssues.$.checkStatus': false}})
         },
 
         // *********************************   analyzing -> analyzingResponseTeam  *********************
@@ -302,7 +271,7 @@ if(Meteor.isServer){
         },
 
         'readReConfig': function(contentArray) {
-                console.log('starting')
+            //    console.log('starting')
                 let reConfigArray = [];
                 let reConfigObj = {};
                 contentArray.forEach((element) => {
@@ -317,7 +286,7 @@ if(Meteor.isServer){
                             {$addToSet: {reConfigArray : reConfigObj}})
                     } catch(e) {}
                 })
-            console.log('done')
+          //  console.log('done')
         },
 
 /*
@@ -1341,7 +1310,7 @@ if(Meteor.isServer){
         },
 
         saveConfigFile: function(blob, name, path, encoding, selectedVariantId) {
-            console.log(path, name, selectedVariantId)
+         //   console.log(path, name, selectedVariantId)
             path = '/files/config-items/';
             encoding = encoding || 'binary';
             name = selectedVariantId + '.JPG';
@@ -1356,7 +1325,5 @@ if(Meteor.isServer){
             variants.update({_id: selectedVariantId},
                 {$set: {imagePath: name}})
         },
-
-
     });
 }

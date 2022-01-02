@@ -267,7 +267,7 @@ table.analyze-team-table {
   top: 30em;
 }
 
-//  *********************************************************
+//  *********************************************************  parts time and claims
 
 .team-repair-time-graph {
   left: 35em;
@@ -275,22 +275,37 @@ table.analyze-team-table {
   top: 55em;
 }
 
+.supply-list-pdi-tech {
+  max-width: 75px;
+  min-width: 75px;
+}
 
-// Repair time per Machine
+
 .table-package {
   left: 5em;
   position: absolute;
-  top: 10em;
+  top: 14em;
 }
 
 .pdi-comment-time-table {
-  width: 314px;
+  max-width: 250px;
+  min-width: 250px;
 }
 
 .repair-time-table {
   left: 5em;
   position: absolute;
   top: 15em;
+}
+
+.supply-issuer {
+  max-width: 75px;
+  min-width: 75px;
+}
+
+.pdi-repair-time {
+  max-width: 65px;
+  min-width: 65px;
 }
 
 .error-comp {
@@ -304,8 +319,9 @@ table.analyze-team-table {
 }
 
 .look-up-machine-number {
-  position: relative;
-  top: 4em;
+  left: 568px;
+  position: absolute;
+  top: 18em;
   width: 270px;
 }
 
@@ -315,19 +331,20 @@ table.analyze-team-table {
 }
 
 .parts-ordered {
-  left: 50em;
-  position: relative;
+  left: 172em;
+  position: absolute;
+  top: 246px;
   width: 270px;
 }
 
 .claim-number {
-  left: 20em;
+  left: 22em;
   position: relative;
   top: 5px;
 }
 
 .part-number {
-  left: 20.6em;
+  left: 22em;
   position: relative;
   top: 12px;
 }
@@ -342,16 +359,163 @@ table.parts-order-table {
   width: 390px;
 }
 
+//***********************************  Sort Buttons Supplier Tables  **********************************
+
+.toggle-list-button {
+  left: 1332px;
+  position: absolute;
+  top: 300px;
+}
+
+.button-machine-sort {
+  left: 14px;
+  position: absolute;
+  top: 1px;
+  z-index: 1;
+  opacity: 0;
+}
+
+.machine-sort-button {
+  width: 82px;
+  height: 53px;
+}
+
+.button-pdiTech-sort {
+  left: 91px;
+  position: absolute;
+  top: 1px;
+  z-index: 1;
+  opacity: 0;
+}
+
+.pdiTech-sort-button {
+  width: 72px;
+  height: 53px;
+}
+
+.button-repTech-sort {
+  left: 416px;
+  position: absolute;
+  top: 1px;
+  z-index: 1;
+  opacity: 0;
+}
+
+.repTech-sort-button {
+  width: 72px;
+  height: 53px;
+}
+
+.button-issuer-sort {
+  left: 742px;
+  position: absolute;
+  top: 1px;
+  z-index: 1;
+  opacity: 0;
+}
+
+.issuer-sort-button {
+  width: 73px;
+  height: 53px;
+}
+
+.button-repairTime-sort {
+  left: 815px;
+  position: absolute;
+  top: 1px;
+  z-index: 1;
+  opacity: 0;
+}
+
+.repairTime-sort-button {
+  width: 60px;
+  height: 53px;
+}
+
+.button-qualityComments-sort {
+  left: 1285px;
+  position: absolute;
+  top: 1px;
+  z-index: 1;
+  opacity: 0;
+}
+
+.qualityComments-sort-button {
+  width: 134px;
+  height: 53px;
+}
+
+.button-qualityClaim-sort {
+  left: 1419px;
+  position: absolute;
+  top: 1px;
+  z-index: 1;
+  opacity: 0;
+}
+
+.qualityClaim-sort-button {
+  width: 134px;
+  height: 53px;
+}
+
+.button-parts-sort {
+  left: 1555px;
+  position: absolute;
+  top: 1px;
+  z-index: 1;
+  opacity: 0;
+}
+
+.parts-sort-button {
+  width: 57px;
+  height: 53px;
+}
+
+.checkbox-button {
+  left: 1545px;
+  position: absolute;
+  top: -50px;
+}
+
+.checkbox-field {
+  min-width: 66px;
+  max-width: 50px;
+}
+
 .order-number {
   width: 120px;
 }
 
 .insert-quality-comment {
   height: 80px;
-  left: 50em;
-  position: relative;
-  top: -1em;
+  left: 127em;
+  position: absolute;
+  top: 8em;
   width: 370px;
+}
+
+.quality-comment-input {
+  left: 165em;
+  position: absolute;
+  top: 28em;
+}
+
+.quality-comment-button {
+  left: -.1em;
+  position: absolute;
+  top: -3em;
+}
+
+.parts-on-order {
+  min-width: 57px;
+  max-width: 57px;
+  text-align: center;
+}
+
+.issue-closed {
+  min-width: 54px;
+  max-width: 60px;
+  text-align: center;
 }
 
 .look-up-machine {
@@ -371,9 +535,9 @@ table.parts-order-table {
 }
 
 .order-list {
-  left: 88em;
-  position: relative;
-  top: -41.6em;
+  left: 171em;
+  position: absolute;
+  top: 21em;
 }
 
 
@@ -381,11 +545,7 @@ table.parts-order-table {
 
 // ******************** supplier Table   ******************************************
 
-.assigned-supplier {
-  left: 20em;
-  position: absolute;
-  top: 15em;
-}
+
 
 .supplier-assign {
   left: 32em;
@@ -400,17 +560,28 @@ table.parts-order-table {
 }
 
 .supplier-table {
-  left: 4em;
+  left: 40em;
   position: absolute;
-  top: 30em;
+  top: 25em;
 }
 
 table.extended-table {
-  width: 1430px;
+  width: 1680px;
 }
 
 .assign-supplier {
-  width: 135px;
+  max-width: 135px;
+  min-width: 135px;
+}
+
+.quality-comment {
+  max-width: 135px;
+  min-width: 135px;
+}
+
+.quality-claim {
+  max-width: 135px;
+  min-width: 135px;
 }
 
 .img-supplier-table {
@@ -429,6 +600,12 @@ table.extended-table {
 }
 
 //  ***************************  Supplier Results  ************************************************
+
+.single-suppliers-name {
+  left: 2em;
+  position: absolute;
+  top: 25em;
+}
 
 .single-supplier-table {
   left: 5em;

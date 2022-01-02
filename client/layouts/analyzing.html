@@ -15,14 +15,9 @@
     </body>
     <div class="nav navbar-btn">
         <button class="btn btn-default btn-info btn-over-view">Home</button>
-        <button class="btn btn-default btn-success btn-key-word">Search with keyword</button>
+        <button class="btn btn-default btn-success btn-key-word">Search</button>
         <button class="btn btn-default btn-success btn-response-team">Issues by Team</button>
-        <button class="btn btn-default btn-success btn-component-search">Time, Parts and Claims</button>
         <button class="btn btn-default btn-success btn-response-supplier">Issues by Supplier</button>
-        <!--
-        <button class="btn btn-default btn-success btn-edit-responsibility" >Edit Responsibility</button>
-        <button class="btn btn-default btn-success btn-advance-search" >Advance Search</button>
-        -->
         <button class="btn btn-default btn-info btn-pdi" >PDI performed</button>
         <button class="btn btn-default btn-success btn-options" >Options</button>
     </div>
@@ -34,9 +29,6 @@
 
     {{else if responseTeam}}  <!-- Responsible Team -->
         {{> analyzingResponseTeam}}
-
-    {{else if issueByComponent}}  <!-- Issue by Component -->
-        {{> analyzingComponent}}
 
     {{else if issueBySupplier}}  <!-- Issue by supplier -->
         {{> analyzingSupplier}}
@@ -193,160 +185,65 @@
         {{/if}}
 </template>
 
-<!-----------------------------------  Repair Time by Machine / Machine search ---------------------------->
+<!----------------------------------- Issues by Supplier  -------------------------------->
 
-<template name="analyzingComponent">
+<template name="analyzingSupplier">
 
-<div class="table-package">
     <div class="look-up-machine-number">
         <div>
             <h3>Look up specific Machine</h3>
         </div>
-            <form class="look-up">
-                <label for="lookUpMachine"></label>
-                <input type="text" id="lookUpMachine" class="" name="lookUp"/>
-                <button type="submit" class="btn btn-default btn-success" >Submit</button>
-            </form>
+        <form class="look-up">
+            <label for="lookUpMachine"></label>
+            <input type="text" id="lookUpMachine" class="" name="lookUp"/>
+            <button type="submit" class="btn btn-default btn-success" >Submit</button>
+        </form>
     </div>
 
-    <div class="insert-quality-comment">
-        <h3>Quality Comment / Parts on Order</h3>
-            <form class="quality-comment">
-                <label for="lookUpMachine" class=""></label>
-                <input type="text" id="lookUpMachine" class="" name="quality" value="{{showQualityEntries}}" style="width: 500px" >
-                <label for="claimNumber" class="claim-number">Claim</label>
-                <input type="text" id="claimNumber" class="claim-number" name="claimNumber">
-                <label for="partNumber" class="part-number">Part</label>
-                <input type="text" id="partNumber" class="part-number" name="partNumber">
-                <div class="order-radio-button">
-                    <label for="partsOnOrder">Parts On Order</label>
-                    <input type="radio" id="partsOnOrder" class="" name="partsAvailability" value="2">
-                    <br>
-                    <label for="partsArrived">Parts Arrived</label>
-                    <input type="radio" id="partsArrived" class="" name="partsAvailability" value="1">
-                </div>
-                <button type="submit" class="btn btn-default btn-success quality-button" >Submit</button>
-            </form>
+    <div class="toggle-list-button">
+        <button type="button" class="btn btn-default btn-info toggle-list">Toggle List open / closed Claims</button>
     </div>
 
-        <div class="pdi-tech">
-            <h4>Pdi Tech : {{user}}</h4>
-            <h4>Machine : {{resultMachineId}}</h4>
-        </div>
-    <div class="parts-ordered">
-        <h4>Parts waiting for arrival  : {{partsOrdered}}</h4>
-    </div>
-        <div class="look-up-machine">
-            <table class="blueTable">
-                <thead>
-                <tr>
-                    <th class="pdi-comment-time-table">Description</th>
-                    <th class="pdi-rep-tech">Repair Tech</th>
-                    <th class="pdi-comment">Repair Comment</th>
-                    <th class="pdi-image">Rep Time</th>
-                    <th class="pdi-rep-status">Repair Status</th>
-                    <th class="pdi-image">image</th>
-                    <th class="pdi-comment">Quality Comments</th>
-                    <th class="pdi-rep-status">Parts Ordered</th>
-                </tr>
-                </thead>
-                <tbody>
-                    {{#each machineResult}}
-                        <tr class="qualityResponse {{qualityResponse}}">
-                            <td class="pdi-comment-time-table">{{description}}</td>
-                            <td class="pdi-rep-tech">{{repairTech}}</td>
-                            <td class="pdi-comment">{{repairComment}}</td>
-                            <td class="pdi-image">{{repairTime}}</td>
-                            <td class="pdi-rep-status  {{getStatusColor repairStatus}}"
-                                                        style="background-color:{{getStatusColor repairStatus}}; color:{{getStatusColor repairStatus}}" >{{repairStatus}}</td>
-                            <td class="thumbnail thumbnail-box">
-                                <img src={{pictureLocation}}
-                                     onerror="this.src='noPicture.JPG'"
-                                     alt="No Picture"
-                                />
-                            </td>
-                            <td class="pdi-comment">{{qualityComment}}</td>
-                            <td class="pdi-rep-status  {{getStatusColor partsOrder}}"
-                                style="background-color:{{getStatusColor partsOrder}}; color:{{getStatusColor partsOrder}}">{{partsOrder}}</td>
-                        </tr>
-                    {{/each}}
-                </tbody>
-            </table>
-        </div>
-    <div class="order-list">
-        <div class="order-header">
-            <h3>Open Orders / Claims</h3>
-        </div>
-        <table class="blueTable parts-order-table">
-            <thead>
-            <tr>
-                <th class="pdiMachineField">Machine</th>
-                <th class="pdi-rep-status">Parts Status</th>
-                <th class="order-number">Claim Nr.</th>
-                <th class="order-number">Part Nr.</th>
-            </tr>
-            </thead>
-            <tbody>
-            {{#each orderResult}}
-                <tr class="">
-                    <td class="pdiMachineField">{{machineId}}</td>
-                    <td class="pdi-rep-status  {{getStatusColor partsOrder}}"
-                        style="background-color:{{getStatusColor partsOrder}}; color:{{getStatusColor partsOrder}}">{{partsOrder}}</td>
-                    <td class="order-number">{{claimNumber}}</td>
-                    <td class="order-number">{{partNumber}}</td>
-                </tr>
-            {{/each}}
-            </tbody>
-        </table>
-    </div>
-</div>
-</template>
-
-<!----------------------------------- Issues by Supplier  -------------------------------->
-
-<template name="analyzingSupplier">
-    <div class="assigned-supplier">
-        <button class="btn btn-info supplierResultList">Show Supplier List</button>
-    </div>
-    <div class="supplier-assign">
-        <h3>Assigning Suppliers</h3>
-    </div>
 <div class="supplier-table">
     <table class="blueTable table-height extended-table">
         <thead>
             <tr>
                 <th class="pdiMachineField">Machine</th>
-                <th class="pdi-rep-tech">Pdi Tech</th>
+                <th class="supply-list-pdi-tech">Pdi Tech</th>
                 <th class="pdi-comment-time-table">Error Description</th>
-                <th class="pdi-rep-tech">Rep Tech</th>
+                <th class="supply-list-pdi-tech">Rep Tech</th>
                 <th class="pdi-comment-time-table">Repair Description</th>
-                <th class="pdi-issuer">Issuer</th>
-                <th class="pdi-image">Repair Time</th>
+                <th class="supply-issuer">Issuer</th>
+                <th class="pdi-repair-time">Repair Time</th>
                 <th class="pdi-rep-status">Repair Status</th>
                 <th class="pdi-image">Image</th>
                 <th class="assign-supplier">Change / Assign Supplier</th>
                 <th class="assign-supplier">Change / Assign Team</th>
+                <th class="quality-comment">Comment / Notes</th>
+                <th class="quality-claim">Claim Nr</th>
+                <th class="quality-claim">Part Ordered</th>
+                <th class="checkbox-field">Parts on Order</th>
+                <th class="checkbox-field">Close</th>
             </tr>
         </thead>
         <tbody>
             {{#each supplierIssue}}
-                    <tr class="selectedIssue {{selectedSupplierRow}}">
+                    <tr class="">
                         <td class="pdiMachineField">{{machineNr}}</td>
-                        <td class="pdi-rep-tech">{{pdiPerformer}}</td>
+                        <td class="supply-list-pdi-tech">{{pdiPerformer}}</td>
                         <td class="pdi-comment-time-table">{{errorDescription}}</td>
-                        <td class="pdi-rep-tech">{{repairTech}}</td>
+                        <td class="supply-list-pdi-tech">{{repairTech}}</td>
                         <td class="pdi-comment-time-table">{{repairComment}}</td>
-                        <td class="pdi-issuer">{{responsible}}</td>
-                        <td class="pdi-image">{{repairTime}}</td>
+                        <td class="supply-issuer">{{responsible}}</td>
+                        <td class="pdi-repair-time">{{repairTime}}</td>
                         <td class="pdi-rep-status {{getStatusColor repairStatus}}"
                             style="background-color:{{getStatusColor repairStatus}}; color:{{getStatusColor repairStatus}}">{{repairStatus}}</td>
                         <td class="thumbnail thumbnail-box pdi-image">
                             <img src={{pictureLocation}}
                                  onerror="this.src='noPicture.JPG'"
-                                 alt="No Picture"
-                            />
+                                 alt="No Picture" />
                         </td>
-                        <td>
+                        <td class="selectedIssue {{selectedSupplierRow}}">
                             <label for="category-select"></label>
                                 <select name="team-select" id="category-select" >
                                     <option value="">Select Supplier</option>
@@ -355,7 +252,7 @@
                                     {{/each}}
                                 </select>
                         </td>
-                        <td>
+                        <td class="selectedIssue {{selectedSupplierRow}}">
                             <label for="category-select"></label>
                             <select name="team-select" id="category-select" class="team-select">
                                 <option value="">Select Team</option>
@@ -364,12 +261,141 @@
                                 {{/each}}
                             </select>
                         </td>
+                        <td class="quality-comment selectedIssue {{selectedSupplierRow}}">{{qualityComment}}</td>
+                        <td class="quality-claim selectedIssue {{selectedSupplierRow}}">{{claimNumber}}</td>
+                        <td class="quality-claim selectedIssue {{selectedSupplierRow}}">{{partNumber}}</td>
+
+                        <td class="parts-on-order {{getStatusColor partsOrder}}"
+                            style="background-color:{{getStatusColor partsOrder}};
+                                    color:{{getStatusColor partsOrder}}">{{partsOrder}}</td>
+
+                        <td class="issue-closed checkbox-field"  style="background-color: darkred">
+                            <label for="closeCase"></label>
+                            <input type="checkbox"
+                                   name="closeCase"
+                                   id="closeCase"
+                                   value="{{_id}} {{machineNr}}">
+                        </td>
                     </tr>
             {{/each}}
         </tbody>
     </table>
+
+    <div class="button-machine-sort">
+        <button class="btn btn-default issuer-sort-button"></button>
+    </div>
+
+    <div class="button-pdiTech-sort">
+        <button class="btn btn-default pdiTech-sort-button"></button>
+    </div>
+
+    <div class="button-repTech-sort">
+        <button class="btn btn-default repTech-sort-button"></button>
+    </div>
+
+    <div class="button-issuer-sort">
+        <button class="btn btn-default issuer-sort-button"></button>
+    </div>
+
+    <div class="button-repairTime-sort">
+        <button class="btn btn-default repairTime-sort-button"></button>
+    </div>
+
+    <div class="button-qualityComments-sort">
+        <button class="btn btn-default qualityComments-sort-button"></button>
+    </div>
+
+    <div class="button-qualityClaim-sort">
+        <button class="btn btn-default qualityClaim-sort-button"></button>
+    </div>
+
+    <div class="button-parts-sort">
+        <button class="btn btn-default parts-sort-button"></button>
+    </div>
+
 </div>
+
+    <div  class="single-suppliers-name">
+        <table class="blueTable supplier-result-table">
+            <thead>
+            <tr>
+                <th class="supplier-field">Supplier</th>
+                <th class="supplier-field">open items</th>
+                <th class="supplier-field">Items with Claims (open)</th>
+                <th class="supplier-field">Items with Claims (closed)</th>
+                <th class="supplier-field">Items with Parts on Order</th>
+            </tr>
+            </thead>
+            <tbody>
+            {{#each supplierTable}}
+                <tr class="selectedSupplier {{selectedSupplier}}">
+                    <td>{{supplier}}</td>
+                    <td>{{supplier}}</td>
+                    <td>{{supplier}}</td>
+                    <td>{{supplier}}</td>
+                    <td>{{supplier}}</td>
+                </tr>
+            {{/each}}
+            </tbody>
+        </table>
+    </div>
+
+    <div class="order-list">
+        <div class="order-header">
+            <h3>Parts on Order</h3>
+        </div>
+        <table class="blueTable parts-order-table">
+            <thead>
+            <tr>
+                <th class="pdiMachineField">Machine</th>
+                <th class="pdi-rep-status">Parts Status</th>
+                <th class="order-number">Claim Nr.</th>
+                <th class="order-number">Part Nr.</th>
+                <th class="quality-comment">Quality Comment</th>
+            </tr>
+            </thead>
+            <tbody>
+            {{#each orderResult}}
+                <tr class="selectedPartsOrdered">
+                    <td class="pdiMachineField">{{machineId}}</td>
+                    <td class="pdi-rep-status  {{getStatusColor partsOrder}}"
+                        style="background-color:{{getStatusColor partsOrder}};
+                                color:{{getStatusColor partsOrder}}">{{partsOrder}}</td>
+                    <td class="order-number">{{claimNumber}}</td>
+                    <td class="order-number">{{partNumber}}</td>
+                    <td class="quality-comment">{{qualityText}}</td>
+                </tr>
+            {{/each}}
+            </tbody>
+        </table>
+    </div>
+
+    <div class="parts-ordered">
+        <h4>Total Parts waiting for arrival  : {{partsOrdered}}</h4>
+    </div>
+
+    <div class="insert-quality-comment">
+        <h3>Quality Comment / Notes</h3>
+        <form class="quality-comment">
+            <label for="lookUpMachine" class=""></label>
+            <input type="text" id="lookUpMachine" class="" name="quality" value="{{quality_Comment}}" style="width: 500px" >
+            <label for="claimNumber" class="claim-number">Claim</label>
+            <input type="text" id="claimNumber" class="claim-number" name="claimNumber" value="{{claim_Number}}">
+            <label for="partNumber" class="part-number">Part</label>
+            <input type="text" id="partNumber" class="part-number" name="partNumber" value="{{part_Number}}">
+            <div class="order-radio-button">
+                <label for="partsOnOrder">Parts On Order</label>
+                <input type="radio" id="partsOnOrder" class="" name="partsAvailability" value="2">
+                <br>
+                <label for="partsArrived">Parts Arrived</label>
+                <input type="radio" id="partsArrived" class="" name="partsAvailability" value="1">
+            </div>
+            <button type="submit" class="btn btn-default btn-success quality-button" >Submit</button>
+        </form>
+    </div>
+
 </template>
+
 
 <!-- ---------------------------------  Edit Responsibilities  ----------------------------->
 

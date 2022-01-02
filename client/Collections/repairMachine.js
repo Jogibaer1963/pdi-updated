@@ -12,20 +12,26 @@ Meteor.subscribe('addIssues');
 
         shippList: function () {
             // Order of shipping date
+            let result;
             let k = Session.get('toggleRepair');
             if (k === 0) {
                 Session.set('repair', '**** Repair ****');
-                return  MachineReady.find({
+                result =  MachineReady.find({
                     $and: [
                         {pdiStatus: 1},
                         {$or: [{repairStatus: 0}, {repairStatus: 2}]}
                     ]
-                }, {sort: {date: 1}});
+                }, {sort: {date: 1}}).fetch();
+                if (result[0].partsOnOrder > 0) {
+                    result[0].partsOnOrder = 2;
+                }
+                return result;
             } else {
                 Session.set('repair', '**** Upcoming Shipments****');
-                return MachineReady.find({$and: [{pdiStatus: 0},
+                result = MachineReady.find({$and: [{pdiStatus: 0},
                             {$or: [{shipStatus: 0}, {shipStatus: 2}]}]},
                     {sort: {date: 1}});
+
             }
         },
 
@@ -73,23 +79,6 @@ Meteor.subscribe('addIssues');
                 }
             } catch {}
         },
-/*
-        machineToRepair: () => {
-           try {
-              let repairInfos = Session.get('repairInfos');
-              let newIssuesFound = [];
-              const machineToRepair = Session.get('selectedMachineId');
-              if (machineToRepair) {
-                  newIssuesFound = MachineReady.findOne({_id: machineToRepair}).newIssues;
-              }
-              newIssuesFound.forEach((element) => {
-                  element.pictureLocation = repairInfos + element.pictureLocation;
-              });
-              return newIssuesFound;
-           } catch {}
-        },
-
- */
 
         repairUser: () => {
             return Meteor.user().username;
@@ -167,9 +156,6 @@ Meteor.subscribe('addIssues');
             } catch (e) {
             }
         },
-
-
-
 
     });
 
@@ -251,7 +237,6 @@ Meteor.subscribe('addIssues');
         'click .failureRow': function (e) {
             e.preventDefault();
             const confirmRepair = this._id;
-            console.log(confirmRepair)
             Session.set('confirmRepair', confirmRepair);
         },
 
@@ -309,7 +294,6 @@ Meteor.subscribe('addIssues');
             }
             document.getElementById('img').value = '';
         },
-
 
     });
 

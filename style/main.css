@@ -902,7 +902,8 @@ table.display-error {
   width: 50px; }
 
 .pdi-rep-status {
-  width: 70px; }
+  max-width: 65px;
+  min-width: 65px; }
 
 .pdi-issuer {
   width: 73px; }
@@ -911,7 +912,8 @@ table.display-error {
   width: 9em; }
 
 .pdi-image {
-  width: 73px; }
+  max-width: 70px;
+  min-width: 70px; }
 
 .pdi-rep-tech {
   width: 70px; }
@@ -2051,18 +2053,31 @@ table.analyze-team-table {
   position: absolute;
   top: 55em; }
 
+.supply-list-pdi-tech {
+  max-width: 75px;
+  min-width: 75px; }
+
 .table-package {
   left: 5em;
   position: absolute;
-  top: 10em; }
+  top: 14em; }
 
 .pdi-comment-time-table {
-  width: 314px; }
+  max-width: 250px;
+  min-width: 250px; }
 
 .repair-time-table {
   left: 5em;
   position: absolute;
   top: 15em; }
+
+.supply-issuer {
+  max-width: 75px;
+  min-width: 75px; }
+
+.pdi-repair-time {
+  max-width: 65px;
+  min-width: 65px; }
 
 .error-comp {
   width: 222px; }
@@ -2073,8 +2088,9 @@ table.analyze-team-table {
   top: 55em; }
 
 .look-up-machine-number {
-  position: relative;
-  top: 4em;
+  left: 568px;
+  position: absolute;
+  top: 18em;
   width: 270px; }
 
 .pdi-tech {
@@ -2082,17 +2098,18 @@ table.analyze-team-table {
   width: 270px; }
 
 .parts-ordered {
-  left: 50em;
-  position: relative;
+  left: 172em;
+  position: absolute;
+  top: 246px;
   width: 270px; }
 
 .claim-number {
-  left: 20em;
+  left: 22em;
   position: relative;
   top: 5px; }
 
 .part-number {
-  left: 20.6em;
+  left: 22em;
   position: relative;
   top: 12px; }
 
@@ -2104,15 +2121,137 @@ table.analyze-team-table {
 table.parts-order-table {
   width: 390px; }
 
+.toggle-list-button {
+  left: 1332px;
+  position: absolute;
+  top: 300px; }
+
+.button-machine-sort {
+  left: 14px;
+  position: absolute;
+  top: 1px;
+  z-index: 1;
+  opacity: 0; }
+
+.machine-sort-button {
+  width: 82px;
+  height: 53px; }
+
+.button-pdiTech-sort {
+  left: 91px;
+  position: absolute;
+  top: 1px;
+  z-index: 1;
+  opacity: 0; }
+
+.pdiTech-sort-button {
+  width: 72px;
+  height: 53px; }
+
+.button-repTech-sort {
+  left: 416px;
+  position: absolute;
+  top: 1px;
+  z-index: 1;
+  opacity: 0; }
+
+.repTech-sort-button {
+  width: 72px;
+  height: 53px; }
+
+.button-issuer-sort {
+  left: 742px;
+  position: absolute;
+  top: 1px;
+  z-index: 1;
+  opacity: 0; }
+
+.issuer-sort-button {
+  width: 73px;
+  height: 53px; }
+
+.button-repairTime-sort {
+  left: 815px;
+  position: absolute;
+  top: 1px;
+  z-index: 1;
+  opacity: 0; }
+
+.repairTime-sort-button {
+  width: 60px;
+  height: 53px; }
+
+.button-qualityComments-sort {
+  left: 1285px;
+  position: absolute;
+  top: 1px;
+  z-index: 1;
+  opacity: 0; }
+
+.qualityComments-sort-button {
+  width: 134px;
+  height: 53px; }
+
+.button-qualityClaim-sort {
+  left: 1419px;
+  position: absolute;
+  top: 1px;
+  z-index: 1;
+  opacity: 0; }
+
+.qualityClaim-sort-button {
+  width: 134px;
+  height: 53px; }
+
+.button-parts-sort {
+  left: 1555px;
+  position: absolute;
+  top: 1px;
+  z-index: 1;
+  opacity: 0; }
+
+.parts-sort-button {
+  width: 57px;
+  height: 53px; }
+
+.checkbox-button {
+  left: 1545px;
+  position: absolute;
+  top: -50px; }
+
+.checkbox-field {
+  min-width: 66px;
+  max-width: 50px; }
+
 .order-number {
   width: 120px; }
 
 .insert-quality-comment {
   height: 80px;
-  left: 50em;
-  position: relative;
-  top: -1em;
+  left: 127em;
+  position: absolute;
+  top: 8em;
   width: 370px; }
+
+.quality-comment-input {
+  left: 165em;
+  position: absolute;
+  top: 28em; }
+
+.quality-comment-button {
+  left: -.1em;
+  position: absolute;
+  top: -3em; }
+
+.parts-on-order {
+  min-width: 57px;
+  max-width: 57px;
+  text-align: center; }
+
+.issue-closed {
+  min-width: 54px;
+  max-width: 60px;
+  text-align: center; }
 
 .look-up-machine {
   position: relative;
@@ -2128,14 +2267,9 @@ table.parts-order-table {
   position: relative; }
 
 .order-list {
-  left: 88em;
-  position: relative;
-  top: -41.6em; }
-
-.assigned-supplier {
-  left: 20em;
+  left: 171em;
   position: absolute;
-  top: 15em; }
+  top: 21em; }
 
 .supplier-assign {
   left: 32em;
@@ -2148,15 +2282,24 @@ table.parts-order-table {
   top: 25em; }
 
 .supplier-table {
-  left: 4em;
+  left: 40em;
   position: absolute;
-  top: 30em; }
+  top: 25em; }
 
 table.extended-table {
-  width: 1430px; }
+  width: 1680px; }
 
 .assign-supplier {
-  width: 135px; }
+  max-width: 135px;
+  min-width: 135px; }
+
+.quality-comment {
+  max-width: 135px;
+  min-width: 135px; }
+
+.quality-claim {
+  max-width: 135px;
+  min-width: 135px; }
 
 .img-supplier-table {
   border: 1px solid #ddd;
@@ -2168,6 +2311,11 @@ table.extended-table {
   left: 5em;
   position: absolute;
   top: 10em; }
+
+.single-suppliers-name {
+  left: 2em;
+  position: absolute;
+  top: 25em; }
 
 .single-supplier-table {
   left: 5em;
@@ -2253,87 +2401,6 @@ table.supplier-result-table {
 .fuel-consumption-chart {
   position: absolute;
   left: 4em;
-  top: 15em; }
-
-.button-toggle-supplier {
-  left: 45em;
-  position: absolute;
-  top: 15em; }
-
-.button-parts {
-  left: 60em;
-  position: absolute;
-  top: 15em; }
-
-.submit-supplier-button {
-  left: 100em;
-  position: absolute;
-  top: 15em; }
-
-.single-supplier-table {
-  left: 5em;
-  position: absolute;
-  top: 20em; }
-
-table.single-supplier-extended {
-  width: 1580px; }
-
-.quality-comment {
-  width: 225px; }
-
-.quality-claim {
-  width: 191px; }
-
-.checkbox-field {
-  width: 61px; }
-
-td {
-  text-align: center;
-  vertical-align: middle; }
-
-.suppliers-table-view {
-  border-spacing: 5px;
-  width: auto; }
-
-.single-suppliers-name {
-  left: 150em;
-  position: absolute;
-  top: 20em; }
-
-table.supplier-result-table {
-  width: 90px; }
-
-.supplier-field {
-  width: 95px; }
-
-.quality-comment-input {
-  left: 120em;
-  position: absolute;
-  top: 25em; }
-
-.quality-comment-button {
-  left: -.1em;
-  position: absolute;
-  top: -3em; }
-
-.annual-machine-result {
-  left: 5em;
-  position: absolute;
-  top: 60em; }
-
-.annual-supplier-result {
-  left: 80em;
-  position: absolute;
-  top: 60em; }
-
-.options-header {
-  left: 5em;
-  position: absolute;
-  top: 15em; }
-
-.options-header-2 {
-  left: 30em;
-  position: absolute;
   top: 15em; }
 
 .mainLayout {

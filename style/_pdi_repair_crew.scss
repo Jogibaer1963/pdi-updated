@@ -53,7 +53,8 @@ table.display-error {
 }
 
 .pdi-rep-status {
-  width: 70px;
+  max-width: 65px;
+  min-width: 65px;
 }
 
 .pdi-issuer {
@@ -65,7 +66,8 @@ table.display-error {
 }
 
 .pdi-image {
-  width: 73px;
+  max-width: 70px;
+  min-width: 70px;
  }
 
 .pdi-rep-tech {
