@@ -465,7 +465,8 @@ table.returnMachines {
   top: 27.7em; }
 
 table.editTable tbody.editBody, thead.editTableHead {
-  display: revert; }
+  display: revert;
+  height: 50px; }
 
 .shipped-machines {
   left: 10em;
