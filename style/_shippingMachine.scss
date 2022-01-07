@@ -49,7 +49,15 @@
 }
 
 .newMachineSubmit {
-  margin-top: 50px ;
+  left: 429px;
+  position: absolute;
+  top: 144px;
+}
+
+.load-machine-list {
+  left: 630px;
+  position: absolute;
+  top: 123px;
 }
 
 .toggleShippedAll {
@@ -60,7 +68,7 @@
 
 .shippingMachinesTable {
   position: relative;
-  top: -9em;
+  top: -3em;
 }
 
 .shippingTable {

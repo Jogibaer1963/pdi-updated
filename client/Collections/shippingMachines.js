@@ -115,13 +115,32 @@ Session.set('toggleShipList', 0);
             const newMachine = this._id;
             Session.set('selectedMachine', newMachine);
         },
-/*
-        'click .changeUnixTime': (e) => {
+
+
+
+
+
+        'change .load-machine-list': (e) => {
             e.preventDefault();
-            Meteor.call('changeUnixTime');
+            const file = e.target.files[0];
+            if (!file) {
+                return;
+            }
+            let reader = new FileReader();
+            reader.onload = function(e) {
+                const contents = e.target.result;
+                Meteor.call('upload-machine-list', contents);
+            };
+
+            reader.readAsText(file);
+            document.getElementById('files').value = [];
         },
 
- */
+
+
+
+
+
 
         'submit .truckDate': function(e) {
             e.preventDefault();

@@ -377,7 +377,14 @@ table.locationTable {
   width: 35em; }
 
 .newMachineSubmit {
-  margin-top: 50px; }
+  left: 429px;
+  position: absolute;
+  top: 144px; }
+
+.load-machine-list {
+  left: 630px;
+  position: absolute;
+  top: 123px; }
 
 .toggleShippedAll {
   position: absolute;
@@ -386,7 +393,7 @@ table.locationTable {
 
 .shippingMachinesTable {
   position: relative;
-  top: -9em; }
+  top: -3em; }
 
 .shippingTable {
   margin-top: 3em; }
@@ -987,7 +994,7 @@ table.display-error {
   bottom: 0;
   float: left;
   font-weight: bold;
-  margin-left: 69px;
+  margin-left: 259px;
   position: absolute;
   width: 130px; }
 

@@ -158,6 +158,91 @@ if(Meteor.isServer){
         },
 
  */
+     // ************************  Load Shipping Machine List  ********************************
+
+     'upload-machine-list':(contents) => {
+         let arr = contents.split(/[\n\r]/g);
+         let i = 0;
+         arr.forEach((element) => {
+             if (element === '') {
+                   arr.splice(i, 1);
+                  }
+             i++
+         })
+
+         let newElement = [];
+         let kit = [];
+         let sequence, machineId, targetDate, destination, tireTrack, timeStamp, hours, minutes, seconds, unixTime, formattedTime,
+              year, monthDate, month, day, dateOfCreation, mdKiller, slashKiller, shipDate, dateString, result;
+         let monthArray = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
+         timeStamp = Date.now() // Unix Time in ms
+         unixTime = new Date(timeStamp)
+         hours =  unixTime.getHours();   // Hours part from the timestamp
+         minutes = "0" +  unixTime.getMinutes();  // Minutes part from the timestamp
+         seconds = "0" +  unixTime.getSeconds();   // Seconds part from the timestamp
+         formattedTime = hours + ':' + minutes.substr(-2) + ':' + seconds.substr(-2);
+         year = unixTime.getFullYear();
+         month = unixTime.getMonth();
+         day =  unixTime.getDay();
+         if (day <= 9) {
+             day = '0' + day
+         }
+         if (monthArray[month] <= 9) {
+             monthDate = '0' + monthArray[month]
+         }
+        dateOfCreation = year + '-' + monthDate  + '-' + day
+        arr.forEach((element) => {
+             let validStringTest = element.search(/^(C8[7-9][0-9]{5})/g);
+             // *********************  important step end ********************************
+             if (validStringTest === 0) {
+                 newElement.push(element)
+             }
+         })
+        newElement.forEach((element) => {
+            sequence = element.split(',');
+            machineId = sequence[0];
+            targetDate = sequence[1];
+            shipDate = new Date(targetDate)
+            dateString = new Date(shipDate.getTime() - (shipDate.getTimezoneOffset() * 60000 ))
+                .toISOString()
+                .split("T")[0];
+            destination = sequence[2];
+            tireTrack = sequence[3];
+
+            for (let i = 4; i <= 16; i++) {
+                if (sequence[i] === '' || sequence[i] === undefined) {
+                } else {
+                    mdKiller = sequence[i].substring(3)
+                    slashKiller = mdKiller.replace('/', '_')
+                    kit.push(slashKiller)
+                }
+            }
+
+             result = MachineReady.findOne({machineId: machineId});
+            if (result === undefined) {
+                console.log('machine new')
+                MachineReady.insert({machineId: machineId,
+                    dateOfCreation: dateOfCreation,
+                    timeOfCreation: formattedTime,
+                    pdiStatus: 0,
+                    repairStatus: 0,
+                    washStatus: 0,
+                    shipStatus: 0,
+                    unixTime: timeStamp,
+                    date: dateString,
+                    destination: destination,
+                    transporter: '',
+                    kit: kit,
+                    tireTrack: tireTrack,
+                    machineReturn: 'No',
+                    shippingComment: ''});
+                kit = [];
+            } else {
+                console.log('found Machine')
+            }
+         })
+     },
+
 
    // ************* Remove last year shipped machines from database  **************************
 
@@ -699,16 +784,7 @@ if(Meteor.isServer){
             // Check points
             let typeOfMachine = machineType.toString();
 
-            if(typeOfMachine === 'C77') {
-                 checkType = checkPoints.find({machineRangeEndC77: {$gt: pdiMachineNr}, status: 1},
-                                                 {fields: {errorDescription: 1, errorPos: 1}}).fetch();
-            } else if (typeOfMachine === 'C78') {
-                 checkType = checkPoints.find({machineRangeEndC78: {$gt: pdiMachineNr}, status: 1},
-                                                 {fields: {errorDescription: 1, errorPos: 1}}).fetch();
-            } else if (typeOfMachine === 'C79') {
-                 checkType = checkPoints.find({machineRangeEndC79: {$gt: pdiMachineNr}, status: 1},
-                                                 {fields: {errorDescription: 1, errorPos: 1}}).fetch();
-            } else if (typeOfMachine === 'C87') {
+            if (typeOfMachine === 'C87') {
                  checkType = checkPoints.find({machineRangeEndC79: {$gt: pdiMachineNr}, status: 1},
                                                  {fields: {errorDescription: 1, errorPos: 1}}).fetch();
             } else if (typeOfMachine === 'C88') {
@@ -743,6 +819,7 @@ if(Meteor.isServer){
                                                     {fields: {config: 1, reConfigArray: 1}},
                                                     {sort: {variant: 1}}).fetch();
             // Origin Configuration
+
             combineVariant[0].config.forEach((element) => {
                 variantResult.forEach((element2) => {
                     if (element === element2.variant && element2.status === 1) {
@@ -758,6 +835,8 @@ if(Meteor.isServer){
                     }
                 })
             })
+
+
             // Load re.configuration. Add variant is green (status 2) remove variant is red (status 1)
             let machineConfigStatus = 0;
             try {
