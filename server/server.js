@@ -217,10 +217,13 @@ if(Meteor.isServer){
                     kit.push(slashKiller)
                 }
             }
+            if (kit.length === 0) {
+                kit = ['No_Kit']
+            }
 
              result = MachineReady.findOne({machineId: machineId});
             if (result === undefined) {
-                console.log('machine new')
+              //  console.log('machine new')
                 MachineReady.insert({machineId: machineId,
                     dateOfCreation: dateOfCreation,
                     timeOfCreation: formattedTime,
@@ -238,7 +241,7 @@ if(Meteor.isServer){
                     shippingComment: ''});
                 kit = [];
             } else {
-                console.log('found Machine')
+              //  console.log('found Machine')
             }
          })
      },
@@ -456,6 +459,7 @@ if(Meteor.isServer){
             // find positions of all cbpat8, store group in array
             let cbpat8Count = (contentString.match(/cbpat8/g) || []).length;
             let newContentString = contentString;
+
             for (let i = 0; i <= cbpat8Count - 1; i++) {
                 cbpat8Pos = newContentString.search("cbpat8");
                 cbpat8Array.push(cbpat8Pos);
@@ -479,15 +483,15 @@ if(Meteor.isServer){
                         let z = textVariant.search('          L ');
                         if (z < 0) {
                             try {
-                                variants.upsert({_id: id},
-                                    {
+                                variants.insert(
+                                     {
                                     variant : singleGroupVariant,
                                     type: combineType,
                                     variantDescription: textVariant,
                                     imagePath: "noInfo.JPG",
                                     status: 1,
                                     dateLoaded: latestUpdate
-                                });
+                                        });
                             } catch (e) {
                                 console.log(e)
                             }
@@ -934,6 +938,7 @@ if(Meteor.isServer){
                                                        {fields: {pdiItems: 1}}).pdiItems;
                 pdiItemList.forEach((element) => {
                     let pdiDescription = "- Added Items -" + element.pdiItem
+                    let responsible = element.responsible
                     let uniqueIdSi = Random.id();
                     MachineReady.update({_id: selectedPdiMachineId}, {
                         $push: {
@@ -948,7 +953,7 @@ if(Meteor.isServer){
                                 "repairComment" : "",
                                 "repairDateTime" : "",
                                 "repairDuration" : "",
-                                "responsible" : ""
+                                "responsible" : responsible
                             }
                         }
                     })
@@ -1389,7 +1394,7 @@ if(Meteor.isServer){
         },
 
         saveConfigFile: function(blob, name, path, encoding, selectedVariantId) {
-         //   console.log(path, name, selectedVariantId)
+           console.log(path, name, selectedVariantId)
             path = '/files/config-items/';
             encoding = encoding || 'binary';
             name = selectedVariantId + '.JPG';

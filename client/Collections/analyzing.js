@@ -167,12 +167,20 @@ Template.analyzingOverView.helpers({
                 machineId: 1
                }}).fetch();
         result.forEach((element) => {
-            completedMachines.push(element.machineId);
-            issuesFound = issuesFound + element.newIssues.length;
+           completedMachines.push(element.machineId);
+           element.newIssues.forEach((element2) => {
+                if (element2.responsible === "N/A") {
+
+                } else {
+                        issuesFound ++
+                   }
+            })
+
         });
         let machines = completedMachines.length;
         return {machines, issuesFound};
     }
+
 });
 
 Template.analyzingOverView.events({
@@ -464,24 +472,29 @@ Template.analyzingSupplier.helpers({
                     issueArray.forEach((element2) => {
                         if (element2.checkStatus === true) {
                        // console.log(element2)
-                               supplierIssues = {
-                                _id: element2._id,
-                                machineNr: machineNr,
-                                pdiPerformer:  pdiPerformer,
-                                errorDescription: element2.errorDescription,
-                                repairTech: element2.repairTech,
-                                repairComment: element2.repairComment,
-                                responsible: element2.responsible,
-                                repairStatus: element2.repairStatus,
-                                pictureLocation : repairInfos + element2.pictureLocation,
-                                repairTime: element2.repairTime,
-                                qualityComment: element2.qualityComment,
-                                claimNumber: element2.claimNumber,
-                                partNumber: element2.partNumber,
-                                partsOrder : element2.partsOrder,
-                                amountOnOrder : amountOnOrder
+                            if (element2.responsible === "N/A") {
+                             //   console.log('N/A detected', element2._id)
+                            } else if (element2.responsible !== "N/A")   {
+                                supplierIssues = {
+                                    _id: element2._id,
+                                    machineNr: machineNr,
+                                    pdiPerformer:  pdiPerformer,
+                                    errorDescription: element2.errorDescription,
+                                    repairTech: element2.repairTech,
+                                    repairComment: element2.repairComment,
+                                    responsible: element2.responsible,
+                                    repairStatus: element2.repairStatus,
+                                    pictureLocation : repairInfos + element2.pictureLocation,
+                                    repairTime: element2.repairTime,
+                                    qualityComment: element2.qualityComment,
+                                    claimNumber: element2.claimNumber,
+                                    partNumber: element2.partNumber,
+                                    partsOrder : element2.partsOrder,
+                                    amountOnOrder : amountOnOrder
+                                }
+                                supplierArray.push(supplierIssues)
                             }
-                            supplierArray.push(supplierIssues)
+
                        }
                     })
                 })
@@ -494,24 +507,29 @@ Template.analyzingSupplier.helpers({
                     issueArray.forEach((element2) => {
                         if (element2.checkStatus === false) {
                             // console.log(element2)
-                            supplierIssues = {
-                                _id: element2._id,
-                                machineNr: machineNr,
-                                pdiPerformer:  pdiPerformer,
-                                errorDescription: element2.errorDescription,
-                                repairTech: element2.repairTech,
-                                repairComment: element2.repairComment,
-                                responsible: element2.responsible,
-                                repairStatus: element2.repairStatus,
-                                pictureLocation : repairInfos + element2.pictureLocation,
-                                repairTime: element2.repairTime,
-                                qualityComment: element2.qualityComment,
-                                claimNumber: element2.claimNumber,
-                                partNumber: element2.partNumber,
-                                partsOrder : element2.partsOrder,
-                                amountOnOrder : amountOnOrder
+                            if (element2.responsible === "N/A") {
+                        //        console.log('N/A detected', element2._id)
+                            } else  if (element2.responsible !== "N/A")   {
+                                supplierIssues = {
+                                    _id: element2._id,
+                                    machineNr: machineNr,
+                                    pdiPerformer:  pdiPerformer,
+                                    errorDescription: element2.errorDescription,
+                                    repairTech: element2.repairTech,
+                                    repairComment: element2.repairComment,
+                                    responsible: element2.responsible,
+                                    repairStatus: element2.repairStatus,
+                                    pictureLocation : repairInfos + element2.pictureLocation,
+                                    repairTime: element2.repairTime,
+                                    qualityComment: element2.qualityComment,
+                                    claimNumber: element2.claimNumber,
+                                    partNumber: element2.partNumber,
+                                    partsOrder : element2.partsOrder,
+                                    amountOnOrder : amountOnOrder
+                                }
+                                supplierArray.push(supplierIssues)
                             }
-                            supplierArray.push(supplierIssues)
+
                         }
                     })
                 })
