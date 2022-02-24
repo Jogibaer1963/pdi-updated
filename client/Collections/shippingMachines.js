@@ -15,7 +15,7 @@ Session.set('toggleShipList', 0);
             switch(shipToggleList) {
                 case 1:
                     return MachineReady.find({shipStatus: 0},
-                                              {sort: {date: -1}}
+                                              {sort: {date: 1}}
                                               );
                 case 0:
                   //  let changeDate = new Date("2020-09-31").getTime() / 1000
