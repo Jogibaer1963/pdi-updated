@@ -659,7 +659,7 @@ if(Meteor.isServer){
         'download_2': function (machineNr) {
          //   const collection = MachineReady.find({machineId: machineNr}, {fields: {
          //                                                                          'checkListIssues.errorDescription': 1,
-          //                                                                          _id: 0}}).fetch();
+          //                                                                         _id: 0}}).fetch();
         },
 
         'editRepair': function(editId) {
@@ -693,7 +693,7 @@ if(Meteor.isServer){
 
         'messageToWashBay': function(machine_id, machineNr, washMessage ) {
             washBayText.insert({machineNr: machineNr, washBayMessage: washMessage, active: 1});
-            MachineReady.update({_id: machine_id}, {$set: {washStatus: 0}});
+            MachineReady.update({_id: machine_id}, {$set: {washStatus: 0, washBayMessage: washMessage}});
         },
 
         'messageToWashBay_2': function(machineNr, washMessage) {

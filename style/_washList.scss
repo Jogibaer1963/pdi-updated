@@ -14,12 +14,11 @@ table.washTable {
 }
 
 table.messageTable {
-  width: 700px;
+  width: 660px;
   position: absolute;
   top: 24em;
   left: 50em;
 }
-
 
 .washListButtons {
   margin-left: 25px;
@@ -39,13 +38,15 @@ table.messageTable {
 }
 
 .messageClearButton {
-  left: 32em;
+  left: 102em;
   position: absolute;
-  top: 20.5em;
+  top: 24.5em;
 }
 
 .washBayToggleButton {
-  margin-left: 300px;
+  left: 51em;
+  position: absolute;
+  top:20em;
 }
 
 .locationButton {

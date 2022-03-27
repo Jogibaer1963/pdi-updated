@@ -1123,7 +1123,7 @@ table.washTable {
   top: 24em; }
 
 table.messageTable {
-  width: 700px;
+  width: 660px;
   position: absolute;
   top: 24em;
   left: 50em; }
@@ -1142,12 +1142,14 @@ table.messageTable {
   width: 480px; }
 
 .messageClearButton {
-  left: 32em;
+  left: 102em;
   position: absolute;
-  top: 20.5em; }
+  top: 24.5em; }
 
 .washBayToggleButton {
-  margin-left: 300px; }
+  left: 51em;
+  position: absolute;
+  top: 20em; }
 
 .locationButton {
   position: relative;
@@ -1475,12 +1477,12 @@ tbody.newIssueTableHeight {
 .washBayText {
   position: relative;
   top: -5em;
-  left: 50em; }
+  left: 36.5em; }
 
 .washBayMessage {
   position: absolute;
   top: -0.5em;
-  left: 30em; }
+  left: 45em; }
 
 #textMessage {
   width: 400px; }

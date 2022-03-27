@@ -217,15 +217,26 @@ Meteor.subscribe('addIssues');
 
         'submit .messageToWashBay': function (e) {
             e.preventDefault();
+            const new_machine_id = e.target.machineForWashBay.value;
             const washMessage = e.target.message.value;
-            if(Session.get('selectedMachineId') === 'undefined') {
-                Session.set('errorMachine', 'Choose Machine first');
-            } else {
-                const machine_id = Session.get('selectedMachineId');
-                const machineTestId = MachineReady.findOne({_id: machine_id}).machineId;
-                Meteor.call('messageToWashBay', machine_id, machineTestId, washMessage);
-            }
+            // console.log(new_machine_id)
+            try {
+                if (new_machine_id === '' && Session.get('selectedMachineId') === '') {
+                    Bert.alert('No Machine Number for Wash Bay Text', 'danger', 'growl-top-left');
+                } else  if (new_machine_id) {
+                   let _id = MachineReady.findOne({machineId: new_machine_id})._id;
+                //   console.log('manual entry', _id, new_machine_id, washMessage)
+                    Meteor.call('messageToWashBay', _id, new_machine_id, washMessage);
+                } else {
+                    let _id = Session.get('selectedMachineId')
+                    let machineNr = MachineReady.findOne({_id: _id}).machineId;
+                //    console.log('from repair List', _id, machineNr, washMessage)
+                    Meteor.call('messageToWashBay', _id, machineNr, washMessage);
+                }
+            } catch(e) {}
+            Session.set('selectedMachineId', '')
             e.target.message.value = '';
+            e.target.machineForWashBay.value = '';
         },
 
         'click .addIssueToList': (e) => {
