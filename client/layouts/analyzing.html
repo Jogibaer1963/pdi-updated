@@ -414,14 +414,16 @@
 <!-- ------------------------------  PDI informal --------------------------------------------->
 
 <template name="pdiSearch">
+    <!--
     <div>
         <button type="button" class="btn btn-danger date-button">Button</button>
     </div>
+    -->
     <div class="pdi-search-position">
        <h4>PDI performed</h4>
         <div>
               {{#each findPdiPerformer}}
-                <tr class="selectedPdiName {{selectedPdiName}}">
+                <tr class="selectedPdiName {{selectedPdi}}">
                     <td class="pdi-performer">{{pdiPerformer}}</td>
                     <td class="pdi-summary">{{pdiSummary}}</td>
                 </tr>

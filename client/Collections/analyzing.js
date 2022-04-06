@@ -1034,12 +1034,22 @@ Template.pdiSearch.helpers({
         });
     },
 
-    'selectedPdiName': function() {
+    'selectedPdi': function() {
         let name = this.pdiPerformer;
         let nameReturned = Session.get('nameReturned')
         if (name === nameReturned) {
             return 'selected';
         }
+    }
+
+})
+
+Template.pdiSearch.events({
+
+    'click .selectedPdiName': function(e) {
+        e.preventDefault();
+        let name = this.pdiPerformer;
+        Session.set('nameReturned', name)
     }
 
 })
