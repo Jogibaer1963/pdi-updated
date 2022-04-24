@@ -31,7 +31,7 @@
            <br>
            <label for="ommSupp">Supplemental OMM</label>
            <br>
-           <input type="text" class="omInput inputSize" id="ommSupp" name="omSupp" placeholder="Supplemental OMM" value={{ommSupp}} required>
+           <input type="text" class="omInput inputSize" id="ommSupp" name="omSupp" placeholder="Supplemental OMM" value="N/A">
            <br>
            <label for="unloadOmm">Unload OMM</label>
            <br>
@@ -208,7 +208,14 @@
                               <br>
                               Repair Time: {{repairTime}}
                           </td>
-                          <td class="pdi-rep-conf  {{getStatusColor repairStatus}}" style="background-color:{{getStatusColor repairStatus}}; color:{{getStatusColor repairStatus}}" >{{repairStatus}}</td>
+                          <td  class="pdi-estimate-field {{getPdiStatus pdiEstimate}}"
+                               style="background-color:{{getPdiStatus pdiEstimate}};
+                                       color:{{getPdiStatus pdiEstimate}}">{{pdiEstimate}}
+                          </td>
+                          <td class="pdi-rep-conf  {{getStatusColor repairStatus}}"
+                              style="background-color:{{getStatusColor repairStatus}};
+                                      color:{{getStatusColor repairStatus}}">{{repairStatus}}
+                          </td>
                       </tr>
                   </table>
                   <br><br>
@@ -216,6 +223,7 @@
         </table>
     </div>
     <br><br>
+    <button type="button" class="pdi-estimate">Extended Repair Possible</button>
     <div class="issueField">
         <button type="button" class="btn btn-danger deleteRepair">Delete selected repair</button>
     </div>
@@ -247,15 +255,9 @@
     <div class="batteries">
         <form class="batts">
             <label for="batteryC13" class="batteryC13">Battery Volt & CCA</label>
-            <br>
-            <input type="text" class="batteryC13CCA inputSize" id="batteryC13CCA" name="batteryC13CCA" placeholder="Battery C13 CCA" value={{battC13CCA}}>
-            <input type="text" class="batteryC13Volt inputSize" id="batteryC13Volt" name="batteryC13Volt" placeholder="Battery C13 Volt" value={{battC13Volt}}>
             <br><br>
             <input type="text" class="batteryC13 inputSize" id="mtuG001CCA" name="mtuG001CCA" placeholder="Battery MTU G001 CCA" value={{mtuG001CCA}}>
             <input type="text" class="batteryC13 inputSize" id="mtuG001Volt" name="mtuG001Volt" placeholder="Battery MTU G001 Volt" value={{mtuG001Volt}}>
-            <br><br>
-            <input type="text" class="batteryC13 inputSize" id="mtuG005CCA" name="mtuG005CCA" placeholder="Battery MTU G005 CCA" value={{mtuG005CCA}}>
-            <input type="text" class="batteryC13 inputSize" id="mtuG005Volt" name="mtuG005Volt" placeholder="Battery MTU G005 Volt" value={{mtuG005Volt}}>
             <br><br>
             <input type="text" class="batteryC13 inputSize" id="mtuG004CCA" name="mtuG004CCA" placeholder="Battery MTU G004 CCA" value={{mtuG004CCA}}>
             <input type="text" class="batteryC13 inputSize" id="mtuG004Volt" name="mtuG004Volt" placeholder="Battery MTU G004 Volt" value={{mtuG004Volt}}>

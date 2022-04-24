@@ -9,12 +9,14 @@
   margin-left: 25px;
   position: relative;
   top: 80px;
+  width: 300px;
 }
 
 .headerTablePosition {
   left: 37em;
   position: absolute;
   top: 21em;
+  z-index: -1;
 }
 
 table.overViewTable {
@@ -32,8 +34,18 @@ table.preOverViewTable {
   width: 21em;
 }
 
+.machine-font {
+  font-weight: bolder;
+}
+
 .sort-button {
   left: 27em;
   position: absolute;
   top: 21em;
+}
+
+.pdi-release-button {
+  left: 555px;
+  position: absolute;
+  top: 210px;
 }

@@ -139,26 +139,29 @@ if(Meteor.isServer){
 
 
     Meteor.methods({
-/*
-        'newIdForIssues': () => {
-          let result = MachineReady.find({}, {fields: {newIssues: 1}}).fetch();
-          result.forEach((element) => {
-                  if (element.newIssues !== undefined) {
-                          element.newIssues.forEach((element2) => {
-                        //  console.log(element2._id, element2.errorDescription)
-                          let newId = Random.id();
-                          MachineReady.update({_id: element._id, 'newIssues._id': element2._id},
-                              {$set: {'newIssues.$._id': newId}})
-                        //  console.log(element2._id, element2.errorDescription)
-                         })
-                  }
-                })
 
-            console.log('done')
+/*
+        'specialOperation': (contents) => {
+         //   console.log(contents)
+            let arr = contents.split(/[\n\r]/g);
+            arr.forEach((element) => {
+                if (element !== '') {
+                    console.log(element)
+                    MachineReady.update({machineId: element}, {$set: {pdiOk: 1}})
+                }
+            })
         },
 
  */
+
+
+
      // ************************  Load Shipping Machine List  ********************************
+
+        'pdiBlocker': (machineNr, value) => {
+            MachineReady.update({machineId: machineNr}, {$set: {pdiOk: value}})
+        },
+
 
      'upload-machine-list':(contents) => {
          let arr = contents.split(/[\n\r]/g);
@@ -377,24 +380,6 @@ if(Meteor.isServer){
           //  console.log('done')
         },
 
-/*
-        'machines': () => {
-                let result = MachineReady.find({pdiStatus: 1}).fetch();
-                result.forEach(function(element) {
-                    let date = element.startPdiDate
-                    if (date !== undefined) {
-                       let machine = element.machineId;
-                        console.log(machine)
-                       let unixPdiDate = date.getTime().toFixed(0);
-                       let unixPdiDateInt = parseInt(unixPdiDate, 10);
-
-                       MachineReady.update({machineId: machine},
-                           {$set: {unixPdiDate: unixPdiDateInt}})
-                    }
-
-                })
-        },
-*/
 
         'coaDate': (machineId, coaDate) => {
             MachineReady.upsert({machineId: machineId}, {$set: {coaDate: coaDate}});
@@ -1118,6 +1103,12 @@ if(Meteor.isServer){
                                                                  }}});
         },
 
+        'pdiEstimate': (selectedPdiMachineId, openFailure) => {
+            MachineReady.update({_id: selectedPdiMachineId, 'newIssues._id': openFailure},
+                {$set: {'newIssues.$.pdiEstimate': 1}});
+        },
+
+
         'removeFailure': (selectedPdiMachineId, openFailure) => {
           MachineReady.update({_id: selectedPdiMachineId}, {$pull: {newIssues : {_id: openFailure}}});
         },
@@ -1158,12 +1149,11 @@ if(Meteor.isServer){
 
         // --------------------------------------------------------------------------------------------------------------
 
-        'pdiMachineBattery': function(selectedPdiMachineId, loggedInUser, battC13CCA, battC13Volt,
-                                      mtuG001CCA, mtuG001Volt, mtuG005CCA, mtuG005Volt, mtuG004CCA, mtuG004Volt,
-                                      manBatt_1CCA, manBatt_1Volt, manBatt_2CCA, manBatt_2Volt  ) {
-            MachineReady.update({_id: selectedPdiMachineId}, {$set: {batteries: {user: loggedInUser, battC13CCA, battC13Volt,
-                                      mtuG001CCA, mtuG001Volt, mtuG005CCA, mtuG005Volt, mtuG004CCA, mtuG004Volt,
-                                                       manBatt_1CCA, manBatt_1Volt, manBatt_2CCA, manBatt_2Volt, battStatus: 1}}});
+        'pdiMachineBattery': function(selectedPdiMachineId, loggedInUser,
+                                     G001CCA, G001Volt, G004CCA, G004Volt,
+                                       ) {
+            MachineReady.update({_id: selectedPdiMachineId}, {$set: {batteries: {user: loggedInUser,
+                                      G001CCA, G001Volt, G004CCA, G004Volt,  battStatus: 1}}});
 
         },
 
@@ -1411,3 +1401,23 @@ if(Meteor.isServer){
         },
     });
 }
+
+function CSVtoArray(text) {
+    let re_valid = /^\s*(?:'[^'\\]*(?:\\[\S\s][^'\\]*)*'|"[^"\\]*(?:\\[\S\s][^"\\]*)*"|[^,'"\s\\]*(?:\s+[^,'"\s\\]+)*)\s*(?:,\s*(?:'[^'\\]*(?:\\[\S\s][^'\\]*)*'|"[^"\\]*(?:\\[\S\s][^"\\]*)*"|[^,'"\s\\]*(?:\s+[^,'"\s\\]+)*)\s*)*$/;
+   let re_value = /(?!\s*$)\s*(?:'([^'\\]*(?:\\[\S\s][^'\\]*)*)'|"([^"\\]*(?:\\[\S\s][^"\\]*)*)"|([^,'"\s\\]*(?:\s+[^,'"\s\\]+)*))\s*(?:,|$)/g;
+    // Return NULL if input string is not well formed CSV string.
+    if (!re_valid.test(text)) return null;
+    let a = [];                     // Initialize array to receive values.
+    text.replace(re_value, // "Walk" the string using replace with callback.
+        function(m0, m1, m2, m3) {
+            // Remove backslash from \' in single quoted values.
+            if      (m1 !== undefined) a.push(m1.replace(/\\'/g, "'"));
+            // Remove backslash from \" in double quoted values.
+            else if (m2 !== undefined) a.push(m2.replace(/\\"/g, '"'));
+            else if (m3 !== undefined) a.push(m3);
+            return ''; // Return empty string.
+        });
+    // Handle special case of empty last value.
+    if (/,\s*$/.test(text)) a.push('');
+    return a;
+};

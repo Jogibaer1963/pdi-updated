@@ -156,6 +156,7 @@ Template.joinPdiMachine.helpers({
             newIssuesFound.forEach((element) => {
                 element.pictureLocation = repairInfos + element.pictureLocation;
             });
+            console.log(newIssuesFound)
             return newIssuesFound;
         } catch {}
     },
@@ -258,16 +259,12 @@ Template.joinPdiMachine.events({
         e.preventDefault();
         const loggedInUser = Session.get('currentLoggedInUser');
         const pdiMachineId = Session.get('selectedPdiMachineId');
-        const battC13CCA = e.target.batteryC13CCA.value;
-        const battC13Volt = e.target.batteryC13Volt.value;
         const mtuG001CCA = e.target.mtuG001CCA.value;
         const mtuG001Volt = e.target.mtuG001Volt.value;
-        const mtuG005CCA = e.target.mtuG005CCA.value;
-        const mtuG005Volt = e.target.mtuG005Volt.value;
         const mtuG004CCA = e.target.mtuG004CCA.value;
         const mtuG004Volt = e.target.mtuG004Volt.value;
-        Meteor.call('pdiMachineBattery', pdiMachineId, loggedInUser, battC13CCA, battC13Volt,
-            mtuG001CCA, mtuG001Volt, mtuG005CCA, mtuG005Volt, mtuG004CCA, mtuG004Volt,
+        Meteor.call('pdiMachineBattery', pdiMachineId, loggedInUser,
+            mtuG001CCA, mtuG001Volt, mtuG004CCA, mtuG004Volt,
            );
     },
 
@@ -277,7 +274,7 @@ Template.joinPdiMachine.events({
         const pdiMachineId = Session.get('selectedPdiMachineId');
         const fuelMe = e.target.fuelMe.value;
         const ommMain = e.target.omMain.value;
-        const ommSupp = e.target.omSupp.value;
+        const ommSupp = "N/A";
         const ommUnload = e.target.omUnload.value;
         const ommProfiCam = e.target.omProfiCam.value;
         const ommCebis = e.target.omCebis.value;
@@ -385,6 +382,18 @@ Template.joinPdiMachine.events({
     'click .openFailure': function () {
         const openFailure = this._id;
         Session.set('openFailure', openFailure);
+    },
+
+    'click .pdi-estimate': (e) => {
+        e.preventDefault();
+        const selectedPdiMachineId = Session.get('selectedPdiMachineId');
+        const openFailure = Session.get('openFailure');
+        if(selectedPdiMachineId) {
+            Meteor.call('pdiEstimate', selectedPdiMachineId, openFailure);
+            Session.set('openFailure', '')
+        } else {
+            console.log('Lost Machine Number');
+        }
     },
 
     'click .deleteRepair': (e) => {

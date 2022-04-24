@@ -94,7 +94,8 @@
         <tbody class="tableHeight">
           {{#each shippList}}
              <tr class="openInspections {{selectedClass2}}">
-                <td class="pdiMachineField ">{{machineId}}{{newHeadId}}</td>
+                <td class="pdiMachineField {{getPdiStatus pdiEstimate}}"
+                    style="background-color:{{getPdiStatus pdiEstimate}}; font-weight: bolder">{{machineId}}{{newHeadId}}</td>
                 <td class="pdiShipDate">{{date}}</td>
                  <td class="pdiTruckOnOrder {{getStatusTruck truckStatus}}" style="background-color:{{getStatusTruck truckStatus}}; color:{{getStatusTruck truckStatus}}" >{{truckStatus}}</td>
                  <td class="pdiTruckDate truckDateCorrection">{{confirmedShipDate}}</td>
@@ -186,7 +187,9 @@
                 <tbody>
                 {{#each machineToRepair}}
                     <tr class="failureRow {{failureRow}}">
-                        <td>{{machineNr}}</td>
+                        <td class="{{getPdiStatus pdiEstimate}}"
+                        style="background-color:{{getPdiStatus pdiEstimate}};
+                        font-weight: bolder;">{{machineNr}}</td>
                         <td class="pdiComments">{{errorDescription}}</td>
                         <td class="thumbnail thumbnail-box">
                             <img src={{pictureLocation}}

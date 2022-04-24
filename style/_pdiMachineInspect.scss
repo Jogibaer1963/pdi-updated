@@ -175,10 +175,30 @@ img {
   max-width: 100%;
 }
 
+.print-error-description {
+  font-weight: bolder;
+}
+
 .pdi-repair {
   position: absolute;
   left: 34.5em;
   top: 205em;
+}
+
+.pdi-estimate {
+  left: 510px;
+  position: absolute;
+  top: 2500px;
+  background-color: #ed0606;
+  border: none;
+  color: white;
+  padding: 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  border-radius: 50%
 }
 
 .pdiNewIssue {

@@ -276,7 +276,7 @@ Meteor.subscribe('oms');
             const pdiMachineId = Session.get('selectedPdiMachineId');
             const fuelMe = event.target.fuelMe.value;
             const ommMain = event.target.omMain.value;
-            const ommSupp = event.target.omSupp.value;
+            const ommSupp = "N/A" // event.target.omSupp.value;
             const ommUnload = event.target.omUnload.value;
             const ommProfiCam = event.target.omProfiCam.value;
             const ommCebis = event.target.omCebis.value;
@@ -383,6 +383,17 @@ Meteor.subscribe('oms');
             Session.set('openFailure', openFailure);
         },
 
+        'click .pdi-estimate': (e) => {
+            e.preventDefault();
+            const selectedPdiMachineId = Session.get('selectedPdiMachineId');
+            const openFailure = Session.get('openFailure');
+            if(selectedPdiMachineId) {
+                Meteor.call('pdiEstimate', selectedPdiMachineId, openFailure);
+            } else {
+                console.log('Lost Machine Number');
+            }
+        },
+
         'click .deleteRepair': (e) => {
             e.preventDefault();
             const selectedPdiMachineId = Session.get('selectedPdiMachineId');
@@ -473,16 +484,16 @@ Meteor.subscribe('oms');
             Session.set('selectedPdiMachine', localStorage.getItem('selectedPdi'));
             const loggedInUser = Session.get('currentLoggedInUser');
             const pdiMachineId = Session.get('selectedPdiMachineId');
-            const battC13CCA = e.target.batteryC13CCA.value;
-            const battC13Volt = e.target.batteryC13Volt.value;
+          //  const battC13CCA = e.target.batteryC13CCA.value;
+           // const battC13Volt = e.target.batteryC13Volt.value;
             const mtuG001CCA = e.target.mtuG001CCA.value;
             const mtuG001Volt = e.target.mtuG001Volt.value;
-            const mtuG005CCA = e.target.mtuG005CCA.value;
-            const mtuG005Volt = e.target.mtuG005Volt.value;
+          //  const mtuG005CCA = e.target.mtuG005CCA.value;
+          //  const mtuG005Volt = e.target.mtuG005Volt.value;
             const mtuG004CCA = e.target.mtuG004CCA.value;
             const mtuG004Volt = e.target.mtuG004Volt.value;
-            Meteor.call('pdiMachineBattery', pdiMachineId, loggedInUser, battC13CCA, battC13Volt,
-                mtuG001CCA, mtuG001Volt, mtuG005CCA, mtuG005Volt, mtuG004CCA, mtuG004Volt);
+            Meteor.call('pdiMachineBattery', pdiMachineId, loggedInUser,
+                mtuG001CCA, mtuG001Volt, mtuG004CCA, mtuG004Volt);
         },
 
         'submit .afterPdiFuel': (event) => {
@@ -495,18 +506,24 @@ Meteor.subscribe('oms');
             let k = 0;
             if(selectedPdiMachineId) {
                let result =  MachineReady.findOne({_id: selectedPdiMachineId},
-                                                        {fields: {newIssues: 1, omms: 1}});
+                                                        {fields: {newIssues: 1, omms: 1, batteries: 1}});
                try {
-               if (result.omms === undefined) {
-                  k = 1;
-               }
-               } catch(e) {
-               }
-                result.newIssues.forEach((element) => {
-                    if (element.responsible === '') {
+                   if (result.omms === undefined) {
+                      k = 1;
+                      console.log('omms', k)
+                   }
+                    result.newIssues.forEach((element) => {
+                        if (element.responsible === '') {
+                           k = 1;
+                           console.log('new Issue', k)
+                        }
+                    })
+                   if (result.batteries === undefined) {
                        k = 1;
-                    }
-                })
+                       console.log('batteries', k, result.batteries)
+                   }
+               } catch(e) {
+                      }
             } else {
            //     console.log("Lost Machine Number")
             }

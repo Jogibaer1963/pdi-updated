@@ -18,11 +18,11 @@
        <h4>Wash Bay    :  {{countWash}}</h4>
        <h4>Not shipped yet but ready : {{countShip}}</h4>
     </div>
-    <table class="overViewTable blueTable " cellpadding="10">
+    <table class="overViewTable blueTable">
       <thead>
          <tr>
            <th class="pdiMachineField"><strong>Machine</strong></th>
-           <th class="pdiShipDate"><strong>COA Ship Date</strong></th>
+           <th class="pdiShipDate"><strong></strong></th>
            <th class="pdiShipDate"><strong>Shipp Date</strong></th>
            <th class="pdiPDIField"><strong>PDI</strong></th>
            <th class="pdiRepField"><strong>Rep</strong></th>
@@ -33,7 +33,7 @@
       <tbody>
           {{#each machineOverView}}
              <tr class="">
-               <td class="pdiMachineField">{{machineId}}</td>
+               <td class="pdiMachineField machine-font {{getStatus pdiOk}}" style="background-color:{{getStatus pdiOk}}; color:{{getStatus pdiOk}}" >{{machineId}}</td>
                <td class="pdiShipDate" style="width: 50px">{{coaDate}}</td>
                <td class="pdiShipDate" style="width: 50px">{{date}}</td>
                <td class="pdiPDIField {{getStatusColor pdiStatus}}"
@@ -49,6 +49,23 @@
     <div class="sort-button">
             <button type="button" class="btn btn-success sortButton">Reverse Sorting</button>
     </div>
+
+    <div class="pdi-release-button">
+        <form class="pdiReleaseButton">
+            <label for="machineNr">Release Machine for PDI </label>
+            <br>
+            <input type="text" id="machineNr" name="machineNr">
+            <button type="submit" class="btn btn-success">Submit</button>
+        </form>
+
+        <form class="pdiBlockButton">
+            <label for="machineNr">Block Machine for PDI </label>
+            <br>
+            <input type="text" id="machineNr" name="machineNr">
+            <button type="submit" class="btn btn-danger">Submit</button>
+        </form>
+    </div>
+
   <div class="headerTablePosition">
     <table class="headerTable blueTable" cellpadding="10">
        <thead>

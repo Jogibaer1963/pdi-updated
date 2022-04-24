@@ -61,7 +61,7 @@
      </div>
 
 
-    <table class="pdiTable blueTable tablePdiOverview" cellpadding="10">
+    <table class="pdiTable blueTable tablePdiOverview">
          <thead>
             <tr>
               <th class="pdiMachineField"><strong>Machine</strong></th>
@@ -80,7 +80,7 @@
         <tbody>
            {{#each shipList}}
             <tr class="openInspections {{selectedClass}}">
-                <td class="pdiMachineField">{{machineId}}</td>
+                <td class="pdiMachineField {{getStatus pdiOk}}" style="background-color:{{getStatus pdiOk}}; color:{{getStatus pdiOk}}" >{{machineId}}</td>
                 <td class="pdiShipDate">{{date}}</td>
                 <td class="pdiShipDate">{{bay19Planned}}</td>
                 <td class="pdiLocation" style="background-color: #6fd981">{{locationId}}</td>

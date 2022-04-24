@@ -15,8 +15,6 @@
     Session.set('selectedProfiId', '');
 
 
-
-
     Template.overView.helpers({
 //-----------------------------  Over View counter --------------------------------------------------------
         countPdi: function() {
@@ -39,7 +37,7 @@
 
        machineOverView: function() {
         let choice = Session.get('toggleSort');
-        return MachineReady.find({$or: [{shipStatus: 0}]}, {sort: {date: choice}});
+        return MachineReady.find({$or: [{shipStatus: 0}]}, {sort: {date: choice}}).fetch();
         },
 
 //------------------------------- Header Table --------------------------------------------------------------
@@ -63,7 +61,21 @@
             } else {
                 Session.set('toggleSort', -1);
             }
-        }
+        },
+
+        'submit .pdiReleaseButton': function(e) {
+            e.preventDefault();
+            let machineNr = e.target.machineNr.value;
+            Meteor.call('pdiBlocker', machineNr, 0)
+            e.target.machineNr.value = ""
+        },
+
+        'submit .pdiBlockButton': function(e) {
+            e.preventDefault();
+            let machineNr = e.target.machineNr.value;
+            Meteor.call('pdiBlocker', machineNr, 1)
+            e.target.machineNr.value = ""
+        },
 
 
     });

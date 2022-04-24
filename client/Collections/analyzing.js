@@ -681,7 +681,7 @@ Template.analyzingSupplier.helpers({
 
 
 
-    'qualityResponse':function (e) {
+    'qualityResponse':function () {
         let line = this._id;
         let selectedLine = Session.get('selectedLine');
         if (line === selectedLine) {
@@ -801,7 +801,7 @@ Template.analyzingSupplier.events({
         e.preventDefault();
         let machine_string = e.target.lookUp.value;
         let machine = machine_string.toUpperCase();
-        console.log(machine)
+
         Session.set('specificMachine', machine);
         Session.set('machine-look-up', true);
         Session.set('machine-number', machine)
@@ -895,7 +895,7 @@ Template.analyzingSupplier.events({
 
 
 });
-
+/*
 function supplierFunction(result, singleSupplier, repairInfos, statusElement,
                           supplierList, singleResult) {
     result.forEach((element) => {
@@ -923,16 +923,20 @@ function supplierFunction(result, singleSupplier, repairInfos, statusElement,
     return singleResult;
 }
 
+ */
+
 //  ************************************  PDI Informal  *******************************
 
 Template.pdiSearch.helpers({
+
+
 
     findPdiPerformer: () => {
         let endResult = [];
         let singleResultArray = [];
         let result, pdiPerformer, graph, coAuditorTrue;
         result = MachineReady.find({$and: [{pdiStatus: 1},
-                {unixPdiDate: {$gt: 1598936400000}}]}).fetch(); // unix date is 1.09.2020
+                {unixPdiDate: {$gt: 1630476000000}}]}).fetch(); // unix date is 1.09.2020
         result.forEach((element) => {
             if (element.coAuditor !== undefined) {
                 pdiPerformer = element.coAuditor;
@@ -945,14 +949,15 @@ Template.pdiSearch.helpers({
                 pdiPerformer : pdiPerformer,
                 machineNr : element.machineId,
                 issuesFound : element.newIssues.length,
-                coAuditor : coAuditorTrue
+                coAuditor : coAuditorTrue,
+                timeDate : moment(element.unixPdiDate).format('L')
                }
             endResult.push(graph)
         })
         endResult.sort((a,b) => (a.pdiPerformer > b.pdiPerformer) ? 1 :
                                                 ((b.pdiPerformer > a.pdiPerformer) ? -1 : 0))
         Session.set('graphPdiEndResult', endResult);
-       // console.log(endResult)
+
         let lookup = endResult.reduce((a, e) => {
             a[e.pdiPerformer] = ++ a[e.pdiPerformer] || 0;
             return a;
@@ -967,7 +972,6 @@ Template.pdiSearch.helpers({
             }
             singleResultArray.push(objKeyValue)
         }
-    //    console.log(singleResultArray)
       return singleResultArray
     },
 
@@ -1033,6 +1037,70 @@ Template.pdiSearch.helpers({
             });
         });
     },
+
+    pdiPerDayResult: function () {
+        // Gather data:
+        let pdiMachines = [];
+        let pdiIssuesFound = [];
+        let pdiResult = Session.get('graphPdiEndResult');
+
+        let returnedPdiPerformer = Session.get('nameReturned');
+        pdiResult.forEach((element) => {
+            if (element.pdiPerformer === returnedPdiPerformer) {
+              //  console.log(element.timeDate, element.pdiPerformer)
+            }
+        })
+        // Use Meteor.defer() to create chart after DOM is ready:
+        let titleText = ' PDI per Day';
+        Meteor.defer(function() {
+            // Create standard Highcharts chart with options:
+            Highcharts.chart('chart_7', {
+                title: {
+                    text: titleText
+                },
+                tooltip: {
+                    shared: true
+                },
+                chart: {
+                    style: {
+                        fontFamily: '\'Unica One\', sans-serif'
+                    },
+                    plotBorderColor: '#606063',
+                    height: 500,
+                    width: 900,
+                    zoomType: 'xy'
+                },
+                yAxis: {
+                    categories: [],
+                    title: {enabled: true,
+                        text: 'Issues Found',
+                        style: {
+                            fontWeight: 'normal'
+                        }
+                    }
+                },
+                xAxis: {
+                    categories: pdiMachines,
+                    title: {
+                        enabled: true,
+                        text: 'Machine',
+                        style: {
+                            fontWeight: 'normal'
+                        }
+                    }
+                },
+                series: [
+                    {
+                        name: '',
+                        type: 'column',
+                        data: pdiIssuesFound
+                    }
+                ]
+            });
+        });
+    },
+
+
 
     'selectedPdi': function() {
         let name = this.pdiPerformer;

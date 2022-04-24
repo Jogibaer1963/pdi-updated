@@ -21,10 +21,23 @@ Meteor.subscribe('addIssues');
                         {pdiStatus: 1},
                         {$or: [{repairStatus: 0}, {repairStatus: 2}]}
                     ]
-                }, {sort: {date: 1}}).fetch();
-                if (result[0].partsOnOrder > 0) {
-                    result[0].partsOnOrder = 2;
-                }
+                }, {fields: {machineId: 1, date: 1, truckStatus: 1, confirmedShipDate: 1,
+                                      shippingComment: 1, kit: 1, repairStatus: 1, washStatus: 1,
+                                      locationId: 1, kitStatus: 1, partsOnOrder: 1, newIssues: 1}  }, {sort: {date: 1}}).fetch();
+                try {
+                    if (result[0].partsOnOrder > 0) {
+                        result[0].partsOnOrder = 2;
+                    }
+                } catch (e) {
+                   }
+                   result.forEach((element) => {
+                       element.newIssues.every(element2 => {
+                           if (element2.pdiEstimate === 1) {
+                               element.pdiEstimate = 1
+                               return false
+                           }
+                       })
+                   })
                 return result;
             } else {
                 Session.set('repair', '**** Upcoming Shipments****');

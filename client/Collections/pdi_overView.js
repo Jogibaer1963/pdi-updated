@@ -52,12 +52,12 @@
 
         'click .openInspections': function () {
             const openInspect = this._id;
-            // localStorage.setItem('selectedPdi', openInspect);
-            Session.set('selectedPdiMachine', openInspect);
-            const machineNr = MachineReady.findOne({_id: openInspect}).machineId;
-            // localStorage.setItem('pdiMachine', machineId);
-            Session.set('pdiMachineNumber', machineNr);
-            //   Session.setPersistent('currentLoggedInUser', user);
+            let pdiOk = this.pdiOk;
+            if (pdiOk !== 1) {
+                Session.set('selectedPdiMachine', openInspect);
+                const machineNr = MachineReady.findOne({_id: openInspect}).machineId;
+                Session.set('pdiMachineNumber', machineNr);
+            }
         },
 
         'click .machinePdi': function (e) {

@@ -57,7 +57,7 @@
   margin: 10px;
 }
 
-$grey: #978f93;
+$grey: rgba(151, 143, 147, 0.3);
 
 .selected {
   background-color: $grey;
@@ -104,13 +104,23 @@ $comm-status: #252525;
 }
 
 .inActiveButton-1 {
-  background: repeating-linear-gradient(
+  background: $comm-status repeating-linear-gradient(
                   45deg,
                   #e6e6e6,
                   #bc171b 10px,
                   #e6e6e6 10px,
                   #bc171b 20px
   );
-  background-color: $comm-status;
   opacity: .5;
+  pointer-events: none;
+}
+
+.inActiveButton {
+  background: $comm-status repeating-linear-gradient(
+                  45deg,
+                  #e6e6e6,
+                  #bc171b
+  );
+  opacity: .8;
+  pointer-events: none;
 }

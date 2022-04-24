@@ -298,12 +298,14 @@ table.headerTable {
 .openStatus {
   margin-left: 25px;
   position: relative;
-  top: 80px; }
+  top: 80px;
+  width: 300px; }
 
 .headerTablePosition {
   left: 37em;
   position: absolute;
-  top: 21em; }
+  top: 21em;
+  z-index: -1; }
 
 table.overViewTable {
   float: left;
@@ -318,10 +320,18 @@ table.preOverViewTable {
   top: 6em;
   width: 21em; }
 
+.machine-font {
+  font-weight: bolder; }
+
 .sort-button {
   left: 27em;
   position: absolute;
   top: 21em; }
+
+.pdi-release-button {
+  left: 555px;
+  position: absolute;
+  top: 210px; }
 
 .locationTable {
   position: relative;
@@ -1075,10 +1085,28 @@ img {
   max-height: 100%;
   max-width: 100%; }
 
+.print-error-description {
+  font-weight: bolder; }
+
 .pdi-repair {
   position: absolute;
   left: 34.5em;
   top: 205em; }
+
+.pdi-estimate {
+  left: 510px;
+  position: absolute;
+  top: 2500px;
+  background-color: #ed0606;
+  border: none;
+  color: white;
+  padding: 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  border-radius: 50%; }
 
 .pdiNewIssue {
   width: 371px; }
@@ -2056,7 +2084,12 @@ table.analyze-team-table {
 .pdi-result-graph {
   left: 30em;
   position: absolute;
-  top: 30em; }
+  top: 15em; }
+
+.pdi-per-day-result {
+  left: 30em;
+  position: absolute;
+  top: 50em; }
 
 .team-repair-time-graph {
   left: 35em;
@@ -2434,13 +2467,13 @@ table.supplier-result-table {
   margin: 10px; }
 
 .selected {
-  background-color: #978f93; }
+  background-color: rgba(151, 143, 147, 0.3); }
 
 .selectedMachine {
-  background-color: #978f93; }
+  background-color: rgba(151, 143, 147, 0.3); }
 
 .selectedArea {
-  background-color: #978f93; }
+  background-color: rgba(151, 143, 147, 0.3); }
 
 .selectedBackgroundGreen {
   background-color: green; }
@@ -2464,8 +2497,13 @@ table.supplier-result-table {
   pointer-events: auto; }
 
 .inActiveButton-1 {
-  background: repeating-linear-gradient(45deg, #e6e6e6, #bc171b 10px, #e6e6e6 10px, #bc171b 20px);
-  background-color: #252525;
-  opacity: .5; }
+  background: #252525 repeating-linear-gradient(45deg, #e6e6e6, #bc171b 10px, #e6e6e6 10px, #bc171b 20px);
+  opacity: .5;
+  pointer-events: none; }
+
+.inActiveButton {
+  background: #252525 repeating-linear-gradient(45deg, #e6e6e6, #bc171b);
+  opacity: .8;
+  pointer-events: none; }
 
 /*# sourceMappingURL=main.css.map */
