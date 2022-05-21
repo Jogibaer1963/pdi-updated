@@ -510,7 +510,7 @@ Template.analyzingSupplier.helpers({
                     let issueArray = element.newIssues;
                     let amountOnOrder = element.amountOnOrder;
                     issueArray.forEach((element2) => {
-                        if (element2.checkStatus === true) {
+                        if (element2.checkStatus === true) { // issue is active in List
                        // console.log(element2)
                             if (element2.responsible === "N/A") {
                              //   console.log('N/A detected', element2._id)
@@ -545,7 +545,7 @@ Template.analyzingSupplier.helpers({
                     let issueArray = element.newIssues;
                     let amountOnOrder = element.amountOnOrder;
                     issueArray.forEach((element2) => {
-                        if (element2.checkStatus === false) {
+                        if (element2.checkStatus === false) { // issue is closed and disappeared from List
                             // console.log(element2)
                             if (element2.responsible === "N/A") {
                         //        console.log('N/A detected', element2._id)
