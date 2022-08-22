@@ -1,15 +1,12 @@
-Meteor.subscribe("mcoReview");
+//Meteor.subscribe("mcoReview");
 
-
+/*
 
 Template.ecnPage.helpers({
 
     mcoOverView: function() {
         return mcoReview.find({}, {sort: {effectiveDate: -1}});
     },
-
-
-
 
 });
 
@@ -42,11 +39,11 @@ Template.ecnPage.events({
         const materialScrap = Session.get('materialStatus');
 
         Meteor.call('mcoNew', newEcn, ecnEffectivity, machineSerial, materialScrap, mcoNotes, newMcoTeam);
-        event.target.newEcn.value= "8100";
-        event.target.ecnEffectivity.value= "";
+        e.target.newEcn.value= "8100";
+        e.target.ecnEffectivity.value= "";
         document.getElementById('machineRecording').checked = false;
         document.getElementById('materialStatus').checked = false;
-        event.target.mcoNotes.value= "";
+        e.target.mcoNotes.value= "";
         document.getElementById('mcoTeam_1').checked= false;
         document.getElementById('mcoTeam_2').checked= false;
         document.getElementById('mcoTeam_3').checked= false;
@@ -54,15 +51,15 @@ Template.ecnPage.events({
         document.getElementById('mcoTeam_5').checked= false;
     },
 
-    'submit .searchMCO': () => {
-       event.preventDefault();
+    'submit .searchMCO': (e) => {
+       e.preventDefault(e);
         const newMcoSearch= [];
         $('input[name = mcoSearch]:checked').each(function() {
             newMcoSearch.push($(this).val());
         });
-       const mcoReCording = event.target.reCording.value;
-       const matStatus = event.target.matStatus.value;
-       const mcoSearchString = event.target.mcoSearchNotes.value;
+       const mcoReCording = e.target.reCording.value;
+       const matStatus = e.target.matStatus.value;
+       const mcoSearchString = e.target.mcoSearchNotes.value;
        Meteor.call('mcoSearch', newMcoSearch, mcoReCording, matStatus, mcoSearchString);
         document.getElementById('team1').checked= false;
         document.getElementById('team2').checked= false;
@@ -75,6 +72,8 @@ Template.ecnPage.events({
     }
 
 });
+
+ */
 
 
 

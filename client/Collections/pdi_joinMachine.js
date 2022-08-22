@@ -52,24 +52,28 @@ Template.joinPdiMachine.helpers({
             console.log('error ', e)
         }
     },
-
+/*
     fuelStart: () => {
         try {
             return Session.get('omms').fuelStart;
         } catch (e) {}
     },
 
+ */
+
     ommMain: () => {
         try {
             return Session.get('omms').ommMain;
         } catch (e) {}
     },
-
+/*
     ommSupp: () => {
         try {
             return Session.get('omms').ommSupp;
         } catch (e) {}
     },
+
+ */
 
     ommUnload: () => {
         try {
@@ -156,7 +160,7 @@ Template.joinPdiMachine.helpers({
             newIssuesFound.forEach((element) => {
                 element.pictureLocation = repairInfos + element.pictureLocation;
             });
-            console.log(newIssuesFound)
+            //console.log(newIssuesFound)
             return newIssuesFound;
         } catch {}
     },
@@ -182,7 +186,7 @@ Template.joinPdiMachine.helpers({
             } catch (e) {
               }
     },
-
+/*
     battC13CCA: () => {
         try {
             return Session.get('batteries').battC13CCA;
@@ -195,6 +199,8 @@ Template.joinPdiMachine.helpers({
         } catch (e) {}
     },
 
+ */
+
     mtuG001CCA: () => {
         try {
             return Session.get('batteries').mtuG001CCA;
@@ -206,7 +212,7 @@ Template.joinPdiMachine.helpers({
             return Session.get('batteries').mtuG001Volt;
         } catch (e) {}
     },
-
+/*
     mtuG005CCA: () => {
         try {
             return Session.get('batteries').mtuG005CCA;
@@ -218,6 +224,8 @@ Template.joinPdiMachine.helpers({
             return Session.get('batteries').mtuG005Volt;
         } catch (e) {}
     },
+
+ */
 
     mtuG004CCA: () => {
         try {
@@ -272,14 +280,14 @@ Template.joinPdiMachine.events({
         e.preventDefault();
         const loggedInUser = Session.get('currentLoggedInUser');
         const pdiMachineId = Session.get('selectedPdiMachineId');
-        const fuelMe = e.target.fuelMe.value;
+    //    const fuelMe = e.target.fuelMe.value;
         const ommMain = e.target.omMain.value;
-        const ommSupp = "N/A";
+   //     const ommSupp = "N/A";
         const ommUnload = e.target.omUnload.value;
         const ommProfiCam = e.target.omProfiCam.value;
         const ommCebis = e.target.omCebis.value;
         const ommTerra = e.target.omTerra.value;
-        Meteor.call('pdiMachineOmm', pdiMachineId, loggedInUser, fuelMe, ommMain, ommSupp,
+        Meteor.call('pdiMachineOmm', pdiMachineId, loggedInUser, ommMain,
             ommUnload,ommProfiCam, ommCebis, ommTerra);
     },
 
@@ -479,7 +487,7 @@ Template.joinPdiMachine.events({
         event.preventDefault();
         const selectedPdiMachineId = Session.get('selectedPdiMachineId');
         const selectedPdiMachineNr = Session.get('selectedPdiMachineNr');
-        let fuelAfter = event.target.afterFuel.value;
+    //    let fuelAfter = event.target.afterFuel.value;
         let k = 0;
         if(selectedPdiMachineId) {
             let result =  MachineReady.findOne({_id: selectedPdiMachineId}, {fields: {newIssues: 1}});
@@ -492,15 +500,12 @@ Template.joinPdiMachine.events({
             //     console.log("Lost Machine Number")
         }
         if (k === 0) {
-            Meteor.call('fuelAfterPdi', selectedPdiMachineId, selectedPdiMachineNr, fuelAfter);
+            Meteor.call('fuelAfterPdi', selectedPdiMachineId, selectedPdiMachineNr);
             FlowRouter.go('/inspectionStart');
         } else {
             window.alert('One or more Issues were not assigned to a Team')
         }
     }
-
-
-
 });
 
 

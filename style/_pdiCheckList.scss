@@ -11,12 +11,6 @@ $rangeStartEndTable: 100px;
 
 // Buttons
 
-.checklistReturn-btn {
-  position: fixed;
-  right: 250px;
-  color: black;
-}
-
 // Anker tags
 
 a:hover {
@@ -38,15 +32,6 @@ a:hover {
   color:white;
   padding:10px;
   vertical-align: center;
-}
-
-.tableHeadFixed {
-  position: fixed
-}
-
-.scroll {
-  max-height: 60px;
-  overflow: auto;
 }
 
 // Input Fields
@@ -79,12 +64,6 @@ select > option[value=''] {
 
 .inputRange {
   width: 220px;
-}
-
-.dependencies {
-  position: relative;
-  left: 30px;
-  top: 19px;
 }
 
 .checkBoxCheckList {

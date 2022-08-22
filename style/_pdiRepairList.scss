@@ -1,9 +1,4 @@
 
-.searchButton {
-  top: 10em;
-  left: 10em;
-}
-
 .searchMe {
   position: absolute;
   top: 16em;
@@ -16,29 +11,6 @@
   left: 60em;
 }
 
-.historicButtonPos {
-  position: absolute;
-  top: 16em;
-  left: 8em;
-}
-
-.dropDownHistoric {
-  font-size: 20px;
-  white-space: nowrap;
-  border-radius: 1px;
-  padding: 1px;
-  z-index: 1001;
-  // For opening transition
-  transform-origin: center top;
-}
-
-.pdiYear {
-  left: 24em;
-  position: absolute;
-  top: 16em;
-
-}
-
 .pdi-Date {
 
 }
@@ -49,23 +21,6 @@ table.pdiRepairList {
   margin-left: 25px;
   width: 242px;
   left: 20em;
-}
-
-.repairListButton {
-  position: absolute;
-  top: 200px;
-  margin-left: 25px;
-}
-
-.container {
-  overflow: scroll;
-  position: absolute;
-  top: 20em;
-  left: 40em;
-  height: 700px;
-  width: 800px;
-  border: black 1px solid;
-  padding: 10px;
 }
 
 .pdiUser {
@@ -82,24 +37,6 @@ table.pdiRepairList {
   position: relative;
   top: 4em;
   left: 2em;
-}
-
-.imageMargin {
-  margin-bottom: 20px;
-}
-
-.containerText {
-  font-weight: bolder;
-}
-
-table.printTableWidth {
-  width: 500px;
-}
-
-.printTable {
-  left: 40em;
-  position: absolute;
-  top: 20em;
 }
 
 .print-error-description {

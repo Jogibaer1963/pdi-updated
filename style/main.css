@@ -110,9 +110,6 @@ table.blueTable tfoot {
 table.blueTable tfoot td {
   font-size: 14px; }
 
-table.blueTable tfoot .links {
-  text-align: right; }
-
 table.blueTable tfoot .links a {
   display: inline-block;
   background: #8f8e8c;
@@ -158,10 +155,6 @@ table.tableAdminPos {
   max-width: 60px;
   min-width: 60px; }
 
-.partsOnOrder {
-  max-width: 50px;
-  min-width: 50px; }
-
 .userLogOut {
   max-width: 50px;
   min-width: 50px;
@@ -171,9 +164,6 @@ table.tableAdminPos {
   max-width: 50px;
   min-width: 50px;
   text-align: center; }
-
-.shippingMachines {
-  height: 100px; }
 
 .tablePdiOverview {
   position: absolute;
@@ -285,11 +275,6 @@ table.headerTable {
   max-width: 850px;
   min-width: 850px; }
 
-.headerPos {
-  position: absolute;
-  left: 450px;
-  top: 300px; }
-
 .overView {
   left: 200px;
   position: relative;
@@ -309,13 +294,6 @@ table.headerTable {
 
 table.overViewTable {
   float: left;
-  position: relative;
-  top: 6em;
-  width: 21em; }
-
-table.preOverViewTable {
-  float: left;
-  left: 23em;
   position: relative;
   top: 6em;
   width: 21em; }
@@ -405,9 +383,6 @@ table.locationTable {
   position: relative;
   top: -3em; }
 
-.shippingTable {
-  margin-top: 3em; }
-
 .searchMachine {
   margin-left: 0.8em; }
 
@@ -452,34 +427,6 @@ table.locationTable {
 
 .confirmedDate {
   font-weight: bold; }
-
-.addList {
-  left: 12em;
-  position: relative;
-  top: -3.8em; }
-
-.removeList {
-  left: 3.4em;
-  position: relative; }
-
-table.returnMachines {
-  width: 190px; }
-
-.returnButton {
-  left: 1.6em;
-  position: absolute;
-  top: -5em; }
-
-.returnersHead {
-  font-weight: bold;
-  left: 3em;
-  position: absolute;
-  top: -2em; }
-
-.machineReturnTable {
-  left: 120em;
-  position: absolute;
-  top: 27.7em; }
 
 table.editTable tbody.editBody, thead.editTableHead {
   display: revert;
@@ -596,29 +543,8 @@ table.trailerTable {
   position: relative;
   left: 25em; }
 
-.navTruckStatus {
-  position: relative;
-  left: 50em; }
-
-.machineSearchButton {
-  position: relative;
-  top: 15em;
-  left: 20em; }
-
-.inputSearchMary {
-  background: repeating-linear-gradient(45deg, #e6e6e6, #bc171b 10px, #e6e6e6 10px, #bc171b 20px); }
-
-table.truckTable {
-  position: relative;
-  top: 15em;
-  margin-left: 2em; }
-
 tbody.machineSearchTable {
   height: 50px; }
-
-.inProcess {
-  animation: glowing 1500ms infinite;
-  color: transparent; }
 
 @keyframes glowing {
   0% {
@@ -640,11 +566,6 @@ tbody.machineSearchTable {
   100% {
     background-color: #1cbdee;
     box-shadow: 0 0 3px #ec67ff; } }
-.checklistReturn-btn {
-  position: fixed;
-  right: 250px;
-  color: black; }
-
 a:hover {
   background-color: lightgrey;
   text-align: right;
@@ -661,13 +582,6 @@ a:hover {
   color: white;
   padding: 10px;
   vertical-align: center; }
-
-.tableHeadFixed {
-  position: fixed; }
-
-.scroll {
-  max-height: 60px;
-  overflow: auto; }
 
 .input {
   border: black 1px;
@@ -691,11 +605,6 @@ select > option[value=''] {
 
 .inputRange {
   width: 220px; }
-
-.dependencies {
-  position: relative;
-  left: 30px;
-  top: 19px; }
 
 .checkBoxCheckList {
   position: relative;
@@ -836,18 +745,12 @@ table.pdiTable {
   top: 1em;
   margin: 10px; }
 
-.singleVariantButton {
-  margin: 15px; }
-
 .variantTable {
   position: relative;
   top: -20em; }
 
 .variant-info-thumb {
   width: 90px; }
-
-.image-thumb {
-  width: 50px; }
 
 .variant-visibility {
   width: 100px;
@@ -857,30 +760,15 @@ table.pdiTable {
   text-align: center;
   min-width: 90px; }
 
-.variant-hidden {
-  text-align: center; }
-
-.addPicToVariant {
-  left: 50em;
-  position: relative;
-  top: 4em;
-  width: 12em; }
-
 .submit-pic {
   left: 55em;
   position: absolute;
   top: 20em; }
 
-.noVariant {
-  background: repeating-linear-gradient(45deg, #e8bf7e, #f4a4ae 10px, #f85558 10px); }
-
-.confirmBoxWidth {
-  width: 6.5em; }
-
 .pdi-repair-finnish {
-  left: 65em;
+  left: 100em;
   position: absolute;
-  top: 16em; }
+  top: 794px; }
 
 .toggle-button {
   left: 35em;
@@ -897,6 +785,26 @@ table.repair-table {
   position: absolute;
   top: 47em; }
 
+.road-test-table {
+  left: 1127px;
+  position: absolute;
+  top: 16px; }
+
+.road-test-header {
+  left: 380px;
+  position: relative;
+  top: 250px; }
+
+.road-test-button {
+  left: 1500px;
+  position: absolute;
+  top: 240px; }
+
+.road-test-inputs {
+  left: 2150px;
+  position: absolute;
+  top: 326px; }
+
 .thumbnail-pdi-crew:hover img {
   left: 37em;
   position: absolute;
@@ -905,7 +813,7 @@ table.repair-table {
   z-index: 1; }
 
 table.display-error {
-  width: 995px; }
+  width: 1160px; }
 
 .pdi-comment {
   width: 200px; }
@@ -934,15 +842,15 @@ table.display-error {
   min-width: 70px; }
 
 .pdi-rep-tech {
-  width: 70px; }
+  width: 97px; }
 
 .utility-repair {
-  left: 75em;
+  left: 87em;
   position: absolute;
   top: 50em; }
 
 .pdi-open-repair {
-  left: 2em;
+  left: 1px;
   position: absolute;
   top: 1em; }
 
@@ -979,10 +887,6 @@ table.display-error {
 
 .config-image {
   width: 100em; }
-
-.resize {
-  height: auto;
-  width: 400px; }
 
 .buttonOK {
   bottom: 0;
@@ -1108,9 +1012,6 @@ img {
   margin: 4px 2px;
   border-radius: 50%; }
 
-.pdiNewIssue {
-  width: 371px; }
-
 .pdi-repair-button {
   position: absolute;
   left: 6em; }
@@ -1119,9 +1020,6 @@ img {
   left: 26em;
   position: absolute;
   top: 1.9em; }
-
-.repairPointStyle {
-  height: 2em; }
 
 .deleteRepair {
   width: 30em; }
@@ -1184,10 +1082,6 @@ table.messageTable {
   top: 10em;
   left: 31em; }
 
-.searchButton {
-  top: 10em;
-  left: 10em; }
-
 .searchMe {
   position: absolute;
   top: 16em;
@@ -1198,45 +1092,12 @@ table.messageTable {
   top: 16em;
   left: 60em; }
 
-.historicButtonPos {
-  position: absolute;
-  top: 16em;
-  left: 8em; }
-
-.dropDownHistoric {
-  font-size: 20px;
-  white-space: nowrap;
-  border-radius: 1px;
-  padding: 1px;
-  z-index: 1001;
-  transform-origin: center top; }
-
-.pdiYear {
-  left: 24em;
-  position: absolute;
-  top: 16em; }
-
 table.pdiRepairList {
   position: absolute;
   top: 280px;
   margin-left: 25px;
   width: 242px;
   left: 20em; }
-
-.repairListButton {
-  position: absolute;
-  top: 200px;
-  margin-left: 25px; }
-
-.container {
-  overflow: scroll;
-  position: absolute;
-  top: 20em;
-  left: 40em;
-  height: 700px;
-  width: 800px;
-  border: black 1px solid;
-  padding: 10px; }
 
 .pdiUser {
   padding: 25px; }
@@ -1250,20 +1111,6 @@ table.pdiRepairList {
   position: relative;
   top: 4em;
   left: 2em; }
-
-.imageMargin {
-  margin-bottom: 20px; }
-
-.containerText {
-  font-weight: bolder; }
-
-table.printTableWidth {
-  width: 500px; }
-
-.printTable {
-  left: 40em;
-  position: absolute;
-  top: 20em; }
 
 .print-error-description {
   width: 29em; }
@@ -1285,16 +1132,6 @@ table.issue-list {
 .image-box-thumb {
   width: 100px;
   height: 100px; }
-
-.itemHeadLiner {
-  position: relative;
-  top: 2em;
-  left: 3em; }
-
-.itemButtons {
-  position: relative;
-  top: 3em;
-  left: 2em; }
 
 .add-to-pdi {
   position: absolute;
@@ -1407,34 +1244,10 @@ table.siInactive {
   top: -0.5em;
   left: 18em; }
 
-.posDatei {
-  position: relative;
-  top: -8em;
-  left: 20em; }
-
-.removeSiButton {
-  position: absolute;
-  top: 32px;
-  left: 10px; }
-
 .reactSi {
   position: absolute;
   top: 38em;
   left: 78em; }
-
-.siText {
-  position: absolute;
-  top: -40px;
-  left: 400px;
-  width: 450px; }
-
-.upComings {
-  position: absolute;
-  top: 65em;
-  margin-left: 25px; }
-
-table.upComingTable {
-  width: 1010px; }
 
 table.repairTable {
   position: absolute;
@@ -1472,11 +1285,6 @@ tbody.newIssueTableHeight {
   top: 11em;
   left: 50em; }
 
-.machineHours {
-  position: relative;
-  left: 20em;
-  top: 3em; }
-
 .repairLoad {
   position: relative;
   top: 6em;
@@ -1484,8 +1292,8 @@ tbody.newIssueTableHeight {
 
 .repairButton {
   position: absolute;
-  top: 4em;
-  left: 15em; }
+  top: 102px;
+  left: 0; }
 
 .workingHours {
   position: absolute;
@@ -1524,9 +1332,6 @@ tbody.newIssueTableHeight {
   top: 22em;
   left: 82em; }
 
-.btn-warning {
-  height: 50px; }
-
 .repair-print-list {
   left: 83em;
   position: absolute;
@@ -1535,30 +1340,11 @@ tbody.newIssueTableHeight {
 table.table-width {
   width: 1100px; }
 
-table.repair-print-out {
-  left: 1em;
-  position: absolute;
-  top: 50em;
-  width: 55em; }
-
 .repair-comment {
   width: 45em; }
 
-.pictureWidth {
-  width: 5.4em; }
-
 .error-description {
   width: 45.4em; }
-
-img.repair-pre-view {
-  border: 1px solid #ddd;
-  /* Gray border */
-  border-radius: 4px;
-  /* Rounded border */
-  padding: 5px;
-  /* Some padding */
-  width: 100px;
-  /* Set a small width */ }
 
 img:hover {
   box-shadow: 0 0 2px 1px rgba(0, 140, 186, 0.5); }
@@ -1567,17 +1353,8 @@ img:hover {
   width: 500px;
   height: 515px; }
 
-.image-box {
-  width: 32em;
-  height: 30em; }
-
 .pdi-rep-conf {
   width: 6em; }
-
-.repair-confirm-input {
-  left: 60em;
-  position: absolute;
-  top: 55em; }
 
 .confirm-text-area {
   width: 500px;
@@ -1590,11 +1367,6 @@ img:hover {
 .add-to-repair {
   position: absolute;
   top: 18em; }
-
-.industrial-minutes {
-  position: absolute;
-  top: 9em;
-  left: 6em; }
 
 .repair-user {
   left: 70em;
@@ -1625,18 +1397,9 @@ table.readyTable {
   left: 2em;
   width: 600px; }
 
-.not-active {
-  pointer-events: none;
-  cursor: default;
-  text-decoration: none;
-  color: black; }
-
 .repairNavButton {
   position: relative;
   left: 40em; }
-
-.buttonNotWorking {
-  background: repeating-linear-gradient(45deg, #e6e6e6, #bc171b 10px, #e6e6e6 10px, #bc171b 20px); }
 
 .printoutMargin {
   margin-left: 1em; }
@@ -1754,24 +1517,6 @@ tbody.mainCompTbody {
   top: 25em;
   left: 15em; }
 
-.listContainer {
-  border-style: solid;
-  height: 33em;
-  left: 3em;
-  margin: 10px;
-  padding: 10px;
-  width: 60em; }
-
-.tablePos {
-  position: absolute;
-  top: 20em;
-  width: 40em; }
-
-.preView {
-  left: 20em;
-  position: absolute;
-  top: 10em; }
-
 img {
   max-height: 100%;
   max-width: 100%; }
@@ -1782,21 +1527,6 @@ img {
   margin-bottom: 10px;
   width: 80%; }
 
-.submitButtonInside {
-  margin: 10px;
-  width: 100px; }
-
-table.preTable {
-  width: 10em; }
-
-.submit-pre {
-  left: 35em;
-  position: relative; }
-
-tbody.preTbodyHeight {
-  height: 35em;
-  width: 50em; }
-
 .button {
   left: 10em;
   margin-left: 40px;
@@ -1805,38 +1535,6 @@ tbody.preTbodyHeight {
 
 table, td {
   border: 2px solid #333; }
-
-.progressWidth {
-  margin-left: 50px;
-  width: 80em; }
-
-.preSeriesCheckPoints {
-  left: 60em;
-  position: absolute;
-  top: -6em; }
-
-table.preTableChecklist {
-  margin-left: 3em;
-  position: absolute;
-  top: 10em;
-  width: 500px; }
-
-.addPreIssues {
-  left: 60em;
-  position: relative; }
-
-.preSeriesAddCheck {
-  position: relative;
-  top: 3em; }
-
-table.addCheck {
-  margin-left: 3.5em;
-  width: 400px; }
-
-.show-team {
-  left: 40em;
-  position: relative;
-  top: -2.5em; }
 
 .ecnOverView {
   position: absolute;
@@ -1892,23 +1590,8 @@ table.addCheck {
   top: 10em;
   width: 14.5em; }
 
-.btn-component-search {
-  left: 38em;
-  position: absolute;
-  top: 10em; }
-
 .btn-response-supplier {
   left: 51em;
-  position: absolute;
-  top: 10em; }
-
-.btn-edit-responsibility {
-  left: 62.5em;
-  position: absolute;
-  top: 10em; }
-
-.btn-advance-search {
-  left: 74em;
   position: absolute;
   top: 10em; }
 
@@ -1943,9 +1626,6 @@ table.addCheck {
 .result-table {
   width: 45em; }
 
-.error-head {
-  text-align: center; }
-
 .error-machine {
   text-align: center;
   width: 10em; }
@@ -1960,23 +1640,6 @@ td.error-machine {
   left: 44em;
   position: absolute;
   top: 20em; }
-
-.analyze-header {
-  left: 6.8em;
-  position: absolute;
-  top: 16em;
-  width: 22em; }
-
-.analyze-header-complete {
-  left: 50em;
-  position: absolute;
-  top: 16em;
-  width: 22em; }
-
-.refresh-button-edit-response {
-  left: 45em;
-  position: absolute;
-  top: 16em; }
 
 table.analyze-team-table {
   width: 1130px; }
@@ -2100,11 +1763,6 @@ table.analyze-team-table {
   max-width: 75px;
   min-width: 75px; }
 
-.table-package {
-  left: 5em;
-  position: absolute;
-  top: 14em; }
-
 .pdi-comment-time-table {
   max-width: 250px;
   min-width: 250px; }
@@ -2122,22 +1780,10 @@ table.analyze-team-table {
   max-width: 65px;
   min-width: 65px; }
 
-.error-comp {
-  width: 222px; }
-
-.repair-time-graph {
-  left: 5em;
-  position: absolute;
-  top: 55em; }
-
 .look-up-machine-number {
   left: 568px;
   position: absolute;
   top: 18em;
-  width: 270px; }
-
-.pdi-tech {
-  position: relative;
   width: 270px; }
 
 .parts-ordered {
@@ -2175,10 +1821,6 @@ table.parts-order-table {
   top: 1px;
   z-index: 1;
   opacity: 0; }
-
-.machine-sort-button {
-  width: 82px;
-  height: 53px; }
 
 .button-pdiTech-sort {
   left: 91px;
@@ -2276,16 +1918,6 @@ table.parts-order-table {
   top: 8em;
   width: 370px; }
 
-.quality-comment-input {
-  left: 165em;
-  position: absolute;
-  top: 28em; }
-
-.quality-comment-button {
-  left: -.1em;
-  position: absolute;
-  top: -3em; }
-
 .parts-on-order {
   min-width: 57px;
   max-width: 57px;
@@ -2295,10 +1927,6 @@ table.parts-order-table {
   min-width: 54px;
   max-width: 60px;
   text-align: center; }
-
-.look-up-machine {
-  position: relative;
-  top: 2em; }
 
 .quality-button {
   left: 37em;
@@ -2313,16 +1941,6 @@ table.parts-order-table {
   left: 171em;
   position: absolute;
   top: 21em; }
-
-.supplier-assign {
-  left: 32em;
-  position: absolute;
-  top: 20em; }
-
-.supplier-head-liner {
-  left: 5em;
-  position: absolute;
-  top: 25em; }
 
 .supplier-table {
   left: 40em;
@@ -2344,51 +1962,16 @@ table.extended-table {
   max-width: 135px;
   min-width: 135px; }
 
-.img-supplier-table {
-  border: 1px solid #ddd;
-  border-radius: 4px;
-  padding: 5px;
-  width: 100px; }
-
-.button-back {
-  left: 5em;
-  position: absolute;
-  top: 10em; }
-
 .single-suppliers-name {
   left: 2em;
   position: absolute;
   top: 25em; }
-
-.single-supplier-table {
-  left: 5em;
-  position: absolute;
-  top: 20em; }
-
-.suppliers-table-view {
-  border-spacing: 5px;
-  width: auto; }
-
-.suppliers-name {
-  left: 100em;
-  position: absolute;
-  top: 20em; }
 
 table.supplier-result-table {
   width: 90px; }
 
 .supplier-field {
   width: 95px; }
-
-.annual-machine-result {
-  left: 5em;
-  position: absolute;
-  top: 60em; }
-
-.annual-supplier-result {
-  left: 80em;
-  position: absolute;
-  top: 60em; }
 
 .options-header {
   left: 5em;
@@ -2441,17 +2024,9 @@ table.supplier-result-table {
   position: absolute;
   top: 10em; }
 
-.fuel-consumption-chart {
-  position: absolute;
-  left: 4em;
-  top: 15em; }
-
 .mainLayout {
   left: 40em;
   position: absolute; }
-
-.insideNavBar {
-  margin-top: 25px; }
 
 .topNav {
   left: 40em;
@@ -2469,35 +2044,8 @@ table.supplier-result-table {
 .selected {
   background-color: rgba(151, 143, 147, 0.3); }
 
-.selectedMachine {
-  background-color: rgba(151, 143, 147, 0.3); }
-
-.selectedArea {
-  background-color: rgba(151, 143, 147, 0.3); }
-
-.selectedBackgroundGreen {
-  background-color: green; }
-
-.individualNavigation {
-  font-size: 16px; }
-
-.navigation {
-  margin-left: 25px; }
-
-.marginMain {
-  margin-left: 25px; }
-
 .in-active-button {
   background-color: #e69f7c;
-  opacity: .5;
-  pointer-events: none; }
-
-.activeButton {
-  opacity: 1;
-  pointer-events: auto; }
-
-.inActiveButton-1 {
-  background: #252525 repeating-linear-gradient(45deg, #e6e6e6, #bc171b 10px, #e6e6e6 10px, #bc171b 20px);
   opacity: .5;
   pointer-events: none; }
 
@@ -2505,5 +2053,30 @@ table.supplier-result-table {
   background: #252525 repeating-linear-gradient(45deg, #e6e6e6, #bc171b);
   opacity: .8;
   pointer-events: none; }
+
+@keyframes glowing {
+  0% {
+    background-color: #AA3939;
+    box-shadow: 0 0 3px  #AA5939; }
+  50% {
+    background-color: #FFB232;
+    box-shadow: 0 0 10px #FFB232; }
+  100% {
+    background-color: #FFE800;
+    box-shadow: 0 0 3px #FFE800; } }
+.inProcess {
+  animation: glowing 1500ms infinite;
+  color: transparent; }
+
+@keyframes Siglowing {
+  0% {
+    background-color: #481317;
+    box-shadow: 0 0 3px  #AA5939; }
+  50% {
+    background-color: #cb2aff;
+    box-shadow: 0 0 10px #ffd855; }
+  100% {
+    background-color: #1cbdee;
+    box-shadow: 0 0 3px #ec67ff; } }
 
 /*# sourceMappingURL=main.css.map */

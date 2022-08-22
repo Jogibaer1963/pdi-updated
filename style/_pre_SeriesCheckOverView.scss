@@ -1,25 +1,4 @@
 
-.listContainer {
-  border-style: solid;
-  height: 33em;
-  left: 3em;
-  margin: 10px;
-  padding: 10px;
-  width: 60em;
-}
-
-.tablePos {
-  position: absolute;
-  top: 20em;
-  width: 40em;
-}
-
-.preView {
-  left: 20em;
-  position: absolute;
-  top: 10em;
-}
-
 img {
   max-height: 100%;
   max-width: 100%;
@@ -32,25 +11,6 @@ img {
   width: 80%;
 }
 
-.submitButtonInside {
-  margin: 10px;
-  width: 100px;
-}
-
-table.preTable {
-  width: 10em;
-}
-
-.submit-pre {
-  left: 35em;
-  position: relative;
-}
-
-tbody.preTbodyHeight {
-  height: 35em;
-  width: 50em;
-}
-
 .button {
   left: 10em;
   margin-left: 40px;
@@ -60,45 +20,5 @@ tbody.preTbodyHeight {
 
 table, td {
   border: 2px solid #333;
-}
-
-.progressWidth {
-  margin-left: 50px;
-  width: 80em;
-}
-
-.preSeriesCheckPoints {
-  left:  60em;
-  position: absolute;
-  top: -6em;
-}
-
-table.preTableChecklist {
-  margin-left: 3em;
-  position: absolute;
-  top: 10em;
-  width: 500px;
-}
-
-.addPreIssues {
-  left: 60em;
-  position: relative;
-}
-
-.preSeriesAddCheck {
-  position: relative;
-  top: 3em;
-}
-
-table.addCheck {
-  margin-left: 3.5em;
-  width: 400px;
-}
-
-.show-team {
-  left: 40em;
-  position: relative;
-  top: -2.5em;
-
 }
 

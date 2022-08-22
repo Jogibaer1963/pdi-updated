@@ -39,30 +39,6 @@ Template.inputNewCheckPoint.helpers({
         }
     },
 
-    rangeC77: () => {
-        let checkPointToActivateEdit = Session.get('selectedCheckPoint');
-        let result = checkPoints.findOne({_id:checkPointToActivateEdit});
-        if(result) {
-            return result.machineRangeEndC77;
-        }
-    },
-
-    rangeC78: () => {
-        let checkPointToActivateEdit = Session.get('selectedCheckPoint');
-        let result = checkPoints.findOne({_id:checkPointToActivateEdit});
-        if(result) {
-            return result.machineRangeEndC78;
-        }
-    },
-
-    rangeC79: () => {
-        let checkPointToActivateEdit = Session.get('selectedCheckPoint');
-        let result = checkPoints.findOne({_id:checkPointToActivateEdit});
-        if(result) {
-            return result.machineRangeEndC79;
-        }
-    },
-
     position: () => {
         let checkPointToActivateEdit = Session.get('selectedCheckPoint');
         let result = checkPoints.findOne({_id:checkPointToActivateEdit});
@@ -91,11 +67,6 @@ Template.inputNewCheckPoint.helpers({
             event.preventDefault();
             const errorPos = event.target.newPosition.value;
             const errorDescription = event.target.errorDescription.value;
-            const machineRangeStart = event.target.machineRangeStart.value;
-            const machineRangeEndC77 = event.target.machineRangeEndC77.value;
-            const machineRangeEndC78 = event.target.machineRangeEndC78.value;
-            const machineRangeEndC79 = event.target.machineRangeEndC79.value;
-            const resultStart = machineRangeStart.split(" ");
             const checkStatus = 0;
             const range = [];
             $('input[name=range]:checked').each(function () {
@@ -105,26 +76,18 @@ Template.inputNewCheckPoint.helpers({
             let statusEdit = Session.get("statusEdit");
             if (statusEdit === 0 ) {
             Meteor.call('inputNewCheckPoint', status, errorPos, errorDescription,
-                            range, checkStatus, machineRangeEndC77,
-                            machineRangeEndC78, machineRangeEndC79);
+                            range, checkStatus)
             } else if (statusEdit === 1 ) {
                 let checkPointToActivateEdit = Session.get("selectedCheckPoint");
                 Meteor.call('editCheckPoint',checkPointToActivateEdit, status, errorPos,
                                 errorDescription, range, checkStatus,
-                                machineRangeEndC77, machineRangeEndC78, machineRangeEndC79);
+                              );
                 Session.set("statusEdit", 0);
                 Session.set("errorEdit", '');
 
             }
             event.target.newPosition.value = "";
             event.target.errorDescription.value = "";
-            event.target.C77.checked = false;
-            event.target.C78.checked = false;
-            event.target.C79.checked = false;
-            event.target.machineRangeStart.value = "";
-            event.target.machineRangeEndC77.value = "";
-            event.target.machineRangeEndC78.value = "";
-            event.target.machineRangeEndC79.value = "";
         },
 
 
@@ -152,8 +115,6 @@ Template.inputNewCheckPoint.helpers({
             Meteor.call('deactivateCheckPoint', deactivateCheck, status);
         },
 
-
-
         // switch active and inactive checklists
         // initial value = 0 => Active Checklist
         'click .switchCheckPointTable': (e) => {
@@ -165,26 +126,6 @@ Template.inputNewCheckPoint.helpers({
                 Session.set("toggleActiveInactive", 0);
             }
         },
-
-        // combine Type 1 = C8, 2 = C7, 3 = all
-
-
-        'click .onlyC8Checks': (e) => {
-            e.preventDefault();
-            Session.set('combineType', 1)
-        },
-
-        'click .onlyC7Checks': (e) => {
-            e.preventDefault();
-            Session.set('combineType', 2)
-        },
-
-        'click .allChecks': (e) => {
-            e.preventDefault();
-            Session.set('combineType', 3)
-        }
-
-
 
     });
 

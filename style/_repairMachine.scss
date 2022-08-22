@@ -1,15 +1,5 @@
 
 
-.upComings {
-  position: absolute;
-  top: 65em;
-  margin-left: 25px;
-}
-
-table.upComingTable {
-  width: 1010px;
-}
-
 table.repairTable {
   position: absolute;
   margin-left: 35px;
@@ -54,12 +44,6 @@ tbody.newIssueTableHeight {
   left: 50em;
 }
 
-.machineHours {
-  position: relative;
-  left: 20em;
-  top: 3em;
-}
-
 .repairLoad {
   position: relative;
   top: 6em;
@@ -68,8 +52,8 @@ tbody.newIssueTableHeight {
 
 .repairButton {
   position: absolute;
-  top: 4em;
-  left: 15em;
+  top: 102px;
+  left: 0;
 }
 
 .workingHours {
@@ -117,10 +101,6 @@ tbody.newIssueTableHeight {
   left: 82em;
 }
 
-.btn-warning {
-  height: 50px;
-}
-
 .repair-print-list {
   left: 83em;
   position: absolute;
@@ -131,30 +111,12 @@ table.table-width {
   width: 1100px;
 }
 
-table.repair-print-out {
-  left: 1em;
-  position: absolute;
-  top: 50em;
-  width: 55em;
-}
-
 .repair-comment {
   width: 45em;
 }
 
-.pictureWidth {
-  width: 5.4em;
-}
-
 .error-description {
   width: 45.4em;
-}
-
-img.repair-pre-view {
-  border: 1px solid #ddd; /* Gray border */
-  border-radius: 4px;  /* Rounded border */
-  padding: 5px; /* Some padding */
-  width: 100px; /* Set a small width */
 }
 
 img:hover {
@@ -165,19 +127,9 @@ img:hover {
   width: 500px;
   height: 515px;
 }
-.image-box {
-  width: 32em;
-  height: 30em;
-}
 
 .pdi-rep-conf {
   width: 6em;
-}
-
-.repair-confirm-input {
-  left: 60em;
-  position: absolute;
-  top: 55em;
 }
 
 .confirm-text-area {
@@ -194,12 +146,6 @@ img:hover {
   position: absolute;
   top: 18em;
 
-}
-
-.industrial-minutes {
-  position: absolute;
-  top: 9em;
-  left: 6em;
 }
 
 .repair-user {

@@ -22,12 +22,33 @@ Template.pdiCrewHome.helpers({
 
     },
 
+    roadTestList: () => {
+        let toggleView = Session.get('roadTestView');
+        if (toggleView === 0) {
+            return MachineReady.find({$or: [{roadTest: 0},{roadTest: 2}]}
+            , {sort: {date: 1}}).fetch();
+        } else if (toggleView === 1) {
+            return MachineReady.find(
+                    {roadTest: 1}, {sort: {date: 1}}).fetch();
+        }
+
+    },
+
 
     'selectedClass2': function () {
         // Session.set('machineToRepair', '');
         const selectedRepair = this._id;
         const selectedMachineId = Session.get('selectedMachineId');
         if (selectedMachineId === selectedRepair) {
+            return "selected"
+        }
+    },
+
+    'selectedClass3': function () {
+        // Session.set('machineToRepair', '');
+        const selectedRoadTest = this.machineId;
+        const selectedMachineId = Session.get('selectedRoadTest');
+        if (selectedMachineId === selectedRoadTest) {
             return "selected"
         }
     },
@@ -63,6 +84,7 @@ Template.pdiCrewHome.helpers({
                     omms: 1
                 }
             });
+
             let machineNr = result.machineId;
             let newIssues = result.newIssues;
             Session.set('pdiTech', result.omms.user);
@@ -126,15 +148,20 @@ Template.pdiCrewHome.helpers({
         } catch (e) {
 
         }
-    }
+    },
 
     //  ************************** end adding issue  ***********************
 
-
+    roadTestComments: () => {
+        let machine = Session.get('selectedRoadTest')
+        let result = MachineReady.findOne({machineId: machine}, {fields: {roadTestComment: 1}})
+        return result.roadTestComment
+    }
 
 });
 
 Session.set('toggleView', 0);
+Session.set('roadTestView', 0);
 
 Template.pdiCrewHome.events({
 
@@ -261,6 +288,39 @@ Template.pdiCrewHome.events({
         } else {
         }
     },
+//  *************************  Road Test Section  ********************************************
+    'click .road-test-view': (e) => {
+        e.preventDefault();
+        if (Session.get('roadTestView') === 0) {
+            Session.set('roadTestView', 1)
+        } else if (Session.get('roadTestView') === 1) {
+            Session.set('roadTestView', 0)
+        }
+    },
+
+    'click .openRoadTest': function () {
+        const openRoadTest = this.machineId
+        Session.set('selectedRoadTest', openRoadTest);
+    },
+
+    'click .road-test-start': function (e) {
+        e.preventDefault()
+        Meteor.call('roadTest', Session.get('selectedRoadTest'), 2)
+    },
+
+    'click .road-test-end': function (e) {
+        e.preventDefault()
+        const machine = this.machineId;
+        Meteor.call('roadTest', Session.get('selectedRoadTest'), 1)
+    },
+
+    'submit .road-test-comments': function (e) {
+        e.preventDefault()
+        let comment = e.target.roadTestComments.value;
+        Meteor.call('roadTestComments', Session.get('selectedRoadTest'), comment)
+    },
+
+
 
 
 

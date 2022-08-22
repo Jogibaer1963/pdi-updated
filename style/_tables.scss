@@ -71,10 +71,6 @@ table.blueTable tfoot td {
     font-size: 14px;
 }
 
-table.blueTable tfoot .links {
-    text-align: right;
-}
-
 table.blueTable tfoot .links a{
     display: inline-block;
     background: #8f8e8c;
@@ -177,11 +173,6 @@ $eraseUser: 50px;
    min-width: $loggedIn;
  }
 
-.partsOnOrder {
-  max-width: $partsOnOrder;
-  min-width: $partsOnOrder;
-}
-
 .userLogOut {
   max-width: $logOut;
   min-width: $logOut;
@@ -192,10 +183,6 @@ $eraseUser: 50px;
   max-width: $eraseUser;
   min-width: $eraseUser;
   text-align: center;
-}
-
-.shippingMachines {
-  height: 100px;
 }
 
 // end Admin Table
@@ -336,11 +323,5 @@ table.headerTable {
 .ecnTextField {
   max-width: $ecnTextFiled;
   min-width: $ecnTextFiled;
-}
-
-.headerPos {
-  position: absolute;
-  left: 450px;
-  top: 300px;
 }
 

@@ -37,10 +37,6 @@
   position: absolute;
 }
 
-.insideNavBar {
-  margin-top: 25px;
-}
-
 .topNav {
   left: 40em;
   margin-top: 25px;
@@ -63,31 +59,6 @@ $grey: rgba(151, 143, 147, 0.3);
   background-color: $grey;
 }
 
-.selectedMachine {
-  background-color: $grey;
-}
-
-.selectedArea {
-  background-color: $grey;
-}
-
-.selectedBackgroundGreen {
-  background-color: green;
-}
-
-.individualNavigation {
-  font-size: 16px;
-}
-
-.navigation {
-  margin-left: 25px;
-}
-
-.marginMain {
-  margin-left: 25px;
-}
-
-
 
 //  Inactive Buttons
 $comm-status: #252525;
@@ -98,29 +69,24 @@ $comm-status: #252525;
   pointer-events: none;
 }
 
-.activeButton {
-  opacity: 1;
-  pointer-events: auto;
-}
-
-.inActiveButton-1 {
-  background: $comm-status repeating-linear-gradient(
-                  45deg,
-                  #e6e6e6,
-                  #bc171b 10px,
-                  #e6e6e6 10px,
-                  #bc171b 20px
-  );
-  opacity: .5;
-  pointer-events: none;
-}
-
 .inActiveButton {
-  background: $comm-status repeating-linear-gradient(
-                  45deg,
-                  #e6e6e6,
-                  #bc171b
-  );
+  background: #252525 repeating-linear-gradient(45deg, #e6e6e6, #bc171b);
   opacity: .8;
-  pointer-events: none;
+  pointer-events: none; }
+
+@keyframes glowing {
+  0% { background-color: #AA3939; box-shadow: 0 0 3px  #AA5939; }
+  50% { background-color: #FFB232; box-shadow: 0 0 10px #FFB232; }
+  100% { background-color: #FFE800; box-shadow: 0 0 3px #FFE800; }
+}
+
+.inProcess {
+  animation: glowing 1500ms infinite;
+  color: transparent;
+}
+
+@keyframes Siglowing {
+  0% { background-color: #481317; box-shadow: 0 0 3px  #AA5939; }
+  50% { background-color: #cb2aff; box-shadow: 0 0 10px #ffd855; }
+  100% { background-color: #1cbdee; box-shadow: 0 0 3px #ec67ff; }
 }

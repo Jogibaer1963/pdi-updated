@@ -4,7 +4,8 @@
     {{> pdi_repairList}}
     {{> pdiInspectList}}
 {{else}}
-    {{> login}}
+    {{> pdi_repairList}}
+    {{> pdiInspectList}}
 {{/if}}
 </template>
 
@@ -32,6 +33,7 @@
         </form>
         <a class="btn btn-default btn-success printButton"  href="/pdi_printOut">Print Out</a>
     </div>
+    <!--
         <div class="historicButtonPos">
             {{#dropdownTrigger  name="mainComponents"}}
                 <button class="loginSubmit omInputButton">PDI FY 2021 </button>
@@ -64,6 +66,7 @@
          {{/each}}
        </tbody>
     </table>
+    -->
 </template>
 
 <template name="pdiInspectList">

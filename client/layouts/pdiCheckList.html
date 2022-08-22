@@ -1,4 +1,3 @@
-
 <template name="checkList">
 {{#if currentUser}}
 {{> topNav}}
@@ -52,41 +51,24 @@
                        placeholder="Description" value='{{errorEdit}}' required>
                 <br><br><br>
             </div>
-                <div class="inputMargin title">
-                   <label for="machineRange">Machine Range, divide by white space like "C7800200 C7900300 "</label>
-                <br>
-                   <label for="machineRangeStart" class="">
-                       <input type="text" class="inputRange" id="machineRangeStart" name="machineRangeStart" placeholder="Range Start" disabled>
-                   </label>
-                   <label for="machineRangeEnd" class="machineRangeEnd">
-                       <input type="text" class="inputRange" id="machineRangeEnd" name="machineRangeEndC77" placeholder="Range End C77" value='{{rangeC77}}'>
-                       <input type="text" class="inputRange" id="machineRangeEnd" name="machineRangeEndC78" placeholder="Range End C78" value='{{rangeC78}}'>
-                       <input type="text" class="inputRange" id="machineRangeEnd" name="machineRangeEndC79" placeholder="Range End C79" value='{{rangeC79}}'>
-                   </label>
-                </div>
             <br><br><br>
                 <div>
-                    <label for="machineRange" class="checkpointCheckbox checkBoxHeader">Machine type only if range is not applicable</label>
+                    <label for="machineRange" class="checkpointCheckbox checkBoxHeader">Machine type</label>
                 </div>
                 <div class="checkBoxCheckList">
-                   <ul class="checkpointCheckbox">
-                       <label for="C77" class="checkBoxMargin"><input type="checkbox" value="C77" id="C77" name="range">C77</label>
-                       <label for="C78" class="checkBoxMargin"><input type="checkbox" value="C78" id="C78" name="range">C78</label>
-                       <label for="C79" class="checkBoxMargin"><input type="checkbox" value="C79" id="C79" name="range">C79</label>
-                       <label for="C87" class="checkBoxMargin"><input type="checkbox" value="C87" id="C87" name="range">C87</label>
-                       <label for="C88" class="checkBoxMargin"><input type="checkbox" value="C88" id="C88" name="range">C88</label>
-                       <label for="C89" class="checkBoxMargin"><input type="checkbox" value="C89" id="C89" name="range">C89</label>
-                   </ul>
+                       <label for="C87" class="checkBoxMargin" id="C87"></label>
+                    <input type="checkbox" value="C87" id="C87" name="range">C87
+                       <label for="C88" class="checkBoxMargin" id="C88"></label>
+                    <input type="checkbox" value="C88" id="C88" name="range">C88
+                       <label for="C89" class="checkBoxMargin" id="C89"></label>
+                    <input type="checkbox" value="C89" id="C89" name="range">C89
                 </div>
 
             <div class="inputMargin">
-                <button class="btn btn-default btn-info insertNew" type="submit" >Submit check point</button>
+                <button class="btn btn-default btn-success insertNew" type="submit" >Submit check point</button>
                 <button class="btn btn-default btn-info activateCheck">Re-activate check point</button>
-                <button class="btn btn-default btn-info  colorCheckButtonDeactivate deActiveCheck">Deactivate check point</button>
+                <button class="btn btn-default btn-danger  colorCheckButtonDeactivate deActiveCheck">Deactivate check point</button>
                 <button class="btn btn-default btn-info switchCheckPointTable">Switch active / inactive list </button>
-                <button class="btn btn-default btn-info onlyC8Checks">Show only C8x check points</button>
-                <button class="btn btn-default btn-info onlyC7Checks">Show only C7x check points</button>
-                <button class="btn btn-default btn-info allChecks">Show all check points</button>
             </div>
         </form>
     <table class="blueTable tableChecklist"  cellpadding="10">

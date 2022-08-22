@@ -85,25 +85,28 @@ Meteor.subscribe('oms');
             } catch (e) {
             }
         },
-
+/*
         fuelStart: () => {
             try {
-
                 return Session.get('omms').fuelStart;
             } catch (e) {}
         },
+
+ */
 
         ommMain: () => {
             try {
                 return Session.get('omms').ommMain;
             } catch (e) {}
         },
-
+/*
         ommSupp: () => {
             try {
                 return Session.get('omms').ommSupp;
             } catch (e) {}
         },
+
+ */
 
         ommUnload: () => {
             try {
@@ -192,7 +195,7 @@ Meteor.subscribe('oms');
                 }
             } catch (e) {}
         },
-
+/*
         battC13CCA: () => {
             try {
                 return Session.get('batteries').battC13CCA;
@@ -205,6 +208,8 @@ Meteor.subscribe('oms');
             } catch (e) {}
         },
 
+
+ */
         mtuG001CCA: () => {
             try {
                 return Session.get('batteries').mtuG001CCA;
@@ -216,7 +221,7 @@ Meteor.subscribe('oms');
                 return Session.get('batteries').mtuG001Volt;
             } catch (e) {}
         },
-
+/*
         mtuG005CCA: () => {
             try {
                 return Session.get('batteries').mtuG005CCA;
@@ -228,6 +233,8 @@ Meteor.subscribe('oms');
                 return Session.get('batteries').mtuG005Volt;
             } catch (e) {}
         },
+
+ */
 
         mtuG004CCA: () => {
             try {
@@ -274,14 +281,14 @@ Meteor.subscribe('oms');
             event.preventDefault();
             const loggedInUser = Session.get('currentLoggedInUser');
             const pdiMachineId = Session.get('selectedPdiMachineId');
-            const fuelMe = event.target.fuelMe.value;
+         //   const fuelMe = event.target.fuelMe.value;
             const ommMain = event.target.omMain.value;
-            const ommSupp = "N/A" // event.target.omSupp.value;
+        //    const ommSupp = "N/A" // event.target.omSupp.value;
             const ommUnload = event.target.omUnload.value;
             const ommProfiCam = event.target.omProfiCam.value;
             const ommCebis = event.target.omCebis.value;
             const ommTerra = event.target.omTerra.value;
-            Meteor.call('pdiMachineOmm', pdiMachineId, loggedInUser, fuelMe, ommMain, ommSupp,
+            Meteor.call('pdiMachineOmm', pdiMachineId, loggedInUser, ommMain,
                 ommUnload,ommProfiCam, ommCebis, ommTerra);
         },
 
@@ -502,7 +509,7 @@ Meteor.subscribe('oms');
             Session.set('selectedPdiMachineNr', localStorage.getItem('pdiMachineNr'));
             const selectedPdiMachineId = Session.get('selectedPdiMachineId');
             const selectedPdiMachineNr = Session.get('selectedPdiMachineNr');
-            let fuelAfter = event.target.afterFuel.value;
+        //    let fuelAfter = event.target.afterFuel.value;
             let k = 0;
             if(selectedPdiMachineId) {
                let result =  MachineReady.findOne({_id: selectedPdiMachineId},
@@ -528,7 +535,7 @@ Meteor.subscribe('oms');
            //     console.log("Lost Machine Number")
             }
             if (k === 0) {
-                Meteor.call('fuelAfterPdi', selectedPdiMachineId, selectedPdiMachineNr, fuelAfter);
+                Meteor.call('fuelAfterPdi', selectedPdiMachineId, selectedPdiMachineNr);
                 FlowRouter.go('/inspectionStart');
             } else if (k === 1) {
                 window.alert('One or more Issues were not assigned to a Team or Omms are not saved')

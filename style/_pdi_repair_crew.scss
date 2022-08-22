@@ -1,11 +1,7 @@
-.confirmBoxWidth {
-  width: 6.5em;
-}
-
 .pdi-repair-finnish {
-  left: 65em;
+  left: 100em;
   position: absolute;
-  top: 16em;
+  top: 794px;
 }
 
 .toggle-button {
@@ -25,6 +21,32 @@ table.repair-table {
   top: 47em;
 }
 
+//  ******************************  Road Test Section   *********************************
+
+.road-test-table {
+  left: 1127px;
+  position: absolute;
+  top: 16px;
+}
+
+.road-test-header {
+  left: 380px;
+  position: relative;
+  top: 250px;
+}
+
+.road-test-button {
+  left: 1500px;
+  position: absolute;
+  top: 240px;
+}
+
+.road-test-inputs {
+  left: 2150px;
+  position: absolute;
+  top: 326px;
+}
+
 .thumbnail-pdi-crew:hover img {
   left: 37em;
   position: absolute;
@@ -34,7 +56,7 @@ table.repair-table {
 }
 
 table.display-error {
-  width: 995px;
+  width: 1160px;
 }
 
 .pdi-comment {
@@ -71,17 +93,17 @@ table.display-error {
  }
 
 .pdi-rep-tech {
-  width: 70px;
+  width: 97px;
 }
 
 .utility-repair {
-  left: 75em;
+  left: 87em;
   position: absolute;
   top: 50em;
 }
 
 .pdi-open-repair {
-  left: 2em;
+  left: 1px;
   position: absolute;
   top: 1em;
 }

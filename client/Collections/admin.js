@@ -102,8 +102,8 @@ Template.adminFiscalYear.helpers({
 });
 
 Template.adminFiscalYear.events({
-    'submit .moveMachine': () => {
-        event.preventDefault();
+    'submit .moveMachine': (e) => {
+        e.preventDefault();
         const newMoveMe = [];
         $('input[name = moveMe]:checked').each(function() {
             newMoveMe.push($(this).val());
@@ -111,8 +111,8 @@ Template.adminFiscalYear.events({
     Meteor.call('moveMachines', newMoveMe);
     },
 
-    'submit .moveHead': () => {
-        event.preventDefault();
+    'submit .moveHead': (e) => {
+        e.preventDefault();
         const newHeadMove = [];
         $('input[name = moveMe]:checked').each(function() {
             newHeadMove.push($(this).val());

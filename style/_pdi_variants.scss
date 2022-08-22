@@ -20,10 +20,6 @@
   margin: 10px;
 }
 
-.singleVariantButton {
-  margin: 15px;
-}
-
 .variantTable {
   position: relative;
   top: -20em;
@@ -31,10 +27,6 @@
 
 .variant-info-thumb {
   width: 90px;
-}
-
-.image-thumb {
-  width: 50px;
 }
 
 .variant-visibility {
@@ -47,29 +39,9 @@
   min-width: 90px;
 }
 
-.variant-hidden  {
-  text-align: center;
-}
-
-.addPicToVariant {
-  left: 50em;
-  position: relative;
-  top: 4em;
-  width: 12em;
-}
-
 .submit-pic {
   left: 55em;
   position: absolute;
   top: 20em;
-}
-
-.noVariant {
-  background: repeating-linear-gradient(
-                  45deg,
-                  #e8bf7e,
-                  #f4a4ae 10px,
-                  #f85558 10px
-  );
 }
 

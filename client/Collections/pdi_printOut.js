@@ -31,7 +31,6 @@ if(Meteor.isClient) {
                         };
                     return checkResult;
                 });
-
             }
             catch (e) {
             }

@@ -45,6 +45,7 @@
                   <option>620 MI / 2208 019.0</option>
                   <option>620 GY / 2208 878.0</option>
                   <option>620/70/R42 GY / 2817 926.0</option>
+                  <option>1250/50R32 / 1816 735.0</option>
                   <option>MTS</option>
               </select>
           </div>
@@ -224,7 +225,7 @@
             <tbody>
               {{#each shippList}}
                 <tr class="shippingMachine {{selected}}">
-                    <td class="pdiMachineField">{{machineId}}</td>
+                    <td class="pdiMachineField machine-font {{getStatus pdiOk}}" style="background-color:{{getStatus pdiOk}}; color:{{getStatus pdiOk}}">{{machineId}}</td>
                     <td class="pdiShipDate">{{date}}</td>
                     <td class="pdiDestination">{{destination}}</td>
                     <td class="pdiTransporter">{{transporter}}</td>

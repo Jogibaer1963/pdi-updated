@@ -1,3 +1,4 @@
+/*
 const Highcharts = require('highcharts');
 
 
@@ -96,12 +97,15 @@ Template.fuelConsumption.helpers({
             });
         });
     },
-
-
 });
 
+ */
+
+/*
 
 Template.fuelConsumption.events({
 
 
 });
+
+ */

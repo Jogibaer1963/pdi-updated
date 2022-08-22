@@ -514,7 +514,7 @@ Template.analyzingSupplier.helpers({
                        // console.log(element2)
                             if (element2.responsible === "N/A") {
                              //   console.log('N/A detected', element2._id)
-                            } else if (element2.responsible !== "N/A")   {
+                            } else if (element2.responsible !== "N/A" && element2.repairTime > '10')   {
                                 supplierIssues = {
                                     _id: element2._id,
                                     machineNr: machineNr,
@@ -524,7 +524,7 @@ Template.analyzingSupplier.helpers({
                                     repairComment: element2.repairComment,
                                     responsible: element2.responsible,
                                     repairStatus: element2.repairStatus,
-                                    pictureLocation : repairInfos + element2.pictureLocation,
+                                    pictureLocation : '../../public/noPicture.JPG',
                                     repairTime: element2.repairTime,
                                     qualityComment: element2.qualityComment,
                                     claimNumber: element2.claimNumber,
@@ -549,7 +549,7 @@ Template.analyzingSupplier.helpers({
                             // console.log(element2)
                             if (element2.responsible === "N/A") {
                         //        console.log('N/A detected', element2._id)
-                            } else  if (element2.responsible !== "N/A")   {
+                            } else  if (element2.responsible !== "N/A" && element2.repairTime > '10')   {
                                 supplierIssues = {
                                     _id: element2._id,
                                     machineNr: machineNr,
@@ -559,7 +559,7 @@ Template.analyzingSupplier.helpers({
                                     repairComment: element2.repairComment,
                                     responsible: element2.responsible,
                                     repairStatus: element2.repairStatus,
-                                    pictureLocation : repairInfos + element2.pictureLocation,
+                                    pictureLocation : '../../public/noPicture.JPG',
                                     repairTime: element2.repairTime,
                                     qualityComment: element2.qualityComment,
                                     claimNumber: element2.claimNumber,

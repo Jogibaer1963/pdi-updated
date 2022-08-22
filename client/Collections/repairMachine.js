@@ -23,7 +23,8 @@ Meteor.subscribe('addIssues');
                     ]
                 }, {fields: {machineId: 1, date: 1, truckStatus: 1, confirmedShipDate: 1,
                                       shippingComment: 1, kit: 1, repairStatus: 1, washStatus: 1,
-                                      locationId: 1, kitStatus: 1, partsOnOrder: 1, newIssues: 1}  }, {sort: {date: 1}}).fetch();
+                                      locationId: 1, kitStatus: 1, partsOnOrder: 1,
+                                      newIssues: 1, pdiEstimate: 1}  }, {sort: {date: 1}}).fetch();
                 try {
                     if (result[0].partsOnOrder > 0) {
                         result[0].partsOnOrder = 2;
@@ -41,7 +42,7 @@ Meteor.subscribe('addIssues');
                 return result;
             } else {
                 Session.set('repair', '**** Upcoming Shipments****');
-                result = MachineReady.find({$and: [{pdiStatus: 0},
+                return MachineReady.find({$and: [{pdiStatus: 0},
                             {$or: [{shipStatus: 0}, {shipStatus: 2}]}]},
                     {sort: {date: 1}});
 

@@ -96,6 +96,7 @@
                     <th class="thumbnail-box">image</th>
                     <th class="pdi-rep-tech">Rep by</th>
                     <th class="pdi-rep-comment-field">Repair Comment</th>
+                    <th class="quality-comment">Quality Comment</th>
                     <th class="pdi-time">Rep time</th>
                     <th class="pdi-rep-status">Rep Status</th>
                     <th class="pdiRepField"><strong>Parts on Order</strong></th>
@@ -116,10 +117,11 @@
                        </td>
                         <td class="pdi-rep-tech">{{repairTech}}</td>
                         <td class="pdi-rep-comment-field">{{repairComment}}</td>
+                        <td class="quality-comment">{{qualityComment}}</td>
                         <td class="pdi-time">{{repairTime}}</td>
                         <td class="pdi-rep-status  {{getStatusColor repairStatus}}" style="background-color:{{getStatusColor repairStatus}}; color:{{getStatusColor repairStatus}}" >{{repairStatus}}</td>
                         <td class="pdi-time  {{getStatusColor partsOrder}}" style="background-color:{{getStatusColor partsOrder}}; color:{{getStatusColor partsOrder}}">{{partsOrder}}</td>
-                        <td>{{responsible}}</td>
+                        <td class="pdi-issuer">{{responsible}}</td>
                         <td>
                             <label for="category-select"></label>
                             <select name="team-select" id="category-select">
@@ -181,7 +183,67 @@
             </form>
     </div>
 
+    <div class="road-test-button">
+        <button class="btn btn-default btn-success road-test-view">Road Test  Present / History</button>
+    </div>
+
+    <div class="road-test-table">
+        <h3 class="road-test-header">Road Test</h3>
+        <table class="blueTable repairTable">
+            <thead>
+            <tr>
+                <th class="pdiMachineField"><strong>Machine</strong></th>
+                <th class="pdiShipDate"><strong>Ship Date</strong></th>
+                <th class="pdiTruckOnOrder"><strong>Truck ordered</strong></th>
+                <th class="pdiTruckDate"><strong>Confirmed Ship Date</strong></th>
+                <th class="pdiComments"><strong>Comments</strong></th>
+                <th class="pdiRepField"><strong>Rep</strong></th>
+                <th class="pdiWashField"><strong>Wash</strong></th>
+                <th class="pdiWashField"><strong>Road Test</strong></th>
+                <th class="pdiLocation"><strong>Location</strong></th>
+                <th class="pdiLocation"><strong>Tire / MTS</strong></th>
+            </tr>
+            </thead>
+            <tbody class="tableHeight">
+            {{#each roadTestList}}
+                <tr class="openRoadTest {{selectedClass3}}">
+                    <td class="pdiMachineField ">{{machineId}}</td>
+                    <td class="pdiShipDate">{{date}}</td>
+                    <td class="pdiTruckOnOrder {{getStatusTruck truckStatus}}" style="background-color:{{getStatusTruck truckStatus}}; color:{{getStatusTruck truckStatus}}" >{{truckStatus}}</td>
+                    <td class="pdiTruckDate truckDateCorrection">{{confirmedShipDate}}</td>
+                    <td class="pdiComments" style="width: 250px" >{{roadTestComment}}</td>
+                    <td class="pdiRepField  {{getStatusColor repairStatus}}" style="background-color:{{getStatusColor repairStatus}}; color:{{getStatusColor repairStatus}}" >{{repairStatus}}</td>
+                    <td class="pdiWashField  {{getStatusColor washStatus}}" style="background-color:{{getStatusColor washStatus}}; color:{{getStatusColor washStatus}}" >{{washStatus}}</td>
+                    <td class="pdiRepField  {{getStatusColor roadTest}}" style="background-color:{{getStatusColor roadTest}}; color:{{getStatusColor roadTest}}" >{{roadTest}}</td>
+                    <td class="pdiLocation">{{locationId}}</td>
+                    <td class="pdiLocation">{{tireTrack}}</td>
+                </tr>
+            {{/each}}
+            </tbody>
+        </table>
+    </div>
+
+<div class="road-test-inputs">
+    <label for="road-test-start"></label>
+    <button class="btn btn-info road-test-start">Road Test Start</button>
+    <br><br>
+    <label for="road-test-end"></label>
+    <button class="btn btn-success road-test-end">Road Test End</button>
+    <br><br>
+    <form class="road-test-comments">
+        <label for="inputComments">Road Test Comments</label>
+        <br>
+        <textarea name="roadTestComments" id="inputComments"
+                  placeholder="Comments"
+                  value="{{roadTestComments}}" style="width: 300px; height: 100px; border: #bc171b 1px solid"></textarea>
+        <br><br>
+        <label for="road-test-comment"></label>
+        <button type="submit" class="btn btn-success road-test-comments">Write / Edit Comments</button>
+    </form>
 
 
+
+
+</div>
 
 </template>

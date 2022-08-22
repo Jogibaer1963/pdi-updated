@@ -48,10 +48,12 @@ if(Meteor.isServer){
         Meteor.publish("reworkMachineList", function(){
             return reworkMachineList.find();
         });
-
+/*
         Meteor.publish("mcoReview", function () {
            return mcoReview.find();
         });
+
+ */
 
         Meteor.publish("siListDone", function () {
             return siListDone.find();
@@ -140,6 +142,15 @@ if(Meteor.isServer){
 
     Meteor.methods({
 
+        'roadTest': () => {
+            console.log('operation performed')
+            let result = MachineReady.update({repairStatus: 0}, {$set: {roadTest: 0}}, {multi: true})
+            console.log(result)
+        },
+
+
+
+
 /*
         'specialOperation': (contents) => {
          //   console.log(contents)
@@ -154,6 +165,24 @@ if(Meteor.isServer){
 
  */
 
+        // ****************************  Road Test Section  **********************************
+
+        'roadTestComments':(machineId, comment) => {
+            MachineReady.update({machineId: machineId}, {$set: {roadTestComment: comment}})
+    },
+/*
+        'roadTest':(machineId, status) => {
+            let roadTestStatus = parseInt(status)
+            if (roadTestStatus === 2 ) {
+                // Road Test Start
+                MachineReady.update({machineId: machineId}, {$set:{roadTest: roadTestStatus}})
+            } else if (roadTestStatus === 1) {
+                // Road Test End
+                MachineReady.update({machineId: machineId}, {$set: {roadTest: roadTestStatus}})
+            }
+        },
+
+ */
 
 
      // ************************  Load Shipping Machine List  ********************************
@@ -493,6 +522,7 @@ if(Meteor.isServer){
         },
 
 //----------------------------------------------------------- Fuel control ------------------------------------------------------------------
+       /*
         'fuelConsumption': function () {
             let elementMachine = [];
             let elementFuelStart = [];
@@ -519,6 +549,8 @@ if(Meteor.isServer){
                   elementConsumption: elementConsumption
           };
         },
+
+        */
 //------------------------------------------------------------ Admin User Control ------------------------------------------------------
        'userManualLogout': function (logOutUser) {
             for (let i = 0; i < logOutUser.length; i++) {
@@ -719,27 +751,19 @@ if(Meteor.isServer){
             headerTrailer.remove({_id: trailerId});
         },
 
-        'inputNewCheckPoint': function(status, errorPos, errorDescription, range, checkStatus, machineRangeEndC77,
-                                                                                  machineRangeEndC78, machineRangeEndC79) {
+        'inputNewCheckPoint': function(status, errorPos, errorDescription, range, checkStatus, ) {
             checkPoints.insert({status: status,
                                 errorPos: errorPos,
                                 errorDescription: errorDescription,
                                 machineType: range,
-                                machineRangeEndC77: machineRangeEndC77,
-                                machineRangeEndC78: machineRangeEndC78,
-                                machineRangeEndC79: machineRangeEndC79,
                                 checkStatus: 0});
         },
 
-        'editCheckPoint': function(checkId, status, errorPos, errorDescription, range, checkStatus, machineRangeEndC77,
-                                                                                machineRangeEndC78, machineRangeEndC79) {
+        'editCheckPoint': function(checkId, status, errorPos, errorDescription, range, checkStatus, ) {
             checkPoints.update({_id: checkId}, {$set: {status: status,
                                                         errorPos: errorPos,
                                                         errorDescription: errorDescription,
                                                         machineType: range,
-                                                        machineRangeEndC77: machineRangeEndC77,
-                                                        machineRangeEndC78: machineRangeEndC78,
-                                                        machineRangeEndC79: machineRangeEndC79,
                                                         checkStatus: 0}});
         },
 
@@ -951,10 +975,9 @@ if(Meteor.isServer){
         },
 
 
-        'fuelAfterPdi': function(selectedPdiMachine, selectedPdiMachineNr, fuelAfter) {
+        'fuelAfterPdi': function(selectedPdiMachine, selectedPdiMachineNr) {
             let date = Date.now();
-            MachineReady.update({_id: selectedPdiMachine}, {$set: {fuelAfter: fuelAfter,
-                    pdiStatus: 1,
+            MachineReady.update({_id: selectedPdiMachine}, {$set: {pdiStatus: 1,
                      unixPdiDate: date}});
             specialItems.update({}, {$inc: {pdiFinished: 1, pdiLeft: -1}})
             let result = siList.find({machineNr: selectedPdiMachineNr}).fetch();
@@ -1002,7 +1025,6 @@ if(Meteor.isServer){
                                                                             machineConfig: [],
                                                                             pdiPerformer: user,
                                                                             startPdiDate: '',
-                                                                            fuelStart: '',
                                                                             newIssues: [],
                                                                             batteries: "",
                                                                             omms: ""
@@ -1015,7 +1037,6 @@ if(Meteor.isServer){
                                                                              machineConfig: [],
                                                                              pdiPerformer: '',
                                                                              startPdiDate: '',
-                                                                             fuelStart: '',
                                                                              newIssues: [],
                                                                              batteries: "",
                                                                              omms: ""
@@ -1106,6 +1127,7 @@ if(Meteor.isServer){
         'pdiEstimate': (selectedPdiMachineId, openFailure) => {
             MachineReady.update({_id: selectedPdiMachineId, 'newIssues._id': openFailure},
                 {$set: {'newIssues.$.pdiEstimate': 1}});
+            MachineReady.update({_id: selectedPdiMachineId}, {$set: {pdiEstimate: 1}})
         },
 
 
@@ -1157,10 +1179,10 @@ if(Meteor.isServer){
 
         },
 
-        'pdiMachineOmm': function(selectedPdiMachineId, loggedInUser, fuelMe, ommMain, ommSupp,
+        'pdiMachineOmm': function(selectedPdiMachineId, loggedInUser, ommMain,
                                   ommUnload,ommProfiCam, ommCebis, ommTerra) {
-            MachineReady.update({_id: selectedPdiMachineId}, {$set: {omms: {user: loggedInUser, fuelStart: fuelMe,
-                    ommMain, ommSupp, ommUnload, ommProfiCam, ommCebis,  ommTerra, ommStatus: 1}}});
+            MachineReady.update({_id: selectedPdiMachineId}, {$set: {omms: {user: loggedInUser,
+                    ommMain, ommUnload, ommProfiCam, ommCebis,  ommTerra, ommStatus: 1}}});
         },
 
         'machineUser': function (machineId, userLoggedIn, arrayOrder) {
@@ -1405,14 +1427,14 @@ if(Meteor.isServer){
 function CSVtoArray(text) {
     let re_valid = /^\s*(?:'[^'\\]*(?:\\[\S\s][^'\\]*)*'|"[^"\\]*(?:\\[\S\s][^"\\]*)*"|[^,'"\s\\]*(?:\s+[^,'"\s\\]+)*)\s*(?:,\s*(?:'[^'\\]*(?:\\[\S\s][^'\\]*)*'|"[^"\\]*(?:\\[\S\s][^"\\]*)*"|[^,'"\s\\]*(?:\s+[^,'"\s\\]+)*)\s*)*$/;
    let re_value = /(?!\s*$)\s*(?:'([^'\\]*(?:\\[\S\s][^'\\]*)*)'|"([^"\\]*(?:\\[\S\s][^"\\]*)*)"|([^,'"\s\\]*(?:\s+[^,'"\s\\]+)*))\s*(?:,|$)/g;
-    // Return NULL if input string is not well formed CSV string.
+    // Return NULL if input string is not formed as CSV string.
     if (!re_valid.test(text)) return null;
     let a = [];                     // Initialize array to receive values.
     text.replace(re_value, // "Walk" the string using replace with callback.
         function(m0, m1, m2, m3) {
             // Remove backslash from \' in single quoted values.
             if      (m1 !== undefined) a.push(m1.replace(/\\'/g, "'"));
-            // Remove backslash from \" in double quoted values.
+            // Remove backslash from \" in values.
             else if (m2 !== undefined) a.push(m2.replace(/\\"/g, '"'));
             else if (m3 !== undefined) a.push(m3);
             return ''; // Return empty string.

@@ -1,6 +1,8 @@
+/*
 Meteor.subscribe('dropDownHistoricMachines');
 Meteor.subscribe("machineReadyToGo_2019");
 Meteor.subscribe("preSeriesMachine");
+ */
 Session.set('selectedPdiMachine', '');
 Session.set('selectedPreMachine', '');
 

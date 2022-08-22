@@ -1,9 +1,3 @@
-
-.inProcess {
-  animation: glowing 1500ms infinite;
-  color: transparent;
-}
-
 @keyframes glowing {
   0% { background-color: #AA3939; box-shadow: 0 0 3px  #AA5939; }
   50% { background-color: #FFB232; box-shadow: 0 0 10px #FFB232; }

@@ -31,7 +31,7 @@
             if (a.machineNr < b.machineNr) return -1
             return a.machineNr > b.machineNr ? 1 : 0
         })
-        // prepare arrays for Graph (machine Nr -> x-Axis, summary Repair time -> y-Axis
+        // prepare arrays for Graph (machine Nr -> x-Axis, summary Repair time -> y-Axis)
         let machineArray = [];
         let repairArray = [];
         let machineRepairArray = [];

@@ -33,7 +33,8 @@
       <tbody>
           {{#each machineOverView}}
              <tr class="">
-               <td class="pdiMachineField machine-font {{getStatus pdiOk}}" style="background-color:{{getStatus pdiOk}}; color:{{getStatus pdiOk}}" >{{machineId}}</td>
+               <td class="pdiMachineField machine-font {{getStatus pdiOk}}" style="background-color:{{getStatus pdiOk}};
+                       color:{{getStatus pdiOk}}" >{{machineId}}</td>
                <td class="pdiShipDate" style="width: 50px">{{coaDate}}</td>
                <td class="pdiShipDate" style="width: 50px">{{date}}</td>
                <td class="pdiPDIField {{getStatusColor pdiStatus}}"
@@ -67,7 +68,7 @@
     </div>
 
   <div class="headerTablePosition">
-    <table class="headerTable blueTable" cellpadding="10">
+    <table class="headerTable blueTable">
        <thead>
          <tr>
             <th class="headerId"><strong>Header</strong></th>
