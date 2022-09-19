@@ -44,7 +44,8 @@
         countPdiDone: () => {
             let result = specialItems.find({}).fetch();
             return result[0];
-        }
+        },
+
 
         });
 

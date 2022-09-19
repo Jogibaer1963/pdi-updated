@@ -27,14 +27,11 @@
         <a>|</a>
         <a class="btn" href="/dropDownList">Component Lists</a>
         <a>|</a>
-        <a class="btn" href="inspectionStart" disabled="true">OMM List</a>
-        <a>|</a>
-        <a class="btn" href="pdiRepairCrew">Pdi Repairs</a>
+        <a class="btn" href="/pdiRepairCrew">Pdi Repairs</a>
     </nav>
     <div class="overviewHeader">
         Open Pdi's : {{countPdi}}
         <br>
-  <!--     Average Fuel Consumption per Pdi : {{countConsumption}} Gallon  -->
         PDI goal for this week: {{countPdiDone.pdiWeekGoal}}
         <br>
         PDI's done: {{countPdiDone.pdiFinished}}
@@ -50,6 +47,7 @@
      <div class="container-one">
          <form class="file-container-origin">
              <button class="btn btn-default btn-info">Load origin config</button>
+             <label for="files"></label>
              <input class="loadConfig" type="file" id="files" name="files[]" >
          </form>
      </div>

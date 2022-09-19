@@ -1,6 +1,6 @@
 if (Meteor.isClient) {
 
-    Meteor.subscribe('newHeadYear');
+ Meteor.subscribe('newHeadYear');
 
     Template.overViewReadyList.helpers({
 

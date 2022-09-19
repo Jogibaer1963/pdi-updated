@@ -165,8 +165,9 @@ Template.analyzingOverView.helpers({
         let completedMachines = [];
         let issuesFound = 0;
         let result = MachineReady.find({pdiStatus: 1}, {fields: {newIssues: 1,
-                machineId: 1
+                machineId: 1, machineNr: 1,  omms: 1, amountOnOrder: 1
                }}).fetch();
+        Session.set('analyzingOverView', result)
         result.forEach((element) => {
            completedMachines.push(element.machineId);
            element.newIssues.forEach((element2) => {
@@ -452,27 +453,35 @@ Template.analyzingResponseTeam.events({
 
 Template.analyzingSupplier.helpers({
 
+    issueCount: () => {
+      return Session.get('issuesCount')
+    },
+
     supplierIssue: function () {
-        let result, toggle, repairInfos, machineLookUp, machine;
+         let supplierNames = [];
+         let supplierResult = SuppliersList.find({}).fetch();
+         supplierResult.forEach((element) => {
+             supplierNames.push(element.supplier)
+         })
+         let result, toggle, sortOrder, repairInfos, machineLookUp, machine;
          toggle = Session.get('toggle-button');
+         sortOrder = Session.get('sortOrder')
          repairInfos = Session.get('repairInfos');
          machineLookUp = Session.get('machine-look-up');
          machine = Session.get('machine-number');
         let supplierArray = [];
         let supplierIssues = {};
-
+        // search for Machine, pictures will be displayed
         if (machineLookUp === true) {
-            result = MachineReady.findOne({machineId: machine}, {
-                fields: {machineNr: 1,  machineId: 1, newIssues: 1, omms: 1, amountOnOrder: 1}})
-                let pdiPerformer = result.omms.user;
+           result = MachineReady.findOne({machineId: machine}, {
+              fields: {machineNr: 1,  machineId: 1, newIssues: 1, pdiPerformer: 1, amountOnOrder: 1}})
+                let pdiPerformer = result.pdiPerformer;
                 let machineNr = result.machineId;
                 let issueArray = result.newIssues;
                 let amountOnOrder = result.amountOnOrder;
                 issueArray.forEach((element2) => {
                     if (element2.checkStatus === true) {
-                        // console.log(element2)
                         if (element2.responsible === "N/A") {
-                            //   console.log('N/A detected', element2._id)
                         } else if (element2.responsible !== "N/A")   {
                             supplierIssues = {
                                 _id: element2._id,
@@ -497,23 +506,20 @@ Template.analyzingSupplier.helpers({
                 })
             return supplierArray;
         } else {
-
         }
-            result = MachineReady.find({pdiStatus: 1}, {
-            fields: {machineNr: 1, newIssues: 1, machineId: 1, omms: 1, amountOnOrder: 1
-            }}).fetch();
+            result = MachineReady.find({pdiStatus: 1},
+                {fields: {machineNr: 1, newIssues: 1, machineId: 1, pdiPerformer: 1, amountOnOrder: 1}}).fetch();
+        Session.set('issuesCount', result.length)
         try {
             if (toggle === 0) {
                 result.forEach((element) => {
-                    let pdiPerformer = element.omms.user;
+                    let pdiPerformer = element.pdiPerformer;
                     let machineNr = element.machineId;
                     let issueArray = element.newIssues;
                     let amountOnOrder = element.amountOnOrder;
                     issueArray.forEach((element2) => {
                         if (element2.checkStatus === true) { // issue is active in List
-                       // console.log(element2)
                             if (element2.responsible === "N/A") {
-                             //   console.log('N/A detected', element2._id)
                             } else if (element2.responsible !== "N/A" && element2.repairTime > '10')   {
                                 supplierIssues = {
                                     _id: element2._id,
@@ -534,21 +540,18 @@ Template.analyzingSupplier.helpers({
                                 }
                                 supplierArray.push(supplierIssues)
                             }
-
                        }
                     })
                 })
             } else if (toggle === 1) {
                 result.forEach((element) => {
-                    let pdiPerformer = element.omms.user;
+                    let pdiPerformer = element.pdiPerformer;
                     let machineNr = element.machineId;
                     let issueArray = element.newIssues;
                     let amountOnOrder = element.amountOnOrder;
                     issueArray.forEach((element2) => {
                         if (element2.checkStatus === false) { // issue is closed and disappeared from List
-                            // console.log(element2)
                             if (element2.responsible === "N/A") {
-                        //        console.log('N/A detected', element2._id)
                             } else  if (element2.responsible !== "N/A" && element2.repairTime > '10')   {
                                 supplierIssues = {
                                     _id: element2._id,
@@ -573,47 +576,84 @@ Template.analyzingSupplier.helpers({
                         }
                     })
                 })
+            } else if (toggle === 2) {
+                let supplier;
+                result.forEach((element) => {
+                    let pdiPerformer = element.pdiPerformer;
+                    let machineNr = element.machineId;
+                    let issueArray = element.newIssues;
+                    let amountOnOrder = element.amountOnOrder;
+                    issueArray.forEach((element2) => {
+                        for(supplier of supplierNames) {
+                            if (element2.responsible === supplier && element2.repairTime >= '10')   {
+                                supplierIssues = {
+                                    _id: element2._id,
+                                    machineNr: machineNr,
+                                    pdiPerformer:  pdiPerformer,
+                                    errorDescription: element2.errorDescription,
+                                    repairTech: element2.repairTech,
+                                    repairComment: element2.repairComment,
+                                    responsible: element2.responsible,
+                                    repairStatus: element2.repairStatus,
+                                    pictureLocation : '../../public/noPicture.JPG',
+                                    repairTime: element2.repairTime,
+                                    qualityComment: element2.qualityComment,
+                                    claimNumber: element2.claimNumber,
+                                    partNumber: element2.partNumber,
+                                    partsOrder : element2.partsOrder,
+                                    amountOnOrder : amountOnOrder
+                                }
+                                supplierArray.push(supplierIssues)
+                            }
+                        }
+                    })
+                })
             }
         } catch(e) {}
-     // sorting per repair time first
-        let sortOrder = Session.get('sortOrder')
+     // sorting per machine
+        sortOrder = Session.get('sortOrder')
         if (sortOrder === 1) {
             // sort by Machine number
-            supplierArray.sort( function(b, a) {
-                return ('' + b.machineNr).localeCompare(a.machineNr)
+            supplierArray.sort((a, b) => {
+                if (a.machineNr > b.machineNr) return -1
+                return a.machineNr < b.machineNr ? 1 : 0
             })
-        } else if (sortOrder === 2) {
+        }  else if (sortOrder === 2) {
             supplierArray.sort((a, b) => {
                 if (a.pdiPerformer > b.pdiPerformer) return -1
                 return a.pdiPerformer < b.pdiPerformer ? 1 : 0
             })
+
         } else if (sortOrder === 3) {
             supplierArray.sort((a, b) => {
                 if (a.repairTech > b.repairTech) return -1
                 return a.repairTech < b.repairTech ? 1 : 0
             })
+
         } else if (sortOrder === 6) {
             supplierArray.sort((a, b) => {
                 if (a.responsible > b.responsible) return -1
                 return a.responsible < b.responsible ? 1 : 0
             })
+
         } else if (sortOrder === 7) {
             supplierArray.sort( (a, b) => {
                 if (a.repairTime > b.repairTime) return -1
                 return a.repairTime < b.repairTime ? 1 : 0
             })
+
         } else if (sortOrder === 12) {
             supplierArray.sort( (a, b) => {
                 if (a.qualityComment > b.qualityComment) return -1
                 return a.qualityComment < b.qualityComment ? 1 : 0
             })
+
         } else if (sortOrder === 13) {
             supplierArray.sort( (a, b) => {
                 if (a.claimNumber > b.claimNumber) return -1
                 return a.claimNumber < b.claimNumber ? 1 : 0
             })
         } else if (sortOrder === 14) {
-          //  console.log('sort Order Type: ', sortOrder)
             supplierArray.sort( function(b, a) {
                return ('' + b.partsOrder).localeCompare(a.partsOrder)
             })
@@ -764,10 +804,13 @@ Template.analyzingSupplier.events({
 
    'click .machine-sort-button': () => {
         // sort by machine number
-       Session.set('sortOrder', 1)
+       console.log('clicked')
+       Session.set('setOrder', 1);
+       console.log(Session.get('setOrder'))
    },
 
     'click .pdiTech-sort-button': () => {
+        console.log('clicked')
         // sort by PDI Tech
         Session.set('sortOrder', 2)
     },
@@ -801,15 +844,18 @@ Template.analyzingSupplier.events({
         e.preventDefault();
         let machine_string = e.target.lookUp.value;
         let machine = machine_string.toUpperCase();
-
-        Session.set('specificMachine', machine);
-        Session.set('machine-look-up', true);
-        Session.set('machine-number', machine)
-
-        if (machine === '') {
-            Session.set('machine-look-up', false)
+        let result = MachineReady.findOne({machineId: machine}, {fields: {machineId: 1}})
+        if (result === undefined) {
+            window.alert('Machine does not exists')
+        } else {
+            Session.set('specificMachine', machine);
+            Session.set('machine-look-up', true);
+            Session.set('machine-number', machine)
+            if (machine === '') {
+                Session.set('machine-look-up', false)
+            }
+            e.target.lookUp.value = '';
         }
-        e.target.lookUp.value = '';
     },
 
     'click .toggle-list': function (e) {
@@ -820,6 +866,17 @@ Template.analyzingSupplier.events({
         } else {
             Session.set('toggle-button', 1);
         }
+    },
+
+    'click .supplier-only': (e) => {
+        e.preventDefault()
+        let toggle = Session.get('toggle-button')
+        if(toggle === 1 || toggle === 0) {
+            Session.set('toggle-button', 2)
+        } else {
+            Session.set('toggle-button', 0);
+        }
+       // console.log(Session.get('toggle-button'))
     },
 
     'submit .quality-comment': function(e) {
@@ -892,6 +949,14 @@ Template.analyzingSupplier.events({
         let selectedLine = this._id;
         Session.set('selectedLine', selectedLine);
     },
+
+    'click .selectedPartsOrdered': function(e) {
+        e.preventDefault()
+        let machine = this.machineId
+        Session.set('specificMachine', machine);
+        Session.set('machine-look-up', true);
+        Session.set('machine-number', machine)
+    }
 
 
 });

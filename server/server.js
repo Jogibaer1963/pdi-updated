@@ -87,8 +87,8 @@ if(Meteor.isServer){
             return mainComponents.find();
         });
 
-        Meteor.publish("newHeadYear", function() {
-            return newHeadYear.find();
+        Meteor.publish("headersToShip", function() {
+           return newHeadYear.find();
         });
 
         Meteor.publish("dropDownHistoricMachines", function() {
@@ -148,9 +148,6 @@ if(Meteor.isServer){
             console.log(result)
         },
 
-
-
-
 /*
         'specialOperation': (contents) => {
          //   console.log(contents)
@@ -164,33 +161,17 @@ if(Meteor.isServer){
         },
 
  */
-
         // ****************************  Road Test Section  **********************************
 
         'roadTestComments':(machineId, comment) => {
             MachineReady.update({machineId: machineId}, {$set: {roadTestComment: comment}})
     },
-/*
-        'roadTest':(machineId, status) => {
-            let roadTestStatus = parseInt(status)
-            if (roadTestStatus === 2 ) {
-                // Road Test Start
-                MachineReady.update({machineId: machineId}, {$set:{roadTest: roadTestStatus}})
-            } else if (roadTestStatus === 1) {
-                // Road Test End
-                MachineReady.update({machineId: machineId}, {$set: {roadTest: roadTestStatus}})
-            }
-        },
-
- */
-
 
      // ************************  Load Shipping Machine List  ********************************
 
-        'pdiBlocker': (machineNr, value) => {
-            MachineReady.update({machineId: machineNr}, {$set: {pdiOk: value}})
-        },
-
+    'pdiBlocker': (machineNr, value) => {
+        MachineReady.update({machineId: machineNr}, {$set: {pdiOk: value}})
+    },
 
      'upload-machine-list':(contents) => {
          let arr = contents.split(/[\n\r]/g);
@@ -201,7 +182,6 @@ if(Meteor.isServer){
                   }
              i++
          })
-
          let newElement = [];
          let kit = [];
          let sequence, machineId, targetDate, destination, tireTrack, timeStamp, hours, minutes, seconds, unixTime, formattedTime,
@@ -235,12 +215,11 @@ if(Meteor.isServer){
             machineId = sequence[0];
             targetDate = sequence[1];
             shipDate = new Date(targetDate)
-            dateString = new Date(shipDate.getTime() - (shipDate.getTimezoneOffset() * 60000 ))
+            dateString = new Date(shipDate.getTime() - (shipDate.getTimezoneOffset() * 60000))
                 .toISOString()
                 .split("T")[0];
             destination = sequence[2];
             tireTrack = sequence[3];
-
             for (let i = 4; i <= 16; i++) {
                 if (sequence[i] === '' || sequence[i] === undefined) {
                 } else {
@@ -252,32 +231,53 @@ if(Meteor.isServer){
             if (kit.length === 0) {
                 kit = ['No_Kit']
             }
-
-             result = MachineReady.findOne({machineId: machineId});
-            if (result === undefined) {
-              //  console.log('machine new')
-                MachineReady.insert({machineId: machineId,
-                    dateOfCreation: dateOfCreation,
-                    timeOfCreation: formattedTime,
-                    pdiStatus: 0,
-                    repairStatus: 0,
-                    washStatus: 0,
-                    shipStatus: 0,
-                    unixTime: timeStamp,
-                    date: dateString,
-                    destination: destination,
-                    transporter: '',
-                    kit: kit,
-                    tireTrack: tireTrack,
-                    machineReturn: 'No',
-                    shippingComment: ''});
-                kit = [];
-            } else {
-              //  console.log('found Machine')
-            }
+             result = MachineReady.find({machineId: machineId}, {fields: {shipStatus: 1}}).fetch();
+             try {
+                 if ( _.isEmpty(result) === true ) {
+               //      console.log(machineId, ' machine is new', kit)
+                     MachineReady.insert({machineId: machineId,
+                         dateOfCreation: dateOfCreation,
+                         timeOfCreation: formattedTime,
+                         pdiStatus: 0,
+                         repairStatus: 0,
+                         washStatus: 0,
+                         shipStatus: 0,
+                         unixTime: timeStamp,
+                         date: dateString,
+                         destination: destination,
+                         transporter: '',
+                         kit: kit,
+                         tireTrack: tireTrack,
+                         machineReturn: 'No',
+                         shippingComment: ''});
+                     kit = [];
+                 } else if (result[0].shipStatus === 0) {
+               //   console.log(machineId, ' not shipped yet, update machine', kit, dateString, targetDate)
+                     MachineReady.update({machineId: machineId}, {
+                         $set: {
+                             dateOfCreation: dateOfCreation,
+                             timeOfCreation: formattedTime,
+                             unixTime: timeStamp,
+                             date: dateString,
+                             destination: destination,
+                             kit: kit,
+                             tireTrack: tireTrack,
+                             machineReturn: 'No'
+                         }
+                         })
+                     kit = [];
+                 } else if (result[0].shipStatus ===  1) {
+                   //  console.log(machineId, ' machine Shipped, skip update')
+                     kit = [];
+                 }
+             } catch (e) {
+                // console.log(machineId, 'new machine detected')
+                 kit = [];
+             }
+            kit = [];
          })
+                kit = [];
      },
-
 
    // ************* Remove last year shipped machines from database  **************************
 
@@ -303,7 +303,6 @@ if(Meteor.isServer){
         'removeTeam': (removeId) => {
             TeamList.remove({_id: removeId})
         },
-
 
         //  ********************   Supplier List & quality comments & claims ****************
 
@@ -1339,31 +1338,47 @@ if(Meteor.isServer){
 
         // shipping Machines
 
-        'addToShipList': function(newMachineInput, newShippingDate, createUnixTime, createDate, createTime,
+        'addToShipList': function(machineId, newShippingDate, createUnixTime, createDate, createTime,
             newShippingDestination, newShippingTransporter, newShippingKit, newShippingTireTrack,
                           newShippingReturns, newShippingComment ) {
-            try {
-            MachineReady.insert({
-                machineId: newMachineInput,
-                dateOfCreation: createDate,
-                timeOfCreation: createTime,
-                pdiStatus: 0,
-                repairStatus: 0,
-                washStatus: 0,
-                shipStatus: 0,
-                unixTime: createUnixTime,
-                date: newShippingDate,
-                destination: newShippingDestination,
-                transporter: newShippingTransporter,
-                kit: newShippingKit,
-                tireTrack: newShippingTireTrack,
-                machineReturn: newShippingReturns,
-                shippingComment: newShippingComment
-            });
-            } catch(err) {
-                console.log(err.message)
+
+            let result = MachineReady.findOne({machineId: machineId})
+            if (result === undefined) {
+                console.log('undefined detected')
+                // machine not found
+                MachineReady.insert({
+                    machineId: machineId,
+                    dateOfCreation: createDate,
+                    timeOfCreation: createTime,
+                    pdiStatus: 0,
+                    repairStatus: 0,
+                    washStatus: 0,
+                    shipStatus: 0,
+                    unixTime: createUnixTime,
+                    date: newShippingDate,
+                    destination: newShippingDestination,
+                    transporter: newShippingTransporter,
+                    kit: newShippingKit,
+                    tireTrack: newShippingTireTrack,
+                    machineReturn: newShippingReturns,
+                    shippingComment: newShippingComment
+                });
+            }  else {
+                console.log('update Machine')
+                // machine found and need update
+                MachineReady.update({machineId:machineId},
+                    {$set: {
+                            date: newShippingDate,
+                            destination: newShippingDestination,
+                            transporter: newShippingTransporter,
+                            tireTrack: newShippingTireTrack,
+                            kit: newShippingKit,
+                            machineReturn: newShippingReturns,
+                            shippingComment: newShippingComment}
+                    });
             }
-               // console.log('kein eror ?')
+
+
         },
 
 

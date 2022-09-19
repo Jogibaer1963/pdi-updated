@@ -68,7 +68,7 @@
 
 .shippingMachinesTable {
   position: relative;
-  top: -3em;
+  top: 7em;
 }
 
 .searchMachine {
@@ -76,9 +76,9 @@
 }
 
 .find_delete_button {
-  position: relative;
-  top: -18em;
-  left: 80em;
+  position: absolute;
+  top: 1em;
+  left: 90em;
   }
 
 .find_Machine {
@@ -88,7 +88,7 @@
 .buttonField {
   margin-left: 30em;
   position: relative;
-  top: -15em;
+  top: -2em;
   left: 50em;
 }
 
@@ -117,6 +117,16 @@
 
 .shipDate {
   margin-left: 0.5em;
+}
+
+.addTruck {
+  left: 12em;
+  position: absolute;
+}
+
+.removeTruck {
+  left: 12em;
+  position: absolute;
 }
 
 .confirmedShipDate {

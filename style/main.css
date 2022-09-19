@@ -1,575 +1,722 @@
 .submitAdmin {
   position: absolute;
-  left: 57em; }
+  left: 57em;
+}
 
 .totalUsers {
   margin-left: 25px;
   position: absolute;
-  top: 100px; }
+  top: 100px;
+}
 
 .newUser {
   position: absolute;
   top: 120px;
-  margin-left: 10px; }
+  margin-left: 10px;
+}
 
 table.fiscalTable {
   position: absolute;
   top: 20em;
-  left: 3em; }
+  left: 3em;
+}
 
 table.tableWidth {
-  width: 210px; }
+  width: 210px;
+}
 
 .machineMovingTable {
   position: absolute;
   top: 1em;
-  left: 3em; }
+  left: 3em;
+}
 
 .moveMachineSubmit {
   position: absolute;
   top: 14em;
-  left: 15em; }
+  left: 15em;
+}
 
 .headMovingTable {
   position: absolute;
   left: 25em;
-  top: 1em; }
+  top: 1em;
+}
 
 .logo {
-  margin: 25px; }
+  margin: 25px;
+}
 
 .login-image {
-  margin-top: 50px; }
+  margin-top: 50px;
+}
 
 .user-name {
   left: 25px;
   position: absolute;
-  top: 150px; }
+  top: 150px;
+}
 
 .login-passwd {
   left: 25px;
   position: absolute;
-  top: 220px; }
+  top: 220px;
+}
 
 .login-button {
   left: 25px;
   position: absolute;
-  top: 290px; }
+  top: 290px;
+}
 
 .loading-screen {
   left: 20em;
   position: absolute;
-  top: 3em; }
+  top: 3em;
+}
 
 thead {
-  background-color: lightgrey; }
+  background-color: lightgrey;
+}
 
 table tbody, table thead {
-  display: block; }
+  display: block;
+}
 
 table tbody {
   overflow: auto;
-  height: 500px; }
+  height: 500px;
+}
 
 table.blueTable {
-  width: 1195px; }
+  width: 1195px;
+}
 
 table.blueTable {
   border: 1px solid #a49892;
   text-align: left;
-  border-collapse: collapse; }
+  border-collapse: collapse;
+}
 
 table.blueTable td, table.blueTable th {
   border: 1px solid #AAAAAA;
-  padding: 3px 8px; }
+  padding: 3px 8px;
+}
 
 table.blueTable tbody td {
   font-size: 13px;
-  word-wrap: break-word; }
+  word-wrap: break-word;
+}
 
 table.blueTable thead {
   background: #1C6EA4;
-  border-bottom: 2px solid #444444; }
+  border-bottom: 2px solid #444444;
+}
 
 table.blueTable thead th {
   border-left: 2px solid #d0e4f5;
   color: #FFF;
   font-size: 15px;
-  font-weight: bold; }
+  font-weight: bold;
+}
 
 table.blueTable thead th:first-child {
-  border-left: none; }
+  border-left: none;
+}
 
 table.blueTable tfoot {
   font-size: 14px;
   font-weight: bold;
   color: #FFFFFF;
   background: #d6e0f5;
-  border-top: 2px solid #444444; }
+  border-top: 2px solid #444444;
+}
 
 table.blueTable tfoot td {
-  font-size: 14px; }
+  font-size: 14px;
+}
 
 table.blueTable tfoot .links a {
   display: inline-block;
   background: #8f8e8c;
   color: #FFFFFF;
   padding: 2px 8px;
-  border-radius: 5px; }
+  border-radius: 5px;
+}
 
 th {
-  height: 50px; }
+  height: 50px;
+}
 
 table.tableAdminPos {
-  width: 853px; }
+  width: 853px;
+}
 
 .adminUserId {
   max-width: 170px;
-  min-width: 170px; }
+  min-width: 170px;
+}
 
 .adminUser {
   max-width: 80px;
-  min-width: 80px; }
+  min-width: 80px;
+}
 
 .userRole {
   max-width: 80px;
-  min-width: 80px; }
+  min-width: 80px;
+}
 
 .userCreated {
   max-width: 120px;
-  min-width: 120px; }
+  min-width: 120px;
+}
 
 .userCreatedBy {
   max-width: 80px;
-  min-width: 80px; }
+  min-width: 80px;
+}
 
 .userLastLogin {
   max-width: 110px;
-  min-width: 110px; }
+  min-width: 110px;
+}
 
 .userIP {
   max-width: 100px;
-  min-width: 100px; }
+  min-width: 100px;
+}
 
 .userStatus {
   max-width: 60px;
-  min-width: 60px; }
+  min-width: 60px;
+}
 
 .userLogOut {
   max-width: 50px;
   min-width: 50px;
-  text-align: center; }
+  text-align: center;
+}
 
 .userErase {
   max-width: 50px;
   min-width: 50px;
-  text-align: center; }
+  text-align: center;
+}
 
 .tablePdiOverview {
   position: absolute;
-  top: 300px; }
+  top: 300px;
+}
 
 .kitSet {
   max-width: 450px;
-  min-width: 450px; }
+  min-width: 450px;
+}
 
 .pdiMachineField {
   max-width: 80px;
-  min-width: 80px; }
+  min-width: 80px;
+}
 
 .pdiShipDate {
   max-width: 90px;
-  min-width: 90px; }
+  min-width: 90px;
+}
 
 .pdiDestination {
   max-width: 100px;
-  min-width: 100px; }
+  min-width: 100px;
+}
 
 .pdiTransporter {
   max-width: 100px;
-  min-width: 100px; }
+  min-width: 100px;
+}
 
 .pdiTruckOnOrder {
   max-width: 70px;
-  min-width: 70px; }
+  min-width: 70px;
+}
 
 .pdiTruckDate {
   min-width: 6em;
-  max-width: 6em; }
+  max-width: 6em;
+}
 
 .truckDateCorrection {
-  min-width: 6.8em; }
+  min-width: 6.8em;
+}
 
 .pdiKitList {
   max-width: 80px;
-  min-width: 80px; }
+  min-width: 80px;
+}
 
 .pdiComments {
   max-width: 290px;
-  min-width: 290px; }
+  min-width: 290px;
+}
 
 .pdiKitField {
   max-width: 145px;
-  min-width: 145px; }
+  min-width: 145px;
+}
 
 .pdiTireField {
   max-width: 145px;
-  min-width: 145px; }
+  min-width: 145px;
+}
 
 .pdiPDIField {
   max-width: 50px;
-  min-width: 50px; }
+  min-width: 50px;
+}
 
 .pdiRepField {
   max-width: 50px;
-  min-width: 50px; }
+  min-width: 50px;
+}
 
 .pdiVariantDescription {
   max-width: 250px;
-  min-width: 250px; }
+  min-width: 250px;
+}
 
 .pdiWashField {
   max-width: 50px;
-  min-width: 50px; }
+  min-width: 50px;
+}
 
 .pdiShipField {
   max-width: 60px;
-  min-width: 60px; }
+  min-width: 60px;
+}
 
 .pdiLocation {
   max-width: 70px;
-  min-width: 70px; }
+  min-width: 70px;
+}
 
 .pdiConfig {
   max-width: 60px;
-  min-width: 60px; }
+  min-width: 60px;
+}
 
 .pdiTrailer {
   max-width: 80px;
-  min-width: 80px; }
+  min-width: 80px;
+}
 
 .headerKit {
   max-width: 320px;
-  min-width: 320px; }
+  min-width: 320px;
+}
 
 .pdiUser {
   max-width: 200px;
-  min-width: 200px; }
+  min-width: 200px;
+}
 
 table.headerTable {
-  width: 230px; }
+  width: 230px;
+}
 
 .headerId {
   max-width: 80px;
-  min-width: 80px; }
+  min-width: 80px;
+}
 
 .headerShipDate {
   max-width: 90px;
-  min-width: 90px; }
+  min-width: 90px;
+}
 
 .headerStatus {
   max-width: 80px;
-  min-width: 80px; }
+  min-width: 80px;
+}
 
 .ecnTextField {
   max-width: 850px;
-  min-width: 850px; }
+  min-width: 850px;
+}
 
 .overView {
   left: 200px;
   position: relative;
-  top: 80px; }
+  top: 80px;
+}
 
 .openStatus {
   margin-left: 25px;
   position: relative;
   top: 80px;
-  width: 300px; }
+  width: 300px;
+}
 
 .headerTablePosition {
   left: 37em;
   position: absolute;
   top: 21em;
-  z-index: -1; }
+  z-index: -1;
+}
 
 table.overViewTable {
   float: left;
   position: relative;
   top: 6em;
-  width: 21em; }
+  width: 21em;
+}
 
 .machine-font {
-  font-weight: bolder; }
+  font-weight: bolder;
+}
 
 .sort-button {
   left: 27em;
   position: absolute;
-  top: 21em; }
+  top: 21em;
+}
 
 .pdi-release-button {
   left: 555px;
   position: absolute;
-  top: 210px; }
+  top: 210px;
+}
 
 .locationTable {
   position: relative;
   top: 13em;
-  margin-left: 2.5em; }
+  margin-left: 2.5em;
+}
 
 table.locationTable {
-  width: 30em; }
+  width: 30em;
+}
 
 .mLocationId {
   position: relative;
   top: 10em;
-  margin-left: 2.8em; }
+  margin-left: 2.8em;
+}
 
 .shippingNav {
   position: absolute;
   top: 70px;
-  left: 40em; }
+  left: 40em;
+}
 
 .switchToHeader {
   position: absolute;
   left: -13em;
-  top: -2.5em; }
+  top: -2.5em;
+}
 
 .newMachineShipping {
   position: relative;
   top: 3em;
-  margin-left: 2.5em; }
+  margin-left: 2.5em;
+}
 
 .shippingInputs {
   margin-left: 20px;
-  float: left; }
+  float: left;
+}
 
 .machineReturn {
   position: absolute;
-  left: 71em; }
+  left: 71em;
+}
 
 .firstKit {
-  float: left; }
+  float: left;
+}
 
 .secondKit {
-  float: left; }
+  float: left;
+}
 
 .thirdKit {
   position: relative;
   top: 24px;
-  float: left; }
+  float: left;
+}
 
 .comment {
   position: relative;
   top: 3em;
   left: 4.5em;
-  width: 35em; }
+  width: 35em;
+}
 
 .newMachineSubmit {
   left: 429px;
   position: absolute;
-  top: 144px; }
+  top: 144px;
+}
 
 .load-machine-list {
   left: 630px;
   position: absolute;
-  top: 123px; }
+  top: 123px;
+}
 
 .toggleShippedAll {
   position: absolute;
   top: 16em;
-  left: 35em; }
+  left: 35em;
+}
 
 .shippingMachinesTable {
   position: relative;
-  top: -3em; }
+  top: 7em;
+}
 
 .searchMachine {
-  margin-left: 0.8em; }
+  margin-left: 0.8em;
+}
 
 .find_delete_button {
-  position: relative;
-  top: -18em;
-  left: 80em; }
+  position: absolute;
+  top: 1em;
+  left: 90em;
+}
 
 .find_Machine {
-  margin-bottom: 1em; }
+  margin-bottom: 1em;
+}
 
 .buttonField {
   margin-left: 30em;
   position: relative;
-  top: -15em;
-  left: 50em; }
+  top: -2em;
+  left: 50em;
+}
 
 .buttonEditField {
   margin-left: 30em;
   position: relative;
-  top: 5em; }
+  top: 5em;
+}
 
 .editTable {
   position: relative;
   top: 4em;
-  margin-left: 2.5em; }
+  margin-left: 2.5em;
+}
 
 .editTableHead {
   width: 15em;
-  border: 1px solid black; }
+  border: 1px solid black;
+}
 
 .editTableBody {
-  border: 1px solid black; }
+  border: 1px solid black;
+}
 
 .shipDate {
-  margin-left: 0.5em; }
+  margin-left: 0.5em;
+}
+
+.addTruck {
+  left: 12em;
+  position: absolute;
+}
+
+.removeTruck {
+  left: 12em;
+  position: absolute;
+}
 
 .confirmedShipDate {
   position: relative;
   left: 39em;
-  top: -4.5em; }
+  top: -4.5em;
+}
 
 .confirmedDate {
-  font-weight: bold; }
+  font-weight: bold;
+}
 
 table.editTable tbody.editBody, thead.editTableHead {
   display: revert;
-  height: 50px; }
+  height: 50px;
+}
 
 .shipped-machines {
   left: 10em;
   position: absolute;
-  top: 25em; }
+  top: 25em;
+}
 
 .switchToCombine {
   position: absolute;
   left: 27em;
-  top: 2em; }
+  top: 2em;
+}
 
 .newHeadShipping {
   position: relative;
   top: 8em;
-  margin-left: 25px; }
+  margin-left: 25px;
+}
 
 .firstKit {
-  margin-top: 25px; }
+  margin-top: 25px;
+}
 
 .secondKit {
-  margin-top: 25px; }
+  margin-top: 25px;
+}
 
 .headerComment {
   position: relative;
   top: 1em;
-  left: 1.2em; }
+  left: 1.2em;
+}
 
 .headerInputComment {
   position: relative;
-  width: 500px; }
+  width: 500px;
+}
 
 .headerSubmit {
   position: absolute;
   top: 235px;
   left: 610px;
-  width: 80px; }
+  width: 80px;
+}
 
 .headerSection {
   position: absolute;
-  top: 32.3em; }
+  top: 32.3em;
+}
 
 .headerTable {
   margin-top: 50px;
-  margin-left: 30px; }
+  margin-left: 30px;
+}
 
 .buttonDelete {
   position: relative;
   top: 5em;
-  left: 45em; }
+  left: 45em;
+}
 
 .buttonToggle {
   position: relative;
-  left: 30em; }
+  left: 30em;
+}
 
 .buttonEdit {
   position: relative;
   top: 2.5em;
-  left: 10em; }
+  left: 10em;
+}
 
 .trailerSection {
   position: relative;
   left: 105em;
-  top: 1em; }
+  top: 1em;
+}
 
 .newTrailerInput {
   position: absolute;
-  top: 220px; }
+  top: 220px;
+}
 
 .deleteTrailer {
   position: absolute;
   top: 300px;
-  left: 185px; }
+  left: 185px;
+}
 
 .newTrailer {
-  margin-top: 10px; }
+  margin-top: 10px;
+}
 
 .trailerHome {
   position: absolute;
   top: 350px;
-  left: 50px; }
+  left: 50px;
+}
 
 .trailerOnDuty {
   position: absolute;
   top: 350px;
-  left: 27em; }
+  left: 27em;
+}
 
 .moveButton {
   position: relative;
   top: 35em;
-  left: -21.5em; }
+  left: -21.5em;
+}
 
 .imageButton {
   width: 8em;
-  height: 4em; }
+  height: 4em;
+}
 
 .headerButtonField {
   position: absolute;
   top: -2em;
-  left: 60em; }
+  left: 60em;
+}
 
 .headerKit {
-  white-space: pre-wrap; }
+  white-space: pre-wrap;
+}
 
 table.trailerTable {
   position: absolute;
   width: 180px;
-  top: 420px; }
+  top: 420px;
+}
 
 .trailerTableOnTheMove {
   position: relative;
-  left: 25em; }
+  left: 25em;
+}
 
 tbody.machineSearchTable {
-  height: 50px; }
+  height: 50px;
+}
 
 @keyframes glowing {
   0% {
     background-color: #AA3939;
-    box-shadow: 0 0 3px  #AA5939; }
+    box-shadow: 0 0 3px #AA5939;
+  }
   50% {
     background-color: #FFB232;
-    box-shadow: 0 0 10px #FFB232; }
+    box-shadow: 0 0 10px #FFB232;
+  }
   100% {
     background-color: #FFE800;
-    box-shadow: 0 0 3px #FFE800; } }
+    box-shadow: 0 0 3px #FFE800;
+  }
+}
 @keyframes Siglowing {
   0% {
     background-color: #481317;
-    box-shadow: 0 0 3px  #AA5939; }
+    box-shadow: 0 0 3px #AA5939;
+  }
   50% {
     background-color: #cb2aff;
-    box-shadow: 0 0 10px #ffd855; }
+    box-shadow: 0 0 10px #ffd855;
+  }
   100% {
     background-color: #1cbdee;
-    box-shadow: 0 0 3px #ec67ff; } }
+    box-shadow: 0 0 3px #ec67ff;
+  }
+}
 a:hover {
   background-color: lightgrey;
   text-align: right;
-  text-decoration: none; }
+  text-decoration: none;
+}
 
 .checkpointHeader .title {
   margin-top: 40px;
@@ -581,125 +728,153 @@ a:hover {
   display: block;
   color: white;
   padding: 10px;
-  vertical-align: center; }
+  vertical-align: center;
+}
 
 .input {
   border: black 1px;
-  background-color: #e6e6e6; }
+  background-color: #e6e6e6;
+}
 
 .inputMargin {
   float: left;
-  margin-left: 2em; }
+  margin-left: 2em;
+}
 
-select > option[value=''] {
-  display: none; }
+select > option[value=""] {
+  display: none;
+}
 
 .descriptionBox {
-  width: 350px; }
+  width: 350px;
+}
 
 .checkBoxHeader {
-  padding-left: 40px; }
+  padding-left: 40px;
+}
 
 .checkBoxMargin {
-  margin: 5px; }
+  margin: 5px;
+}
 
 .inputRange {
-  width: 220px; }
+  width: 220px;
+}
 
 .checkBoxCheckList {
   position: relative;
-  left: 3em; }
+  left: 3em;
+}
 
 table.tableChecklist {
   position: absolute;
   top: 27em;
   margin-left: 2em;
-  width: 800px; }
+  width: 800px;
+}
 
 .position {
   max-width: 142px;
-  min-width: 142px; }
+  min-width: 142px;
+}
 
 .failure {
   max-width: 500px;
-  min-width: 500px; }
+  min-width: 500px;
+}
 
 .failureRow {
   max-width: 500px;
-  min-width: 500px; }
+  min-width: 500px;
+}
 
 .type {
   max-width: 100px;
-  min-width: 100px; }
+  min-width: 100px;
+}
 
 .rangeField {
   max-width: 136px;
-  min-width: 136px; }
+  min-width: 136px;
+}
 
 .range {
   max-width: 136px;
-  min-width: 136px; }
+  min-width: 136px;
+}
 
 table {
   width: 411px;
-  margin-left: 10px; }
+  margin-left: 10px;
+}
 
 tbody.pdiCheckList {
   height: 500px;
-  overflow: auto; }
+  overflow: auto;
+}
 
 .pdiCheckList {
   border: 1px solid #a49892;
-  background-color: #EEEEEE; }
+  background-color: #EEEEEE;
+}
 
 .positionCheckPos {
   position: absolute;
   margin: 10px;
   top: 0;
   font-weight: bold;
-  font-size: 16px; }
+  font-size: 16px;
+}
 
 .positionCheckText {
   margin: 10px;
   font-weight: bold;
-  font-size: 16px; }
+  font-size: 16px;
+}
 
 .setWeeklyGoal {
   position: absolute;
   left: 25em;
-  top: 11em; }
+  top: 11em;
+}
 
 #logo {
   position: absolute;
-  top: 25px; }
+  top: 25px;
+}
 
 .overviewHeader {
   position: absolute;
   top: 120px;
   font-size: 25px;
-  margin-left: 25px; }
+  margin-left: 25px;
+}
 
 .pdiButton {
   position: absolute;
   top: 240px;
-  margin-left: 25px; }
+  margin-left: 25px;
+}
 
 .pdiOverViewNav {
   left: 559px;
   position: absolute;
-  top: 50px; }
+  top: 50px;
+}
 
 .container-one {
   left: 40em;
   overflow: hidden;
   position: absolute;
-  top: 17.1em; }
+  top: 17.1em;
+}
 
 .container-two {
   left: 60em;
   overflow: hidden;
   position: absolute;
-  top: 17.1em; }
+  top: 17.1em;
+}
 
 .file-container-origin [type=file] {
   cursor: inherit;
@@ -711,7 +886,8 @@ tbody.pdiCheckList {
   position: absolute;
   right: 0;
   text-align: right;
-  top: 0; }
+  top: 0;
+}
 
 .file-container-new [type=file] {
   cursor: inherit;
@@ -723,143 +899,177 @@ tbody.pdiCheckList {
   position: absolute;
   right: 0;
   text-align: right;
-  top: 0; }
+  top: 0;
+}
 
 table.pdiTable {
-  width: 570px; }
+  width: 570px;
+}
 
 .loadVariantButton {
   position: relative;
   top: -3em;
-  left: 22em; }
+  left: 22em;
+}
 
 .howTo {
   position: relative;
-  margin-left: 100px; }
+  margin-left: 100px;
+}
 
 .variantViewer {
-  margin-left: 25px; }
+  margin-left: 25px;
+}
 
 .variantButtons {
   position: relative;
   top: 1em;
-  margin: 10px; }
+  margin: 10px;
+}
 
 .variantTable {
   position: relative;
-  top: -20em; }
+  top: -20em;
+}
 
 .variant-info-thumb {
-  width: 90px; }
+  width: 90px;
+}
 
 .variant-visibility {
   width: 100px;
-  text-align: center; }
+  text-align: center;
+}
 
 .variant-visible {
   text-align: center;
-  min-width: 90px; }
+  min-width: 90px;
+}
 
 .submit-pic {
   left: 55em;
   position: absolute;
-  top: 20em; }
+  top: 20em;
+}
 
 .pdi-repair-finnish {
   left: 100em;
   position: absolute;
-  top: 794px; }
+  top: 794px;
+}
 
 .toggle-button {
   left: 35em;
-  position: absolute; }
+  position: absolute;
+}
 
 table.repair-table {
   margin-left: 35px;
   position: absolute;
   top: 20em;
-  width: 850px; }
+  width: 850px;
+}
 
 .repair-header {
   left: 4em;
   position: absolute;
-  top: 47em; }
+  top: 47em;
+}
 
 .road-test-table {
   left: 1127px;
   position: absolute;
-  top: 16px; }
+  top: 16px;
+}
 
 .road-test-header {
   left: 380px;
   position: relative;
-  top: 250px; }
+  top: 250px;
+}
 
 .road-test-button {
   left: 1500px;
   position: absolute;
-  top: 240px; }
+  top: 240px;
+}
 
 .road-test-inputs {
   left: 2150px;
   position: absolute;
-  top: 326px; }
+  top: 326px;
+}
 
 .thumbnail-pdi-crew:hover img {
   left: 37em;
   position: absolute;
   top: -300px;
   transform: scale(2);
-  z-index: 1; }
+  z-index: 1;
+}
 
 table.display-error {
-  width: 1160px; }
+  width: 1160px;
+}
 
 .pdi-comment {
-  width: 200px; }
+  width: 200px;
+}
 
 .pdi-rep-comment {
-  width: 45em; }
+  width: 45em;
+}
 
 .pdi-rep-comment-field {
-  width: 200px; }
+  width: 200px;
+}
 
 .pdi-time {
-  width: 50px; }
+  width: 50px;
+}
 
 .pdi-rep-status {
   max-width: 65px;
-  min-width: 65px; }
+  min-width: 65px;
+}
 
 .pdi-issuer {
-  width: 73px; }
+  width: 73px;
+}
 
 .team-button {
-  width: 9em; }
+  width: 9em;
+}
 
 .pdi-image {
   max-width: 70px;
-  min-width: 70px; }
+  min-width: 70px;
+}
 
 .pdi-rep-tech {
-  width: 97px; }
+  width: 97px;
+}
 
 .utility-repair {
   left: 87em;
   position: absolute;
-  top: 50em; }
+  top: 50em;
+}
 
 .pdi-open-repair {
   left: 1px;
   position: absolute;
-  top: 1em; }
+  top: 1em;
+}
 
 .pdiToDo {
-  margin-left: 3em; }
+  margin-left: 3em;
+}
 
 .profiCamInputPos {
   position: relative;
-  top: 1em; }
+  top: 1em;
+}
 
 .configButtonOK {
   bottom: 0;
@@ -867,7 +1077,8 @@ table.display-error {
   font-weight: bold;
   left: -1px;
   position: absolute;
-  width: 130px; }
+  width: 130px;
+}
 
 .configButtonNOK {
   bottom: 0;
@@ -875,7 +1086,8 @@ table.display-error {
   font-weight: bold;
   left: 130px;
   position: absolute;
-  width: 130px; }
+  width: 130px;
+}
 
 .configButtonInfo {
   bottom: 0;
@@ -883,10 +1095,12 @@ table.display-error {
   font-weight: bold;
   margin-left: 69px;
   position: absolute;
-  width: 130px; }
+  width: 130px;
+}
 
 .config-image {
-  width: 100em; }
+  width: 100em;
+}
 
 .buttonOK {
   bottom: 0;
@@ -894,7 +1108,8 @@ table.display-error {
   font-weight: bold;
   left: -1px;
   position: absolute;
-  width: 130px; }
+  width: 130px;
+}
 
 .buttonNOK {
   bottom: 0;
@@ -902,7 +1117,8 @@ table.display-error {
   font-weight: bold;
   left: 130px;
   position: absolute;
-  width: 130px; }
+  width: 130px;
+}
 
 .buttonNA {
   bottom: 0;
@@ -910,46 +1126,56 @@ table.display-error {
   font-weight: bold;
   margin-left: 259px;
   position: absolute;
-  width: 130px; }
+  width: 130px;
+}
 
 .pdiCell {
   font-size: 16px;
   height: 10em;
   position: relative;
-  width: 39em; }
+  width: 39em;
+}
 
 .inputSize {
   height: 3em;
-  width: 12em; }
+  width: 12em;
+}
 
 .inputIssueSize {
   height: 3em;
-  width: 25em; }
+  width: 25em;
+}
 
 .configHeader {
   left: 3em;
   position: relative;
-  width: 20em; }
+  width: 20em;
+}
 
 .configTable {
-  margin-left: 3em; }
+  margin-left: 3em;
+}
 
 .re-config-table {
   left: 40em;
   position: absolute;
-  top: 64em; }
+  top: 64em;
+}
 
 .checkListTable {
-  margin-left: 3em; }
+  margin-left: 3em;
+}
 
 .pdiDivider {
   left: 3.5em;
   position: relative;
-  width: 30em; }
+  width: 30em;
+}
 
 .mainComponentsPos {
   left: 3.6em;
-  position: relative; }
+  position: relative;
+}
 
 .dropDown {
   border-radius: 1px;
@@ -960,17 +1186,21 @@ table.display-error {
   transform-origin: center top;
   white-space: nowrap;
   width: 100px;
-  z-index: 1001; }
+  z-index: 1001;
+}
 
 .issueField {
-  margin-left: 3em; }
+  margin-left: 3em;
+}
 
 .addIssueText {
-  width: 30em; }
+  width: 30em;
+}
 
 .pdiInputFields {
-  margin: .8em;
-  width: 30em; }
+  margin: 0.8em;
+  width: 30em;
+}
 
 table.newIssuesTable {
   left: 2em;
@@ -978,24 +1208,29 @@ table.newIssuesTable {
   width: 32em;
   display: block;
   overflow: auto;
-  height: 505px; }
+  height: 505px;
+}
 
 .add-image-to-repair {
   left: 57em;
   position: absolute;
-  top: 195em; }
+  top: 195em;
+}
 
 img {
   max-height: 100%;
-  max-width: 100%; }
+  max-width: 100%;
+}
 
 .print-error-description {
-  font-weight: bolder; }
+  font-weight: bolder;
+}
 
 .pdi-repair {
   position: absolute;
   left: 34.5em;
-  top: 205em; }
+  top: 205em;
+}
 
 .pdi-estimate {
   left: 778px;
@@ -1010,600 +1245,732 @@ img {
   display: inline-block;
   font-size: 16px;
   margin: 4px 2px;
-  border-radius: 50%; }
+  border-radius: 50%;
+}
 
 .pdi-repair-button {
   position: absolute;
-  left: 6em; }
+  left: 6em;
+}
 
 .submit-button-image {
   left: 26em;
   position: absolute;
-  top: 1.9em; }
+  top: 1.9em;
+}
 
 .deleteRepair {
-  width: 30em; }
+  width: 30em;
+}
 
 .pdi-repair {
-  margin-left: 2em; }
+  margin-left: 2em;
+}
 
 .confirm-pdi-repair {
-  position: relative; }
+  position: relative;
+}
 
 .batteries {
   left: 3em;
-  position: relative; }
+  position: relative;
+}
 
 .endOfList {
-  margin-bottom: 10em; }
+  margin-bottom: 10em;
+}
 
 .washBayLinks {
   position: relative;
-  left: 40em; }
+  left: 40em;
+}
 
 table.washTable {
-  width: 393px; }
+  width: 393px;
+}
 
 .washTable {
   position: absolute;
-  top: 24em; }
+  top: 24em;
+}
 
 table.messageTable {
   width: 660px;
   position: absolute;
   top: 24em;
-  left: 50em; }
+  left: 50em;
+}
 
 .washListButtons {
   margin-left: 25px;
   position: absolute;
-  top: 16em; }
+  top: 16em;
+}
 
 .washMessage {
   margin-left: 25px;
   position: absolute;
-  top: 10em; }
+  top: 10em;
+}
 
 .textBox {
-  width: 480px; }
+  width: 480px;
+}
 
 .messageClearButton {
   left: 102em;
   position: absolute;
-  top: 24.5em; }
+  top: 24.5em;
+}
 
 .washBayToggleButton {
   left: 51em;
   position: absolute;
-  top: 20em; }
+  top: 20em;
+}
 
 .locationButton {
   position: relative;
   top: 10em;
-  left: 31em; }
+  left: 31em;
+}
 
 .searchMe {
   position: absolute;
   top: 16em;
-  left: 40em; }
+  left: 40em;
+}
 
 .printButton {
   position: absolute;
   top: 16em;
-  left: 60em; }
+  left: 60em;
+}
 
 table.pdiRepairList {
   position: absolute;
   top: 280px;
   margin-left: 25px;
   width: 242px;
-  left: 20em; }
+  left: 20em;
+}
 
 .pdiUser {
-  padding: 25px; }
+  padding: 25px;
+}
 
 .sumRightSide {
   position: relative;
   top: -122px;
-  left: 300px; }
+  left: 300px;
+}
 
 .printList {
   position: relative;
   top: 4em;
-  left: 2em; }
+  left: 2em;
+}
 
 .print-error-description {
-  width: 29em; }
+  width: 29em;
+}
 
 .repair-box {
   position: absolute;
   left: 2em;
-  top: 50em; }
+  top: 50em;
+}
 
 .view-box {
   position: absolute;
   left: 40em;
-  top: 20em; }
+  top: 20em;
+}
 
 table.issue-list {
   width: 530px;
-  height: 60px; }
+  height: 60px;
+}
 
 .image-box-thumb {
   width: 100px;
-  height: 100px; }
+  height: 100px;
+}
 
 .add-to-pdi {
   position: absolute;
   left: 5em;
-  top: 10em; }
+  top: 10em;
+}
 
 table.pdi-item-table {
   position: absolute;
   top: 18em;
   left: 4.5em;
-  width: 32.2em; }
+  width: 32.2em;
+}
 
 tbody.pdi-items-height {
-  height: 200px; }
+  height: 200px;
+}
 
 .pdi-item-table {
-  width: 520px; }
+  width: 520px;
+}
 
 .remove-pdi-Item {
   position: absolute;
   left: 38em;
-  top: 22em; }
+  top: 22em;
+}
 
 .siSingle {
   position: relative;
   top: 34em;
-  left: 4em; }
+  left: 4em;
+}
 
 .submit-Si {
   position: absolute;
-  left: 34em; }
+  left: 34em;
+}
 
 .siItemMachine {
   position: absolute;
   left: -0.25em;
-  width: 75px; }
+  width: 75px;
+}
 
 .siItem {
   position: absolute;
   left: 6em;
-  width: 380px; }
+  width: 380px;
+}
 
 table.siSingleTable {
   position: relative;
   top: 36em;
   left: 3em;
-  width: 34em; }
+  width: 34em;
+}
 
 .remove-Si-Item {
   position: absolute;
   left: 34em;
-  top: 11.5em; }
+  top: 11.5em;
+}
 
 table.siType {
   position: relative;
   top: 180px;
-  width: 100px; }
+  width: 100px;
+}
 
 table.siMachineList {
   position: absolute;
   top: 180px;
   left: 150px;
-  width: 155px; }
+  width: 155px;
+}
 
 table.siInactive {
   position: absolute;
   top: 41em;
   left: 77.5em;
-  width: 90px; }
+  width: 90px;
+}
 
 .headerMultiple {
   position: absolute;
   top: 9.5em;
-  left: 50em; }
+  left: 50em;
+}
 
 .multipleSiTable {
   position: absolute;
   top: 10em;
   left: 50em;
-  width: 20em; }
+  width: 20em;
+}
 
 .headSi {
   position: absolute;
   left: 28em;
-  width: 20em; }
+  width: 20em;
+}
 
 .siMdList {
   left: 25em;
   position: absolute;
-  top: 4em; }
+  top: 4em;
+}
 
 .siButtons {
   position: absolute;
   top: 22em;
-  left: 78em; }
+  left: 78em;
+}
 
 .siHeader {
   left: 16.3em;
   position: absolute;
   top: 3em;
-  width: 5em; }
+  width: 5em;
+}
 
 .siFile {
   position: absolute;
   top: 11em;
-  left: 28em; }
+  left: 28em;
+}
 
 .siSubmit {
   position: absolute;
   top: -0.5em;
-  left: 18em; }
+  left: 18em;
+}
 
 .reactSi {
   position: absolute;
   top: 38em;
-  left: 78em; }
+  left: 78em;
+}
 
 table.repairTable {
   position: absolute;
   margin-left: 35px;
   top: 22em;
-  width: 960px; }
+  width: 960px;
+}
 
 tbody.tableHeight {
-  height: 264px; }
+  height: 264px;
+}
 
 table.issueTable {
   position: absolute;
   top: 13em;
   left: 49.3em;
-  width: 400px; }
+  width: 400px;
+}
 
 tbody.newIssueTableHeight {
-  height: 72px; }
+  height: 72px;
+}
 
 .addIssueToList {
   position: absolute;
   top: 13em;
-  left: 80em; }
+  left: 80em;
+}
 
 .add-pdi-comment {
-  max-width: 300px; }
+  max-width: 300px;
+}
 
 .reActivateRepair {
   position: absolute;
   top: 19em;
-  left: 52em; }
+  left: 52em;
+}
 
 .issueHeader {
   position: absolute;
   top: 11em;
-  left: 50em; }
+  left: 50em;
+}
 
 .repairLoad {
   position: relative;
   top: 6em;
-  margin-left: 25px; }
+  margin-left: 25px;
+}
 
 .repairButton {
   position: absolute;
   top: 102px;
-  left: 0; }
+  left: 0;
+}
 
 .workingHours {
   position: absolute;
   left: 2em;
-  top: 4.2em; }
+  top: 4.2em;
+}
 
 .toggleRepairUpcoming {
   position: relative;
   left: 30em;
-  top: 5.1em; }
+  top: 5.1em;
+}
 
 .washHeader {
   position: absolute;
   top: -0.5em;
-  left: -7em; }
+  left: -7em;
+}
 
 .washBayText {
   position: relative;
   top: -5em;
-  left: 36.5em; }
+  left: 36.5em;
+}
 
 .washBayMessage {
   position: absolute;
   top: -0.5em;
-  left: 45em; }
+  left: 45em;
+}
 
 #textMessage {
-  width: 400px; }
+  width: 400px;
+}
 
 .repNav {
   position: absolute;
-  left: 40em; }
+  left: 40em;
+}
 
 .kitListButton {
   position: absolute;
   top: 22em;
-  left: 82em; }
+  left: 82em;
+}
 
 .repair-print-list {
   left: 83em;
   position: absolute;
-  top: 50em; }
+  top: 50em;
+}
 
 table.table-width {
-  width: 1100px; }
+  width: 1100px;
+}
 
 .repair-comment {
-  width: 45em; }
+  width: 45em;
+}
 
 .error-description {
-  width: 45.4em; }
+  width: 45.4em;
+}
 
 img:hover {
-  box-shadow: 0 0 2px 1px rgba(0, 140, 186, 0.5); }
+  box-shadow: 0 0 2px 1px rgba(0, 140, 186, 0.5);
+}
 
 .repair-table-view {
   width: 500px;
-  height: 515px; }
+  height: 515px;
+}
 
 .pdi-rep-conf {
-  width: 6em; }
+  width: 6em;
+}
 
 .confirm-text-area {
   width: 500px;
-  height: 45px; }
+  height: 45px;
+}
 
 .confirm-time-area {
   width: 50px;
-  height: 30px; }
+  height: 30px;
+}
 
 .add-to-repair {
   position: absolute;
-  top: 18em; }
+  top: 18em;
+}
 
 .repair-user {
   left: 70em;
   position: absolute;
-  top: 50em; }
+  top: 50em;
+}
 
 .repair-machine {
   left: 2em;
   position: absolute;
-  top: 45em; }
+  top: 45em;
+}
 
 .outBoundNav {
   position: absolute;
-  left: 40em; }
+  left: 40em;
+}
 
 .shipMe {
   position: absolute;
   left: 32em;
-  top: 15em; }
+  top: 15em;
+}
 
 .shipMeButton {
   left: -25em;
-  position: absolute; }
+  position: absolute;
+}
 
 table.readyTable {
   position: relative;
   top: 16em;
   left: 2em;
-  width: 600px; }
+  width: 600px;
+}
 
 .repairNavButton {
   position: relative;
-  left: 40em; }
+  left: 40em;
+}
 
 .printoutMargin {
-  margin-left: 1em; }
+  margin-left: 1em;
+}
 
 .footer {
   bottom: 40px;
   font-size: x-small;
   height: 30px;
   position: fixed;
-  width: 70%; }
+  width: 70%;
+}
 
 .printOutTable {
-  width: 900px; }
+  width: 900px;
+}
 
 tr.tableHeight {
-  height: 55px; }
+  height: 55px;
+}
 
 .tableWidthError {
-  width: 300px; }
+  width: 300px;
+}
 
 .tableWidthComment {
-  width: 200px; }
+  width: 200px;
+}
 
 .tableWidthSignOff {
-  width: 50px; }
+  width: 50px;
+}
 
 table.toDoListTable {
   position: relative;
   margin-left: 2.5em;
   top: 14em;
-  width: 60.5em; }
+  width: 60.5em;
+}
 
 .toDoMessage {
   position: relative;
-  top: 10em; }
+  top: 10em;
+}
 
 .adminLopMessage {
   position: absolute;
   top: 16em;
-  left: 70em; }
+  left: 70em;
+}
 
 .inputEditHead {
   position: absolute;
   top: 10em;
-  left: 3em; }
+  left: 3em;
+}
 
 .headFloater {
   float: left;
-  margin-left: 2em; }
+  margin-left: 2em;
+}
 
 .headComment {
   position: absolute;
   top: 20em;
-  left: 4em; }
+  left: 4em;
+}
 
 .headSubmit {
   position: absolute;
   top: 25em;
-  left: 4em; }
+  left: 4em;
+}
 
 .headLiner {
   position: absolute;
   top: 10em;
-  left: 5em; }
+  left: 5em;
+}
 
 .addIssue {
   position: absolute;
   top: 20em;
-  left: 10em; }
+  left: 10em;
+}
 
 .inputNewIssue {
   position: absolute;
   top: 20em;
-  left: 40em; }
+  left: 40em;
+}
 
 #newIssueInput {
-  width: 50em; }
+  width: 50em;
+}
 
 .removeButton {
   position: absolute;
-  top: 6em; }
+  top: 6em;
+}
 
 .issueList {
   position: absolute;
   top: 30em;
-  left: 10em; }
+  left: 10em;
+}
 
 .logoDropDown {
   position: absolute;
   top: 5em;
-  left: 2em; }
+  left: 2em;
+}
 
 .formDropDown {
   position: absolute;
   top: 15em;
-  left: 2em; }
+  left: 2em;
+}
 
 .componentTable {
   position: absolute;
   top: 25em;
-  left: 1.3em; }
+  left: 1.3em;
+}
 
 .boxWidth {
-  width: 11em; }
+  width: 11em;
+}
 
 table.mainCompTable {
-  width: 9.8em; }
+  width: 9.8em;
+}
 
 tbody.mainCompTbody {
   overflow: unset;
-  height: 0; }
+  height: 0;
+}
 
 .subComponentTable {
   position: absolute;
   top: 25em;
-  left: 15em; }
+  left: 15em;
+}
 
 img {
   max-height: 100%;
-  max-width: 100%; }
+  max-width: 100%;
+}
 
 .image {
   float: left;
   height: 80%;
   margin-bottom: 10px;
-  width: 80%; }
+  width: 80%;
+}
 
 .button {
   left: 10em;
   margin-left: 40px;
   position: relative;
-  width: 150px; }
+  width: 150px;
+}
 
 table, td {
-  border: 2px solid #333; }
+  border: 2px solid #333;
+}
 
 .ecnOverView {
   position: absolute;
   top: 5em;
-  left: 2em; }
+  left: 2em;
+}
 
 .mcoTable {
   position: absolute;
   top: 30em;
-  left: 2em; }
+  left: 2em;
+}
 
 .checkBoxList {
   position: absolute;
   top: 0.5em;
-  left: 20em; }
+  left: 20em;
+}
 
 .searchBoxes {
   position: absolute;
   top: 5.5em;
-  left: 60em; }
+  left: 60em;
+}
 
 .goButton {
   position: absolute;
   top: 20em;
-  left: 60em; }
+  left: 60em;
+}
 
 .mcoReCording {
   position: absolute;
   top: 9.5em;
-  left: 70em; }
+  left: 70em;
+}
 
 .coa-machine-date {
   left: 40em;
-  position: absolute; }
+  position: absolute;
+}
 
 .btn-over-view {
   left: 2em;
   position: absolute;
-  top: 10em; }
+  top: 10em;
+}
 
 .refresh-button {
   position: absolute;
-  top: -3em; }
+  top: -3em;
+}
 
 .btn-key-word {
   left: 9.5em;
   position: absolute;
-  top: 10em; }
+  top: 10em;
+}
 
 .btn-response-team {
   left: 22em;
   position: absolute;
   top: 10em;
-  width: 14.5em; }
+  width: 14.5em;
+}
 
 .btn-response-supplier {
   left: 51em;
   position: absolute;
-  top: 10em; }
+  top: 10em;
+}
 
 .btn-pdi {
   left: 74em;
   position: absolute;
-  top: 10em; }
+  top: 10em;
+}
 
 .btn-options {
   left: 85em;
   position: absolute;
-  top: 10em; }
+  top: 10em;
+}
 
 .analyze-overview {
   border-collapse: separate;
@@ -1611,130 +1978,158 @@ table, td {
   border-style: solid;
   left: 2em;
   position: absolute;
-  top: 18em; }
+  top: 18em;
+}
 
 .search-text {
   left: 5em;
   position: absolute;
-  top: 20em; }
+  top: 20em;
+}
 
 .analyze-table {
   left: 3em;
   position: absolute;
-  top: 25em; }
+  top: 25em;
+}
 
 .result-table {
-  width: 45em; }
+  width: 45em;
+}
 
 .error-machine {
   text-align: center;
-  width: 10em; }
+  width: 10em;
+}
 
 .error-field {
-  width: 30em; }
+  width: 30em;
+}
 
 td.error-machine {
-  height: 30px; }
+  height: 30px;
+}
 
 .count-result {
   left: 44em;
   position: absolute;
-  top: 20em; }
+  top: 20em;
+}
 
 table.analyze-team-table {
-  width: 1130px; }
+  width: 1130px;
+}
 
 .response-team {
   left: 5em;
   position: absolute;
-  top: 15em; }
+  top: 15em;
+}
 
 .team-table {
   left: 35em;
   position: absolute;
-  top: 15em; }
+  top: 15em;
+}
 
 .btn-team1-details {
   left: 22em;
   position: absolute;
-  top: -.1em; }
+  top: -0.1em;
+}
 
 .btn-team2-details {
   left: 22em;
   position: absolute;
-  top: 4em; }
+  top: 4em;
+}
 
 .btn-team3-details {
   left: 22em;
   position: absolute;
-  top: 8.5em; }
+  top: 8.5em;
+}
 
 .btn-team4-details {
   left: 22em;
   position: absolute;
-  top: 12.7em; }
+  top: 12.7em;
+}
 
 .btn-team5-details {
   left: 22em;
   position: absolute;
-  top: 17em; }
+  top: 17em;
+}
 
 .btn-teamTestBay-details {
   left: 22em;
   position: absolute;
-  top: 21.5em; }
+  top: 21.5em;
+}
 
 .btn-teamSupplier-details {
   left: 22em;
   position: absolute;
-  top: 25.5em; }
+  top: 25.5em;
+}
 
 .btn-ctd-details {
   left: 22em;
   position: absolute;
-  top: 30.5em; }
+  top: 30.5em;
+}
 
 .btn-development-details {
   left: 22em;
   position: absolute;
-  top: 34.5em; }
+  top: 34.5em;
+}
 
 .btn-unknown-details {
   left: 22em;
   position: absolute;
-  top: 38.5em; }
+  top: 38.5em;
+}
 
 .btn-not-applicable-details {
   left: 22em;
   position: absolute;
-  top: 42.5em; }
+  top: 42.5em;
+}
 
 .btn-undefined-issuer-details {
   left: 22em;
   position: absolute;
-  top: 46.5em; }
+  top: 46.5em;
+}
 
 .date-bay-19 {
-  width: 84px; }
+  width: 84px;
+}
 
 .thumbnail-box {
   height: 50px;
-  width: 73px; }
+  width: 73px;
+}
 
 .team-select {
-  width: 116px; }
+  width: 116px;
+}
 
 .thumbnail:hover img {
   left: 50em;
   position: absolute;
   top: 100px;
   transform: scale(1.8);
-  z-index: 1; }
+  z-index: 1;
+}
 
 .pdi-search-position {
   left: 5em;
   position: absolute;
-  top: 20em; }
+  top: 20em;
+}
 
 .pdi-performer,
 .pdi-summary {
@@ -1742,341 +2137,430 @@ table.analyze-team-table {
   font-weight: bold;
   height: 30px;
   text-align: center;
-  width: 100px; }
+  width: 100px;
+}
 
 .pdi-result-graph {
   left: 30em;
   position: absolute;
-  top: 15em; }
+  top: 15em;
+}
 
 .pdi-per-day-result {
   left: 30em;
   position: absolute;
-  top: 50em; }
+  top: 50em;
+}
 
 .team-repair-time-graph {
   left: 35em;
   position: absolute;
-  top: 55em; }
+  top: 55em;
+}
 
 .supply-list-pdi-tech {
   max-width: 75px;
-  min-width: 75px; }
+  min-width: 75px;
+}
 
 .pdi-comment-time-table {
   max-width: 250px;
-  min-width: 250px; }
+  min-width: 250px;
+}
 
 .repair-time-table {
   left: 5em;
   position: absolute;
-  top: 15em; }
+  top: 15em;
+}
 
 .supply-issuer {
   max-width: 75px;
-  min-width: 75px; }
+  min-width: 75px;
+}
 
 .pdi-repair-time {
   max-width: 65px;
-  min-width: 65px; }
+  min-width: 65px;
+}
 
 .look-up-machine-number {
-  left: 568px;
+  left: 34px;
   position: absolute;
   top: 18em;
-  width: 270px; }
+  width: 270px;
+}
 
 .parts-ordered {
-  left: 172em;
+  left: 138em;
   position: absolute;
   top: 246px;
-  width: 270px; }
+  width: 270px;
+}
 
 .claim-number {
   left: 22em;
   position: relative;
-  top: 5px; }
+  top: 5px;
+}
 
 .part-number {
   left: 22em;
   position: relative;
-  top: 12px; }
+  top: 12px;
+}
 
 .order-radio-button {
   left: 1px;
   position: relative;
-  top: -4em; }
+  top: -4em;
+}
 
 table.parts-order-table {
-  width: 390px; }
+  width: 390px;
+}
+
+.supplier-only-button {
+  left: 650px;
+  position: absolute;
+  top: 300px;
+}
 
 .toggle-list-button {
-  left: 1332px;
+  left: 900px;
   position: absolute;
-  top: 300px; }
+  top: 300px;
+}
 
-.button-machine-sort {
-  left: 14px;
+.issue-count {
+  left: 567px;
   position: absolute;
-  top: 1px;
+  top: 205px;
+}
+
+.machine-sort-button {
+  left: 25px;
+  position: absolute;
+  top: 10px;
   z-index: 1;
-  opacity: 0; }
+  opacity: 0;
+  width: 50px;
+  height: 50px;
+}
 
 .button-pdiTech-sort {
   left: 91px;
   position: absolute;
   top: 1px;
   z-index: 1;
-  opacity: 0; }
+  opacity: 0;
+}
 
 .pdiTech-sort-button {
   width: 72px;
-  height: 53px; }
+  height: 53px;
+}
 
 .button-repTech-sort {
   left: 416px;
   position: absolute;
   top: 1px;
   z-index: 1;
-  opacity: 0; }
+  opacity: 0;
+}
 
 .repTech-sort-button {
   width: 72px;
-  height: 53px; }
+  height: 53px;
+}
 
 .button-issuer-sort {
   left: 742px;
   position: absolute;
   top: 1px;
   z-index: 1;
-  opacity: 0; }
+  opacity: 0;
+}
 
 .issuer-sort-button {
   width: 73px;
-  height: 53px; }
+  height: 53px;
+}
 
 .button-repairTime-sort {
   left: 815px;
   position: absolute;
   top: 1px;
   z-index: 1;
-  opacity: 0; }
+  opacity: 0;
+}
 
 .repairTime-sort-button {
   width: 60px;
-  height: 53px; }
+  height: 53px;
+}
 
 .button-qualityComments-sort {
   left: 1285px;
   position: absolute;
   top: 1px;
   z-index: 1;
-  opacity: 0; }
+  opacity: 0;
+}
 
 .qualityComments-sort-button {
   width: 134px;
-  height: 53px; }
+  height: 53px;
+}
 
 .button-qualityClaim-sort {
   left: 1419px;
   position: absolute;
   top: 1px;
   z-index: 1;
-  opacity: 0; }
+  opacity: 0;
+}
 
 .qualityClaim-sort-button {
   width: 134px;
-  height: 53px; }
+  height: 53px;
+}
 
 .button-parts-sort {
   left: 1555px;
   position: absolute;
   top: 1px;
   z-index: 1;
-  opacity: 0; }
+  opacity: 0;
+}
 
 .parts-sort-button {
   width: 57px;
-  height: 53px; }
+  height: 53px;
+}
 
 .checkbox-button {
   left: 1545px;
   position: absolute;
-  top: -50px; }
+  top: -50px;
+}
 
 .checkbox-field {
   min-width: 66px;
-  max-width: 50px; }
+  max-width: 50px;
+}
 
 .order-number {
-  width: 120px; }
+  width: 120px;
+}
 
 .insert-quality-comment {
   height: 80px;
-  left: 127em;
+  left: 98em;
   position: absolute;
   top: 8em;
-  width: 370px; }
+  width: 370px;
+}
 
 .parts-on-order {
   min-width: 57px;
   max-width: 57px;
-  text-align: center; }
+  text-align: center;
+}
 
 .issue-closed {
   min-width: 54px;
   max-width: 60px;
-  text-align: center; }
+  text-align: center;
+}
 
 .quality-button {
   left: 37em;
   position: absolute;
-  top: 5em; }
+  top: 5em;
+}
 
 .order-header {
   left: 6em;
-  position: relative; }
+  position: relative;
+}
 
 .order-list {
-  left: 171em;
+  left: 137em;
   position: absolute;
-  top: 21em; }
+  top: 21em;
+}
 
 .supplier-table {
-  left: 40em;
+  left: 2em;
   position: absolute;
-  top: 25em; }
+  top: 25em;
+}
 
 table.extended-table {
-  width: 1680px; }
+  width: 1680px;
+}
 
 .assign-supplier {
   max-width: 135px;
-  min-width: 135px; }
+  min-width: 135px;
+}
 
 .quality-comment {
   max-width: 135px;
-  min-width: 135px; }
+  min-width: 135px;
+}
 
 .quality-claim {
   max-width: 135px;
-  min-width: 135px; }
+  min-width: 135px;
+}
 
 .single-suppliers-name {
   left: 2em;
   position: absolute;
-  top: 25em; }
+  top: 25em;
+}
 
 table.supplier-result-table {
-  width: 90px; }
+  width: 90px;
+}
 
 .supplier-field {
-  width: 95px; }
+  width: 95px;
+}
 
 .options-header {
   left: 5em;
   position: absolute;
-  top: 19em; }
+  top: 19em;
+}
 
 .team-supplier-width {
-  width: 140px; }
+  width: 140px;
+}
 
 .team-supplier-table {
-  width: 125px; }
+  width: 125px;
+}
 
 .input-new-team {
   left: 2em;
   position: absolute;
-  top: 5em; }
+  top: 5em;
+}
 
 .remove-team-button {
   left: 16em;
   position: absolute;
-  top: 10em; }
+  top: 10em;
+}
 
 .add-team-table {
   left: 1em;
   position: absolute;
-  top: 10em; }
+  top: 10em;
+}
 
 .add-supplier-table {
   left: 6em;
   position: absolute;
-  top: 10em; }
+  top: 10em;
+}
 
 .btn-add-new {
   left: 14em;
   position: relative;
-  top: -2em; }
+  top: -2em;
+}
 
 .input-new-supplier {
   left: 7em;
   position: absolute;
-  top: 5em; }
+  top: 5em;
+}
 
 .btn-add-supplier {
   left: 14em;
   position: absolute;
-  top: 1.5em; }
+  top: 1.5em;
+}
 
 .remove-supplier-button {
   left: 21em;
   position: absolute;
-  top: 10em; }
+  top: 10em;
+}
 
 .mainLayout {
   left: 40em;
-  position: absolute; }
+  position: absolute;
+}
 
 .topNav {
   left: 40em;
   margin-top: 25px;
-  position: relative; }
+  position: relative;
+}
 
 .templateNav {
   left: 40em;
   position: absolute;
-  top: 6em; }
+  top: 6em;
+}
 
 #logo {
-  margin: 10px; }
+  margin: 10px;
+}
 
 .selected {
-  background-color: rgba(151, 143, 147, 0.3); }
+  background-color: rgba(151, 143, 147, 0.3);
+}
 
 .in-active-button {
   background-color: #e69f7c;
-  opacity: .5;
-  pointer-events: none; }
+  opacity: 0.5;
+  pointer-events: none;
+}
 
 .inActiveButton {
   background: #252525 repeating-linear-gradient(45deg, #e6e6e6, #bc171b);
-  opacity: .8;
-  pointer-events: none; }
+  opacity: 0.8;
+  pointer-events: none;
+}
 
 @keyframes glowing {
   0% {
     background-color: #AA3939;
-    box-shadow: 0 0 3px  #AA5939; }
+    box-shadow: 0 0 3px #AA5939;
+  }
   50% {
     background-color: #FFB232;
-    box-shadow: 0 0 10px #FFB232; }
+    box-shadow: 0 0 10px #FFB232;
+  }
   100% {
     background-color: #FFE800;
-    box-shadow: 0 0 3px #FFE800; } }
+    box-shadow: 0 0 3px #FFE800;
+  }
+}
 .inProcess {
   animation: glowing 1500ms infinite;
-  color: transparent; }
+  color: transparent;
+}
 
 @keyframes Siglowing {
   0% {
     background-color: #481317;
-    box-shadow: 0 0 3px  #AA5939; }
+    box-shadow: 0 0 3px #AA5939;
+  }
   50% {
     background-color: #cb2aff;
-    box-shadow: 0 0 10px #ffd855; }
+    box-shadow: 0 0 10px #ffd855;
+  }
   100% {
     background-color: #1cbdee;
-    box-shadow: 0 0 3px #ec67ff; } }
+    box-shadow: 0 0 3px #ec67ff;
+  }
+}
 
 /*# sourceMappingURL=main.css.map */

@@ -1,5 +1,6 @@
 Meteor.subscribe("headerTrailer");
-Meteor.subscribe("newHeadYear");
+Meteor.subscribe('headersToShip')
+
 
     Template.headerShipList.events({
 
@@ -21,7 +22,9 @@ Template.inputHead.helpers({
         if(z === 0) {
             return newHeadYear.find({shipStatus: 1}, {sort: {date: 1}});
         } else {
-            return newHeadYear.find({shipStatus: 0}, {sort: {date: 1}});
+            let result = newHeadYear.find({shipStatus: 0}, {sort: {date: 1}});
+            console.log('result' , result)
+            return result
         }
     },
 

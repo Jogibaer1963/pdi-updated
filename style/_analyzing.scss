@@ -267,14 +267,14 @@ table.analyze-team-table {
 }
 
 .look-up-machine-number {
-  left: 568px;
+  left: 34px;
   position: absolute;
   top: 18em;
   width: 270px;
 }
 
 .parts-ordered {
-  left: 172em;
+  left: 138em;
   position: absolute;
   top: 246px;
   width: 270px;
@@ -304,18 +304,32 @@ table.parts-order-table {
 
 //***********************************  Sort Buttons Supplier Tables  **********************************
 
-.toggle-list-button {
-  left: 1332px;
+.supplier-only-button {
+  left: 650px;
   position: absolute;
   top: 300px;
 }
 
-.button-machine-sort {
-  left: 14px;
+.toggle-list-button {
+  left: 900px;
   position: absolute;
-  top: 1px;
+  top: 300px;
+}
+
+.issue-count {
+  left: 567px;
+  position: absolute;
+  top: 205px;
+}
+
+.machine-sort-button {
+  left: 25px;
+  position: absolute;
+  top: 10px;
   z-index: 1;
   opacity: 0;
+  width: 50px;
+  height: 50px;
 }
 
 .button-pdiTech-sort {
@@ -426,7 +440,7 @@ table.parts-order-table {
 
 .insert-quality-comment {
   height: 80px;
-  left: 127em;
+  left: 98em;
   position: absolute;
   top: 8em;
   width: 370px;
@@ -456,7 +470,7 @@ table.parts-order-table {
 }
 
 .order-list {
-  left: 171em;
+  left: 137em;
   position: absolute;
   top: 21em;
 }
@@ -468,7 +482,7 @@ table.parts-order-table {
 
 
 .supplier-table {
-  left: 40em;
+  left: 2em;
   position: absolute;
   top: 25em;
 }

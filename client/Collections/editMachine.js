@@ -130,7 +130,6 @@ if(Meteor.isClient) {
             } else {
                 Session.set('kit_12', undefined);
             }
-
             return MachineReady.findOne({_id: selectedMachine});
         },
 

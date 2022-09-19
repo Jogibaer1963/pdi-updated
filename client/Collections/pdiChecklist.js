@@ -31,19 +31,20 @@ Template.inputNewCheckPoint.helpers({
     },
 
     // edit description of a checkpoint
-    errorEdit: () => {
-        let checkPointToActivateEdit = Session.get('selectedCheckPoint');
-        let result = checkPoints.findOne({_id:checkPointToActivateEdit});
-        if(result) {
-            return result.errorDescription;
-        }
-    },
 
     position: () => {
         let checkPointToActivateEdit = Session.get('selectedCheckPoint');
         let result = checkPoints.findOne({_id:checkPointToActivateEdit});
         if(result) {
             return result.errorPos;
+        }
+    },
+
+    errorEdit: () => {
+        let checkPointToActivateEdit = Session.get('selectedCheckPoint');
+        let result = checkPoints.findOne({_id:checkPointToActivateEdit});
+        if(result) {
+            return result.errorDescription;
         }
     },
 

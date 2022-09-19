@@ -17,35 +17,36 @@
          <div class="shippingInputs">
            <label for="MachineId" class="input" >Machine-Id</label>
            <br>
-           <input type="text" class="inputComment" id="MachineId" name="newMachine" placeholder="Machine Id" value="{{machineId}}" required>
+           <input type="text" class="inputComment" id="MachineId" name="newMachine" placeholder="Machine Id" value="{{editMachineId}}" required>
          </div>
          <div class="shippingInputs">
            <label for="shippingDate" class="input">Shipping-Date</label>
            <br>
-           <input type="Date" class="inputComment" id="shippingDate" name="newDate" required>
+           <input type="date" class="inputComment" id="shippingDate" name="newDate" value="{{editDate}}">
          </div>
          <div class="shippingInputs">
-           <label for="newDestination" class="input">Destination</label>
+           <label for="newDestination" class="input" >Destination</label>
            <br>
-           <input type="text" class="inputComment" id="newDestination" name="newDestination" placeholder="Destination">
+           <input type="text" class="inputComment" id="newDestination" name="newDestination" value="{{editDestination}}" placeholder="Destination">
          </div>
          <div class="shippingInputs">
             <label for="newTransporter" class="input">Transporter</label>
             <br>
-            <input type="text" class="inputComment" id="newTransporter" name="newTransporter" placeholder="Transporter">
+            <input type="text" class="inputComment" id="newTransporter" name="newTransporter"  value="{{editTransporter}}" placeholder="Transporter">
          </div>
           <div class="shippingInputs">
               <label for="selectMe" class="input">Tires / MTS </label>
               <br>
-              <select name="newTireTrack" id="selectMe" class="inputComment">
-                  <option>Single Tire</option>
-                  <option>520 GY / 2208 017.0</option>
-                  <option>580/85R42 / 2815 191.0</option>
-                  <option>620 GY / 2208 016.0</option>
-                  <option>620 MI / 2208 019.0</option>
-                  <option>620 GY / 2208 878.0</option>
-                  <option>620/70/R42 GY / 2817 926.0</option>
-                  <option>1250/50R32 / 1816 735.0</option>
+              <select name="newTireTrack" id="selectMe">
+                  <option>{{editTire}}</option>
+                  <option value="Single Tire"> Single Tire</option>
+                  <option value="520 GY / 2208 017.0">520 GY / 2208 017.0</option>
+                  <option value="580/85R42 / 2815 191.0">580/85R42 / 2815 191.0</option>
+                  <option value="620 GY / 2208 016.0">620 GY / 2208 016.0</option>
+                  <option value="620 MI / 2208 019.0">620 MI / 2208 019.0</option>
+                  <option value="620 GY / 2208 878.0">620 GY / 2208 878.0</option>
+                  <option value="620/70/R42 GY / 2817 926.0">620/70/R42 GY / 2817 926.0</option>
+                  <option value="1250/50R32 / 1816 735.0">1250/50R32 / 1816 735.0</option>
                   <option>MTS</option>
               </select>
           </div>
@@ -54,6 +55,7 @@
                   <label for="newReturn">Machine Returns</label>
                   <br>
                   <select name="newReturn" id="newReturn" class="">
+                      <option>{{editReturn}}</option>
                       <option>No</option>
                       <option>Yes</option>
                   </select>
@@ -65,25 +67,25 @@
                 <li>
                   <div>
                     <label for="noKit">
-                    <input type="checkbox" value="No Kit" id="noKit" name="newKit" class="newKit">No Kit</label>
+                    <input type="checkbox" value="No Kit" id="noKit" name="newKit" class="newKit" {{noKit}}>No Kit</label>
                   </div>
                 </li>
                 <li>
                   <div>
                     <label for="newKit1">
-                    <input type="checkbox" value="C03_0019" id="newKit1" name="newKit" class="newKit1">C03 0019</label>
+                    <input type="checkbox" value="C03_0019" id="newKit1" name="newKit" class="newKit1" {{newKit1}}>C03 0019</label>
                   </div>
                 </li>
                 <li>
                   <div>
                      <label for="newKit2">
-                     <input type="checkbox" value="C03_0183" id="newKit2" name="newKit" class="newKit2">C03 0183</label>
+                     <input type="checkbox" value="C03_0183" id="newKit2" name="newKit" class="newKit2"  {{newKit2}}>C03 0183</label>
                   </div>
                </li>
                <li>
                  <div>
                     <label for="newKit3">
-                    <input type="checkbox" value="C03_0165" id="newKit3" name="newKit" class="newKit3">C03 0165</label>
+                    <input type="checkbox" value="C03_0165" id="newKit3" name="newKit" class="newKit3" {{newKit3}}>C03 0165</label>
                   </div>
                 </li>
              </ul>
@@ -93,34 +95,34 @@
               <li>
                   <div>
                       <label for="newKit7">
-                          <input type="checkbox" value="C03_0180" id="newKit7" name="newKit" class="newKit7">C03 0180</label>
+                          <input type="checkbox" value="C03_0180" id="newKit7" name="newKit" class="newKit7" {{newKit7}}>C03 0180</label>
                   </div>
               </li>
               <li>
                   <div class="newKit4Pos">
                       <label for="newKit4">
-                          <input type="checkbox" value="C03_0184" id="newKit4" name="newKit" class="newKit4">C03 0184</label>
+                          <input type="checkbox" value="C03_0184" id="newKit4" name="newKit" class="newKit4" {{newKit4}}>C03 0184</label>
                   </div>
               </li>
 
               <li>
                   <div class="newKit5Pos">
                       <label for="newKit5">
-                          <input type="checkbox" value="C03_0185" id="newKit5" name="newKit" class="newKit5">C03 0185</label>
+                          <input type="checkbox" value="C03_0185" id="newKit5" name="newKit" class="newKit5"  {{newKit5}}>C03 0185</label>
                   </div>
               </li>
 
               <li>
                   <div class="newKit6Pos">
                       <label for="newKit6">
-                          <input type="checkbox" value="N04_0625" id="newKit6" name="newKit" class="newKit6">N04 0625</label>
+                          <input type="checkbox" value="N04_0625" id="newKit6" name="newKit" class="newKit6" {{newKit6}}>N04 0625</label>
                   </div>
               </li>
 
                 <li>
                     <div class="newKit13Pos">
                         <label for="newKit13">
-                            <input type="checkbox" value="N04_0626" id="newKit13" name="newKit" class="newKit13">N04 0626</label>
+                            <input type="checkbox" value="N04_0626" id="newKit13" name="newKit" class="newKit13" {{newKit13}} >N04 0626</label>
                     </div>
                 </li>
 
@@ -131,44 +133,45 @@
                   <li>
                       <div>
                           <label for="newKit7">
-                            <input type="checkbox" value="G03_0112" id="newKit8" name="newKit" class="newKit8">G03 0112</label>
+                            <input type="checkbox" value="G03_0112" id="newKit8" name="newKit" class="newKit8"  {{newKit8}}>G03 0112</label>
                       </div>
                   </li>
                   <li>
                       <div class="newKit4Pos">
                           <label for="newKit4">
-                            <input type="checkbox" value="G03_0120" id="newKit9" name="newKit" class="newKit9">G03 0120</label>
+                            <input type="checkbox" value="G03_0120" id="newKit9" name="newKit" class="newKit9" {{newKit9}}>G03 0120</label>
                       </div>
                   </li>
                   <li>
                       <div class="newKit5Pos">
                           <label for="newKit5">
-                              <input type="checkbox" value="N04_0624" id="newKit10" name="newKit" class="newKit10">N04 0624</label>
+                              <input type="checkbox" value="N04_0624" id="newKit10" name="newKit" class="newKit10" {{newKit10}}>N04 0624</label>
                       </div>
                   </li>
                   <li>
                       <div class="newKit6Pos">
                           <label for="newKit6">
-                              <input type="checkbox" value="N04_0595" id="newKit11" name="newKit" class="newKit11">N04 0595</label>
+                              <input type="checkbox" value="N04_0595" id="newKit11" name="newKit" class="newKit11" {{newKit11}}>N04 0595</label>
                       </div>
                   </li>
                   <li>
                       <div class="newKit4Pos">
                           <label for="newKit4">
-                              <input type="checkbox" value="N06_0125" id="newKit12" name="newKit" class="newKit12">N06 0125</label>
+                              <input type="checkbox" value="N06_0125" id="newKit12" name="newKit" class="newKit12" {{newKit12}}>N06 0125</label>
                       </div>
                   </li>
               </ul>
           </div>
        <div>
           <label for="newComment"></label>
-          <input type="text" class="comment" id="newComment" name="newComment" placeholder="Shipping Comment">
+          <input type="text" class="comment" id="newComment" name="newComment" value={{editShippingComment}} placeholder="Shipping Comment">
        </div>
           <br><br><br>
        <div class="newMachineSubmit">
            <button class="btn btn-success" type="submit">Submit shipping machine</button>
        </div>
       </form>
+
 
         <div class="load-machine-list">
             <form class="fileContainer">
@@ -179,17 +182,22 @@
 
         <br>
       <div class="find_delete_button">
+
          <form class="find_Machine">
-           <input class="searchField" type="text" name="inputSearch" placeholder=" Machine Search" value="{{myMachine}}" />
+             <label for="searchField"></label>
+           <input class="searchField" type="text" id="searchField" name="inputSearch" placeholder=" Machine Search" value="{{myMachine.machineId}}" />
            <button class="btn btn-success searchMachine" type="submit">Find & Edit </button>
          </form>
+
             <button class="btn btn-danger deleteMachine" type="button">Delete marked machine</button>
+
         </div>
         <div class="buttonField">
             <h5 class="confirmedDate">!! Confirmed Ship Date !!</h5>
             <form class="truckDate">
                 <button type="submit" class="btn btn-success addTruck">Truck Ordered</button>
-                <input class="shipDate" type="date" name="inputDate" placeholder="Confirmed Ship Date" />
+                <label for="inputDate"></label>
+                <input class="shipDate" type="date" id="inputDate" name="inputDate" placeholder="Confirmed Ship Date" />
             </form>
             <br>
             <button type="submit" class="btn btn-danger removeTruck">Remove Truck</button>
@@ -224,7 +232,7 @@
           </thead>
             <tbody>
               {{#each shippList}}
-                <tr class="shippingMachine {{selected}}">
+                <tr class="selectedMachine {{selected}}">
                     <td class="pdiMachineField machine-font {{getStatus pdiOk}}" style="background-color:{{getStatus pdiOk}}; color:{{getStatus pdiOk}}">{{machineId}}</td>
                     <td class="pdiShipDate">{{date}}</td>
                     <td class="pdiDestination">{{destination}}</td>
