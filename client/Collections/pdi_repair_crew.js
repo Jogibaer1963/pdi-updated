@@ -25,11 +25,11 @@ Template.pdiCrewHome.helpers({
     roadTestList: () => {
         let toggleView = Session.get('roadTestView');
         if (toggleView === 0) {
-            return MachineReady.find({$or: [{roadTest: 0},{roadTest: 2}]}
+            return machineCommTable.find({$and: [{$or: [{roadTest: false},{roadTest: 2}]},
+                    {dateOfCreation: {$gt: '2022-09-01'}}]}
             , {sort: {date: 1}}).fetch();
         } else if (toggleView === 1) {
-            return MachineReady.find(
-                    {roadTest: 1}, {sort: {date: 1}}).fetch();
+            return machineCommTable.find({roadTest: 1}, {sort: {date: 1}}).fetch();
         }
 
     },

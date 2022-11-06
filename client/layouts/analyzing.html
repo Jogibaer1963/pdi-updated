@@ -226,9 +226,6 @@
                 <th class="assign-supplier">Change / Assign Supplier</th>
                 <th class="assign-supplier">Change / Assign Team</th>
                 <th class="quality-comment">Comment / Notes</th>
-                <th class="quality-claim">Claim Nr</th>
-                <th class="quality-claim">Part Ordered</th>
-                <th class="checkbox-field">Parts on Order</th>
                 <th class="checkbox-field">Close</th>
             </tr>
         </thead>
@@ -268,13 +265,6 @@
                             </select>
                         </td>
                         <td class="quality-comment selectedIssue {{selectedSupplierRow}}">{{qualityComment}}</td>
-                        <td class="quality-claim selectedIssue {{selectedSupplierRow}}">{{claimNumber}}</td>
-                        <td class="quality-claim selectedIssue {{selectedSupplierRow}}">{{partNumber}}</td>
-
-                        <td class="parts-on-order {{getStatusColor partsOrder}}"
-                            style="background-color:{{getStatusColor partsOrder}};
-                                    color:{{getStatusColor partsOrder}}">{{partsOrder}}</td>
-
                         <td class="issue-closed checkbox-field"  style="background-color: darkred">
                             <label for="closeCase"></label>
                             <input type="checkbox"
@@ -319,85 +309,11 @@
 
 </div>
 
-    <!--
-
-    <div  class="single-suppliers-name">
-        <table class="blueTable supplier-result-table">
-            <thead>
-            <tr>
-                <th class="supplier-field">Supplier</th>
-                <th class="supplier-field">open items</th>
-                <th class="supplier-field">Items with Claims (open)</th>
-                <th class="supplier-field">Items with Claims (closed)</th>
-                <th class="supplier-field">Items with Parts on Order</th>
-            </tr>
-            </thead>
-            <tbody>
-            {{#each supplierTable}}
-                <tr class="selectedSupplier {{selectedSupplier}}">
-                    <td>{{supplier}}</td>
-                    <td>{{supplier}}</td>
-                    <td>{{supplier}}</td>
-                    <td>{{supplier}}</td>
-                    <td>{{supplier}}</td>
-                </tr>
-            {{/each}}
-            </tbody>
-        </table>
-    </div>
-
-    -->
-
-    <div class="order-list">
-        <div class="order-header">
-            <h3>Parts on Order</h3>
-        </div>
-        <table class="blueTable parts-order-table">
-            <thead>
-            <tr>
-                <th class="pdiMachineField">Machine</th>
-                <th class="pdi-rep-status">Parts Status</th>
-                <th class="order-number">Claim Nr.</th>
-                <th class="order-number">Part Nr.</th>
-                <th class="quality-comment">Quality Comment</th>
-            </tr>
-            </thead>
-            <tbody>
-            {{#each orderResult}}
-                <tr class="selectedPartsOrdered">
-                    <td class="pdiMachineField">{{machineId}}</td>
-                    <td class="pdi-rep-status  {{getStatusColor partsOrder}}"
-                        style="background-color:{{getStatusColor partsOrder}};
-                                color:{{getStatusColor partsOrder}}">{{partsOrder}}</td>
-                    <td class="order-number">{{claimNumber}}</td>
-                    <td class="order-number">{{partNumber}}</td>
-                    <td class="quality-comment">{{qualityText}}</td>
-                </tr>
-            {{/each}}
-            </tbody>
-        </table>
-    </div>
-
-    <div class="parts-ordered">
-        <h4>Total Parts waiting for arrival  : {{partsOrdered}}</h4>
-    </div>
-
     <div class="insert-quality-comment">
         <h3>Quality Comment / Notes</h3>
         <form class="quality-comment">
             <label for="lookUpMachine" class=""></label>
             <input type="text" id="lookUpMachine" class="" name="quality" value="{{quality_Comment}}" style="width: 500px" >
-            <label for="claimNumber" class="claim-number">Claim</label>
-            <input type="text" id="claimNumber" class="claim-number" name="claimNumber" value="{{claim_Number}}">
-            <label for="partNumber" class="part-number">Part</label>
-            <input type="text" id="partNumber" class="part-number" name="partNumber" value="{{part_Number}}">
-            <div class="order-radio-button">
-                <label for="partsOnOrder">Parts On Order</label>
-                <input type="radio" id="partsOnOrder" class="" name="partsAvailability" value="2">
-                <br>
-                <label for="partsArrived">Parts Arrived</label>
-                <input type="radio" id="partsArrived" class="" name="partsAvailability" value="1">
-            </div>
             <button type="submit" class="btn btn-default btn-success quality-button" >Submit</button>
         </form>
     </div>

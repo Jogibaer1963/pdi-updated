@@ -20,7 +20,7 @@ Template.inputHead.helpers({
     shippList: function () {
         let z = Session.get('z');
         if(z === 0) {
-            return newHeadYear.find({shipStatus: 1}, {sort: {date: 1}});
+            return newHeadYear.find({shipStatus: 1, dateOfCreation: {$gt: '2022-10-01'}}, {$sort: {date: -1}});
         } else {
             let result = newHeadYear.find({shipStatus: 0}, {sort: {date: 1}});
             console.log('result' , result)

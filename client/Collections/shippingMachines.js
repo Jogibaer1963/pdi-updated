@@ -62,7 +62,7 @@ Session.set('toggleShipList', 1);
         editDate: () => {
             try {
                 let result = Session.get('myMachine')
-                console.log('shipp date', result.date)
+             //   console.log('shipp date', result.date)
                 document.getElementById('shippingDate').innerHTML = result.date
                 return result.date
             } catch (e) {
@@ -89,7 +89,7 @@ Session.set('toggleShipList', 1);
         editTire: () => {
             try {
                 let result = Session.get('myMachine')
-                console.log(result.tireTrack)
+             //   console.log(result.tireTrack)
                 return result.tireTrack
             } catch (e) {
             }
@@ -116,7 +116,7 @@ Session.set('toggleShipList', 1);
                 let result = Session.get('myMachine').kit;
                 for (let i = 0; i <= result.length; i++) {
                     if (result[i] === 'No_Kit' || result[i] === 'No_Kit ' || result[i] === 'No Kit') {
-                        console.log('No Kit detected')
+                   //     console.log('No Kit detected')
                         return 'checked'
                     }
                 }

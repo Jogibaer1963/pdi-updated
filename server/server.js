@@ -131,10 +131,6 @@ if(Meteor.isServer){
             return machineCommTable.find();
         });
 
-        Meteor.publish("orderParts", function() {
-            return orderParts.find();
-        });
-
     });
 
 
@@ -242,6 +238,7 @@ if(Meteor.isServer){
                          repairStatus: 0,
                          washStatus: 0,
                          shipStatus: 0,
+                         roadTest: 0,
                          unixTime: timeStamp,
                          date: dateString,
                          destination: destination,
@@ -324,35 +321,9 @@ if(Meteor.isServer){
             }
         },
 
-        'updateQualityComment': (machineNr, selectedLineId, qualityText, partsOrder,
-                                amountOnOrder, claimNumber, partNumber) => {
-         //   console.log('parts status ', partsOrder)
-            if (partsOrder === 1) {
-                // Parts received
+        'updateQualityComment': (machineNr, selectedLineId, qualityText) => {
                 MachineReady.update({machineId: machineNr, 'newIssues._id' : selectedLineId},
-                    {$set: {'newIssues.$.qualityComment' : qualityText,
-                            'newIssues.$.partsOrder':  partsOrder}});
-             //   console.log('Id ', selectedLineId, 'partsOrder ', partsOrder, qualityText)
-                orderParts.update({_id : selectedLineId},
-                    {$set: {partsOrder: partsOrder}})
-            } else if (partsOrder === 2) {
-                // need Parts, parts on order
-                MachineReady.update({machineId: machineNr, 'newIssues._id' : selectedLineId},
-                    {$set: {'newIssues.$.qualityComment' : qualityText,
-                            'newIssues.$.partsOrder': partsOrder,
-                            'newIssues.$.claimNumber': claimNumber,
-                            'newIssues.$.partNumber': partNumber,
-                            'amountOnOrder': amountOnOrder}});
-                orderParts.insert({_id: selectedLineId, machineId: machineNr,
-                    qualityText : qualityText, partsOrder: partsOrder,
-                    claimNumber: claimNumber, partNumber: partNumber})
-            } else if (partsOrder === 0) {
-                // no parts needed, just claim or comments
-                MachineReady.update({machineId: machineNr, 'newIssues._id' : selectedLineId},
-                    {$set: {'newIssues.$.qualityComment' : qualityText,
-                            'newIssues.$.claimNumber': claimNumber,
-                            'newIssues.$.partNumber': partNumber}});
-            }
+                    {$set: {'newIssues.$.qualityComment' : qualityText}});
         },
 
         'updateSupplierIssues': (machineNr, issueId, comment, claimNr) => {
@@ -1134,12 +1105,6 @@ if(Meteor.isServer){
           MachineReady.update({_id: selectedPdiMachineId}, {$pull: {newIssues : {_id: openFailure}}});
         },
 
-        'orderParts': function (machineNr, loggedInUser, failureAddDescription) {
-            const orderStatus = 1;
-            orderParts.insert({machineNr: machineNr, user: loggedInUser, description: failureAddDescription,
-                orderStatus: orderStatus});
-        },
-
         // Add / remove issue to finished PDI list
 
         'newPdiIssue': (machineId, newIssue) => {
@@ -1183,7 +1148,7 @@ if(Meteor.isServer){
             MachineReady.update({_id: selectedPdiMachineId}, {$set: {omms: {user: loggedInUser,
                     ommMain, ommUnload, ommProfiCam, ommCebis,  ommTerra, ommStatus: 1}}});
         },
-
+/*
         'machineUser': function (machineId, userLoggedIn, arrayOrder) {
             orderParts.insert({_id: userLoggedIn, machineNr: machineId, user: userLoggedIn});
             setTimeout(function () {
@@ -1196,6 +1161,8 @@ if(Meteor.isServer){
                 orderParts.upsert({_id: userLoggedIn}, {$addToSet: {repOrder}});
             }
         },
+
+ */
 
    // -------------------------------------------------- Wash List -------------------------------------------
         'stopWashing': function(selectedCheckPoint) {
@@ -1354,6 +1321,7 @@ if(Meteor.isServer){
                     repairStatus: 0,
                     washStatus: 0,
                     shipStatus: 0,
+                    roadTest: 0,
                     unixTime: createUnixTime,
                     date: newShippingDate,
                     destination: newShippingDestination,

@@ -1,6 +1,5 @@
 Meteor.subscribe('SuppliersList');
 Meteor.subscribe('TeamList');
-Meteor.subscribe('orderParts');
 
 const Highcharts = require('highcharts');
 
@@ -164,7 +163,7 @@ Template.analyzingOverView.helpers({
     machineCount: function () {
         let completedMachines = [];
         let issuesFound = 0;
-        let result = MachineReady.find({pdiStatus: 1}, {fields: {newIssues: 1,
+        let result = MachineReady.find({pdiStatus: 1, dateOfCreation: {$gt: '2022-10-01'}}, {fields: {newIssues: 1,
                 machineId: 1, machineNr: 1,  omms: 1, amountOnOrder: 1
                }}).fetch();
         Session.set('analyzingOverView', result)
@@ -474,11 +473,10 @@ Template.analyzingSupplier.helpers({
         // search for Machine, pictures will be displayed
         if (machineLookUp === true) {
            result = MachineReady.findOne({machineId: machine}, {
-              fields: {machineNr: 1,  machineId: 1, newIssues: 1, pdiPerformer: 1, amountOnOrder: 1}})
+              fields: {machineNr: 1,  machineId: 1, newIssues: 1, pdiPerformer: 1}})
                 let pdiPerformer = result.pdiPerformer;
                 let machineNr = result.machineId;
                 let issueArray = result.newIssues;
-                let amountOnOrder = result.amountOnOrder;
                 issueArray.forEach((element2) => {
                     if (element2.checkStatus === true) {
                         if (element2.responsible === "N/A") {
@@ -494,11 +492,7 @@ Template.analyzingSupplier.helpers({
                                 repairStatus: element2.repairStatus,
                                 pictureLocation : repairInfos + element2.pictureLocation,
                                 repairTime: element2.repairTime,
-                                qualityComment: element2.qualityComment,
-                                claimNumber: element2.claimNumber,
-                                partNumber: element2.partNumber,
-                                partsOrder : element2.partsOrder,
-                                amountOnOrder : amountOnOrder
+                                qualityComment: element2.qualityComment
                             }
                             supplierArray.push(supplierIssues)
                         }
@@ -507,8 +501,8 @@ Template.analyzingSupplier.helpers({
             return supplierArray;
         } else {
         }
-            result = MachineReady.find({pdiStatus: 1},
-                {fields: {machineNr: 1, newIssues: 1, machineId: 1, pdiPerformer: 1, amountOnOrder: 1}}).fetch();
+            result = MachineReady.find({pdiStatus: 1, dateOfCreation : {$gt: '2022-09-01'}},
+                {fields: {machineNr: 1, newIssues: 1, machineId: 1, pdiPerformer: 1}}).fetch();
         Session.set('issuesCount', result.length)
         try {
             if (toggle === 0) {
@@ -516,7 +510,6 @@ Template.analyzingSupplier.helpers({
                     let pdiPerformer = element.pdiPerformer;
                     let machineNr = element.machineId;
                     let issueArray = element.newIssues;
-                    let amountOnOrder = element.amountOnOrder;
                     issueArray.forEach((element2) => {
                         if (element2.checkStatus === true) { // issue is active in List
                             if (element2.responsible === "N/A") {
@@ -532,11 +525,7 @@ Template.analyzingSupplier.helpers({
                                     repairStatus: element2.repairStatus,
                                     pictureLocation : '../../public/noPicture.JPG',
                                     repairTime: element2.repairTime,
-                                    qualityComment: element2.qualityComment,
-                                    claimNumber: element2.claimNumber,
-                                    partNumber: element2.partNumber,
-                                    partsOrder : element2.partsOrder,
-                                    amountOnOrder : amountOnOrder
+                                    qualityComment: element2.qualityComment
                                 }
                                 supplierArray.push(supplierIssues)
                             }
@@ -548,7 +537,6 @@ Template.analyzingSupplier.helpers({
                     let pdiPerformer = element.pdiPerformer;
                     let machineNr = element.machineId;
                     let issueArray = element.newIssues;
-                    let amountOnOrder = element.amountOnOrder;
                     issueArray.forEach((element2) => {
                         if (element2.checkStatus === false) { // issue is closed and disappeared from List
                             if (element2.responsible === "N/A") {
@@ -564,11 +552,7 @@ Template.analyzingSupplier.helpers({
                                     repairStatus: element2.repairStatus,
                                     pictureLocation : '../../public/noPicture.JPG',
                                     repairTime: element2.repairTime,
-                                    qualityComment: element2.qualityComment,
-                                    claimNumber: element2.claimNumber,
-                                    partNumber: element2.partNumber,
-                                    partsOrder : element2.partsOrder,
-                                    amountOnOrder : amountOnOrder
+                                    qualityComment: element2.qualityComment
                                 }
                                 supplierArray.push(supplierIssues)
                             }
@@ -582,7 +566,6 @@ Template.analyzingSupplier.helpers({
                     let pdiPerformer = element.pdiPerformer;
                     let machineNr = element.machineId;
                     let issueArray = element.newIssues;
-                    let amountOnOrder = element.amountOnOrder;
                     issueArray.forEach((element2) => {
                         for(supplier of supplierNames) {
                             if (element2.responsible === supplier && element2.repairTime >= '10')   {
@@ -597,11 +580,7 @@ Template.analyzingSupplier.helpers({
                                     repairStatus: element2.repairStatus,
                                     pictureLocation : '../../public/noPicture.JPG',
                                     repairTime: element2.repairTime,
-                                    qualityComment: element2.qualityComment,
-                                    claimNumber: element2.claimNumber,
-                                    partNumber: element2.partNumber,
-                                    partsOrder : element2.partsOrder,
-                                    amountOnOrder : amountOnOrder
+                                    qualityComment: element2.qualityComment
                                 }
                                 supplierArray.push(supplierIssues)
                             }
@@ -647,16 +626,6 @@ Template.analyzingSupplier.helpers({
                 if (a.qualityComment > b.qualityComment) return -1
                 return a.qualityComment < b.qualityComment ? 1 : 0
             })
-
-        } else if (sortOrder === 13) {
-            supplierArray.sort( (a, b) => {
-                if (a.claimNumber > b.claimNumber) return -1
-                return a.claimNumber < b.claimNumber ? 1 : 0
-            })
-        } else if (sortOrder === 14) {
-            supplierArray.sort( function(b, a) {
-               return ('' + b.partsOrder).localeCompare(a.partsOrder)
-            })
         }
         return supplierArray;
     },
@@ -677,48 +646,10 @@ Template.analyzingSupplier.helpers({
         return TeamList.find().fetch();
     },
 
-    supplierTable: () => {
-        return SuppliersList.find().fetch();
-    },
 
     user: () => {
         return Session.get('userResult');
     },
-
-    partsOrdered: () => {
-        let resultArray = []
-        let result = orderParts.find({}, {fields: {partsOrder: 1}}).fetch()
-        result.forEach(function(element) {
-            if (element.partsOrder === 2) {
-                resultArray.push(element.partsOrder)
-            }
-        })
-        return resultArray.length
-    },
-
-    orderResult: () => {
-       let result = orderParts.find({}).fetch();
-        result.sort( (a, b) => {
-            if (a.partsOrder > b.partsOrder) return -1
-            return a.partsOrder < b.partsOrder ? 1 : 0
-        })
-        return result
-    },
-
-    quality_Comment: () => {
-        return Session.get('quality_Comment')
-    },
-
-    claim_Number: () => {
-      return Session.get('claim_Number')
-    },
-
-    part_Number: () => {
-      return Session.get('part_Number')
-    },
-
-
-
 
 
     'qualityResponse':function () {
@@ -881,59 +812,13 @@ Template.analyzingSupplier.events({
 
     'submit .quality-comment': function(e) {
         e.preventDefault();
-        let selectedMachine, selectedLine, qualityText, amountOnOrder, partsOnOrderInt,
-            claimNumber, partNumber;
+        let selectedMachine, selectedLine, qualityText;
         selectedMachine = Session.get('selectedSupplierMachine');
         selectedLine = Session.get('selectedFailure');
-        amountOnOrder = Session.get('amountOnOrder');
-      //  console.log('first ', amountOnOrder)
-        if (amountOnOrder === undefined) {
-     //       console.log('before ', amountOnOrder)
-            amountOnOrder = 0;
-     //      console.log('after ', amountOnOrder)
-        }
         qualityText = e.target.quality.value;
-        claimNumber = e.target.claimNumber.value;
-        partNumber = e.target.partNumber.value;
-        let partsOrder= [];
-        $('input[name = partsAvailability]:checked').each(function() {
-            partsOrder.push($(this).val());
-        });
-        if (partsOrder.length > 0) {
-            partsOnOrderInt = parseInt(partsOrder[0])
-            if (partsOnOrderInt === 2) {
-                // value 2 is for a new Order
-                amountOnOrder = amountOnOrder + 1;
-                Session.set('amountOnOrder', amountOnOrder)
-            } else if (partsOnOrderInt === 1) {
-                // value 1 is part is arrived
-                amountOnOrder = amountOnOrder -  1;
-                Session.set('amountOnOrder', amountOnOrder - 1)
-            }
-        } else {
-            partsOnOrderInt = 0
-        }
-        if (selectedLine === '') {
-            alert('Mark Line prior Submitting')
-        } else {
-         //  console.log('Order final', selectedMachine,
-          //      selectedLine, qualityText, partsOnOrderInt, amountOnOrder, claimNumber, partNumber)
-                Meteor.call('updateQualityComment', selectedMachine,
-                selectedLine, qualityText, partsOnOrderInt, amountOnOrder, claimNumber, partNumber)
-        }
+        Meteor.call('updateQualityComment', selectedMachine, selectedLine, qualityText)
         e.target.quality.value = '';
-        document.getElementById('partsOnOrder').checked= false;
-        document.getElementById('partsArrived').checked= false;
-        document.getElementById('claimNumber').value = '';
-        document.getElementById('partNumber').value = '';
-        Session.set('selectedLine', '');
-        Session.set('selectedFailure', '');
-        Session.set('selectedSupplierMachine', '');
-        Session.set('amountOnOrder', '')
         Session.set('quality_Comment', '');
-        Session.set('claim_Number', '')
-        Session.set('part_Number', '')
-
     },
 
     'click .issue-closed': function (e) {
@@ -1001,7 +886,8 @@ Template.pdiSearch.helpers({
         let singleResultArray = [];
         let result, pdiPerformer, graph, coAuditorTrue;
         result = MachineReady.find({$and: [{pdiStatus: 1},
-                {unixPdiDate: {$gt: 1630476000000}}]}).fetch(); // unix date is 1.09.2020
+                {unixPdiDate: {$gt: 1664600400000}}]}).fetch(); // unix date is 1.09.2020
+
         result.forEach((element) => {
             if (element.coAuditor !== undefined) {
                 pdiPerformer = element.coAuditor;
@@ -1288,7 +1174,7 @@ function prepareTeamResult() {
     result.forEach((element) => {
         let machineId = element.machineId;
         try {
-        let machineBay19 = machineCommTable.findOne({machineId: machineId}, {fields: {timeLine: 1}})
+        let machineBay19 = machineCommTable.findOne({machineId: machineId, dateOfCreation: {$gt: '2022-10-01'}}, {fields: {timeLine: 1}})
         machineTimeLine = machineBay19.timeLine.bay19Planned;
             if (element.newIssues) {
                 element.newIssues.forEach((element2) => {
