@@ -139,9 +139,9 @@ if(Meteor.isServer){
     Meteor.methods({
 
         'roadTest': () => {
-            console.log('operation performed')
+          //  console.log('operation performed')
             let result = MachineReady.update({repairStatus: 0}, {$set: {roadTest: 0}}, {multi: true})
-            console.log(result)
+          //  console.log(result)
         },
 
 /*
@@ -477,7 +477,7 @@ if(Meteor.isServer){
                                     dateLoaded: latestUpdate
                                         });
                             } catch (e) {
-                                console.log(e)
+                          //      console.log(e)
                             }
                         }
                         groupVariantString = groupVariant.replace(singleGroup, '');
@@ -1311,7 +1311,7 @@ if(Meteor.isServer){
 
             let result = MachineReady.findOne({machineId: machineId})
             if (result === undefined) {
-                console.log('undefined detected')
+              //  console.log('undefined detected')
                 // machine not found
                 MachineReady.insert({
                     machineId: machineId,
@@ -1332,7 +1332,7 @@ if(Meteor.isServer){
                     shippingComment: newShippingComment
                 });
             }  else {
-                console.log('update Machine')
+               // console.log('update Machine')
                 // machine found and need update
                 MachineReady.update({machineId:machineId},
                     {$set: {
@@ -1379,7 +1379,7 @@ if(Meteor.isServer){
                 if (err) {
                     throw (new Meteor.Error(500, 'Failed to save file.', err));
                 } else {
-                 console.log('The file ' + name + ' (' + encoding + ') was saved to ' + path);
+                // console.log('The file ' + name + ' (' + encoding + ') was saved to ' + path);
                 }
             });
             MachineReady.update({_id: selectedPdiMachineId, 'newIssues._id': failureId},
@@ -1389,7 +1389,7 @@ if(Meteor.isServer){
         },
 
         saveConfigFile: function(blob, name, path, encoding, selectedVariantId) {
-           console.log(path, name, selectedVariantId)
+          // console.log(path, name, selectedVariantId)
             path = '/files/config-items/';
             encoding = encoding || 'binary';
             name = selectedVariantId + '.JPG';
