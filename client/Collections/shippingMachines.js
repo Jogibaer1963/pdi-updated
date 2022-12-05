@@ -13,7 +13,7 @@ Session.set('toggleShipList', 1);
 
         shippList: function () {
             // Order of shipping date
-            let shipToggleList = Session.get('toggleShipList');
+            let shipToggleList = Session.get('toggleShipList'); //
             switch(shipToggleList) {
                 case 1:
                     return MachineReady.find({shipStatus: 0},
@@ -21,7 +21,7 @@ Session.set('toggleShipList', 1);
                                               );
                 case 0:
                   //  let changeDate = new Date("2020-09-31").getTime() / 1000
-                    let fiscalYear = '2020-09-31';
+                    let fiscalYear = '2022-09-31';
                     let result = MachineReady.find({$and: [{date : {$gt: fiscalYear}}, {shipStatus: 1}]},
                         {sort: {date: -1}}).fetch();
                     Session.set('shippedMachines', result.length)
@@ -303,6 +303,7 @@ Session.set('toggleShipList', 1);
             const newShippingTireTrack = e.target.newTireTrack.value;
             const newShippingReturns = e.target.newReturn.value;
             const newShippingComment = e.target.newComment.value;
+            //console.log(  newShippingTransporter, newShippingKit, newShippingTireTrack)
             Meteor.call('addToShipList', newMachineInput, newShippingDate,
                 createUnixTime, createDate, createTime, newShippingDestination,
                 newShippingTransporter, newShippingKit, newShippingTireTrack,
@@ -330,6 +331,7 @@ Session.set('toggleShipList', 1);
             document.getElementById('newKit12').checked= false;
             document.getElementById('newKit13').checked= false;
             Session.set('selectedMachine', '');
+            window.location.reload(true)
         },
 
         'submit .find_Machine': function(e) {

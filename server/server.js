@@ -33,9 +33,12 @@ if(Meteor.isServer){
             return checkPoints.find();
         });
 
+        /*
         Meteor.publish("headerTrailer", function(){
             return headerTrailer.find();
         });
+
+         */
 
         Meteor.publish("washBayText", function(){
             return washBayText.find();
@@ -66,10 +69,12 @@ if(Meteor.isServer){
         Meteor.publish("siTable", function() {
             return siTable.find();
         });
-
+/*
         Meteor.publish("fuelAverage", function() {
             return fuelAverage.find();
         });
+
+ */
 
         Meteor.publish("usersProfile", function() {
             return usersProfile.find();
@@ -138,29 +143,21 @@ if(Meteor.isServer){
 
     Meteor.methods({
 
-        'roadTest': () => {
-          //  console.log('operation performed')
-            let result = MachineReady.update({repairStatus: 0}, {$set: {roadTest: 0}}, {multi: true})
-          //  console.log(result)
+        'specialOperation': () => {
+
+
         },
 
-/*
-        'specialOperation': (contents) => {
-         //   console.log(contents)
-            let arr = contents.split(/[\n\r]/g);
-            arr.forEach((element) => {
-                if (element !== '') {
-                    console.log(element)
-                    MachineReady.update({machineId: element}, {$set: {pdiOk: 1}})
-                }
-            })
-        },
 
- */
         // ****************************  Road Test Section  **********************************
 
+
+        'roadTest': (selected, status) => {
+            machineCommTable.update({machineId: selected}, {$set: {roadTest: status}})
+        },
+
         'roadTestComments':(machineId, comment) => {
-            MachineReady.update({machineId: machineId}, {$set: {roadTestComment: comment}})
+            machineCommTable.update({machineId: machineId}, {$set: {roadTestComment: comment}})
     },
 
      // ************************  Load Shipping Machine List  ********************************
@@ -227,7 +224,7 @@ if(Meteor.isServer){
             if (kit.length === 0) {
                 kit = ['No_Kit']
             }
-             result = MachineReady.find({machineId: machineId}, {fields: {shipStatus: 1}}).fetch();
+             result = MachineReady.findOne({machineId: machineId}, {fields: {shipStatus: 1}}).fetch();
              try {
                  if ( _.isEmpty(result) === true ) {
                //      console.log(machineId, ' machine is new', kit)
@@ -1144,25 +1141,11 @@ if(Meteor.isServer){
         },
 
         'pdiMachineOmm': function(selectedPdiMachineId, loggedInUser, ommMain,
-                                  ommUnload,ommProfiCam, ommCebis, ommTerra) {
+                                  ommUnload,ommProfiCam, ommTerra) {
             MachineReady.update({_id: selectedPdiMachineId}, {$set: {omms: {user: loggedInUser,
-                    ommMain, ommUnload, ommProfiCam, ommCebis,  ommTerra, ommStatus: 1}}});
-        },
-/*
-        'machineUser': function (machineId, userLoggedIn, arrayOrder) {
-            orderParts.insert({_id: userLoggedIn, machineNr: machineId, user: userLoggedIn});
-            setTimeout(function () {
-            }, 1000);
-
-            for (let i = 0; i < arrayOrder.length; i++) {
-                let repOrder = {};
-                repOrder._id = Random.id();
-                repOrder.description = arrayOrder[i];
-                orderParts.upsert({_id: userLoggedIn}, {$addToSet: {repOrder}});
-            }
+                    ommMain, ommUnload, ommProfiCam, ommTerra, ommStatus: 1}}});
         },
 
- */
 
    // -------------------------------------------------- Wash List -------------------------------------------
         'stopWashing': function(selectedCheckPoint) {

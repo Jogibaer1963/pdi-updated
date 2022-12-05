@@ -285,10 +285,9 @@ Template.joinPdiMachine.events({
    //     const ommSupp = "N/A";
         const ommUnload = e.target.omUnload.value;
         const ommProfiCam = e.target.omProfiCam.value;
-        const ommCebis = e.target.omCebis.value;
         const ommTerra = e.target.omTerra.value;
         Meteor.call('pdiMachineOmm', pdiMachineId, loggedInUser, ommMain,
-            ommUnload,ommProfiCam, ommCebis, ommTerra);
+            ommUnload,ommProfiCam, ommTerra);
     },
 
     'click .configButtonOK': (event) => {

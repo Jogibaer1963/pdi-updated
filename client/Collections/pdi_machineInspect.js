@@ -281,15 +281,12 @@ Meteor.subscribe('oms');
             event.preventDefault();
             const loggedInUser = Session.get('currentLoggedInUser');
             const pdiMachineId = Session.get('selectedPdiMachineId');
-         //   const fuelMe = event.target.fuelMe.value;
             const ommMain = event.target.omMain.value;
-        //    const ommSupp = "N/A" // event.target.omSupp.value;
             const ommUnload = event.target.omUnload.value;
             const ommProfiCam = event.target.omProfiCam.value;
-            const ommCebis = event.target.omCebis.value;
             const ommTerra = event.target.omTerra.value;
             Meteor.call('pdiMachineOmm', pdiMachineId, loggedInUser, ommMain,
-                ommUnload,ommProfiCam, ommCebis, ommTerra);
+                ommUnload,ommProfiCam, ommTerra);
         },
 
         'click .configButtonOK': (event) => {
