@@ -2,7 +2,7 @@ Template.dataBrowser.events({
 
     'click .goButton': () => {
         console.log('Go');
-        Meteor.call('roadTest')
+        Meteor.call('specialOperation')
     },
 
 

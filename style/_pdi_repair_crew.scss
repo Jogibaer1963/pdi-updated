@@ -100,10 +100,17 @@ table.display-error {
   left: 87em;
   position: absolute;
   top: 50em;
+  z-index: -2;
 }
 
 .pdi-open-repair {
   left: 1px;
   position: absolute;
   top: 1em;
+}
+
+.pdi-repair-orders {
+  left: 1340px;
+  position: absolute;
+  top: 1223px;
 }

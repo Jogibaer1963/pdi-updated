@@ -3,6 +3,10 @@
         {{> topNav}}
         {{> repairNav}}
         {{> repairMachine}}
+        <div class="repair-orders">
+            {{> order_repair}}
+        </div>
+
     {{else}}
         {{> login}}
     {{/if}}
@@ -11,9 +15,8 @@
 <template name="repairNav">
     <div  class="repNav">
         <nav>
-            <a class="btn" href="/pdiRepairList">Review Repair List</a>
-            <a>|</a>
-            <a class="btn" href="/si">SI's or special Item's </a>
+
+            <a class="btn btn-default btn-info" href="/si">SI's or special Item's </a>
         </nav>
     </div>
 </template>

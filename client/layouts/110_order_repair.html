@@ -1,0 +1,77 @@
+<template name="order_repair">
+
+    <div class="repair-order-button">
+        <label for="messageButton_repair"></label>
+        <button type="button" id="messageButton_repair"
+                class="btn
+                        btn-default
+                        btn-warning
+                        messageButton_repair">Parts Needed</button>
+    </div>
+
+    <div class="repair-cancel-button">
+        <label for="messageButton"></label>
+        <button type="button" id="messageButton"
+                class="btn
+                        btn-danger
+                        cancelButton">Cancel Order</button>
+    </div>
+
+
+    <table class="blueTable repair-order-table">
+        <thead>
+        <tr>
+            <th class="part-number-table">Part Number</th>
+            <th class="part-storage-bin"><strong>Storage Bin</strong></th>
+            <th class="part-storage-bin"><strong>Point of Use</strong></th>
+            <th class="part-order-quantity"><strong>Quantity</strong></th>
+            <th class="pdiMachineField"><strong>Status</strong></th>
+            <th class="date-time-order"><strong>Time ordered</strong></th>
+
+        </tr>
+        </thead>
+        <tbody>
+        {{#each lineOrders}}
+            <tr class="selectedOrder {{markedSelectedOrder}}">
+                <td class="part-number-table">{{part_number}}</td>
+                <td class="part-storage-bin">{{storage_bin}}</td>
+                <td class="part-storage-bin">{{point_of_use}}</td>
+                <td class="part-order-quantity">{{quantity_needed}}</td>
+                <td class="pdiMachineField {{getOrderStatus status}}"
+                    style="background-color: {{getOrderStatus status}}; font-size: 0">{{status}}</td>
+                <td class="date-time-order">{{time_ordered}}</td>
+            </tr>
+        {{/each}}
+        </tbody>
+    </table>
+
+    <table class="blueTable repair-history-table">
+        <thead>
+        <tr>
+            <th class="part-number-table">Part Number</th>
+            <th class="part-storage-bin"><strong>Storage Bin</strong></th>
+            <th class="part-storage-bin"><strong>Point of Use</strong></th>
+            <th class="part-order-quantity"><strong>Quantity</strong></th>
+            <th class="picked-by"><strong>Picked by</strong></th>
+            <th class="pdiMachineField"><strong>Status</strong></th>
+            <th class="date-time-order"><strong>Time ordered</strong></th>
+            <th class="date-time-order"><strong>Time completed</strong></th>
+        </tr>
+        </thead>
+        <tbody>
+        {{#each historyOrders}}
+            <tr class="">
+                <td class="part-number-table">{{part_number}}</td>
+                <td class="part-storage-bin">{{storage_bin}}</td>
+                <td class="part-storage-bin">{{point_of_use}}</td>
+                <td class="part-order-quantity">{{quantity_needed}}</td>
+                <td class="picked-by">{{picked_by}}</td>
+                <td class="pdiMachineField" style="text-align: center">{{status}}</td>
+                <td class="date-time-order">{{time_ordered}}</td>
+                <td class="date-time-order">{{order_completed}}</td>
+            </tr>
+        {{/each}}
+        </tbody>
+    </table>
+
+</template>

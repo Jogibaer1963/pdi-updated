@@ -48,12 +48,10 @@ if(Meteor.isServer){
         Meteor.publish("reworkMachineList", function(){
             return reworkMachineList.find();
         });
-/*
-        Meteor.publish("mcoReview", function () {
-           return mcoReview.find();
-        });
 
- */
+        Meteor.publish('lineOrders', function() {
+            return lineOrders.find()
+        });
 
         Meteor.publish("siListDone", function () {
             return siListDone.find();
@@ -138,32 +136,65 @@ if(Meteor.isServer){
 
     Meteor.methods({
 
-        'roadTest': () => {
+        'roadTest': (selected, status) => {
           //  console.log('operation performed')
-            let result = MachineReady.update({repairStatus: 0}, {$set: {roadTest: 0}}, {multi: true})
-          //  console.log(result)
+            console.log(selected, status)
+           let result = machineCommTable.update({machineId: selected}, {$set: {roadTest: status}})
         },
 
-/*
-        'specialOperation': (contents) => {
-         //   console.log(contents)
-            let arr = contents.split(/[\n\r]/g);
-            arr.forEach((element) => {
-                if (element !== '') {
-                    console.log(element)
-                    MachineReady.update({machineId: element}, {$set: {pdiOk: 1}})
-                }
-            })
-        },
 
- */
-        // ****************************  Road Test Section  **********************************
-
-        'roadTestComments':(machineId, comment) => {
+        'roadTestComments': (machineId, comment) => {
             MachineReady.update({machineId: machineId}, {$set: {roadTestComment: comment}})
     },
 
-     // ************************  Load Shipping Machine List  ********************************
+        'cancelOrder':(id) => {
+            lineOrders.remove({_id: id})
+        },
+
+        'repair_parts_on_order': (user_order, partNumber_order, quantityNeeded_order, storageLocation_order,
+                           point_of_use_order, reason_order) => {
+            // status : 0 = unseen, 1 = picking in progress, 2 = delivered
+            // urgency level : 10 = high urgency, 11 = medium urgency, 12 low urgency
+            console.log(user_order, partNumber_order, quantityNeeded_order, storageLocation_order,
+                point_of_use_order, reason_order)
+            let reason = parseInt(reason_order);
+            let months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+            let order_date, orderStart, year, month, date, hours, minutes, seconds, success, unixOrder;
+            unixOrder = Date.now()
+            orderStart = new Date()
+            year = orderStart.getFullYear();
+            month = months[orderStart.getMonth()];
+            date = orderStart.getDate();
+            hours = orderStart.getHours();
+            if (hours < 10) {
+                hours = '0' + hours
+            }
+            minutes = orderStart.getMinutes();
+            if (minutes < 10) {
+                minutes = '0' + minutes
+            }
+            seconds = orderStart.getSeconds();
+            if (seconds < 10) {
+                seconds = '0' + seconds
+            }
+            //   console.log(orderStart, date + '-' + month + '-' + year + ' '+ hours + ':' + minutes + ':' + seconds)
+            order_date = (date + '-' + month + '-' + year + ' '+ hours + ':' + minutes + ':' + seconds)
+            lineOrders.insert({ team_user : user_order,
+                time_ordered  : order_date,
+                unixTimeOrderStart : unixOrder,
+                part_number : partNumber_order,
+                quantity_needed : quantityNeeded_order,
+                storage_bin : storageLocation_order,
+                point_of_use : point_of_use_order,
+                reason : reason,
+                status: 0,
+                order_completed : ''})
+            success = 'success ' + order_date;
+            return success
+
+        },
+
+        // ************************  Load Shipping Machine List  ********************************
 
     'pdiBlocker': (machineNr, value) => {
         MachineReady.update({machineId: machineNr}, {$set: {pdiOk: value}})
@@ -1144,25 +1175,11 @@ if(Meteor.isServer){
         },
 
         'pdiMachineOmm': function(selectedPdiMachineId, loggedInUser, ommMain,
-                                  ommUnload,ommProfiCam, ommCebis, ommTerra) {
+                                  ommUnload,ommProfiCam, ommTerra) {
             MachineReady.update({_id: selectedPdiMachineId}, {$set: {omms: {user: loggedInUser,
-                    ommMain, ommUnload, ommProfiCam, ommCebis,  ommTerra, ommStatus: 1}}});
-        },
-/*
-        'machineUser': function (machineId, userLoggedIn, arrayOrder) {
-            orderParts.insert({_id: userLoggedIn, machineNr: machineId, user: userLoggedIn});
-            setTimeout(function () {
-            }, 1000);
-
-            for (let i = 0; i < arrayOrder.length; i++) {
-                let repOrder = {};
-                repOrder._id = Random.id();
-                repOrder.description = arrayOrder[i];
-                orderParts.upsert({_id: userLoggedIn}, {$addToSet: {repOrder}});
-            }
+                    ommMain, ommUnload, ommProfiCam, ommTerra, ommStatus: 1}}});
         },
 
- */
 
    // -------------------------------------------------- Wash List -------------------------------------------
         'stopWashing': function(selectedCheckPoint) {

@@ -1054,12 +1054,19 @@ table.display-error {
   left: 87em;
   position: absolute;
   top: 50em;
+  z-index: -2;
 }
 
 .pdi-open-repair {
   left: 1px;
   position: absolute;
   top: 1em;
+}
+
+.pdi-repair-orders {
+  left: 1340px;
+  position: absolute;
+  top: 1223px;
 }
 
 .pdiToDo {
@@ -1536,6 +1543,68 @@ table.siInactive {
   left: 78em;
 }
 
+.repair-orders {
+  left: 1378px;
+  position: absolute;
+  top: 8px;
+}
+
+.repair-order-button {
+  left: -112px;
+  position: relative;
+  top: 18px;
+}
+
+.repair-cancel-button {
+  left: 10px;
+  position: relative;
+  top: -16px;
+}
+
+.part-number-table {
+  width: 120px;
+}
+
+.part-storage-bin {
+  width: 120px;
+}
+
+.part-order-quantity {
+  width: 77px;
+}
+
+.date-time-order {
+  width: 170px;
+}
+
+.repair-order-parts {
+  left: 21px;
+  position: absolute;
+  top: 10px;
+}
+
+.picked-by {
+  width: 95px;
+}
+
+table.repair-order-table {
+  display: block;
+  height: 300px;
+  left: 130px;
+  position: relative;
+  top: -51px;
+  width: 691px;
+}
+
+table.repair-history-table {
+  display: block;
+  height: 300px;
+  left: 130px;
+  position: relative;
+  top: -10px;
+  width: 935px;
+}
+
 table.repairTable {
   position: absolute;
   margin-left: 35px;
@@ -1627,8 +1696,9 @@ tbody.newIssueTableHeight {
 }
 
 .repNav {
+  left: 389px;
   position: absolute;
-  left: 40em;
+  top: 25px;
 }
 
 .kitListButton {
@@ -1687,12 +1757,6 @@ img:hover {
   left: 70em;
   position: absolute;
   top: 50em;
-}
-
-.repair-machine {
-  left: 2em;
-  position: absolute;
-  top: 45em;
 }
 
 .outBoundNav {
@@ -2490,6 +2554,35 @@ table.supplier-result-table {
   left: 21em;
   position: absolute;
   top: 10em;
+}
+
+table.recon-order-table {
+  display: block;
+  height: 300px;
+  left: 490px;
+  position: relative;
+  top: 35px;
+  width: 691px;
+}
+
+table.recon-history-table {
+  display: block;
+  height: 500px;
+  left: 490px;
+  position: relative;
+  top: 150px;
+  width: 691px;
+}
+
+.recon-cancel-button {
+  left: 350px;
+  position: absolute;
+  top: 50px;
+}
+
+.recon-order-form {
+  position: absolute;
+  top: 50px;
 }
 
 .mainLayout {

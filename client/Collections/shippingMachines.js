@@ -13,7 +13,7 @@ Session.set('toggleShipList', 1);
 
         shippList: function () {
             // Order of shipping date
-            let shipToggleList = Session.get('toggleShipList');
+            let shipToggleList = Session.get('toggleShipList'); //
             switch(shipToggleList) {
                 case 1:
                     return MachineReady.find({shipStatus: 0},
@@ -21,7 +21,7 @@ Session.set('toggleShipList', 1);
                                               );
                 case 0:
                   //  let changeDate = new Date("2020-09-31").getTime() / 1000
-                    let fiscalYear = '2020-09-31';
+                    let fiscalYear = '2022-09-31';
                     let result = MachineReady.find({$and: [{date : {$gt: fiscalYear}}, {shipStatus: 1}]},
                         {sort: {date: -1}}).fetch();
                     Session.set('shippedMachines', result.length)

@@ -1,4 +1,64 @@
+.repair-orders {
+  left: 1378px;
+  position: absolute;
+  top: 8px;
+}
 
+.repair-order-button {
+  left: -112px;
+  position: relative;
+  top: 18px;
+}
+
+.repair-cancel-button {
+  left: 10px;
+  position: relative;
+  top: -16px;
+}
+
+.part-number-table {
+  width: 120px;
+}
+
+.part-storage-bin {
+  width: 120px;
+}
+
+.part-order-quantity {
+  width: 77px;
+}
+
+.date-time-order {
+  width: 170px;
+}
+
+.repair-order-parts {
+  left: 21px;
+  position: absolute;
+  top: 10px;
+}
+
+.picked-by {
+  width: 95px;
+}
+
+table.repair-order-table {
+  display: block;
+  height: 300px;
+  left: 130px;
+  position: relative;
+  top: -51px;
+  width: 691px;
+}
+
+table.repair-history-table {
+  display: block;
+  height: 300px;
+  left: 130px;
+  position: relative;
+  top: -10px;
+  width: 935px;
+}
 
 table.repairTable {
   position: absolute;
@@ -91,8 +151,9 @@ tbody.newIssueTableHeight {
 }
 
 .repNav {
+  left: 389px;
   position: absolute;
-  left: 40em;
+  top: 25px;
 }
 
 .kitListButton {
@@ -145,7 +206,6 @@ img:hover {
 .add-to-repair {
   position: absolute;
   top: 18em;
-
 }
 
 .repair-user {
@@ -154,8 +214,3 @@ img:hover {
   top: 50em;
 }
 
-.repair-machine {
-  left:2em;
-  position: absolute;
-  top: 45em;
-}
