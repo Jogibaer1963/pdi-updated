@@ -303,6 +303,7 @@ Session.set('toggleShipList', 1);
             const newShippingTireTrack = e.target.newTireTrack.value;
             const newShippingReturns = e.target.newReturn.value;
             const newShippingComment = e.target.newComment.value;
+            //console.log(  newShippingTransporter, newShippingKit, newShippingTireTrack)
             Meteor.call('addToShipList', newMachineInput, newShippingDate,
                 createUnixTime, createDate, createTime, newShippingDestination,
                 newShippingTransporter, newShippingKit, newShippingTireTrack,
@@ -330,6 +331,7 @@ Session.set('toggleShipList', 1);
             document.getElementById('newKit12').checked= false;
             document.getElementById('newKit13').checked= false;
             Session.set('selectedMachine', '');
+            window.location.reload(true)
         },
 
         'submit .find_Machine': function(e) {

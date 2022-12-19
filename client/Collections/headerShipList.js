@@ -1,4 +1,4 @@
-Meteor.subscribe("headerTrailer");
+// Meteor.subscribe("headerTrailer");
 Meteor.subscribe('headersToShip')
 
 
@@ -10,6 +10,8 @@ Meteor.subscribe('headersToShip')
 
     });
 
+
+/*
 Template.inputHead.helpers({
 
     editMachine: function() {
@@ -196,5 +198,5 @@ Template.inputHead.events({
     });
 
 
-
+*/
 
