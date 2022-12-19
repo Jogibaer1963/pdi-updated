@@ -1405,15 +1405,15 @@ table.issue-list {
 }
 
 .add-to-pdi {
-  position: absolute;
   left: 5em;
+  position: absolute;
   top: 10em;
 }
 
 table.pdi-item-table {
+  left: 4.5em;
   position: absolute;
   top: 18em;
-  left: 4.5em;
   width: 32.2em;
 }
 

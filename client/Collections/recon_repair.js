@@ -8,6 +8,7 @@ Template.part_order_recon.helpers({
         let user_order = Meteor.user().username;
         let result = lineOrders.find({team_user: user_order,
             status: {$in: [0, 1]}}).fetch();
+      //  console.log('result ', user_order, result)
         return result.sort((a, b) => a.status - b.status)
     },
 
@@ -47,16 +48,16 @@ Template.part_order_recon.events({
         point_of_use_order = e.target.location.value;
         reason_order = e.target.reason.value;
         urgency_order = 11;
-        console.log(user_order, partNumber_order, storageLocation_order, point_of_use_order,
-            reason_order, urgency_order)
+     //   console.log(user_order, partNumber_order, storageLocation_order, point_of_use_order,
+      //      reason_order, urgency_order)
         Meteor.call('repair_parts_on_order', user_order, partNumber_order, quantityNeeded_order,
-            storageLocation_order, point_of_use_order, reason_order, function (err, respond) {
+            storageLocation_order, point_of_use_order, reason_order, urgency_order, function (err, respond) {
                 if (err) {
                     //  Meteor.call('success', err, user_order, 'order failed')
                 } else {
                     //     Meteor.call('success', respond, user_order, 'order succeed')
-                    Session.set('selectedComponent', '')
                     Session.set('issueComp', '')
+
                 }
             })
 

@@ -66,10 +66,12 @@ if(Meteor.isServer){
         Meteor.publish("siTable", function() {
             return siTable.find();
         });
-
+/*
         Meteor.publish("fuelAverage", function() {
             return fuelAverage.find();
         });
+
+ */
 
         Meteor.publish("usersProfile", function() {
             return usersProfile.find();
@@ -131,6 +133,10 @@ if(Meteor.isServer){
             return machineCommTable.find();
         });
 
+        Meteor.publish("lineOrders", function() {
+           return lineOrders.find();
+        });
+
     });
 
 
@@ -163,6 +169,55 @@ if(Meteor.isServer){
             MachineReady.update({machineId: machineId}, {$set: {roadTestComment: comment}})
     },
 
+        'cancelOrder':(id) => {
+            lineOrders.remove({_id: id})
+        },
+
+
+        'repair_parts_on_order': (user_order, partNumber_order, quantityNeeded_order, storageLocation_order,
+                           point_of_use_order, reason_order, urgency_order) => {
+            // status : 0 = unseen, 1 = picking in progress, 2 = delivered
+            // urgency level : 10 = high urgency, 11 = medium urgency, 12 low urgency
+      //      console.log(user_order, partNumber_order, quantityNeeded_order, storageLocation_order,
+       //         point_of_use_order, reason_order, urgency_order)
+            let reason = parseInt(reason_order);
+            let urgency = parseInt(urgency_order)
+            let months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+            let order_date, orderStart, year, month, date, hours, minutes, seconds, success, unixOrder;
+            unixOrder = Date.now()
+            orderStart = new Date()
+            year = orderStart.getFullYear();
+            month = months[orderStart.getMonth()];
+            date = orderStart.getDate();
+            hours = orderStart.getHours();
+            if (hours < 10) {
+                hours = '0' + hours
+            }
+            minutes = orderStart.getMinutes();
+            if (minutes < 10) {
+                minutes = '0' + minutes
+            }
+            seconds = orderStart.getSeconds();
+            if (seconds < 10) {
+                seconds = '0' + seconds
+            }
+            //  console.log(orderStart, date + '-' + month + '-' + year + ' '+ hours + ':' + minutes + ':' + seconds)
+            order_date = (date + '-' + month + '-' + year + ' '+ hours + ':' + minutes + ':' + seconds)
+            lineOrders.insert({ team_user : user_order,
+                time_ordered  : order_date,
+                unixTimeOrderStart : unixOrder,
+                part_number : partNumber_order,
+                quantity_needed : quantityNeeded_order,
+                storage_bin : storageLocation_order,
+                point_of_use : point_of_use_order,
+                reason : reason,
+                urgency : urgency,
+                status: 0,
+                order_completed : ''})
+            success = 'success ' + order_date;
+            return success
+
+        },
      // ************************  Load Shipping Machine List  ********************************
 
     'pdiBlocker': (machineNr, value) => {
