@@ -543,6 +543,7 @@ if(Meteor.isServer){
         },
 
     'toggleVariant': function(variantType, id, toggle) {
+            console.log(variantType, id, toggle)
             variants.update({_id: id}, {$set: {status: toggle}});
         },
 

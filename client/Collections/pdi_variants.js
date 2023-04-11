@@ -104,6 +104,8 @@ Meteor.subscribe("variants");
             reader.readAsText(file);
         },
 
+        /*
+
         'click .c77': (e) => {
             e.preventDefault();
             Session.set('variantType', 1);
@@ -118,6 +120,9 @@ Meteor.subscribe("variants");
             e.preventDefault();
             Session.set('variantType', 3);
         },
+
+
+         */
 
         'click .c87': (e) => {
             e.preventDefault();
