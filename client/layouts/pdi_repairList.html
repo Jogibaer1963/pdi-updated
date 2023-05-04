@@ -33,40 +33,7 @@
         </form>
         <a class="btn btn-default btn-success printButton"  href="/pdi_printOut">Print Out</a>
     </div>
-    <!--
-        <div class="historicButtonPos">
-            {{#dropdownTrigger  name="mainComponents"}}
-                <button class="loginSubmit omInputButton">PDI FY 2021 </button>
-            {{/dropdownTrigger}}
-            {{#dropdown name="mainComponents" align="left" top="25" left="0"}}
-                <tbody class="rTable">
-                {{#each historicPdi}}
-                    <tr class="histPdi {{selectedComponent}}">
-                        <td class="dropDownHistoric">{{historic}}</td>
-                    </tr>
-                {{/each}}
-                </tbody>
-            {{/dropdown}}
-        </div>
-    <table class="blueTable pdiRepairList">
-       <thead>
-          <tr>
-            <th class="pdiMachineField"><strong>Machine</strong></th>
-            <th class="pdiShipDate"><strong>Ship Date</strong></th>
-            <th class="pdiRepField"><strong>PDI</strong></th>
-          </tr>
-       </thead>
-       <tbody>
-         {{#each showList}}
-            <tr class="showPdiResult {{selectedClass}}">
-                <td class="pdiMachineField">{{machineId}}{{newHeadId}} {{preMachineId}}</td>
-                <td class="pdiShipDate">{{date}}</td>
-                <td class="pdiRepField {{getStatusColor pdiStatus}}" style="background-color:{{getStatusColor pdiStatus}}; color:{{getStatusColor pdiStatus}}">{{pdiStatus}}</td>
-            </tr>
-         {{/each}}
-       </tbody>
-    </table>
-    -->
+
 </template>
 
 <template name="pdiInspectList">
@@ -82,12 +49,8 @@
                         <br>
                         <h3>Operator Maintenance Manual</h3>
                         <h4>Omm Main : {{ommMain}}</h4>
-                        <h4>Omm Supplemental : {{ommSupp}}</h4>
                         <h4>Omm Unload : {{ommUnload}}</h4>
-                        <h4>Omm Cebis : {{ommCebis}}</h4>
-                        <h4>Omm Cebis Touch : {{ommCebisTouch}}</h4>
                         <h4>Omm Terra Track : {{ommTerra}}</h4>
-                        <h4>Omm Dual : {{ommDuals}}</h4>
                         <h4>Omm Profi Cam : {{ommProfiCam}}</h4>
                         <h4>---------------------------------------------------------------------------</h4>
                     </div>

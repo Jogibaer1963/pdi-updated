@@ -371,7 +371,8 @@ if(Meteor.isServer){
             MachineReady.update({machineId: machineNr, 'newIssues._id' : issueId},
                                 {$set: {'newIssues.$.responsible': selectedSupplier,
                                                  'newIssues.$.extern': true,
-                                                 'newIssues.$.newEntry': true}
+                                                 'newIssues.$.newEntry': true,
+                                                 'newIssues.$.supplier': true}
                                 })
             }
         },
@@ -396,9 +397,17 @@ if(Meteor.isServer){
         // *********************************   analyzing -> analyzingResponseTeam  *********************
 
         'choseTeam': (team, failureId, machineId) => {
-                MachineReady.update({_id: machineId, 'newIssues._id': failureId},
-                                    {$set: {'newIssues.$.responsible': team}})
-
+            if (team === 'Supplier') {
+                    MachineReady.update({_id: machineId, 'newIssues._id': failureId},
+                        {
+                            $set: {'newIssues.$.responsible': team,
+                                'newIssues.$.extern': true}
+                            })
+                } else {
+                    MachineReady.update({_id: machineId, 'newIssues._id': failureId},
+                        {$set: {'newIssues.$.responsible': team,
+                                'newIssues.$.extern': false}})
+            }
         },
 
         //  *******************************************************
@@ -543,6 +552,7 @@ if(Meteor.isServer){
         },
 
     'toggleVariant': function(variantType, id, toggle) {
+            console.log(variantType, id, toggle)
             variants.update({_id: id}, {$set: {status: toggle}});
         },
 
@@ -641,6 +651,12 @@ if(Meteor.isServer){
           MachineReady.update({_id: machineRepaired}, {$set: {machineHours: workingHour,
                                                                               repairStatus: 1,
                                                                               fuelEnd: fuel}});
+        },
+
+        'reOpenPDIRepair': function (machineNr) {
+          MachineReady.update({machineId: machineNr}, {$set: {
+              repairStatus: 0
+              }});
         },
 
         'changeStatus': function (siNumber, selectedMachineId, setStatus) {
@@ -950,7 +966,7 @@ if(Meteor.isServer){
                 let uniqueIdSi = Random.id();
                 MachineReady.update({_id: selectedPdiMachineId}, {
                     $push: {
-                        newIssues: {
+                        checkList: {
                             "_id": uniqueIdSi,
                             "checkStatus": true,
                             "errorDescription" : siIssue,
@@ -1199,9 +1215,9 @@ if(Meteor.isServer){
         },
 
         'pdiMachineOmm': function(selectedPdiMachineId, loggedInUser, ommMain,
-                                  ommUnload,ommProfiCam, ommCebis, ommTerra) {
+                                  ommUnload,ommProfiCam, ommTerra) {
             MachineReady.update({_id: selectedPdiMachineId}, {$set: {omms: {user: loggedInUser,
-                    ommMain, ommUnload, ommProfiCam, ommCebis,  ommTerra, ommStatus: 1}}});
+                    ommMain, ommUnload, ommProfiCam,  ommTerra, ommStatus: 1}}});
         },
 /*
         'machineUser': function (machineId, userLoggedIn, arrayOrder) {
@@ -1282,14 +1298,19 @@ if(Meteor.isServer){
         },
 
         'confirmRepair': (repairId, repairUser, repairComment, time, machineId) => {
+            let repairDateAndTime = Date.now()
+            let repairDateTime = new Date()
+            let reportedDate = repairDateTime + " Unix Time : " + repairDateAndTime
             let industrialMinutes = time * 1.66;
             MachineReady.update({_id: machineId, 'newIssues._id': repairId},
                                         {$set: {'newIssues.$.repairStatus': 1,
                                                          'newIssues.$.repairTech': repairUser,
                                                          'newIssues.$.repairComment': repairComment,
                                                          'newIssues.$.repairTime': time,
-                                                         'newIssues.$.industrialTime': industrialMinutes
+                                                         'newIssues.$.industrialTime': industrialMinutes,
+                                                         'newIssues.$.repairDateTime': reportedDate
                                             }})
+
         },
 
         // ------------------------------------  Machine ------------------------------------

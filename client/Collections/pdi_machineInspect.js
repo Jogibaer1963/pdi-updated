@@ -67,10 +67,6 @@ Meteor.subscribe('oms');
             }
         },
 
-        omProfiCam: () => {
-            return oms.find({}).fetch();
-        },
-
         ommSaved: function() {
             try {
                 Session.set('selectedPdiMachineNr', localStorage.getItem('pdiMachineNr'));
@@ -85,28 +81,12 @@ Meteor.subscribe('oms');
             } catch (e) {
             }
         },
-/*
-        fuelStart: () => {
-            try {
-                return Session.get('omms').fuelStart;
-            } catch (e) {}
-        },
-
- */
 
         ommMain: () => {
             try {
                 return Session.get('omms').ommMain;
             } catch (e) {}
         },
-/*
-        ommSupp: () => {
-            try {
-                return Session.get('omms').ommSupp;
-            } catch (e) {}
-        },
-
- */
 
         ommUnload: () => {
             try {
@@ -125,11 +105,6 @@ Meteor.subscribe('oms');
             } catch (e) {}
         },
 
-        ommCebis: () => {
-            try {
-                return Session.get('omms').ommCebis;
-            } catch (e) {}
-        },
 
         ommTerra: () => {
             try {
@@ -177,7 +152,7 @@ Meteor.subscribe('oms');
         'click .openFailure': function (e) {
             e.preventDefault();
             const confirmRepair = this._id;
-            console.log(confirmRepair);
+            // console.log(confirmRepair);
             Session.set('confirmRepair', confirmRepair);
         },
 
@@ -195,58 +170,7 @@ Meteor.subscribe('oms');
                 }
             } catch (e) {}
         },
-/*
-        battC13CCA: () => {
-            try {
-                return Session.get('batteries').battC13CCA;
-            } catch (e) {}
-        },
 
-        battC13Volt: () => {
-            try {
-                return Session.get('batteries').battC13Volt;
-            } catch (e) {}
-        },
-
-
- */
-        mtuG001CCA: () => {
-            try {
-                return Session.get('batteries').mtuG001CCA;
-            } catch (e) {}
-        },
-
-        mtuG001Volt: () => {
-            try {
-                return Session.get('batteries').mtuG001Volt;
-            } catch (e) {}
-        },
-/*
-        mtuG005CCA: () => {
-            try {
-                return Session.get('batteries').mtuG005CCA;
-            } catch (e) {}
-        },
-
-        mtuG005Volt: () => {
-            try {
-                return Session.get('batteries').mtuG005Volt;
-            } catch (e) {}
-        },
-
- */
-
-        mtuG004CCA: () => {
-            try {
-                return Session.get('batteries').mtuG004CCA;
-            } catch (e) {}
-        },
-
-        mtuG004Volt: () => {
-            try {
-                return Session.get('batteries').mtuG004Volt;
-            } catch (e) {}
-        },
 
         configImage: () => {
             let choice = Session.get('imageOnOff');
@@ -488,12 +412,8 @@ Meteor.subscribe('oms');
             Session.set('selectedPdiMachine', localStorage.getItem('selectedPdi'));
             const loggedInUser = Session.get('currentLoggedInUser');
             const pdiMachineId = Session.get('selectedPdiMachineId');
-          //  const battC13CCA = e.target.batteryC13CCA.value;
-           // const battC13Volt = e.target.batteryC13Volt.value;
             const mtuG001CCA = e.target.mtuG001CCA.value;
             const mtuG001Volt = e.target.mtuG001Volt.value;
-          //  const mtuG005CCA = e.target.mtuG005CCA.value;
-          //  const mtuG005Volt = e.target.mtuG005Volt.value;
             const mtuG004CCA = e.target.mtuG004CCA.value;
             const mtuG004Volt = e.target.mtuG004Volt.value;
             Meteor.call('pdiMachineBattery', pdiMachineId, loggedInUser,

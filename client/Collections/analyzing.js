@@ -456,7 +456,7 @@ Template.analyzingSupplier.helpers({
       return Session.get('issuesCount')
     },
 
-    supplierIssue: function () {
+    supplierIssue: function () { // todo rewrite selection process
          let supplierNames = [];
          let supplierResult = SuppliersList.find({}).fetch();
          supplierResult.forEach((element) => {
@@ -560,15 +560,16 @@ Template.analyzingSupplier.helpers({
                         }
                     })
                 })
-            } else if (toggle === 2) {
+            } else if (toggle === 2) {  // only supplier
                 let supplier;
                 result.forEach((element) => {
                     let pdiPerformer = element.pdiPerformer;
                     let machineNr = element.machineId;
                     let issueArray = element.newIssues;
                     issueArray.forEach((element2) => {
-                        for(supplier of supplierNames) {
-                            if (element2.responsible === supplier && element2.repairTime >= '10')   {
+                            if (element2.repairTime >= 10 &&
+                                element2.supplier === true &&
+                                element2.checkStatus === true)   {
                                 supplierIssues = {
                                     _id: element2._id,
                                     machineNr: machineNr,
@@ -582,8 +583,7 @@ Template.analyzingSupplier.helpers({
                                     repairTime: element2.repairTime,
                                     qualityComment: element2.qualityComment
                                 }
-                                supplierArray.push(supplierIssues)
-                            }
+                            supplierArray.push(supplierIssues)
                         }
                     })
                 })
@@ -649,6 +649,17 @@ Template.analyzingSupplier.helpers({
 
     user: () => {
         return Session.get('userResult');
+    },
+
+    toggleList: () => {
+        let toggleStatus = Session.get('toggle-button')
+        if (toggleStatus === 0) {
+            return "Open Issues List is shown "
+        } else if (toggleStatus === 1) {
+            return "Closed Issues List is shown "
+        } else if (toggleStatus === 2) {
+            return "Only Supplier open issues is shown"
+        }
     },
 
 
@@ -735,13 +746,10 @@ Template.analyzingSupplier.events({
 
    'click .machine-sort-button': () => {
         // sort by machine number
-       console.log('clicked')
        Session.set('setOrder', 1);
-       console.log(Session.get('setOrder'))
    },
 
     'click .pdiTech-sort-button': () => {
-        console.log('clicked')
         // sort by PDI Tech
         Session.set('sortOrder', 2)
     },

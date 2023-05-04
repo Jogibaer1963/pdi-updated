@@ -280,9 +280,7 @@ Template.joinPdiMachine.events({
         e.preventDefault();
         const loggedInUser = Session.get('currentLoggedInUser');
         const pdiMachineId = Session.get('selectedPdiMachineId');
-    //    const fuelMe = e.target.fuelMe.value;
         const ommMain = e.target.omMain.value;
-   //     const ommSupp = "N/A";
         const ommUnload = e.target.omUnload.value;
         const ommProfiCam = e.target.omProfiCam.value;
         const ommTerra = e.target.omTerra.value;

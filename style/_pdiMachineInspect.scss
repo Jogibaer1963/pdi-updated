@@ -139,6 +139,7 @@
 
 .issueField {
   margin-left: 3em;
+  width: 172px;
 }
 
 .addIssueText {
@@ -160,7 +161,7 @@ table.newIssuesTable {
 }
 
 .add-image-to-repair {
-  left: 57em;
+  left: 36em;
   position: absolute;
   top: 195em;
 }
@@ -181,9 +182,9 @@ img {
 }
 
 .pdi-estimate {
-  left: 778px;
+  left: 515px;
   position: absolute;
-  top: 2500px;
+  top: 2651px;
   background-color: #ed0606;
   border: none;
   color: white;
@@ -193,7 +194,7 @@ img {
   display: inline-block;
   font-size: 16px;
   margin: 4px 2px;
-  border-radius: 50%
+  border-radius: 50%;
 }
 
 .pdi-repair-button {
@@ -208,7 +209,7 @@ img {
 }
 
 .deleteRepair {
-  width: 30em;
+  width: 12em;
 }
 
 .pdi-repair {
@@ -222,6 +223,7 @@ img {
 .batteries {
   left: 3em;
   position: relative;
+  width: 200px;
 }
 
 .endOfList {

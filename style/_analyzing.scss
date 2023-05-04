@@ -484,7 +484,7 @@ table.parts-order-table {
 .supplier-table {
   left: 2em;
   position: absolute;
-  top: 25em;
+  top: 29em;
 }
 
 table.extended-table {
@@ -578,6 +578,12 @@ table.supplier-result-table {
   left: 14em;
   position: absolute;
   top: 1.5em;
+}
+
+.supplier-toggle-list {
+  left: 28em;
+  position: absolute;
+  top: 15em;
 }
 
 .remove-supplier-button {

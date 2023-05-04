@@ -22,12 +22,10 @@
       <thead>
          <tr>
            <th class="pdiMachineField"><strong>Machine</strong></th>
-           <th class="pdiShipDate"><strong></strong></th>
-           <th class="pdiShipDate"><strong>Shipp Date</strong></th>
+           <th class="pdiShipDate"><strong>Ship Date</strong></th>
            <th class="pdiPDIField"><strong>PDI</strong></th>
            <th class="pdiRepField"><strong>Rep</strong></th>
            <th class="pdiWashField"><strong>Wash</strong></th>
-           <th class="pdiLocation"><strong>Location</strong></th>
        </tr>
       </thead>
       <tbody>
@@ -35,14 +33,12 @@
              <tr class="">
                <td class="pdiMachineField machine-font {{getStatus pdiOk}}" style="background-color:{{getStatus pdiOk}};
                        color:{{getStatus pdiOk}}" >{{machineId}}</td>
-               <td class="pdiShipDate" style="width: 50px">{{coaDate}}</td>
                <td class="pdiShipDate" style="width: 50px">{{date}}</td>
                <td class="pdiPDIField {{getStatusColor pdiStatus}}"
                    style="background-color:{{getStatusColor pdiStatus}};
                            color:{{getStatusColor pdiStatus}}" >{{pdiStatus}}</td>
                <td class="pdiRepField {{getStatusColor repairStatus}}" style="background-color:{{getStatusColor repairStatus}}; color:{{getStatusColor repairStatus}}" >{{repairStatus}}</td>
                <td class="pdiWashField {{getStatusColor washStatus}}" style="background-color:{{getStatusColor washStatus}}; color:{{getStatusColor washStatus}}" >{{washStatus}}</td>
-               <td class="pdiLocation" style="background-color: #6fd981">{{locationId}}</td>
              </tr>
          {{/each}}
       </tbody>

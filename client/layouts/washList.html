@@ -45,7 +45,6 @@
             <th class="pdiPDIField"><strong>PDI</strong></th>
             <th class="pdiRepField"><strong>Rep</strong></th>
             <th class="pdiWashField"><strong>Wash</strong></th>
-            <th class="pdiLocation"><strong>Location</strong></th>
               <th class="pdiTruckOnOrder"><strong>Truck ordered</strong></th>
               <th class="pdiTruckDate"><strong>Confirmed Ship Date</strong></th>
           </tr>
@@ -61,7 +60,6 @@
                         color:{{getStatusColor repairStatus}}" >{{repairStatus}}</td>
                 <td class="pdiWashField  {{getStatusColor washStatus}}" style="background-color:{{getStatusColor washStatus}};
                         color:{{getStatusColor washStatus}}" >{{washStatus}}</td>
-                <td class="pdiLocation" style="background-color: #6fd981">{{locationId}}</td>
                  <td class="pdiTruckOnOrder {{getStatusTruck truckStatus}}" style="background-color:{{getStatusTruck truckStatus}}; color:{{getStatusTruck truckStatus}}" >{{truckStatus}}</td>
                  <td class="pdiTruckDate truckDateCorrection">{{confirmedShipDate}}</td>
              </tr>

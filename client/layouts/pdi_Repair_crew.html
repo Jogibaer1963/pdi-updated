@@ -48,6 +48,16 @@
     <div class="toggle-button">
         <button class="btn btn-default btn-success toggle-repair-view">Kyles Repair Spy Button</button>
     </div>
+    <div class="reOpenRepairSection"  >
+        <form class="reOpenRepair">
+            <label for="reopenRepair">Re-open Repair</label>
+            <input type="text" id="reopenRepair" name="reopenRepair">
+            <button type="submit" class="btn btn-default btn-success">Re-open Repair</button>
+        </form>
+    </div>
+    <div class="toggle-ship-date">
+        <button class="btn btn-default btn-info ship-date-button">Sort by Confirmed Ship DATE</button>
+    </div>
     <div class="pdi-open-repair">
         <table class="blueTable repairTable">
             <thead>
@@ -60,7 +70,6 @@
                 <th class="pdiKitField"><strong>Ship with Kit</strong></th>
                 <th class="pdiRepField"><strong>Rep</strong></th>
                 <th class="pdiWashField"><strong>Wash</strong></th>
-                <th class="pdiLocation"><strong>Location</strong></th>
                 <th class="pdiKitList"><strong>Kit List printed</strong></th>
                 <th class="pdiRepField"><strong>Parts on Order</strong></th>
             </tr>
@@ -76,7 +85,6 @@
                     <td class="pdiKitField">{{kit}}</td>
                     <td class="pdiRepField  {{getStatusColor repairStatus}}" style="background-color:{{getStatusColor repairStatus}}; color:{{getStatusColor repairStatus}}" >{{repairStatus}}</td>
                     <td class="pdiWashField  {{getStatusColor washStatus}}" style="background-color:{{getStatusColor washStatus}}; color:{{getStatusColor washStatus}}" >{{washStatus}}</td>
-                    <td class="pdiLocation">{{locationId}}</td>
                     <td class="pdiKitList {{getStatusKit KitStatus}}" style="background-color:{{getStatusKit KitStatus}}; color:{{getStatusKit KitStatus}}" >{{KitStatus}}</td>
                     <td class="pdi-rep-status  {{getStatusColor partsOnOrder}}"
                         style="background-color:{{getStatusColor partsOnOrder}}; color:{{getStatusColor partsOnOrder}}">{{partsOnOrder}}</td>

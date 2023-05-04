@@ -10,8 +10,6 @@ Meteor.subscribe('headersToShip')
 
     });
 
-
-/*
 Template.inputHead.helpers({
 
     editMachine: function() {
@@ -125,7 +123,7 @@ Template.inputHead.events({
         }
     });
 
-
+/*
     Template.headerTrailer.helpers({
 
             availiableTrailer: function() {
@@ -154,6 +152,10 @@ Template.inputHead.events({
             }
         }
     });
+
+ */
+
+    /*
 
     Template.headerTrailer.events({
        'submit .newTrailerInput': function(e) {
@@ -197,6 +199,6 @@ Template.inputHead.events({
         }
     });
 
-
 */
+
 

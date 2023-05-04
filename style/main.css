@@ -963,6 +963,18 @@ table.pdiTable {
   position: absolute;
 }
 
+.reOpenRepairSection {
+  left: 690px;
+  position: absolute;
+  top: 221px;
+}
+
+.toggle-ship-date {
+  left: 182px;
+  position: absolute;
+  top: 271px;
+}
+
 table.repair-table {
   margin-left: 35px;
   position: absolute;
@@ -1198,6 +1210,7 @@ table.display-error {
 
 .issueField {
   margin-left: 3em;
+  width: 172px;
 }
 
 .addIssueText {
@@ -1219,7 +1232,7 @@ table.newIssuesTable {
 }
 
 .add-image-to-repair {
-  left: 57em;
+  left: 36em;
   position: absolute;
   top: 195em;
 }
@@ -1240,9 +1253,9 @@ img {
 }
 
 .pdi-estimate {
-  left: 778px;
+  left: 515px;
   position: absolute;
-  top: 2500px;
+  top: 2651px;
   background-color: #ed0606;
   border: none;
   color: white;
@@ -1267,7 +1280,7 @@ img {
 }
 
 .deleteRepair {
-  width: 30em;
+  width: 12em;
 }
 
 .pdi-repair {
@@ -1281,6 +1294,7 @@ img {
 .batteries {
   left: 3em;
   position: relative;
+  width: 200px;
 }
 
 .endOfList {
@@ -1757,6 +1771,12 @@ img:hover {
   left: 70em;
   position: absolute;
   top: 50em;
+}
+
+.repair-machine {
+  left: 39px;
+  position: absolute;
+  top: 643px;
 }
 
 .outBoundNav {
@@ -2458,7 +2478,7 @@ table.parts-order-table {
 .supplier-table {
   left: 2em;
   position: absolute;
-  top: 25em;
+  top: 29em;
 }
 
 table.extended-table {
@@ -2548,6 +2568,12 @@ table.supplier-result-table {
   left: 14em;
   position: absolute;
   top: 1.5em;
+}
+
+.supplier-toggle-list {
+  left: 28em;
+  position: absolute;
+  top: 15em;
 }
 
 .remove-supplier-button {

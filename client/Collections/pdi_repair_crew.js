@@ -4,22 +4,24 @@ Template.pdiCrewHome.helpers({
     pdiShippList: function () {
         // Order of shipping date  let k = Session.get('toggleRepair');
         let toggleView = Session.get('toggleView');
-        if (toggleView === 0) {
+        if (toggleView === 0) {  //  all machines
             return MachineReady.find({
                 $and: [
                     {pdiStatus: 1},
                     {$or: [{repairStatus: 0}, {repairStatus: 2}]}
                 ]
             }, {sort: {date: 1}}).fetch();
-        } else if (toggleView === 1) {
+        } else if (toggleView === 1) { // machines pdi work load
             return MachineReady.find({
                 $and: [
                     {pdiStatus: 1},
                     {$or: [{repairStatus: 1}]}
                 ]
             }, {sort: {date: 1}}).fetch();
+        } else if (toggleView === 2) { //  only with confirmed ship dates
+            return MachineReady.find({pdiStatus: 1, repairStatus: 0, confirmedShipDate: {$ne: null}},
+                {sort: {confirmedShipDate: 1}}).fetch();
         }
-
     },
 
     roadTestList: () => {
@@ -177,6 +179,23 @@ Template.pdiCrewHome.events({
       } else if (Session.get('toggleView') === 1) {
           Session.set('toggleView', 0)
       }
+    },
+
+    'click .ship-date-button': function(e){
+      e.preventDefault()
+        if (Session.get('toggleView') === 0 || Session.get('toggleView') === 1) {
+            Session.set('toggleView', 2)
+        } else if (Session.get('toggleView') === 2) {
+            Session.set('toggleView', 0)
+        }
+    },
+
+    'submit .reOpenRepair': function(e) {
+        e.preventDefault()
+        let machineNr = e.target.reopenRepair.value
+        console.log(machineNr)
+        Meteor.call('reOpenPDIRepair', machineNr)
+
     },
 
     'submit .repair-finnish': function (e) {
