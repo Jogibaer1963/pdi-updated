@@ -31,8 +31,9 @@
       <tbody>
           {{#each machineOverView}}
              <tr class="">
-               <td class="pdiMachineField machine-font {{getStatus pdiOk}}" style="background-color:{{getStatus pdiOk}};
-                       color:{{getStatus pdiOk}}" >{{machineId}}</td>
+               <td class="pdiMachineField machine-font {{getStatus pdiOk}}"
+                   style="background-color:{{getStatus pdiOk}};
+                       color:{{getStatus pdiOk}}" >{{machineId}} {{blockUser}} {{blockComment}}</td>
                <td class="pdiShipDate" style="width: 50px">{{date}}</td>
                <td class="pdiPDIField {{getStatusColor pdiStatus}}"
                    style="background-color:{{getStatusColor pdiStatus}};
@@ -51,15 +52,17 @@
         <form class="pdiReleaseButton">
             <label for="machineNr">Release Machine for PDI </label>
             <br>
-            <input type="text" id="machineNr" name="machineNr">
+            <input type="text" id="machineNr" name="machineNr" required>
             <button type="submit" class="btn btn-success">Submit</button>
         </form>
 
         <form class="pdiBlockButton">
             <label for="machineNr">Block Machine for PDI </label>
             <br>
-            <input type="text" id="machineNr" name="machineNr">
-            <button type="submit" class="btn btn-danger">Submit</button>
+            <input type="text" id="machineNr" name="machineNr" required>
+            <label for="blockComment"></label>
+            <input type="text" id="blockComment" name="blockCommentText" style="width: 300px" required>
+            <button type="submit" class="btn btn-danger submit-button">Submit</button>
         </form>
     </div>
 

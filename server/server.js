@@ -220,8 +220,18 @@ if(Meteor.isServer){
         },
      // ************************  Load Shipping Machine List  ********************************
 
-    'pdiBlocker': (machineNr, value) => {
-        MachineReady.update({machineId: machineNr}, {$set: {pdiOk: value}})
+    'pdiBlocker': (machineNr, value, blockComment, user) => {
+            if (value === 1) {
+                MachineReady.update({machineId: machineNr},
+                    {$set: {pdiOk: value,
+                            blockComment: blockComment,
+                            blockUser: user}})
+            } else if (value === 0) {
+                MachineReady.update({machineId: machineNr},
+                    {$set: {pdiOk: value},
+                            $unset: {blockComment: "", blockUser: ""}})
+            }
+
     },
 
      'upload-machine-list':(contents) => {

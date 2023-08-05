@@ -385,6 +385,12 @@ table.overViewTable {
   top: 210px;
 }
 
+.submit-button {
+  left: 480px;
+  position: absolute;
+  top: 79px;
+}
+
 .locationTable {
   position: relative;
   top: 13em;

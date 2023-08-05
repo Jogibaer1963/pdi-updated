@@ -37,7 +37,8 @@
 
        machineOverView: function() {
         let choice = Session.get('toggleSort');
-        return MachineReady.find({$or: [{shipStatus: 0}]}, {sort: {date: choice}}).fetch();
+        return MachineReady.find({$or: [{shipStatus: 0}]},
+            {sort: {date: choice}})
         },
 
 //------------------------------- Header Table --------------------------------------------------------------
@@ -46,6 +47,8 @@
             return newHeadYear.find( {newHeadId: {$gt:'00'}, $or: [{shipStatus: 0},
               {shipStatus: 2}]}, {sort: {date: 1}});
         },
+
+
 
     });
 
@@ -72,9 +75,12 @@
 
         'submit .pdiBlockButton': function(e) {
             e.preventDefault();
+            let user = Meteor.user().username
             let machineNr = e.target.machineNr.value;
-            Meteor.call('pdiBlocker', machineNr, 1)
+            let blockComment = e.target.blockCommentText.value
+            Meteor.call('pdiBlocker', machineNr, 1, blockComment, user)
             e.target.machineNr.value = ""
+            e.target.blockCommentText.value = ""
         },
 
 
