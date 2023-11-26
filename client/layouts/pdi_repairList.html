@@ -26,6 +26,42 @@
         </div>
     </div>
         <br>
+    <div class="machine-search">
+        <h4>Machine search FY 2023 and up</h4>
+    </div>
+
+    <div class="'special-ops">
+        <button class="btn btn-default btn-success specialOps">Special Ops</button>
+    </div>
+
+    <div>
+        <h4 style="position: absolute; top: 100px; left: 100px;">Attention</h4>
+    </div>
+
+    <div class="historic-table">
+        <table class="table-blue table-historic">
+            <thead>
+                <tr>
+                    <th class="history-pdi-machine"><strong>Machine</strong></th>
+                    <th class="history-pdi-date"><strong>PDI Date</strong></th>
+                </tr>
+            </thead>
+            <tbody>
+                {{#each historicMachine}}
+            <tr class="historic-machines-selected" {{selectedHistoric}}>
+                <td class="histMachine">{{machineId}}</td>
+                <td class="histDate">{{pdiDate}}</td>
+            </tr>
+                 {{/each}}
+            </tbody>
+        </table>
+    </div>
+
+    <div>
+        <button class="machine-sort"></button>
+        <button class="date-sort"></button>
+    </div>
+
     <div>
         <form class="searchMe">
             <input type="text" id="searchMachine" name="searchMachine" placeholder="Machine number" >
@@ -41,6 +77,7 @@
     <div class="view-box">
         <div>
             <div class="pdi-date">
+                <h3>Machine: {{machineNr}}</h3>
                 <h3>Pdi Date :  {{pdiDate}}</h3>
             </div>
                 {{#each ommAndBatt}}

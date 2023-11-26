@@ -21,7 +21,7 @@ Session.set('toggleShipList', 1);
                                               );
                 case 0:
                   //  let changeDate = new Date("2020-09-31").getTime() / 1000
-                    let fiscalYear = '2022-09-31';
+                    let fiscalYear = '2023-09-31';
                     let result = MachineReady.find({$and: [{date : {$gt: fiscalYear}}, {shipStatus: 1}]},
                         {sort: {date: -1}}).fetch();
                     Session.set('shippedMachines', result.length)
@@ -130,6 +130,18 @@ Session.set('toggleShipList', 1);
                 let result = Session.get('myMachine').kit;
                 for (let i = 0; i <= result.length; i++) {
                     if (result[i] === 'C03_0019') {
+                        return 'checked'
+                    }
+                }
+            } catch (e) {
+            }
+        },
+
+        newKit14: function() {
+            try {
+                let result = Session.get('myMachine').kit;
+                for (let i = 0; i <= result.length; i++) {
+                    if (result[i] === 'C03_0065') {
                         return 'checked'
                     }
                 }
@@ -330,6 +342,7 @@ Session.set('toggleShipList', 1);
             document.getElementById('newKit11').checked= false;
             document.getElementById('newKit12').checked= false;
             document.getElementById('newKit13').checked= false;
+            document.getElementById('newKit14').checked= false;
             Session.set('selectedMachine', '');
             window.location.reload(true)
         },

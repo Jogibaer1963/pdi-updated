@@ -1,33 +1,11 @@
-/*
-Meteor.subscribe('dropDownHistoricMachines');
-Meteor.subscribe("machineReadyToGo_2019");
-Meteor.subscribe("preSeriesMachine");
- */
+Meteor.subscribe('historicMachines')
+
 Session.set('selectedPdiMachine', '');
 Session.set('selectedPreMachine', '');
 
     Template.pdi_repairList.helpers({
 
-        showList: function() {
-            let collectionName = Session.get('collectionName');
-            if (collectionName === '2019') {
-                Session.set('year', '2019');
-                return  MachineReady.find({machineId: {$gt:'C4700000'},
-                                                            dateOfCreation: {$gt: "2018-09-01",
-                                                                             $lte: "2019-08-30"}},
-                                                    {sort: {date: -1}});
-            } else if (collectionName === '2020') {
-                Session.set('year', '2020');
-                return  MachineReady.find({machineId: {$gt:'C4700000'},
-                                                   dateOfCreation: {$gt: "2019-09-01"}},
-                                          {sort: {date: -1}});
-            } else if (collectionName === 'C8x-pre-Series' ) {
-                Session.set('year', 'Pre Series');
-                return preSeriesMachine.find({}, {sort: {preMachineId: 1}}).fetch();
-            }
-        },
-
-        'selectedClass': function(){
+        'selectedHistoric': function(){
             const openInspect = this._id;
             const selectedPdiMachine = Session.get('selectedPdiMachine');
             if (selectedPdiMachine === openInspect) {
@@ -35,25 +13,52 @@ Session.set('selectedPreMachine', '');
             }
         },
 
-        historicPdi: function () {
-            return dropDownHistoricMachines.find({}).fetch();
-        },
+        historicMachine: function () { // Machines older than FY 2023, table view
+            let returnResult;
+            Meteor.call('historicMachine', function (err, response) {
+                if(response) {
+                 //   console.log(response)
+                    returnResult = response
+                } else if (err) {
 
-        'selectedComponent': function () {
-            let component = this._id;
-            let selected = Session.get('selectedComponent');
-            if (component === selected) {
-                Session.set('componentChosen', 1);
-                return 'selected'
-            }
-        },
-
+                }
+                Session.set('historicMachines', returnResult)
+                console.log(returnResult)
+            })
+            return Session.get('historicMachines')
+        }
     });
 
 /* ToDo make Battery, OMM and repair list editable */
 
+    Session.set('MachineSortStatus', 0);
 
     Template.pdi_repairList.events({
+
+
+
+        'click .historic-machines-selected': function (e) {
+            e.preventDefault();
+            const pdiMachine = this._id;
+            let status = true;
+           // console.log(pdiMachine)
+            Session.set('status', status)
+            Session.set('selectedPdiMachine', pdiMachine);
+
+        },
+
+        'click .machine-sort': () => {
+            let status = Session.get('MachineSortStatus');
+            if (status === 0) {
+                Session.set('MachineSortStatus', 1)
+            } else if (status === 1) {
+                Session.set('MachineSortStatus', 0)
+            }
+        },
+
+        'click .date-sort': () => {
+            
+        },
 
         'click .showPdiResult': function() {
             const pdiMachine = this._id;
@@ -83,18 +88,9 @@ Session.set('selectedPreMachine', '');
             e.preventDefault();
             let machineId = e.target.searchMachine.value;
             let id = MachineReady.findOne({machineId: machineId})._id;
+            Session.set('status', false);
             Session.set('selectedPdiMachine', id);
         },
-
-
-        'click .histPdi': function () {
-            const selected = this._id;
-            Session.set('selectedComponent', selected,);
-            Meteor.call('historicPdi', selected,  function (err, collectionName) {
-                Session.set('collectionName', collectionName);
-            });
-        },
-
 
     });
 
@@ -104,7 +100,7 @@ Session.set('selectedPreMachine', '');
             let minutesNew = '';
             try {
             let pdiMachine = Session.get('result');
-            let current_datetime = pdiMachine[0].startPdiDate;
+            let current_datetime = pdiMachine.startPdiDate;
             let current_minutes = current_datetime.getMinutes();
             if (current_minutes < 10) {
                 minutesNew = '0' + current_minutes;
@@ -119,8 +115,19 @@ Session.set('selectedPreMachine', '');
             } catch {}
         },
 
+        machineNr: function() {
+            try {
+                let result = Session.get('result');
+                return result.machineId
+            } catch (e) {
+
+            }
+
+        },
+
         ommAndBatt: function () {
             let returnArray = [];
+            let status = Session.get('status');
             let pdiMachine = Session.get('selectedPdiMachine');
             let year = Session.get('year');
             try {
@@ -128,16 +135,25 @@ Session.set('selectedPreMachine', '');
                     let result = preSeriesMachine.find({_id: pdiMachine});
                     Session.set('result', result);
                     return result;
-                } else {
-                    let result = MachineReady.find({_id: pdiMachine}).fetch();
+                } else if (status === true) {
+                    let result = historicMachines.findOne({_id: pdiMachine});
                     Session.set('result', result);
-                    let omms = result[0].omms;
-                    let batteries = result[0].batteries;
+                    let omms = result.omms;
+                    let batteries = result.batteries;
+                    let newResult = Object.assign(omms, batteries);
+                    returnArray.push(newResult)
+                    Session.set('returnArray', returnArray)
+                } else {
+                    let result = MachineReady.findOne({_id: pdiMachine});
+                    Session.set('result', result);
+                    let omms = result.omms;
+                    let batteries = result.batteries;
                     let newResult = Object.assign(omms, batteries);
                     returnArray.push(newResult);
+                    Session.set('returnArray', returnArray)
                 }
             } catch {}
-            //console.log(returnArray);
+            returnArray = Session.get('returnArray')
             return returnArray;
         },
 
@@ -147,7 +163,7 @@ Session.set('selectedPreMachine', '');
             let newIssuesFound = [];
             try {
                 if (pdiMachine) {
-                    newIssuesFound = pdiMachine[0].newIssues;
+                    newIssuesFound = pdiMachine.newIssues;
                 }
                 newIssuesFound.forEach((element) => {
                     element.pictureLocation = repairInfos + element.pictureLocation;

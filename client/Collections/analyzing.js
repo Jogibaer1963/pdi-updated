@@ -893,8 +893,13 @@ Template.pdiSearch.helpers({
         let endResult = [];
         let singleResultArray = [];
         let result, pdiPerformer, graph, coAuditorTrue;
-        result = MachineReady.find({$and: [{pdiStatus: 1},
-                {unixPdiDate: {$gt: 1664600400000}}]}).fetch(); // unix date is 1.09.2020
+
+        result = MachineReady.find( {$and: [{pdiStatus: 1},
+                {unixPdiDate: {$gt: 1696116213000}}]},
+            {fields: {machineId: 1, pdiPerformer: 1, coAuditor: 1, newIssues: 1}}).fetch(); // unix date is 1.09.2020
+
+
+       // console.log(result)
 
         result.forEach((element) => {
             if (element.coAuditor !== undefined) {
@@ -923,6 +928,7 @@ Template.pdiSearch.helpers({
         }, {});
         let list = Object.keys(lookup);
         let listValue = Object.values(lookup)
+        //console.log(list)
 
         for (let i = 0; i <= list.length -1; i++) {
             let objKeyValue = {
@@ -932,6 +938,10 @@ Template.pdiSearch.helpers({
             singleResultArray.push(objKeyValue)
         }
       return singleResultArray
+
+
+
+
     },
 
     pdiPerformerResult: function () {

@@ -137,6 +137,10 @@ if(Meteor.isServer){
            return lineOrders.find();
         });
 
+        Meteor.publish('historicMachines', function() {
+            return historicMachines.find();
+        })
+
     });
 
 
@@ -144,13 +148,8 @@ if(Meteor.isServer){
 
     Meteor.methods({
 
-        'roadTest': () => {
-          //  console.log('operation performed')
-            let result = MachineReady.update({repairStatus: 0}, {$set: {roadTest: 0}}, {multi: true})
-          //  console.log(result)
-        },
-
 /*
+
         'specialOperation': (contents) => {
          //   console.log(contents)
             let arr = contents.split(/[\n\r]/g);
@@ -163,6 +162,19 @@ if(Meteor.isServer){
         },
 
  */
+
+         'specialOperation': () => {
+             let result = historicMachines.find({}).fetch()
+             result.forEach((element) => {
+                 let elementObject = element.element
+                 elementObject['_id'] = Random.id();
+                 console.log(elementObject)
+                 historicMachines.insert(elementObject)
+             })
+            },
+
+
+
         // ****************************  Road Test Section  **********************************
 
         'roadTestComments':(machineId, comment) => {
@@ -478,9 +490,36 @@ if(Meteor.isServer){
 
   //-------------------------------------------------- Historic PDI's ------------------------------------
 
-        'historicPdi': (selected) => {
-          return dropDownHistoricMachines.findOne({_id: selected}).id;
+        'historicMachine': () => {  // return the table of Machines FY 21 and 22
+          let returnArray = []
+          let returnObject = {}
+          let result = historicMachines.find({},
+              {fields: {_id: 1, machineId: 1, startPdiDate: 1, omms: 1, batteries: 1}}).fetch()
+          result.forEach((element) => {
+              if(element.machineId) {
+                  let pdiDate = (element.startPdiDate).toString()
+                  let newPdiDate = pdiDate.slice(0, 21)
+                  returnObject = {
+                    _id : element._id,
+                      machineId: element.machineId,
+                      pdiDate: newPdiDate,
+                      omms: element.omms,
+                      batteries: element.batteries
+                  }
+                  returnArray.push(returnObject)
+              }
+          })
+           return returnArray
         },
+
+        'singleHistMachine': (pdiMachine) => {
+           // console.log(pdiMachine)
+            let result = historicMachines.find({_id: pdiMachine}).fetch()
+           // console.log(result)
+            return result
+        },
+
+
 
  //----------------------------------------------------- Components -----------------------------------------------------------------------
 

@@ -1368,10 +1368,61 @@ table.messageTable {
   left: 40em;
 }
 
+.machine-search {
+  position: absolute;
+  top: 170px;
+  left: 560px;
+}
+
+table.table-historic {
+  width: 280px;
+  position: absolute;
+  top: 375px;
+  left: 100px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.histMachine {
+  width: 85px;
+  text-align: center;
+}
+
+.histDate {
+  width: 175px;
+  text-align: center;
+}
+
 .printButton {
   position: absolute;
   top: 16em;
   left: 60em;
+}
+
+.history-pdi-machine {
+  padding-left: 20px;
+}
+
+.history-pdi-date {
+  padding-left: 65px;
+}
+
+.machine-sort {
+  position: absolute;
+  top: 376px;
+  left: 100px;
+  width: 90px;
+  height: 50px;
+  opacity: 0;
+}
+
+.date-sort {
+  position: absolute;
+  top: 376px;
+  left: 190px;
+  width: 173px;
+  height: 50px;
+  opacity: 0;
 }
 
 table.pdiRepairList {

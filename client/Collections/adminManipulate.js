@@ -1,11 +1,6 @@
 Template.dataBrowser.events({
 
-    'click .goButton': () => {
-        console.log('Go');
-        Meteor.call('specialOperation')
-    },
-
-
+    /*
     'change .load-machine-list': (e) => {
         e.preventDefault();
         const file = e.target.files[0];
@@ -22,4 +17,7 @@ Template.dataBrowser.events({
         document.getElementById('files').value = [];
     },
 
+     */
+
 })
+
