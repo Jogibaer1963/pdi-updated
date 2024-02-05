@@ -4,7 +4,7 @@ Session.set('selectedPdiMachine', '');
 Session.set('selectedPreMachine', '');
 
     Template.pdi_repairList.helpers({
-
+/*
         'selectedHistoric': function(){
             const openInspect = this._id;
             const selectedPdiMachine = Session.get('selectedPdiMachine');
@@ -23,11 +23,24 @@ Session.set('selectedPreMachine', '');
 
                 }
                 Session.set('historicMachines', returnResult)
-                console.log(returnResult)
             })
             return Session.get('historicMachines')
+        },
+
+        historicCount: ()=> {
+            let result = historicMachines.find({}, {fields: {_id: 1}}).fetch()
+            if (result.length === 0) {
+                return "Searching........."
+            } else {
+                return result.length + ' Machines Found'
+            }
+
         }
+
+ */
     });
+
+
 
 /* ToDo make Battery, OMM and repair list editable */
 
@@ -35,7 +48,7 @@ Session.set('selectedPreMachine', '');
 
     Template.pdi_repairList.events({
 
-
+/*
 
         'click .historic-machines-selected': function (e) {
             e.preventDefault();
@@ -92,10 +105,12 @@ Session.set('selectedPreMachine', '');
             Session.set('selectedPdiMachine', id);
         },
 
+ */
+
     });
 
     Template.pdiInspectList.helpers({
-
+/*
         pdiDate: function() {
             let minutesNew = '';
             try {
@@ -171,6 +186,8 @@ Session.set('selectedPreMachine', '');
                 return newIssuesFound;
             } catch {}
         },
+
+ */
 
     });
 

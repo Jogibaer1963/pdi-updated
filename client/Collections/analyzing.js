@@ -1,5 +1,7 @@
+/*
 Meteor.subscribe('SuppliersList');
 Meteor.subscribe('TeamList');
+
 
 const Highcharts = require('highcharts');
 
@@ -706,8 +708,10 @@ Template.analyzingSupplier.events({
         Session.set('selectedSupplierMachine', '');
     },
 
-    // */*********************  select Row with failure  ***********
+ */
 
+    // *********************  select Row with failure  ***********
+/*
     'click .selectedIssue': function(e){
         e.preventDefault();
         try {
@@ -888,7 +892,7 @@ function supplierFunction(result, singleSupplier, repairInfos, statusElement,
 Template.pdiSearch.helpers({
 
 
-
+/*
     findPdiPerformer: () => {
         let endResult = [];
         let singleResultArray = [];
@@ -938,10 +942,6 @@ Template.pdiSearch.helpers({
             singleResultArray.push(objKeyValue)
         }
       return singleResultArray
-
-
-
-
     },
 
     pdiPerformerResult: function () {
@@ -1079,15 +1079,20 @@ Template.pdiSearch.helpers({
         }
     }
 
+ */
+
 })
 
 Template.pdiSearch.events({
 
+    /*
     'click .selectedPdiName': function(e) {
         e.preventDefault();
         let name = this.pdiPerformer;
         Session.set('nameReturned', name)
     }
+
+     */
 
 })
 
@@ -1095,6 +1100,7 @@ Template.pdiSearch.events({
 
 Template.analyzingOptions.helpers({
 
+    /*
     suppliersList: () => {
         return SuppliersList.find();
     },
@@ -1119,10 +1125,13 @@ Template.analyzingOptions.helpers({
         }
     },
 
+     */
+
 });
 
 Template.analyzingOptions.events({
 
+    /*
     'click .selectedSupplier': function(e){
         e.preventDefault();
         const selected = this._id;
@@ -1167,10 +1176,12 @@ Template.analyzingOptions.events({
         Meteor.call('removeTeam', removeId);
     },
 
+     */
+
 
 });
 
-
+/*
 function prepareTeamResult() {
     let machineTimeLine = '';
     let returnedTarget = {};
@@ -1279,3 +1290,5 @@ function prepareTeamResult() {
             teamSupplierAmount, ctdAmount, rAndD_Amount,
             unknownAmount, notApplicableAmount, undefinedIssuer]
 }
+
+ */

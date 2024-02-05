@@ -1,6 +1,6 @@
 <template name="pdiRepairList">
 {{#if currentUser}}
-    {{> topNav}}
+ <!--   {{> topNav}} -->
     {{> pdi_repairList}}
     {{> pdiInspectList}}
 {{else}}
@@ -29,13 +29,17 @@
     <div class="machine-search">
         <h4>Machine search FY 2023 and up</h4>
     </div>
+    <div class="offline">
+        <h1>O F F L I N E</h1>
+    </div>
 
-    <div class="'special-ops">
-        <button class="btn btn-default btn-success specialOps">Special Ops</button>
+    <div style="position: absolute; top: 250px; left: 100px;">
+        <h4 >Attention, long loading time</h4>
+        <p>Print out for Historic Machines disabled</p>
     </div>
 
     <div>
-        <h4 style="position: absolute; top: 100px; left: 100px;">Attention</h4>
+        <h3 style="position: absolute; top: 320px; left: 100px;">{{historicCount}}</h3>
     </div>
 
     <div class="historic-table">
@@ -58,16 +62,16 @@
     </div>
 
     <div>
-        <button class="machine-sort"></button>
-        <button class="date-sort"></button>
+        <button class="machine-sort" disabled></button>
+        <button class="date-sort" disabled></button>
     </div>
 
     <div>
         <form class="searchMe">
             <input type="text" id="searchMachine" name="searchMachine" placeholder="Machine number" >
-            <button type="submit" class="btn btn-default btn-success" id="buttonSearch">Search</button>
+            <button type="submit" class="btn btn-default btn-success" id="buttonSearch" disabled>Search</button>
         </form>
-        <a class="btn btn-default btn-success printButton"  href="/pdi_printOut">Print Out</a>
+        <a class="btn btn-default btn-success printButton"  href="/pdi_printOut" disabled="disabled">Print Out</a>
     </div>
 
 </template>

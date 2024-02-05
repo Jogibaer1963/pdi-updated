@@ -24,17 +24,6 @@ Template.pdiCrewHome.helpers({
         }
     },
 
-    roadTestList: () => {
-        let toggleView = Session.get('roadTestView');
-        if (toggleView === 0) {
-            return machineCommTable.find({$and: [{$or: [{roadTest: 0},{roadTest: 2}]},
-                    {dateOfCreation: {$gt: '2022-09-31'}}]}, {sort: {date: 1}}).fetch();
-        } else if (toggleView === 1) {
-            return machineCommTable.find({roadTest: 1, dateOfCreation: {$gt: '2022-09-31'}},
-                {sort: {date: 1}}).fetch();
-        }
-
-    },
 
 
     'selectedClass2': function () {
@@ -46,14 +35,6 @@ Template.pdiCrewHome.helpers({
         }
     },
 
-    'selectedClass3': function () {
-        // Session.set('machineToRepair', '');
-        const selectedRoadTest = this.machineId;
-        const selectedMachineId = Session.get('selectedRoadTest');
-        if (selectedMachineId === selectedRoadTest) {
-            return "selected"
-        }
-    },
 
     washMachine: () => {
         try {

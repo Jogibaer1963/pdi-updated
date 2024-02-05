@@ -48,12 +48,6 @@ if(Meteor.isServer){
         Meteor.publish("reworkMachineList", function(){
             return reworkMachineList.find();
         });
-/*
-        Meteor.publish("mcoReview", function () {
-           return mcoReview.find();
-        });
-
- */
 
         Meteor.publish("siListDone", function () {
             return siListDone.find();
@@ -66,12 +60,6 @@ if(Meteor.isServer){
         Meteor.publish("siTable", function() {
             return siTable.find();
         });
-/*
-        Meteor.publish("fuelAverage", function() {
-            return fuelAverage.find();
-        });
-
- */
 
         Meteor.publish("usersProfile", function() {
             return usersProfile.find();
@@ -163,23 +151,10 @@ if(Meteor.isServer){
 
  */
 
-         'specialOperation': () => {
-             let result = historicMachines.find({}).fetch()
-             result.forEach((element) => {
-                 let elementObject = element.element
-                 elementObject['_id'] = Random.id();
-                 console.log(elementObject)
-                 historicMachines.insert(elementObject)
-             })
-            },
-
 
 
         // ****************************  Road Test Section  **********************************
 
-        'roadTestComments':(machineId, comment) => {
-            MachineReady.update({machineId: machineId}, {$set: {roadTestComment: comment}})
-    },
 
         'cancelOrder':(id) => {
             lineOrders.remove({_id: id})
@@ -605,36 +580,6 @@ if(Meteor.isServer){
             variants.update({_id: id}, {$set: {status: toggle}});
         },
 
-//----------------------------------------------------------- Fuel control ------------------------------------------------------------------
-       /*
-        'fuelConsumption': function () {
-            let elementMachine = [];
-            let elementFuelStart = [];
-            let elementFuelAfter = [];
-            let elementConsumption = [];
-          let data = MachineReady.find({}, {fields: {machineId: 1, fuelStart: 1, fuelAfter: 1,
-                _id: 0}}).fetch();
-            data.forEach( (element) => {
-                if (element.fuelStart) {
-                    elementMachine.push(element.machineId);
-                    let a = parseFloat(element.fuelStart);
-                    let b = parseFloat(element.fuelAfter);
-                    let consumption = b - a;
-                    consumption = consumption.toFixed(1);
-                    let consumptionData = parseFloat(consumption);
-                    elementFuelStart.push(a);
-                    elementFuelAfter.push(b);
-                    elementConsumption.push(consumptionData);
-                }
-            });
-          return {elementMachine: elementMachine,
-                  elementFuelStart: elementFuelStart,
-                  elementFuelAfter: elementFuelAfter,
-                  elementConsumption: elementConsumption
-          };
-        },
-
-        */
 //------------------------------------------------------------ Admin User Control ------------------------------------------------------
        'userManualLogout': function (logOutUser) {
             for (let i = 0; i < logOutUser.length; i++) {
