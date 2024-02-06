@@ -1,6 +1,6 @@
 <template name="pdiRepairList">
 {{#if currentUser}}
- <!--   {{> topNav}} -->
+    {{> topNav}}
     {{> pdi_repairList}}
     {{> pdiInspectList}}
 {{else}}
@@ -28,9 +28,6 @@
         <br>
     <div class="machine-search">
         <h4>Machine search FY 2023 and up</h4>
-    </div>
-    <div class="offline">
-        <h1>O F F L I N E</h1>
     </div>
 
     <div style="position: absolute; top: 250px; left: 100px;">
@@ -62,16 +59,16 @@
     </div>
 
     <div>
-        <button class="machine-sort" disabled></button>
-        <button class="date-sort" disabled></button>
+        <button class="machine-sort"></button>
+        <button class="date-sort"></button>
     </div>
 
     <div>
         <form class="searchMe">
             <input type="text" id="searchMachine" name="searchMachine" placeholder="Machine number" >
-            <button type="submit" class="btn btn-default btn-success" id="buttonSearch" disabled>Search</button>
+            <button type="submit" class="btn btn-default btn-success" id="buttonSearch">Search</button>
         </form>
-        <a class="btn btn-default btn-success printButton"  href="/pdi_printOut" disabled="disabled">Print Out</a>
+        <a class="btn btn-default btn-success printButton"  href="/pdi_printOut">Print Out</a>
     </div>
 
 </template>

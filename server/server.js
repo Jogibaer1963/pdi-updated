@@ -1,4 +1,4 @@
-//import {Email} from 'meteor/email';
+
 import {Random} from 'meteor/random';
 import { Meteor } from 'meteor/meteor';
 
@@ -8,6 +8,7 @@ import { Meteor } from 'meteor/meteor';
 if(Meteor.isServer){
 
     Meteor.startup( function() {
+		
 
         Meteor.publish("overView", () => {
             return MachineReady.find({machineId: {$gt: 'C6800000'},
@@ -48,6 +49,7 @@ if(Meteor.isServer){
         Meteor.publish("reworkMachineList", function(){
             return reworkMachineList.find();
         });
+
 
         Meteor.publish("siListDone", function () {
             return siListDone.find();
@@ -128,6 +130,7 @@ if(Meteor.isServer){
         Meteor.publish('historicMachines', function() {
             return historicMachines.find();
         })
+		
 
     });
 
@@ -136,25 +139,12 @@ if(Meteor.isServer){
 
     Meteor.methods({
 
-/*
-
-        'specialOperation': (contents) => {
-         //   console.log(contents)
-            let arr = contents.split(/[\n\r]/g);
-            arr.forEach((element) => {
-                if (element !== '') {
-                    console.log(element)
-                    MachineReady.update({machineId: element}, {$set: {pdiOk: 1}})
-                }
-            })
-        },
-
- */
 
 
 
         // ****************************  Road Test Section  **********************************
 
+ 
 
         'cancelOrder':(id) => {
             lineOrders.remove({_id: id})
@@ -580,6 +570,7 @@ if(Meteor.isServer){
             variants.update({_id: id}, {$set: {status: toggle}});
         },
 
+
 //------------------------------------------------------------ Admin User Control ------------------------------------------------------
        'userManualLogout': function (logOutUser) {
             for (let i = 0; i < logOutUser.length; i++) {
@@ -599,8 +590,6 @@ if(Meteor.isServer){
 
         'newUser' : function (userConst, passwordConst, role,  createdAt, loggedUser) {
             Accounts.createUser({username: userConst, password: passwordConst});
-            setTimeout(function () {
-            }, 1000);
           Meteor.users.upsert({username:userConst}, {$addToSet: {roles: role}});
           usersProfile.insert({username: userConst, role: role, createdAt: createdAt,
               createdBy: loggedUser, loginStatus: 0});
@@ -660,9 +649,8 @@ if(Meteor.isServer){
 
         'successLogin': function (userVar, dateLogin) {
           let clientIp = this.connection.clientAddress;
-             usersProfile.update({username: userVar}, {$set: {loginStatus: 1,
-                                                                                lastLogin: dateLogin,
-                                                                                 clientIp: clientIp}});
+             usersProfile.update({username: userVar},
+                 {$set: {loginStatus: 1, lastLogin: dateLogin,  clientIp: clientIp}});
         },
 
         'successLogout': function(logoutId, logoutDate) {
@@ -685,8 +673,7 @@ if(Meteor.isServer){
         },
 
         'mcoSearch': function(newMcoSearch, mcoReCording, matStatus, mcoSearchString) {
-           // console.log(newMcoSearch, mcoReCording, matStatus, mcoSearchString);
-          //  const result = mcoReview.find({mcoTeam: newMcoSearch}).fetch();
+
         },
 
         /* -----------------------------------------------  Re work  ------------------------------------------------ */
@@ -709,9 +696,6 @@ if(Meteor.isServer){
         },
 
         'download_2': function (machineNr) {
-         //   const collection = MachineReady.find({machineId: machineNr}, {fields: {
-         //                                                                          'checkListIssues.errorDescription': 1,
-          //                                                                         _id: 0}}).fetch();
         },
 
         'editRepair': function(editId) {
@@ -1213,21 +1197,7 @@ if(Meteor.isServer){
             MachineReady.update({_id: selectedPdiMachineId}, {$set: {omms: {user: loggedInUser,
                     ommMain, ommUnload, ommProfiCam,  ommTerra, ommStatus: 1}}});
         },
-/*
-        'machineUser': function (machineId, userLoggedIn, arrayOrder) {
-            orderParts.insert({_id: userLoggedIn, machineNr: machineId, user: userLoggedIn});
-            setTimeout(function () {
-            }, 1000);
 
-            for (let i = 0; i < arrayOrder.length; i++) {
-                let repOrder = {};
-                repOrder._id = Random.id();
-                repOrder.description = arrayOrder[i];
-                orderParts.upsert({_id: userLoggedIn}, {$addToSet: {repOrder}});
-            }
-        },
-
- */
 
    // -------------------------------------------------- Wash List -------------------------------------------
         'stopWashing': function(selectedCheckPoint) {

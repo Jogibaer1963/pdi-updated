@@ -1,4 +1,3 @@
-/*
 Template.fuelAfter.events({
 
     'submit .fuelAfterPdi': function () {
@@ -13,8 +12,4 @@ Template.fuelAfter.events({
         FlowRouter.go('inspectionStart')
     }
 
-
-
 });
-
- */
